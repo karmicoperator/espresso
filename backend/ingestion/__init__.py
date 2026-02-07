@@ -32,7 +32,6 @@ from .arxiv_fetcher import (
 from .pdf_parser import parse_pdf
 from .html_parser import parse_html, fetch_and_parse_html
 from .section_extractor import extract_sections
-from .section_consolidator import llm_consolidate_sections
 from .section_formatter import format_sections
 
 # Configure logging
@@ -50,40 +49,40 @@ async def ingest_paper(
 ) -> StructuredPaper:
     """
     Main entry point for paper ingestion.
-    
+
     Takes an arXiv ID and returns a fully structured paper ready for
     Team 2's AI visualization pipeline.
-    
+
     Args:
         arxiv_id: arXiv paper ID (e.g., "1706.03762" or "1706.03762v1")
         force_refresh: If True, bypass cache and re-fetch
         prefer_pdf: If True, use PDF even if HTML is available
-        
+
     Returns:
         StructuredPaper with metadata and extracted sections
-        
+
     Raises:
         ValueError: If paper not found or parsing fails
     """
     # Normalize ID
     arxiv_id = normalize_arxiv_id(arxiv_id)
     logger.info(f"Starting ingestion for paper: {arxiv_id}")
-    
+
     # Check cache
     if not force_refresh:
         cached = await get_cached_paper(arxiv_id)
         if cached:
             logger.info(f"Returning cached paper: {arxiv_id}")
             return cached
-    
+
     # Step 1: Fetch metadata from arXiv
     logger.info(f"Fetching metadata for: {arxiv_id}")
     meta = await fetch_paper_meta(arxiv_id)
     logger.info(f"Got paper: {meta.title}")
-    
+
     # Step 2: Parse content (HTML preferred, PDF fallback)
     content: ParsedContent
-    
+
     if meta.html_url and not prefer_pdf:
         # Try HTML first (cleaner structure)
         logger.info(f"Parsing ar5iv HTML: {meta.html_url}")
@@ -96,37 +95,29 @@ async def ingest_paper(
     else:
         # Use PDF
         content = await _parse_pdf_content(meta.pdf_url)
-    
+
     # Step 3: Extract sections
     logger.info("Extracting sections from parsed content")
     sections = extract_sections(content, meta)
     logger.info(f"Extracted {len(sections)} sections")
 
-    # Step 3.5: LLM-based section consolidation (merge to 5-6 sections)
-    try:
-        sections = await llm_consolidate_sections(sections, meta)
-        print(f"[INGESTION] Consolidated to {len(sections)} sections via LLM")
-    except Exception as e:
-        print(f"[INGESTION] WARNING: LLM consolidation skipped: {type(e).__name__}: {e}")
-        logger.warning(f"LLM consolidation skipped: {e}")
-
-    # Step 4: Format sections with LLM (populates summary field)
+    # Step 4: Summarize + organize into <=5 sections (two-phase LLM pipeline)
     try:
         sections = await format_sections(sections, meta)
-        print("[INGESTION] Section summaries formatted successfully")
+        print(f"[INGESTION] Paper summarized and organized: {len(sections)} final sections")
     except Exception as e:
-        print(f"[INGESTION] WARNING: LLM formatting skipped: {type(e).__name__}: {e}")
-        logger.warning(f"LLM formatting skipped (sections will use raw content): {e}")
-    
+        print(f"[INGESTION] WARNING: Section formatting skipped: {type(e).__name__}: {e}")
+        logger.warning(f"Section formatting skipped (sections will use raw content): {e}")
+
     # Step 5: Build final structure
     paper = StructuredPaper(
         meta=meta,
         sections=sections
     )
-    
+
     # Step 6: Cache result
     await cache_paper(paper)
-    
+
     logger.info(f"Ingestion complete for: {arxiv_id}")
     return paper
 
@@ -136,7 +127,7 @@ async def _parse_pdf_content(pdf_url: str) -> ParsedContent:
     logger.info(f"Downloading PDF: {pdf_url}")
     pdf_bytes = await download_pdf(pdf_url)
     logger.info(f"Downloaded {len(pdf_bytes)} bytes, parsing...")
-    
+
     content = parse_pdf(pdf_bytes)
     logger.info(
         f"Parsed PDF: {len(content.raw_text)} chars, "
@@ -150,7 +141,7 @@ async def _parse_pdf_content(pdf_url: str) -> ParsedContent:
 async def get_cached_paper(arxiv_id: str) -> Optional[StructuredPaper]:
     """
     Check cache for previously processed paper.
-    
+
     In production, this would check Redis/database.
     """
     return _paper_cache.get(arxiv_id)
@@ -159,7 +150,7 @@ async def get_cached_paper(arxiv_id: str) -> Optional[StructuredPaper]:
 async def cache_paper(paper: StructuredPaper) -> None:
     """
     Cache processed paper for future requests.
-    
+
     In production, this would store in Redis/database.
     """
     _paper_cache[paper.meta.arxiv_id] = paper
@@ -176,12 +167,12 @@ def clear_cache() -> None:
 __all__ = [
     # Main function
     "ingest_paper",
-    
+
     # Cache functions
     "get_cached_paper",
     "cache_paper",
     "clear_cache",
-    
+
     # Lower-level functions for flexibility
     "fetch_paper_meta",
     "download_pdf",
@@ -193,7 +184,7 @@ __all__ = [
     "format_sections",
     "normalize_arxiv_id",
     "validate_arxiv_id",
-    
+
     # Models (re-exported for convenience)
     "ArxivPaperMeta",
     "ParsedContent",

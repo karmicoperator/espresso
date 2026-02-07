@@ -182,6 +182,7 @@ dependencies = [
     { name = "arxiv" },
     { name = "asyncio-throttle" },
     { name = "beautifulsoup4" },
+    { name = "dedalus-labs" },
     { name = "fastapi" },
     { name = "greenlet" },
     { name = "httpx" },
@@ -211,6 +212,7 @@ requires-dist = [
     { name = "arxiv", specifier = ">=2.0.0" },
     { name = "asyncio-throttle", specifier = ">=1.0.0" },
     { name = "beautifulsoup4", specifier = ">=4.12.0" },
+    { name = "dedalus-labs", specifier = ">=0.2.0" },
     { name = "fastapi", specifier = ">=0.109.0" },
     { name = "greenlet", specifier = ">=3.0.0" },
     { name = "httpx", specifier = ">=0.25.0" },
@@ -487,6 +489,24 @@ source = { registry = "https://pkgs.shopify.io/basic/data/python/simple/" }
 sdist = { url = "https://files.pythonhosted.org/packages/43/fa/6d96a0978d19e17b68d634497769987b16c8f4cd0a7a05048bec693caa6b/decorator-5.2.1.tar.gz", hash = "sha256:65f266143752f734b0a7cc83c46f4618af75b8c5911b00ccb61d0ac9b6da0360", size = 56711, upload-time = "2025-02-24T04:41:34.073Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4e/8c/f3147f5c4b73e7550fe5f9352eaa956ae838d5c51eb58e7a25b9f3e2643b/decorator-5.2.1-py3-none-any.whl", hash = "sha256:d316bb415a2d9e2d2b3abcc4084c6502fc09240e292cd76a76afc106a1c8e04a", size = 9190, upload-time = "2025-02-24T04:41:32.565Z" },
+]
+
+[[package]]
+name = "dedalus-labs"
+version = "0.2.0"
+source = { registry = "https://pkgs.shopify.io/basic/data/python/simple/" }
+dependencies = [
+    { name = "anyio" },
+    { name = "distro" },
+    { name = "httpx" },
+    { name = "jiter" },
+    { name = "pydantic" },
+    { name = "sniffio" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/da/30/50be26cf39c717bf089b77345118a304475f80c72b1594ee68e32c1fd028/dedalus_labs-0.2.0.tar.gz", hash = "sha256:05d1010ae04d44f7bdb889e7b66c3f4d8be3afc117967efc56329a9ebffdf791", size = 349632, upload-time = "2026-01-09T19:11:23.888Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/83/c6/5fdf20625e95ef5493139f20c2e026346b4c280e6362815e4011212044be/dedalus_labs-0.2.0-py3-none-any.whl", hash = "sha256:b0a7c33f528429532b0c9c204d4d2e4d4eefc4814ba88e24d159458de55b21f2", size = 223256, upload-time = "2026-01-09T19:11:22.471Z" },
 ]
 
 [[package]]
