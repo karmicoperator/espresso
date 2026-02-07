@@ -32,6 +32,7 @@ from .arxiv_fetcher import (
 from .pdf_parser import parse_pdf
 from .html_parser import parse_html, fetch_and_parse_html
 from .section_extractor import extract_sections
+from .section_consolidator import llm_consolidate_sections
 from .section_formatter import format_sections
 
 # Configure logging
@@ -100,7 +101,15 @@ async def ingest_paper(
     logger.info("Extracting sections from parsed content")
     sections = extract_sections(content, meta)
     logger.info(f"Extracted {len(sections)} sections")
-    
+
+    # Step 3.5: LLM-based section consolidation (merge to 5-6 sections)
+    try:
+        sections = await llm_consolidate_sections(sections, meta)
+        print(f"[INGESTION] Consolidated to {len(sections)} sections via LLM")
+    except Exception as e:
+        print(f"[INGESTION] WARNING: LLM consolidation skipped: {type(e).__name__}: {e}")
+        logger.warning(f"LLM consolidation skipped: {e}")
+
     # Step 4: Format sections with LLM (populates summary field)
     try:
         sections = await format_sections(sections, meta)
