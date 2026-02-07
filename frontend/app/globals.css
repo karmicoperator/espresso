@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+:root {
+  /* 3Blue1Brown inspired color palette */
+  --background: #1c1c2e;
+  --foreground: #f4f1eb;
+  
+  /* 3B1B signature colors */
+  --3b1b-blue: #58c4dd;
+  --3b1b-brown: #cd8b62;
+  --3b1b-gold: #f9c74f;
+  --3b1b-cream: #fffaf0;
+  --3b1b-dark: #1c1c2e;
+  --3b1b-darker: #141421;
+  --3b1b-green: #83c167;
+  --3b1b-red: #fc6255;
+  --3b1b-purple: #9a72ac;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Spotlight animation */
+@keyframes spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
+
+.animate-spotlight {
+  animation: spotlight 2s ease 0.75s 1 forwards;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(88, 196, 221, 0.3);
+  color: white;
+}
+
+/* 3Blue1Brown grid background */
+.grid-3b1b {
+  background-image: 
+    linear-gradient(rgba(88, 196, 221, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88, 196, 221, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Mathematical glow effects */
+.glow-blue {
+  box-shadow: 0 0 20px rgba(88, 196, 221, 0.3), 0 0 40px rgba(88, 196, 221, 0.1);
+}
+
+.glow-brown {
+  box-shadow: 0 0 20px rgba(205, 139, 98, 0.3), 0 0 40px rgba(205, 139, 98, 0.1);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(249, 199, 79, 0.3), 0 0 40px rgba(249, 199, 79, 0.1);
+}
+
+/* Text gradient for 3B1B style */
+.text-gradient-3b1b {
+  background: linear-gradient(135deg, var(--3b1b-blue), var(--3b1b-brown));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* KaTeX styling for dark theme */
+.katex {
+  color: #e2e8f0;
+  font-size: 1.05em;
+}
+
+/* Inline math styling */
+.markdown-content .katex:not(.katex-display .katex) {
+  color: #93c5fd;
+  font-size: 1em;
+}
+
+/* Display math block styling */
+.markdown-content .katex-display {
+  margin: 1.25rem 0;
+  padding: 1rem 1.25rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markdown-content .katex-display > .katex {
+  text-align: center;
+  color: #bfdbfe;
+}
+
+/* Make display math slightly larger */
+.markdown-content .katex-display .katex {
+  font-size: 1.1em;
+}
+
+/* Prevent overflow on small screens */
+.katex-html {
+  white-space: nowrap;
+}
+
+/* Smooth scrollbar for equations */
+.markdown-content .katex-display::-webkit-scrollbar {
+  height: 4px;
+}
+
+.markdown-content .katex-display::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+}
+
+.markdown-content .katex-display::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.markdown-content .katex-display::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Math colors */
+.katex .mathnormal,
+.katex .mathdefault,
+.katex .mathit {
+  color: inherit;
+}
+
+.katex .mord,
+.katex .mbin,
+.katex .mrel,
+.katex .mopen,
+.katex .mclose,
+.katex .mpunct,
+.katex .minner {
+  color: inherit;
+}
