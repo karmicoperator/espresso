@@ -31,9 +31,8 @@ manim-voiceover[elevenlabs]>=0.3.0
 # LLM
 openai>=1.12.0
 
-# Dedalus MCP Gateway (uses openai SDK with custom base_url)
-# Context7 live docs (uses httpx REST API)
-# No additional packages needed - openai and httpx cover both
+# Dedalus SDK + MCP Gateway (Context7 live docs)
+dedalus-labs>=0.2.0
 
 # Tests
 pytest>=7.0.0

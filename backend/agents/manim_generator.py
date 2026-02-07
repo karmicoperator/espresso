@@ -1,8 +1,10 @@
 """Manim Generator Agent - Generates Manim Python code from visualization plans.
 
-Uses Dedalus + Context7 MCP to fetch live Manim documentation before generation,
-ensuring code uses accurate, up-to-date API references instead of potentially
-stale static docs.
+Uses the official Dedalus SDK with Context7 MCP (via DedalusRunner + mcp_servers)
+to fetch live Manim documentation as the PRIMARY doc source. The static
+manim_reference.md is kept only as a last-resort fallback.
+
+Hackathon Track: Dedalus "Best use of tool calling"
 """
 
 import logging
@@ -219,14 +221,15 @@ class ManimGenerator(BaseAgent):
         plan: VisualizationPlan,
     ) -> str:
         """
-        Fetch live Manim docs via Dedalus + Context7 MCP and merge with
-        the static system prompt.
+        Fetch live Manim docs via Dedalus SDK + Context7 MCP as the PRIMARY
+        documentation source, with static manim_reference.md as fallback only.
 
         This is the key integration point for the Dedalus "Best use of
         tool calling" hackathon track:
-        - Dedalus acts as the MCP gateway
-        - Context7 MCP provides live, version-specific Manim documentation
-        - The fetched docs are injected alongside the static reference
+        - Official Dedalus SDK (AsyncDedalus + DedalusRunner)
+        - Context7 MCP via mcp_servers=["tsion/context7"]
+        - Local tool functions combined with MCP servers
+        - Static docs used ONLY when all live sources fail
         """
         # Build a topic query based on the visualization plan
         viz_type = plan.visualization_type.value if hasattr(plan.visualization_type, "value") else str(plan.visualization_type)
@@ -250,15 +253,25 @@ class ManimGenerator(BaseAgent):
         try:
             live_docs = await get_manim_docs(topic=topic, max_tokens=5000, use_dedalus=True)
             if live_docs and len(live_docs) > 100:
-                logger.info("  ✓ Enriched prompt with %d chars of live Manim docs (Dedalus+Context7)", len(live_docs))
+                logger.info(
+                    "  Enriched prompt with %d chars of live Manim docs "
+                    "(Dedalus SDK + Context7 MCP)",
+                    len(live_docs),
+                )
+                # Context7 docs are PRIMARY -- use them as the main reference,
+                # with only a minimal static preamble for structure
                 return (
-                    self.system_prompt
-                    + "\n\n## Live Documentation (fetched via Context7 MCP)\n\n"
+                    "# Manim API Reference (live, via Context7 MCP + Dedalus SDK)\n\n"
+                    "The following documentation was fetched in real-time from "
+                    "Context7 using the Dedalus MCP gateway. Use these references "
+                    "as the authoritative source for Manim APIs.\n\n"
                     + live_docs
                 )
         except Exception as exc:
-            logger.warning("  Live doc fetch failed (%s), using static docs only", exc)
+            logger.warning("  Live doc fetch failed (%s), falling back to static docs", exc)
 
+        # Fallback: static manim_reference.md (only used when live sources fail)
+        logger.info("  Using static manim_reference.md as fallback")
         return self.system_prompt
 
     async def run(
@@ -271,8 +284,9 @@ class ManimGenerator(BaseAgent):
         target_duration_seconds: tuple[int, int] = (30, 45),
     ) -> GeneratedCode:
         """Generate Manim code from a plan, optionally with built-in voiceovers.
-        
-        Now enriched with live documentation via Dedalus + Context7 MCP gateway.
+
+        Uses the Dedalus SDK + Context7 MCP as the primary documentation source.
+        Static docs are only used as a last-resort fallback.
         """
         # Fetch live Manim docs via Dedalus + Context7 before generating
         enriched_system_prompt = await self._enrich_system_prompt_with_live_docs(plan)
@@ -320,8 +334,8 @@ class ManimGenerator(BaseAgent):
         target_duration_seconds: tuple[int, int] = (30, 45),
     ) -> GeneratedCode:
         """Regenerate code with feedback from previous failures.
-        
-        Also enriched with live documentation via Dedalus + Context7.
+
+        Also uses Dedalus SDK + Context7 MCP for live documentation.
         """
         # Fetch live docs for the feedback loop too
         enriched_system_prompt = await self._enrich_system_prompt_with_live_docs(plan)
