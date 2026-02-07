@@ -121,29 +121,29 @@ html {
 
 /* Inline math styling */
 .markdown-content .katex:not(.katex-display .katex) {
-  color: #b0b0b0;
-  font-size: 1em;
+  color: #c0c0c0;
+  font-size: 1.05em;
 }
 
-/* Display math block styling */
+/* Display math block styling — prominent, own line, breathing room */
 .markdown-content .katex-display {
-  margin: 1.25rem 0;
-  padding: 1rem 1.25rem;
+  margin: 2rem -1rem;
+  padding: 1.75rem 2rem;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow-x: auto;
   overflow-y: hidden;
 }
 
 .markdown-content .katex-display > .katex {
   text-align: center;
-  color: #c8c8c8;
+  color: #d4d4d4;
 }
 
-/* Make display math slightly larger */
+/* Display math — larger and more readable */
 .markdown-content .katex-display .katex {
-  font-size: 1.1em;
+  font-size: 1.25em;
 }
 
 /* Prevent overflow on small screens */
@@ -191,5 +191,17 @@ html {
 @media (prefers-reduced-motion: reduce) {
   canvas {
     animation: none;
+  }
+
+  /* Disable section fade-in/slide transitions */
+  [data-section-id] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  /* Disable stacked card 3D transforms and transitions */
+  [data-card-index] {
+    transition: none !important;
   }
 }

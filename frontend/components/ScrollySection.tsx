@@ -104,8 +104,12 @@ export function ScrollySection({
         if (!entry) return;
 
         if (entry.isIntersecting) setHasEntered(true);
+        // Activate if >=30% visible OR if the section top is near the viewport top
+        // (handles sections taller than viewport that never reach 0.55 ratio)
+        const rect = entry.boundingClientRect;
+        const topNearViewport = rect.top >= 0 && rect.top < window.innerHeight * 0.4;
         const nextActive =
-          entry.isIntersecting && entry.intersectionRatio >= 0.55;
+          entry.isIntersecting && (entry.intersectionRatio >= 0.3 || topNearViewport);
 
         if (activeRef.current !== nextActive) {
           activeRef.current = nextActive;
@@ -114,8 +118,8 @@ export function ScrollySection({
         }
       },
       {
-        threshold: [0.15, 0.35, 0.55, 0.75],
-        rootMargin: "0px 0px -35% 0px",
+        threshold: [0.1, 0.2, 0.3, 0.5, 0.75],
+        rootMargin: "0px 0px -25% 0px",
       }
     );
 
@@ -135,7 +139,7 @@ export function ScrollySection({
       transition={{ duration: 0.6, ease: "easeOut" }}
       onMouseMove={handleMouseMove}
       className={cn(
-        "group relative rounded-2xl border backdrop-blur-sm overflow-hidden scroll-mt-24",
+        "group relative rounded-2xl border backdrop-blur-sm overflow-hidden scroll-mt-8",
         isActive
           ? "bg-white/[0.06] border-white/[0.15]"
           : "bg-white/[0.03] border-white/[0.06]",
@@ -201,7 +205,7 @@ export function ScrollySection({
             </motion.h2>
 
             {/* Section content */}
-            <div className="mt-4 text-sm leading-7 text-white/55 sm:text-base sm:leading-8">
+            <div className="mt-6 text-base leading-[1.9] text-white/55 sm:text-[17px] sm:leading-[2]">
               <MarkdownContent content={unifiedContent} />
             </div>
 

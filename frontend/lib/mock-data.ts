@@ -1,64 +1,88 @@
 import type { Paper, ProcessingStatus } from "./types";
 
-// Public sample video for local UI testing.
-// Source: MDN (CC0)
-const SAMPLE_VIDEO =
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+/**
+ * Hard-coded demo paper: "Attention Is All You Need" (1706.03762)
+ *
+ * 5 sections with beginner-friendly descriptions and pre-rendered
+ * Manim videos from backend/few-shot/, served from public/videos/demo/.
+ */
+
+export const DEMO_PAPER_ID = "1706.03762";
 
 export const MOCK_PAPER: Paper = {
-  paper_id: "1706.03762",
+  paper_id: DEMO_PAPER_ID,
   title: "Attention Is All You Need",
-  authors: ["Ashish Vaswani", "Noam Shazeer", "Niki Parmar", "Jakob Uszkoreit"],
+  authors: [
+    "Ashish Vaswani",
+    "Noam Shazeer",
+    "Niki Parmar",
+    "Jakob Uszkoreit",
+    "Llion Jones",
+    "Aidan N. Gomez",
+    "Lukasz Kaiser",
+    "Illia Polosukhin",
+  ],
   abstract:
-    "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks. We propose the Transformer, a model architecture relying entirely on attention mechanisms to draw global dependencies between input and output.",
+    "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train.",
   pdf_url: "https://arxiv.org/pdf/1706.03762.pdf",
   html_url: "https://arxiv.org/abs/1706.03762",
   sections: [
     {
-      id: "s-intro",
-      title: "1. Motivation",
+      id: "section-3-1",
+      title: "The Transformer Architecture",
       content:
-        "The dominant sequence transduction models are based on complex **recurrent** or **convolutional** neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an *attention mechanism*.\n\nWe propose a new simple network architecture, the **Transformer**, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.",
+        'Think of the Transformer as a factory with two halves \u2014 an **encoder** that reads and understands the input, and a **decoder** that produces the output one piece at a time.\n\nUnlike older models (RNNs) that process words one-by-one in sequence, the Transformer looks at **all words simultaneously**. It uses a stack of 6 identical layers, each containing two key ingredients: a self-attention mechanism and a feed-forward network. Residual connections and layer normalization keep information flowing smoothly.\n\n**Key takeaway:** The Transformer\u2019s parallel architecture replaces sequential processing, making it dramatically faster to train.',
       level: 1,
       order_index: 0,
       equations: [],
+      video_url: "/videos/demo/TransformerArchitectureOverview.mp4",
     },
     {
-      id: "s-attn",
-      title: "2. The Attention Mechanism",
+      id: "section-3-2",
+      title: "Scaled Dot-Product Attention",
       content:
-        "An attention function can be described as mapping a query and a set of key-value pairs to an output. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.\n\nWe call our particular attention **Scaled Dot-Product Attention**. The input consists of queries and keys of dimension $d_k$, and values of dimension $d_v$. We compute the dot products of the query with all keys, divide each by $\\sqrt{d_k}$, and apply a softmax function to obtain the weights on the values:\n\n$$\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$$\n\nThe two most commonly used attention functions are additive attention and dot-product (multiplicative) attention. Dot-product attention is identical to our algorithm, except for the scaling factor of $\\frac{1}{\\sqrt{d_k}}$.",
+        'Attention answers a simple question: *"Which parts of the input should I focus on right now?"*\n\nIt works with three ingredients \u2014 **Queries** (what am I looking for?), **Keys** (what\u2019s available?), and **Values** (the actual information). The mechanism computes how well each query matches each key, scales the scores down by $\\sqrt{d_k}$ to prevent them from getting too large, then uses softmax to convert scores into weights. The final output is a weighted blend of the values.\n\n$$\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$$\n\n**Key takeaway:** Scaling by $\\sqrt{d_k}$ is what makes this "scaled" dot-product attention \u2014 without it, large dimensions push softmax into regions with vanishing gradients.',
       level: 1,
       order_index: 1,
-      equations: [],
-      video_url: SAMPLE_VIDEO,
+      equations: [
+        "\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V",
+      ],
+      video_url: "/videos/demo/ScaledDotproductAttention.mp4",
     },
     {
-      id: "s-mha",
-      title: "2.1 Multi-Head Attention",
+      id: "section-3-3",
+      title: "Multi-Head Attention",
       content:
-        "Instead of performing a single attention function with $d_{\\text{model}}$-dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values $h$ times with different, learned linear projections to $d_k$, $d_k$ and $d_v$ dimensions, respectively.\n\nOn each of these projected versions we perform the attention function in parallel, yielding $d_v$-dimensional output values. These are concatenated and once again projected:\n\n$$\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\ldots, \\text{head}_h)W^O$$\n\nwhere each head is computed as:\n\n$$\\text{head}_i = \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$\n\nMulti-head attention allows the model to jointly attend to information from different representation subspaces at different positions.",
-      level: 2,
+        "A single attention head can only focus on one type of relationship at a time. **Multi-head attention** runs 8 attention heads in parallel, each with different learned projections. One head might track syntax, another might track meaning, and another might track position.\n\nAfter each head computes its own attention output, the results are concatenated and projected through a final linear layer:\n\n$$\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\ldots, \\text{head}_h)W^O$$\n\n**Key takeaway:** Multiple heads let the model attend to different types of relationships simultaneously \u2014 like reading a sentence with 8 different lenses.",
+      level: 1,
       order_index: 2,
-      equations: [],
+      equations: [
+        "\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\ldots, \\text{head}_h)W^O",
+      ],
+      video_url: "/videos/demo/MultiheadAttentionMechanism.mp4",
     },
     {
-      id: "s-ffn",
-      title: "2.2 Position-wise Feed-Forward Networks",
+      id: "section-3-5",
+      title: "Positional Encoding",
       content:
-        "In addition to attention sub-layers, each of the layers in our encoder and decoder contains a fully connected feed-forward network. This consists of two linear transformations with a ReLU activation in between:\n\n$$\\text{FFN}(x) = \\max(0, xW_1 + b_1)W_2 + b_2$$\n\nWhile the linear transformations are the same across different positions, they use different parameters from layer to layer. The dimensionality of input and output is $d_{\\text{model}} = 512$, and the inner-layer has dimensionality $d_{ff} = 2048$.",
-      level: 2,
+        'Since the Transformer processes all words at once (not sequentially), it has no built-in sense of word order. Positional encoding solves this by adding a unique "position signal" to each word embedding.\n\nThe encoding uses sine and cosine waves of different frequencies \u2014 think of it like giving each position its own unique musical chord. Nearby positions sound similar, distant positions sound different:\n\n$$PE_{(pos, 2i)} = \\sin\\left(\\frac{pos}{10000^{2i/d_{\\text{model}}}}\\right)$$\n\n**Key takeaway:** Sinusoidal encodings let the model learn relative positions \u2014 it can figure out "word B is 3 positions after word A" through linear transformations.',
+      level: 1,
       order_index: 3,
-      equations: [],
+      equations: [
+        "PE_{(pos, 2i)} = \\sin\\left(\\frac{pos}{10000^{2i/d_{\\text{model}}}}\\right)",
+      ],
+      video_url: "/videos/demo/SinusoidalPositionalEncoding.mp4",
     },
     {
-      id: "s-takeaways",
-      title: "3. Takeaways",
+      id: "section-4",
+      title: "Why Self-Attention",
       content:
-        "The Transformer is the first transduction model relying entirely on self-attention to compute representations of its input and output without using sequence-aligned RNNs or convolution.\n\n**Key advantages:**\n- Reduced computational complexity per layer from $O(n^2 \\cdot d)$ to $O(n \\cdot d^2)$\n- Increased parallelization\n- Shorter path lengths between long-range dependencies\n\nFor very long sequences where $n > d$, self-attention can be restricted to a neighborhood of size $r$ in the input sequence, yielding a complexity of $O(r \\cdot n \\cdot d)$.",
+        "Why not just use RNNs or CNNs? The answer comes down to three things: **speed**, **parallelism**, and **long-range connections**.\n\nAn RNN must process words one after another \u2014 to connect the first word to the last in a 100-word sentence, information must travel through 100 steps. Self-attention connects every word to every other word in just **one step** (O(1) path length vs O(n) for RNNs).\n\nSelf-attention is also faster when the sequence length is shorter than the model dimension (which is most real-world cases), and it produces more interpretable models \u2014 you can literally see which words each head is attending to.\n\n**Key takeaway:** Self-attention trades the sequential bottleneck of RNNs for constant-time connections between any two positions.",
       level: 1,
       order_index: 4,
       equations: [],
+      video_url:
+        "/videos/demo/PathLengthComparisonSelfattentionVsRnnVsCnn.mp4",
     },
   ],
 };
@@ -67,8 +91,7 @@ export const MOCK_STATUS: ProcessingStatus = {
   job_id: "mock-job-123",
   status: "completed",
   progress: 1.0,
-  sections_completed: 4,
-  sections_total: 4,
+  sections_completed: 5,
+  sections_total: 5,
   current_step: "Complete",
 };
-

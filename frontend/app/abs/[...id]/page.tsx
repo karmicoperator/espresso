@@ -1,19 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useCallback, use } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { SectionViewer, type SectionModel } from "@/components/SectionViewer";
+import { useEffect, useState, useCallback, useRef, use } from "react";
+import { motion } from "framer-motion";
+import { CardStack } from "@/components/CardStack";
+import type { ScrollySectionModel } from "@/components/ScrollySection";
 import { GlassCard } from "@/components/ui/glass-card";
 import { MosaicBackground } from "@/components/ui/mosaic-background";
 import { ShardField } from "@/components/ui/glass-shard";
 import type { Paper, ProcessingStatus } from "@/lib/types";
+import { DEMO_PAPER_ID } from "@/lib/mock-data";
 import {
   getPaper,
   processArxivPaper,
   getProcessingStatus,
   toProcessingStatus,
 } from "@/lib/api";
+
+// --- Demo simulation config ---
+const DEMO_DURATION_MS = 5000;
+const DEMO_TICK_MS = 50;
+const DEMO_STEPS = [
+  { label: "Fetching paper from arXiv", at: 0 },
+  { label: "Parsing sections and equations", at: 0.2 },
+  { label: "Analyzing concepts for visualization", at: 0.4 },
+  { label: "Generating Manim animations", at: 0.6 },
+  { label: "Rendering videos", at: 0.8 },
+];
 
 function normalizeArxivId(segments: string[] | undefined): string {
   if (!segments || segments.length === 0) return "";
@@ -50,11 +63,29 @@ export default function PaperPage({
 
   const [state, setState] = useState<PageState>({ type: "loading" });
   const [jobId, setJobId] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<"overview" | "reader">("overview");
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const demoSimRunning = useRef(false);
 
   const loadPaper = useCallback(async () => {
     if (!arxivId) {
       setState({ type: "error", message: "No arXiv ID provided" });
+      return;
+    }
+
+    // Demo paper: run simulated 5-second processing
+    if (arxivId === DEMO_PAPER_ID) {
+      demoSimRunning.current = true;
+      setState({
+        type: "processing",
+        status: {
+          job_id: "demo",
+          status: "processing",
+          progress: 0,
+          sections_completed: 0,
+          sections_total: 5,
+          current_step: DEMO_STEPS[0].label,
+        },
+      });
       return;
     }
 
@@ -100,8 +131,53 @@ export default function PaperPage({
     }
   }, [arxivId]);
 
+  // Demo simulation: animate progress 0→100% over 5 seconds
   useEffect(() => {
-    if (state.type !== "processing" || !jobId) return;
+    if (state.type !== "processing" || !demoSimRunning.current) return;
+
+    const startTime = Date.now();
+    const timer = setInterval(async () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / DEMO_DURATION_MS, 1);
+
+      // Find current step label
+      let currentStep = DEMO_STEPS[0].label;
+      for (const step of DEMO_STEPS) {
+        if (progress >= step.at) currentStep = step.label;
+      }
+
+      if (progress >= 1) {
+        clearInterval(timer);
+        demoSimRunning.current = false;
+        const paper = await getPaper(arxivId);
+        if (paper) {
+          setState({ type: "ready", paper });
+        }
+        return;
+      }
+
+      setState({
+        type: "processing",
+        status: {
+          job_id: "demo",
+          status: "processing",
+          progress,
+          sections_completed: Math.floor(progress * 5),
+          sections_total: 5,
+          current_step: currentStep,
+        },
+      });
+    }, DEMO_TICK_MS);
+
+    return () => {
+      clearInterval(timer);
+      demoSimRunning.current = false;
+    };
+  }, [state.type, arxivId]);
+
+  // Real API polling (non-demo papers)
+  useEffect(() => {
+    if (state.type !== "processing" || !jobId || demoSimRunning.current) return;
 
     const pollInterval = setInterval(async () => {
       try {
@@ -137,69 +213,48 @@ export default function PaperPage({
     loadPaper();
   }, [loadPaper]);
 
+  const onProgressChange = useCallback((progress: number) => {
+    setScrollProgress(progress);
+  }, []);
+
   return (
-    <main className="min-h-dvh relative overflow-hidden bg-black">
-      <MosaicBackground />
-      <ShardField />
+    <main className="min-h-dvh relative bg-black">
+      {/* Background — fixed so it covers the full page as you scroll */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <MosaicBackground />
+        <ShardField />
+      </div>
 
       <div className="relative z-10">
-        {/* Fixed Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="sticky top-0 z-40 bg-black/80 backdrop-blur-2xl border-b border-white/[0.06]"
-        >
-          <div className="mx-auto w-full max-w-7xl px-6 py-4">
-            <div className="flex items-center justify-between gap-4">
-              <Link
-                href="/"
-                className="group inline-flex items-center gap-2 rounded-xl bg-white/[0.04] px-4 py-2.5 text-sm text-white/60 border border-white/[0.08] transition-all hover:bg-white/[0.07] hover:border-white/[0.12]"
-              >
-                <motion.span
-                  aria-hidden
-                  className="transition-transform group-hover:-translate-x-1 text-white/50"
-                >
-                  &larr;
-                </motion.span>
-                Back
-              </Link>
-
-              <div className="flex-1 flex items-center justify-center">
-                <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08]">
-                  <div className="w-2 h-2 rounded-full bg-white/30 animate-pulse" />
-                  <span className="text-sm font-mono text-white/50">{arxivId || "Loading..."}</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <motion.a
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  href={absUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-xl bg-white/[0.04] px-4 py-2.5 text-sm text-white/60 border border-white/[0.08] transition hover:bg-white/[0.07]"
-                >
-                  arXiv
-                </motion.a>
-                <motion.a
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  href={pdfUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-xl bg-white/[0.06] px-4 py-2.5 text-sm text-white/60 border border-white/[0.10] transition hover:bg-white/[0.09]"
-                >
-                  PDF
-                </motion.a>
-              </div>
-            </div>
+        {/* Minimal progress bar — fixed at top, no nav chrome */}
+        {state.type === "ready" && (
+          <div className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-white/[0.03]">
+            <motion.div
+              className="h-full bg-gradient-to-r from-white/50 to-white/25"
+              animate={{ width: `${scrollProgress * 100}%` }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
           </div>
-        </motion.header>
+        )}
+
+        {/* Floating back button — minimal, top-left */}
+        <motion.div
+          initial={{ opacity: 0, x: -10 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="fixed top-5 left-5 z-50"
+        >
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-xl px-4 py-2.5 text-sm text-white/50 border border-white/[0.08] transition-all hover:bg-black/80 hover:text-white/80 hover:border-white/[0.15] shadow-lg shadow-black/30"
+          >
+            <span className="transition-transform group-hover:-translate-x-0.5">&larr;</span>
+            <span className="hidden sm:inline">Back</span>
+          </Link>
+        </motion.div>
 
         {/* Content based on state */}
-        <div className="min-h-[calc(100dvh-80px)]">
+        <div className="min-h-dvh">
           {state.type === "loading" && <LoadingState message="Loading paper..." />}
 
           {state.type === "not_found" && (
@@ -213,21 +268,11 @@ export default function PaperPage({
           )}
 
           {state.type === "ready" && (
-            <AnimatePresence mode="wait">
-              {viewMode === "overview" ? (
-                <OverviewMode
-                  key="overview"
-                  paper={state.paper}
-                  onStartReading={() => setViewMode("reader")}
-                />
-              ) : (
-                <ReaderMode
-                  key="reader"
-                  paper={state.paper}
-                  onBack={() => setViewMode("overview")}
-                />
-              )}
-            </AnimatePresence>
+            <ReadyState
+              paper={state.paper}
+              absUrl={absUrl}
+              onProgressChange={onProgressChange}
+            />
           )}
         </div>
       </div>
@@ -235,208 +280,17 @@ export default function PaperPage({
   );
 }
 
-// === Overview Mode ===
-function OverviewMode({
+// === Scrollytelling Ready State ===
+function ReadyState({
   paper,
-  onStartReading,
+  absUrl,
+  onProgressChange,
 }: {
   paper: Paper;
-  onStartReading: () => void;
+  absUrl: string;
+  onProgressChange: (progress: number) => void;
 }) {
-  const sectionsWithVideo = paper.sections.filter((s) => s.video_url);
-  const totalEquations = paper.sections.reduce(
-    (acc, s) => acc + (s.equations?.length || 0),
-    0
-  );
-
-  const stats = [
-    {
-      title: "Sections",
-      description: `${paper.sections.length} sections to explore`,
-      icon: <span className="text-2xl text-white/50">&sect;</span>,
-    },
-    {
-      title: "Visualizations",
-      description: `${sectionsWithVideo.length} animated explanations`,
-      icon: <span className="text-2xl text-white/50">&#9654;</span>,
-    },
-    {
-      title: "Equations",
-      description: `${totalEquations} mathematical expressions`,
-      icon: <span className="text-2xl text-white/50">&sum;</span>,
-    },
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="px-6 py-12"
-    >
-      <div className="max-w-6xl mx-auto space-y-12">
-        {/* Hero section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-center space-y-6"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08]">
-            <span className="w-2 h-2 rounded-full bg-white/30" />
-            <span className="text-sm text-white/50">Research Paper</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-white/90 leading-tight tracking-tight max-w-4xl mx-auto">
-            {paper.title}
-          </h1>
-
-          <p className="text-white/40 max-w-2xl mx-auto">
-            {paper.authors.slice(0, 5).join(", ")}
-            {paper.authors.length > 5 && ", et al."}
-          </p>
-
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={onStartReading}
-            className="mt-4 inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-white/[0.08] hover:bg-white/[0.12] text-white font-medium border border-white/[0.15] hover:border-white/[0.25] backdrop-blur-xl shadow-xl shadow-white/[0.03] transition-all duration-300"
-          >
-            Start Reading
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </motion.button>
-        </motion.div>
-
-        {/* Stats cards */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
-        >
-          {stats.map((stat, i) => (
-            <GlassCard key={i} delay={0.2 + i * 0.1} className="p-6">
-              <div className="flex items-start gap-4">
-                <div className="h-10 w-10 rounded-xl bg-white/[0.06] border border-white/[0.08] flex items-center justify-center">
-                  {stat.icon}
-                </div>
-                <div>
-                  <h4 className="text-white/90 font-medium">{stat.title}</h4>
-                  <p className="mt-1 text-sm text-white/40">{stat.description}</p>
-                </div>
-              </div>
-            </GlassCard>
-          ))}
-        </motion.div>
-
-        {/* Abstract section */}
-        <GlassCard delay={0.3} className="p-8">
-          <h2 className="text-lg font-medium text-white/80 mb-4 flex items-center gap-3">
-            <span className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/40">
-              &there4;
-            </span>
-            Abstract
-          </h2>
-          <p className="text-white/50 leading-relaxed text-lg">
-            {paper.abstract}
-          </p>
-        </GlassCard>
-
-        {/* Table of contents */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-        >
-          <h2 className="text-lg font-medium text-white/80 mb-6 flex items-center gap-3">
-            <span className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/40">
-              &equiv;
-            </span>
-            Table of Contents
-          </h2>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {[...paper.sections]
-              .sort((a, b) => a.order_index - b.order_index)
-              .map((section, idx) => (
-                <motion.button
-                  key={section.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + idx * 0.05 }}
-                  onClick={onStartReading}
-                  className="group relative text-left p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.05] transition-all duration-200"
-                >
-                  <div className="flex items-start gap-3">
-                    <span className="w-7 h-7 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-sm font-semibold text-white/50 shrink-0">
-                      {idx + 1}
-                    </span>
-                    <div className="min-w-0">
-                      <h3 className="font-medium text-white/60 group-hover:text-white/80 transition-colors truncate">
-                        {section.title}
-                      </h3>
-                      <div className="mt-1 flex items-center gap-2 text-xs text-white/25">
-                        {section.video_url && (
-                          <span className="flex items-center gap-1 text-white/40">
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-                              <path d="M8 5v14l11-7z" />
-                            </svg>
-                            Video
-                          </span>
-                        )}
-                        {section.equations && section.equations.length > 0 && (
-                          <span>{section.equations.length} equations</span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </motion.button>
-              ))}
-          </div>
-        </motion.div>
-
-        {/* Quick start CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="text-center py-8"
-        >
-          <GlassCard className="inline-flex flex-col items-center gap-4 p-8">
-            <div className="text-4xl text-white/30" style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}>
-              <div className="w-12 h-12 bg-white/[0.06] border border-white/[0.10]" />
-            </div>
-            <h3 className="text-xl font-medium text-white/80">Ready to dive in?</h3>
-            <p className="text-white/40 max-w-md">
-              Navigate through sections seamlessly with our interactive reader, complete with visualizations and equations.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={onStartReading}
-              className="mt-2 px-6 py-3 rounded-xl bg-white/[0.06] text-white/80 font-medium border border-white/[0.10] hover:bg-white/[0.10] transition-all"
-            >
-              Begin Reading Experience
-            </motion.button>
-          </GlassCard>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-}
-
-// === Reader Mode ===
-function ReaderMode({
-  paper,
-  onBack,
-}: {
-  paper: Paper;
-  onBack: () => void;
-}) {
-  const sections: SectionModel[] = [...paper.sections]
+  const scrollySections: ScrollySectionModel[] = [...paper.sections]
     .sort((a, b) => a.order_index - b.order_index)
     .map((s) => ({
       id: s.id,
@@ -447,37 +301,104 @@ function ReaderMode({
       videoUrl: s.video_url,
     }));
 
+  const heroContent = (
+    <div className="mb-12">
+      {/* Hero section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="space-y-6 pt-8 pb-8"
+      >
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.04] border border-white/[0.08]">
+          <span className="w-2 h-2 rounded-full bg-white/30" />
+          <span className="text-sm text-white/50">Research Paper</span>
+        </div>
+
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-white/90 leading-tight tracking-tight">
+          {paper.title}
+        </h1>
+
+        <p className="text-white/40 max-w-2xl">
+          {paper.authors.slice(0, 5).join(", ")}
+          {paper.authors.length > 5 && ", et al."}
+        </p>
+      </motion.div>
+
+      {/* Abstract */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.15 }}
+      >
+        <div className="rounded-2xl bg-white/[0.04] p-6 sm:p-8 border border-white/[0.08] backdrop-blur-sm">
+          <h2 className="text-lg font-medium text-white/80 mb-4 flex items-center gap-3">
+            <span className="w-8 h-8 rounded-lg bg-white/[0.06] border border-white/[0.08] flex items-center justify-center text-white/40">
+              &there4;
+            </span>
+            Abstract
+          </h2>
+          <p className="text-white/50 leading-relaxed text-base sm:text-lg">
+            {paper.abstract}
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Scroll hint */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+        className="mt-8 flex flex-col items-center gap-2 text-white/25"
+      >
+        <span className="text-xs tracking-wider uppercase">Scroll to begin reading</span>
+        <motion.svg
+          animate={{ y: [0, 6, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="w-5 h-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </motion.svg>
+      </motion.div>
+
+      {/* Divider before sections */}
+      <div className="mt-10 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+    </div>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.5 }}
+      className="px-6 py-8"
     >
-      {/* Back to overview button */}
-      <div className="sticky top-[73px] z-30 bg-black/80 backdrop-blur-2xl border-b border-white/[0.04]">
-        <div className="max-w-6xl mx-auto px-6 py-2 flex items-center justify-between">
-          <button
-            onClick={onBack}
-            className="group flex items-center gap-2 text-sm text-white/40 hover:text-white/70 transition-colors"
+      <div className="max-w-6xl mx-auto">
+        <CardStack
+          sections={scrollySections}
+          heroContent={heroContent}
+          onProgressChange={onProgressChange}
+        />
+
+        {/* Footer links */}
+        <div className="mt-8 mb-16 flex items-center justify-center gap-4 text-sm">
+          <a
+            href={absUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-white/30 hover:text-white/60 transition-colors"
           >
-            <svg
-              className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back to Overview
-          </button>
-          <h2 className="text-sm font-medium text-white/50 truncate max-w-md">
-            {paper.title}
-          </h2>
+            View on arXiv
+          </a>
+          <span className="w-1 h-1 rounded-full bg-white/20" />
+          <Link href="/" className="text-white/30 hover:text-white/60 transition-colors">
+            Explore another paper
+          </Link>
         </div>
       </div>
-
-      <SectionViewer sections={sections} />
     </motion.div>
   );
 }

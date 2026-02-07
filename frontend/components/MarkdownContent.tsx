@@ -20,7 +20,7 @@ export function MarkdownContent({ content, className = "" }: MarkdownContentProp
         rehypePlugins={[rehypeKatex]}
         components={{
           p: ({ children }) => (
-            <p className="mb-4 last:mb-0">{children}</p>
+            <p className="mb-6 last:mb-0 leading-[1.9]">{children}</p>
           ),
           strong: ({ children }) => (
             <strong className="font-semibold text-white">{children}</strong>
@@ -44,30 +44,30 @@ export function MarkdownContent({ content, className = "" }: MarkdownContentProp
             );
           },
           pre: ({ children }) => (
-            <pre className="mb-4 overflow-x-auto rounded-xl bg-white/[0.02] border border-white/[0.06]">
+            <pre className="mb-6 overflow-x-auto rounded-xl bg-white/[0.02] border border-white/[0.06]">
               {children}
             </pre>
           ),
           ul: ({ children }) => (
-            <ul className="mb-4 ml-4 list-disc space-y-1 last:mb-0">{children}</ul>
+            <ul className="mb-6 ml-5 list-disc space-y-2 last:mb-0">{children}</ul>
           ),
           ol: ({ children }) => (
-            <ol className="mb-4 ml-4 list-decimal space-y-1 last:mb-0">{children}</ol>
+            <ol className="mb-6 ml-5 list-decimal space-y-2 last:mb-0">{children}</ol>
           ),
           li: ({ children }) => (
-            <li className="text-white/70">{children}</li>
+            <li className="text-white/70 leading-[1.8] pl-1">{children}</li>
           ),
           h1: ({ children }) => (
-            <h1 className="mb-3 text-xl font-semibold text-white">{children}</h1>
+            <h1 className="mt-8 mb-4 text-xl font-semibold text-white">{children}</h1>
           ),
           h2: ({ children }) => (
-            <h2 className="mb-3 text-lg font-semibold text-white">{children}</h2>
+            <h2 className="mt-6 mb-4 text-lg font-semibold text-white">{children}</h2>
           ),
           h3: ({ children }) => (
-            <h3 className="mb-2 text-base font-semibold text-white">{children}</h3>
+            <h3 className="mt-5 mb-3 text-base font-semibold text-white">{children}</h3>
           ),
           blockquote: ({ children }) => (
-            <blockquote className="mb-4 border-l-2 border-white/[0.15] pl-4 italic text-white/50 last:mb-0">
+            <blockquote className="mb-6 border-l-2 border-white/[0.15] pl-5 italic text-white/50 last:mb-0">
               {children}
             </blockquote>
           ),
