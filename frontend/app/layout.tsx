@@ -14,12 +14,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "ArXiviz",
-    template: "%s · ArXiviz",
+    default: "ArXivisual",
+    template: "%s · ArXivisual",
   },
   description:
     "Turn arXiv papers into scrollytelling explanations with Manim-generated visuals.",
-  applicationName: "ArXiviz",
+  applicationName: "ArXivisual",
   keywords: [
     "arXiv",
     "research",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     "machine learning",
     "computer science",
   ],
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/icon.png" }],
 };
 
 export default function RootLayout({
