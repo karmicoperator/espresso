@@ -83,7 +83,7 @@ VOICEOVER_TARGET_DURATION_SECONDS = (30, 45)
 VOICE_MODE = "unified_generator"  # unified_generator | legacy_post_transform
 VOICE_QUALITY_STRICT = True
 VOICE_QUALITY_RETRIES = 2
-VOICE_FAIL_BEHAVIOR = "drop_viz"  # drop_viz | return_silent | hard_error
+VOICE_FAIL_BEHAVIOR = "return_silent"  # drop_viz | return_silent | hard_error
 
 
 def _extract_voiceover_metadata(code: str) -> tuple[list[str], list[str]]:

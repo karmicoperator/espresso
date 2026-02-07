@@ -385,7 +385,7 @@ async def run_demo(max_visualizations: int = 2, verbose: bool = False) -> list[P
         f"Paper: Attention Is All You Need (1706.03762)\n"
         f"Generated: {datetime.now().isoformat()}\n"
         f"TTS: ElevenLabs (eleven_flash_v2_5, voice=2fe8mwpfJcqvj9RGBsC1)\n"
-        f"Model: Claude Opus 4.5 via Martian\n"
+        f"Model: Claude Opus 4.5 via {'Dedalus SDK' if os.getenv('DEDALUS_API_KEY') else 'Martian' if os.getenv('MARTIAN_API_KEY') else 'Anthropic'}\n"
         f"Visualizations: {len(visualizations)}\n\n"
         + "\n".join(manifest_lines) + "\n"
     )
@@ -511,14 +511,19 @@ Examples:
     from dotenv import load_dotenv
     load_dotenv()
     
-    api_key = os.getenv("MARTIAN_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+    api_key = os.getenv("DEDALUS_API_KEY") or os.getenv("MARTIAN_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
         print_error("No API key found!")
-        print("  Set ANTHROPIC_API_KEY or MARTIAN_API_KEY in .env file")
+        print("  Set DEDALUS_API_KEY, MARTIAN_API_KEY, or ANTHROPIC_API_KEY in .env file")
         print("  Copy .env.example to .env and add your key")
         sys.exit(1)
-    
-    api_provider = "Martian" if os.getenv("MARTIAN_API_KEY") else "Anthropic"
+
+    if os.getenv("DEDALUS_API_KEY"):
+        api_provider = "Dedalus SDK → Anthropic Claude Opus"
+    elif os.getenv("MARTIAN_API_KEY"):
+        api_provider = "Martian"
+    else:
+        api_provider = "Anthropic"
     print(f"  API Provider: {api_provider}")
     print(f"  API Key: {api_key[:8]}...{api_key[-4:]}")
     

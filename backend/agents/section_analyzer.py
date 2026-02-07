@@ -71,16 +71,11 @@ class SectionAnalyzer(BaseAgent):
             equations=self._format_equations(section),
         )
         
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            system=self.system_prompt,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        
-        result = self._parse_json_response(response.content[0].text)
+        text = await self._call_llm(prompt)
+
+        result = self._parse_json_response(text)
         return self._parse_result(result, section.id)
-    
+
     def _parse_result(self, result: dict, section_id: str) -> AnalyzerOutput:
         """Parse the LLM response into an AnalyzerOutput."""
         candidates = []
@@ -126,12 +121,7 @@ class SectionAnalyzer(BaseAgent):
             equations=self._format_equations(section),
         )
         
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            system=self.system_prompt,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        
-        result = self._parse_json_response(response.content[0].text)
+        text = self._call_llm_sync(prompt)
+
+        result = self._parse_json_response(text)
         return self._parse_result(result, section.id)

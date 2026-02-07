@@ -64,16 +64,11 @@ class VisualizationPlanner(BaseAgent):
             paper_context=paper_context,
         )
         
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            system=self.system_prompt,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        
-        result = self._parse_json_response(response.content[0].text)
+        text = await self._call_llm(prompt)
+
+        result = self._parse_json_response(text)
         return self._parse_result(result, candidate.visualization_type)
-    
+
     def _parse_result(
         self,
         result: dict,
@@ -124,12 +119,7 @@ class VisualizationPlanner(BaseAgent):
             paper_context=paper_context,
         )
         
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            system=self.system_prompt,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        
-        result = self._parse_json_response(response.content[0].text)
+        text = self._call_llm_sync(prompt)
+
+        result = self._parse_json_response(text)
         return self._parse_result(result, candidate.visualization_type)

@@ -224,14 +224,9 @@ Example BAD narrations (DO NOT generate these):
 
 Generate {len(plan.scenes)} educational sentences, one per line:"""
 
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=1024,
-            messages=[{"role": "user", "content": prompt}]
-        )
-        
+        text = await self._call_llm(prompt, max_tokens=1024)
+
         # Parse response - one narration per line
-        text = response.content[0].text
         lines = [line.strip() for line in text.strip().split("\n") if line.strip()]
         
         # Filter out any lines that look like animation commands

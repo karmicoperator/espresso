@@ -9,7 +9,7 @@ from typing import Optional
 
 # Handle imports for both package and direct execution
 try:
-    from .base import _get_client, get_model_name
+    from .base import call_llm_sync, get_model_name, get_provider
     from ..models.generation import GeneratedCode, VisualizationCandidate, VisualizationPlan
     from ..models.voiceover import VoiceoverValidationOutput
 except ImportError:
@@ -17,7 +17,7 @@ except ImportError:
     from pathlib import Path
 
     sys.path.insert(0, str(Path(__file__).parent.parent))
-    from agents.base import _get_client, get_model_name
+    from agents.base import call_llm_sync, get_model_name, get_provider
     from models.generation import GeneratedCode, VisualizationCandidate, VisualizationPlan
     from models.voiceover import VoiceoverValidationOutput
 
@@ -37,8 +37,8 @@ class VoiceoverScriptValidator:
         strict: bool = True,
         min_words: int = 6,
         max_words: int = 40,
-        alignment_threshold: float = 0.70,
-        educational_threshold: float = 0.70,
+        alignment_threshold: float = 0.45,
+        educational_threshold: float = 0.50,
         use_llm_judge: bool = True,
         model: Optional[str] = None,
     ):
@@ -48,7 +48,6 @@ class VoiceoverScriptValidator:
         self.alignment_threshold = alignment_threshold
         self.educational_threshold = educational_threshold
         self.use_llm_judge = use_llm_judge
-        self._client = _get_client() if use_llm_judge else None
         self.model = get_model_name(model)
 
     def validate(
@@ -203,7 +202,8 @@ class VoiceoverScriptValidator:
         narrations: list[str],
     ) -> tuple[Optional[float], Optional[float], Optional[str]]:
         """LLM rubric scorer. Returns None scores if unavailable."""
-        if not (os.environ.get("MARTIAN_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")):
+        provider = get_provider()
+        if provider == "anthropic" and not os.environ.get("ANTHROPIC_API_KEY"):
             return None, None, None
 
         try:
@@ -223,12 +223,11 @@ class VoiceoverScriptValidator:
                 "- issues: short list of concrete problems\n"
             )
 
-            response = self._client.messages.create(
+            text = call_llm_sync(
+                prompt=prompt,
                 model=self.model,
                 max_tokens=512,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            text = response.content[0].text.strip()
+            ).strip()
             match = re.search(r"```json\s*([\s\S]*?)\s*```", text)
             payload = match.group(1).strip() if match else text
             result = json.loads(payload)

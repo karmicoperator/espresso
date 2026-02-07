@@ -307,14 +307,9 @@ class ManimGenerator(BaseAgent):
             target_duration_seconds=target_duration_seconds,
         )
 
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            system=enriched_system_prompt,
-            messages=[{"role": "user", "content": prompt}],
-        )
+        text = await self._call_llm(prompt, system_prompt=enriched_system_prompt)
 
-        code = self._clean_code(response.content[0].text)
+        code = self._clean_code(text)
         actual_class_name = self._extract_scene_class_name(code)
         dependencies = ["manim"]
         if voiceover_enabled:
@@ -376,14 +371,9 @@ The previous code had issues. Fix them and regenerate complete code.
 
         prompt = base_prompt + "\n\n" + error_feedback
 
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            system=enriched_system_prompt,
-            messages=[{"role": "user", "content": prompt}],
-        )
+        text = await self._call_llm(prompt, system_prompt=enriched_system_prompt)
 
-        code = self._clean_code(response.content[0].text)
+        code = self._clean_code(text)
         actual_class_name = self._extract_scene_class_name(code)
         dependencies = ["manim"]
         if voiceover_enabled:
@@ -417,14 +407,9 @@ The previous code had issues. Fix them and regenerate complete code.
             target_duration_seconds=target_duration_seconds,
         )
 
-        response = self.client.messages.create(
-            model=self.model,
-            max_tokens=self.max_tokens,
-            system=self.system_prompt,
-            messages=[{"role": "user", "content": prompt}],
-        )
+        text = self._call_llm_sync(prompt)
 
-        code = self._clean_code(response.content[0].text)
+        code = self._clean_code(text)
         actual_class_name = self._extract_scene_class_name(code)
         dependencies = ["manim"]
         if voiceover_enabled:
