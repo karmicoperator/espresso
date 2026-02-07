@@ -6,6 +6,8 @@ interface MosaicBackgroundProps {
   className?: string;
   /** When true, renders the arXiv logo as colored mosaic fragments */
   showLogo?: boolean;
+  /** Vertical position of the logo as a fraction of viewport height (default 0.22) */
+  logoYFraction?: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -36,6 +38,7 @@ const ARXIV_RED = { r: 179, g: 27, b: 27 }; // #b31b1b — front diagonal of X
 export function MosaicBackground({
   className = "",
   showLogo = false,
+  logoYFraction = 0.22,
 }: MosaicBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -102,7 +105,7 @@ export function MosaicBackground({
         offCtx.textBaseline = "middle";
 
         const logoX = w / 2;
-        const logoY = h * 0.22; // high in the clear area, above the subtitle text
+        const logoY = h * logoYFraction;
 
         // Measure text segments to locate the X character boundaries
         const fullWidth = offCtx.measureText("arXiv").width;
@@ -234,7 +237,7 @@ export function MosaicBackground({
         }
       }
     }
-  }, [showLogo]);
+  }, [showLogo, logoYFraction]);
 
   useEffect(() => {
     render();

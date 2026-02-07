@@ -35,23 +35,6 @@ const placeholders = [
   "1810.04805 (BERT)",
 ];
 
-// Mosaic diamond logo
-const MosaicLogo = () => (
-  <motion.div whileHover={{ scale: 1.1, rotate: 5 }} className="relative">
-    <div className="h-12 w-12 rounded-xl bg-white/[0.06] border border-white/[0.12] flex items-center justify-center backdrop-blur-sm">
-      <div
-        className="h-5 w-5 bg-gradient-to-br from-white/40 to-white/10"
-        style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
-      />
-    </div>
-    <motion.div
-      animate={{ opacity: [0.3, 0.6, 0.3] }}
-      transition={{ duration: 3, repeat: Infinity }}
-      className="absolute -inset-1 rounded-xl bg-white/[0.04] blur-xl -z-10"
-    />
-  </motion.div>
-);
-
 export default function Home() {
   const router = useRouter();
   const [value, setValue] = useState("");
@@ -88,7 +71,7 @@ export default function Home() {
   return (
     <main className="min-h-dvh relative overflow-hidden bg-black">
       {/* Mosaic background with arXiv logo */}
-      <MosaicBackground showLogo />
+      <MosaicBackground showLogo logoYFraction={0.12} />
 
       {/* Floating glass shards */}
       <ShardField />
@@ -96,35 +79,6 @@ export default function Home() {
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
         {/* ── First viewport: Logo (clear) + search bar below ── */}
         <section className="min-h-dvh flex flex-col">
-          {/* Header */}
-          <motion.header
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center justify-between py-8 sm:py-12"
-          >
-            <div className="flex items-center gap-4">
-              <MosaicLogo />
-              <div className="leading-tight">
-                <div className="text-lg font-semibold text-white/90">ArXiviz</div>
-                <div className="text-sm text-white/30">
-                  Mathematical visualizations
-                </div>
-              </div>
-            </div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="hidden items-center gap-3 sm:flex"
-            >
-              <div className="flex items-center gap-2 rounded-full bg-white/[0.04] px-4 py-2 border border-white/[0.08]">
-                <span className="text-white/40 text-sm">◇</span>
-                <span className="text-sm text-white/40">Powered by Manim</span>
-              </div>
-            </motion.div>
-          </motion.header>
-
           {/* Spacer — keeps the logo area clear */}
           <div className="flex-1" />
 
@@ -223,10 +177,11 @@ export default function Home() {
 
         {/* How It Works */}
         <motion.section
+          id="how-it-works"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.6 }}
-          className="mt-20 sm:mt-28"
+          className="mt-20 sm:mt-28 scroll-mt-8"
         >
           {/* Section divider */}
           <div className="flex items-center gap-4 mb-12">
