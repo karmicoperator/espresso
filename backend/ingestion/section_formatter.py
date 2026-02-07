@@ -318,7 +318,8 @@ def _fallback_split(text: str, max_sections: int = MAX_SECTIONS) -> list[dict]:
 async def format_sections(
     sections: list[Section],
     meta: ArxivPaperMeta,
-    model: str = "moonshotai/kimi-k2.5",
+    model: str = "claude-sonnet-4-5-20250929",
+    max_concurrent: int = 5,
 ) -> list[Section]:
     """
     Summarize and organize paper sections for presentation.
@@ -330,7 +331,8 @@ async def format_sections(
     Args:
         sections: Sections from extract_sections()
         meta: Paper metadata for context
-        model: Martian model identifier
+        model: Martian model identifier (e.g. "claude-sonnet-4-5-20250929")
+        max_concurrent: Max concurrent API calls
 
     Returns:
         List of <= 5 sections with summarized .content and .summary
