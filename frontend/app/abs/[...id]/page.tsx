@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState, useCallback, useRef, use } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { CardStack } from "@/components/CardStack";
 import type { ScrollySectionModel } from "@/components/ScrollySection";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -65,6 +65,19 @@ export default function PaperPage({
   const [jobId, setJobId] = useState<string | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const demoSimRunning = useRef(false);
+
+  // Staged entrance:
+  // 0.0s–0.7s  → pure black
+  // 0.7s       → background + arXiv logo + shards fade in
+  // 2.2s       → UI fades in over 0.6s, loadPaper fires
+  //              (logo visible alone for 1.5s: 0.7→2.2)
+  const [bgVisible, setBgVisible] = useState(false);
+  const [bgReady, setBgReady] = useState(false);
+  useEffect(() => {
+    const t1 = setTimeout(() => setBgVisible(true), 700);
+    const t2 = setTimeout(() => setBgReady(true), 2200);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
 
   const loadPaper = useCallback(async () => {
     if (!arxivId) {
@@ -148,11 +161,25 @@ export default function PaperPage({
 
       if (progress >= 1) {
         clearInterval(timer);
-        demoSimRunning.current = false;
-        const paper = await getPaper(arxivId);
-        if (paper) {
-          setState({ type: "ready", paper });
-        }
+        // Show 100% with all steps "Done" for 800ms before transitioning
+        setState({
+          type: "processing",
+          status: {
+            job_id: "demo",
+            status: "processing",
+            progress: 1,
+            sections_completed: 5,
+            sections_total: 5,
+            current_step: "Complete",
+          },
+        });
+        setTimeout(async () => {
+          demoSimRunning.current = false;
+          const paper = await getPaper(arxivId);
+          if (paper) {
+            setState({ type: "ready", paper });
+          }
+        }, 800);
         return;
       }
 
@@ -209,9 +236,10 @@ export default function PaperPage({
     return () => clearInterval(pollInterval);
   }, [state.type, jobId, arxivId]);
 
+  // Don't start loading until the background has had its moment
   useEffect(() => {
-    loadPaper();
-  }, [loadPaper]);
+    if (bgReady) loadPaper();
+  }, [bgReady, loadPaper]);
 
   const onProgressChange = useCallback((progress: number) => {
     setScrollProgress(progress);
@@ -219,63 +247,84 @@ export default function PaperPage({
 
   return (
     <main className="min-h-dvh relative bg-black">
-      {/* Background — fixed so it covers the full page as you scroll */}
-      <div className="fixed inset-0 z-0 overflow-hidden">
-        <MosaicBackground />
-        <ShardField />
-      </div>
-
-      <div className="relative z-10">
-        {/* Minimal progress bar — fixed at top, no nav chrome */}
-        {state.type === "ready" && (
-          <div className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-white/[0.03]">
-            <motion.div
-              className="h-full bg-gradient-to-r from-white/50 to-white/25"
-              animate={{ width: `${scrollProgress * 100}%` }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-            />
-          </div>
-        )}
-
-        {/* Floating back button — minimal, top-left */}
-        <motion.div
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="fixed top-5 left-5 z-50"
-        >
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-xl px-4 py-2.5 text-sm text-white/50 border border-white/[0.08] transition-all hover:bg-black/80 hover:text-white/80 hover:border-white/[0.15] shadow-lg shadow-black/30"
+      {/* Background — fades in after 0.7s black */}
+      <AnimatePresence>
+        {bgVisible && (
+          <motion.div
+            key="background"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="fixed inset-0 z-0 overflow-hidden"
           >
-            <span className="transition-transform group-hover:-translate-x-0.5">&larr;</span>
-            <span className="hidden sm:inline">Back</span>
-          </Link>
-        </motion.div>
+            <MosaicBackground showLogo logoYFraction={0.28} />
+            <ShardField />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        {/* Content based on state */}
-        <div className="min-h-dvh">
-          {state.type === "loading" && <LoadingState message="Loading paper..." />}
+      {/* Foreground UI — fades in 1.5s after logo appears */}
+      <AnimatePresence>
+        {bgReady && (
+          <motion.div
+            key="foreground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="relative z-10"
+          >
+            {/* Minimal progress bar — fixed at top, no nav chrome */}
+            {state.type === "ready" && (
+              <div className="fixed top-0 left-0 right-0 z-50 h-[3px] bg-white/[0.03]">
+                <motion.div
+                  className="h-full bg-gradient-to-r from-white/50 to-white/25"
+                  animate={{ width: `${scrollProgress * 100}%` }}
+                  transition={{ duration: 0.3, ease: "easeOut" }}
+                />
+              </div>
+            )}
 
-          {state.type === "not_found" && (
-            <NotFoundState arxivId={state.arxivId} onProcess={startProcessing} />
-          )}
+            {/* Floating back button — minimal, top-left */}
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="fixed top-5 left-5 z-50"
+            >
+              <Link
+                href="/"
+                className="group inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-xl px-4 py-2.5 text-sm text-white/50 border border-white/[0.08] transition-all hover:bg-black/80 hover:text-white/80 hover:border-white/[0.15] shadow-lg shadow-black/30"
+              >
+                <span className="transition-transform group-hover:-translate-x-0.5">&larr;</span>
+                <span className="hidden sm:inline">Back</span>
+              </Link>
+            </motion.div>
 
-          {state.type === "processing" && <ProcessingState status={state.status} />}
+            {/* Content based on state */}
+            <div className="min-h-dvh">
+              {state.type === "loading" && <LoadingState message="Loading paper..." />}
 
-          {state.type === "error" && (
-            <ErrorState message={state.message} onRetry={loadPaper} />
-          )}
+              {state.type === "not_found" && (
+                <NotFoundState arxivId={state.arxivId} onProcess={startProcessing} />
+              )}
 
-          {state.type === "ready" && (
-            <ReadyState
-              paper={state.paper}
-              absUrl={absUrl}
-              onProgressChange={onProgressChange}
-            />
-          )}
-        </div>
-      </div>
+              {state.type === "processing" && <ProcessingState status={state.status} />}
+
+              {state.type === "error" && (
+                <ErrorState message={state.message} onRetry={loadPaper} />
+              )}
+
+              {state.type === "ready" && (
+                <ReadyState
+                  paper={state.paper}
+                  absUrl={absUrl}
+                  onProgressChange={onProgressChange}
+                />
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }
@@ -495,6 +544,7 @@ function ProcessingState({ status }: { status: ProcessingStatus }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
         className="w-full max-w-2xl"
       >
         <GlassCard animate={false} className="p-8">
@@ -542,7 +592,7 @@ function ProcessingState({ status }: { status: ProcessingStatus }) {
             <ol className="space-y-3">
               {steps.map((step, i) => {
                 const isActive = progressPercent >= step.threshold;
-                const isCurrent = progressPercent >= step.threshold && (i === steps.length - 1 || progressPercent < steps[i + 1].threshold);
+                const isCurrent = progressPercent >= step.threshold && progressPercent < 100 && (i === steps.length - 1 || progressPercent < steps[i + 1].threshold);
 
                 return (
                   <motion.li
@@ -565,7 +615,7 @@ function ProcessingState({ status }: { status: ProcessingStatus }) {
                       </span>
                     )}
                     {isActive && !isCurrent && (
-                      <span className="text-white/50">&check;</span>
+                      <span className="text-xs text-[#7dd19b] font-medium">Done</span>
                     )}
                   </motion.li>
                 );
