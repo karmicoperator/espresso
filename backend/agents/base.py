@@ -21,9 +21,9 @@ except ImportError:
 # Martian API configuration
 MARTIAN_BASE_URL = "https://api.withmartian.com/v1"
 
-# Default models - Use Opus for best quality
-DEFAULT_MODEL_ANTHROPIC = "claude-opus-4-5-20251101"
-DEFAULT_MODEL_MARTIAN = "anthropic/claude-opus-4-5-20251101"
+# Default models - Kimi K2.5 via Martian for cost savings
+DEFAULT_MODEL_ANTHROPIC = "claude-opus-4-5-20251101"  # fallback if no Martian key
+DEFAULT_MODEL_MARTIAN = "moonshotai/kimi-k2.5"
 
 # Flag to track if we're using Martian
 _using_martian = False
@@ -56,22 +56,20 @@ def _get_client() -> Anthropic:
 def get_model_name(model: str | None = None) -> str:
     """
     Get the correct model name based on which API we're using.
-    
-    Martian requires: "anthropic/claude-sonnet-4-20250514"
-    Anthropic requires: "claude-sonnet-4-20250514"
+
+    Martian requires provider-prefixed names: "moonshotai/kimi-k2.5"
+    Anthropic requires bare names: "claude-opus-4-5-20251101"
     """
     if model is None:
         return DEFAULT_MODEL_MARTIAN if _using_martian else DEFAULT_MODEL_ANTHROPIC
-    
+
     if _using_martian:
-        # Ensure model has anthropic/ prefix for Martian
-        if not model.startswith("anthropic/"):
-            return f"anthropic/{model}"
+        # Martian models already have provider/ prefix — pass through as-is
         return model
     else:
-        # Remove anthropic/ prefix for direct Anthropic API
-        if model.startswith("anthropic/"):
-            return model.replace("anthropic/", "")
+        # Remove provider/ prefix for direct Anthropic API
+        if "/" in model:
+            return model.split("/", 1)[1]
         return model
 
 
@@ -90,8 +88,8 @@ class BaseAgent:
     - ANTHROPIC_API_KEY: Direct Anthropic access (fallback)
     
     Model Names:
-    - For Martian: "anthropic/claude-sonnet-4-20250514" or "anthropic/claude-opus-4-5-20251101"
-    - For Anthropic: "claude-sonnet-4-20250514"
+    - For Martian: "moonshotai/kimi-k2.5" (or any provider/model format)
+    - For Anthropic: "claude-opus-4-5-20251101" (bare model name)
     - The code auto-converts between formats based on which API is used
     """
     
