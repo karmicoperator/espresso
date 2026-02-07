@@ -318,7 +318,7 @@ def _fallback_split(text: str, max_sections: int = MAX_SECTIONS) -> list[dict]:
 async def format_sections(
     sections: list[Section],
     meta: ArxivPaperMeta,
-    model: str = "openai/gpt-4.1",
+    model: str = "moonshotai/kimi-k2.5",
 ) -> list[Section]:
     """
     Summarize and organize paper sections for presentation.
@@ -365,7 +365,7 @@ async def format_sections(
     result_sections: list[Section] = []
     for i, org_section in enumerate(organized):
         section = Section(
-            id=f"section-{i + 1}",
+            id=f"{meta.arxiv_id}-section-{i + 1}",
             title=org_section["title"],
             level=1,
             content=org_section["content"],
