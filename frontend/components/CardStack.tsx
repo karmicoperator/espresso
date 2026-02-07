@@ -4,13 +4,13 @@ import {
   type ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import {
   motion,
   useScroll,
-  useSpring,
   useTransform,
   useMotionValueEvent,
   type MotionValue,
@@ -19,24 +19,21 @@ import { StackCard } from "@/components/StackCard";
 import type { ScrollySectionModel } from "@/components/ScrollySection";
 import { cn } from "@/lib/utils";
 
-// --- Deck layout constants ---
+// --- Layout constants ---
 const SCROLL_PER_SECTION = 2; // 200vh scroll per section
-const EXIT_THRESHOLD = 0.75; // 0–0.75 = content phase, 0.75–1.0 = exit phase
-const STACK_GAP_X = 12; // px rightward offset per deck position
-const STACK_GAP_Y = 10; // px downward offset per deck position
-const STACK_SCALE_STEP = 0.03; // scale shrinks per position
-const STACK_OPACITY_STEP = 0.15; // opacity dims per position
+const EXIT_FRACTION = 0.25; // last 25% of each segment = exit/enter phase
+const CONTENT_FRACTION = 1 - EXIT_FRACTION; // first 75% = content scroll phase
 
 /**
- * Compute deck position transforms for a single card.
- * Uses deck-position model: 0 = top/active, 1 = second, 2 = third, etc.
+ * SlideCard — creates 3 motion values per card (vs old CardSlot's 8 hooks).
+ * Handles horizontal slide transitions: exit left, enter from right.
  */
-function CardSlot({
+function SlideCard({
   section,
   index,
   totalSections,
   scrollYProgress,
-  activeIndex,
+  isActive,
   contentHeightsRef,
   onContentHeight,
 }: {
@@ -44,7 +41,7 @@ function CardSlot({
   index: number;
   totalSections: number;
   scrollYProgress: MotionValue<number>;
-  activeIndex: number;
+  isActive: boolean;
   contentHeightsRef: React.RefObject<number[]>;
   onContentHeight: (index: number, height: number) => void;
 }) {
@@ -52,121 +49,79 @@ function CardSlot({
   const segStart = index / N;
   const segEnd = (index + 1) / N;
   const segLen = segEnd - segStart;
-  const exitStart = segStart + segLen * EXIT_THRESHOLD;
+  const contentEnd = segStart + segLen * CONTENT_FRACTION;
 
-  // Helper: get effective deck position for this card given scroll progress
-  function getDeckState(v: number) {
-    const currentActive = Math.min(Math.floor(v * N), N - 1);
-    const rawDeckPos = index - currentActive;
+  // Previous card's exit phase = this card's enter phase
+  const prevSegStart = (index - 1) / N;
+  const prevSegLen = 1 / N;
+  const prevExitStart = prevSegStart + prevSegLen * CONTENT_FRACTION;
+  const prevSegEnd = index / N; // = segStart
 
-    // Exit progress for the currently-active card's exit phase
-    const activeSegStart = currentActive / N;
-    const activeSegEnd = (currentActive + 1) / N;
-    const activeExitStart =
-      activeSegStart + (activeSegEnd - activeSegStart) * EXIT_THRESHOLD;
-    const exitProgress =
-      v >= activeExitStart && v < activeSegEnd
-        ? (v - activeExitStart) / (activeSegEnd - activeExitStart)
-        : 0;
+  // --- slideX: horizontal position ---
+  const slideX = useTransform(scrollYProgress, (v) => {
+    const vw = typeof window !== "undefined" ? window.innerWidth : 1000;
 
-    return { rawDeckPos, currentActive, exitProgress };
-  }
+    // Before this card's enter phase: offscreen right
+    if (index > 0 && v < prevExitStart) return vw;
 
-  // --- Card X (horizontal: stack offset + slide-left exit) ---
-  const cardX = useTransform(scrollYProgress, (v) => {
-    const { rawDeckPos, currentActive, exitProgress } = getDeckState(v);
+    // First card is always at x=0 until its exit
+    if (index === 0 && v < contentEnd) return 0;
 
-    // This card is the one currently exiting
-    if (index === currentActive && exitProgress > 0) {
-      // Slide left: 0 → -110vw
-      const vw = typeof window !== "undefined" ? window.innerWidth : 1000;
-      return -exitProgress * 1.1 * vw;
+    // Enter phase (slides in from right) — during previous card's exit
+    if (index > 0 && v >= prevExitStart && v < segStart) {
+      const enterProgress = (v - prevExitStart) / (segStart - prevExitStart);
+      return vw * (1 - enterProgress);
     }
 
-    // Exited cards: hide off-screen
-    if (rawDeckPos < 0) {
-      const vw = typeof window !== "undefined" ? window.innerWidth : 1000;
-      return -1.1 * vw;
+    // Content phase: card is centered
+    if (v >= segStart && v < contentEnd) return 0;
+
+    // Exit phase: slide left
+    if (v >= contentEnd && v < segEnd) {
+      const exitProgress = (v - contentEnd) / (segEnd - contentEnd);
+      return -vw * exitProgress;
     }
 
-    // Cards in the deck: interpolate toward their target position
-    let deckPos = rawDeckPos;
+    // After segment: offscreen left
+    if (v >= segEnd) return -vw;
 
-    // If the active card is exiting, cards behind it shift forward
-    if (exitProgress > 0 && rawDeckPos > 0) {
-      deckPos = rawDeckPos - exitProgress; // smoothly shift forward
-    }
-
-    return deckPos * STACK_GAP_X;
-  });
-
-  // --- Card Y (vertical: stack offset) ---
-  const cardY = useTransform(scrollYProgress, (v) => {
-    const { rawDeckPos, currentActive, exitProgress } = getDeckState(v);
-
-    if (index === currentActive && exitProgress > 0) {
-      return 0; // stays level while sliding left
-    }
-    if (rawDeckPos < 0) return 0;
-
-    let deckPos = rawDeckPos;
-    if (exitProgress > 0 && rawDeckPos > 0) {
-      deckPos = rawDeckPos - exitProgress;
-    }
-
-    return deckPos * STACK_GAP_Y;
-  });
-
-  // --- Card Scale ---
-  const cardScale = useTransform(scrollYProgress, (v) => {
-    const { rawDeckPos, currentActive, exitProgress } = getDeckState(v);
-
-    if (index === currentActive && exitProgress > 0) {
-      return 1 - exitProgress * 0.05; // 1.0 → 0.95
-    }
-    if (rawDeckPos < 0) return 0.95;
-
-    let deckPos = rawDeckPos;
-    if (exitProgress > 0 && rawDeckPos > 0) {
-      deckPos = rawDeckPos - exitProgress;
-    }
-
-    return Math.max(0.88, 1 - deckPos * STACK_SCALE_STEP);
-  });
-
-  // --- Card Opacity ---
-  const cardOpacity = useTransform(scrollYProgress, (v) => {
-    const { rawDeckPos, currentActive, exitProgress } = getDeckState(v);
-
-    if (index === currentActive && exitProgress > 0) {
-      return 1 - exitProgress; // fade out as it slides
-    }
-    if (rawDeckPos < 0) return 0;
-
-    let deckPos = rawDeckPos;
-    if (exitProgress > 0 && rawDeckPos > 0) {
-      deckPos = rawDeckPos - exitProgress;
-    }
-
-    return Math.max(0.25, 1 - deckPos * STACK_OPACITY_STEP);
-  });
-
-  // --- Card Rotate (slight tilt during exit) ---
-  const cardRotate = useTransform(scrollYProgress, (v) => {
-    const { currentActive, exitProgress } = getDeckState(v);
-
-    if (index === currentActive && exitProgress > 0) {
-      return -3 * exitProgress; // 0 → -3deg
-    }
     return 0;
   });
 
-  // --- Content Y (scroll content within active card) ---
-  const contentY = useTransform(scrollYProgress, (v) => {
-    if (v < segStart || v >= segEnd) return 0;
-    const localProgress = (v - segStart) / segLen;
-    const contentPhaseProgress = Math.min(localProgress / EXIT_THRESHOLD, 1);
+  // --- slideOpacity ---
+  const slideOpacity = useTransform(scrollYProgress, (v) => {
+    // Before enter: hidden
+    if (index > 0 && v < prevExitStart) return 0;
 
+    // First card: visible from start
+    if (index === 0 && v < contentEnd) return 1;
+
+    // Enter phase: fade in
+    if (index > 0 && v >= prevExitStart && v < segStart) {
+      const enterProgress = (v - prevExitStart) / (segStart - prevExitStart);
+      return enterProgress;
+    }
+
+    // Content phase: fully visible
+    if (v >= segStart && v < contentEnd) return 1;
+
+    // Exit phase: fade out
+    if (v >= contentEnd && v < segEnd) {
+      const exitProgress = (v - contentEnd) / (segEnd - contentEnd);
+      return 1 - exitProgress;
+    }
+
+    // After: hidden
+    if (v >= segEnd) return 0;
+
+    return 1;
+  });
+
+  // --- contentY: scroll content within the card during content phase ---
+  const contentY = useTransform(scrollYProgress, (v) => {
+    if (v < segStart || v >= contentEnd) return 0;
+
+    const contentPhaseProgress = (v - segStart) / (contentEnd - segStart);
     const contentHeight = contentHeightsRef.current?.[index] || 0;
     const cardViewportHeight =
       typeof window !== "undefined" ? window.innerHeight - 96 : 600;
@@ -175,34 +130,20 @@ function CardSlot({
     return -contentPhaseProgress * maxScroll;
   });
 
-  // --- Z-index (reactive: top of deck = highest) ---
-  const [zIndex, setZIndex] = useState(() => N - index);
-
-  useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const { rawDeckPos, currentActive, exitProgress } = getDeckState(v);
-
-    let z: number;
-    if (rawDeckPos < 0) {
-      z = 0; // exited
-    } else if (index === currentActive && exitProgress > 0) {
-      z = N + 1; // exiting card stays on top during animation
-    } else {
-      z = N - rawDeckPos;
-    }
-    if (z !== zIndex) setZIndex(z);
-  });
+  // z-index: computed inline, no useState
+  const zIndex = useMemo(() => {
+    if (isActive) return N + 1;
+    return N - Math.abs(index);
+  }, [isActive, N, index]);
 
   return (
     <StackCard
       section={section}
       index={index}
       totalSections={N}
-      isActive={index === activeIndex}
-      cardScale={cardScale}
-      cardX={cardX}
-      cardY={cardY}
-      cardRotate={cardRotate}
-      cardOpacity={cardOpacity}
+      isActive={isActive}
+      cardX={slideX}
+      cardOpacity={slideOpacity}
       contentY={contentY}
       zIndex={zIndex}
       onContentHeight={onContentHeight}
@@ -237,12 +178,7 @@ export function CardStack({
     offset: ["start start", "end end"],
   });
 
-  // Spring-smoothed scroll progress for fluid card transforms
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    mass: 0.5,
-  });
+  // No useSpring — raw scroll progress for responsive feel
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -258,6 +194,15 @@ export function CardStack({
       onProgressChange(activeIndex / (N - 1));
     }
   }, [activeIndex, N, onProgressChange]);
+
+  // Virtualize: only render cards near the active one (max 3 in DOM)
+  const visibleIndices = useMemo(() => {
+    const indices: number[] = [];
+    for (let i = activeIndex - 1; i <= activeIndex + 1; i++) {
+      if (i >= 0 && i < N) indices.push(i);
+    }
+    return indices;
+  }, [activeIndex, N]);
 
   const indicatorOpacity = useTransform(
     scrollYProgress,
@@ -275,22 +220,22 @@ export function CardStack({
         style={{ height: `${totalScrollVh}vh` }}
         className="relative"
       >
-        {/* Sticky viewport — holds all cards, clips exit animation */}
+        {/* Sticky viewport — holds visible cards, clips transitions */}
         <div className="sticky top-0 h-screen overflow-hidden">
-          {sections.map((section, i) => (
-            <CardSlot
-              key={section.id}
-              section={section}
+          {visibleIndices.map((i) => (
+            <SlideCard
+              key={sections[i].id}
+              section={sections[i]}
               index={i}
               totalSections={N}
-              scrollYProgress={smoothProgress}
-              activeIndex={activeIndex}
+              scrollYProgress={scrollYProgress}
+              isActive={i === activeIndex}
               contentHeightsRef={contentHeightsRef}
               onContentHeight={handleContentHeight}
             />
           ))}
 
-          {/* Stack count indicator */}
+          {/* Section counter indicator */}
           <motion.div
             className="absolute bottom-3 left-1/2 -translate-x-1/2 z-[100]"
             style={{ opacity: indicatorOpacity }}

@@ -125,8 +125,11 @@ html {
   font-size: 1.05em;
 }
 
-/* Display math block styling — prominent, own line, breathing room */
+/* Display math block styling — prominent, centered, breathing room */
 .markdown-content .katex-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 2rem -1rem;
   padding: 1.75rem 2rem;
   background: rgba(255, 255, 255, 0.03);
@@ -138,12 +141,13 @@ html {
 
 .markdown-content .katex-display > .katex {
   text-align: center;
-  color: #d4d4d4;
+  color: #e0e0e0;
 }
 
-/* Display math — larger and more readable */
+/* Display math — larger, bolder, and more readable */
 .markdown-content .katex-display .katex {
-  font-size: 1.25em;
+  font-size: 1.3em;
+  font-weight: 700;
 }
 
 /* Prevent overflow on small screens */

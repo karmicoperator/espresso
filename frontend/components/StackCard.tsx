@@ -60,10 +60,7 @@ interface StackCardProps {
   index: number;
   totalSections: number;
   isActive: boolean;
-  cardScale: MotionValue<number>;
   cardX: MotionValue<number>;
-  cardY: MotionValue<number>;
-  cardRotate: MotionValue<number>;
   cardOpacity: MotionValue<number>;
   contentY: MotionValue<number>;
   zIndex: number;
@@ -75,10 +72,7 @@ export function StackCard({
   index,
   totalSections,
   isActive,
-  cardScale,
   cardX,
-  cardY,
-  cardRotate,
   cardOpacity,
   contentY,
   zIndex,
@@ -151,9 +145,6 @@ export function StackCard({
       )}
       style={{
         x: cardX,
-        y: cardY,
-        scale: cardScale,
-        rotate: cardRotate,
         opacity: cardOpacity,
         zIndex,
         pointerEvents: isActive ? "auto" : "none",
