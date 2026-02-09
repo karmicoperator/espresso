@@ -29,7 +29,13 @@ export const metadata: Metadata = {
     "machine learning",
     "computer science",
   ],
-  icons: [{ rel: "icon", url: "/icon.png" }],
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/icon.png", sizes: "any" },
+    ],
+    apple: [{ url: "/icon.png", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({
