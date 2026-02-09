@@ -1,5 +1,5 @@
 <div align="center">
-    <img alt="Logo" src="frontend/public/icon.png" width=150 />
+    <img alt="Logo" src="frontend/public/icon.png" width=100 />
 </div>
 <h1 align="center">
     ArXivisual
