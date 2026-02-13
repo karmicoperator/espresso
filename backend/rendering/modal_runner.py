@@ -15,7 +15,11 @@ app = modal.App("arxiviz-manim")
 manim_image = (
     modal.Image.debian_slim(python_version="3.11")
     .apt_install(["ffmpeg", "libcairo2-dev", "libpango1.0-dev"])
-    .pip_install(["manim>=0.18.0"])
+    .pip_install([
+        "setuptools>=65.0.0",  # Required by manim-voiceover (pkg_resources)
+        "manim>=0.18.0",
+        "manim-voiceover[elevenlabs]>=0.3.0",
+    ])
 )
 
 
