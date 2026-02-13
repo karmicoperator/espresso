@@ -506,25 +506,27 @@ function NotFoundState({
           </div>
         </motion.div>
 
-        <h2 className="mt-8 text-2xl font-medium text-white/80">Paper Not Yet Processed</h2>
-        <p className="mt-4 text-white/40 leading-relaxed">
-          This paper (<span className="font-mono text-white/80 bg-white/15 px-2 py-0.5 rounded">{arxivId}</span>) hasn&apos;t been visualized yet.
-          We&apos;ll parse the content and generate Manim animations for key concepts.
-        </p>
-
-        <div className="mt-8 space-y-4">
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={onProcess}
-            className="w-full sm:w-auto rounded-2xl bg-white/[0.08] hover:bg-white/[0.12] px-8 py-4 text-sm font-medium text-white border border-white/[0.15] hover:border-white/[0.25] shadow-xl shadow-white/[0.03] transition-all duration-300"
-          >
-            Start Processing
-          </motion.button>
-
-          <p className="text-xs text-white/20">
-            This usually takes 1-3 minutes depending on paper length
+        <div className="mt-8 rounded-2xl bg-black/90 border border-white/10 p-6 sm:p-8 shadow-xl">
+          <h2 className="text-2xl font-medium text-white/90">Paper Not Yet Processed</h2>
+          <p className="mt-4 text-white/70 leading-relaxed">
+            This paper (<span className="font-mono text-white/80 bg-white/15 px-2 py-0.5 rounded">{arxivId}</span>) hasn&apos;t been visualized yet.
+            We&apos;ll parse the content and generate Manim animations for key concepts.
           </p>
+
+          <div className="mt-8 space-y-4">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={onProcess}
+              className="w-full sm:w-auto rounded-2xl bg-white/[0.08] hover:bg-white/[0.12] px-8 py-4 text-sm font-medium text-white border border-white/[0.15] hover:border-white/[0.25] shadow-xl shadow-white/[0.03] transition-all duration-300"
+            >
+              Start Processing
+            </motion.button>
+
+            <p className="text-xs text-white/40">
+              This usually takes 1-3 minutes depending on paper length
+            </p>
+          </div>
         </div>
       </motion.div>
     </div>
