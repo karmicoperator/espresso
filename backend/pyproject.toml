@@ -19,7 +19,8 @@ dependencies = [
 
     # Database / jobs
     "sqlalchemy>=2.0.0",
-    "aiosqlite>=0.19.0",
+    "aiosqlite>=0.19.0",  # For local SQLite development
+    "asyncpg>=0.29.0",     # For PostgreSQL (Neon, Supabase, Railway, etc.)
     "greenlet>=3.0.0",
 
     # Ingestion (Team 1)
