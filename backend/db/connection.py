@@ -2,21 +2,33 @@
 Database connection management for ArXiviz.
 
 Uses SQLite with aiosqlite for local development.
-Switch to PostgreSQL by changing DATABASE_URL to:
-  postgresql+asyncpg://user:pass@localhost:5432/arxiviz
+Automatically switches to PostgreSQL when DATABASE_URL environment variable is set (Railway/Render).
 """
 
 import os
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from .models import Base
 
-# Default to SQLite for local development
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./arxiviz.db")
+# Use DATABASE_URL from environment (Railway/Render) or fallback to SQLite
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# Railway/Render provide postgres:// URLs, but we need postgresql+asyncpg://
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1)
+elif DATABASE_URL and DATABASE_URL.startswith("postgresql://"):
+    DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://", 1)
+else:
+    # Local development fallback
+    DATABASE_URL = "sqlite+aiosqlite:///./arxiviz.db"
 
 # Create async engine
 engine = create_async_engine(
     DATABASE_URL,
     echo=os.getenv("ENVIRONMENT", "development") == "development",  # Log SQL in dev
+    # Additional pool settings for PostgreSQL (ignored for SQLite)
+    pool_pre_ping=True,
+    pool_size=5,
+    max_overflow=10,
 )
 
 # Session factory
