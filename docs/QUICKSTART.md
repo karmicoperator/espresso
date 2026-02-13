@@ -44,7 +44,8 @@ npm install
 ```env
 # Minimal setup for local testing
 DATABASE_URL=sqlite+aiosqlite:///./arxiviz.db
-ANTHROPIC_API_KEY=sk-ant-xxxxx  # Get from console.anthropic.com
+DEDALUS_API_KEY=dsk-your-dedalus-key
+ELEVEN_API_KEY=your-elevenlabs-key
 ```
 
 **Frontend** - Create `frontend/.env.local`:
@@ -94,7 +95,7 @@ MosiacManim/
 ├── frontend/            # Next.js app
 │   ├── app/abs/        # Paper display pages
 │   └── components/     # Scrollytelling UI
-└── AgentDocs/          # Full documentation
+└── docs/AgentDocs/     # Full documentation
 ```
 
 ## Key API Endpoints
@@ -120,14 +121,14 @@ npm run build                          # Build for production
 
 ## Need Help?
 
-- **Full Setup Guide**: See `AgentDocs/SETUP.md` for detailed instructions
-- **Architecture**: Read `AgentDocs/PROJECT_OVERVIEW.md`
-- **API Documentation**: Check `AgentDocs/API_SPEC.md`
+- **Full Setup Guide**: See `docs/AgentDocs/SETUP.md` for detailed instructions
+- **Architecture**: Read `docs/AgentDocs/PROJECT_OVERVIEW.md`
+- **API Documentation**: Check `docs/AgentDocs/API_SPEC.md`
 - **Team Guides**:
-  - Team 1 (Ingestion): `AgentDocs/TEAM1_INGESTION.md`
-  - Team 2 (Generation): `AgentDocs/TEAM2_GENERATION.md`
-  - Team 3 (Backend): `AgentDocs/TEAM3_BACKEND.md`
-  - Team 4 (Frontend): `AgentDocs/TEAM4_FRONTEND.md`
+  - Team 1 (Ingestion): `docs/AgentDocs/TEAM1_INGESTION.md`
+  - Team 2 (Generation): `docs/AgentDocs/TEAM2_GENERATION.md`
+  - Team 3 (Backend): `docs/AgentDocs/TEAM3_BACKEND.md`
+  - Team 4 (Frontend): `docs/AgentDocs/TEAM4_FRONTEND.md`
 
 ## Optional: Full Infrastructure
 
@@ -159,7 +160,7 @@ MODAL_TOKEN_SECRET=your_token_secret
 
 - **Frontend**: Next.js 16, React 19, Tailwind CSS, Framer Motion
 - **Backend**: Python 3.11+, FastAPI, SQLAlchemy
-- **AI**: Anthropic Claude API
+- **AI**: Dedalus SDK (Claude models)
 - **Video**: Manim Community Edition on Modal.com
 - **Storage**: PostgreSQL, Redis, S3/Cloudflare R2
 
@@ -188,6 +189,6 @@ DATABASE_URL=sqlite+aiosqlite:///./arxiviz.db
 
 ---
 
-**Ready to dive deeper?** Check out the full documentation in `AgentDocs/` 📚
+**Ready to dive deeper?** Check out the full documentation in `docs/AgentDocs/` 📚
 
 ;jhk.ylkkjlh

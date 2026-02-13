@@ -8,11 +8,11 @@ This script:
 3. Optionally renders the videos using Manim
 
 Usage (from the backend/ directory):
-    uv run python run_demo.py                         # Generate and save code
-    uv run python run_demo.py --render                # Also render videos
-    uv run python run_demo.py --render --quality low  # Faster render for testing
-    uv run python run_demo.py --verbose               # Show detailed agent logs
-    uv run python run_demo.py --max 3                 # Generate up to 3 visualizations
+    uv run python tools/run_demo.py                         # Generate and save code
+    uv run python tools/run_demo.py --render                # Also render videos
+    uv run python tools/run_demo.py --render --quality low  # Faster render for testing
+    uv run python tools/run_demo.py --verbose               # Show detailed agent logs
+    uv run python tools/run_demo.py --max 3                 # Generate up to 3 visualizations
 """
 
 import asyncio
@@ -26,7 +26,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Add backend to path
-backend_dir = Path(__file__).parent
+backend_dir = Path(__file__).parent.parent
 if str(backend_dir) not in sys.path:
     sys.path.insert(0, str(backend_dir))
 
@@ -385,7 +385,7 @@ async def run_demo(max_visualizations: int = 2, verbose: bool = False) -> list[P
         f"Paper: Attention Is All You Need (1706.03762)\n"
         f"Generated: {datetime.now().isoformat()}\n"
         f"TTS: ElevenLabs (eleven_flash_v2_5, voice=2fe8mwpfJcqvj9RGBsC1)\n"
-        f"Model: Claude Opus 4.5 via {'Dedalus SDK' if os.getenv('DEDALUS_API_KEY') else 'Martian' if os.getenv('MARTIAN_API_KEY') else 'Anthropic'}\n"
+        "Model: Claude Opus 4.5 via Dedalus SDK\n"
         f"Visualizations: {len(visualizations)}\n\n"
         + "\n".join(manifest_lines) + "\n"
     )
@@ -483,10 +483,10 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  uv run python run_demo.py                    # Generate visualizations
-  uv run python run_demo.py --verbose          # Show detailed agent logs
-  uv run python run_demo.py --render           # Generate and render videos
-  uv run python run_demo.py --max 3            # Generate up to 3 visualizations
+  uv run python tools/run_demo.py                    # Generate visualizations
+  uv run python tools/run_demo.py --verbose          # Show detailed agent logs
+  uv run python tools/run_demo.py --render           # Generate and render videos
+  uv run python tools/run_demo.py --max 3            # Generate up to 3 visualizations
         """
     )
     parser.add_argument("--render", action="store_true", help="Render videos after generation")
@@ -511,19 +511,14 @@ Examples:
     from dotenv import load_dotenv
     load_dotenv()
     
-    api_key = os.getenv("DEDALUS_API_KEY") or os.getenv("MARTIAN_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+    api_key = os.getenv("DEDALUS_API_KEY")
     if not api_key:
         print_error("No API key found!")
-        print("  Set DEDALUS_API_KEY, MARTIAN_API_KEY, or ANTHROPIC_API_KEY in .env file")
+        print("  Set DEDALUS_API_KEY in .env file")
         print("  Copy .env.example to .env and add your key")
         sys.exit(1)
 
-    if os.getenv("DEDALUS_API_KEY"):
-        api_provider = "Dedalus SDK → Anthropic Claude Opus"
-    elif os.getenv("MARTIAN_API_KEY"):
-        api_provider = "Martian"
-    else:
-        api_provider = "Anthropic"
+    api_provider = "Dedalus SDK → Anthropic Claude"
     print(f"  API Provider: {api_provider}")
     print(f"  API Key: {api_key[:8]}...{api_key[-4:]}")
     
@@ -558,8 +553,8 @@ Examples:
         print(f"  1. cd {OUTPUT_DIR}")
         print("  2. uv run manim -qm <filename>.py")
         print("\nOr run this script with --render:")
-        print("  uv run python run_demo.py --render")
-        print("  uv run python run_demo.py --render --quality low   # Faster (480p)")
+        print("  uv run python tools/run_demo.py --render")
+        print("  uv run python tools/run_demo.py --render --quality low   # Faster (480p)")
         print("\nOutput videos will be in:")
         print(f"  {OUTPUT_DIR}/media/videos/")
 

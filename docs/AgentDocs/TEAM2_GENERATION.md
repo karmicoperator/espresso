@@ -109,8 +109,8 @@ backend/
 │   ├── matrix_operations.py         # matrix type
 │   └── three_d_network.py           # three_d type
 │
-├── run_demo.py                      # Demo runner (generate + render)
-├── test_pipeline.py                 # Test harness (offline + online)
+├── tools/run_demo.py                # Demo runner (generate + render)
+├── tools/test_pipeline.py           # Test harness (offline + online)
 ├── test_voiceover.py                # Voiceover-specific tests
 ├── pyproject.toml                   # Project config + dependencies (uv)
 ├── uv.lock                          # Locked dependency versions
@@ -340,14 +340,14 @@ Feedback from all 3 validators is combined into a single message sent to `ManimG
 
 All agents inherit from `BaseAgent`, which provides:
 
-1. **Anthropic client** - auto-detects Martian vs direct Anthropic from env vars
+1. **Dedalus client routing** - enforces `DEDALUS_API_KEY` and routes all calls via Dedalus
 2. **Model name handling** - auto-converts `claude-opus-4-5-20251101` ↔ `anthropic/claude-opus-4-5-20251101`
 3. **System prompt** - loads `prompts/system/manim_reference.md` (curated Manim API reference)
 4. **Prompt template loading** - reads `.md` files from `prompts/` directory
 5. **JSON response parsing** - extracts JSON from markdown code blocks
 6. **Code block extraction** - extracts Python code from LLM responses
 
-**API priority:** `MARTIAN_API_KEY` > `ANTHROPIC_API_KEY`
+**API requirement:** `DEDALUS_API_KEY` is required
 
 **Default model:** `claude-opus-4-5-20251101` (best quality, ~60-90s per viz). Change to `claude-sonnet-4-20250514` in `base.py` line 25 for faster but slightly lower quality.
 
@@ -401,18 +401,18 @@ Visualization
 cd backend
 
 # Offline (no API key needed) - tests models + code validator
-uv run python test_pipeline.py
+uv run python tools/test_pipeline.py
 
 # Online - test individual agents
-uv run python test_pipeline.py --online --test analyzer     # Section analysis
-uv run python test_pipeline.py --online --test planner      # Storyboard planning
-uv run python test_pipeline.py --online --test generator    # Manim code generation
-uv run python test_pipeline.py --online --test pipeline     # Full pipeline (1 viz)
+uv run python tools/test_pipeline.py --online --test analyzer     # Section analysis
+uv run python tools/test_pipeline.py --online --test planner      # Storyboard planning
+uv run python tools/test_pipeline.py --online --test generator    # Manim code generation
+uv run python tools/test_pipeline.py --online --test pipeline     # Full pipeline (1 viz)
 
 # Demo - generate + save code
-uv run python run_demo.py                                   # 2 visualizations
-uv run python run_demo.py --max 3 --verbose                 # 3 viz + debug logs
-uv run python run_demo.py --render --quality low            # Generate + render
+uv run python tools/run_demo.py                                   # 2 visualizations
+uv run python tools/run_demo.py --max 3 --verbose                 # 3 viz + debug logs
+uv run python tools/run_demo.py --render --quality low            # Generate + render
 ```
 
 ---

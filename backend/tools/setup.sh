@@ -1,7 +1,7 @@
 #!/bin/bash
 # ═══════════════════════════════════════════════════════════════
 # ArXivisual Backend — One-Shot Setup
-# Run: cd backend && bash setup.sh
+# Run: cd backend && bash tools/setup.sh
 #
 # NOTE: We use Text() instead of MathTex() in all Manim scenes
 # so LaTeX/BasicTeX is NOT required. This keeps setup simple.
@@ -41,8 +41,8 @@ uv pip install python-multipart 2>&1 # needed for FastAPI file uploads
 step "Checking .env file..."
 if [ ! -f .env ]; then
     cat > .env << 'ENVEOF'
-# Martian API (proxy to Anthropic)
-MARTIAN_API_KEY=your-key-here
+# Dedalus API (required for all LLM calls)
+DEDALUS_API_KEY=your-key-here
 
 # ElevenLabs TTS (for voiceover generation)
 ELEVEN_API_KEY=your-key-here

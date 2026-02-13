@@ -9,23 +9,23 @@ Usage:
     cd backend
 
     # Run offline tests (no API key required):
-    uv run python test_pipeline.py
+    uv run python tools/test_pipeline.py
 
     # Run full online tests (requires API key in .env):
-    uv run python test_pipeline.py --online
+    uv run python tools/test_pipeline.py --online
 
     # Run a specific agent test:
-    uv run python test_pipeline.py --online --test analyzer
-    uv run python test_pipeline.py --online --test planner
-    uv run python test_pipeline.py --online --test generator
-    uv run python test_pipeline.py --online --test pipeline
+    uv run python tools/test_pipeline.py --online --test analyzer
+    uv run python tools/test_pipeline.py --online --test planner
+    uv run python tools/test_pipeline.py --online --test generator
+    uv run python tools/test_pipeline.py --online --test pipeline
 """
 
 import sys
 from pathlib import Path
 
 # Add the backend directory to path for direct script execution
-backend_dir = Path(__file__).parent
+backend_dir = Path(__file__).parent.parent
 if str(backend_dir) not in sys.path:
     sys.path.insert(0, str(backend_dir))
 
@@ -626,19 +626,14 @@ async def run_online_tests(test_type: str = "all"):
     print("=" * 60)
     
     import os
-    martian_key = os.environ.get("MARTIAN_API_KEY")
-    anthropic_key = os.environ.get("ANTHROPIC_API_KEY")
-    
-    if martian_key:
-        print("✓ Using MARTIAN_API_KEY (unlimited usage!)")
-    elif anthropic_key:
-        print("✓ Using ANTHROPIC_API_KEY")
+    dedalus_key = os.environ.get("DEDALUS_API_KEY")
+
+    if dedalus_key:
+        print("✓ Using DEDALUS_API_KEY")
     else:
         print("\n⚠️  WARNING: No API key set!")
         print("Add one to backend/.env:")
-        print("  MARTIAN_API_KEY=your_martian_key   # Recommended (unlimited)")
-        print("  # OR")
-        print("  ANTHROPIC_API_KEY=your_key         # Direct Anthropic")
+        print("  DEDALUS_API_KEY=your_dedalus_key")
         return
     
     if test_type in ["analyzer", "all"]:
@@ -676,11 +671,9 @@ if __name__ == "__main__":
     else:
         print("\n💡 To run API tests:")
         print("   1. Set your API key in backend/.env:")
-        print("      MARTIAN_API_KEY=your_key   # Recommended (unlimited)")
-        print("      # OR")
-        print("      ANTHROPIC_API_KEY=your_key")
+        print("      DEDALUS_API_KEY=your_key")
         print("")
         print("   2. Run tests (from the backend/ directory):")
-        print("      uv run python test_pipeline.py --online                    # Full pipeline")
-        print("      uv run python test_pipeline.py --online --test analyzer    # Just analyzer")
-        print("      uv run python test_pipeline.py --online --test generator   # Just generator")
+        print("      uv run python tools/test_pipeline.py --online                    # Full pipeline")
+        print("      uv run python tools/test_pipeline.py --online --test analyzer    # Just analyzer")
+        print("      uv run python tools/test_pipeline.py --online --test generator   # Just generator")
