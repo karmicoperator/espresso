@@ -89,7 +89,7 @@ class SectionAnalyzer(BaseAgent):
                 viz_type = VisualizationType.EQUATION
             
             candidate = VisualizationCandidate(
-                section_id=candidate_data.get("section_id", section_id),
+                section_id=section_id,  # Always use the actual section ID, not LLM-generated one
                 concept_name=candidate_data.get("concept_name", "Unknown Concept"),
                 concept_description=candidate_data.get("concept_description", ""),
                 visualization_type=viz_type,

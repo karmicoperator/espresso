@@ -132,10 +132,22 @@ async def get_paper(arxiv_id: str, db: AsyncSession = Depends(get_db)):
         sections = sorted(paper.sections, key=lambda s: s.order_index)
 
         # Build section_id -> video_url lookup from visualizations
+        # Prioritize complete videos and take the first complete one for each section
         section_video_map = {}
+        section_status_map = {}  # Track status of mapped videos
         for v in paper.visualizations:
             if v.video_url and v.section_id:
-                section_video_map[v.section_id] = v.video_url
+                existing_status = section_status_map.get(v.section_id)
+                # Only update if:
+                # 1. We don't have a video for this section yet, OR
+                # 2. This video is complete and the existing one is not complete
+                if v.section_id not in section_video_map:
+                    section_video_map[v.section_id] = v.video_url
+                    section_status_map[v.section_id] = v.status
+                elif v.status == "complete" and existing_status != "complete":
+                    # Prefer complete videos over failed/pending/rendering
+                    section_video_map[v.section_id] = v.video_url
+                    section_status_map[v.section_id] = v.status
 
         return PaperResponse(
             paper_id=paper.id,
