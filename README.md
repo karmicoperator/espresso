@@ -48,7 +48,7 @@ Visit **http://localhost:3000** and paste any arXiv URL.
 
 - [uv](https://docs.astral.sh/uv/) (Python package manager)
 - Node.js 18+
-- Python 3.13+
+- Python 3.13 (3.14 is **not** supported — `manim-voiceover` needs `pkg_resources`, removed in 3.14)
 - API keys: [Dedalus Labs](https://www.dedaluslabs.ai/dashboard/api-keys) and [ElevenLabs](https://elevenlabs.io)
 
 #### 1. Install system dependencies
@@ -109,6 +109,34 @@ Optional. Create `frontend/.env.local` to override defaults:
 |----------|---------|-------------|
 | `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | Backend API URL |
 | `NEXT_PUBLIC_USE_MOCK` | `false` | Set `true` for demo mode (no backend needed) |
+
+## Troubleshooting
+
+**Python 3.14 not working:**
+`manim-voiceover` depends on `pkg_resources` (part of `setuptools`), which was removed from the Python stdlib in 3.14. Stick with Python 3.13:
+```bash
+uv python pin 3.13
+```
+
+**`uv sync` fails with setuptools errors:**
+Python 3.13 also removed `pkg_resources` from the stdlib, but `setuptools` is listed as a project dependency so `uv sync` should install it. If it doesn't:
+```bash
+uv pip install setuptools
+```
+
+**`tlmgr` permission denied (macOS):**
+BasicTeX's package manager requires sudo:
+```bash
+sudo tlmgr update --self && sudo tlmgr install standalone preview dvisvgm cm-super
+```
+
+**Port 8000 already in use:**
+```bash
+lsof -ti:8000 | xargs kill -9
+```
+
+**Videos not appearing after processing:**
+Check that `STORAGE_MODE=local` is set in `backend/.env`. If using R2 cloud storage, all `S3_*` variables must also be configured.
 
 ## Inspiration
 

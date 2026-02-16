@@ -2,7 +2,7 @@
 name = "arxiviz-backend"
 version = "0.1.0"
 description = "ArXiviz Backend - Team 2 AI Agent Pipeline for Manim Visualization Generation"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<3.14"
 dependencies = [
     # API framework
     "fastapi>=0.109.0",
