@@ -14,7 +14,7 @@ app = modal.App("arxiviz-manim")
 # Create image with Manim and dependencies
 manim_image = (
     modal.Image.debian_slim(python_version="3.11")
-    .apt_install(["ffmpeg", "libcairo2-dev", "libpango1.0-dev"])
+    .apt_install(["ffmpeg", "libcairo2-dev", "libpango1.0-dev", "sox"])
     .pip_install([
         "setuptools>=65.0.0",  # Required by manim-voiceover (pkg_resources)
         "manim>=0.18.0",
@@ -23,7 +23,11 @@ manim_image = (
 )
 
 
-@app.function(image=manim_image, timeout=300)
+@app.function(
+    image=manim_image,
+    timeout=300,
+    secrets=[modal.Secret.from_name("elevenlabs-key")],
+)
 def render_manim_modal(code: str, scene_name: str, quality: str = "low_quality") -> bytes:
     """
     Render Manim code on Modal.com and return video bytes.
