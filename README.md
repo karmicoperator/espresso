@@ -26,22 +26,43 @@
 
 ### Prerequisites
 
+- [uv](https://docs.astral.sh/uv/) (Python package manager)
 - Node.js 18+
-- Python 3.11+
-- FFmpeg, Cairo, Pango (for Manim)
-- API keys: **Dedalus Labs** and ElevenLabs
+- Python 3.13+
+- API keys: [Dedalus Labs](https://www.dedaluslabs.ai/dashboard/api-keys) and [ElevenLabs](https://elevenlabs.io)
 
-### Backend Setup
+### 1. Install system dependencies
+
+Manim renders videos using FFmpeg, LaTeX, Cairo, Pango, and SoX. These are **system binaries** that cannot be installed via pip.
+
+**macOS (Homebrew):**
+```bash
+brew install ffmpeg sox cairo pango pkg-config
+brew install --cask basictex
+# After basictex, open a new terminal, then:
+sudo tlmgr update --self && sudo tlmgr install standalone preview dvisvgm cm-super
+```
+
+**Linux (apt):**
+```bash
+sudo apt-get install -y ffmpeg sox libcairo2-dev libpango1.0-dev pkg-config \
+  texlive-latex-base texlive-fonts-recommended texlive-latex-extra \
+  texlive-fonts-extra cm-super dvipng
+```
+
+> The Dockerfile handles all of this automatically for production deploys.
+
+### 2. Backend setup
 
 ```bash
 cd backend
-cp .env.example .env
-# Edit .env and add your keys (see Environment Variables below)
-uv sync
+cp .env.example .env          # Then add your API keys (see below)
+uv python pin 3.13            # Ensure correct Python version
+uv sync                       # Install all Python dependencies
 uv run uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### Frontend Setup
+### 3. Frontend setup
 
 ```bash
 cd frontend
@@ -49,7 +70,7 @@ npm install
 npm run dev
 ```
 
-Visit **http://localhost:3000** — paste an arXiv URL (e.g. `https://arxiv.org/abs/2512.24601`) and click through.
+Visit **http://localhost:3000** — paste an arXiv URL (e.g. `https://arxiv.org/abs/2501.12599`) and click through.
 
 ### Environment Variables (Backend)
 
