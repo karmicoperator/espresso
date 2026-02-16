@@ -42,11 +42,14 @@ async def render_manim(code: str, scene_name: str, quality: str = "low_quality")
         MP4 video file as bytes
     """
     if RENDER_MODE == "modal":
-        from .modal_runner import render_manim_modal
-        # Modal functions are sync, run in thread pool
         import asyncio
+        import modal
+        # Look up the deployed function by app + function name.
+        # This works from any external Python process (Render, scripts, etc.)
+        # unlike direct import which only works inside `modal run`.
+        render_fn = modal.Function.from_name("arxiviz-manim", "render_manim_modal")
         return await asyncio.to_thread(
-            render_manim_modal.remote, code, scene_name, quality
+            render_fn.remote, code, scene_name, quality
         )
     else:
         return await render_manim_local(code, scene_name, quality)
