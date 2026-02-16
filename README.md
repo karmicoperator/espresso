@@ -24,14 +24,34 @@
 
 ## Quick Start
 
-### Prerequisites
+### Option A: Docker (recommended — zero system setup)
+
+Only requires [Docker](https://docs.docker.com/get-docker/) and API keys.
+
+```bash
+# 1. Configure API keys
+cp backend/.env.example backend/.env
+# Edit backend/.env — add DEDALUS_API_KEY and ELEVEN_API_KEY
+
+# 2. Start backend (builds image with all system deps automatically)
+docker compose up
+
+# 3. Start frontend (in a separate terminal)
+cd frontend && npm install && npm run dev
+```
+
+Visit **http://localhost:3000** and paste any arXiv URL.
+
+### Option B: Native install (faster dev loop)
+
+#### Prerequisites
 
 - [uv](https://docs.astral.sh/uv/) (Python package manager)
 - Node.js 18+
 - Python 3.13+
 - API keys: [Dedalus Labs](https://www.dedaluslabs.ai/dashboard/api-keys) and [ElevenLabs](https://elevenlabs.io)
 
-### 1. Install system dependencies
+#### 1. Install system dependencies
 
 Manim renders videos using FFmpeg, LaTeX, Cairo, Pango, and SoX. These are **system binaries** that cannot be installed via pip.
 
@@ -50,9 +70,7 @@ sudo apt-get install -y ffmpeg sox libcairo2-dev libpango1.0-dev pkg-config \
   texlive-fonts-extra cm-super dvipng
 ```
 
-> The Dockerfile handles all of this automatically for production deploys.
-
-### 2. Backend setup
+#### 2. Backend setup
 
 ```bash
 cd backend
@@ -62,7 +80,7 @@ uv sync                       # Install all Python dependencies
 uv run uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### 3. Frontend setup
+#### 3. Frontend setup
 
 ```bash
 cd frontend
