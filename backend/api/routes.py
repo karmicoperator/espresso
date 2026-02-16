@@ -4,6 +4,7 @@ FastAPI routes for the ArXiviz API.
 Now using SQLite database and local Manim rendering.
 """
 
+import os
 import uuid
 from fastapi import APIRouter, HTTPException, Depends, BackgroundTasks
 from fastapi.responses import FileResponse, RedirectResponse
@@ -331,16 +332,27 @@ async def health_check(db: AsyncSession = Depends(get_db)):
         else:
             storage_status = "r2: configured"
 
-    all_healthy = db_status == "connected" and "available" in manim_status
+    # Check Modal configuration
+    from rendering import RENDER_MODE
+    modal_status = "not configured"
+    if RENDER_MODE == "modal":
+        modal_token = os.getenv("MODAL_TOKEN_ID")
+        modal_status = "configured" if modal_token else "missing MODAL_TOKEN_ID"
+
+    # When using Modal, manim doesn't need to be local
+    if RENDER_MODE == "modal":
+        all_healthy = db_status == "connected"
+    else:
+        all_healthy = db_status == "connected" and "available" in manim_status
 
     return HealthResponse(
         status="healthy" if all_healthy else "degraded",
         version="0.1.0",
         services={
             "database": db_status,
-            "manim": manim_status,
+            "manim": manim_status if RENDER_MODE != "modal" else f"offloaded to modal ({manim_status})",
             "storage": storage_status,
             "redis": "not configured",
-            "modal": "not configured"
+            "modal": modal_status
         }
     )
