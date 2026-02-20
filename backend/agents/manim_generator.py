@@ -66,23 +66,7 @@ class ManimGenerator(BaseAgent):
     DEFAULT_VOICEOVER_EXAMPLE = "voiceover_equation.py"
 
     TTS_SETUP = {
-        "gtts": "self.set_speech_service(GTTSService())",
-        "azure": 'self.set_speech_service(AzureService(voice="en-US-AriaNeural"))',
-        "elevenlabs": 'self.set_speech_service(ElevenLabsService(voice_id="2fe8mwpfJcqvj9RGBsC1", model="eleven_flash_v2_5", transcription_model=None))',
-        "recorder": "self.set_speech_service(RecorderService())",
-    }
-
-    ELEVENLABS_VOICES = {
-        "Custom": "2fe8mwpfJcqvj9RGBsC1",
-        "Adam": "pNInz6obpgDQGcFmaJgB",
-        "Antoni": "ErXwobaYiN019PkySvjV",
-        "Arnold": "VR6AewLTigWG4xSOukaG",
-        "Bella": "EXAVITQu4vr4xnSDxMaL",
-        "Domi": "AZnzlk1XvdvUeBnXmlld",
-        "Elli": "MF3mGyEYCl7XYWbV9V6O",
-        "Josh": "TxGEqnHWrfWFTfGW9XjX",
-        "Rachel": "21m00Tcm4TlvDq8ikWAM",
-        "Sam": "yoZ06aMxZJJ28mfd3POQ",
+        "gtts": "self.set_speech_service(GTTSService(transcription_model=None))",
     }
 
     def __init__(self, model: str | None = None):
@@ -124,15 +108,6 @@ class ManimGenerator(BaseAgent):
 
     def _get_tts_setup_snippet(self, tts_service: str, voice_name: str) -> str:
         """Return concrete set_speech_service(...) snippet for prompt grounding."""
-        if tts_service == "elevenlabs":
-            voice_id = self.ELEVENLABS_VOICES.get(voice_name, self.ELEVENLABS_VOICES["Adam"])
-            return (
-                "self.set_speech_service("
-                f'ElevenLabsService(voice_id="{voice_id}", '
-                'model="eleven_flash_v2_5", transcription_model=None)'
-                ")"
-            )
-
         return self.TTS_SETUP.get(tts_service, self.TTS_SETUP["gtts"])
 
     def _generate_scene_class_name(self, concept_name: str) -> str:
@@ -285,8 +260,8 @@ class ManimGenerator(BaseAgent):
         self,
         plan: VisualizationPlan,
         voiceover_enabled: bool = True,
-        tts_service: str = "elevenlabs",
-        voice_name: str = "Custom",
+        tts_service: str = "gtts",
+        voice_name: str = "",
         narration_style: str = "concept_teacher",
         target_duration_seconds: tuple[int, int] = (30, 45),
     ) -> GeneratedCode:
@@ -330,8 +305,8 @@ class ManimGenerator(BaseAgent):
         previous_code: str,
         error_message: str,
         voiceover_enabled: bool = True,
-        tts_service: str = "elevenlabs",
-        voice_name: str = "Custom",
+        tts_service: str = "gtts",
+        voice_name: str = "",
         narration_style: str = "concept_teacher",
         target_duration_seconds: tuple[int, int] = (30, 45),
     ) -> GeneratedCode:
@@ -392,8 +367,8 @@ The previous code had issues. Fix them and regenerate complete code.
         self,
         plan: VisualizationPlan,
         voiceover_enabled: bool = True,
-        tts_service: str = "elevenlabs",
-        voice_name: str = "Custom",
+        tts_service: str = "gtts",
+        voice_name: str = "",
         narration_style: str = "concept_teacher",
         target_duration_seconds: tuple[int, int] = (30, 45),
     ) -> GeneratedCode:

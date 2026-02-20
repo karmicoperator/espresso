@@ -43,7 +43,7 @@ RUN uv venv /app/.venv && \
         "sqlalchemy>=2.0.0" "aiosqlite>=0.19.0" "asyncpg>=0.29.0" "greenlet>=3.0.0" \
         "arxiv>=2.0.0" "pymupdf4llm>=0.0.5" "pymupdf>=1.23.0" \
         "beautifulsoup4>=4.12.0" "lxml>=5.0.0" \
-        "manim>=0.18.0" "manim-voiceover[elevenlabs]>=0.3.0" \
+        "manim>=0.18.0" "manim-voiceover[gtts]>=0.3.0" \
         "boto3>=1.34.0" "openai>=1.12.0" "setuptools>=65.0.0" \
         "dedalus-labs>=0.2.0" "python-multipart>=0.0.6"
 

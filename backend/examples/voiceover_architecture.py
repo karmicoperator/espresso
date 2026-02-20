@@ -2,18 +2,12 @@
 
 from manim import *
 from manim_voiceover import VoiceoverScene
-from manim_voiceover.services.elevenlabs import ElevenLabsService
+from manim_voiceover.services.gtts import GTTSService
 
 
 class VoiceoverArchitectureExample(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(
-            ElevenLabsService(
-                voice_id="pNInz6obpgDQGcFmaJgB",
-                model="eleven_flash_v2_5",
-                transcription_model=None,
-            )
-        )
+        self.set_speech_service(GTTSService(transcription_model=None))
 
         # Beat 1: frame architecture objective
         title = Text("Transformer Encoder Block", font_size=40)

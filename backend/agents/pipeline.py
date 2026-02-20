@@ -80,8 +80,8 @@ ENABLE_RENDER_TESTING = RENDER_MODE != "modal"
 
 # Voiceover configuration
 ENABLE_VOICEOVER = True
-VOICEOVER_TTS_SERVICE = "elevenlabs"  # gtts, azure, elevenlabs, recorder
-VOICEOVER_VOICE_NAME = "Custom"
+VOICEOVER_TTS_SERVICE = "gtts"
+VOICEOVER_VOICE_NAME = ""
 VOICEOVER_NARRATION_STYLE = "friendly_tutor"
 VOICEOVER_TARGET_DURATION_SECONDS = (30, 45)
 

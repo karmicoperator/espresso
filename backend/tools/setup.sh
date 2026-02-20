@@ -44,9 +44,6 @@ if [ ! -f .env ]; then
 # Dedalus API (required for all LLM calls)
 DEDALUS_API_KEY=your-key-here
 
-# ElevenLabs TTS (for voiceover generation)
-ELEVEN_API_KEY=your-key-here
-
 # API Configuration
 API_HOST=0.0.0.0
 API_PORT=8000

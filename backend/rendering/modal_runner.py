@@ -18,7 +18,7 @@ manim_image = (
     .pip_install(["setuptools>=75.0.0,<81"])  # Must keep pkg_resources (removed in 81+)
     .pip_install([
         "manim>=0.18.0",
-        "manim-voiceover[elevenlabs]>=0.3.0",
+        "manim-voiceover[gtts]>=0.3.0",
     ])
 )
 
@@ -26,7 +26,6 @@ manim_image = (
 @app.function(
     image=manim_image,
     timeout=300,
-    secrets=[modal.Secret.from_name("elevenlabs-key")],
 )
 def render_manim_modal(code: str, scene_name: str, quality: str = "low_quality") -> bytes:
     """
@@ -103,15 +102,11 @@ def main():
     test_code = '''
 from manim import *
 from manim_voiceover import VoiceoverScene
-from manim_voiceover.services.elevenlabs import ElevenLabsService
+from manim_voiceover.services.gtts import GTTSService
 
 class TestScene(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(ElevenLabsService(
-            voice_id="pNInz6obpgDQGcFmaJgB",
-            model="eleven_flash_v2_5",
-            transcription_model=None,
-        ))
+        self.set_speech_service(GTTSService(transcription_model=None))
         circle = Circle(color=BLUE)
         with self.voiceover(text="Here is a blue circle.") as tracker:
             self.play(Create(circle), run_time=tracker.duration)

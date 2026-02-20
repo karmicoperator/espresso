@@ -31,7 +31,7 @@ lxml>=5.0.0
 # Rendering / visualization
 manim>=0.18.0
 modal>=0.60.0
-manim-voiceover[elevenlabs]>=0.3.0
+manim-voiceover[gtts]>=0.3.0
 
 # Cloud storage (S3-compatible — Cloudflare R2)
 boto3>=1.34.0

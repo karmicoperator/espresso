@@ -36,11 +36,11 @@ def _plan() -> VisualizationPlan:
 def _valid_code() -> str:
     return '''from manim import *
 from manim_voiceover import VoiceoverScene
-from manim_voiceover.services.elevenlabs import ElevenLabsService
+from manim_voiceover.services.gtts import GTTSService
 
 class AttentionVoice(VoiceoverScene):
     def construct(self):
-        self.set_speech_service(ElevenLabsService(voice_id="pNInz6obpgDQGcFmaJgB", model="eleven_flash_v2_5", transcription_model=None))
+        self.set_speech_service(GTTSService(transcription_model=None))
 
         # Beat 1: framing
         title = Text("Attention")

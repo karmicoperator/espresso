@@ -8,7 +8,7 @@ Features:
 1. Generates voiceover script from visualization plan
 2. Transforms Scene to VoiceoverScene
 3. Wraps animations with voiceover blocks
-4. Supports multiple TTS backends (gTTS, Azure, ElevenLabs)
+4. Uses gTTS for text-to-speech
 """
 
 import re
@@ -44,7 +44,7 @@ class VoiceoverOutput(BaseModel):
     
     transformed_code: str = Field(..., description="Manim code with voiceover integration")
     script: VoiceoverScript = Field(..., description="The generated voiceover script")
-    tts_service: str = Field("gtts", description="TTS service used (gtts, azure, elevenlabs)")
+    tts_service: str = Field("gtts", description="TTS service used")
 
 
 class VoiceoverGenerator(BaseAgent):
@@ -60,68 +60,31 @@ class VoiceoverGenerator(BaseAgent):
     # TTS service import statements
     TTS_IMPORTS = {
         "gtts": "from manim_voiceover.services.gtts import GTTSService",
-        "azure": "from manim_voiceover.services.azure import AzureService",
-        "elevenlabs": "from manim_voiceover.services.elevenlabs import ElevenLabsService",
-        "recorder": "from manim_voiceover.services.recorder import RecorderService",
     }
-    
+
     # TTS service setup code
-    # Note: ElevenLabs requires ELEVEN_API_KEY environment variable
-    # Using voice_id for ElevenLabs to avoid needing "voices_read" API permission
-    # model="eleven_flash_v2_5" - fastest and cheapest option
     # transcription_model=None avoids whisper dependency issues on Python 3.13
     TTS_SETUP = {
-        "gtts": "self.set_speech_service(GTTSService())",
-        "azure": 'self.set_speech_service(AzureService(voice="en-US-AriaNeural"))',
-        "elevenlabs": 'self.set_speech_service(ElevenLabsService(voice_id="2fe8mwpfJcqvj9RGBsC1", model="eleven_flash_v2_5", transcription_model=None))',  # Custom voice
-        "recorder": "self.set_speech_service(RecorderService())",
-    }
-    
-    # Available ElevenLabs voices with their IDs (use voice_id to bypass API permission issues)
-    # Using voice_id instead of voice_name avoids needing "voices_read" API permission
-    ELEVENLABS_VOICES = {
-        "Custom": "2fe8mwpfJcqvj9RGBsC1",     # User's preferred voice
-        "Adam": "pNInz6obpgDQGcFmaJgB",       # Deep, warm male voice
-        "Antoni": "ErXwobaYiN019PkySvjV",     # Young male voice  
-        "Arnold": "VR6AewLTigWG4xSOukaG",     # Authoritative male voice
-        "Bella": "EXAVITQu4vr4xnSDxMaL",      # Friendly female voice
-        "Domi": "AZnzlk1XvdvUeBnXmlld",       # Strong female voice
-        "Elli": "MF3mGyEYCl7XYWbV9V6O",       # Young female voice
-        "Josh": "TxGEqnHWrfWFTfGW9XjX",       # Conversational male voice
-        "Rachel": "21m00Tcm4TlvDq8ikWAM",     # Clear female voice
-        "Sam": "yoZ06aMxZJJ28mfd3POQ",        # Neutral voice
+        "gtts": "self.set_speech_service(GTTSService(transcription_model=None))",
     }
     
     def __init__(
         self,
         model: str | None = None,
-        tts_service: str = "elevenlabs",
-        voice_name: str = "Custom",
+        tts_service: str = "gtts",
+        voice_name: str = "",
     ):
         """
         Initialize the Voiceover Generator.
 
         Args:
             model: LLM model to use for script generation
-            tts_service: TTS service to use (gtts, azure, elevenlabs, recorder)
-            voice_name: Voice name for ElevenLabs (default: "Adam")
-                       See ELEVENLABS_VOICES for available options.
-
-        Note:
-            For ElevenLabs, set ELEVEN_API_KEY environment variable.
-            For Azure, set AZURE_SUBSCRIPTION_KEY and AZURE_SERVICE_REGION.
-
-            ElevenLabs uses voice_id internally to avoid needing "voices_read" permission.
+            tts_service: TTS service to use (gtts)
+            voice_name: Unused, kept for interface compatibility
         """
         super().__init__(prompt_file="voiceover_generator.md", model=model)
         self.tts_service = tts_service
         self.voice_name = voice_name
-        
-        # Update ElevenLabs setup with the appropriate voice_id
-        if tts_service == "elevenlabs":
-            voice_id = self.ELEVENLABS_VOICES.get(voice_name, self.ELEVENLABS_VOICES["Adam"])
-            self.TTS_SETUP = self.TTS_SETUP.copy()
-            self.TTS_SETUP["elevenlabs"] = f'self.set_speech_service(ElevenLabsService(voice_id="{voice_id}", model="eleven_flash_v2_5", transcription_model=None))'
     
     async def run(
         self,
@@ -432,7 +395,7 @@ class AttentionVisualization(Scene):
     # Create a minimal generator for testing (without LLM initialization)
     class TestVoiceoverGenerator:
         """Minimal generator for testing transformation without LLM."""
-        tts_service = "elevenlabs"
+        tts_service = "gtts"
         TTS_IMPORTS = VoiceoverGenerator.TTS_IMPORTS
         TTS_SETUP = VoiceoverGenerator.TTS_SETUP
         
@@ -447,6 +410,6 @@ class AttentionVisualization(Scene):
     print("Original code:")
     print("-" * 40)
     print(sample_code)
-    print("\nTransformed code with voiceover (ElevenLabs):")
+    print("\nTransformed code with voiceover (gTTS):")
     print("-" * 40)
     print(transformed)

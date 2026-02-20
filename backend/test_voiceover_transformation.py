@@ -49,8 +49,8 @@ async def test_voiceover_transformation():
     after = await generator.run(
         plan=plan,
         voiceover_enabled=True,
-        tts_service="elevenlabs",
-        voice_name="Adam",
+        tts_service="gtts",
+        voice_name="",
         narration_style="concept_teacher",
         target_duration_seconds=(30, 45),
     )

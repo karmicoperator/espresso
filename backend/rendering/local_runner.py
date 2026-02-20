@@ -43,37 +43,6 @@ def extract_scene_name(code: str) -> str:
     return "MainScene"  # Fallback
 
 
-def _swap_tts_to_gtts(code: str) -> str:
-    """Replace ElevenLabs TTS with gTTS in Manim voiceover code."""
-    # Replace import
-    code = re.sub(
-        r"from manim_voiceover\.services\.elevenlabs import ElevenLabsService",
-        "from manim_voiceover.services.gtts import GTTSService",
-        code,
-    )
-    # Replace set_speech_service call (handles any ElevenLabsService(...) args)
-    code = re.sub(
-        r"self\.set_speech_service\s*\(\s*ElevenLabsService\s*\([^)]*\)\s*\)",
-        "self.set_speech_service(GTTSService())",
-        code,
-    )
-    return code
-
-
-def _is_elevenlabs_failure(error_msg: str) -> bool:
-    """Check if a render failure was caused by ElevenLabs TTS."""
-    markers = [
-        "Failed to initialize ElevenLabs",
-        "Free users cannot use library voices",
-        "payment_required",
-        "paid_plan_required",
-        "elevenlabs",
-        "APIError",
-    ]
-    lower = error_msg.lower()
-    return any(m.lower() in lower for m in markers)
-
-
 def _run_manim_subprocess(
     code: str,
     scene_name: str,
@@ -158,10 +127,7 @@ def _render_manim_sync(
     quality: str = "low_quality"
 ) -> bytes:
     """
-    Synchronous Manim rendering with automatic gTTS fallback.
-
-    If the first render fails due to an ElevenLabs TTS error (wrong API key,
-    free-tier limitation, etc.), the code is rewritten to use gTTS and retried.
+    Synchronous Manim rendering.
 
     Args:
         code: Complete Manim Python code
@@ -172,19 +138,9 @@ def _render_manim_sync(
         MP4 video file as bytes
 
     Raises:
-        RuntimeError: If rendering fails on both attempts
+        RuntimeError: If rendering fails
     """
-    try:
-        return _run_manim_subprocess(code, scene_name, quality)
-    except RuntimeError as exc:
-        error_msg = str(exc)
-        if _is_elevenlabs_failure(error_msg) and "ElevenLabsService" in code:
-            logger.warning(
-                "  [Renderer] ElevenLabs TTS failed — retrying with gTTS fallback"
-            )
-            gtts_code = _swap_tts_to_gtts(code)
-            return _run_manim_subprocess(gtts_code, scene_name, quality, label="/gTTS-fallback")
-        raise
+    return _run_manim_subprocess(code, scene_name, quality)
 
 
 async def render_manim_local(

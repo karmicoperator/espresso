@@ -384,7 +384,7 @@ async def run_demo(max_visualizations: int = 2, verbose: bool = False) -> list[P
     manifest_path.write_text(
         f"Paper: Attention Is All You Need (1706.03762)\n"
         f"Generated: {datetime.now().isoformat()}\n"
-        f"TTS: ElevenLabs (eleven_flash_v2_5, voice=2fe8mwpfJcqvj9RGBsC1)\n"
+        f"TTS: gTTS (Google Text-to-Speech)\n"
         "Model: Claude Opus 4.5 via Dedalus SDK\n"
         f"Visualizations: {len(visualizations)}\n\n"
         + "\n".join(manifest_lines) + "\n"
