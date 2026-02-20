@@ -264,9 +264,7 @@ VOICEOVER_TARGET_DURATION_SECONDS = (30, 45)
 The LLM model is configured in `agents/base.py`:
 
 ```python
-DEFAULT_MODEL = "claude-opus-4-5-20251101"               # Best quality (~60-90s/viz)
-# Change to:
-DEFAULT_MODEL = "claude-sonnet-4-20250514"               # Faster (~20-30s/viz)
+DEFAULT_MODEL = "claude-sonnet-4-5-20250929"             # Sonnet (anthropic/claude-sonnet-4-5-20250929 for Dedalus)
 ```
 
 ### ElevenLabs Voices

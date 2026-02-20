@@ -14,12 +14,12 @@ Ensure all code using the Anthropic SDK and Martian Gateway follows official doc
 ### Anthropic/Claude Developer Platform
 - Docs: https://platform.claude.com/docs/
 - SDK: https://docs.anthropic.com/en/api/client-sdks
-- Models: claude-opus-4-5-20251101, claude-sonnet-4-20250514
+- Models: claude-sonnet-4-5-20250929
 
 ### Martian Gateway
 - Docs: https://gateway-docs.withmartian.com/
 - Base URL: https://api.withmartian.com/v1
-- Model format: `provider/model-name` (e.g., `anthropic/claude-opus-4-5-20251101`)
+- Model format: `provider/model-name` (e.g., `anthropic/claude-sonnet-4-5-20250929`)
 
 ## When Invoked
 
@@ -53,13 +53,13 @@ client = Anthropic(
 ### Model Name Formats
 | API | Format | Example |
 |-----|--------|---------|
-| Direct Anthropic | `model-version` | `claude-opus-4-5-20251101` |
-| Martian Gateway | `provider/model-version` | `anthropic/claude-opus-4-5-20251101` |
+| Direct Anthropic | `model-version` | `claude-sonnet-4-5-20250929` |
+| Martian Gateway | `provider/model-version` | `anthropic/claude-sonnet-4-5-20250929` |
 
 ### Messages API Structure
 ```python
 response = client.messages.create(
-    model="anthropic/claude-opus-4-5-20251101",  # or direct format
+    model="anthropic/claude-sonnet-4-5-20250929",  # or direct format
     max_tokens=4096,
     system="System prompt here",  # Optional
     messages=[

@@ -110,7 +110,7 @@ flowchart LR
 
 | Backend API | Python FastAPI |
 
-| LLM | Anthropic Claude (claude 4.5 opus) |
+| LLM | Anthropic Claude (claude 4.5 sonnet) |
 
 | Video Generation | Manim Community Edition on Modal.com |
 

@@ -34,33 +34,28 @@ TaskType = Literal["research", "code", "creative", "analysis", "multi_step"]
 # Model chains using ONLY Claude models for handoffs
 # Dedalus SDK automatically routes work between models based on task complexity
 MODEL_CHAINS: dict[TaskType, list[str]] = {
-    # Research: Haiku quickly gathers → Sonnet analyzes → Opus synthesizes
+    # Research: Haiku quickly gathers → Sonnet analyzes/synthesizes
     "research": [
         "anthropic/claude-haiku-4-5",
-        "anthropic/claude-sonnet-4-5",
-        "anthropic/claude-opus-4-5"
+        "anthropic/claude-sonnet-4-5-20250929"
     ],
 
-    # Code generation: Sonnet plans architecture → Opus implements
-    "code": [
-        "anthropic/claude-sonnet-4-5",
-        "anthropic/claude-opus-4-5"
-    ],
+    # Code generation: Sonnet plans and implements
+    "code": ["anthropic/claude-sonnet-4-5-20250929"],
 
-    # Creative writing: Opus handles everything (best for nuanced content)
-    "creative": ["anthropic/claude-opus-4-5"],
+    # Creative writing: Sonnet handles everything
+    "creative": ["anthropic/claude-sonnet-4-5-20250929"],
 
-    # Analysis: Haiku for quick scan → Opus for deep reasoning
+    # Analysis: Haiku for quick scan → Sonnet for deep reasoning
     "analysis": [
         "anthropic/claude-haiku-4-5",
-        "anthropic/claude-opus-4-5"
+        "anthropic/claude-sonnet-4-5-20250929"
     ],
 
     # Multi-step complex tasks: Full handoff chain
     "multi_step": [
         "anthropic/claude-haiku-4-5",
-        "anthropic/claude-sonnet-4-5",
-        "anthropic/claude-opus-4-5"
+        "anthropic/claude-sonnet-4-5-20250929"
     ],
 }
 
