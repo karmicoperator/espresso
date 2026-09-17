@@ -87,6 +87,16 @@ export type VerificationReport = {
   checked: number;
   passed: number;
   rejections: { what: string; locator: string; reason: string }[];
+  /** Numbers in the prose looked up in the paper; misses are marked on the page. */
+  prose_checked?: number;
+  prose_unmatched?: { section_id: string; number: string; context: string }[];
+};
+
+/** What the paper asked and found, checked like a plotted value against its quote. */
+export type BottomLine = {
+  question: string;
+  answer: string;
+  provenance: Provenance;
 };
 
 export type Explainer = {
@@ -98,6 +108,7 @@ export type Explainer = {
   doi: string | null;
   source_url: string | null;
   question: string;
+  bottom_line?: BottomLine | null;
   sections: ReaderSection[];
   charts: Chart[];
   figures: FigurePlate[];

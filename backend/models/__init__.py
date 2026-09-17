@@ -6,6 +6,7 @@
 
 from .charts import (
     Annotation,
+    BottomLine,
     Chart,
     ChartKind,
     Datum,
@@ -28,6 +29,7 @@ from .paper import (
 __all__ = [
     "Annotation",
     "ArxivPaperMeta",
+    "BottomLine",
     "Chart",
     "ChartKind",
     "Datum",

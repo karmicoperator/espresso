@@ -23,7 +23,7 @@ from pydantic import BaseModel, Field, ValidationError
 
 from agents.base import call_llm
 from ingestion.figures import _is_displayable
-from models.charts import Chart
+from models.charts import BottomLine, Chart
 from models.paper import StructuredPaper
 
 logger = logging.getLogger(__name__)
@@ -43,6 +43,7 @@ class Plan(BaseModel):
 
     charts: list[Chart] = Field(default_factory=list)
     figures: list[FigurePick] = Field(default_factory=list)
+    bottom_line: BottomLine | None = None
 
 
 MAX_CHARTS = 6
@@ -104,6 +105,13 @@ Pick at most {max_charts}, in the order a reader needs them. Prefer few and clea
 
   The rule that matters: diagram the paper's argument, never your own knowledge of
   biology. A paper that offers no mechanism gets no diagram.
+BOTTOM LINE
+Return a `bottom_line` with the `question` the paper set out to answer and its `answer`,
+one plain sentence each. The answer is what a clinician would take away, with the main
+number in it, and it carries a `provenance` like a plotted value: one quoted span from the
+paper that contains every number the answer uses. It is checked the same way, so an
+answer whose numbers are not in its quote is dropped. No verdicts the paper does not give.
+
 ANNOTATION
 Give at most one chart an `annotation`: a short note pointing at the single value that
 matters, with `target` exactly matching that datum's `label`. This is what makes a chart
@@ -160,8 +168,9 @@ Every string here is read by a person: titles, subtitles, captions, caveats, ann
 - Do not editorialise the result. The number carries the weight. An annotation points at a
   value and says what it is, not how impressive it is.
 
-Return ONLY a JSON object: {"charts": [ ... ], "figures": [ ... ]}. Use an empty list for
-`figures` when none of them earn a place. No prose, no markdown fence."""
+Return ONLY a JSON object: {"bottom_line": {...}, "charts": [ ... ], "figures": [ ... ]}.
+Use an empty list for `figures` when none of them earn a place. No prose, no markdown
+fence."""
 
 
 def _render_paper(paper: StructuredPaper, max_chars: int = 140_000) -> str:
@@ -245,6 +254,8 @@ def _schema_block() -> str:
         + json.dumps(Chart.model_json_schema(), separators=(",", ":"))
         + "\n\nEach entry in `figures` must validate against this one:\n"
         + json.dumps(FigurePick.model_json_schema(), separators=(",", ":"))
+        + "\n\n`bottom_line` must validate against this one:\n"
+        + json.dumps(BottomLine.model_json_schema(), separators=(",", ":"))
     )
 
 
@@ -272,8 +283,14 @@ async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> P
             payload = json.loads(extract_json(reply))
             raw_charts = payload.get("charts", payload if isinstance(payload, list) else [])
             charts = [Chart.model_validate(c) for c in raw_charts][:max_charts]
-            # A bad figure pick should not cost the charts: the charts are the expensive
-            # part of this call, and a figure is an extra rather than the point.
+            # A bad bottom line or figure pick should not cost the charts: the charts are
+            # the expensive part of this call, and these are extras rather than the point.
+            bottom_line: BottomLine | None = None
+            if isinstance(payload.get("bottom_line"), dict):
+                try:
+                    bottom_line = BottomLine.model_validate(payload["bottom_line"])
+                except ValidationError as exc:
+                    logger.info("Dropped an unusable bottom line: %s", str(exc)[:160])
             picks: list[FigurePick] = []
             for raw in (payload.get("figures") or [])[:MAX_FIGURES]:
                 try:
@@ -307,7 +324,7 @@ async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> P
                 "Planned %d figures: %s",
                 len(picks), ", ".join(f"{p.kind}:{p.figure_id}" for p in picks),
             )
-        return Plan(charts=unique, figures=picks)
+        return Plan(charts=unique, figures=picks, bottom_line=bottom_line)
 
     raise RuntimeError(
         f"plan_charts: no valid chart JSON in {RETRIES} attempts. Last error: {last_error[:300]}"

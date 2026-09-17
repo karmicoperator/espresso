@@ -54,8 +54,19 @@ a locator and a verbatim quote; three string checks confirm the locator exists, 
 appears there, and the number appears in the quote. Values that fail are dropped and listed.
 Nothing downstream can introduce a number the paper does not contain.
 
+**Bottom line** opens the page: what the paper asked and what it found, one sentence each,
+checked like a plotted value against the quoted span shown beneath it, and dropped if it
+fails.
+
+**Prose** is the model's summary, so every number in it is looked up in the paper. One
+that is not printed there as such (a percentage the summary worked out from a rate ratio,
+a rounded mean) is marked with a dotted underline rather than removed, and the header
+says how many there are. The page also says plainly what was checked and what was not,
+and that it is not clinical advice.
+
 **Charts** are typed specs the browser draws: `stat`, `bars`, `dots`, `forest`, `line`,
-`flow`, `diagram`. Hovering any mark shows the paper's own sentence.
+`flow`, `diagram`. Hovering, tapping or tabbing to any mark shows the paper's own
+sentence. "Print or save as PDF" gives a light handout with every chart drawn.
 
 **Figures** are the paper's own images, taken only when a chart could not be rebuilt from
 printed numbers: radiographs, micrographs, specimens, clinical photos, schematics, and
@@ -94,7 +105,7 @@ Papers are stored as JSON under `backend/data/explainers/`, figures under
 
 ## Status
 
-Working. 55 tests, ruff and eslint clean.
+Working. 65 tests, ruff and eslint clean.
 
 Known limits, all verified rather than assumed:
 

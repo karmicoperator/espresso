@@ -253,3 +253,36 @@ html {
 
 /* Section titles echo Nature's display serif; the rest of the shell stays Geist. */
 .serif { font-family: "Iowan Old Style", Palatino, Georgia, serif; }
+
+/* A number the summary uses that the paper does not print as such. Marked, not removed:
+   it may be arithmetic the summary did, and the reader should see that it was. */
+.unprinted {
+  background: none;
+  color: inherit;
+  text-decoration: underline dotted rgba(217, 164, 65, 0.9);
+  text-underline-offset: 3px;
+  cursor: help;
+}
+
+/* Print: the page on paper, or saved as a PDF, for a handout. Light, no chrome, every
+   chart shown regardless of the reveal, nothing pinned. */
+@media print {
+  html { scroll-behavior: auto; }
+  body { background: #fff !important; color: #111 !important; }
+  body * { color: #111 !important; border-color: #ccc !important; background: transparent !important;
+           backdrop-filter: none !important; box-shadow: none !important; }
+  .print-hide { display: none !important; }
+  .lg\:sticky { position: static !important; }
+  main { max-width: none; }
+  figure, section > div > div { break-inside: avoid; }
+  .chart .r-bar, .chart .r-fade, .chart .r-rise, .chart .r-stat, .chart .r-grow, .chart .r-draw {
+    opacity: 1 !important; transform: none !important; stroke-dashoffset: 0 !important; transition: none !important;
+  }
+  .chart text { fill: #222 !important; }
+  .chart .tick { fill: #555 !important; }
+  .chart .grid { stroke: #bbb !important; }
+  .chart .axis, .chart .lead { stroke: #666 !important; }
+  .chart .whisker line { stroke: #222 !important; }
+  .unprinted { text-decoration-color: #b8860b; }
+  a[href]::after { content: none; }
+}

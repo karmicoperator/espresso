@@ -17,11 +17,13 @@ import unicodedata
 from dataclasses import dataclass, field
 
 from models.charts import (
+    BottomLine,
     Chart,
     ChartKind,
     Datum,
     DiagramEdge,
     Provenance,
+    ReaderSection,
     VerificationReport,
 )
 from models.paper import StructuredPaper
@@ -300,6 +302,64 @@ def _keep_diagram(chart: Chart, index: LocatorIndex, report: VerificationReport)
 
     chart.edges = survivors
     return True
+
+
+def verify_bottom_line(
+    bottom_line: BottomLine | None, index: LocatorIndex, report: VerificationReport
+) -> BottomLine | None:
+    """The one-sentence answer, held to the standard of a plotted value: its quote must
+    exist in the paper and every number in the answer must appear in that quote."""
+    if bottom_line is None:
+        return None
+    report.checked += 1
+    ok, note = _quote_is_real(bottom_line.provenance, index)
+    if not ok:
+        report.rejections.append(
+            {"what": "bottom line", "locator": bottom_line.provenance.locator, "reason": note}
+        )
+        return None
+    missing = [
+        v for v in numbers_in(bottom_line.answer)
+        if not _value_in_quote(v, bottom_line.provenance.quote)
+    ]
+    if missing:
+        report.rejections.append(
+            {"what": "bottom line", "locator": bottom_line.provenance.locator,
+             "reason": f"value {missing[0]:g} does not appear in the quoted text"}
+        )
+        return None
+    report.passed += 1
+    return bottom_line
+
+
+# A number in prose: digits with an optional decimal part, not part of a longer number.
+# Single digits are skipped: every paper contains every digit, so a match means nothing.
+_PROSE_NUM = re.compile(r"(?<![\d.])(\d{1,3}(?:,\d{3})+|\d+\.\d+|\d{2,})(?![\d.])")
+
+
+def check_prose(sections: list[ReaderSection], index: LocatorIndex, report: VerificationReport) -> None:
+    """Look every number in the rewritten prose up in the paper.
+
+    The prose is the model's, so nothing guarantees its figures. This does not prove a
+    number is right, only that it is printed somewhere in the paper; a "17% lower" the
+    summary worked out from a rate ratio will be flagged, which is the point, because the
+    reader should know which numbers are the paper's and which are the summary's.
+    """
+    haystack = index.haystack()
+    for section in sections:
+        for m in _PROSE_NUM.finditer(section.markdown or ""):
+            token = m.group(1)
+            report.prose_checked += 1
+            plain = token.replace(",", "")
+            found = re.search(rf"(?<![\d.]){re.escape(plain)}(?![\d.])", haystack) or (
+                "," in token and token.lower() in haystack
+            )
+            if not found:
+                start, end = max(0, m.start() - 40), min(len(section.markdown), m.end() + 40)
+                report.prose_unmatched.append(
+                    {"section_id": section.id, "number": token,
+                     "context": section.markdown[start:end].replace("\n", " ")}
+                )
 
 
 def verify_charts(

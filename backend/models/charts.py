@@ -260,9 +260,28 @@ class VerificationReport(BaseModel):
     passed: int = 0
     rejections: list[dict] = Field(default_factory=list)
 
+    # The prose is written by the model, so its numbers are looked up in the paper too.
+    # A number not printed there is marked on the page, not removed: it may be a sum or a
+    # rounding the summary made, and the reader should see that it was.
+    prose_checked: int = 0
+    prose_unmatched: list[dict] = Field(default_factory=list)
+
     @property
     def pass_rate(self) -> float:
         return self.passed / self.checked if self.checked else 1.0
+
+
+class BottomLine(BaseModel):
+    """What the paper asked and what it found, in one sentence each.
+
+    The answer is checked like a plotted value: every number in it must appear in the
+    quoted span, and the span must exist in the paper. It is the first thing on the page,
+    so it is held to the same standard as the charts.
+    """
+
+    question: str = Field(..., max_length=240)
+    answer: str = Field(..., max_length=360)
+    provenance: Provenance
 
 
 class Explainer(BaseModel):
@@ -277,6 +296,7 @@ class Explainer(BaseModel):
     source_url: str | None = None
 
     question: str = Field("", max_length=240, description="The clinical question, one sentence")
+    bottom_line: BottomLine | None = None
     sections: list[ReaderSection] = Field(default_factory=list, max_length=6)
     charts: list[Chart] = Field(default_factory=list, max_length=12)
     figures: list[FigurePlate] = Field(default_factory=list, max_length=8)

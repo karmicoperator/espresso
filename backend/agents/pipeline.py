@@ -18,7 +18,7 @@ import time
 from collections.abc import Callable
 
 from agents.chart_planner import plan_charts
-from agents.verify import verify_charts
+from agents.verify import LocatorIndex, check_prose, verify_bottom_line, verify_charts
 from ingestion.figures import fetch_figures, image_size
 from models.charts import Chart, Explainer, FigurePlate, ReaderSection
 from models.paper import StructuredPaper
@@ -184,9 +184,10 @@ async def build_visuals(
     progress("plan", 0.15, "choosing the charts")
     mark = time.monotonic()
     figure_picks: list = []
+    bottom_line = None
     try:
         plan = await plan_charts(paper, max_charts=max_charts)
-        planned, figure_picks = plan.charts, plan.figures
+        planned, figure_picks, bottom_line = plan.charts, plan.figures, plan.bottom_line
     except Exception as exc:
         logger.exception("Chart planning failed")
         notes.append(f"No charts could be planned for this paper: {exc}")
@@ -195,6 +196,8 @@ async def build_visuals(
 
     progress("verify", 0.70, "checking every value against the source")
     charts, report = verify_charts(planned, paper)
+    index = LocatorIndex.build(paper)
+    bottom_line = verify_bottom_line(bottom_line, index, report)
 
     if report.checked and report.pass_rate < 0.6:
         notes.append(
@@ -212,6 +215,7 @@ async def build_visuals(
     sections = _reader_sections(paper)
     if not sections:
         notes.append("The paper could not be summarised into readable sections.")
+    check_prose(sections, index, report)
     _attach_charts(sections, charts)
     _attach_figures(sections, figures)
 
@@ -224,6 +228,8 @@ async def build_visuals(
         published=str(meta.published) if getattr(meta, "published", None) else None,
         doi=getattr(meta, "doi", None),
         source_url=getattr(meta, "html_url", None) or getattr(meta, "pdf_url", None),
+        question=bottom_line.question if bottom_line else "",
+        bottom_line=bottom_line,
         sections=sections,
         charts=charts,
         figures=figures,

@@ -28,23 +28,41 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
     [explainer.figures],
   );
 
+  // Numbers the prose uses that the paper does not print, per section, for marking.
+  const unprinted = useMemo(() => {
+    const m = new Map<string, string[]>();
+    for (const u of explainer.verification.prose_unmatched ?? []) {
+      m.set(u.section_id, [...(m.get(u.section_id) ?? []), u.number]);
+    }
+    return m;
+  }, [explainer.verification.prose_unmatched]);
+
   const meta = [
     explainer.journal,
     explainer.published?.slice(0, 4),
     explainer.paper_id,
   ].filter(Boolean);
 
-  const pct = explainer.verification.checked
-    ? Math.round((explainer.verification.passed / explainer.verification.checked) * 100)
-    : null;
+  const v = explainer.verification;
+  const pct = v.checked ? Math.round((v.passed / v.checked) * 100) : null;
+  const proseMisses = v.prose_unmatched?.length ?? 0;
 
   return (
     <main>
       <header className="border-b border-white/[0.08]">
         <div className="mx-auto max-w-[1180px] px-8 py-12">
-          <Link href="/" className="text-xs text-white/50 transition-colors hover:text-white">
-            ← Build another paper
-          </Link>
+          <div className="print-hide flex items-baseline justify-between gap-4">
+            <Link href="/" className="text-xs text-white/50 transition-colors hover:text-white">
+              ← Build another paper
+            </Link>
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="text-xs text-white/50 transition-colors hover:text-white"
+            >
+              Print or save as PDF
+            </button>
+          </div>
           <h1 className="mt-5 max-w-4xl text-3xl leading-snug font-medium tracking-tight text-[#e8e8e8]">
             {explainer.title}
           </h1>
@@ -74,14 +92,45 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
                   color: pct >= 90 ? "#7dd19b" : pct >= 70 ? "#d9a441" : "#f27066",
                   borderColor: "rgba(255,255,255,0.10)",
                 }}
-                title={`${explainer.verification.passed} of ${explainer.verification.checked} plotted values were matched to a quoted span in the paper`}
+                title={`${v.passed} of ${v.checked} charted values were matched to a quoted span in the paper`}
               >
-                {pct}% of values verified
+                {pct}% of charted values verified
               </span>
             )}
           </div>
+          {/* What was checked and what was not, in one line, because "verified" on its own
+              reads as a claim about the whole page. */}
+          <p className="mt-4 max-w-3xl text-xs leading-relaxed text-white/40">
+            The summary below was written by a model from the paper. Every charted value was
+            checked against the paper&rsquo;s own text before it was drawn
+            {v.prose_checked
+              ? proseMisses
+                ? `; ${proseMisses} of the ${v.prose_checked} numbers in the prose ${
+                    proseMisses === 1 ? "is" : "are"
+                  } not printed in the paper as such and ${proseMisses === 1 ? "is" : "are"} `
+                : `; all ${v.prose_checked} numbers in the prose are printed in the paper`
+              : ""}
+            {v.prose_checked && proseMisses ? (
+              <span className="unprinted">marked like this</span>
+            ) : null}
+            . Not clinical advice.
+          </p>
         </div>
       </header>
+
+      {explainer.bottom_line && (
+        <div className="mx-auto max-w-[1180px] px-8 pt-10">
+          <div className="rounded-2xl border border-white/[0.10] bg-white/[0.04] px-7 py-6 backdrop-blur-xl">
+            <p className="text-[11px] tracking-[0.16em] text-white/30 uppercase">Bottom line</p>
+            <p className="mt-2 text-sm text-white/50">{explainer.bottom_line.question}</p>
+            <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{explainer.bottom_line.answer}</p>
+            <p className="mt-4 border-t border-white/[0.08] pt-3 text-xs leading-relaxed text-white/45">
+              The paper: &ldquo;{explainer.bottom_line.provenance.quote}&rdquo;
+              <span className="text-white/30"> — {explainer.bottom_line.provenance.section || explainer.bottom_line.provenance.locator}</span>
+            </p>
+          </div>
+        </div>
+      )}
 
       {explainer.notes.length > 0 && (
         <div className="mx-auto max-w-[1180px] px-8 pt-8">
@@ -105,7 +154,7 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
 
           <div className="mx-auto max-w-[1180px] px-8 pb-6">
             <div className="grid gap-11 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-              <Prose markdown={section.markdown} />
+              <Prose markdown={section.markdown} unprinted={unprinted.get(section.id) ?? []} />
               <ChartColumn
                 charts={[
                   ...section.chart_ids.map((id) => byId.get(id)).filter((c): c is Chart => Boolean(c)),
@@ -127,16 +176,16 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
         </section>
       ))}
 
-      {explainer.verification.rejections.length > 0 && (
+      {v.rejections.length > 0 && (
         <div className="mx-auto max-w-[1180px] px-8 py-16">
           <details className="rounded-xl border border-white/[0.08] bg-white/[0.02] px-6 py-5">
             <summary className="cursor-pointer text-xs text-white/50 hover:text-white">
-              {explainer.verification.rejections.length} value
-              {explainer.verification.rejections.length === 1 ? "" : "s"} were dropped before
+              {v.rejections.length} value
+              {v.rejections.length === 1 ? "" : "s"} were dropped before
               anything was drawn
             </summary>
             <ul className="mt-4 space-y-2 border-t border-white/[0.08] pt-4">
-              {explainer.verification.rejections.map((r, i) => (
+              {v.rejections.map((r, i) => (
                 <li key={i} className="text-xs">
                   <span className="num text-[#e8e8e8]">{r.what}</span>
                   <span className="num ml-2 text-white/30">@ {r.locator}</span>
@@ -176,8 +225,9 @@ function ChartColumn({ charts }: { charts: Chart[] }) {
 }
 
 /** Minimal markdown: paragraphs, bold, and bullets. The rewrite emits little else. */
-function Prose({ markdown }: { markdown: string }) {
+function Prose({ markdown, unprinted }: { markdown: string; unprinted: string[] }) {
   const blocks = markdown.split(/\n{2,}/).map(deLatex).filter(Boolean);
+  const mark = useMemo(() => marker(unprinted), [unprinted]);
   return (
     <div className="text-[15px] leading-[1.75] text-white/60">
       {blocks.map((block, i) => {
@@ -188,7 +238,7 @@ function Prose({ markdown }: { markdown: string }) {
               {lines.map((l, j) => (
                 <li key={j} className="flex gap-2.5">
                   <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-white/25" aria-hidden />
-                  <span>{inline(l.replace(/^\s*[-*]\s+/, ""))}</span>
+                  <span>{inline(l.replace(/^\s*[-*]\s+/, ""), mark)}</span>
                 </li>
               ))}
             </ul>
@@ -203,7 +253,7 @@ function Prose({ markdown }: { markdown: string }) {
         }
         return (
           <p key={i} className="mb-5">
-            {inline(block)}
+            {inline(block, mark)}
           </p>
         );
       })}
@@ -221,35 +271,58 @@ function deLatex(text: string): string {
     .replace(/\$\$?/g, "")
     .replace(/\\(?:text|mathrm|mathbf|textbf|textsc)\{([^{}]*)\}/g, "$1")
     .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, "($1) / ($2)")
-    .replace(/\\times/g, "\u00d7")
-    .replace(/\\cdot/g, "\u00b7")
-    .replace(/\\pm/g, "\u00b1")
-    .replace(/\\approx/g, "\u2248")
-    .replace(/\\leq?\b/g, "\u2264")
-    .replace(/\\geq?\b/g, "\u2265")
+    .replace(/\\times/g, "×")
+    .replace(/\\cdot/g, "·")
+    .replace(/\\pm/g, "±")
+    .replace(/\\approx/g, "≈")
+    .replace(/\\leq?\b/g, "≤")
+    .replace(/\\geq?\b/g, "≥")
     .replace(/\\%/g, "%")
     .replace(/\\[,;:!]/g, " ")
     .replace(/[ \t]{2,}/g, " ")
     .trim();
 }
 
-function inline(text: string) {
+const UNPRINTED_TITLE =
+  "This number is not printed in the paper as such. It may be arithmetic or rounding the summary did; the charts beside the text are checked, this is not.";
+
+/** A splitter for the numbers to mark in one section, or null when there are none. */
+function marker(unprinted: string[]): RegExp | null {
+  if (unprinted.length === 0) return null;
+  const alts = [...new Set(unprinted)].map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  return new RegExp(`((?<![\\d.])(?:${alts.join("|")})(?![\\d.]))`, "g");
+}
+
+function withMarks(text: string, mark: RegExp | null, key: string) {
+  if (!mark) return text;
+  return text.split(mark).map((part, i) =>
+    i % 2 === 1 ? (
+      <mark key={`${key}-${i}`} className="unprinted" title={UNPRINTED_TITLE}>
+        {part}
+      </mark>
+    ) : (
+      part
+    ),
+  );
+}
+
+function inline(text: string, mark: RegExp | null) {
   // Bold before italic, so the ** in "**x**" is never read as a single emphasis marker.
   return text.split(/(\*\*[^*]+\*\*|\*[^*\n]+\*)/g).map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={i} className="font-medium text-[#e8e8e8]">
-          {part.slice(2, -2)}
+          {withMarks(part.slice(2, -2), mark, `b${i}`)}
         </strong>
       );
     }
     if (part.length > 2 && part.startsWith("*") && part.endsWith("*")) {
       return (
         <em key={i} className="text-white/75 italic">
-          {part.slice(1, -1)}
+          {withMarks(part.slice(1, -1), mark, `i${i}`)}
         </em>
       );
     }
-    return <span key={i}>{part}</span>;
+    return <span key={i}>{withMarks(part, mark, `t${i}`)}</span>;
   });
 }

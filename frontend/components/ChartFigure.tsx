@@ -133,11 +133,23 @@ export function ChartFigure({ chart }: { chart: Chart }) {
   const { ref, on } = useReveal<HTMLDivElement>();
   const [tip, setTip] = useState<TipState>(null);
 
+  // The paper's sentence has to be reachable without a mouse: a keyboard reaches it by
+  // focus, a finger by tap, a screen reader through the label.
   const showQuote = (quote: string, section: string, value?: number) => ({
     onMouseMove: (e: React.MouseEvent) =>
       setTip({ x: e.clientX, y: e.clientY, quote, section, value }),
     onMouseLeave: () => setTip(null),
-    style: { cursor: "default" as const },
+    onFocus: (e: React.FocusEvent) => {
+      const r = e.currentTarget.getBoundingClientRect();
+      setTip({ x: r.left + r.width / 2, y: r.bottom, quote, section, value });
+    },
+    onBlur: () => setTip(null),
+    onClick: (e: React.MouseEvent) =>
+      setTip((t) => (t && t.quote === quote ? null : { x: e.clientX, y: e.clientY, quote, section, value })),
+    tabIndex: 0,
+    role: "img" as const,
+    "aria-label": `${value !== undefined ? `${fmt(value)}. ` : ""}The paper says: ${quote} (${section})`,
+    style: { cursor: "default" as const, outline: "none" },
   });
 
   const hover = (datum: Datum) =>
@@ -500,14 +512,17 @@ function Forest({ chart, hover }: { chart: Chart; hover: HoverFn }) {
           {fmt(t)}
         </text>
       ))}
+      {/* Anchored away from the null line, not centred in whatever room is left on each
+          side: when most estimates sit below 1 the right-hand room is a few pixels wide,
+          and two centred labels ran into each other. */}
       {chart.favours_left && (
-        <text x={(plotL + x(nullV)) / 2} y={baseY + 34} textAnchor="middle" className="tick" fill={A}>
-          {chart.favours_left}
+        <text x={x(nullV) - 8} y={baseY + 34} textAnchor="end" className="tick" fill={A}>
+          {chart.favours_left} ←
         </text>
       )}
       {chart.favours_right && (
-        <text x={(x(nullV) + plotR) / 2} y={baseY + 34} textAnchor="middle" className="tick" fill={B}>
-          {chart.favours_right}
+        <text x={x(nullV) + 8} y={baseY + 34} textAnchor="start" className="tick" fill={B}>
+          → {chart.favours_right}
         </text>
       )}
     </svg>
