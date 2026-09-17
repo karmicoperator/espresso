@@ -18,7 +18,16 @@ import time
 from collections.abc import Callable
 
 from agents.chart_planner import plan_charts
-from agents.verify import LocatorIndex, check_prose, verify_bottom_line, verify_charts
+from agents.verify import (
+    LocatorIndex,
+    check_prose,
+    collect_sources,
+    link_prose,
+    verify_absolute_risk,
+    verify_bottom_line,
+    verify_charts,
+    verify_terms,
+)
 from ingestion.figures import fetch_figures, image_size
 from models.charts import Chart, Explainer, FigurePlate, ReaderSection
 from models.paper import StructuredPaper
@@ -185,9 +194,12 @@ async def build_visuals(
     mark = time.monotonic()
     figure_picks: list = []
     bottom_line = None
+    absolute_risk = None
+    terms = []
     try:
         plan = await plan_charts(paper, max_charts=max_charts)
         planned, figure_picks, bottom_line = plan.charts, plan.figures, plan.bottom_line
+        absolute_risk, terms = plan.absolute_risk, plan.terms
     except Exception as exc:
         logger.exception("Chart planning failed")
         notes.append(f"No charts could be planned for this paper: {exc}")
@@ -198,6 +210,8 @@ async def build_visuals(
     charts, report = verify_charts(planned, paper)
     index = LocatorIndex.build(paper)
     bottom_line = verify_bottom_line(bottom_line, index, report)
+    absolute_risk = verify_absolute_risk(absolute_risk, index, report)
+    terms = verify_terms(terms, index, report)
 
     if report.checked and report.pass_rate < 0.6:
         notes.append(
@@ -216,6 +230,13 @@ async def build_visuals(
     if not sections:
         notes.append("The paper could not be summarised into readable sections.")
     check_prose(sections, index, report)
+    links = link_prose(sections, charts)
+    cited: list = [d.provenance for c in charts for d in c.data]
+    cited += [e.provenance for c in charts for e in c.edges]
+    cited += [bottom_line.provenance if bottom_line else None]
+    cited += [absolute_risk.comparator.provenance, absolute_risk.intervention.provenance] if absolute_risk else []
+    cited += [t.provenance for t in terms]
+    sources = collect_sources(cited, index)
     _attach_charts(sections, charts)
     _attach_figures(sections, figures)
 
@@ -230,6 +251,11 @@ async def build_visuals(
         source_url=getattr(meta, "html_url", None) or getattr(meta, "pdf_url", None),
         question=bottom_line.question if bottom_line else "",
         bottom_line=bottom_line,
+        absolute_risk=absolute_risk,
+        absolute_risk_derived=absolute_risk.derived() if absolute_risk else None,
+        terms=terms,
+        links=links,
+        sources=sources,
         sections=sections,
         charts=charts,
         figures=figures,
@@ -237,7 +263,7 @@ async def build_visuals(
         notes=notes,
     )
 
-    progress("done", 1.0, f"{len(charts)} charts, {len(figures)} figures, {len(sections)} sections")
+    progress("done", 1.0, f"{len(charts)} charts, {len(figures)} figures, {len(sections)} sections, {len(links)} linked sentences")
     logger.info(
         "Built explainer for %s in %.1fs (plan %.1fs): %d charts, %d/%d values verified",
         explainer.paper_id or explainer.title[:40],

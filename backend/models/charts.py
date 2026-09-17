@@ -284,6 +284,80 @@ class BottomLine(BaseModel):
     provenance: Provenance
 
 
+class RiskArm(BaseModel):
+    """One arm's absolute rate for the primary outcome, as the paper prints it."""
+
+    label: str = Field(..., max_length=80)
+    value: float = Field(..., description="The percentage printed, e.g. 22.9")
+    events: int | None = None
+    n: int | None = None
+    provenance: Provenance
+
+
+class AbsoluteRisk(BaseModel):
+    """The primary outcome as two absolute rates.
+
+    Everything a reader needs to feel the size of an effect is in here: the icon array
+    and the per-1,000 strip are drawn from these two numbers and nothing else. Each arm
+    is verified like a plotted value. The numbers derived from them (difference, number
+    needed to treat) are computed here, once, and carried marked as derived.
+    """
+
+    outcome: str = Field(..., max_length=120)
+    timeframe: str = Field("", max_length=60)
+    comparator: RiskArm
+    intervention: RiskArm
+    higher_is_better: bool = False
+
+    def derived(self) -> dict:
+        c, i = self.comparator.value, self.intervention.value
+        diff = i - c  # percentage points, intervention minus comparator
+        per_1000 = {"comparator": round(c * 10), "intervention": round(i * 10)}
+        fewer = diff < 0
+        good = (fewer and not self.higher_is_better) or ((not fewer) and self.higher_is_better)
+        out = {
+            "derived": True,
+            "per_1000": per_1000,
+            "difference_per_1000": round(abs(diff) * 10),
+            "direction": "fewer" if fewer else "more",
+            "favours_intervention": good if diff != 0 else None,
+            "relative_change_pct": round((i / c - 1) * 100) if c else None,
+        }
+        if diff:
+            nn = -(-100 // abs(diff)) if abs(diff) >= 1 else round(100 / abs(diff))
+            out["number_needed"] = int(nn)
+            out["number_needed_kind"] = "to treat" if good else "to harm"
+        return out
+
+
+class Term(BaseModel):
+    """A word the explainer uses that a reader from another field may not know.
+
+    With a provenance, the definition shown is the paper's own sentence. Without one it
+    is the model's wording and the page says so.
+    """
+
+    term: str = Field(..., max_length=48)
+    definition: str = Field(..., max_length=280)
+    provenance: Provenance | None = None
+
+
+class Link(BaseModel):
+    """A sentence of the prose that states the same printed fact as a chart element.
+
+    Found deterministically: the sentence contains the value the chart plots, and names
+    the thing it belongs to. The page lights the mark up as the sentence scrolls into
+    view, which is what makes a long paper readable: the reader never hunts for the
+    number a sentence means.
+    """
+
+    section_id: str
+    sentence: str = Field(..., max_length=600)
+    chart_id: str
+    kind: str = Field("datum", description="datum | edge")
+    index: int
+
+
 class Explainer(BaseModel):
     """The whole output. This is the API contract the frontend is built against."""
 
@@ -300,6 +374,14 @@ class Explainer(BaseModel):
     sections: list[ReaderSection] = Field(default_factory=list, max_length=6)
     charts: list[Chart] = Field(default_factory=list, max_length=12)
     figures: list[FigurePlate] = Field(default_factory=list, max_length=8)
+
+    absolute_risk: AbsoluteRisk | None = None
+    absolute_risk_derived: dict | None = None
+    terms: list[Term] = Field(default_factory=list, max_length=10)
+    links: list[Link] = Field(default_factory=list)
+    # The paper's own paragraph behind every locator a provenance points at, so the page
+    # can show a value's sentence in its context without a second request.
+    sources: dict[str, str] = Field(default_factory=dict)
 
     verification: VerificationReport = Field(default_factory=VerificationReport)
     notes: list[str] = Field(default_factory=list, description="Caveats worth surfacing")

@@ -1,0 +1,134 @@
+"""The verifiable layer under the reader: absolute risk, terms, prose links, sources."""
+
+from __future__ import annotations
+
+from agents.verify import (
+    LocatorIndex,
+    VerificationReport,
+    collect_sources,
+    link_prose,
+    verify_absolute_risk,
+    verify_terms,
+)
+from models.charts import (
+    AbsoluteRisk,
+    Chart,
+    ChartKind,
+    Datum,
+    DiagramEdge,
+    DiagramNode,
+    Provenance,
+    ReaderSection,
+    RiskArm,
+    Term,
+)
+from models.paper import ArxivPaperMeta, Section, StructuredPaper
+
+QUOTE = ("482 patients (22.9%) in the dexamethasone group and 1110 patients (25.7%) in the "
+         "usual care group died within 28 days after randomization (age-adjusted rate ratio, "
+         "0.83; 95% confidence interval [CI], 0.75 to 0.93; P<0.001).")
+
+
+def _paper() -> StructuredPaper:
+    return StructuredPaper(
+        meta=ArxivPaperMeta(arxiv_id="PMC1", title="Trial", abstract="An abstract.", pdf_url="u"),
+        sections=[Section(id="sec-1", title="Results", level=1,
+                          content=QUOTE + "\n\nA platform trial compares several treatments against one shared control group.")],
+    )
+
+
+def _prov(quote=QUOTE, locator="sec-1/p1") -> Provenance:
+    return Provenance(locator=locator, kind="paragraph", quote=quote, section="Results")
+
+
+def _risk(iv=22.9, cv=25.7) -> AbsoluteRisk:
+    return AbsoluteRisk(
+        outcome="Death within 28 days", timeframe="28 days",
+        comparator=RiskArm(label="Usual care", value=cv, events=1110, provenance=_prov()),
+        intervention=RiskArm(label="Dexamethasone", value=iv, events=482, provenance=_prov()),
+    )
+
+
+def test_absolute_risk_verified_and_derived():
+    report = VerificationReport()
+    risk = verify_absolute_risk(_risk(), LocatorIndex.build(_paper()), report)
+    assert risk is not None and report.passed == 2
+    d = risk.derived()
+    assert d["derived"] is True
+    assert d["per_1000"] == {"comparator": 257, "intervention": 229}
+    assert d["difference_per_1000"] == 28 and d["direction"] == "fewer"
+    assert d["favours_intervention"] is True
+    assert d["number_needed"] == 36 and d["number_needed_kind"] == "to treat"
+    assert d["relative_change_pct"] == -11
+
+
+def test_absolute_risk_dropped_when_one_arm_is_invented():
+    report = VerificationReport()
+    assert verify_absolute_risk(_risk(iv=19.0), LocatorIndex.build(_paper()), report) is None
+    assert any(r["what"].startswith("absolute risk") for r in report.rejections)
+
+
+def test_absolute_risk_dropped_when_a_denominator_is_not_in_the_quote():
+    risk = _risk()
+    risk.comparator.n = 4321  # true in the paper, absent from this quote
+    report = VerificationReport()
+    assert verify_absolute_risk(risk, LocatorIndex.build(_paper()), report) is None
+    assert "denominator" in report.rejections[0]["what"]
+
+
+def test_term_keeps_paper_quote_only_when_real():
+    report = VerificationReport()
+    real = Term(term="platform trial", definition="Several treatments tested against one control.",
+                provenance=_prov("A platform trial compares several treatments against one shared control group.", "sec-1/p2"))
+    fake = Term(term="open-label", definition="Everyone knew the assignment.",
+                provenance=_prov("The trial was open label, with no placebo.", "sec-1/p2"))
+    ours = Term(term="rate ratio", definition="One rate divided by another.")
+    kept = verify_terms([real, fake, ours], LocatorIndex.build(_paper()), report)
+    assert kept[0].provenance is not None
+    assert kept[1].provenance is None and kept[2].provenance is None
+    assert len(kept) == 3 and any("open-label" in r["what"] for r in report.rejections)
+
+
+def _chart() -> Chart:
+    return Chart(
+        id="mortality", kind=ChartKind.BARS, title="Death within 28 days", section_id="r1",
+        data=[
+            Datum(label="Dexamethasone", value=22.9, provenance=_prov()),
+            Datum(label="Usual care", value=25.7, provenance=_prov()),
+        ],
+    )
+
+
+def test_prose_sentences_link_to_the_datum_they_state():
+    sections = [ReaderSection(
+        id="r1", title="What they found", chart_ids=["mortality"],
+        markdown="Overall, 22.9% of dexamethasone patients died within 28 days. In the usual care "
+                 "group the figure was 25.7%. The trial ran across 176 hospitals.",
+    )]
+    links = link_prose(sections, [_chart()])
+    assert [(k.index, k.sentence[:12]) for k in links] == [(0, "Overall, 22."), (1, "In the usual")]
+    assert all(k.chart_id == "mortality" and k.kind == "datum" for k in links)
+
+
+def test_a_number_alone_in_another_section_does_not_link():
+    sections = [ReaderSection(id="r2", title="Elsewhere", chart_ids=[],
+                              markdown="The mean age was 22.9 years in one substudy.")]
+    assert link_prose(sections, [_chart()]) == []
+
+
+def test_diagram_edge_links_to_a_sentence_naming_both_ends():
+    diagram = Chart(
+        id="mech", kind=ChartKind.DIAGRAM, title="Why", section_id="r1",
+        nodes=[DiagramNode(id="a", label="Inflammatory lung damage"), DiagramNode(id="b", label="Greater mortality")],
+        edges=[DiagramEdge(source="a", target="b", label="drives", provenance=_prov())],
+    )
+    sections = [ReaderSection(id="r1", title="Why", chart_ids=["mech"],
+                              markdown="Later in the illness, inflammatory lung damage drives mortality more than the virus does.")]
+    links = link_prose(sections, [diagram])
+    assert len(links) == 1 and links[0].kind == "edge" and links[0].index == 0
+
+
+def test_sources_hold_the_paragraph_behind_each_locator():
+    index = LocatorIndex.build(_paper())
+    sources = collect_sources([_prov(), None, _prov(locator="abstract", quote="An abstract.")], index)
+    assert sources["sec-1/p1"].startswith("482 patients") and sources["abstract"] == "An abstract."

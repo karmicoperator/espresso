@@ -23,7 +23,7 @@ from pydantic import BaseModel, Field, ValidationError
 
 from agents.base import call_llm
 from ingestion.figures import _is_displayable
-from models.charts import BottomLine, Chart
+from models.charts import AbsoluteRisk, BottomLine, Chart, Term
 from models.paper import StructuredPaper
 
 logger = logging.getLogger(__name__)
@@ -44,6 +44,8 @@ class Plan(BaseModel):
     charts: list[Chart] = Field(default_factory=list)
     figures: list[FigurePick] = Field(default_factory=list)
     bottom_line: BottomLine | None = None
+    absolute_risk: AbsoluteRisk | None = None
+    terms: list[Term] = Field(default_factory=list)
 
 
 MAX_CHARTS = 6
@@ -112,6 +114,22 @@ number in it, and it carries a `provenance` like a plotted value: one quoted spa
 paper that contains every number the answer uses. It is checked the same way, so an
 answer whose numbers are not in its quote is dropped. No verdicts the paper does not give.
 
+ABSOLUTE RISK
+When the paper prints the primary outcome as a proportion in each of two arms, return
+`absolute_risk`: the `outcome` in plain words, a `timeframe`, and two arms, `comparator`
+(placebo or usual care) and `intervention`, each with `label`, `value` as the percentage
+printed, `events` and `n` when printed, and a `provenance` quote containing every number
+you give for that arm. Set `higher_is_better` true for a good outcome (survival,
+discharge). This pair is what the page draws as 100 people and as a per-1,000 count, so
+it must be the outcome the trial was about. Leave `absolute_risk` out when there is no
+such pair: a review, a case report, a continuous outcome, a single-arm study.
+
+TERMS
+Up to 8 `terms`: technical words the explainer uses that a clinician from another field
+would want defined. `definition` is one plain sentence. When the paper itself defines or
+explains the term, quote that sentence in `provenance` and it is shown as the paper's own
+words; otherwise leave `provenance` out and the definition is shown as ours.
+
 ANNOTATION
 Give at most one chart an `annotation`: a short note pointing at the single value that
 matters, with `target` exactly matching that datum's `label`. This is what makes a chart
@@ -168,7 +186,8 @@ Every string here is read by a person: titles, subtitles, captions, caveats, ann
 - Do not editorialise the result. The number carries the weight. An annotation points at a
   value and says what it is, not how impressive it is.
 
-Return ONLY a JSON object: {"bottom_line": {...}, "charts": [ ... ], "figures": [ ... ]}.
+Return ONLY a JSON object: {"bottom_line": {...}, "absolute_risk": {...} or omitted,
+"terms": [ ... ], "charts": [ ... ], "figures": [ ... ]}.
 Use an empty list for `figures` when none of them earn a place. No prose, no markdown
 fence."""
 
@@ -256,6 +275,10 @@ def _schema_block() -> str:
         + json.dumps(FigurePick.model_json_schema(), separators=(",", ":"))
         + "\n\n`bottom_line` must validate against this one:\n"
         + json.dumps(BottomLine.model_json_schema(), separators=(",", ":"))
+        + "\n\n`absolute_risk` must validate against this one:\n"
+        + json.dumps(AbsoluteRisk.model_json_schema(), separators=(",", ":"))
+        + "\n\nEach entry in `terms` must validate against this one:\n"
+        + json.dumps(Term.model_json_schema(), separators=(",", ":"))
     )
 
 
@@ -291,6 +314,18 @@ async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> P
                     bottom_line = BottomLine.model_validate(payload["bottom_line"])
                 except ValidationError as exc:
                     logger.info("Dropped an unusable bottom line: %s", str(exc)[:160])
+            absolute_risk: AbsoluteRisk | None = None
+            if isinstance(payload.get("absolute_risk"), dict):
+                try:
+                    absolute_risk = AbsoluteRisk.model_validate(payload["absolute_risk"])
+                except ValidationError as exc:
+                    logger.info("Dropped an unusable absolute risk: %s", str(exc)[:160])
+            terms: list[Term] = []
+            for raw in (payload.get("terms") or [])[:10]:
+                try:
+                    terms.append(Term.model_validate(raw))
+                except ValidationError as exc:
+                    logger.info("Dropped an unusable term: %s", str(exc)[:120])
             picks: list[FigurePick] = []
             for raw in (payload.get("figures") or [])[:MAX_FIGURES]:
                 try:
@@ -324,7 +359,8 @@ async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> P
                 "Planned %d figures: %s",
                 len(picks), ", ".join(f"{p.kind}:{p.figure_id}" for p in picks),
             )
-        return Plan(charts=unique, figures=picks, bottom_line=bottom_line)
+        return Plan(charts=unique, figures=picks, bottom_line=bottom_line,
+                    absolute_risk=absolute_risk, terms=terms)
 
     raise RuntimeError(
         f"plan_charts: no valid chart JSON in {RETRIES} attempts. Last error: {last_error[:300]}"

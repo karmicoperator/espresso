@@ -17,13 +17,16 @@ import unicodedata
 from dataclasses import dataclass, field
 
 from models.charts import (
+    AbsoluteRisk,
     BottomLine,
     Chart,
     ChartKind,
     Datum,
     DiagramEdge,
+    Link,
     Provenance,
     ReaderSection,
+    Term,
     VerificationReport,
 )
 from models.paper import StructuredPaper
@@ -56,9 +59,13 @@ def numbers_in(text: str) -> list[float]:
 
 @dataclass
 class LocatorIndex:
-    """Every addressable span of the paper, keyed by the id a citation must use."""
+    """Every addressable span of the paper, keyed by the id a citation must use.
+
+    `exact` is normalised for matching; `raw` is the paper's own text, for showing.
+    """
 
     exact: dict[str, str] = field(default_factory=dict)
+    raw: dict[str, str] = field(default_factory=dict)
 
     @classmethod
     def build(cls, paper: StructuredPaper) -> LocatorIndex:
@@ -82,7 +89,10 @@ class LocatorIndex:
             for fig in getattr(section, "figures", []) or []:
                 idx[f"{fig.id}/caption"] = fig.caption or ""
                 idx[fig.id] = fig.caption or ""
-        return cls(exact={k: normalise(v) for k, v in idx.items() if v})
+        return cls(
+            exact={k: normalise(v) for k, v in idx.items() if v},
+            raw={k: v for k, v in idx.items() if v},
+        )
 
     def haystack(self) -> str:
         return " ‖ ".join(self.exact.values())
@@ -330,6 +340,145 @@ def verify_bottom_line(
         return None
     report.passed += 1
     return bottom_line
+
+
+def verify_absolute_risk(
+    risk: AbsoluteRisk | None, index: LocatorIndex, report: VerificationReport
+) -> AbsoluteRisk | None:
+    """Both arms held to the standard of a plotted value. Either failing drops the pair:
+    a difference computed from one verified rate and one invented one is worth nothing."""
+    if risk is None:
+        return None
+    for arm, name in ((risk.comparator, "comparator"), (risk.intervention, "intervention")):
+        report.checked += 1
+        ok, note = _quote_is_real(arm.provenance, index)
+        if not ok:
+            report.rejections.append(
+                {"what": f"absolute risk ({name})", "locator": arm.provenance.locator, "reason": note}
+            )
+            return None
+        for v, what in ((arm.value, "rate"), (arm.events, "event count"), (arm.n, "denominator")):
+            if v is not None and not _value_in_quote(float(v), arm.provenance.quote):
+                report.rejections.append(
+                    {"what": f"absolute risk ({name} {what})", "locator": arm.provenance.locator,
+                     "reason": f"{what} {v:g} does not appear in the quoted text"}
+                )
+                return None
+        report.passed += 1
+    return risk
+
+
+def verify_terms(terms: list[Term], index: LocatorIndex, report: VerificationReport) -> list[Term]:
+    """A term's quote must exist in the paper and mention the term; otherwise the
+    definition is kept as the model's wording and the quote is dropped, since a quote
+    that is not in the paper must not be shown as the paper's."""
+    kept: list[Term] = []
+    for term in terms[:10]:
+        item = term
+        if item.provenance is not None:
+            ok, _ = _quote_is_real(item.provenance, index)
+            if not ok or not _term_present(item.term.lower(), normalise(item.provenance.quote)):
+                report.rejections.append(
+                    {"what": f"term '{item.term}' (quote)", "locator": item.provenance.locator,
+                     "reason": "the defining sentence is not in the paper, so the definition is shown as ours"}
+                )
+                item = item.model_copy(update={"provenance": None})
+        kept.append(item)
+    return kept
+
+
+_PROSE_SENTENCE = re.compile(r'(?<=[.!?])\s+(?=[A-Z0-9"(\u201c])')
+_WORD = re.compile(r"[a-z][a-z\-]{3,}")
+_STOP = {"with", "that", "than", "this", "from", "were", "have", "their", "been", "which",
+         "there", "these", "those", "about", "after", "before", "group", "groups", "patients",
+         "rate", "ratio", "within", "among", "versus", "usual", "care", "days", "weeks",
+         "years", "percent", "overall", "total", "number"}
+
+
+def _terms_of(text: str) -> set[str]:
+    return {w[:5] for w in _WORD.findall(text.lower()) if w not in _STOP}
+
+
+def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]:
+    """Sentences of the prose that state a fact a chart plots.
+
+    A datum is linked to a sentence when the sentence prints the datum's value and either
+    names what the datum is (a label word, prefix-matched) or sits in the section the chart
+    belongs to. One link per sentence, the best-scoring one. Diagram edges have no number,
+    so an edge links to a sentence that names both ends of its arrow. All string work;
+    nothing here can invent a connection the text does not make.
+    """
+    links: list[Link] = []
+    targets: list[tuple[Chart, int, str, set[float], set[str]]] = []
+    for c in charts:
+        if c.kind is ChartKind.DIAGRAM:
+            continue
+        for j, d in enumerate(c.data):
+            nums = {float(d.value)}
+            for extra in (d.low, d.high, d.events, d.n):
+                if extra is not None:
+                    nums.add(float(extra))
+            targets.append((c, j, "datum", nums, _terms_of(f"{d.label} {d.group}")))
+    edges: list[tuple[Chart, int, set[str], set[str]]] = []
+    for c in charts:
+        if c.kind is not ChartKind.DIAGRAM:
+            continue
+        names = {n.id: n.label for n in c.nodes}
+        for j, e in enumerate(c.edges):
+            edges.append((c, j, _terms_of(names.get(e.source, "")), _terms_of(names.get(e.target, ""))))
+
+    for section in sections:
+        for para in section.markdown.split("\n\n"):
+            if para.lstrip().startswith(("|", "#")):
+                continue
+            for raw_sentence in _PROSE_SENTENCE.split(para.strip()):
+                sentence = raw_sentence.strip()
+                if len(sentence) < 20:
+                    continue
+                nums = numbers_in(sentence)
+                words = _terms_of(sentence)
+                best: tuple[int, Link] | None = None
+                for c, j, kind, target_nums, terms in targets:
+                    hit = any(abs(a - b) <= max(0.011, abs(b) * 0.011) for a in nums for b in target_nums)
+                    if not hit:
+                        continue
+                    named = len(terms & words)
+                    here = c.id in section.chart_ids
+                    if not named and not here:
+                        continue
+                    score = 1 + named + (1 if here else 0)
+                    if best is None or score > best[0]:
+                        best = (score, Link(section_id=section.id, sentence=sentence[:600],
+                                            chart_id=c.id, kind=kind, index=j))
+                if best is None:
+                    for c, j, a, b in edges:
+                        if a and b and a & words and b & words and c.id in section.chart_ids:
+                            best = (1, Link(section_id=section.id, sentence=sentence[:600],
+                                            chart_id=c.id, kind="edge", index=j))
+                            break
+                if best is not None:
+                    links.append(best[1])
+    return links
+
+
+def collect_sources(explainer_parts: list[Provenance | None], index: LocatorIndex) -> dict[str, str]:
+    """The paper's own text behind every locator cited, for the source panel."""
+    out: dict[str, str] = {}
+    for prov in explainer_parts:
+        if prov is None or prov.locator in out:
+            continue
+        text = index.raw.get(prov.locator)
+        if text is None:
+            # A quote verified against the full text rather than its locator still needs
+            # a home: find the paragraph that contains it.
+            q = normalise(prov.quote)
+            for loc, body in index.exact.items():
+                if "/" in loc and q in body:
+                    text = index.raw.get(loc)
+                    break
+        if text:
+            out[prov.locator] = text[:2000]
+    return out
 
 
 # A number in prose: digits with an optional decimal part, not part of a longer number.

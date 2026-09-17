@@ -62,6 +62,7 @@ def listing() -> list[dict]:
             data = json.loads(path.read_text(encoding="utf-8"))
         except (ValueError, OSError):
             continue
+        words = sum(len((s.get("markdown") or "").split()) for s in data.get("sections", []))
         out.append(
             {
                 "paper_id": data.get("paper_id"),
@@ -69,6 +70,10 @@ def listing() -> list[dict]:
                 "journal": data.get("journal"),
                 "published": data.get("published"),
                 "chart_count": len(data.get("charts", [])),
+                # At a reading pace of about 230 words a minute, rounded up, never zero.
+                "reading_minutes": max(1, -(-words // 230)),
+                "source": "pdf" if str(data.get("paper_id", "")).startswith("pdf-") else "pmc",
+                "checked": bool(data.get("bottom_line")) or "prose_checked" in (data.get("verification") or {}),
             }
         )
     return out

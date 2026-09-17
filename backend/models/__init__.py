@@ -5,15 +5,19 @@
 """
 
 from .charts import (
+    AbsoluteRisk,
     Annotation,
     BottomLine,
     Chart,
     ChartKind,
     Datum,
     Explainer,
+    Link,
     LocatorKind,
     Provenance,
     ReaderSection,
+    RiskArm,
+    Term,
     VerificationReport,
 )
 from .paper import (
@@ -27,6 +31,7 @@ from .paper import (
 )
 
 __all__ = [
+    "AbsoluteRisk",
     "Annotation",
     "ArxivPaperMeta",
     "BottomLine",
@@ -36,12 +41,15 @@ __all__ = [
     "Equation",
     "Explainer",
     "Figure",
+    "Link",
     "LocatorKind",
     "ParsedContent",
     "Provenance",
     "ReaderSection",
+    "RiskArm",
     "Section",
     "StructuredPaper",
     "Table",
+    "Term",
     "VerificationReport",
 ]
