@@ -8,10 +8,12 @@ from agents.verify import (
     collect_sources,
     link_prose,
     verify_absolute_risk,
+    verify_bottom_line,
     verify_terms,
 )
 from models.charts import (
     AbsoluteRisk,
+    BottomLine,
     Chart,
     ChartKind,
     Datum,
@@ -132,3 +134,58 @@ def test_sources_hold_the_paragraph_behind_each_locator():
     index = LocatorIndex.build(_paper())
     sources = collect_sources([_prov(), None, _prov(locator="abstract", quote="An abstract.")], index)
     assert sources["sec-1/p1"].startswith("482 patients") and sources["abstract"] == "An abstract."
+
+
+async def test_repair_round_recites_a_value_with_a_wrong_quote(monkeypatch):
+    """A datum whose quote is not in the paper gets the paper's paragraph and a second go."""
+    from agents import chart_planner
+    from agents.verify import verify_charts
+
+    paper = _paper()
+    bad = Chart(
+        id="mortality", kind=ChartKind.BARS, title="Death within 28 days", section_id="r1",
+        data=[
+            Datum(label="Dexamethasone", value=22.9, provenance=_prov(quote="22.9% died on the drug")),
+            Datum(label="Usual care", value=25.7, provenance=_prov()),
+        ],
+    )
+    _, report = verify_charts([bad.model_copy(deep=True)], paper)
+    assert report.passed == 1 and report.rejections[0]["what"] == "mortality:Dexamethasone"
+
+    seen = {}
+
+    async def fake_llm(prompt, system_prompt="", max_tokens=0, name=""):
+        seen["prompt"] = prompt
+        return ('{"fixes": [{"chart_id": "mortality", "label": "Dexamethasone", "group": "", '
+                '"locator": "sec-1/p1", "quote": "482 patients (22.9%) in the dexamethasone group"}]}')
+
+    monkeypatch.setattr(chart_planner, "call_llm", fake_llm)
+    repaired = await chart_planner.repair_charts([bad], report.rejections, LocatorIndex.build(paper))
+    assert "482 patients (22.9%)" in seen["prompt"]  # the paper's own paragraph was offered
+    _, report2 = verify_charts(repaired, paper)
+    assert report2.passed == 2 and report2.rejections == []
+
+
+async def test_bottom_line_repair_shortens_the_answer_and_recites(monkeypatch):
+    from agents import chart_planner
+
+    paper = _paper()
+    bl = BottomLine(
+        question="Does dexamethasone reduce 28-day mortality?",
+        answer="Yes: 22.9% died with dexamethasone versus 25.7% with usual care, in a trial of 65 sites.",
+        provenance=_prov(),
+    )
+    report = VerificationReport()
+    assert verify_bottom_line(bl, LocatorIndex.build(paper), report) is None
+    reason = report.rejections[0]["reason"]
+
+    async def fake_llm(prompt, system_prompt="", max_tokens=0, name=""):
+        assert "bottom_line" in prompt and "65" in prompt
+        return ('{"fixes": [{"kind": "bottom_line", "locator": "sec-1/p1", '
+                '"answer": "Yes: 22.9% died with dexamethasone versus 25.7% with usual care.", '
+                '"quote": "482 patients (22.9%) in the dexamethasone group and 1110 patients (25.7%) in the usual care group died within 28 days"}]}')
+
+    monkeypatch.setattr(chart_planner, "call_llm", fake_llm)
+    fixed = await chart_planner.repair_bottom_line(bl, reason, LocatorIndex.build(paper))
+    assert fixed is not None and "65" not in fixed.answer
+    assert verify_bottom_line(fixed, LocatorIndex.build(paper), VerificationReport()) is fixed

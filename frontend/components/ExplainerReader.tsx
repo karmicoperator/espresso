@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ChartFigure, type Lit } from "./ChartFigure";
+import { ChartFigure, datumColour, type Lit } from "./ChartFigure";
 import { FigureFigure } from "./FigureFigure";
 import { ReadingRail } from "./ReadingRail";
 import { RiskFigure } from "./RiskFigure";
@@ -77,7 +77,6 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
   }, [explainer.title]);
 
   const v = explainer.verification;
-  const pct = v.checked ? Math.round((v.passed / v.checked) * 100) : null;
   const proseMisses = v.prose_unmatched?.length ?? 0;
 
   return (
@@ -123,16 +122,21 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
               </a>
             )}
             {explainer.doi && <span className="text-white/30">doi:{explainer.doi}</span>}
-            {pct !== null && (
+            {/* Every value drawn passed the check; that is a rule, not a rate. What varies
+                is how many of the model's proposed values survived, which is said
+                separately so the badge never reads as "a third of this page is unverified". */}
+            {v.checked > 0 && (
               <span
-                className="rounded-full border px-2.5 py-0.5"
-                style={{
-                  color: pct >= 90 ? "#7dd19b" : pct >= 70 ? "#d9a441" : "#f27066",
-                  borderColor: "rgba(255,255,255,0.10)",
-                }}
-                title={`${v.passed} of ${v.checked} charted values were matched to a quoted span in the paper`}
+                className="rounded-full border px-2.5 py-0.5 text-[#7dd19b]"
+                style={{ borderColor: "rgba(255,255,255,0.10)" }}
+                title="A value that fails the check against the paper is never drawn"
               >
-                {pct}% of charted values verified
+                All {v.passed} charted values verified
+              </span>
+            )}
+            {v.checked > v.passed && (
+              <span className="text-white/35" title="Proposed by the model, not found in the paper as stated, and left out">
+                {v.checked - v.passed} proposed {v.checked - v.passed === 1 ? "value" : "values"} dropped
               </span>
             )}
           </div>
@@ -200,25 +204,39 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           </div>
 
           <div className="mx-auto max-w-[1180px] px-8 pb-6">
-            <div className="grid gap-11 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-              <Prose
-                sectionId={section.id}
-                markdown={section.markdown}
-                unprinted={unprinted.get(section.id) ?? []}
-                links={linksBySection.get(section.id) ?? []}
-                terms={terms}
-                onActive={setLit}
-                onOpen={openSource}
-              />
-              <ChartColumn
-                charts={[
-                  ...section.chart_ids.map((id) => byId.get(id)).filter((c): c is Chart => Boolean(c)),
-                  ...(i === explainer.sections.length - 1 ? orphans : []),
-                ]}
-                lit={lit}
-                onOpen={openSource}
-              />
-            </div>
+            {(() => {
+              const charts = [
+                ...section.chart_ids.map((id) => byId.get(id)).filter((c): c is Chart => Boolean(c)),
+                ...(i === explainer.sections.length - 1 ? orphans : []),
+              ];
+              // Only links to charts drawn beside this section count: lighting a mark two
+              // screens away lights nothing the reader can see.
+              const here = new Set(charts.map((c) => c.id));
+              const prose = (
+                <Prose
+                  sectionId={section.id}
+                  markdown={section.markdown}
+                  unprinted={unprinted.get(section.id) ?? []}
+                  links={(linksBySection.get(section.id) ?? []).filter((l) => here.has(l.chart_id))}
+                  terms={terms}
+                  charts={byId}
+                  wide={charts.length === 0}
+                  onActive={setLit}
+                  onOpen={openSource}
+                />
+              );
+              // A section with nothing to draw beside it reads as one wide column, at a
+              // measure the eye can still follow, rather than text down one side of a void.
+              if (charts.length === 0) {
+                return <div className="mx-auto max-w-[760px]">{prose}</div>;
+              }
+              return (
+                <div className="grid gap-11 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+                  {prose}
+                  <ChartColumn charts={charts} lit={lit} onOpen={openSource} />
+                </div>
+              );
+            })()}
 
             {/* Figures take the full column width rather than the chart gutter. A chest
                 plate authored at 1600px says nothing useful at 590, and the prose it
@@ -319,15 +337,35 @@ function ChartColumn({
   lit: Lit | null;
   onOpen: (prov: Provenance, value?: number) => void;
 }) {
-  const pin = charts.length === 1;
+  // Pinned whenever the whole column fits on screen, measured rather than assumed: two
+  // short charts beside a long section left a screen of black under them, and a count
+  // cannot know how tall a chart is.
+  const inner = useRef<HTMLDivElement>(null);
+  const [fits, setFits] = useState(charts.length === 1);
+  useEffect(() => {
+    const el = inner.current;
+    if (!el) return;
+    const measure = () => setFits(el.getBoundingClientRect().height <= window.innerHeight - 96);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    window.addEventListener("resize", measure, { passive: true });
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [charts]);
+  const strip = charts.length === 1;
   return (
     <div className="min-w-0 max-lg:order-first">
       <div
-        className={
-          pin
-            ? "lg:sticky lg:top-16 max-lg:sticky max-lg:top-0 max-lg:z-20 max-lg:-mx-8 max-lg:max-h-[46vh] max-lg:overflow-y-auto max-lg:bg-black/90 max-lg:px-8 max-lg:backdrop-blur"
-            : undefined
-        }
+        ref={inner}
+        className={[
+          fits ? "lg:sticky lg:top-16" : "",
+          strip
+            ? "max-lg:sticky max-lg:top-0 max-lg:z-20 max-lg:-mx-8 max-lg:max-h-[46vh] max-lg:overflow-y-auto max-lg:bg-black/90 max-lg:px-8 max-lg:backdrop-blur"
+            : "",
+        ].join(" ")}
       >
         {charts.map((chart) => (
           <ChartFigure key={chart.id} chart={chart} lit={lit} onOpen={onOpen} />
@@ -344,6 +382,8 @@ function Prose({
   unprinted,
   links,
   terms,
+  charts,
+  wide = false,
   onActive,
   onOpen,
 }: {
@@ -352,6 +392,8 @@ function Prose({
   unprinted: string[];
   links: ProseLink[];
   terms: Term[];
+  charts: Map<string, Chart>;
+  wide?: boolean;
   onActive: (lit: Lit | null) => void;
   onOpen: (prov: Provenance, value?: number) => void;
 }) {
@@ -397,10 +439,12 @@ function Prose({
   }, [links, sectionId, onActive]);
 
   const render = (text: string, key: string) =>
-    withLinks(text, links, (piece, k) => inline(piece, mark, termRe, terms, seen, onOpen, `${key}-${k}`));
+    withLinks(text, links, charts, (piece, k, tint) =>
+      inline(piece, mark, termRe, terms, seen, onOpen, `${key}-${k}`, tint),
+    );
 
   return (
-    <div ref={root} className="text-[15px] leading-[1.75] text-white/60">
+    <div ref={root} className={`${wide ? "text-[16px] leading-[1.8]" : "text-[15px] leading-[1.75]"} text-white/60`}>
       {blocks.map((block, i) => {
         const lines = block.split("\n");
         const table = pipeTable(block);
@@ -463,32 +507,76 @@ function Prose({
  * Wraps the linked sentences of a paragraph. The link carries the sentence text the API
  * matched, so finding it is a substring search; anything not found renders as plain text.
  */
+/** What to colour inside a linked sentence: the datum's numbers and its arm's name. */
+type Tint = { colour: string; re: RegExp } | null;
+
+function tintFor(link: ProseLink, charts: Map<string, Chart>): Tint {
+  if (link.kind !== "datum") return null;
+  const chart = charts.get(link.chart_id);
+  const d = chart?.data[link.index];
+  if (!chart || !d) return null;
+  const colour = datumColour(chart, link.index);
+  const nums = [d.value, d.low, d.high, d.events, d.n]
+    .filter((v): v is number => v !== null && v !== undefined)
+    .flatMap((v) => [String(v), v.toFixed(1), v.toFixed(2), v.toLocaleString()])
+    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const names = [d.group].filter((t): t is string => Boolean(t && t.length > 2))
+    .map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const alts = [...new Set([...nums.map((n) => `(?<![\\d.])${n}(?![\\d.])`), ...names.map((n) => `\\b${n}\\b`)])];
+  if (alts.length === 0) return null;
+  return { colour, re: new RegExp(`(${alts.join("|")})`, "gi") };
+}
+
 function withLinks(
   text: string,
   links: ProseLink[],
-  render: (piece: string, k: number) => React.ReactNode,
+  charts: Map<string, Chart>,
+  render: (piece: string, k: number, tint: Tint) => React.ReactNode,
 ): React.ReactNode {
   const hits = links
     .map((l) => ({ l, at: text.indexOf(l.sentence.slice(0, 80)) }))
     .filter((h) => h.at >= 0)
     .sort((a, b) => a.at - b.at);
-  if (hits.length === 0) return render(text, 0);
+  if (hits.length === 0) return render(text, 0, null);
   const out: React.ReactNode[] = [];
   let pos = 0;
   let k = 0;
   for (const { l, at } of hits) {
     if (at < pos) continue;
     const end = Math.min(text.length, at + l.sentence.length);
-    if (at > pos) out.push(<span key={k++}>{render(text.slice(pos, at), k)}</span>);
+    if (at > pos) out.push(<span key={k++}>{render(text.slice(pos, at), k, null)}</span>);
+    const tint = tintFor(l, charts);
     out.push(
-      <span key={k++} className="sentence" data-link={`${l.chart_id}|${l.kind}|${l.index}`}>
-        {render(text.slice(at, end), k)}
+      <span
+        key={k++}
+        className="sentence"
+        data-link={`${l.chart_id}|${l.kind}|${l.index}`}
+        style={tint ? ({ ["--lit" as string]: tint.colour } as React.CSSProperties) : undefined}
+      >
+        {render(text.slice(at, end), k, tint)}
       </span>,
     );
     pos = end;
   }
-  if (pos < text.length) out.push(<span key={k++}>{render(text.slice(pos), k)}</span>);
+  if (pos < text.length) out.push(<span key={k++}>{render(text.slice(pos), k, null)}</span>);
   return out;
+}
+
+/** The numbers a chart plots, in the chart's colour, inside a linked sentence. */
+function withTint(nodes: React.ReactNode[], tint: Tint, key: string): React.ReactNode[] {
+  if (!tint) return nodes;
+  return nodes.flatMap((node, i): React.ReactNode[] => {
+    if (typeof node !== "string") return [node];
+    return node.split(tint.re).map((part, j) =>
+      j % 2 === 1 ? (
+        <span key={`${key}-${i}-${j}`} className="num font-medium" style={{ color: tint.colour }}>
+          {part}
+        </span>
+      ) : (
+        part
+      ),
+    );
+  });
 }
 
 /**
@@ -575,10 +663,11 @@ function withTerms(
   seen: Set<string>,
   onOpen: (prov: Provenance, value?: number) => void,
   key: string,
+  tint: Tint = null,
 ): React.ReactNode[] {
-  if (!termRe) return withMarks(text, mark, key);
+  if (!termRe) return withTint(withMarks(text, mark, key), tint, key);
   return text.split(termRe).flatMap((part, i): React.ReactNode[] => {
-    if (i % 2 === 0) return withMarks(part, mark, `${key}-${i}`);
+    if (i % 2 === 0) return withTint(withMarks(part, mark, `${key}-${i}`), tint, `${key}-${i}`);
     const t = terms.find((x) => x.term.toLowerCase() === part.toLowerCase());
     if (!t || seen.has(t.term.toLowerCase())) return [part];
     seen.add(t.term.toLowerCase());
@@ -617,23 +706,24 @@ function inline(
   seen: Set<string>,
   onOpen: (prov: Provenance, value?: number) => void,
   key: string,
+  tint: Tint = null,
 ) {
   // Bold before italic, so the ** in "**x**" is never read as a single emphasis marker.
   return text.split(/(\*\*[^*]+\*\*|\*[^*\n]+\*)/g).map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={i} className="font-medium text-[#e8e8e8]">
-          {withTerms(part.slice(2, -2), mark, termRe, terms, seen, onOpen, `${key}b${i}`)}
+          {withTerms(part.slice(2, -2), mark, termRe, terms, seen, onOpen, `${key}b${i}`, tint)}
         </strong>
       );
     }
     if (part.length > 2 && part.startsWith("*") && part.endsWith("*")) {
       return (
         <em key={i} className="text-white/75 italic">
-          {withTerms(part.slice(1, -1), mark, termRe, terms, seen, onOpen, `${key}i${i}`)}
+          {withTerms(part.slice(1, -1), mark, termRe, terms, seen, onOpen, `${key}i${i}`, tint)}
         </em>
       );
     }
-    return <span key={i}>{withTerms(part, mark, termRe, terms, seen, onOpen, `${key}t${i}`)}</span>;
+    return <span key={i}>{withTerms(part, mark, termRe, terms, seen, onOpen, `${key}t${i}`, tint)}</span>;
   });
 }

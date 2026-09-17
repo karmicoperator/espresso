@@ -142,8 +142,13 @@ html {
    paragraph is not touched; the chart does the rest by dimming everything but
    the mark the sentence is about.
    --------------------------------------------------------------------------- */
-.sentence { transition: color .3s ease, background-color .3s ease; border-radius: 3px; }
-.sentence-lit { color: #e8e8e8; background: rgba(255,255,255,0.05); box-shadow: 0 0 0 3px rgba(255,255,255,0.05); }
+.sentence { transition: color .3s ease, background-color .3s ease, box-shadow .3s ease; border-radius: 3px; }
+.sentence-lit {
+  color: #e8e8e8;
+  /* The highlight takes the colour of the mark it points at, faintly. */
+  background: color-mix(in srgb, var(--lit, #ffffff) 9%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--lit, #ffffff) 9%, transparent);
+}
 
 /* A chart element the prose is about gets a hairline so the eye finds it at once. */
 .chart [data-lit="1"] rect, .chart [data-lit="1"] circle { filter: drop-shadow(0 0 3px rgba(232,232,232,0.55)); }

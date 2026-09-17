@@ -42,6 +42,12 @@ else would have:
   strict and fix the instruction.
 - **Split citations.** Papers state "11 cases vs 185" in one sentence and the denominators
   in another. Adding a separate `total_provenance` took one build from 81% to 100%.
+- **The paper's minus sign.** Publishers set a negative with a typographic minus (U+2212)
+  or an en dash. The normaliser folded those for the quote match, but the number reader
+  ran on the raw quote, so a printed "minus 8.7" read as 8.7 and every negative value in
+  SELECT failed against the very sentence that printed it. Three rebuilds and a repair
+  round could not fix what was a gate bug: fold the dashes before reading numbers. When
+  a whole class of values keeps failing, suspect the gate before the model.
 - **Precision drift.** A formatter turned 0.83 into 0.8. Only ever add precision, never
   round.
 
@@ -347,6 +353,33 @@ everything derived from them (per 1,000, difference, number needed to treat) com
 once on the API and carried as derived. The words have to follow the outcome's
 direction: "spared by the treatment" is right for deaths avoided and wrong for people
 who reach a weight-loss target because of the drug.
+
+Colour is the relation. Inside a linked sentence the numbers the chart plots take the
+colour of their mark (intervention teal, comparator rust, the series colours), the arm's
+name with them, and the sentence's highlight tints the same colour. The chart already
+draws in those colours, so "this 43.23 is that teal bar" needs no hunting. The colour
+comes from the same function the chart draws with, so the two cannot drift apart.
+
+"100% of charted values verified" is a rule, not a rate. A value that fails the gate is
+never drawn, so the badge now says "All N charted values verified" and counts dropped
+proposals separately; "65% verified" had read as though a third of the page were
+unchecked. What can still be raised is how many of the model's values survive, and the
+commonest failures (a quote from the wrong sentence, a sign the paper does not print)
+are fixable by showing the model where the number actually is. One repair round hands
+the rejected values back with the paper's own paragraphs and runs the gate again on the
+same terms. It only ever adds verified values; the bar does not move. The bottom line gets
+the same second chance, and may be shortened to drop a number the paper does not print,
+never lengthened. On SELECT the first rebuild after this lost its bottom line to a
+"week 65" absent from the quote; that is the case the round exists for.
+
+A watcher that outlives its own timeout takes the servers with it. The harness kills a
+timed-out background task's process group, and a server started from the same shell is
+in that group. Start servers in their own session, and keep polling loops shorter than
+the limit that would kill them.
+
+A section with nothing to draw beside it reads as one wide column at a measure the eye
+can follow, and a chart column is pinned whenever it fits on screen, measured rather than
+counted: two short charts beside a long section used to leave a screen of black.
 
 A popover that is invisible is still laid out. Three closed term popovers, 300px each,
 beside terms near the right edge gave a phone a horizontal scroll. `display: none` until

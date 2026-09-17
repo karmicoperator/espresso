@@ -17,7 +17,7 @@ import logging
 import time
 from collections.abc import Callable
 
-from agents.chart_planner import plan_charts
+from agents.chart_planner import plan_charts, repair_bottom_line, repair_charts
 from agents.verify import (
     LocatorIndex,
     check_prose,
@@ -29,7 +29,7 @@ from agents.verify import (
     verify_terms,
 )
 from ingestion.figures import fetch_figures, image_size
-from models.charts import Chart, Explainer, FigurePlate, ReaderSection
+from models.charts import Chart, Explainer, FigurePlate, ReaderSection, VerificationReport
 from models.paper import StructuredPaper
 
 logger = logging.getLogger(__name__)
@@ -207,9 +207,43 @@ async def build_visuals(
     plan_seconds = time.monotonic() - mark
 
     progress("verify", 0.70, "checking every value against the source")
+    originals = [c.model_copy(deep=True) for c in planned]
     charts, report = verify_charts(planned, paper)
     index = LocatorIndex.build(paper)
+
+    # Every value on the page is verified or it is not drawn. What can still be pushed up
+    # is how many of the model's values survive: a wrong quote or an inverted sign fails
+    # the gate for a number the paper does print. One repair round hands those back with
+    # the paper's own paragraphs, then the gate runs again on the same terms.
+    if report.rejections and originals:
+        progress("verify", 0.76, "asking for corrected citations")
+        try:
+            repaired = await repair_charts(originals, report.rejections, index)
+            charts2, report2 = verify_charts(repaired, paper)
+            if report2.passed > report.passed:
+                logger.info("Repair round: %d verified, up from %d", report2.passed, report.passed)
+                charts, report = charts2, report2
+        except Exception:
+            logger.exception("Repair round failed; keeping the first verification")
+    proposed_bottom_line = bottom_line
     bottom_line = verify_bottom_line(bottom_line, index, report)
+    if bottom_line is None and proposed_bottom_line is not None:
+        # The same second chance the charts get: the answer with the paragraphs that print
+        # its numbers, then the gate again. An answer that still fails stays off the page.
+        reason = next((r["reason"] for r in report.rejections if r["what"] == "bottom line"), "")
+        try:
+            fixed = await repair_bottom_line(proposed_bottom_line, reason, index)
+            if fixed is not None:
+                retry = VerificationReport()
+                fixed = verify_bottom_line(fixed, index, retry)
+                if fixed is not None:
+                    bottom_line = fixed
+                    report.checked += 1
+                    report.passed += 1
+                    report.rejections = [r for r in report.rejections if r["what"] != "bottom line"]
+                    logger.info("Repair round: bottom line re-cited")
+        except Exception:
+            logger.exception("Bottom line repair failed; leaving it out")
     absolute_risk = verify_absolute_risk(absolute_risk, index, report)
     terms = verify_terms(terms, index, report)
 

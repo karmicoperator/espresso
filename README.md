@@ -53,8 +53,10 @@ PubMed link ─→ resolve ─→ JATS from PubMed Central ─→ rewrite into �
 
 The capitalised step is the one that makes the rest trustworthy. Every plotted value carries
 a locator and a verbatim quote; three string checks confirm the locator exists, the quote
-appears there, and the number appears in the quote. Values that fail are dropped and listed.
-Nothing downstream can introduce a number the paper does not contain.
+appears there, and the number appears in the quote. Values that fail get one repair round,
+handed back to the model with the paper's own paragraphs, and are dropped and listed if
+they still fail. Every value on the page is verified; that is a rule, not a rate. Nothing
+downstream can introduce a number the paper does not contain.
 
 **Bottom line** opens the page: what the paper asked and what it found, one sentence each,
 checked like a plotted value against the quoted span shown beneath it, and dropped if it

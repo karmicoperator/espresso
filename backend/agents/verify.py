@@ -48,8 +48,15 @@ def normalise(text: str) -> str:
 
 
 def numbers_in(text: str) -> list[float]:
+    """Every number in a span, with the sign the paper printed.
+
+    Publishers set a negative with a typographic minus (U+2212) or an en dash. Read raw,
+    a printed "minus 8.7" is 8.7, and a value of -8.7 then fails against the very sentence
+    that prints it. Fold the dashes before looking for numbers.
+    """
     out: list[float] = []
-    for m in _NUM.finditer((text or "").replace(",", "")):
+    folded = (text or "").translate(_DASHES).replace(",", "")
+    for m in _NUM.finditer(folded):
         try:
             out.append(float(m.group()))
         except ValueError:

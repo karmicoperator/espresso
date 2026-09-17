@@ -7,6 +7,38 @@ import type { Chart, Datum, DiagramEdge, Provenance } from "@/lib/types";
 export type Lit = { chart_id: string; kind: "datum" | "edge"; index: number };
 
 /**
+ * The colour a chart draws a datum in, so the prose can use the same one. Kept in step
+ * with each chart's own rule: grouped bars and lines colour by arm, a forest row by
+ * whether it favours treatment, everything else the intervention teal. Split rows of a
+ * flow chart colour by position; other flow boxes and diagram edges are neutral.
+ */
+export function datumColour(chart: Chart, index: number): string {
+  const d = chart.data[index];
+  if (!d) return "#e8e8e8";
+  const groups = [...new Set(chart.data.map((x) => x.group).filter(Boolean))] as string[];
+  switch (chart.kind) {
+    case "bars":
+    case "dots":
+    case "line": {
+      if (groups.length > 1) return SERIES[groups.indexOf(d.group as string) % SERIES.length];
+      return A;
+    }
+    case "forest": {
+      const nullV = chart.null_value ?? (chart.log_scale ? 1 : 0);
+      const lowerIsBetter =
+        d.higher_is_better === null || d.higher_is_better === undefined
+          ? chart.lower_is_better
+          : !d.higher_is_better;
+      return d.value < nullV === lowerIsBetter ? A : C;
+    }
+    case "stat":
+      return A;
+    default:
+      return "#e8e8e8";
+  }
+}
+
+/**
  * Draws a chart spec as live SVG.
  *
  * Geometry is computed from the data, never hardcoded: the forest plot in particular has

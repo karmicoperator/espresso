@@ -119,3 +119,12 @@ def test_a_dangling_annotation_is_cleared_after_verification(paper):
     kept, _ = verify_charts([chart], paper)
     assert len(kept) == 1
     assert kept[0].annotation is None
+
+
+def test_a_negative_printed_with_a_typographic_minus_verifies():
+    """SELECT prints weight changes as \u22128.7%. That is -8.7, not 8.7."""
+    from agents.verify import _value_in_quote, numbers_in
+
+    assert numbers_in("treatment difference \u22128.7% (95% CI \u22129.42 to \u22127.88)") == [-8.7, 95.0, -9.42, -7.88]
+    assert _value_in_quote(-8.7, "treatment difference \u22128.7%")
+    assert not _value_in_quote(8.7, "treatment difference \u22128.7%")

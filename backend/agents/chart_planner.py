@@ -365,3 +365,159 @@ async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> P
     raise RuntimeError(
         f"plan_charts: no valid chart JSON in {RETRIES} attempts. Last error: {last_error[:300]}"
     )
+
+
+# ---------------------------------------------------------------------------
+# Repair: a second chance to cite correctly before a value is dropped
+# ---------------------------------------------------------------------------
+
+REPAIR_SYSTEM = """You correct citations for values extracted from a medical paper.
+
+Each item below is a value the extractor reported, with the quote it gave and why that
+quote failed a mechanical check against the paper. You are given the paper's own
+paragraphs that contain the number. Your job is to return, for each item, either a
+corrected `provenance` (a `locator` from the paragraphs given, and a `quote` copied
+character for character from that paragraph, containing every number the item reports:
+value, and low, high, events and n when present) or `"drop": true` when the paper does not
+state the value as reported.
+
+Rules:
+- Copy quotes exactly. The check is a string match; a paraphrase fails.
+- Do not change a number to make it match, with one exception: a sign. If the paper prints
+  a loss as "12.4%" and the item says -12.4, return `"value": 12.4`; if the paper prints a
+  minus sign before 8.7 and the item says 8.7, return `"value": -8.7`. As printed, always.
+- Never invent a paragraph. If none of the paragraphs given states the value, drop it.
+
+Return ONLY a JSON object: {"fixes": [{"chart_id": "...", "label": "...", "group": "...",
+"locator": "...", "quote": "...", "value": 12.4 (optional), "drop": false}, ...]}."""
+
+
+def _paragraphs_for(value: float, index, limit: int = 4) -> list[tuple[str, str]]:
+    """Locators whose text contains the value, in some printed form."""
+    from agents.verify import normalise
+
+    forms = {f"{value:g}", f"{value:.1f}", f"{value:.2f}", f"{abs(value):g}", f"{abs(value):.1f}"}
+    out: list[tuple[str, str]] = []
+    for loc, body in index.exact.items():
+        if "/" not in loc and loc != "abstract":
+            continue
+        if any(normalise(f) in body for f in forms):
+            out.append((loc, index.raw.get(loc, "")[:700]))
+            if len(out) >= limit:
+                break
+    return out
+
+
+async def repair_charts(charts: list[Chart], rejections: list[dict], index) -> list[Chart]:
+    """One call that hands every rejected value back with the paper's own paragraphs.
+
+    The commonest failures are a quote from the wrong sentence and a sign the paper does not
+    print. Both are fixable by showing the model where the number actually is. Anything
+    still failing after this is dropped by the gate as before; this only raises the number
+    of values that survive it, never lowers the bar.
+    """
+    by_id = {c.id: c for c in charts}
+    items = []
+    for r in rejections:
+        what = r.get("what", "")
+        if ":" not in what or "(" in what:
+            continue  # partial failures (interval, denominator) keep their datum
+        chart_id, label = what.split(":", 1)
+        chart = by_id.get(chart_id)
+        if chart is None:
+            continue
+        for d in chart.data:
+            if d.label == label:
+                paras = _paragraphs_for(d.value, index)
+                if d.provenance.locator in index.raw and d.provenance.locator not in dict(paras):
+                    paras.insert(0, (d.provenance.locator, index.raw[d.provenance.locator][:700]))
+                items.append({
+                    "chart_id": chart_id, "label": d.label, "group": d.group, "value": d.value,
+                    "low": d.low, "high": d.high, "events": d.events, "n": d.n,
+                    "quote_given": d.provenance.quote, "reason": r.get("reason", ""),
+                    "paragraphs": [{"locator": loc, "text": txt} for loc, txt in paras],
+                })
+    if not items:
+        return charts
+
+    prompt = json.dumps({"items": items}, ensure_ascii=False, indent=1)
+    reply = await call_llm(prompt=prompt, system_prompt=REPAIR_SYSTEM, max_tokens=8000, name="repair-citations")
+    try:
+        fixes = json.loads(extract_json(reply)).get("fixes") or []
+    except (ValueError, json.JSONDecodeError, AttributeError) as exc:
+        logger.info("repair_charts: reply unusable: %s", str(exc)[:120])
+        return charts
+
+    applied = 0
+    for fix in fixes:
+        if not isinstance(fix, dict):
+            continue
+        chart = by_id.get(str(fix.get("chart_id", "")))
+        if chart is None:
+            continue
+        for d in chart.data:
+            if d.label != fix.get("label") or (fix.get("group") or "") != (d.group or ""):
+                continue
+            if fix.get("drop"):
+                break
+            loc, quote = str(fix.get("locator", "")).strip(), str(fix.get("quote", "")).strip()
+            if len(quote) < 3 or not loc:
+                break
+            d.provenance = d.provenance.model_copy(update={"locator": loc, "quote": quote})
+            if isinstance(fix.get("value"), (int, float)):
+                d.value = float(fix["value"])
+            applied += 1
+            break
+    logger.info("repair_charts: %d of %d rejected values re-cited", applied, len(items))
+    return charts
+
+
+REPAIR_BOTTOM_LINE_RULE = """
+
+For a `bottom_line` item you may also return a shortened `answer` that drops a number the
+paragraphs do not print, and a `quote` containing every number that remains. Never add a
+number, never change one, never paraphrase the quote."""
+
+
+async def repair_bottom_line(bottom_line: BottomLine, reason: str, index) -> BottomLine | None:
+    """The one-sentence answer, handed back once with the paragraphs that print its numbers."""
+    from agents.verify import numbers_in
+
+    paras: list[tuple[str, str]] = []
+    for v in numbers_in(bottom_line.answer):
+        for loc, txt in _paragraphs_for(v, index, limit=2):
+            if loc not in dict(paras):
+                paras.append((loc, txt))
+    loc0 = bottom_line.provenance.locator
+    if loc0 in index.raw and loc0 not in dict(paras):
+        paras.insert(0, (loc0, index.raw[loc0][:700]))
+    item = {
+        "kind": "bottom_line",
+        "question": bottom_line.question,
+        "answer": bottom_line.answer,
+        "quote_given": bottom_line.provenance.quote,
+        "reason": reason,
+        "paragraphs": [{"locator": loc, "text": txt} for loc, txt in paras[:6]],
+    }
+    prompt = json.dumps({"items": [item]}, ensure_ascii=False, indent=1)
+    reply = await call_llm(
+        prompt=prompt, system_prompt=REPAIR_SYSTEM + REPAIR_BOTTOM_LINE_RULE,
+        max_tokens=4000, name="repair-bottom-line",
+    )
+    try:
+        fixes = json.loads(extract_json(reply)).get("fixes") or []
+    except (ValueError, json.JSONDecodeError, AttributeError) as exc:
+        logger.info("repair_bottom_line: reply unusable: %s", str(exc)[:120])
+        return None
+    for fix in fixes:
+        if not isinstance(fix, dict) or fix.get("drop"):
+            continue
+        loc, quote = str(fix.get("locator", "")).strip(), str(fix.get("quote", "")).strip()
+        if len(quote) < 3 or not loc:
+            continue
+        answer = str(fix.get("answer") or bottom_line.answer).strip()[:360]
+        return bottom_line.model_copy(update={
+            "answer": answer,
+            "provenance": bottom_line.provenance.model_copy(update={"locator": loc, "quote": quote}),
+        })
+    return None
