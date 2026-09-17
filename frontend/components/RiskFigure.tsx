@@ -6,7 +6,7 @@ import { A_FILL, B_FILL, textColour } from "./ChartFigure";
 
 const TREAT = textColour(A_FILL);
 const COMPARE = textColour(B_FILL);
-const HARM = "#d9a441";
+const HARM = "#ef4444";
 
 /**
  * The primary outcome as people.

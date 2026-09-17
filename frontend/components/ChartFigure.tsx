@@ -39,8 +39,8 @@ export function orderGroups(groups: string[], arms: string[]): string[] {
 /** A brighter twin of each mark colour, for text on black; the fills read too dim as type. */
 export function textColour(fill: string): string {
   const map: Record<string, string> = {
-    [A]: "#9fdccb",
-    [A_SOFT]: "#8fbfb1",
+    [A]: "#4ade80",
+    [A_SOFT]: "#7cc496",
     [B]: "#b4b9bf",
     [C]: "#b3c0e6",
     "#b9a56f": "#dccb95",
@@ -93,13 +93,14 @@ export function datumColour(chart: Chart, index: number, arms: string[] = []): s
  */
 
 // Three colours, three meanings, on every chart and in the prose beside it: the treatment
-// and its effect in one colour, the comparison in grey so the treatment is what the eye
-// lands on, harm and caveats in amber. A second hue for the comparator made it look like
+// and its effect in green, the comparison in grey so the treatment is what the eye lands
+// on, harm and caveats in red. Both are saturated on purpose; the page is black and grey,
+// so a strong colour is rare enough to be a signal. A second hue for the comparator made it look like
 // a second thing to attend to; grey says "context" without a legend.
-const A = "#7fb5a6"; // the treatment, and whatever favours it
+const A = "#22c55e"; // the treatment, and whatever favours it
 const B = "#7c8187"; // the comparison
 const C = "#8f9bb8"; // a third series, when a paper has one
-const A_SOFT = "#5f8a7e"; // the treatment colour, desaturated: rows that are not the primary one
+const A_SOFT = "#2f8a4f"; // the treatment colour, desaturated: rows that are not the primary one
 
 /**
  * A single-series bar whose label names an arm takes that arm's colour, so "standard
@@ -340,7 +341,7 @@ export function ChartFigure({
                 Read in the paper ↗
               </button>
             )}
-            {chart.caveat && <span className="basis-full text-[#d9a441]">{chart.caveat}</span>}
+            {chart.caveat && <span className="basis-full text-[#f87171]">{chart.caveat}</span>}
           </footer>
         )}
       </div>
@@ -391,7 +392,7 @@ function Stat({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   return (
     <div className="flex flex-wrap items-start gap-7" {...hover(d)}>
       <div>
-        <div className="r-stat num text-[64px] leading-none font-light tracking-tight text-[#7fb5a6]">
+        <div className="r-stat num text-[64px] leading-none font-light tracking-tight text-[#22c55e]">
           {fmt(d.value, chart.unit)}
         </div>
         {ci && <div className="num mt-3 text-[11px] text-white/30">{ci}</div>}

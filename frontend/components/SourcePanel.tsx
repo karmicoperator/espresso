@@ -65,7 +65,7 @@ export function SourcePanel({
         {parts ? (
           <p>
             {parts[0]}
-            <mark className="rounded-[3px] bg-[#7fb5a6]/20 px-0.5 text-[#e8e8e8]">{parts[1]}</mark>
+            <mark className="rounded-[3px] bg-[#22c55e]/20 px-0.5 text-[#e8e8e8]">{parts[1]}</mark>
             {parts[2]}
           </p>
         ) : (

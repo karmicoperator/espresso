@@ -162,7 +162,7 @@ html {
    highlight outside those sentences. */
 .figure { font-weight: 600; }
 .arm { font-weight: 500; }
-.key { color: #9fdccb; font-weight: 600; }
+.key { color: #4ade80; font-weight: 600; }
 
 /* A chart element the prose is about gets a glow, and its card an edge in the same colour. */
 .chart [data-lit="1"] rect, .chart [data-lit="1"] circle { filter: drop-shadow(0 0 4px rgba(232,232,232,0.7)); }

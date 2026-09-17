@@ -367,8 +367,8 @@ selective, one or two marks per paragraph; paint everything and the benefit is g
 (Dunlosky et al. 2013; Yue, Storm, Kornell and Bjork on the amount of highlighting).
 
 So the rule is now three colours with three meanings and nothing else. The treatment and
-whatever favours it in teal; the comparison in grey, so the treatment bar is what the eye
-lands on; harm and caveats in amber. A single-series bar whose label names an arm takes
+whatever favours it in a strong green; the comparison in grey, so the treatment bar is what the eye
+lands on; harm and caveats in a strong red. A single-series bar whose label names an arm takes
 that arm's colour, a forest plot saturates its primary row and desaturates the rest (same
 hue, never a new one), and the icon array greys the people the outcome reaches either
 way. In the prose, colour appears in exactly two places: inside a sentence joined to a
