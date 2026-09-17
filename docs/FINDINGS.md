@@ -381,6 +381,18 @@ twins of the fills, because a fill that reads on a bar reads dim as type, and th
 comes from the same function the chart draws with, so the two cannot drift apart.
 Anything pressable is a pill with a lift on hover; only the bottom line's is strong.
 
+The lit relation looked broken for a reason that was not in the CSS. The pipeline linked
+prose to charts before it attached charts to sections, so at link time no section had a
+chart and "the chart beside this section" was never true; and the planner pins a chart by
+topic while the sentences that print its numbers sit elsewhere (SPRINT's hazard-ratio
+chart beside "the question", the three sentences quoting 0.75 two sections down). The
+reader rightly refuses to light a mark two screens away, so 6 of 8 links died on the
+page. Now charts are attached first, the linker prefers a chart on screen over a
+better-named one elsewhere, and a chart whose own section never mentions it moves to the
+section that does, then the linker runs again. All string work, so `scripts/relink.py`
+applies it to every stored paper without a model call: SPRINT 2 to 8 sentences shown,
+and the sixteen older papers went from none to real links.
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were

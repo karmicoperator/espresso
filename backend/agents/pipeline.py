@@ -23,6 +23,7 @@ from agents.verify import (
     check_prose,
     collect_sources,
     link_prose,
+    place_charts,
     verify_absolute_risk,
     verify_bottom_line,
     verify_charts,
@@ -264,14 +265,18 @@ async def build_visuals(
     if not sections:
         notes.append("The paper could not be summarised into readable sections.")
     check_prose(sections, index, report)
+    # Charts go beside their sections first, so the linker can prefer the one on screen;
+    # then a chart whose own section never mentions it moves to the one that does.
+    _attach_charts(sections, charts)
     links = link_prose(sections, charts)
+    if place_charts(sections, links):
+        links = link_prose(sections, charts)
     cited: list = [d.provenance for c in charts for d in c.data]
     cited += [e.provenance for c in charts for e in c.edges]
     cited += [bottom_line.provenance if bottom_line else None]
     cited += [absolute_risk.comparator.provenance, absolute_risk.intervention.provenance] if absolute_risk else []
     cited += [t.provenance for t in terms]
     sources = collect_sources(cited, index)
-    _attach_charts(sections, charts)
     _attach_figures(sections, figures)
 
     meta = paper.meta

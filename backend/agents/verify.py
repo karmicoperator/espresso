@@ -411,9 +411,13 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
 
     A datum is linked to a sentence when the sentence prints the datum's value and either
     names what the datum is (a label word, prefix-matched) or sits in the section the chart
-    belongs to. One link per sentence, the best-scoring one. Diagram edges have no number,
-    so an edge links to a sentence that names both ends of its arrow. All string work;
-    nothing here can invent a connection the text does not make.
+    belongs to. One link per sentence, the best-scoring one, and a chart drawn beside the
+    section outweighs a better-named one elsewhere: the reader can only watch a mark light
+    up if it is on screen. Diagram edges have no number, so an edge links to a sentence
+    that names both ends of its arrow. All string work; nothing here can invent a
+    connection the text does not make.
+
+    Call this after the charts are attached to their sections, or `here` is never true.
     """
     links: list[Link] = []
     targets: list[tuple[Chart, int, str, set[float], set[str]]] = []
@@ -453,7 +457,7 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
                     here = c.id in section.chart_ids
                     if not named and not here:
                         continue
-                    score = 1 + named + (1 if here else 0)
+                    score = named + (3 if here else 0)
                     if best is None or score > best[0]:
                         best = (score, Link(section_id=section.id, sentence=sentence[:600],
                                             chart_id=c.id, kind=kind, index=j))
@@ -466,6 +470,35 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
                 if best is not None:
                     links.append(best[1])
     return links
+
+
+def place_charts(sections: list[ReaderSection], links: list[Link]) -> bool:
+    """Move a chart to the section whose prose states its values, when its own does not.
+
+    The planner pins a chart to a section by topic; the sentences that print its numbers
+    are often in another. A chart beside prose that never mentions it lights nothing, so
+    it goes where the mentions are. Charts no sentence links to stay put. Returns whether
+    anything moved, so the caller can link again with the new positions.
+    """
+    mentions: dict[str, dict[str, int]] = {}
+    for link in links:
+        if link.kind == "datum":
+            per = mentions.setdefault(link.chart_id, {})
+            per[link.section_id] = per.get(link.section_id, 0) + 1
+    by_id = {s.id: s for s in sections}
+    moved = False
+    for section in sections:
+        for chart_id in list(section.chart_ids):
+            per = mentions.get(chart_id)
+            if not per or per.get(section.id):
+                continue
+            target = by_id.get(max(per, key=lambda k: per[k]))
+            if target is None or len(target.chart_ids) >= 4:
+                continue
+            section.chart_ids.remove(chart_id)
+            target.chart_ids.append(chart_id)
+            moved = True
+    return moved
 
 
 def collect_sources(explainer_parts: list[Provenance | None], index: LocatorIndex) -> dict[str, str]:

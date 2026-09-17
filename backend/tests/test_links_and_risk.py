@@ -7,6 +7,7 @@ from agents.verify import (
     VerificationReport,
     collect_sources,
     link_prose,
+    place_charts,
     verify_absolute_risk,
     verify_bottom_line,
     verify_terms,
@@ -189,3 +190,48 @@ async def test_bottom_line_repair_shortens_the_answer_and_recites(monkeypatch):
     fixed = await chart_planner.repair_bottom_line(bl, reason, LocatorIndex.build(paper))
     assert fixed is not None and "65" not in fixed.answer
     assert verify_bottom_line(fixed, LocatorIndex.build(paper), VerificationReport()) is fixed
+
+
+def test_a_chart_beside_the_section_outweighs_a_better_named_one_elsewhere():
+    # The hazard-ratio stat is named outright, but it hangs beside another section; the
+    # forest row beside this one prints the same value and wins because it is on screen.
+    stat = Chart(id="hr-stat", kind=ChartKind.STAT, title="Hazard ratio", section_id="r1",
+                 data=[Datum(label="Hazard ratio for the primary outcome", value=0.75, provenance=_prov())])
+    forest = Chart(id="forest", kind=ChartKind.FOREST, title="Outcomes", section_id="r3",
+                   data=[Datum(label="Composite", value=0.75, low=0.64, high=0.89, provenance=_prov())])
+    sections = [
+        ReaderSection(id="r1", title="Question", chart_ids=["hr-stat"], markdown="Why treat lower?"),
+        ReaderSection(id="r3", title="Found", chart_ids=["forest"],
+                      markdown="The hazard ratio was 0.75, with a confidence interval of 0.64 to 0.89."),
+    ]
+    links = link_prose(sections, [stat, forest])
+    assert [(k.chart_id, k.section_id) for k in links] == [("forest", "r3")]
+
+
+def test_a_chart_moves_to_the_section_whose_prose_states_its_values():
+    chart = _chart()
+    sections = [
+        ReaderSection(id="r1", title="Question", chart_ids=["mortality"], markdown="Does it help?"),
+        ReaderSection(id="r2", title="Found", chart_ids=[],
+                      markdown="Overall, 22.9% of dexamethasone patients died within 28 days."),
+    ]
+    links = link_prose(sections, [chart])
+    assert [k.section_id for k in links] == ["r2"]
+    assert place_charts(sections, links) is True
+    assert sections[0].chart_ids == [] and sections[1].chart_ids == ["mortality"]
+    # Linked again with the chart in place, the sentence still links and now sits beside it.
+    again = link_prose(sections, [chart])
+    assert [(k.chart_id, k.section_id) for k in again] == [("mortality", "r2")]
+
+
+def test_a_chart_its_own_section_mentions_stays_put():
+    chart = _chart()
+    sections = [
+        ReaderSection(id="r1", title="Found", chart_ids=["mortality"],
+                      markdown="Overall, 22.9% of dexamethasone patients died within 28 days."),
+        ReaderSection(id="r2", title="More", chart_ids=[],
+                      markdown="In the usual care group the figure was 25.7%. And 25.7% again."),
+    ]
+    links = link_prose(sections, [chart])
+    assert place_charts(sections, links) is False
+    assert sections[0].chart_ids == ["mortality"]

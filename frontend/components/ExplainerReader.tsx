@@ -186,9 +186,9 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
 
       {explainer.notes.length > 0 && (
         <div className="mx-auto max-w-[1180px] px-8 pt-8">
-          <ul className="space-y-2 rounded-xl border border-[#f87171]/25 bg-[#f87171]/[0.06] px-5 py-4">
+          <ul className="space-y-2 rounded-xl border border-[#ff6259]/25 bg-[#ff6259]/[0.06] px-5 py-4">
             {explainer.notes.map((n, i) => (
-              <li key={i} className="text-xs leading-relaxed text-[#f87171]">
+              <li key={i} className="text-xs leading-relaxed text-[#ff6259]">
                 {n}
               </li>
             ))}
