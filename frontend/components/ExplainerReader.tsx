@@ -162,7 +162,7 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           <div className="rounded-2xl border border-white/[0.10] bg-white/[0.04] px-7 py-6 backdrop-blur-xl">
             <p className="text-[11px] tracking-[0.16em] text-white/30 uppercase">Bottom line</p>
             <p className="mt-2 text-sm text-white/50">{explainer.bottom_line.question}</p>
-            <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{explainer.bottom_line.answer}</p>
+            <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{keyFigure(explainer.bottom_line.answer)}</p>
             <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-white/[0.08] pt-3">
               <p className="min-w-0 flex-1 text-xs leading-relaxed text-white/45">
                 The paper: &ldquo;{explainer.bottom_line.provenance.quote}&rdquo;
@@ -458,7 +458,10 @@ function Prose({
 
   const render = (text: string, key: string) =>
     withLinks(text, links, charts, arms, (piece, k, tint) =>
-      inline(piece, mark, termRe, terms, seen, onOpen, `${key}-${k}`, tint, armTint),
+      // Arm names take colour only inside a sentence joined to a chart, where the colour
+      // points at a mark. Coloured everywhere, they were decoration, and the figures the
+      // sentence is about stopped standing out.
+      inline(piece, mark, termRe, terms, seen, onOpen, `${key}-${k}`, tint, tint ? armTint : null),
     );
 
   return (
@@ -598,7 +601,29 @@ function withTint(nodes: React.ReactNode[], tint: Tint, key: string): React.Reac
   });
 }
 
-/** The arms' names, wherever they appear, in the arms' colours: a legend inside the text. */
+/**
+ * The one number the page is about, in the treatment colour: the effect in the bottom
+ * line. It is the only highlight outside a linked sentence, so it is the first thing seen.
+ */
+function keyFigure(answer: string): React.ReactNode {
+  // The effect is a percentage when there is one, else a ratio or rate with a decimal,
+  // else the first number. "Below 120 mm Hg" is the target, not the finding.
+  const m =
+    answer.match(/\d[\d.,]*\s?(?:%|percent(?:age points?)?\b)/) ??
+    answer.match(/\b\d+\.\d+\b/) ??
+    answer.match(/\d[\d.,]*/);
+  if (!m || m.index === undefined) return answer;
+  const end = m.index + m[0].length;
+  return (
+    <>
+      {answer.slice(0, m.index)}
+      <span className="num key">{m[0]}</span>
+      {answer.slice(end)}
+    </>
+  );
+}
+
+/** The arms' names in the arms' colours, inside a sentence that is joined to a chart. */
 type ArmTint = { re: RegExp; colour: (name: string) => string } | null;
 
 /**

@@ -94,7 +94,7 @@ export function FigureFigure({ figure, paperId }: { figure: FigurePlate; paperId
 
         <div className="px-7 pt-5 pb-5">
           {figure.why && (
-            <p className="mb-3 text-[12px] leading-relaxed text-[#7fb5a6]">{figure.why}</p>
+            <p className="mb-3 text-[12px] leading-relaxed text-white/60">{figure.why}</p>
           )}
           {figure.caption && (
             <p className="text-[12.5px] leading-[1.6] text-white/50">{figure.caption}</p>

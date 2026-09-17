@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import type { AbsoluteRisk, AbsoluteRiskDerived, Provenance } from "@/lib/types";
+import { A_FILL, B_FILL, textColour } from "./ChartFigure";
+
+const TREAT = textColour(A_FILL);
+const COMPARE = textColour(B_FILL);
+const HARM = "#d9a441";
 
 /**
  * The primary outcome as people.
@@ -67,10 +72,10 @@ export function RiskFigure({
                 <p className="text-[#e8e8e8]">
                   Of <span className="num">{people.toLocaleString()}</span> people like these,{" "}
                   {lowerIsGood ? "it happens to " : ""}
-                  <span className="num figure" style={{ color: "#e8a993" }}>{n(c.value)}</span>{lowerIsGood ? "" : " reach it"} with{" "}
-                  <QuoteButton prov={c.provenance} value={c.value} colour="#e8a993" onOpen={onOpen}>{c.label}</QuoteButton>{" "}
-                  and {lowerIsGood ? "to " : ""}<span className="num figure" style={{ color: "#9fdccb" }}>{n(i.value)}</span> with{" "}
-                  <QuoteButton prov={i.provenance} value={i.value} colour="#9fdccb" onOpen={onOpen}>{i.label}</QuoteButton>.
+                  <span className="num figure" style={{ color: COMPARE }}>{n(c.value)}</span>{lowerIsGood ? "" : " reach it"} with{" "}
+                  <QuoteButton prov={c.provenance} value={c.value} colour={COMPARE} onOpen={onOpen}>{c.label}</QuoteButton>{" "}
+                  and {lowerIsGood ? "to " : ""}<span className="num figure" style={{ color: TREAT }}>{n(i.value)}</span> with{" "}
+                  <QuoteButton prov={i.provenance} value={i.value} colour={TREAT} onOpen={onOpen}>{i.label}</QuoteButton>.
                 </p>
                 <p className="mt-2">
                   That is <span className="num text-[#e8e8e8]">{n(changed)}</span> {derived.direction} per {people.toLocaleString()}
@@ -150,17 +155,18 @@ function IconArray({
   const cell = 22;
   const size = cell * 10;
   const cells = Array.from({ length: 100 }, (_, k) => k);
-  // Colours: outcome either way in the comparator's rust; the people the intervention
-  // changes in teal when that is a gain, amber when it is a harm; everyone else faint.
+  // Colours: the people the treatment changes are the point, so only they take colour,
+  // the treatment colour for a gain and amber for a harm. Everyone the outcome reaches
+  // either way is grey, everyone it never reaches fainter still.
   const colour = (k: number) => {
-    if (k < both) return "#c98a7a";
-    if (k < both + changed) return good ? "#7fb5a6" : "#d9a441";
-    return "rgba(255,255,255,0.16)";
+    if (k < both) return B_FILL;
+    if (k < both + changed) return good ? A_FILL : HARM;
+    return "rgba(255,255,255,0.12)";
   };
   const legend = [
-    { c: "#c98a7a", t: words.either },
-    { c: good ? "#7fb5a6" : "#d9a441", t: words.changed },
-    { c: "rgba(255,255,255,0.16)", t: words.neither },
+    { c: B_FILL, t: words.either },
+    { c: good ? A_FILL : HARM, t: words.changed },
+    { c: "rgba(255,255,255,0.12)", t: words.neither },
   ];
   return (
     <div>

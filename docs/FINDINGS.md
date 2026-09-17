@@ -354,22 +354,32 @@ once on the API and carried as derived. The words have to follow the outcome's
 direction: "spared by the treatment" is right for deaths avoided and wrong for people
 who reach a weight-loss target because of the drug.
 
-Colour is the relation. Inside a linked sentence the numbers the chart plots take the
-colour of their mark (intervention teal, comparator rust, the series colours), the arm's
-name with them, and the sentence's highlight tints the same colour. The chart already
-draws in those colours, so "this 43.23 is that teal bar" needs no hunting. The colour
-comes from the same function the chart draws with, so the two cannot drift apart.
+Colour is the relation, and it has to be scarce to be one. The first pass coloured every
+arm name on the page in the arm's colour, gave the comparator its own hue (rust) and put
+a coloured bar beside every linked sentence. It looked coloured and meant nothing: on
+SPRINT the prose said "intensive" in teal and "standard" in rust beside a forest plot that
+used neither, and the numbers the sentence was about carried no colour at all. Two
+findings from the literature explain why. Readers look first at the most saturated thing
+in view, and de-emphasising with a second hue reads as a second category rather than as
+"less important"; grey is what says "context" (Datawrapper, "Emphasize what you want
+readers to see with color"). And highlighting in text helps recall only when it is
+selective, one or two marks per paragraph; paint everything and the benefit is gone
+(Dunlosky et al. 2013; Yue, Storm, Kornell and Bjork on the amount of highlighting).
 
-Before making colour louder, make it mean one thing. Grouped charts coloured their arms
-by whichever the planner listed first, so the same drug could be teal in one chart and
-rust in the next; louder colour would have misled faster. The page now picks its arms
-once (the verified risk pair, else the first two-group chart) and every chart orders its
-groups by that, so an arm's colour holds across charts, the icon array and the prose,
-where arm names are coloured wherever they appear. The text variants are brighter twins
-of the fills, because a fill that reads on a bar reads dim as type. A linked sentence
-carries a thin bar in its mark's colour at the left edge, the sign that reading it will
-light something; lit, the bar goes solid, the sentence takes a wash of the colour and the
-chart's card edge takes it too. Anything pressable is a pill with a lift on hover.
+So the rule is now three colours with three meanings and nothing else. The treatment and
+whatever favours it in teal; the comparison in grey, so the treatment bar is what the eye
+lands on; harm and caveats in amber. A single-series bar whose label names an arm takes
+that arm's colour, a forest plot saturates its primary row and desaturates the rest (same
+hue, never a new one), and the icon array greys the people the outcome reaches either
+way. In the prose, colour appears in exactly two places: inside a sentence joined to a
+chart, where the charted figures and the arm they belong to take the mark's colour, and
+once in the bottom line, where the effect (the percentage when there is one) is the
+page's single highlight. Arm names elsewhere are plain. The linked-sentence bar is grey
+until the sentence is read, then takes the mark's colour with the wash and the card edge,
+so at any moment one sentence on the page holds colour. The text variants are brighter
+twins of the fills, because a fill that reads on a bar reads dim as type, and the colour
+comes from the same function the chart draws with, so the two cannot drift apart.
+Anything pressable is a pill with a lift on hover; only the bottom line's is strong.
 
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped

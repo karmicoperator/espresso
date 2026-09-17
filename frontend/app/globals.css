@@ -142,12 +142,12 @@ html {
    paragraph is not touched; the chart does the rest by dimming everything but
    the mark the sentence is about.
    --------------------------------------------------------------------------- */
-/* A linked sentence carries a thin bar in its mark's colour at the left edge: the sign
-   that reading it will light something. Lit, the bar goes solid and the sentence takes a
-   wash of the same colour. */
+/* A linked sentence carries a thin grey bar at the left edge: the sign that reading it
+   will light something. Lit, the bar takes the mark's colour and the sentence a wash of
+   it. Colour arrives with the reader, so at any moment one sentence on the page holds it. */
 .sentence {
   border-radius: 3px;
-  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--lit, #ffffff) 35%, transparent);
+  box-shadow: inset 3px 0 0 rgba(255,255,255,0.18);
   padding-left: 8px; margin-left: -8px;
   transition: color .3s ease, background-color .3s ease, box-shadow .3s ease;
 }
@@ -157,9 +157,12 @@ html {
   box-shadow: inset 3px 0 0 var(--lit, #ffffff), 0 0 0 4px color-mix(in srgb, var(--lit, #ffffff) 14%, transparent);
 }
 
-/* Numbers and arm names carry their colour always; a figure a chart plots is also bold. */
+/* Inside a linked sentence, the figures a chart plots and the arm they belong to take the
+   mark's colour; the figure is also bold. The bottom line's effect is the page's one
+   highlight outside those sentences. */
 .figure { font-weight: 600; }
 .arm { font-weight: 500; }
+.key { color: #9fdccb; font-weight: 600; }
 
 /* A chart element the prose is about gets a glow, and its card an edge in the same colour. */
 .chart [data-lit="1"] rect, .chart [data-lit="1"] circle { filter: drop-shadow(0 0 4px rgba(232,232,232,0.7)); }

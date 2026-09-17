@@ -14,6 +14,12 @@ export type Lit = { chart_id: string; kind: "datum" | "edge"; index: number };
  */
 export const ArmsContext = createContext<string[]>([]);
 
+/** The first row of a forest plot is the primary outcome and the one saturated mark. */
+function forestColour(favourable: boolean, index: number): string {
+  if (!favourable) return B;
+  return index === 0 ? A : A_SOFT;
+}
+
 function sameArm(group: string, arm: string): boolean {
   const g = group.toLowerCase();
   const a = arm.toLowerCase();
@@ -34,7 +40,8 @@ export function orderGroups(groups: string[], arms: string[]): string[] {
 export function textColour(fill: string): string {
   const map: Record<string, string> = {
     [A]: "#9fdccb",
-    [B]: "#e8a993",
+    [A_SOFT]: "#8fbfb1",
+    [B]: "#b4b9bf",
     [C]: "#b3c0e6",
     "#b9a56f": "#dccb95",
   };
@@ -43,9 +50,9 @@ export function textColour(fill: string): string {
 
 /**
  * The colour a chart draws a datum in, so the prose can use the same one. Kept in step
- * with each chart's own rule: grouped bars and lines colour by arm, a forest row by
- * whether it favours treatment, everything else the intervention teal. Split rows of a
- * flow chart colour by position; other flow boxes and diagram edges are neutral.
+ * with each chart's own rule: grouped bars and lines colour the treatment and grey the
+ * comparator, a forest row is coloured only where it favours the treatment, everything
+ * else the treatment colour. Flow boxes and diagram edges are neutral.
  */
 export function datumColour(chart: Chart, index: number, arms: string[] = []): string {
   const d = chart.data[index];
@@ -56,7 +63,7 @@ export function datumColour(chart: Chart, index: number, arms: string[] = []): s
     case "dots":
     case "line": {
       if (groups.length > 1) return SERIES[groups.indexOf(d.group as string) % SERIES.length];
-      return A;
+      return soloColour(d.label, arms);
     }
     case "forest": {
       const nullV = chart.null_value ?? (chart.log_scale ? 1 : 0);
@@ -64,7 +71,7 @@ export function datumColour(chart: Chart, index: number, arms: string[] = []): s
         d.higher_is_better === null || d.higher_is_better === undefined
           ? chart.lower_is_better
           : !d.higher_is_better;
-      return d.value < nullV === lowerIsBetter ? A : C;
+      return forestColour(d.value < nullV === lowerIsBetter, index);
     }
     case "stat":
       return A;
@@ -85,9 +92,26 @@ export function datumColour(chart: Chart, index: number, arms: string[] = []): s
  * number against.
  */
 
-const A = "#7fb5a6"; // intervention
-const B = "#c98a7a"; // comparator
-const C = "#8f9bb8"; // third series
+// Three colours, three meanings, on every chart and in the prose beside it: the treatment
+// and its effect in one colour, the comparison in grey so the treatment is what the eye
+// lands on, harm and caveats in amber. A second hue for the comparator made it look like
+// a second thing to attend to; grey says "context" without a legend.
+const A = "#7fb5a6"; // the treatment, and whatever favours it
+const B = "#7c8187"; // the comparison
+const C = "#8f9bb8"; // a third series, when a paper has one
+const A_SOFT = "#5f8a7e"; // the treatment colour, desaturated: rows that are not the primary one
+
+/**
+ * A single-series bar whose label names an arm takes that arm's colour, so "standard
+ * treatment" is grey beside "intensive treatment" even when the chart has no groups.
+ * A label that could be either arm ("Target below 140 mm Hg" against two targets) stays
+ * the treatment colour rather than guessing.
+ */
+function soloColour(label: string, arms: string[]): string {
+  const g = label.toLowerCase();
+  const hits = arms.map((a, k) => ({ a: a.toLowerCase(), k })).filter(({ a }) => a === g || a.includes(g) || g.includes(a));
+  return hits.length === 1 ? SERIES[hits[0].k % SERIES.length] : A;
+}
 const SERIES = [A, B, C, "#b9a56f"];
 export const A_FILL = A;
 export const B_FILL = B;
@@ -503,10 +527,10 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
               const gi = grouped ? groups.indexOf(d.group as string) : mi;
               const offset = grouped ? (gi - (groups.length - 1) / 2) * (barW + 6) : 0;
               const cx = centre + offset;
-              // Ungrouped bars stay one colour. Cycling the palette across categories would
-              // reuse the same teal/rust that means "dexamethasone vs usual care" in the
-              // grouped chart above, so a reader would read a grouping that is not there.
-              const colour = grouped ? SERIES[gi % SERIES.length] : A;
+              // Ungrouped bars are the treatment colour, or an arm's colour when the label
+              // names one. Cycling the palette across categories would suggest a grouping
+              // that is not there.
+              const colour = grouped ? SERIES[gi % SERIES.length] : soloColour(d.label, arms);
               const top = y(d.value);
               const delay = ci * 0.1 + gi * 0.05;
               const lift = stagger && gi % 2 === 1 ? 12 : 0;
@@ -574,6 +598,7 @@ function HBars({
   chart, hover, data, groups, cats,
 }: { chart: Chart; hover: HoverFn; data: Datum[]; groups: string[]; cats: string[] }) {
   const W = 520;
+  const arms = useContext(ArmsContext);
   const grouped = groups.length > 1;
   const labelW = 176;
   const L = labelW + 14;
@@ -633,7 +658,7 @@ function HBars({
             </text>
             {members.map((d, mi) => {
               const gi = grouped ? groups.indexOf(d.group as string) : mi;
-              const colour = grouped ? SERIES[gi % SERIES.length] : A;
+              const colour = grouped ? SERIES[gi % SERIES.length] : soloColour(d.label, arms);
               const top = rowTop + (rowH - perCat * (barH + 3) + 3) / 2 + gi * (barH + 3);
               const cy = top + barH / 2;
               // The value sits past whichever is further right, the bar's end or the zero
@@ -739,7 +764,7 @@ function Forest({ chart, hover }: { chart: Chart; hover: HoverFn }) {
             ? chart.lower_is_better
             : !d.higher_is_better;
         const favourable = d.value < nullV === lowerIsBetter;
-        const colour = favourable ? A : C;
+        const colour = forestColour(favourable, i);
         return (
           <g key={`${d.label}-${i}`} {...hover(d)}>
             <text
