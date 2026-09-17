@@ -4,10 +4,11 @@ import logging
 import tempfile
 from pathlib import Path
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, HTTPException, Request, UploadFile
 from fastapi.responses import FileResponse
 
 import builds
+import settings
 import store
 from ingestion import IngestError
 from ingestion.figures import DISPLAYABLE, FIGURE_DIR, figure_path
@@ -173,26 +174,65 @@ async def get_figure(paper_id: str, filename: str):
     return FileResponse(path, headers={"Cache-Control": "public, max-age=86400"})
 
 
+# ---------------------------------------------------------------------------
+# Settings. Only from this machine: the API may be bound to every interface, and a
+# request from elsewhere on the network must be able neither to read which keys are set
+# nor to point the OpenAI base URL somewhere that would receive one.
+# ---------------------------------------------------------------------------
+
+def _loopback_only(request: Request) -> None:
+    host = request.client.host if request.client else ""
+    if host not in ("127.0.0.1", "::1", "localhost"):
+        raise HTTPException(status_code=403, detail="Settings can only be changed from this machine.")
+
+
+@router.get("/settings")
+async def get_settings(request: Request):
+    _loopback_only(request)
+    return settings.current()
+
+
+@router.post("/settings")
+async def save_settings(request: Request, body: dict):
+    _loopback_only(request)
+    try:
+        return settings.save(
+            provider=str(body.get("provider", "")),
+            model=str(body.get("model", "") or ""),
+            api_key=str(body.get("api_key", "") or ""),
+            base_url=body.get("base_url"),
+            endpoint=body.get("endpoint"),
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/settings/test")
+async def test_settings(request: Request):
+    """One tiny call through the configured provider. Says what is wrong when it fails."""
+    _loopback_only(request)
+    from agents.base import probe
+
+    ok, why = await probe(force=True)
+    return {"ok": ok, "message": "The model answered." if ok else why}
+
+
 @router.get("/health", response_model=HealthResponse)
 async def health_check():
     """Which service this is, and whether it can build a paper right now."""
-    from agents.base import get_provider
+    from agents.base import get_provider, probe
 
-    # LLM provider. Reachability is only proven by a real call, so this reports what is
-    # configured, not that it works.
     try:
         provider_status = get_provider()
     except Exception as e:
         provider_status = f"unconfigured ({e})"
 
     # Being able to reach the model is the difference between "can open papers" and "can
-    # build one", so health says which. Probed once per process, and fast when broken.
-    if provider_status == "claude_cli":
-        from agents.claude_cli import check_auth
-
-        signed_in, why = check_auth()
-        if not signed_in:
-            provider_status = f"claude_cli (cannot build: {why})"
+    # build one", so health says which. Probed once per configuration, and fast when broken.
+    if not provider_status.startswith("unconfigured"):
+        ready, why = await probe()
+        if not ready:
+            provider_status = f"{provider_status} (cannot build: {why})"
 
     explainers = len(store.listing())
     all_healthy = (

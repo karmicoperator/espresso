@@ -26,9 +26,11 @@ to get it:
 
 - [`uv`](https://docs.astral.sh/uv/) for the API. It fetches Python itself if needed.
 - [Node.js](https://nodejs.org) for the web app.
-- [Claude Code](https://claude.com/claude-code), signed in (`claude` once in a terminal).
-  It is the model backend, so there is no API key. Without it, papers already built still
-  open; the launcher and `/api/health` both say so.
+- A model. By default a signed-in [Claude Code](https://claude.com/claude-code) session
+  (`claude` once in a terminal), with no API key. Or open **Settings** in the app and
+  paste your own key: the Anthropic API, OpenAI, any OpenAI-compatible endpoint (Ollama,
+  Groq, OpenRouter) or Azure OpenAI. Settings tests the model with one tiny call. Without
+  a working model, papers already built still open; the landing page says so.
 
 Logs land in `logs/`. `MEDSCROLL_DEV=1 ./start.command` runs the web app's dev server
 instead of a production build.

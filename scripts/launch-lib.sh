@@ -211,9 +211,10 @@ llm_status() {  # api port
 llm_advice() {  # provider string
   case "$1" in
     unconfigured*)
-      echo "No model provider is configured, so new papers cannot be built. Papers already built will still open.
+      echo "No model is set up, so new papers cannot be built. Papers already built will still open.
 
-Install Claude Code and sign in:
+Open Settings in the app to use your own API key (Anthropic, OpenAI or compatible, Azure),
+or install Claude Code and sign in:
   npm install -g @anthropic-ai/claude-code
   claude"
       ;;

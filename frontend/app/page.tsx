@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ApiError, api } from "@/lib/api";
-import type { ExplainerSummary, Job } from "@/lib/types";
+import Link from "next/link";
+import type { ExplainerSummary, Health, Job } from "@/lib/types";
 
 const EXAMPLES = [
   { paste: "https://pubmed.ncbi.nlm.nih.gov/32678530/", label: "Dexamethasone in Covid-19" },
@@ -36,6 +37,7 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [jobs, setJobs] = useState<Job[]>([]);
   const [built, setBuilt] = useState<ExplainerSummary[]>([]);
+  const [health, setHealth] = useState<Health | null>(null);
   // A start that failed before there was a job: bad input, or a file that is not a PDF.
   const [error, setError] = useState<ApiError | null>(null);
   const [dragging, setDragging] = useState(false);
@@ -52,6 +54,9 @@ export default function Home() {
   }, []);
 
   useEffect(refreshBuilt, [refreshBuilt]);
+  useEffect(() => {
+    api.health().then(setHealth).catch(() => setHealth(null));
+  }, []);
 
   // The build runs on the API, so this page only watches. Polling while anything is
   // active is what makes a reload harmless: the job is still there to be found.
@@ -196,6 +201,8 @@ export default function Home() {
         Central.
       </p>
 
+      <ProviderLine health={health} />
+
       <p className="mt-4 text-xs text-white/30">
         Not in PubMed Central? <PdfPicker onPick={submitPdf}>open the PDF</PdfPicker> or
         drop one anywhere on this page, and it will be built from that instead.
@@ -273,6 +280,40 @@ export default function Home() {
         </section>
       )}
     </main>
+  );
+}
+
+const PROVIDER_LABELS: Record<string, string> = {
+  claude_cli: "Claude Code",
+  anthropic: "Anthropic API",
+  openai: "OpenAI",
+  azure: "Azure OpenAI",
+};
+
+/** Which model will do the building, and a way to change it. Says so when it cannot. */
+function ProviderLine({ health }: { health: Health | null }) {
+  if (!health) return null;
+  const raw = health.services.llm_provider ?? "";
+  const name = raw.split(" ")[0];
+  const broken = raw.startsWith("unconfigured") || raw.includes("cannot build");
+  if (broken) {
+    const why = raw.includes("cannot build: ") ? raw.split("cannot build: ")[1].replace(/\)$/, "") : "No model is set up yet";
+    return (
+      <p className="mt-3 max-w-xl text-xs text-[#d9a441]">
+        {why}. Papers already built still open.{" "}
+        <Link href="/settings" className="underline decoration-[#d9a441]/40 underline-offset-4 hover:decoration-[#d9a441]">
+          Set up a model
+        </Link>
+      </p>
+    );
+  }
+  return (
+    <p className="mt-3 text-xs text-white/30">
+      Model: {PROVIDER_LABELS[name] ?? name}.{" "}
+      <Link href="/settings" className="text-white/45 underline decoration-white/20 underline-offset-4 hover:text-white">
+        Change
+      </Link>
+    </p>
   );
 }
 

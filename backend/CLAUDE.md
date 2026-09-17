@@ -39,8 +39,13 @@ rate; fix the extraction instruction instead.
 
 ## Providers
 
-`agents/base.py` resolves the provider. Default here is `claude_cli`: headless Claude Code,
-no API key.
+`agents/base.py` resolves the provider: `claude_cli` (headless Claude Code, no key),
+`anthropic` (official SDK, your key), `openai` (your key, or any OpenAI-compatible
+endpoint via OPENAI_BASE_URL), `azure`. `settings.py` reads and writes `backend/.env`
+for the Settings page (`/api/settings`, loopback-only), and `probe()` is the one tiny
+call that says whether the configured provider actually answers; health uses it.
+
+For `claude_cli`:
 
 - Errors arrive on **stdout**, not stderr.
 - `--max-turns 1` fails with `error_max_turns`; 4 works.

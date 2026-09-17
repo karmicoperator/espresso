@@ -9,7 +9,7 @@ citation that has been checked against the source text.
     visuals = await build_visuals(paper)
 """
 
-from .base import call_llm, call_llm_sync, get_provider
+from .base import call_llm, get_provider
 from .chart_planner import plan_charts
 from .pipeline import build_visuals
 from .verify import verify_charts
@@ -17,7 +17,6 @@ from .verify import verify_charts
 __all__ = [
     "build_visuals",
     "call_llm",
-    "call_llm_sync",
     "get_provider",
     "plan_charts",
     "verify_charts",

@@ -7,7 +7,7 @@ dependencies = [
     # API
     "fastapi>=0.115",
     "uvicorn>=0.32",
-    "python-multipart>=0.0.18",  # UploadFile for POST /api/build/pdf
+    "python-multipart>=0.0.18", # UploadFile for POST /api/build/pdf
     "pydantic>=2.9",
     "python-dotenv>=1.0",
     # Sources: PubMed Central (JATS over httpx + lxml) and reader-supplied PDFs
@@ -17,6 +17,7 @@ dependencies = [
     "pymupdf4llm>=0.0.17",
     # Model providers. claude_cli needs nothing installed here; azure uses the OpenAI SDK.
     "openai>=1.60",
+    "anthropic>=1.0",
 ]
 
 [project.optional-dependencies]

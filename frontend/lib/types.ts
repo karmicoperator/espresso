@@ -138,3 +138,29 @@ export type Job = {
   title: string | null;
   error: { message: string; kind: string; url: string } | null;
 };
+
+/** Mirrors backend/settings.py current(). Keys are never included, only whether one is set. */
+export type ProviderView = {
+  label: string;
+  help: string;
+  model: string;
+  default_model: string;
+  needs_key: boolean;
+  key_set: boolean;
+  key_hint: string;
+  base_url: string | null;
+  endpoint: string | null;
+};
+
+export type SettingsView = {
+  provider: string;
+  problem: string;
+  providers: Record<string, ProviderView>;
+  env_path: string;
+};
+
+export type Health = {
+  app: string;
+  status: string;
+  services: Record<string, string>;
+};
