@@ -160,7 +160,7 @@ export default function Home() {
       )}
 
       <h1 className="text-6xl font-semibold tracking-tight text-[#e8e8e8] sm:text-7xl">
-        Paper in <span className="text-white/45">Five</span>
+        Paper in <span className="text-(--teal)">Five</span>
       </h1>
       <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-white/55">
         Paste a PubMed link. It comes back as a short explainer with interactive charts built
@@ -236,7 +236,7 @@ export default function Home() {
 
       {active.length > 0 && (
         <section className="mt-12 w-full text-left">
-          <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-white/25 uppercase">
+          <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-(--teal-dim) uppercase">
             Building
           </h2>
           <div className="space-y-2">
@@ -253,7 +253,7 @@ export default function Home() {
 
       {built.length > 0 && (
         <section className="mt-16 w-full text-left">
-          <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-white/25 uppercase">
+          <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-(--teal-dim) uppercase">
             Already built
           </h2>
           <div className="space-y-2">
@@ -261,7 +261,7 @@ export default function Home() {
               <button
                 key={p.paper_id}
                 onClick={() => router.push(`/paper/${encodeURIComponent(p.paper_id)}`)}
-                className="flex w-full items-baseline justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-left backdrop-blur-xl transition-colors hover:border-white/[0.14] hover:bg-white/[0.07]"
+                className="flex w-full items-baseline justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-left backdrop-blur-xl transition-colors hover:border-(--teal-dim) hover:bg-white/[0.07]"
               >
                 <span className="min-w-0">
                   {/* Wraps rather than truncating. A paper is identified by its title, and the
@@ -271,7 +271,7 @@ export default function Home() {
                     {[p.journal, p.published?.slice(0, 4)].filter(Boolean).join(" · ")}
                   </span>
                 </span>
-                <span className="num shrink-0 text-xs text-white/40">
+                <span className="num shrink-0 text-xs text-(--teal-dim)">
                   {p.chart_count} chart{p.chart_count === 1 ? "" : "s"}
                 </span>
               </button>
@@ -310,7 +310,7 @@ function ProviderLine({ health }: { health: Health | null }) {
   return (
     <p className="mt-3 text-xs text-white/30">
       Model: {PROVIDER_LABELS[name] ?? name}.{" "}
-      <Link href="/settings" className="text-white/45 underline decoration-white/20 underline-offset-4 hover:text-white">
+      <Link href="/settings" className="text-(--teal) underline decoration-(--teal-dim) underline-offset-4 hover:text-white">
         Change
       </Link>
     </p>
@@ -415,7 +415,7 @@ function PdfPicker({
     <label
       className={
         className ??
-        "cursor-pointer text-white/60 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+        "cursor-pointer text-(--teal) underline decoration-(--teal-dim) underline-offset-4 transition-colors hover:text-white"
       }
     >
       {children}
