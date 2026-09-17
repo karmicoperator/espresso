@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Chart, Datum } from "@/lib/types";
+import type { Chart, Datum, DiagramEdge } from "@/lib/types";
 
 /**
  * Draws a chart spec as live SVG.
@@ -228,7 +228,7 @@ function Stat({ chart, hover }: { chart: Chart; hover: HoverFn }) {
         <div className="r-stat num text-[64px] leading-none font-light tracking-tight text-[#7fb5a6]">
           {fmt(d.value, chart.unit)}
         </div>
-        {interval && <div className="num mt-2 text-[11px] text-white/30">{interval}</div>}
+        {interval && <div className="num mt-3 text-[11px] text-white/30">{interval}</div>}
       </div>
       <p className="r-fade min-w-[240px] flex-1 border-l-2 border-white/[0.18] pl-4 text-[13px] leading-[1.65] text-white/55">
         {d.provenance.quote}
@@ -240,9 +240,15 @@ function Stat({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   );
 }
 
+
+/** Whether a set of categories fits side by side at this width, or needs a row each. */
+function packedCategories(cats: string[], grouped: boolean): boolean {
+  const longest = Math.max(0, ...cats.map((c) => c.length));
+  return cats.length > 4 || longest > 18 || (grouped && cats.length > 3);
+}
+
 function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   const W = 520;
-  const [L, R, T] = [48, 40, 26];
   const data = chart.data.slice(0, 8);
 
   // Grouped data means the same category appears once per arm. Drawing those as eight
@@ -253,11 +259,26 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   const grouped = groups.length > 1;
   const cats = [...new Set(data.map((d) => d.label))];
 
+  // Five categories, or long names, or several grouped pairs: side by side they collide,
+  // however the labels are wrapped. A row each, with the label in its own column, cannot.
+  // A negative value would hang below the axis, into the category labels. Horizontal bars
+  // draw from a zero line in either direction and keep every label in its own row.
+  const anyNegative = data.some((d) => d.value < 0 || (d.low ?? 0) < 0);
+  if (packedCategories(cats, grouped) || anyNegative) {
+    return <HBars chart={chart} hover={hover} data={data} groups={groups} cats={cats} />;
+  }
+
+  // The annotation lives in a band above the plot, not in a corner of it, so it can never
+  // land on a value label.
+  const noteLines = chart.annotation ? wrapLabel(chart.annotation.text, 44, 3) : [];
+  const [L, R] = [48, 40];
+  const T = 26 + (noteLines.length ? noteLines.length * 13 + 12 : 0);
+
   const labelLines = Math.max(
     ...cats.map((c) => wrapLabel(c, Math.floor(((W - L - R) / cats.length) / 6.4)).length),
   );
   const Bo = 34 + labelLines * 13;
-  const H = 250 + (labelLines - 1) * 13 + (grouped ? 16 : 0);
+  const H = T + 200 + (labelLines - 1) * 13 + Bo - 26 + (grouped ? 16 : 0);
 
   const max = Math.max(...data.flatMap((d) => [d.value, d.high ?? 0])) * 1.15 || 1;
   const gl = ticks(max);
@@ -276,40 +297,29 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
     ? Math.max(...data.filter((d) => d.label === chart.annotation!.target).map((d) => d.value))
     : 0;
 
-  /**
-   * The annotation sits inside the plot, in whichever top corner the tall bars are not
-   * using. Writing it past the right edge put it outside the viewBox, where
-   * overflow-visible let it escape the card and run off the page.
-   */
+  // Value labels wider than their bar collide with the neighbour's in a grouped pair.
+  // Every second member of a pair is lifted a line, which keeps both readable.
+  const valueChars = Math.max(...data.map((d) => fmt(d.value, chart.unit, dp).length));
+  const stagger = grouped && valueChars * 6.5 > barW + 6;
+
   const barNote = () => {
-    if (annotated < 0 || !chart.annotation) return null;
+    if (annotated < 0 || !chart.annotation || !noteLines.length) return null;
     const targetX = L + slot * annotated + slot / 2;
     const targetTop = y(annotatedValue);
-
-    // Anchor away from the tallest bar so the note never lands on top of the data.
-    const tallest = cats
-      .map((c) => Math.max(...data.filter((d) => d.label === c).map((d) => d.value)))
-      .reduce((best, v, i, arr) => (v > arr[best] ? i : best), 0);
-    const right = tallest < cats.length / 2;
-
-    const lines = wrapLabel(chart.annotation.text, 30, 3);
-    const tx = right ? L + plotW : L;
-    const ty = T + 6;
-    const anchor = right ? "end" : "start";
-    const elbowY = ty + lines.length * 13 + 4;
-
+    const ty = 8;
+    const elbowY = ty + noteLines.length * 13 + 2;
     return (
       <g className="r-rise" style={{ transitionDelay: "0.95s" }}>
-        <text x={tx} y={ty} textAnchor={anchor} className="note">
-          {lines.map((ln, k) => (
-            <tspan key={k} x={tx} dy={k === 0 ? 0 : 13}>
+        <text x={L} y={ty + 10} className="note">
+          {noteLines.map((ln, k) => (
+            <tspan key={k} x={L} dy={k === 0 ? 0 : 13}>
               {ln}
             </tspan>
           ))}
         </text>
         <path
           className="lead"
-          d={`M ${tx} ${elbowY} L ${tx} ${Math.max(elbowY + 8, targetTop - 32)} L ${targetX} ${Math.max(elbowY + 8, targetTop - 32)} L ${targetX} ${targetTop - 26}`}
+          d={`M ${targetX} ${elbowY + 4} L ${targetX} ${targetTop - (stagger ? 38 : 26)}`}
           fill="none"
         />
       </g>
@@ -321,7 +331,7 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
       {grouped && (
         <g>
           {groups.map((g, gi) => (
-            <g key={g} transform={`translate(${L + gi * 150}, 0)`}>
+            <g key={g} transform={`translate(${L + gi * 150}, ${T - 24})`}>
               <rect x={0} y={2} width={9} height={9} rx={2} fill={SERIES[gi % SERIES.length]} />
               <text x={14} y={11} className="tick">
                 {g}
@@ -356,6 +366,7 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
               const colour = grouped ? SERIES[gi % SERIES.length] : A;
               const top = y(d.value);
               const delay = ci * 0.1 + gi * 0.05;
+              const lift = stagger && gi % 2 === 1 ? 12 : 0;
               return (
                 <g key={`${cat}-${gi}`} {...hover(d)}>
                   <rect
@@ -372,7 +383,7 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
                   <text
                     className="r-rise val"
                     x={cx}
-                    y={(d.high !== null ? y(d.high) : top) - 10}
+                    y={(d.high !== null ? y(d.high) : top) - 10 - lift}
                     textAnchor="middle"
                     fill={colour}
                     style={{ transitionDelay: `${0.4 + delay}s` }}
@@ -407,6 +418,130 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
       })}
 
       {barNote()}
+    </svg>
+  );
+}
+
+/**
+ * Horizontal bars: one row per category, label in its own column, value at the bar's end.
+ * The layout for anything packed. Nothing here can collide: every text sits in a row of
+ * its own, and the column is wide enough for two lines of any label the planner writes.
+ */
+function HBars({
+  chart, hover, data, groups, cats,
+}: { chart: Chart; hover: HoverFn; data: Datum[]; groups: string[]; cats: string[] }) {
+  const W = 520;
+  const grouped = groups.length > 1;
+  const labelW = 176;
+  const L = labelW + 14;
+  const dp = decimals(data);
+  // The right margin is whatever the longest value string needs, so a unit like
+  // "per 100 years" on the longest bar still ends inside the panel.
+  const valueChars = Math.max(0, ...data.map((d) => fmt(d.value, chart.unit, dp).length));
+  const R = Math.max(40, valueChars * 6.6 + 14);
+  const T = grouped ? 24 : 6;
+  const barH = grouped ? 13 : 18;
+  const perCat = grouped ? groups.length : 1;
+  const labelRows = Math.max(1, ...cats.map((c) => wrapLabel(c, Math.floor((labelW - 6) / 6.9), 3).length));
+  const rowH = Math.max(30, perCat * (barH + 3) + 12, labelRows * 13 + 10);
+  const noteLines = chart.annotation
+    ? wrapLabel(`${chart.annotation.target}: ${chart.annotation.text}`, Math.floor((W - L) / 6.4), 3)
+    : [];
+  const H = T + cats.length * rowH + 6 + (noteLines.length ? noteLines.length * 13 + 10 : 0);
+
+  const max = Math.max(0, ...data.flatMap((d) => [d.value, d.high ?? 0])) || 1;
+  const min = Math.min(0, ...data.flatMap((d) => [d.value, d.low ?? 0]));
+  const plotW = W - L - R;
+  const x = (v: number) => L + ((v - min) / (max - min || 1)) * plotW;
+  const zero = x(0);
+  // Three lines at a width the widest glyphs still fit, so a long clinical term wraps
+  // rather than running out of its column.
+  const chars = Math.floor((labelW - 6) / 6.9);
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} className="block w-full overflow-visible">
+      {grouped && (
+        <g>
+          {groups.map((g, gi) => (
+            <g key={g} transform={`translate(${L + gi * 150}, 0)`}>
+              <rect x={0} y={2} width={9} height={9} rx={2} fill={SERIES[gi % SERIES.length]} />
+              <text x={14} y={11} className="tick">
+                {g}
+              </text>
+            </g>
+          ))}
+        </g>
+      )}
+      <line x1={zero} x2={zero} y1={T} y2={T + cats.length * rowH} className="axis" />
+
+      {cats.map((cat, ci) => {
+        const rowTop = T + ci * rowH;
+        const members = data.filter((d) => d.label === cat);
+        const lines = wrapLabel(cat, chars, 3);
+        const mid = rowTop + rowH / 2;
+        return (
+          <g key={cat}>
+            <text x={L - 12} y={mid + 4 - (lines.length - 1) * 6.5} textAnchor="end" className="cat">
+              {lines.map((ln, k) => (
+                <tspan key={k} x={L - 12} dy={k === 0 ? 0 : 13}>
+                  {ln}
+                </tspan>
+              ))}
+            </text>
+            {members.map((d, mi) => {
+              const gi = grouped ? groups.indexOf(d.group as string) : mi;
+              const colour = grouped ? SERIES[gi % SERIES.length] : A;
+              const top = rowTop + (rowH - perCat * (barH + 3) + 3) / 2 + gi * (barH + 3);
+              const cy = top + barH / 2;
+              // The value sits past whichever is further right, the bar's end or the zero
+              // line, so a negative bar's label never runs into the category column.
+              const end = Math.max(zero, x(d.high !== null ? d.high : d.value));
+              const delay = ci * 0.08 + gi * 0.04;
+              return (
+                <g key={`${cat}-${gi}`} {...hover(d)}>
+                  <rect
+                    className="r-grow"
+                    x={Math.min(zero, x(d.value))}
+                    y={top}
+                    width={Math.max(1, Math.abs(x(d.value) - zero))}
+                    height={barH}
+                    rx={2}
+                    fill={colour}
+                    opacity={0.85}
+                    style={{ transformOrigin: `${zero}px ${cy}px`, transitionDelay: `${delay}s` }}
+                  />
+                  {d.low !== null && d.high !== null && (
+                    <g className="r-fade whisker" style={{ transitionDelay: `${0.5 + delay}s` }}>
+                      <line x1={x(d.low)} x2={x(d.high)} y1={cy} y2={cy} />
+                      <line x1={x(d.low)} x2={x(d.low)} y1={cy - 5} y2={cy + 5} />
+                      <line x1={x(d.high)} x2={x(d.high)} y1={cy - 5} y2={cy + 5} />
+                    </g>
+                  )}
+                  <text
+                    className="r-fade val"
+                    x={end + 8}
+                    y={cy + 4}
+                    fill={colour}
+                    style={{ fontSize: 12, transitionDelay: `${0.45 + delay}s` }}
+                  >
+                    {fmt(d.value, chart.unit, dp)}
+                  </text>
+                </g>
+              );
+            })}
+          </g>
+        );
+      })}
+
+      {noteLines.length > 0 && (
+        <text x={L} y={T + cats.length * rowH + 20} className="note">
+          {noteLines.map((ln, k) => (
+            <tspan key={k} x={L} dy={k === 0 ? 0 : 13}>
+              {ln}
+            </tspan>
+          ))}
+        </text>
+      )}
     </svg>
   );
 }
@@ -529,19 +664,23 @@ function Forest({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   );
 }
 
+
 function Line({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   const W = 520;
   const H = 240;
-  const [L, R, T, Bo] = [50, 24, 20, 52];
+  const [L, R, T, Bo] = [50, 30, 20, 52];
   const groups = [...new Set(chart.data.map((d) => d.group || "series"))];
-  const xs = [...new Set(chart.data.map((d) => d.value))];
-  const maxX = chart.data.length;
+  // The x axis is the timepoints the paper names, in the order they first appear. Each
+  // series places its points by timepoint, so two arms with the same labels share an axis
+  // and an arm missing a timepoint leaves a gap rather than shifting the rest left.
+  const times = [...new Set(chart.data.map((d) => d.label))];
   const values = chart.data.map((d) => d.value);
   const lo = Math.max(0, Math.min(...values) - (Math.max(...values) - Math.min(...values)) * 0.4 - 1);
   const hi = Math.max(...values);
   const plotW = W - L - R;
   const plotH = H - T - Bo;
   const y = (v: number) => T + plotH - ((v - lo) / (hi - lo || 1)) * plotH;
+  const x = (label: string) => L + (plotW / Math.max(1, times.length - 1)) * times.indexOf(label);
 
   return (
     <svg viewBox={`0 0 ${W} ${H}`} className="block w-full overflow-visible">
@@ -549,8 +688,7 @@ function Line({ chart, hover }: { chart: Chart; hover: HoverFn }) {
       <line x1={L} x2={L} y1={T} y2={T + plotH} className="axis" />
       {groups.map((g, gi) => {
         const pts = chart.data.filter((d) => (d.group || "series") === g);
-        const step = plotW / Math.max(1, pts.length - 1 || 1);
-        const path = pts.map((d, i) => `${i ? "L" : "M"}${L + step * i},${y(d.value)}`).join(" ");
+        const path = pts.map((d, i) => `${i ? "L" : "M"}${x(d.label)},${y(d.value)}`).join(" ");
         return (
           <g key={g}>
             <path
@@ -565,7 +703,7 @@ function Line({ chart, hover }: { chart: Chart; hover: HoverFn }) {
               <circle
                 key={i}
                 className="r-fade"
-                cx={L + step * i}
+                cx={x(d.label)}
                 cy={y(d.value)}
                 r={4}
                 fill={SERIES[gi % SERIES.length]}
@@ -576,20 +714,43 @@ function Line({ chart, hover }: { chart: Chart; hover: HoverFn }) {
           </g>
         );
       })}
-      {chart.data.slice(0, maxX).map((d, i) => (
-        <text key={`${d.label}-${i}`} x={L + (plotW / Math.max(1, xs.length - 1)) * i} y={T + plotH + 20}
-              textAnchor="middle" className="tick">
-          {d.label}
+      {groups.length > 1 &&
+        groups.map((g, gi) => (
+          <g key={g} transform={`translate(${L + gi * 150}, ${T + plotH + 34})`}>
+            <rect x={0} y={2} width={9} height={9} rx={2} fill={SERIES[gi % SERIES.length]} />
+            <text x={14} y={11} className="tick">
+              {g}
+            </text>
+          </g>
+        ))}
+      {/* The first and last labels are anchored inwards, so the ends never run out of the panel. */}
+      {times.map((t, i) => (
+        <text
+          key={t}
+          x={x(t)}
+          y={T + plotH + 20}
+          textAnchor={i === 0 ? "start" : i === times.length - 1 ? "end" : "middle"}
+          className="tick"
+        >
+          {t}
         </text>
       ))}
     </svg>
   );
 }
 
+
 function Dots({ chart, hover }: { chart: Chart; hover: HoverFn }) {
+  const data = chart.data.slice(0, 12);
+  const groups = new Set(data.map((d) => d.group).filter(Boolean));
+  const longest = Math.max(0, ...data.map((d) => d.label.length));
+  // Dots say "how big" along one axis. Two arms per category is a comparison, and long or
+  // many labels under a row of dots collide, so those read better as bars.
+  if (groups.size > 1 || data.length > 8 || longest > 12) {
+    return <Bars chart={chart} hover={hover} />;
+  }
   const W = 520;
   const H = 150;
-  const data = chart.data.slice(0, 12);
   const max = Math.max(...data.map((d) => d.value)) || 1;
   const step = W / (data.length + 1);
   // Area, not radius, encodes the value: a radius-scaled circle overstates by its square.
@@ -724,7 +885,6 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
   if (nodes.length < 2 || edges.length === 0) return null;
 
   const W = 520;
-  const rowGap = 104;
 
   // Rank by longest path from a node with nothing feeding it. The model never says where
   // anything goes; the shape falls out of the claims themselves.
@@ -764,23 +924,43 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
     ...[...wrapped.values()].map((w) => 22 + w.label.length * 13 + w.note.length * 12),
   );
 
+  // Every arrow's label sits in the gap below its source row, on the arrow's own vertical
+  // run, stacked so no two labels in a gap share a line. The gap is then made tall enough
+  // for what it holds, so a label can never reach the row below.
+  const labelLines = new Map(edges.map((e, i) => [i, e.label ? wrapLabel(e.label, 26, 2) : []]));
+  const gapOf = (e: DiagramEdge) => rank.get(e.source) ?? 0;
+  const gapHeight: number[] = rows.map(() => 44);
+  const slotY = new Map<number, number>();
+  {
+    const used: number[] = rows.map(() => 0);
+    edges.forEach((e, i) => {
+      const g = gapOf(e);
+      const lines = labelLines.get(i) ?? [];
+      slotY.set(i, used[g]);
+      if (lines.length) used[g] += lines.length * 12 + 8;
+    });
+    used.forEach((u, g) => {
+      gapHeight[g] = Math.max(44, 30 + u);
+    });
+  }
+  const rowY: number[] = [];
+  rows.forEach((_, r) => {
+    rowY[r] = r === 0 ? 8 : rowY[r - 1] + boxH + gapHeight[r - 1];
+  });
+
   const pos = new Map<string, { x: number; y: number }>();
   rows.forEach((row, r) => {
     const step = Math.min(boxW + 26, (W - 30) / row.length);
     row.forEach((id, i) => {
       pos.set(id, {
         x: W / 2 + (i - (row.length - 1) / 2) * step,
-        y: r * (boxH + rowGap) + 8,
+        y: rowY[r],
       });
     });
   });
 
-  const H = rows.length * (boxH + rowGap) - rowGap + 26;
+  const H = rowY[rows.length - 1] + boxH + 26;
   const anyHedged = edges.some((e) => e.hedged);
-
-  // Several arrows crossing the same gap put their labels on the same line. Staggering by
-  // position within the gap keeps them apart without a collision solver.
-  const perGap = new Map<number, number>();
 
   return (
     <>
@@ -796,21 +976,18 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
           const a = pos.get(e.source);
           const b = pos.get(e.target);
           if (!a || !b) return null;
-          const gap = rank.get(e.source) ?? 0;
-          const slot = perGap.get(gap) ?? 0;
-          perGap.set(gap, slot + 1);
-
           const x1 = a.x;
           const y1 = a.y + boxH;
           const x2 = b.x;
           const y2 = b.y - 9;
-          // Two lines, because taking the first line of a wrap and dropping the rest cuts
-          // the claim in half without saying so: "benefit greatest with respiratory" is
-          // not what the arrow asserts.
-          const lines = e.label ? wrapLabel(e.label, 30, 2) : [];
-          const elbow = y1 + 26 + slot * (lines.length * 12 + 6);
+          const lines = labelLines.get(i) ?? [];
+          // The horizontal run sits just above the target row, below every label in the gap.
+          const elbow = b.y - 18;
           const path = `M ${x1} ${y1} L ${x1} ${elbow} L ${x2} ${elbow} L ${x2} ${y2}`;
-          const lx = (x1 + x2) / 2;
+          // Label beside the vertical run, on the side the arrow is heading.
+          const toRight = x2 >= x1;
+          const lx = toRight ? x1 + 7 : x1 - 7;
+          const ly = y1 + 16 + (slotY.get(i) ?? 0);
           const widest = Math.max(0, ...lines.map((l) => l.length));
 
           return (
@@ -832,21 +1009,16 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
               />
               {lines.length > 0 && (
                 <>
-                  {/* Sits on the ground colour so a label crossing a box stays readable. */}
+                  {/* Sits on the ground colour so a label crossing a line stays readable. */}
                   <rect
-                    x={lx - widest * 2.9}
-                    y={elbow - 5 - lines.length * 12}
+                    x={toRight ? lx - 2 : lx - widest * 5.8 + 2}
+                    y={ly - 10}
                     width={widest * 5.8}
                     height={lines.length * 12 + 3}
                     rx={3}
                     fill="#0a0a0a"
                   />
-                  <text
-                    x={lx}
-                    y={elbow - 6 - (lines.length - 1) * 12}
-                    textAnchor="middle"
-                    className="tick"
-                  >
+                  <text x={lx} y={ly} textAnchor={toRight ? "start" : "end"} className="tick">
                     {lines.map((ln, k) => (
                       <tspan key={k} x={lx} dy={k === 0 ? 0 : 12}>
                         {ln}

@@ -71,20 +71,25 @@ export function FigureFigure({ figure, paperId }: { figure: FigurePlate; paperId
             transition stalls, and in a throttled or background tab it does, the reader
             gets a white rectangle where the radiograph should be. Content does not wait
             on an animation. */}
-        <div
-          className="mx-auto max-w-full rounded-[10px] bg-[#f4f4f4] p-3"
-          style={ratio ? { maxWidth: `calc(74vh * ${ratio})` } : undefined}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={figure.caption ? `${figure.label}. ${figure.caption}` : figure.label}
-            width={figure.width ?? undefined}
-            height={figure.height ?? undefined}
-            onError={() => setFailed(true)}
-            className="block h-auto w-full rounded-[6px]"
-            style={ratio ? { aspectRatio: String(ratio) } : undefined}
-          />
+        {/* The image is capped at three quarters of the viewport whatever its metadata says:
+            a figure whose width and height the source did not report used to render at
+            its native size, and a tall multi-panel plate then ran over two screens. */}
+        <div className="flex justify-center px-3">
+          <div
+            className="max-w-full rounded-[10px] bg-[#f4f4f4] p-3"
+            style={ratio ? { maxWidth: `calc(74vh * ${ratio})` } : undefined}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt={figure.caption ? `${figure.label}. ${figure.caption}` : figure.label}
+              width={figure.width ?? undefined}
+              height={figure.height ?? undefined}
+              onError={() => setFailed(true)}
+              className="block h-auto max-h-[74vh] w-auto max-w-full rounded-[6px]"
+              style={ratio ? { aspectRatio: String(ratio) } : undefined}
+            />
+          </div>
         </div>
 
         <div className="px-7 pt-5 pb-5">

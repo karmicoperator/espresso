@@ -295,6 +295,36 @@ Every one of these looked fine on demo data.
   label. Wrap at word boundaries and give the container the height.
 - **Units need a space unless they are symbols**: "162 cases", "95%".
 
+## 17a. Measure overlap in the DOM, then fix the layout, then measure again
+
+"The charts overlap when packed" is a report, not a finding. The finding came from a
+script run on every built page: for every chart, every text element's bounding box, every
+pair checked for intersection, plus anything outside its card. Twenty pages, seven
+distinct causes, none of which a screenshot would have separated:
+
+- **Five or more categories, or long names, under vertical bars.** Wrapping cannot save
+  labels that share 90px. Packed charts go horizontal: a label column, a row per category,
+  values at the bar's end. Nothing in a row can touch anything in another.
+- **Dots drawn for grouped data** repeated every category label once per arm. Two arms is
+  a comparison, so it is bars.
+- **Value labels wider than their bar** collided within a grouped pair. Lift every second
+  one a line.
+- **Negative values** hung below the axis into the category labels. Horizontal bars draw
+  from a zero line in either direction.
+- **The line chart placed ticks by unique values rather than timepoints**, and centred
+  the last label on the right edge. Timepoints from labels, ends anchored inwards.
+- **Diagram edge labels** sat at the elbow between rows and reached the row below when a
+  gap held three of them. Each label now sits in the gap under its own source box, the
+  gaps grow to hold what they carry, and the horizontal run sits just above the target.
+- **A bar chart's annotation** lived in a plot corner and met a value label. It has a band
+  of its own above the plot.
+
+Two more from the same pass that were not overlaps: a figure with no reported width and
+height rendered at native size and ran over two screens (cap the image at 74vh whatever
+the metadata says), and the rewrite emitted a markdown table that the prose renderer
+showed as pipes (render pipe tables). The audit script is the regression test; the fix
+is not done until it reports nothing on every page.
+
 ## 18. Never let content depend on an animation firing
 
 Scroll-triggered reveals worked for the two charts above the fold and left four below it

@@ -240,6 +240,33 @@ function Prose({ markdown, unprinted }: { markdown: string; unprinted: string[] 
     <div className="text-[15px] leading-[1.75] text-white/60">
       {blocks.map((block, i) => {
         const lines = block.split("\n");
+        const table = pipeTable(block);
+        if (table) {
+          return (
+            <table key={i} className="mb-5 w-full border-collapse text-[13px]">
+              <thead>
+                <tr>
+                  {table.head.map((h, k) => (
+                    <th key={k} className="border-b border-white/[0.14] py-1.5 pr-3 text-left font-medium text-[#e8e8e8]">
+                      {inline(h, mark)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {table.rows.map((row, r) => (
+                  <tr key={r}>
+                    {row.map((c, k) => (
+                      <td key={k} className="num border-b border-white/[0.06] py-1.5 pr-3 align-top">
+                        {inline(c, mark)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          );
+        }
         if (lines.every((l) => /^\s*[-*]\s+/.test(l))) {
           return (
             <ul key={i} className="mb-5 space-y-1.5">
@@ -289,6 +316,23 @@ function deLatex(text: string): string {
     .replace(/\\[,;:!]/g, " ")
     .replace(/[ \t]{2,}/g, " ")
     .trim();
+}
+
+/**
+ * A markdown pipe table, as the rewrite sometimes emits for a small results table. Rows
+ * may arrive on their own lines or run together on one, so a row boundary is a closing
+ * pipe followed by an opening one either way. Returns null for anything else.
+ */
+function pipeTable(block: string): { head: string[]; rows: string[][] } | null {
+  if (!/\|\s*:?-{2,}/.test(block)) return null;
+  const rows = block
+    .split(/\n|\|\s*(?=\|)/)
+    .map((r) => r.trim())
+    .filter((r) => r.startsWith("|"))
+    .map((r) => r.replace(/^\||\|$/g, "").split("|").map((c) => c.trim()))
+    .filter((cells) => !cells.every((c) => /^:?-+:?$/.test(c)));
+  if (rows.length < 2) return null;
+  return { head: rows[0], rows: rows.slice(1) };
 }
 
 const UNPRINTED_TITLE =
