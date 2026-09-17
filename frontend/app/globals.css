@@ -17,9 +17,6 @@
   --accent-hover: #ffffff;
   --accent-green: #7dd19b;
   --accent-red: #f27066;
-  /* The one colour on the home screen: a teal for the wordmark, links and labels. */
-  --teal: #6ccbc0;
-  --teal-dim: rgba(108, 203, 192, 0.55);
 
   /* Shard colors */
   --shard-1: rgba(255, 255, 255, 0.03);
