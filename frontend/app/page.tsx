@@ -6,10 +6,13 @@ import { ApiError, api } from "@/lib/api";
 import Link from "next/link";
 import type { ExplainerSummary, Health, Job } from "@/lib/types";
 
+// Three papers that show the range: a 17,604-patient drug trial's four-year data, the
+// landmark surgery-versus-rehabilitation trial in orthopaedics, and a 9,361-patient
+// blood-pressure trial whose paper runs to dozens of pages.
 const EXAMPLES = [
-  { paste: "https://pubmed.ncbi.nlm.nih.gov/32678530/", label: "Dexamethasone in Covid-19" },
-  { paste: "https://pubmed.ncbi.nlm.nih.gov/33378609/", label: "mRNA-1273 vaccine" },
-  { paste: "PMC2988224", label: "LDL meta-analysis" },
+  { paste: "https://pubmed.ncbi.nlm.nih.gov/38740993/", label: "Semaglutide, 4 years (SELECT)" },
+  { paste: "https://pubmed.ncbi.nlm.nih.gov/23349407/", label: "ACL tear: surgery or rehab (KANON)" },
+  { paste: "https://pubmed.ncbi.nlm.nih.gov/26551272/", label: "Blood pressure targets (SPRINT)" },
 ];
 
 /** Mirrors backend/builds.py STEPS: the stages a build reports, in order. */
@@ -179,7 +182,7 @@ export default function Home() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="https://pubmed.ncbi.nlm.nih.gov/32678530/"
+            placeholder="https://pubmed.ncbi.nlm.nih.gov/26551272/"
             className="min-w-0 flex-1 bg-transparent py-2 text-sm text-[#e8e8e8] placeholder:text-white/25 focus:outline-none"
           />
           <button
