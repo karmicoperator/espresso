@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ApiError, api } from "@/lib/api";
-import type { ExplainerSummary } from "@/lib/types";
+import type { ExplainerSummary, Job } from "@/lib/types";
 
 const EXAMPLES = [
   { paste: "https://pubmed.ncbi.nlm.nih.gov/32678530/", label: "Dexamethasone in Covid-19" },
@@ -11,61 +11,96 @@ const EXAMPLES = [
   { paste: "PMC2988224", label: "LDL meta-analysis" },
 ];
 
-const STEPS = [
-  "Resolving the paper",
-  "Reading the full text",
-  "Rewriting it into sections",
-  "Choosing the charts",
-  "Checking every value against the source",
+/** Mirrors backend/builds.py STEPS: the stages a build reports, in order. */
+const STEPS: [string, string][] = [
+  ["resolve", "Resolving the paper"],
+  ["fetch", "Reading the full text"],
+  ["rewrite", "Rewriting it into sections"],
+  ["plan", "Choosing the charts"],
+  ["verify", "Checking every value against the source"],
+  ["figures", "Fetching the paper's own figures"],
 ];
+
+const POLL_MS = 2000;
 
 function isPdf(file: File) {
   return file.type === "application/pdf" || /\.pdf$/i.test(file.name);
 }
 
+function mmss(seconds: number) {
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
 export default function Home() {
   const router = useRouter();
   const [input, setInput] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [step, setStep] = useState(0);
-  const [elapsed, setElapsed] = useState(0);
-  const [error, setError] = useState<ApiError | null>(null);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [built, setBuilt] = useState<ExplainerSummary[]>([]);
+  // A start that failed before there was a job: bad input, or a file that is not a PDF.
+  const [error, setError] = useState<ApiError | null>(null);
   const [dragging, setDragging] = useState(false);
   // dragenter/dragleave fire for every child crossed; only a balanced count means "left".
   const dragDepth = useRef(0);
+  // Jobs started from this page. The latest one is followed to its paper when it is done;
+  // failures of any of them are shown. Builds started elsewhere just appear as progress.
+  const [mine, setMine] = useState<string[]>([]);
+  const watching = useRef<string | null>(null);
+  const knownDone = useRef(new Set<string>());
 
-  useEffect(() => {
+  const refreshBuilt = useCallback(() => {
     api.list().then(setBuilt).catch(() => setBuilt([]));
   }, []);
 
-  // The build is one synchronous request, so the only honest progress signal is a clock
-  // and a rough idea of where it is. Better than a spinner that says nothing.
-  useEffect(() => {
-    if (!busy) return;
-    const t = setInterval(() => setElapsed((s) => s + 1), 1000);
-    const s = setInterval(() => setStep((n) => Math.min(n + 1, STEPS.length - 1)), 42000);
-    return () => {
-      clearInterval(t);
-      clearInterval(s);
-    };
-  }, [busy]);
+  useEffect(refreshBuilt, [refreshBuilt]);
 
-  async function run(build: () => Promise<{ paper_id: string }>) {
+  // The build runs on the API, so this page only watches. Polling while anything is
+  // active is what makes a reload harmless: the job is still there to be found.
+  useEffect(() => {
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    async function tick() {
+      try {
+        const latest = await api.jobs();
+        if (cancelled) return;
+        setJobs(latest);
+        for (const job of latest) {
+          if (job.status !== "done" || knownDone.current.has(job.id)) continue;
+          knownDone.current.add(job.id);
+          refreshBuilt();
+          if (job.id === watching.current && job.paper_id) {
+            router.push(`/paper/${encodeURIComponent(job.paper_id)}`);
+          }
+        }
+        const active = latest.some((j) => j.status === "queued" || j.status === "running");
+        timer = setTimeout(tick, active ? POLL_MS : POLL_MS * 5);
+      } catch {
+        timer = setTimeout(tick, POLL_MS * 3);
+      }
+    }
+    void tick();
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [router, refreshBuilt]);
+
+  async function start(begin: () => Promise<Job>) {
     setError(null);
-    setBusy(true);
-    setStep(0);
-    setElapsed(0);
     try {
-      const explainer = await build();
-      router.push(`/paper/${encodeURIComponent(explainer.paper_id)}`);
+      const job = await begin();
+      setMine((ids) => [...ids, job.id]);
+      watching.current = job.id;
+      setJobs((prev) => (prev.some((j) => j.id === job.id) ? prev : [job, ...prev]));
     } catch (e) {
       setError(e instanceof ApiError ? e : new ApiError(e instanceof Error ? e.message : String(e)));
-      setBusy(false);
     }
   }
 
-  const submit = (reference: string) => run(() => api.build(reference));
+  function submit(reference: string) {
+    setInput("");
+    void start(() => api.startBuild(reference));
+  }
 
   /**
    * The other way in. A quarter of PubMed's free full text was never deposited in PubMed
@@ -77,37 +112,34 @@ export default function Home() {
       setError(new ApiError(`${file.name} is not a PDF.`));
       return;
     }
-    void run(() => api.buildFromPdf(file));
-    // Nothing to resolve for a file, so the progress list starts at reading it.
-    setStep(1);
+    void start(() => api.startPdfBuild(file));
   }
 
   // Dropping a PDF anywhere on the page is the same as choosing it. The browser would
   // otherwise navigate to the file.
-  const dragProps = busy
-    ? {}
-    : {
-        onDragEnter: (e: React.DragEvent) => {
-          e.preventDefault();
-          if (dragDepth.current++ === 0) setDragging(true);
-        },
-        onDragOver: (e: React.DragEvent) => {
-          e.preventDefault();
-          e.dataTransfer.dropEffect = "copy";
-        },
-        onDragLeave: () => {
-          if (--dragDepth.current === 0) setDragging(false);
-        },
-        onDrop: (e: React.DragEvent) => {
-          e.preventDefault();
-          dragDepth.current = 0;
-          setDragging(false);
-          const file = e.dataTransfer.files?.[0];
-          if (file) submitPdf(file);
-        },
-      };
+  const dragProps = {
+    onDragEnter: (e: React.DragEvent) => {
+      e.preventDefault();
+      if (dragDepth.current++ === 0) setDragging(true);
+    },
+    onDragOver: (e: React.DragEvent) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "copy";
+    },
+    onDragLeave: () => {
+      if (--dragDepth.current === 0) setDragging(false);
+    },
+    onDrop: (e: React.DragEvent) => {
+      e.preventDefault();
+      dragDepth.current = 0;
+      setDragging(false);
+      const file = e.dataTransfer.files?.[0];
+      if (file) submitPdf(file);
+    },
+  };
 
-  const mmss = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`;
+  const active = jobs.filter((j) => j.status === "queued" || j.status === "running");
+  const failures = jobs.filter((j) => j.status === "failed" && mine.includes(j.id));
 
   return (
     <main
@@ -131,141 +163,200 @@ export default function Home() {
         drawn.
       </p>
 
-      {busy ? (
-        <div className="mt-12 w-full max-w-xl rounded-2xl border border-white/[0.08] bg-white/[0.04] p-7 text-left backdrop-blur-xl">
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-sm font-medium text-[#e8e8e8]">{STEPS[step]}</h2>
-            <span className="num text-sm text-white/70">{mmss}</span>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (input.trim()) submit(input.trim());
+        }}
+        className="mt-10 w-full max-w-xl"
+      >
+        <div className="flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.04] py-2 pr-2 pl-6 backdrop-blur-xl transition-colors focus-within:border-white/25">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="https://pubmed.ncbi.nlm.nih.gov/32678530/"
+            className="min-w-0 flex-1 bg-transparent py-2 text-sm text-[#e8e8e8] placeholder:text-white/25 focus:outline-none"
+          />
+          <button
+            type="submit"
+            disabled={!input.trim()}
+            aria-label="Build explainer"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/[0.12] bg-white/[0.06] text-white/70 transition-colors hover:border-white/30 hover:bg-white/[0.14] hover:text-white disabled:opacity-25"
+          >
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path d="M5.5 3.5 10 8l-4.5 4.5" stroke="currentColor" strokeWidth="1.6"
+                    strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <p className="mt-3 text-xs text-white/25">
+        PubMed or PMC links, a DOI, or a bare PMID. The full text is read from PubMed
+        Central.
+      </p>
+
+      <p className="mt-4 text-xs text-white/30">
+        Not in PubMed Central? <PdfPicker onPick={submitPdf}>open the PDF</PdfPicker> or
+        drop one anywhere on this page, and it will be built from that instead.
+      </p>
+
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
+        <span className="text-white/25">Try these:</span>
+        {EXAMPLES.map((ex) => (
+          <button
+            key={ex.paste}
+            type="button"
+            onClick={() => setInput(ex.paste)}
+            className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3.5 py-1.5 text-white/45 transition-colors hover:border-white/25 hover:text-white"
+          >
+            {ex.label}
+          </button>
+        ))}
+      </div>
+
+      {error && <Failure message={error.message} kind={error.kind} url={error.url} onPick={submitPdf} />}
+      {failures.map((job) => (
+        <Failure
+          key={job.id}
+          label={job.label}
+          message={job.error?.message ?? "The build failed."}
+          kind={job.error?.kind ?? ""}
+          url={job.error?.url ?? ""}
+          onPick={submitPdf}
+        />
+      ))}
+
+      {active.length > 0 && (
+        <section className="mt-12 w-full text-left">
+          <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-white/25 uppercase">
+            Building
+          </h2>
+          <div className="space-y-2">
+            {active.map((job, i) => (
+              <BuildCard key={job.id} job={job} queuedBehind={i} />
+            ))}
           </div>
-          <ol className="mt-5 space-y-2.5">
-            {STEPS.map((s, i) => (
-              <li key={s} className="flex items-start gap-3">
+          <p className="mt-3 text-center text-xs text-white/30">
+            Builds run one at a time on the API and carry on if you leave this page. Three to
+            five minutes each: the model reads the whole paper to choose the charts.
+          </p>
+        </section>
+      )}
+
+      {built.length > 0 && (
+        <section className="mt-16 w-full text-left">
+          <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-white/25 uppercase">
+            Already built
+          </h2>
+          <div className="space-y-2">
+            {built.map((p) => (
+              <button
+                key={p.paper_id}
+                onClick={() => router.push(`/paper/${encodeURIComponent(p.paper_id)}`)}
+                className="flex w-full items-baseline justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-left backdrop-blur-xl transition-colors hover:border-white/[0.14] hover:bg-white/[0.07]"
+              >
+                <span className="min-w-0">
+                  {/* Wraps rather than truncating. A paper is identified by its title, and the
+                      half that gets cut is usually the half that distinguishes it. */}
+                  <span className="block text-sm leading-snug text-[#e8e8e8]">{p.title}</span>
+                  <span className="block text-xs text-white/30">
+                    {[p.journal, p.published?.slice(0, 4)].filter(Boolean).join(" · ")}
+                  </span>
+                </span>
+                <span className="num shrink-0 text-xs text-white/40">
+                  {p.chart_count} chart{p.chart_count === 1 ? "" : "s"}
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+    </main>
+  );
+}
+
+/** One build in progress: the stages as a checklist, with the API's own detail and clock. */
+function BuildCard({ job, queuedBehind }: { job: Job; queuedBehind: number }) {
+  const current = job.step === "done" ? STEPS.length : Math.max(0, STEPS.findIndex(([k]) => k === job.step));
+  return (
+    <div className="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 backdrop-blur-xl">
+      <div className="flex items-baseline justify-between gap-4">
+        <p className="min-w-0 truncate text-sm text-[#e8e8e8]">{job.title ?? job.label}</p>
+        <span className="num shrink-0 text-sm text-white/70">{mmss(job.elapsed)}</span>
+      </div>
+      {job.status === "queued" ? (
+        <p className="mt-3 text-xs text-white/40">
+          Queued{queuedBehind > 0 && `, ${queuedBehind} ahead of it`}. Starts when the build before it finishes.
+        </p>
+      ) : (
+        <>
+          <ol className="mt-4 space-y-2">
+            {STEPS.map(([key, label], i) => (
+              <li key={key} className="flex items-start gap-3">
                 <span
                   className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
-                    i < step ? "bg-white/70" : i === step ? "animate-pulse bg-white" : "bg-white/15"
+                    i < current ? "bg-white/70" : i === current ? "animate-pulse bg-white" : "bg-white/15"
                   }`}
                 />
-                <p className={i > step ? "text-sm text-white/30" : "text-sm text-[#e8e8e8]"}>{s}</p>
+                <p className={i > current ? "text-sm text-white/30" : "text-sm text-[#e8e8e8]"}>
+                  {label}
+                  {i === current && job.detail && (
+                    <span className="ml-2 text-xs text-white/40">{job.detail}</span>
+                  )}
+                </p>
               </li>
             ))}
           </ol>
-          <p className="mt-5 border-t border-white/[0.08] pt-4 text-xs leading-relaxed text-white/55">
-            Three to five minutes. Choosing the charts is the long pole: the model reads the
-            whole paper, and there is no prompt caching on the Claude Code backend.
-          </p>
-        </div>
-      ) : (
-        <>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (input.trim()) void submit(input.trim());
-            }}
-            className="mt-10 w-full max-w-xl"
-          >
-            <div className="flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.04] py-2 pr-2 pl-6 backdrop-blur-xl transition-colors focus-within:border-white/25">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="https://pubmed.ncbi.nlm.nih.gov/32678530/"
-                className="min-w-0 flex-1 bg-transparent py-2 text-sm text-[#e8e8e8] placeholder:text-white/25 focus:outline-none"
-              />
-              <button
-                type="submit"
-                disabled={!input.trim()}
-                aria-label="Build explainer"
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/[0.12] bg-white/[0.06] text-white/70 transition-colors hover:border-white/30 hover:bg-white/[0.14] hover:text-white disabled:opacity-25"
-              >
-                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
-                  <path d="M5.5 3.5 10 8l-4.5 4.5" stroke="currentColor" strokeWidth="1.6"
-                        strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-            </div>
-          </form>
-
-          <p className="mt-3 text-xs text-white/25">
-            PubMed or PMC links, a DOI, or a bare PMID. The full text is read from PubMed
-            Central.
-          </p>
-
-          <p className="mt-4 text-xs text-white/30">
-            Not in PubMed Central? <PdfPicker onPick={submitPdf}>open the PDF</PdfPicker> or
-            drop one anywhere on this page, and it will be built from that instead.
-          </p>
-
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
-            <span className="text-white/25">Try these:</span>
-            {EXAMPLES.map((ex) => (
-              <button
-                key={ex.paste}
-                type="button"
-                onClick={() => setInput(ex.paste)}
-                className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3.5 py-1.5 text-white/45 transition-colors hover:border-white/25 hover:text-white"
-              >
-                {ex.label}
-              </button>
-            ))}
+          <div className="mt-4 h-px w-full bg-white/[0.08]">
+            <div className="h-px bg-white/60 transition-[width] duration-700" style={{ width: `${Math.round(job.fraction * 100)}%` }} />
           </div>
-
-          {error && (
-            <div
-              role="alert"
-              className="mt-6 w-full max-w-xl rounded-xl border border-[#f27066]/30 bg-[#f27066]/10 p-4 text-left text-sm text-[#f27066]"
-            >
-              <p className="leading-relaxed">{error.message}</p>
-              {error.kind === "not_in_pmc" && (
-                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#f27066]/20 pt-3 text-xs">
-                  {error.url && (
-                    <a
-                      href={error.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-[#e8e8e8] underline decoration-white/30 underline-offset-4 hover:decoration-white"
-                    >
-                      Open the paper at the publisher ↗
-                    </a>
-                  )}
-                  <span className="text-[#e8e8e8]">
-                    then <PdfPicker onPick={submitPdf} className="cursor-pointer underline decoration-white/30 underline-offset-4 hover:decoration-white">choose the downloaded PDF</PdfPicker> or
-                    drop it on this page.
-                  </span>
-                </div>
-              )}
-            </div>
-          )}
-
-          {built.length > 0 && (
-            <section className="mt-16 w-full text-left">
-              <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-white/25 uppercase">
-                Already built
-              </h2>
-              <div className="space-y-2">
-                {built.map((p) => (
-                  <button
-                    key={p.paper_id}
-                    onClick={() => router.push(`/paper/${encodeURIComponent(p.paper_id)}`)}
-                    className="flex w-full items-baseline justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-left backdrop-blur-xl transition-colors hover:border-white/[0.14] hover:bg-white/[0.07]"
-                  >
-                    <span className="min-w-0">
-                      {/* Wraps rather than truncating. A paper is identified by its title, and the
-                          half that gets cut is usually the half that distinguishes it. */}
-                      <span className="block text-sm leading-snug text-[#e8e8e8]">{p.title}</span>
-                      <span className="block text-xs text-white/30">
-                        {[p.journal, p.published?.slice(0, 4)].filter(Boolean).join(" · ")}
-                      </span>
-                    </span>
-                    <span className="num shrink-0 text-xs text-white/40">
-                      {p.chart_count} chart{p.chart_count === 1 ? "" : "s"}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </section>
-          )}
         </>
       )}
-    </main>
+    </div>
+  );
+}
+
+/** A failure the reader can read, and for the not-in-PMC case, act on. */
+function Failure({
+  label,
+  message,
+  kind,
+  url,
+  onPick,
+}: {
+  label?: string;
+  message: string;
+  kind: string;
+  url: string;
+  onPick: (file: File) => void;
+}) {
+  return (
+    <div
+      role="alert"
+      className="mt-6 w-full max-w-xl rounded-xl border border-[#f27066]/30 bg-[#f27066]/10 p-4 text-left text-sm text-[#f27066]"
+    >
+      {label && <p className="mb-1 text-xs text-[#f27066]/70">{label}</p>}
+      <p className="leading-relaxed">{message}</p>
+      {kind === "not_in_pmc" && (
+        <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#f27066]/20 pt-3 text-xs">
+          {url && (
+            <a
+              href={url}
+              target="_blank"
+              rel="noreferrer"
+              className="text-[#e8e8e8] underline decoration-white/30 underline-offset-4 hover:decoration-white"
+            >
+              Open the paper at the publisher ↗
+            </a>
+          )}
+          <span className="text-[#e8e8e8]">
+            then <PdfPicker onPick={onPick} className="cursor-pointer underline decoration-white/30 underline-offset-4 hover:decoration-white">choose the downloaded PDF</PdfPicker> or
+            drop it on this page.
+          </span>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -35,7 +35,9 @@ instead of a production build.
 
 ## What it does
 
-A build takes three to five minutes, almost all of it in one model call.
+A build takes three to five minutes, almost all of it in one model call. Builds run on the
+API one at a time: paste several and they queue, the page shows the stage each is at,
+and reloading or leaving the page loses nothing.
 
 ```
 PubMed link ─→ resolve ─→ JATS from PubMed Central ─→ rewrite into ≤5 sections

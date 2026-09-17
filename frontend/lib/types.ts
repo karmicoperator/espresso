@@ -112,3 +112,18 @@ export type ExplainerSummary = {
   published: string | null;
   chart_count: number;
 };
+
+/** A build in progress or recently finished. Mirrors backend/builds.py Job.public(). */
+export type Job = {
+  id: string;
+  label: string;
+  kind: "pubmed" | "pdf";
+  status: "queued" | "running" | "done" | "failed";
+  step: string;
+  fraction: number;
+  detail: string;
+  elapsed: number;
+  paper_id: string | null;
+  title: string | null;
+  error: { message: string; kind: string; url: string } | null;
+};

@@ -1,4 +1,4 @@
-import type { Explainer, ExplainerSummary } from "./types";
+import type { Explainer, ExplainerSummary, Job } from "./types";
 
 /**
  * Same origin: app/api/[...path]/route.ts forwards every /api request to the API, so the
@@ -41,13 +41,13 @@ export const api = {
       json<Explainer>,
     ),
 
-  /** Synchronous build. Three to five minutes on a trial paper; the caller shows progress. */
-  build: (input: string, forceRefresh = false) =>
-    fetch(`${API_BASE}/api/build`, {
+  /** Start a build. Returns at once with a job to poll; the build runs on the API. */
+  startBuild: (input: string, forceRefresh = false) =>
+    fetch(`${API_BASE}/api/jobs`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input, force_refresh: forceRefresh }),
-    }).then(json<Explainer>),
+    }).then(json<Job>),
 
   /**
    * Build from a PDF the reader downloaded themselves.
@@ -56,9 +56,11 @@ export const api = {
    * publishers hosting it refuse automated downloads. They do not refuse people, so this
    * is the route for everything the PMC path cannot reach.
    */
-  buildFromPdf: (file: File) => {
+  startPdfBuild: (file: File) => {
     const body = new FormData();
     body.append("file", file);
-    return fetch(`${API_BASE}/api/build/pdf`, { method: "POST", body }).then(json<Explainer>);
+    return fetch(`${API_BASE}/api/jobs/pdf`, { method: "POST", body }).then(json<Job>);
   },
+
+  jobs: () => fetch(`${API_BASE}/api/jobs`, { cache: "no-store" }).then(json<Job[]>),
 };

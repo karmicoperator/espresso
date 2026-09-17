@@ -7,14 +7,17 @@ to try again.
 ## Shape
 
 ```
-POST /api/build       {"input": "<PubMed link | PMCID | PMID | DOI>"}   synchronous, 3-5 min
-POST /api/build/pdf   multipart file                                    for papers PMC lacks
+POST /api/jobs        {"input": "<PubMed link | PMCID | PMID | DOI>"}   202, a job to poll
+POST /api/jobs/pdf    multipart file                                    for papers PMC lacks
+GET  /api/jobs        GET /api/jobs/{id}    step, fraction, elapsed, then paper_id or error
+POST /api/build, /api/build/pdf   the same builds as one long request, for scripts
 GET  /api/explainer/{paper_id}   GET /api/explainers   GET /api/figure/{paper_id}/{file}
 GET  /api/health      reports degraded, with the reason, when it cannot build
 
 ingestion/  resolve → fetch JATS → parse to StructuredPaper → rewrite into ≤5 sections
 agents/     chart_planner (one LLM call) → verify (deterministic gate) → pipeline assembles
 models/     charts.py is the contract the frontend is built against
+builds.py   the two build paths, and the in-memory job registry (one build at a time)
 store.py    JSON per paper under data/explainers/
 ```
 

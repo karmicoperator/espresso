@@ -44,7 +44,9 @@ __all__ = [
 _paper_cache: dict[str, StructuredPaper] = {}
 
 
-async def ingest_pdf(path, source_name: str = "", rewrite: bool = True) -> StructuredPaper:
+async def ingest_pdf(
+    path, source_name: str = "", rewrite: bool = True, progress=None
+) -> StructuredPaper:
     """A PDF the reader supplied, through the same rewrite the PMC path uses.
 
     Nothing downstream is told which tier this came from, because nothing downstream should
@@ -53,9 +55,13 @@ async def ingest_pdf(path, source_name: str = "", rewrite: bool = True) -> Struc
     """
     from ingestion.pdf import extract_pdf
 
+    if progress:
+        progress("fetch", 0.05, f"reading {source_name or 'the PDF'}")
     paper = extract_pdf(path, source_name)
 
     if rewrite and paper.sections:
+        if progress:
+            progress("rewrite", 0.10, "")
         try:
             source = [s.model_copy(deep=True) for s in paper.sections]
             paper.reader_sections = await format_sections(source, paper.meta, model=None)
@@ -69,6 +75,7 @@ async def ingest_paper(
     reference: str,
     force_refresh: bool = False,
     rewrite: bool = True,
+    progress=None,
 ) -> StructuredPaper:
     """Resolve, fetch, parse and (by default) rewrite into reader sections.
 
@@ -76,6 +83,7 @@ async def ingest_paper(
         reference: A PubMed/PMC/Europe PMC URL, a PMCID, a PMID or a DOI.
         force_refresh: Bypass the process cache.
         rewrite: Run the section formatter. Off for tests that only need the source text.
+        progress: The pipeline's (step, fraction, detail) callback, for a job to record.
     """
     key = reference.strip()
     if not force_refresh and (cached := _paper_cache.get(key)) is not None:
@@ -85,6 +93,8 @@ async def ingest_paper(
     paper = await ingest_pubmed(key)
 
     if rewrite and paper.sections:
+        if progress:
+            progress("rewrite", 0.10, paper.meta.title[:80])
         try:
             # The formatter rewrites in place, so hand it a copy: `paper.sections` has to
             # stay verbatim for the provenance gate.
