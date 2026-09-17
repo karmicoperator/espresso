@@ -56,7 +56,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@v7
 
       # Export the locked runtime closure instead of `uv sync`-ing: installing
       # the real environment would drag in manimpango's pango/cairo build deps
