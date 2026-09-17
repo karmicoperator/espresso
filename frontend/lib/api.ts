@@ -6,10 +6,26 @@ import type { Explainer, ExplainerSummary } from "./types";
  */
 export const API_BASE = "";
 
+/**
+ * A failure the page can show. `kind` is set for the cases the reader can do something
+ * about, and `url` says where; "not_in_pmc" is the one that offers the PDF route.
+ */
+export class ApiError extends Error {
+  kind: string;
+  url: string;
+  constructor(message: string, kind = "", url = "") {
+    super(message);
+    this.kind = kind;
+    this.url = url;
+  }
+}
+
 async function json<T>(res: Response): Promise<T> {
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.detail ?? `${res.status} ${res.statusText}`);
+    const d = body.detail;
+    if (d && typeof d === "object") throw new ApiError(d.message, d.kind, d.url);
+    throw new ApiError(typeof d === "string" ? d : `${res.status} ${res.statusText}`);
   }
   return res.json() as Promise<T>;
 }

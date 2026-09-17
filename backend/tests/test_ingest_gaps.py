@@ -44,3 +44,24 @@ def test_unparseable_xml_is_empty_rather_than_an_exception():
 def test_the_threshold_rejects_a_stub_and_accepts_a_paper():
     assert body_words(METADATA_ONLY) < MIN_BODY_WORDS
     assert body_words(FULL) >= MIN_BODY_WORDS
+
+
+async def test_not_in_pmc_error_names_the_case_and_offers_the_pdf_route(monkeypatch):
+    """The failure a reader can act on says so, and carries where to go."""
+    from ingestion import pubmed
+
+    async def no_doi(pmid, client):
+        return "10.1000/example"
+
+    async def is_oa(doi, client):
+        return True, "gold"
+
+    monkeypatch.setattr(pubmed, "_doi_from_pubmed", no_doi)
+    monkeypatch.setattr(pubmed, "_oa_status", is_oa)
+    ref = pubmed.PaperRef(pmcid="", pmid="12345678", doi="", url="")
+    err = await pubmed._no_pmcid_error(ref, client=None)
+    assert isinstance(err, pubmed.IngestError)
+    assert err.kind == "not_in_pmc"
+    assert err.url == "https://doi.org/10.1000/example"
+    assert "drop it here" in str(err)
+    assert "open access" in str(err)

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { api } from "@/lib/api";
+import { ApiError, api } from "@/lib/api";
 import type { ExplainerSummary } from "@/lib/types";
 
 const EXAMPLES = [
@@ -19,14 +19,21 @@ const STEPS = [
   "Checking every value against the source",
 ];
 
+function isPdf(file: File) {
+  return file.type === "application/pdf" || /\.pdf$/i.test(file.name);
+}
+
 export default function Home() {
   const router = useRouter();
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [step, setStep] = useState(0);
   const [elapsed, setElapsed] = useState(0);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<ApiError | null>(null);
   const [built, setBuilt] = useState<ExplainerSummary[]>([]);
+  const [dragging, setDragging] = useState(false);
+  // dragenter/dragleave fire for every child crossed; only a balanced count means "left".
+  const dragDepth = useRef(0);
 
   useEffect(() => {
     api.list().then(setBuilt).catch(() => setBuilt([]));
@@ -44,43 +51,77 @@ export default function Home() {
     };
   }, [busy]);
 
-  async function submit(reference: string) {
+  async function run(build: () => Promise<{ paper_id: string }>) {
     setError(null);
     setBusy(true);
     setStep(0);
     setElapsed(0);
     try {
-      const explainer = await api.build(reference);
+      const explainer = await build();
       router.push(`/paper/${encodeURIComponent(explainer.paper_id)}`);
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      setError(e instanceof ApiError ? e : new ApiError(e instanceof Error ? e.message : String(e)));
       setBusy(false);
     }
   }
+
+  const submit = (reference: string) => run(() => api.build(reference));
 
   /**
    * The other way in. A quarter of PubMed's free full text was never deposited in PubMed
    * Central, and the publishers hosting it refuse automated downloads. They do not refuse
    * people, so a paper the reader can open they can also drop here.
    */
-  async function submitPdf(file: File) {
-    setError(null);
-    setBusy(true);
-    setStep(0);
-    setElapsed(0);
-    try {
-      const explainer = await api.buildFromPdf(file);
-      router.push(`/paper/${encodeURIComponent(explainer.paper_id)}`);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
-      setBusy(false);
+  function submitPdf(file: File) {
+    if (!isPdf(file)) {
+      setError(new ApiError(`${file.name} is not a PDF.`));
+      return;
     }
+    void run(() => api.buildFromPdf(file));
+    // Nothing to resolve for a file, so the progress list starts at reading it.
+    setStep(1);
   }
+
+  // Dropping a PDF anywhere on the page is the same as choosing it. The browser would
+  // otherwise navigate to the file.
+  const dragProps = busy
+    ? {}
+    : {
+        onDragEnter: (e: React.DragEvent) => {
+          e.preventDefault();
+          if (dragDepth.current++ === 0) setDragging(true);
+        },
+        onDragOver: (e: React.DragEvent) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = "copy";
+        },
+        onDragLeave: () => {
+          if (--dragDepth.current === 0) setDragging(false);
+        },
+        onDrop: (e: React.DragEvent) => {
+          e.preventDefault();
+          dragDepth.current = 0;
+          setDragging(false);
+          const file = e.dataTransfer.files?.[0];
+          if (file) submitPdf(file);
+        },
+      };
 
   const mmss = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`;
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
+    <main
+      {...dragProps}
+      className="relative mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-6 py-20 text-center"
+    >
+      {dragging && (
+        <div className="pointer-events-none fixed inset-0 z-40 grid place-items-center bg-black/70 backdrop-blur-sm">
+          <div className="rounded-3xl border-2 border-dashed border-white/40 px-14 py-12">
+            <p className="text-2xl font-medium text-[#e8e8e8]">Drop the PDF to build it</p>
+          </div>
+        </div>
+      )}
+
       <h1 className="text-6xl font-semibold tracking-tight text-[#e8e8e8] sm:text-7xl">
         Med<span className="text-white/45">Scroll</span>
       </h1>
@@ -149,22 +190,8 @@ export default function Home() {
           </p>
 
           <p className="mt-4 text-xs text-white/30">
-            Not in PubMed Central?{" "}
-            <label className="cursor-pointer text-white/60 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white">
-              open the PDF
-              <input
-                type="file"
-                accept="application/pdf,.pdf"
-                className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  // Cleared so choosing the same file twice still fires a change event.
-                  e.target.value = "";
-                  if (file) void submitPdf(file);
-                }}
-              />
-            </label>{" "}
-            and it will be built from that instead.
+            Not in PubMed Central? <PdfPicker onPick={submitPdf}>open the PDF</PdfPicker> or
+            drop one anywhere on this page, and it will be built from that instead.
           </p>
 
           <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
@@ -182,9 +209,30 @@ export default function Home() {
           </div>
 
           {error && (
-            <p className="mt-6 w-full max-w-xl rounded-xl border border-[#f27066]/30 bg-[#f27066]/10 p-3 text-sm text-[#f27066]">
-              {error}
-            </p>
+            <div
+              role="alert"
+              className="mt-6 w-full max-w-xl rounded-xl border border-[#f27066]/30 bg-[#f27066]/10 p-4 text-left text-sm text-[#f27066]"
+            >
+              <p className="leading-relaxed">{error.message}</p>
+              {error.kind === "not_in_pmc" && (
+                <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-[#f27066]/20 pt-3 text-xs">
+                  {error.url && (
+                    <a
+                      href={error.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[#e8e8e8] underline decoration-white/30 underline-offset-4 hover:decoration-white"
+                    >
+                      Open the paper at the publisher ↗
+                    </a>
+                  )}
+                  <span className="text-[#e8e8e8]">
+                    then <PdfPicker onPick={submitPdf} className="cursor-pointer underline decoration-white/30 underline-offset-4 hover:decoration-white">choose the downloaded PDF</PdfPicker> or
+                    drop it on this page.
+                  </span>
+                </div>
+              )}
+            </div>
           )}
 
           {built.length > 0 && (
@@ -218,5 +266,37 @@ export default function Home() {
         </>
       )}
     </main>
+  );
+}
+
+/** A file chooser that reads as a link. Clearing the value lets the same file be chosen twice. */
+function PdfPicker({
+  onPick,
+  className,
+  children,
+}: {
+  onPick: (file: File) => void;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <label
+      className={
+        className ??
+        "cursor-pointer text-white/60 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white"
+      }
+    >
+      {children}
+      <input
+        type="file"
+        accept="application/pdf,.pdf"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0];
+          e.target.value = "";
+          if (file) onPick(file);
+        }}
+      />
+    </label>
   );
 }

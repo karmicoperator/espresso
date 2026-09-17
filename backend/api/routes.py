@@ -158,7 +158,12 @@ async def build_now(request: dict):
     try:
         paper = await ingest_paper(reference, force_refresh=bool(request.get("force_refresh")))
     except IngestError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
+        # A case the reader can act on carries its kind and a link, so the page can offer
+        # the PDF route beside the message instead of a dead end.
+        detail = (
+            {"message": str(exc), "kind": exc.kind, "url": exc.url} if exc.kind else str(exc)
+        )
+        raise HTTPException(status_code=422, detail=detail) from exc
 
     explainer = await build_visuals(paper)
 

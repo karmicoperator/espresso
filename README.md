@@ -70,8 +70,10 @@ but outside the open-access subset work too.
 
 About a quarter of PubMed's "free full text" was never deposited in PMC. Those are often
 genuinely open access, but the publishers hosting them answer 403 to anything that is not a
-browser. They block programs, not people — so download the PDF and use **"open the PDF"** on
-the landing page. Same pipeline, same gate, with one honest cost: a PDF has no addressable
+browser. They block programs, not people — so download the PDF and drop it anywhere on the
+landing page, or use **"open the PDF"** there. When a pasted link turns out to be one of
+these, the message says so and links to the publisher's page, with the PDF route beside it.
+Same pipeline, same gate, with one honest cost: a PDF has no addressable
 table cells, so a number printed only inside a table cannot be cited and will not appear.
 The page says when it was built that way.
 

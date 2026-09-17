@@ -62,7 +62,17 @@ _DROP = {
 
 
 class IngestError(RuntimeError):
-    """The paper could not be resolved or retrieved."""
+    """The paper could not be resolved or retrieved.
+
+    `kind` names the case when the reader can do something about it, and `url` is where
+    to go. "not_in_pmc" is the one that matters: the paper exists and is often free to
+    read, so the page offers the PDF route beside the message rather than a dead end.
+    """
+
+    def __init__(self, message: str, kind: str = "", url: str = ""):
+        super().__init__(message)
+        self.kind = kind
+        self.url = url
 
 
 @dataclass
@@ -633,31 +643,36 @@ async def _doi_from_pubmed(pmid: str, client: httpx.AsyncClient) -> str:
     return ""
 
 
-async def _no_pmcid_message(ref: PaperRef, client: httpx.AsyncClient) -> str:
-    """Say what is actually wrong.
+async def _no_pmcid_error(ref: PaperRef, client: httpx.AsyncClient) -> IngestError:
+    """Say what is actually wrong, and what to do about it.
 
     The old message ended "Try an open-access paper", which is both wrong and irritating
     when the paper in front of the reader is open access. Being open access and being
     deposited in PubMed Central are different things, and only the second one is readable
-    from here. So check, and say which.
+    from here. So check, say which, and point at the way through: the publisher blocks
+    programs, not people, so the reader downloads the PDF and hands it over.
     """
     # The id converter has no record for a paper PMC never took, so the DOI arrives empty
     # exactly when it is needed. PubMed itself still has it.
     doi = ref.doi or await _doi_from_pubmed(ref.pmid, client)
     is_oa, status = await _oa_status(doi, client)
-    if is_oa:
-        return (
-            f"{ref.key} is open access ({status or 'confirmed by OpenAlex'}), but it has no "
-            "PubMed Central record. Full text is read from PMC, and the publisher's own "
-            "site is not machine-readable, so there is nothing to build from yet. Papers "
-            "are often deposited months after publication, so this may work later."
-        )
-    return (
-        f"{ref.key} has no PubMed Central record, so there is no full text to read. "
-        "PubMed's 'free full text' filter includes papers that are free to read on the "
-        "publisher's site without being deposited in PMC; only the deposited ones can be "
-        "built here."
+    url = f"https://doi.org/{doi}" if doi else (
+        f"https://pubmed.ncbi.nlm.nih.gov/{ref.pmid}/" if ref.pmid else ""
     )
+    if is_oa:
+        message = (
+            f"{ref.key} is open access ({status or 'confirmed by OpenAlex'}) but was never "
+            "deposited in PubMed Central, which is where the full text is read from. The "
+            "publisher's site refuses programs and not people: open the paper there, "
+            "download the PDF, and drop it here to build it from that."
+        )
+    else:
+        message = (
+            f"{ref.key} has no PubMed Central record, so there is no full text to read "
+            "from here. If you can download the PDF from the publisher, drop it here and "
+            "it will be built from that instead."
+        )
+    return IngestError(message, kind="not_in_pmc", url=url)
 
 
 async def ingest_pubmed(raw: str) -> StructuredPaper:
@@ -666,7 +681,7 @@ async def ingest_pubmed(raw: str) -> StructuredPaper:
         ref = await resolve(raw, client)
 
         if not ref.pmcid:
-            raise IngestError(await _no_pmcid_message(ref, client))
+            raise await _no_pmcid_error(ref, client)
 
         xml = await fetch_jats(ref.pmcid, client)
         paper = parse_jats(xml, ref)
