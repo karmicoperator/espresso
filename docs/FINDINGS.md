@@ -379,8 +379,9 @@ number, invisible until the port moves.
 
 ## 24. Smaller things that cost time
 
-**Next 16's Turbopack dev server silently ignores `rewrites`.** No warning. The frontend
-calls the API directly with CORS.
+**Next 16's Turbopack dev server silently ignores `rewrites`.** No warning. The first fix
+was to call the API directly with CORS, which made the API port part of the build; the
+lasting one is the route-handler proxy described below.
 
 **Long-running polling shells kill their process group on timeout.** This killed the API and
 its in-flight build several times, and once left a stale server holding port 8000 while we
@@ -391,6 +392,23 @@ as configured and failed with a 401 seconds into a build. Validate the shape.
 
 **Do not let one bad spec kill a build.** Validate per item, drop the failure with a note,
 carry on.
+
+**Next's rewrites are decided at build time.** `rewrites()` in `next.config` is evaluated
+by `next build` and written into the routes manifest, so an API port read from the
+environment at `next start` is ignored. A route handler under `app/api/[...path]` forwards
+at request time instead, and the port becomes plain runtime configuration.
+
+**Node's fetch will not forward an `Expect` header.** curl adds `Expect: 100-continue` to
+any large POST, and the proxy answered 502 to every upload over a few hundred kilobytes
+while browsers, which never send it, worked. Drop it with the other hop-by-hop headers.
+
+**`-nt` compares whole seconds.** A stamp file touched right after `npm install` is not
+newer than the lockfile npm rewrote in the same second, so the install ran on every start.
+Record the lockfile's checksum instead.
+
+**A bash trap waits for the foreground command.** `trap ... TERM; sleep 3600` holds the
+signal until the sleep ends. Ctrl-C in a terminal only worked because it hit the sleep
+too. `sleep 3600 & wait $!` returns as soon as the signal arrives.
 
 **A label is not a React key.** The same category legitimately appears once per group, and
 React then drops or duplicates marks. That duplicate-key warning was the grouped-bars bug
@@ -444,6 +462,10 @@ Three ways in, all idempotent, all reusing whatever is already listening:
   when something is wrong and you want to watch it.
 - **A PDF you downloaded** — "open the PDF" on the landing page, for the roughly quarter of
   PubMed's free full text that PubMed Central never took.
+
+First run installs the API's packages with `uv`, the web app's with `npm`, and builds the
+web app, each skipped afterwards while its lockfile checksum matches. A changed source file
+triggers a rebuild on the next start, and the running web server is restarted onto it.
 
 Both launchers resolve ports through `scripts/launch-lib.sh`: our own instance is reused
 wherever it is, an occupied port is stepped over, and the web app is told which API port to

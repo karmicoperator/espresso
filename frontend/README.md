@@ -9,4 +9,7 @@ pick the ports and tell this app which API to call.
 - `components/ExplainerReader.tsx` is the page: prose left, charts right, figures full width.
 - `lib/types.ts` mirrors `backend/models/charts.py`. Change them together.
 
-The API origin comes from `NEXT_PUBLIC_API_URL`, compiled in at build time.
+`app/api/[...path]/route.ts` forwards `/api/*` to the API at request time, so the page is
+single-origin and the API port (`API_URL`, set by the launcher) is not part of the build.
+The launchers serve a production build and rebuild it when a source file is newer;
+`MEDSCROLL_DEV=1 ./start.command` runs the dev server instead.

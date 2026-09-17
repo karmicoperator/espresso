@@ -1,7 +1,10 @@
 import type { Explainer, ExplainerSummary } from "./types";
 
-/** The backend origin. CORS is enabled server-side, so no proxy sits in between. */
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
+/**
+ * Same origin: app/api/[...path]/route.ts forwards every /api request to the API, so the
+ * page never needs to know which port the API is on.
+ */
+export const API_BASE = "";
 
 async function json<T>(res: Response): Promise<T> {
   if (!res.ok) {

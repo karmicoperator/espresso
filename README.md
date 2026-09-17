@@ -17,19 +17,21 @@ requests to PubMed Central for the paper itself.
 ## Running it
 
 Double-click **`MedScroll.app`**, or run **`./start.command`** for the same thing with live
-output. Both start what is down, reuse what is already running, step past ports held by
-other programs, and open the browser.
+output. Both install what is missing on first run, build the web app, start what is down,
+reuse what is already running, step past ports held by other programs, and open the
+browser. When a source file changes, the next start rebuilds and restarts the web app.
 
-First run needs the dependencies:
+Three tools have to be on the machine, and the launcher says which one is missing and how
+to get it:
 
-```bash
-cd backend  && uv sync
-cd frontend && npm install
-```
+- [`uv`](https://docs.astral.sh/uv/) for the API. It fetches Python itself if needed.
+- [Node.js](https://nodejs.org) for the web app.
+- [Claude Code](https://claude.com/claude-code), signed in (`claude` once in a terminal).
+  It is the model backend, so there is no API key. Without it, papers already built still
+  open; the launcher and `/api/health` both say so.
 
-The model backend is headless Claude Code, so there is no API key. It has to be signed in:
-run `claude` once in a terminal. `/api/health` reports `degraded` with the reason when it
-is not.
+Logs land in `logs/`. `MEDSCROLL_DEV=1 ./start.command` runs the web app's dev server
+instead of a production build.
 
 ## What it does
 

@@ -1,22 +1,26 @@
 #!/bin/bash
 # MedScroll launcher.
 #
-# Starts the API and the web app if our own instances are not already up, then opens the
-# browser. Running it twice is harmless, and a port held by somebody else's dev server is
-# stepped over rather than adopted.
+# Installs what is missing on first run, starts the API and the web app if our own
+# instances are not already up, then opens the browser. Running it twice is harmless, and
+# a port held by somebody else's dev server is stepped over rather than adopted.
 #
-# There is no terminal here, so every message goes through osascript. A GUI launch that
-# fails silently is worse than one that fails loudly.
+# There is no terminal here, so progress goes to notifications and failure to a dialog.
+# A GUI launch that fails silently is worse than one that fails loudly.
 
 REPO="/Users/max-j/Desktop/ScrollyTelling"
 
-# Finder hands a GUI app a PATH of /usr/bin:/bin:/usr/sbin:/sbin. That has no node, no npm
-# and no claude, so without this the web server never starts and the API comes up with no
-# model provider, which fails later and further from the cause.
+# Finder hands a GUI app a PATH of /usr/bin:/bin:/usr/sbin:/sbin. That has no node, no uv
+# and no claude, so without this nothing installs and the API comes up with no model
+# provider, which fails later and further from the cause.
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 say()  { osascript -e "display notification \"$1\" with title \"MedScroll\"" >/dev/null 2>&1; }
-fail() { osascript -e "display dialog \"$1\" with title \"MedScroll\" buttons {\"OK\"} default button 1 with icon stop" >/dev/null 2>&1; exit 1; }
+fail() {
+  local text=${1//\"/\\\"}
+  osascript -e "display dialog \"$text\" with title \"MedScroll\" buttons {\"OK\"} default button 1 with icon stop" >/dev/null 2>&1
+  exit 1
+}
 
 # If the repo moved, fall back to walking up from the bundle so the app still works when
 # it is sitting inside the project.
@@ -31,14 +35,16 @@ $REPO
 Move the folder back, or keep MedScroll.app inside it."
 
 cd "$REPO" || fail "Cannot open $REPO"
-mkdir -p logs
 # shellcheck source=scripts/launch-lib.sh
-. scripts/launch-lib.sh || fail "scripts/launch-lib.sh is missing from $REPO"
+. "$REPO/scripts/launch-lib.sh" || fail "scripts/launch-lib.sh is missing from $REPO"
+
+setup_backend
+setup_frontend
 
 API=$(resolve_port api) || fail "Ports $API_PORT_BASE to $((API_PORT_BASE + PORT_SPAN)) are all in use by other programs, so the API has nowhere to listen."
 WEB=$(resolve_port web) || fail "Ports $WEB_PORT_BASE to $((WEB_PORT_BASE + PORT_SPAN)) are all in use by other programs, so the web app has nowhere to listen."
 API_PORT=${API%% *}; API_ACTION=${API##* }
-WEB_PORT=${WEB%% *}; WEB_ACTION=${WEB##* }
+WEB_PORT=${WEB%% *}; WEB_ACTION=$(web_action "${WEB%% *}" "${WEB##* }")
 URL="http://localhost:$WEB_PORT"
 
 # Both already ours: nothing to start, so offer the two things worth doing.
@@ -47,56 +53,31 @@ if [ "$API_ACTION" = reuse ] && [ "$WEB_ACTION" = reuse ]; then
   case "$CHOICE" in
     *Open*) open "$URL" ;;
     *Stop*)
-      kill $(lsof -tiTCP:"$API_PORT" -sTCP:LISTEN 2>/dev/null) 2>/dev/null
-      kill $(lsof -tiTCP:"$WEB_PORT" -sTCP:LISTEN 2>/dev/null) 2>/dev/null
+      stop_port "$API_PORT"
+      stop_port "$WEB_PORT"
       say "Stopped." ;;
   esac
   exit 0
 fi
 
 if [ "$API_ACTION" = start ]; then
-  [ -x backend/.venv/bin/python ] || fail "The backend virtualenv is missing.
-
-Open Terminal and run:
-  cd \"$REPO/backend\" && uv sync"
   say "Starting the API on port $API_PORT…"
-  ( cd backend && API_PORT="$API_PORT" nohup .venv/bin/python main.py > ../logs/api.log 2>&1 & )
-  wait_for_service api "$API_PORT" 45 || fail "The API did not start on port $API_PORT. See:
-
-$REPO/logs/api.log"
+  start_api "$API_PORT"
 fi
 
 if [ "$WEB_ACTION" = start ]; then
-  command -v npm >/dev/null 2>&1 || fail "npm was not found.
-
-Install Node, or edit PATH in MedScroll.app/Contents/MacOS/MedScroll"
-  if [ ! -d frontend/node_modules ]; then
-    say "Installing web dependencies. This happens once."
-    ( cd frontend && npm install >/dev/null 2>&1 )
-  fi
   say "Starting the web app on port $WEB_PORT…"
-  # The API origin is compiled into the page, so it has to be in the environment before
-  # Next starts, not discovered by the browser afterwards.
-  ( cd frontend && NEXT_PUBLIC_API_URL="http://127.0.0.1:$API_PORT" \
-      nohup npm run dev -- -p "$WEB_PORT" > ../logs/web.log 2>&1 & )
-  wait_for_service web "$WEB_PORT" 90 || fail "The web app did not start on port $WEB_PORT. See:
-
-$REPO/logs/web.log"
+  start_web "$WEB_PORT" "$API_PORT"
 fi
 
-PROVIDER=$(curl -s --max-time 8 "http://127.0.0.1:$API_PORT/api/health" \
-  | python3 -c 'import sys,json;print(json.load(sys.stdin)["services"]["llm_provider"])' 2>/dev/null)
+PROVIDER=$(llm_status "$API_PORT")
+ADVICE=$(llm_advice "${PROVIDER:-unconfigured}")
+if [ -n "$ADVICE" ]; then
+  ADVICE=${ADVICE//\"/\\\"}
+  osascript -e "display dialog \"MedScroll started, but new papers cannot be built.
 
-# Reading papers still works without a model; building a new one does not. Better to say
-# that now than to let the first build fail three minutes in.
-case "$PROVIDER" in
-  unconfigured*)
-    osascript -e 'display dialog "MedScroll started, but no model provider is configured, so new papers cannot be built. Papers already built will still open.
-
-The claude CLI was not found. If Claude Code is installed somewhere unusual, add its folder to PATH in MedScroll.app/Contents/MacOS/MedScroll." with title "MedScroll" buttons {"Open anyway"} default button 1 with icon caution' >/dev/null 2>&1
-    ;;
-  *)
-    say "Ready on port $WEB_PORT${PROVIDER:+ · $PROVIDER}"
-    ;;
-esac
+$ADVICE\" with title \"MedScroll\" buttons {\"Open anyway\"} default button 1 with icon caution" >/dev/null 2>&1
+else
+  say "Ready on port $WEB_PORT${PROVIDER:+ · $PROVIDER}"
+fi
 open "$URL"
