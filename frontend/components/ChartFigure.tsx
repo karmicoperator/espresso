@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Chart, Datum, DiagramEdge } from "@/lib/types";
+import type { Chart, Datum, DiagramEdge, Provenance } from "@/lib/types";
+
+/** Which element of a chart the prose beside it is currently about. */
+export type Lit = { chart_id: string; kind: "datum" | "edge"; index: number };
 
 /**
  * Draws a chart spec as live SVG.
@@ -129,31 +132,77 @@ type TipState =
   | { x: number; y: number; quote: string; section: string; value?: number }
   | null;
 
-export function ChartFigure({ chart }: { chart: Chart }) {
+export function ChartFigure({
+  chart,
+  lit = null,
+  onOpen,
+}: {
+  chart: Chart;
+  /** The element the prose is about right now; the rest of the chart steps back. */
+  lit?: Lit | null;
+  /** Opens the paper's paragraph behind a value. Without it, a click shows the sentence. */
+  onOpen?: (prov: Provenance, value?: number) => void;
+}) {
   const { ref, on } = useReveal<HTMLDivElement>();
   const [tip, setTip] = useState<TipState>(null);
+  const focused = lit && lit.chart_id === chart.id ? lit : null;
 
   // The paper's sentence has to be reachable without a mouse: a keyboard reaches it by
   // focus, a finger by tap, a screen reader through the label.
-  const showQuote = (quote: string, section: string, value?: number) => ({
-    onMouseMove: (e: React.MouseEvent) =>
-      setTip({ x: e.clientX, y: e.clientY, quote, section, value }),
-    onMouseLeave: () => setTip(null),
-    onFocus: (e: React.FocusEvent) => {
-      const r = e.currentTarget.getBoundingClientRect();
-      setTip({ x: r.left + r.width / 2, y: r.bottom, quote, section, value });
-    },
-    onBlur: () => setTip(null),
-    onClick: (e: React.MouseEvent) =>
-      setTip((t) => (t && t.quote === quote ? null : { x: e.clientX, y: e.clientY, quote, section, value })),
-    tabIndex: 0,
-    role: "img" as const,
-    "aria-label": `${value !== undefined ? `${fmt(value)}. ` : ""}The paper says: ${quote} (${section})`,
-    style: { cursor: "default" as const, outline: "none" },
-  });
+  const showQuote = (
+    quote: string,
+    section: string,
+    value?: number,
+    prov?: Provenance,
+    key?: { kind: "datum" | "edge"; index: number },
+  ) => {
+    const mine = focused && key && focused.kind === key.kind && focused.index === key.index;
+    return {
+      onMouseMove: (e: React.MouseEvent) =>
+        setTip({ x: e.clientX, y: e.clientY, quote, section, value }),
+      onMouseLeave: () => setTip(null),
+      onFocus: (e: React.FocusEvent) => {
+        const r = e.currentTarget.getBoundingClientRect();
+        setTip({ x: r.left + r.width / 2, y: r.bottom, quote, section, value });
+      },
+      onBlur: () => setTip(null),
+      onClick: (e: React.MouseEvent) => {
+        if (onOpen && prov) {
+          setTip(null);
+          onOpen(prov, value);
+          return;
+        }
+        setTip((t) => (t && t.quote === quote ? null : { x: e.clientX, y: e.clientY, quote, section, value }));
+      },
+      onKeyDown: (e: React.KeyboardEvent) => {
+        if ((e.key === "Enter" || e.key === " ") && onOpen && prov) {
+          e.preventDefault();
+          onOpen(prov, value);
+        }
+      },
+      tabIndex: 0,
+      role: "img" as const,
+      "aria-label": `${value !== undefined ? `${fmt(value)}. ` : ""}The paper says: ${quote} (${section})`,
+      "data-lit": mine ? "1" : undefined,
+      style: {
+        cursor: onOpen ? ("pointer" as const) : ("default" as const),
+        outline: "none",
+        // Focus follows the prose: the element the sentence is about stays full, the
+        // rest of the chart steps back, and nothing moves.
+        opacity: focused && !mine ? 0.28 : 1,
+        transition: "opacity .35s ease",
+      },
+    };
+  };
 
   const hover = (datum: Datum) =>
-    showQuote(datum.provenance.quote, datum.provenance.section || datum.provenance.locator, datum.value);
+    showQuote(
+      datum.provenance.quote,
+      datum.provenance.section || datum.provenance.locator,
+      datum.value,
+      datum.provenance,
+      { kind: "datum", index: chart.data.indexOf(datum) },
+    );
 
   return (
     <figure ref={ref} className={`chart ${on ? "on" : ""} my-8`}>
@@ -865,7 +914,13 @@ function Flow({ chart, hover }: { chart: Chart; hover: HoverFn }) {
 }
 
 
-type QuoteFn = (quote: string, section: string, value?: number) => Record<string, unknown>;
+type QuoteFn = (
+  quote: string,
+  section: string,
+  value?: number,
+  prov?: Provenance,
+  key?: { kind: "datum" | "edge"; index: number },
+) => Record<string, unknown>;
 
 /**
  * A mechanism the paper argues, drawn as the graph it is.
@@ -993,7 +1048,13 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
           return (
             <g
               key={`${e.source}-${e.target}-${i}`}
-              {...showQuote(e.provenance.quote, e.provenance.section || e.provenance.locator)}
+              {...showQuote(
+                e.provenance.quote,
+                e.provenance.section || e.provenance.locator,
+                undefined,
+                e.provenance,
+                { kind: "edge", index: i },
+              )}
             >
               {/* A wide invisible path so the arrow is hoverable without being thick. */}
               <path d={path} stroke="transparent" strokeWidth={16} fill="none" />

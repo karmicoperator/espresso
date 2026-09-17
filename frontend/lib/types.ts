@@ -99,6 +99,51 @@ export type BottomLine = {
   provenance: Provenance;
 };
 
+/** One arm's absolute rate for the primary outcome, verified against its quote. */
+export type RiskArm = {
+  label: string;
+  value: number;
+  events: number | null;
+  n: number | null;
+  provenance: Provenance;
+};
+
+export type AbsoluteRisk = {
+  outcome: string;
+  timeframe: string;
+  comparator: RiskArm;
+  intervention: RiskArm;
+  higher_is_better: boolean;
+};
+
+/** Computed once on the API from the two verified rates. Always marked derived. */
+export type AbsoluteRiskDerived = {
+  derived: true;
+  per_1000: { comparator: number; intervention: number };
+  difference_per_1000: number;
+  direction: "fewer" | "more";
+  favours_intervention: boolean | null;
+  relative_change_pct: number | null;
+  number_needed?: number;
+  number_needed_kind?: "to treat" | "to harm";
+};
+
+/** A defined term. With a provenance the definition shown is the paper's own sentence. */
+export type Term = {
+  term: string;
+  definition: string;
+  provenance: Provenance | null;
+};
+
+/** A prose sentence that states the same printed fact as a chart element. */
+export type Link = {
+  section_id: string;
+  sentence: string;
+  chart_id: string;
+  kind: "datum" | "edge";
+  index: number;
+};
+
 export type Explainer = {
   paper_id: string;
   title: string;
@@ -109,6 +154,12 @@ export type Explainer = {
   source_url: string | null;
   question: string;
   bottom_line?: BottomLine | null;
+  absolute_risk?: AbsoluteRisk | null;
+  absolute_risk_derived?: AbsoluteRiskDerived | null;
+  terms?: Term[];
+  links?: Link[];
+  /** The paper's own paragraph behind each cited locator. */
+  sources?: Record<string, string>;
   sections: ReaderSection[];
   charts: Chart[];
   figures: FigurePlate[];
@@ -122,6 +173,10 @@ export type ExplainerSummary = {
   journal: string | null;
   published: string | null;
   chart_count: number;
+  reading_minutes?: number;
+  source?: "pmc" | "pdf";
+  /** Built with the bottom line and prose check; older builds were not. */
+  checked?: boolean;
 };
 
 /** A build in progress or recently finished. Mirrors backend/builds.py Job.public(). */

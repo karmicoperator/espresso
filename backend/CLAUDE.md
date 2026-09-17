@@ -34,6 +34,12 @@ wording, never supplied by the model.
 Values that fail are dropped and listed in the response. Do not soften this to raise a pass
 rate; fix the extraction instruction instead.
 
+The planner also returns `bottom_line`, `absolute_risk` (two arms, each quoted) and
+`terms` (each with the paper's defining sentence when one exists); all go through the
+gate. `verify.link_prose` joins prose sentences to chart elements by the printed number,
+never by a model, and `collect_sources` stores the paragraph behind every cited locator.
+The reader's linking, icon array, source panel and glossary all draw on those fields.
+
 **`paper.sections` is the source and stays verbatim.** The rewrite lands on
 `paper.reader_sections`. Overwriting `.content` makes the gate verify against a paraphrase.
 

@@ -66,6 +66,20 @@ a rounded mean) is marked with a dotted underline rather than removed, and the h
 says how many there are. The page also says plainly what was checked and what was not,
 and that it is not clinical advice.
 
+**The effect, as people.** When a trial prints its primary outcome as a rate in each arm,
+the two rates are verified like plotted values and drawn as a hundred people: the ones who
+have the outcome either way, the ones the treatment changes, the rest. A per-1,000 count
+and the number needed to treat are worked out from the same two numbers and marked as
+derived. Toggle relative against absolute, or imagine 1,000 or 10,000 people.
+
+**Prose joined to charts.** A sentence that states a plotted value is linked to that mark
+by the printed number, not by a model. As the sentence reaches the middle of the screen
+the mark lights and the rest of its chart steps back. Clicking any mark, the bottom line,
+a risk arm or a defined term opens the paper's own paragraph with the sentence marked.
+
+**Terms** the explainer uses are defined on hover; when the paper defines the term itself,
+its sentence is shown as the paper's words, otherwise the definition is marked as ours.
+
 **Charts** are typed specs the browser draws: `stat`, `bars`, `dots`, `forest`, `line`,
 `flow`, `diagram`. Hovering, tapping or tabbing to any mark shows the paper's own
 sentence. "Print or save as PDF" gives a light handout with every chart drawn.
@@ -107,7 +121,8 @@ Papers are stored as JSON under `backend/data/explainers/`, figures under
 
 ## Status
 
-Working. 65 tests, ruff and eslint clean.
+Working. 80 tests, ruff and eslint clean. A reading rail with progress and minutes left on
+wide screens; on a phone the section's chart pins to the top while its prose scrolls.
 
 Known limits, all verified rather than assumed:
 

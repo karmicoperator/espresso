@@ -1,10 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo } from "react";
-import { ChartFigure } from "./ChartFigure";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ChartFigure, type Lit } from "./ChartFigure";
 import { FigureFigure } from "./FigureFigure";
-import type { Chart, Explainer, FigurePlate } from "@/lib/types";
+import { ReadingRail } from "./ReadingRail";
+import { RiskFigure } from "./RiskFigure";
+import { SourcePanel } from "./SourcePanel";
+import type { Chart, Explainer, FigurePlate, Link as ProseLink, Provenance, Term } from "@/lib/types";
 
 /**
  * The explainer: at most five rewritten sections, each with the charts that belong to it.
@@ -12,6 +15,12 @@ import type { Chart, Explainer, FigurePlate } from "@/lib/types";
  * Prose in a narrow column on the left, charts wide on the right, with a full-bleed rule
  * and a serif title between sections. Borrowed from Nature's immersive layout, which uses
  * the section break to reset attention rather than to decorate.
+ *
+ * The prose and the charts are joined: a sentence that states a plotted value is linked
+ * to that mark on the API (by the printed number, not by a model), and as the sentence
+ * reaches the middle of the screen the mark stays lit while the rest of its chart steps
+ * back. Clicking a mark, an arm of the risk figure or the bottom line opens the paper's
+ * own paragraph in a side panel.
  */
 export function ExplainerReader({ explainer }: { explainer: Explainer }) {
   const byId = useMemo(
@@ -37,6 +46,22 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
     return m;
   }, [explainer.verification.prose_unmatched]);
 
+  const linksBySection = useMemo(() => {
+    const m = new Map<string, ProseLink[]>();
+    for (const l of explainer.links ?? []) m.set(l.section_id, [...(m.get(l.section_id) ?? []), l]);
+    return m;
+  }, [explainer.links]);
+
+  const terms = useMemo(() => explainer.terms ?? [], [explainer.terms]);
+
+  const words = explainer.sections.reduce((n, s) => n + s.markdown.split(/\s+/).length, 0);
+  const minutes = Math.max(1, Math.ceil(words / 230));
+
+  const [lit, setLit] = useState<Lit | null>(null);
+  const [source, setSource] = useState<{ prov: Provenance; value?: number } | null>(null);
+  const openSource = useCallback((prov: Provenance, value?: number) => setSource({ prov, value }), []);
+  const closeSource = useCallback(() => setSource(null), []);
+
   const meta = [
     explainer.journal,
     explainer.published?.slice(0, 4),
@@ -57,6 +82,8 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
 
   return (
     <main>
+      <ReadingRail sections={explainer.sections.map((s) => ({ id: s.id, title: s.title }))} minutes={minutes} />
+
       <header className="border-b border-white/[0.08]">
         <div className="mx-auto max-w-[1180px] px-8 py-12">
           <div className="print-hide flex items-baseline justify-between gap-4">
@@ -74,7 +101,10 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           <h1 className="mt-5 max-w-4xl text-3xl leading-snug font-medium tracking-tight text-[#e8e8e8]">
             {explainer.title}
           </h1>
-          <p className="num mt-3 text-xs text-white/30">{meta.join(" · ")}</p>
+          <p className="num mt-3 text-xs text-white/30">
+            {meta.join(" · ")}
+            <span className="text-white/20"> · {minutes} min read</span>
+          </p>
           {explainer.authors.length > 0 && (
             <p className="mt-2 max-w-3xl text-xs text-white/40">
               {explainer.authors.slice(0, 6).join(", ")}
@@ -132,12 +162,21 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
             <p className="text-[11px] tracking-[0.16em] text-white/30 uppercase">Bottom line</p>
             <p className="mt-2 text-sm text-white/50">{explainer.bottom_line.question}</p>
             <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{explainer.bottom_line.answer}</p>
-            <p className="mt-4 border-t border-white/[0.08] pt-3 text-xs leading-relaxed text-white/45">
+            <button
+              type="button"
+              onClick={() => openSource(explainer.bottom_line!.provenance)}
+              className="mt-4 block w-full border-t border-white/[0.08] pt-3 text-left text-xs leading-relaxed text-white/45 hover:text-white/70"
+              title="Read this in the paper"
+            >
               The paper: &ldquo;{explainer.bottom_line.provenance.quote}&rdquo;
-              <span className="text-white/30"> — {explainer.bottom_line.provenance.section || explainer.bottom_line.provenance.locator}</span>
-            </p>
+              <span className="text-white/30"> — {explainer.bottom_line.provenance.section || explainer.bottom_line.provenance.locator} ↗</span>
+            </button>
           </div>
         </div>
+      )}
+
+      {explainer.absolute_risk && explainer.absolute_risk_derived && (
+        <RiskFigure risk={explainer.absolute_risk} derived={explainer.absolute_risk_derived} onOpen={openSource} />
       )}
 
       {explainer.notes.length > 0 && (
@@ -153,7 +192,7 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
       )}
 
       {explainer.sections.map((section, i) => (
-        <section key={section.id}>
+        <section key={section.id} id={`section-${section.id}`}>
           <div className="my-2 border-y border-white/[0.08] px-8 py-11">
             <h2 className="serif mx-auto max-w-[1180px] text-center text-[34px] leading-tight font-medium tracking-tight">
               {section.title}
@@ -162,12 +201,22 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
 
           <div className="mx-auto max-w-[1180px] px-8 pb-6">
             <div className="grid gap-11 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
-              <Prose markdown={section.markdown} unprinted={unprinted.get(section.id) ?? []} />
+              <Prose
+                sectionId={section.id}
+                markdown={section.markdown}
+                unprinted={unprinted.get(section.id) ?? []}
+                links={linksBySection.get(section.id) ?? []}
+                terms={terms}
+                onActive={setLit}
+                onOpen={openSource}
+              />
               <ChartColumn
                 charts={[
                   ...section.chart_ids.map((id) => byId.get(id)).filter((c): c is Chart => Boolean(c)),
                   ...(i === explainer.sections.length - 1 ? orphans : []),
                 ]}
+                lit={lit}
+                onOpen={openSource}
               />
             </div>
 
@@ -183,6 +232,35 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           </div>
         </section>
       ))}
+
+      {terms.length > 0 && (
+        <div className="mx-auto max-w-[1180px] px-8 py-12">
+          <h2 className="text-[11px] tracking-[0.16em] text-white/30 uppercase">Terms used above</h2>
+          <dl className="mt-4 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+            {terms.map((t) => (
+              <div key={t.term}>
+                <dt className="text-sm text-[#e8e8e8]">{t.term}</dt>
+                <dd className="mt-0.5 text-[13px] leading-relaxed text-white/50">
+                  {t.provenance ? (
+                    <button
+                      type="button"
+                      onClick={() => openSource(t.provenance!)}
+                      className="text-left hover:text-white/75"
+                      title="Read this in the paper"
+                    >
+                      &ldquo;{t.provenance.quote}&rdquo; <span className="text-white/30">— the paper ↗</span>
+                    </button>
+                  ) : (
+                    <>
+                      {t.definition} <span className="text-white/30">— our wording</span>
+                    </>
+                  )}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
 
       {v.rejections.length > 0 && (
         <div className="mx-auto max-w-[1180px] px-8 py-16">
@@ -204,6 +282,16 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           </details>
         </div>
       )}
+
+      {source && (
+        <SourcePanel
+          prov={source.prov}
+          value={source.value}
+          text={explainer.sources?.[source.prov.locator]}
+          sourceUrl={explainer.source_url}
+          onClose={closeSource}
+        />
+      )}
     </main>
   );
 }
@@ -218,26 +306,101 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
  *
  * Only when there is one chart. Two stuck to the same offset would land on top of each
  * other, and a column with two charts is close enough to the prose height not to gap.
+ *
+ * On a phone the column comes first and the single chart sticks to the top of the screen
+ * as a strip, so the sentence being read and the mark it lights are on screen together.
  */
-function ChartColumn({ charts }: { charts: Chart[] }) {
+function ChartColumn({
+  charts,
+  lit,
+  onOpen,
+}: {
+  charts: Chart[];
+  lit: Lit | null;
+  onOpen: (prov: Provenance, value?: number) => void;
+}) {
   const pin = charts.length === 1;
   return (
-    <div className="min-w-0">
-      <div className={pin ? "lg:sticky lg:top-16" : undefined}>
+    <div className="min-w-0 max-lg:order-first">
+      <div
+        className={
+          pin
+            ? "lg:sticky lg:top-16 max-lg:sticky max-lg:top-0 max-lg:z-20 max-lg:-mx-8 max-lg:max-h-[46vh] max-lg:overflow-y-auto max-lg:bg-black/90 max-lg:px-8 max-lg:backdrop-blur"
+            : undefined
+        }
+      >
         {charts.map((chart) => (
-          <ChartFigure key={chart.id} chart={chart} />
+          <ChartFigure key={chart.id} chart={chart} lit={lit} onOpen={onOpen} />
         ))}
       </div>
     </div>
   );
 }
 
-/** Minimal markdown: paragraphs, bold, and bullets. The rewrite emits little else. */
-function Prose({ markdown, unprinted }: { markdown: string; unprinted: string[] }) {
+/** Minimal markdown: paragraphs, bold, bullets, pipe tables. The rewrite emits little else. */
+function Prose({
+  sectionId,
+  markdown,
+  unprinted,
+  links,
+  terms,
+  onActive,
+  onOpen,
+}: {
+  sectionId: string;
+  markdown: string;
+  unprinted: string[];
+  links: ProseLink[];
+  terms: Term[];
+  onActive: (lit: Lit | null) => void;
+  onOpen: (prov: Provenance, value?: number) => void;
+}) {
   const blocks = markdown.split(/\n{2,}/).map(deLatex).filter(Boolean);
   const mark = useMemo(() => marker(unprinted), [unprinted]);
+  const termRe = useMemo(() => termMatcher(terms), [terms]);
+  const seen = new Set<string>();
+  const root = useRef<HTMLDivElement>(null);
+
+  // The sentence in the band where a reader's eye rests, 30% to 60% down the screen,
+  // decides which mark is lit. A band rather than the whole viewport, so only one
+  // sentence is "read" at a time and the chart does not flicker as the reader scrolls.
+  useEffect(() => {
+    const el = root.current;
+    if (!el || links.length === 0) return;
+    const spans = [...el.querySelectorAll<HTMLElement>("[data-link]")];
+    if (spans.length === 0) return;
+    const visible = new Set<HTMLElement>();
+    let mine = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target as HTMLElement);
+          else visible.delete(e.target as HTMLElement);
+        }
+        const top = spans.find((s) => visible.has(s));
+        spans.forEach((s) => s.classList.toggle("sentence-lit", s === top));
+        if (top) {
+          mine = true;
+          const [chart_id, kind, index] = (top.dataset.link ?? "").split("|");
+          onActive({ chart_id, kind: kind as Lit["kind"], index: Number(index) });
+        } else if (mine) {
+          // Only the section that lit the chart may put it out, or two sections' observers
+          // fight over one state as the reader crosses from one to the next.
+          mine = false;
+          onActive(null);
+        }
+      },
+      { rootMargin: "-30% 0px -40% 0px", threshold: 0 },
+    );
+    spans.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, [links, sectionId, onActive]);
+
+  const render = (text: string, key: string) =>
+    withLinks(text, links, (piece, k) => inline(piece, mark, termRe, terms, seen, onOpen, `${key}-${k}`));
+
   return (
-    <div className="text-[15px] leading-[1.75] text-white/60">
+    <div ref={root} className="text-[15px] leading-[1.75] text-white/60">
       {blocks.map((block, i) => {
         const lines = block.split("\n");
         const table = pipeTable(block);
@@ -248,7 +411,7 @@ function Prose({ markdown, unprinted }: { markdown: string; unprinted: string[] 
                 <tr>
                   {table.head.map((h, k) => (
                     <th key={k} className="border-b border-white/[0.14] py-1.5 pr-3 text-left font-medium text-[#e8e8e8]">
-                      {inline(h, mark)}
+                      {render(h, `h${i}${k}`)}
                     </th>
                   ))}
                 </tr>
@@ -258,7 +421,7 @@ function Prose({ markdown, unprinted }: { markdown: string; unprinted: string[] 
                   <tr key={r}>
                     {row.map((c, k) => (
                       <td key={k} className="num border-b border-white/[0.06] py-1.5 pr-3 align-top">
-                        {inline(c, mark)}
+                        {render(c, `c${i}${r}${k}`)}
                       </td>
                     ))}
                   </tr>
@@ -273,7 +436,7 @@ function Prose({ markdown, unprinted }: { markdown: string; unprinted: string[] 
               {lines.map((l, j) => (
                 <li key={j} className="flex gap-2.5">
                   <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-white/25" aria-hidden />
-                  <span>{inline(l.replace(/^\s*[-*]\s+/, ""), mark)}</span>
+                  <span>{render(l.replace(/^\s*[-*]\s+/, ""), `l${i}${j}`)}</span>
                 </li>
               ))}
             </ul>
@@ -288,12 +451,44 @@ function Prose({ markdown, unprinted }: { markdown: string; unprinted: string[] 
         }
         return (
           <p key={i} className="mb-5">
-            {inline(block, mark)}
+            {render(block, `p${i}`)}
           </p>
         );
       })}
     </div>
   );
+}
+
+/**
+ * Wraps the linked sentences of a paragraph. The link carries the sentence text the API
+ * matched, so finding it is a substring search; anything not found renders as plain text.
+ */
+function withLinks(
+  text: string,
+  links: ProseLink[],
+  render: (piece: string, k: number) => React.ReactNode,
+): React.ReactNode {
+  const hits = links
+    .map((l) => ({ l, at: text.indexOf(l.sentence.slice(0, 80)) }))
+    .filter((h) => h.at >= 0)
+    .sort((a, b) => a.at - b.at);
+  if (hits.length === 0) return render(text, 0);
+  const out: React.ReactNode[] = [];
+  let pos = 0;
+  let k = 0;
+  for (const { l, at } of hits) {
+    if (at < pos) continue;
+    const end = Math.min(text.length, at + l.sentence.length);
+    if (at > pos) out.push(<span key={k++}>{render(text.slice(pos, at), k)}</span>);
+    out.push(
+      <span key={k++} className="sentence" data-link={`${l.chart_id}|${l.kind}|${l.index}`}>
+        {render(text.slice(at, end), k)}
+      </span>,
+    );
+    pos = end;
+  }
+  if (pos < text.length) out.push(<span key={k++}>{render(text.slice(pos), k)}</span>);
+  return out;
 }
 
 /**
@@ -345,8 +540,17 @@ function marker(unprinted: string[]): RegExp | null {
   return new RegExp(`((?<![\\d.])(?:${alts.join("|")})(?![\\d.]))`, "g");
 }
 
-function withMarks(text: string, mark: RegExp | null, key: string) {
-  if (!mark) return text;
+/** Matches any defined term, longest first, at word boundaries, any case. */
+function termMatcher(terms: Term[]): RegExp | null {
+  if (terms.length === 0) return null;
+  const alts = [...terms]
+    .sort((a, b) => b.term.length - a.term.length)
+    .map((t) => t.term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  return new RegExp(`(\\b(?:${alts.join("|")})\\b)`, "gi");
+}
+
+function withMarks(text: string, mark: RegExp | null, key: string): React.ReactNode[] {
+  if (!mark) return [text];
   return text.split(mark).map((part, i) =>
     i % 2 === 1 ? (
       <mark key={`${key}-${i}`} className="unprinted" title={UNPRINTED_TITLE}>
@@ -358,23 +562,78 @@ function withMarks(text: string, mark: RegExp | null, key: string) {
   );
 }
 
-function inline(text: string, mark: RegExp | null) {
+/**
+ * Text with unprinted numbers marked and defined terms made into popovers, the first time
+ * each term appears in a section. A term's popover shows the paper's own sentence when
+ * the gate confirmed one, otherwise the definition marked as ours.
+ */
+function withTerms(
+  text: string,
+  mark: RegExp | null,
+  termRe: RegExp | null,
+  terms: Term[],
+  seen: Set<string>,
+  onOpen: (prov: Provenance, value?: number) => void,
+  key: string,
+): React.ReactNode[] {
+  if (!termRe) return withMarks(text, mark, key);
+  return text.split(termRe).flatMap((part, i): React.ReactNode[] => {
+    if (i % 2 === 0) return withMarks(part, mark, `${key}-${i}`);
+    const t = terms.find((x) => x.term.toLowerCase() === part.toLowerCase());
+    if (!t || seen.has(t.term.toLowerCase())) return [part];
+    seen.add(t.term.toLowerCase());
+    return [
+      <span key={`${key}-${i}`} className="term" tabIndex={0}>
+        {part}
+        <span role="tooltip" className="term-pop">
+          {t.provenance ? (
+            <>
+              <span className="block text-[#e8e8e8]">&ldquo;{t.provenance.quote}&rdquo;</span>
+              <button
+                type="button"
+                onClick={() => onOpen(t.provenance!)}
+                className="mt-1.5 block text-[11px] text-white/45 underline decoration-white/20 underline-offset-2 hover:text-white"
+              >
+                the paper&rsquo;s words · read in context
+              </button>
+            </>
+          ) : (
+            <>
+              <span className="block text-[#e8e8e8]">{t.definition}</span>
+              <span className="mt-1.5 block text-[11px] text-white/40">our wording, not the paper&rsquo;s</span>
+            </>
+          )}
+        </span>
+      </span>,
+    ];
+  });
+}
+
+function inline(
+  text: string,
+  mark: RegExp | null,
+  termRe: RegExp | null,
+  terms: Term[],
+  seen: Set<string>,
+  onOpen: (prov: Provenance, value?: number) => void,
+  key: string,
+) {
   // Bold before italic, so the ** in "**x**" is never read as a single emphasis marker.
   return text.split(/(\*\*[^*]+\*\*|\*[^*\n]+\*)/g).map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={i} className="font-medium text-[#e8e8e8]">
-          {withMarks(part.slice(2, -2), mark, `b${i}`)}
+          {withTerms(part.slice(2, -2), mark, termRe, terms, seen, onOpen, `${key}b${i}`)}
         </strong>
       );
     }
     if (part.length > 2 && part.startsWith("*") && part.endsWith("*")) {
       return (
         <em key={i} className="text-white/75 italic">
-          {withMarks(part.slice(1, -1), mark, `i${i}`)}
+          {withTerms(part.slice(1, -1), mark, termRe, terms, seen, onOpen, `${key}i${i}`)}
         </em>
       );
     }
-    return <span key={i}>{withMarks(part, mark, `t${i}`)}</span>;
+    return <span key={i}>{withTerms(part, mark, termRe, terms, seen, onOpen, `${key}t${i}`)}</span>;
   });
 }

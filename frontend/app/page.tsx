@@ -271,11 +271,14 @@ export default function Home() {
                       half that gets cut is usually the half that distinguishes it. */}
                   <span className="block text-sm leading-snug text-[#e8e8e8]">{p.title}</span>
                   <span className="block text-xs text-white/30">
-                    {[p.journal, p.published?.slice(0, 4)].filter(Boolean).join(" · ")}
+                    {[p.journal, p.published?.slice(0, 4), p.source === "pdf" ? "from a PDF" : null]
+                      .filter(Boolean)
+                      .join(" · ")}
                   </span>
                 </span>
-                <span className="num shrink-0 text-xs text-white/40">
+                <span className="num shrink-0 text-right text-xs text-white/40">
                   {p.chart_count} chart{p.chart_count === 1 ? "" : "s"}
+                  {p.reading_minutes ? <span className="block text-white/25">{p.reading_minutes} min</span> : null}
                 </span>
               </button>
             ))}

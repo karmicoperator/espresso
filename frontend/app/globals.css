@@ -5,23 +5,12 @@
   --background: #000000;
   --foreground: #e8e8e8;
 
-  /* Glass surfaces */
-  --glass-white: rgba(255, 255, 255, 0.06);
-  --glass-white-hover: rgba(255, 255, 255, 0.10);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(255, 255, 255, 0.15);
-  --glass-highlight: rgba(255, 255, 255, 0.12);
-
   /* Accent (used sparingly for interactive elements only) */
   --accent: #a0a0a0;
   --accent-hover: #ffffff;
   --accent-green: #7dd19b;
   --accent-red: #f27066;
 
-  /* Shard colors */
-  --shard-1: rgba(255, 255, 255, 0.03);
-  --shard-2: rgba(255, 255, 255, 0.05);
-  --shard-3: rgba(255, 255, 255, 0.02);
 
   /* Typography */
   --text-primary: #e8e8e8;
@@ -45,47 +34,6 @@ body {
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
-}
-
-/* Glassmorphism card */
-.glass-card {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-}
-
-.glass-card-hover:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.14);
-}
-
-/* Glass shard animations */
-@keyframes shard-float {
-  0%, 100% { transform: translateY(0) rotate(var(--shard-rotate, 0deg)); }
-  50% { transform: translateY(var(--shard-y, -12px)) rotate(calc(var(--shard-rotate, 0deg) + 3deg)); }
-}
-
-@keyframes shard-shimmer {
-  0%, 100% { opacity: var(--shard-opacity-low, 0.02); }
-  50% { opacity: var(--shard-opacity-high, 0.06); }
-}
-
-/* Spotlight animation */
-@keyframes spotlight {
-  0% {
-    opacity: 0;
-    transform: translate(-72%, -62%) scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, -40%) scale(1);
-  }
-}
-
-.animate-spotlight {
-  animation: spotlight 2s ease 0.75s 1 forwards;
 }
 
 /* Custom scrollbar */
@@ -112,104 +60,6 @@ html {
   background: rgba(255, 255, 255, 0.20);
   color: white;
 }
-
-/* KaTeX styling for dark theme */
-.katex {
-  color: #d0d0d0;
-  font-size: 1.05em;
-}
-
-/* Inline math styling */
-.markdown-content .katex:not(.katex-display .katex) {
-  color: #c0c0c0;
-  font-size: 1.05em;
-}
-
-/* Display math block styling — prominent, centered, breathing room */
-.markdown-content .katex-display {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem -1rem;
-  padding: 1.75rem 2rem;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.markdown-content .katex-display > .katex {
-  text-align: center;
-  color: #e0e0e0;
-}
-
-/* Display math — larger, bolder, and more readable */
-.markdown-content .katex-display .katex {
-  font-size: 1.3em;
-  font-weight: 700;
-}
-
-/* Prevent overflow on small screens */
-.katex-html {
-  white-space: nowrap;
-}
-
-/* Smooth scrollbar for equations */
-.markdown-content .katex-display::-webkit-scrollbar {
-  height: 4px;
-}
-
-.markdown-content .katex-display::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 2px;
-}
-
-.markdown-content .katex-display::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 2px;
-}
-
-.markdown-content .katex-display::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.20);
-}
-
-/* Math colors */
-.katex .mathnormal,
-.katex .mathdefault,
-.katex .mathit {
-  color: inherit;
-}
-
-.katex .mord,
-.katex .mbin,
-.katex .mrel,
-.katex .mopen,
-.katex .mclose,
-.katex .mpunct,
-.katex .minner {
-  color: inherit;
-}
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  canvas {
-    animation: none;
-  }
-
-  /* Disable section fade-in/slide transitions */
-  [data-section-id] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
-
-  /* Disable stacked card 3D transforms and transitions */
-  [data-card-index] {
-    transition: none !important;
-  }
-}
-
 
 /* ---------------------------------------------------------------------------
    Charts. Nature's restraint on arXivisual's black: dotted gridlines, hairline
@@ -285,4 +135,39 @@ html {
   .chart .whisker line { stroke: #222 !important; }
   .unprinted { text-decoration-color: #b8860b; }
   a[href]::after { content: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Prose joined to charts. The sentence being read is lit, the rest of its
+   paragraph is not touched; the chart does the rest by dimming everything but
+   the mark the sentence is about.
+   --------------------------------------------------------------------------- */
+.sentence { transition: color .3s ease, background-color .3s ease; border-radius: 3px; }
+.sentence-lit { color: #e8e8e8; background: rgba(255,255,255,0.05); box-shadow: 0 0 0 3px rgba(255,255,255,0.05); }
+
+/* A chart element the prose is about gets a hairline so the eye finds it at once. */
+.chart [data-lit="1"] rect, .chart [data-lit="1"] circle { filter: drop-shadow(0 0 3px rgba(232,232,232,0.55)); }
+
+/* Defined terms: a dotted underline, and the definition on hover, focus or tap. */
+.term { position: relative; text-decoration: underline dotted rgba(255,255,255,0.35); text-underline-offset: 3px; cursor: help; outline: none; }
+.term:focus-visible { text-decoration-color: rgba(255,255,255,0.8); }
+.term-pop {
+  position: absolute; left: 0; bottom: calc(100% + 8px); z-index: 25; width: 300px;
+  padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.14);
+  background: #0d0d0d; box-shadow: 0 12px 40px rgba(0,0,0,0.75);
+  font-size: 12px; line-height: 1.5; color: rgba(255,255,255,0.55); font-style: normal; font-weight: 400;
+  /* Out of layout while closed: an invisible 300px box beside a term at the right edge
+     still widened the page on a phone. */
+  display: none;
+}
+.term:hover .term-pop, .term:focus-within .term-pop { display: block; }
+/* On a phone the popover is a sheet at the bottom of the screen, never off the edge. */
+@media (max-width: 640px) {
+  .term-pop { position: fixed; left: 12px; right: 12px; bottom: 12px; width: auto; }
+}
+
+@media print {
+  .sentence-lit { background: none; box-shadow: none; }
+  .term { text-decoration: none; }
+  .term-pop { display: none; }
 }

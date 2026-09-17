@@ -325,6 +325,33 @@ the metadata says), and the rewrite emitted a markdown table that the prose rend
 showed as pipes (render pipe tables). The audit script is the regression test; the fix
 is not done until it reports nothing on every page.
 
+## 17b. Link prose to charts by the printed number, never by a model
+
+The scrollytelling pattern everyone copies from the Pudding is "as this paragraph arrives,
+that mark lights up". The temptation is to ask the model which sentence goes with which
+mark. Do not. The chart value and the sentence both carry the printed number, so the link
+is a string match: the sentence contains the value, and either names what the value is
+(a label word, prefix-matched) or sits in the chart's own section. One link per sentence,
+best score wins, and a sentence that only shares a number with a chart in another section
+does not link, or "22.9 years" lights the mortality bar. On SPRINT this finds 8 sentences
+across 4 charts with no false links; on the dexamethasone paper 11.
+
+The band that counts as "being read" matters more than it looks. Centre ±7% of the
+viewport lit nothing when a sentence sat where the eye actually rests; 30% to 60% down
+the screen does. Only the section that lit a chart may put it out, or two sections'
+observers fight over one state at the boundary.
+
+The Cochrane icon array is the one medical visualization with evidence behind it, and it
+is worth its own contract: two arms, each with its own quote, both through the gate, and
+everything derived from them (per 1,000, difference, number needed to treat) computed
+once on the API and carried as derived. The words have to follow the outcome's
+direction: "spared by the treatment" is right for deaths avoided and wrong for people
+who reach a weight-loss target because of the drug.
+
+A popover that is invisible is still laid out. Three closed term popovers, 300px each,
+beside terms near the right edge gave a phone a horizontal scroll. `display: none` until
+open, and on a phone a sheet at the bottom rather than a box beside the word.
+
 ## 18. Never let content depend on an animation firing
 
 Scroll-triggered reveals worked for the two charts above the fold and left four below it
