@@ -1,50 +1,29 @@
 [project]
-name = "arxiviz-backend"
+name = "medscroll"
 version = "0.1.0"
-description = "ArXiviz Backend - Team 2 AI Agent Pipeline for Manim Visualization Generation"
+description = "Scrollable explainers with verified charts for open-access medical papers"
 requires-python = ">=3.11,<3.14"
 dependencies = [
-    # API framework
-    "fastapi>=0.109.0",
-    "uvicorn>=0.27.0",
-    # Core AI + validation
-    "pydantic>=2.0.0",
-    "python-dotenv>=0.21.1,<0.22.0",
-    # Async / transport
-    "httpx>=0.25.0",
-    "asyncio-throttle>=1.0.0",
-    # Database / jobs
-    "sqlalchemy>=2.0.0",
-    "aiosqlite>=0.19.0",  # For local SQLite development
-    "asyncpg>=0.29.0",     # For PostgreSQL (Neon, Supabase, Railway, etc.)
-    "greenlet>=3.0.0",
-    # Ingestion (Team 1)
-    "arxiv>=2.0.0",
-    "pymupdf4llm>=0.0.5",
-    "pymupdf>=1.23.0",
-    "beautifulsoup4>=4.12.0",
-    "lxml>=5.0.0",
-    # Rendering / visualization
-    "manim>=0.18.0",
-    "modal>=0.60.0",
-    "manim-voiceover[gtts,openai]>=0.3.0",
-    # Cloud storage (S3-compatible — Cloudflare R2)
-    "boto3>=1.34.0",
-    # LLM — Azure OpenAI (GPT-5 family; needs reasoning_effort support)
-    "openai>=1.60.0",
-    # Required by manim-voiceover (pkg_resources)
-    "setuptools>=65.0.0",
-    # Dedalus SDK + MCP Gateway (Context7 live docs)
-    "dedalus-labs>=0.2.0",
-    # Observability — LLM tracing / cost tracking
-    "langfuse>=3.0.0",
-    "temporalio>=1.32.0",
+    # API
+    "fastapi>=0.115",
+    "uvicorn>=0.32",
+    "python-multipart>=0.0.18",  # UploadFile for POST /api/build/pdf
+    "pydantic>=2.9",
+    "python-dotenv>=1.0",
+    # Sources: PubMed Central (JATS over httpx + lxml) and reader-supplied PDFs
+    "httpx>=0.27",
+    "lxml>=5.0",
+    "pymupdf>=1.24",
+    "pymupdf4llm>=0.0.17",
+    # Model providers. claude_cli needs nothing installed here; azure uses the OpenAI SDK.
+    "openai>=1.60",
 ]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
     "pytest-asyncio>=0.21.0",
+    "ruff>=0.8",
 ]
 
 [build-system]
@@ -52,22 +31,18 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["agents", "models", "prompts", "examples"]
+packages = ["agents", "models", "ingestion", "api"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-# Only collect the real unit-test suite. Without this, plain `pytest` also
-# collects the argparse scripts under tools/ and backend root, some of which
-# fire real Azure OpenAI calls and network fetches on collection/execution.
 testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py311"
-extend-exclude = ["generated_output", "demo_scenes", "examples"]
+extend-exclude = ["generated_output"]
 
 [tool.ruff.lint]
-allowed-confusables = ["\u222a"]  # pdf_parser matches literal set-union glyphs in papers
 # Correctness + hygiene set. Style-only churn (quotes, formatting) is left to
 # the formatter; rules here catch real mistakes.
 select = ["E4", "E7", "E9", "F", "I", "UP", "B", "SIM", "DTZ", "PLW", "RUF"]
@@ -81,14 +56,7 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tools/*" = ["E402", "DTZ"]           # CLI scripts: sys.path setup + local timestamps
-"tests/*" = ["E402", "DTZ"]           # fixtures use naive datetimes on purpose
-"test_*.py" = ["E402"]                # root-level CLI scripts
-"temporal_app/worker.py" = ["E402"]
-"jobs/worker.py" = ["E402"]           # optional-langfuse import shim precedes app imports
 "main.py" = ["E402"]                  # load_dotenv() MUST run before app imports
-"ingestion/arxiv_fetcher.py" = ["E402"]  # dotenv-before-arxiv-import, same reason
-"db/queries.py" = ["E402"]            # naive-utc helper defined before ORM imports
 # The provenance gate normalises publisher typography before matching, so its tables
 # of dash, quote and space variants are the point of the file, not a mistake.
 "agents/verify.py" = ["RUF001"]

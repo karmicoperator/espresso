@@ -1,5 +1,5 @@
 """
-Section formatting pipeline for ArXiviz.
+Section formatting pipeline: rewrite a paper into a few readable sections.
 
 Two-phase LLM pipeline:
   Phase 1: Holistic summarization -- LLM summarizes the entire paper to 30-40%

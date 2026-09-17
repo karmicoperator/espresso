@@ -1,60 +1,36 @@
 """
-ArXiviz Backend API - FastAPI Entry Point
+MedScroll API entry point.
 
-Run with: uvicorn main:app --reload --port 8000
+Run with: python main.py   (or: uvicorn main:app --port 8000)
 Docs at: http://localhost:8000/docs
 """
 
 import logging
 import os
-from contextlib import asynccontextmanager
 
 from dotenv import load_dotenv
 
-# Load environment variables BEFORE any local imports
-# (rendering/storage.py reads STORAGE_MODE at import time)
+# Load environment variables BEFORE any local imports: the provider is resolved from them.
 load_dotenv()
 
-# Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S"
 )
 
-# Set specific logger levels
-logging.getLogger("rendering").setLevel(logging.INFO)
-logging.getLogger("jobs").setLevel(logging.INFO)
-logging.getLogger("agents").setLevel(logging.INFO)
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
 from api.routes import router as api_router
-from db import init_db
 
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Application lifespan: startup and shutdown events."""
-    # Startup: Initialize database
-    print("Initializing database...")
-    await init_db()
-    print("Database ready!")
-    yield
-    # Shutdown: cleanup if needed
-    print("Shutting down...")
-
-
-# Create FastAPI app
 app = FastAPI(
-    title="ArXiviz API",
-    description="Transform arXiv papers into animated visual explanations",
+    title="MedScroll API",
+    description="Turns an open-access medical paper into a verified scrollable explainer",
     version="0.1.0",
     docs_url="/docs",
     redoc_url="/redoc",
-    lifespan=lifespan,
 )
 
 # CORS.
@@ -74,7 +50,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount API router
 app.include_router(api_router)
 
 
@@ -87,8 +62,7 @@ async def root():
 if __name__ == "__main__":
     import uvicorn
 
-    host = os.getenv("API_HOST", "0.0.0.0")
-    # Support PORT (Render, Railway, Fly) and API_PORT (local)
-    port = int(os.getenv("PORT") or os.getenv("API_PORT", "8000"))
+    host = os.getenv("API_HOST", "127.0.0.1")
+    port = int(os.getenv("API_PORT", "8000"))
 
-    uvicorn.run("main:app", host=host, port=port, reload=True)
+    uvicorn.run("main:app", host=host, port=port)

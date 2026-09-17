@@ -18,8 +18,7 @@ models/     charts.py is the contract the frontend is built against
 store.py    JSON per paper under data/explainers/
 ```
 
-`jobs/`, `db/` and `api/throttle.py` are the upstream async job path. `/api/build` does not
-use them.
+There is no database. An explainer is a JSON file, and a build is one request.
 
 ## The gate is the point
 

@@ -88,7 +88,7 @@ Papers are stored as JSON under `backend/data/explainers/`, figures under
 
 ## Status
 
-Working. 74 tests, ruff and eslint clean.
+Working. 55 tests, ruff and eslint clean.
 
 Known limits, all verified rather than assumed:
 

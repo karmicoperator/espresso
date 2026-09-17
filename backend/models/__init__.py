@@ -2,7 +2,6 @@
 
 `paper` is the source-agnostic paper representation the ingest layer produces.
 `charts` is what the pipeline emits and the frontend draws.
-`generation` holds the planner's intermediate types.
 """
 
 from .charts import (
@@ -16,12 +15,6 @@ from .charts import (
     ReaderSection,
     VerificationReport,
 )
-from .generation import (
-    AnalyzerOutput,
-    VisualizationCandidate,
-    VisualizationStatus,
-    VisualizationType,
-)
 from .paper import (
     ArxivPaperMeta,
     Equation,
@@ -33,7 +26,6 @@ from .paper import (
 )
 
 __all__ = [
-    "AnalyzerOutput",
     "Annotation",
     "ArxivPaperMeta",
     "Chart",
@@ -50,7 +42,4 @@ __all__ = [
     "StructuredPaper",
     "Table",
     "VerificationReport",
-    "VisualizationCandidate",
-    "VisualizationStatus",
-    "VisualizationType",
 ]
