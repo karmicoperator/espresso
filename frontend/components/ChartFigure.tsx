@@ -61,6 +61,11 @@ function withUnit(s: string, unit: string): string {
   return /^[%°×\u00b0]/.test(unit) ? `${s}${unit}` : `${s} ${unit}`;
 }
 
+/** "0.64–0.89", but "−11.56 to −10.66": an en dash beside a minus sign reads as one glyph. */
+function interval(low: number, high: number): string {
+  return low < 0 || high < 0 ? `${fmt(low)} to ${fmt(high)}` : `${fmt(low)}–${fmt(high)}`;
+}
+
 function fmt(v: number, unit = "", dp?: number): string {
   if (Math.abs(v) >= 1000) return withUnit(v.toLocaleString(), unit);
   const s = dp === undefined ? String(Number(v.toFixed(2))) : v.toFixed(dp);
@@ -302,14 +307,14 @@ type HoverFn = (d: Datum) => Record<string, unknown>;
 function Stat({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   const d = chart.data[0];
   if (!d) return null;
-  const interval = d.low !== null && d.high !== null ? `95% CI ${fmt(d.low)}–${fmt(d.high)}` : "";
+  const ci = d.low !== null && d.high !== null ? `95% CI ${interval(d.low, d.high)}` : "";
   return (
     <div className="flex flex-wrap items-start gap-7" {...hover(d)}>
       <div>
         <div className="r-stat num text-[64px] leading-none font-light tracking-tight text-[#7fb5a6]">
           {fmt(d.value, chart.unit)}
         </div>
-        {interval && <div className="num mt-3 text-[11px] text-white/30">{interval}</div>}
+        {ci && <div className="num mt-3 text-[11px] text-white/30">{ci}</div>}
       </div>
       <p className="r-fade min-w-[240px] flex-1 border-l-2 border-white/[0.18] pl-4 text-[13px] leading-[1.65] text-white/55">
         {d.provenance.quote}
@@ -654,9 +659,13 @@ function Forest({ chart, hover }: { chart: Chart; hover: HoverFn }) {
       ? plotL + ((Math.log(Math.max(v, 1e-9)) - Math.log(lo)) / (Math.log(hi) - Math.log(lo))) * (plotR - plotL)
       : plotL + ((v - lo) / (hi - lo)) * (plotR - plotL);
 
-  const axisTicks = (log ? [0.25, 0.5, 0.75, 1, 1.5, 2, 3] : ticks(hi)).filter(
-    (t) => t >= lo && t <= hi,
-  );
+  // A linear axis runs both ways from the null: weight changes, mean differences and risk
+  // differences sit below zero as often as above it. Ticks are built from the larger
+  // magnitude and mirrored, then trimmed to the range in view.
+  const linear = ticks(Math.max(Math.abs(lo), Math.abs(hi)));
+  const axisTicks = (
+    log ? [0.25, 0.5, 0.75, 1, 1.5, 2, 3] : [...linear.slice(1).map((t) => -t).reverse(), ...linear]
+  ).filter((t) => t >= lo && t <= hi);
   const baseY = data.length * rowH + 18;
 
   return (
@@ -716,7 +725,7 @@ function Forest({ chart, hover }: { chart: Chart; hover: HoverFn }) {
               style={{ transitionDelay: `${0.5 + i * 0.12}s` }}
             >
               {fmt(d.value)}
-              {d.low !== null && d.high !== null ? ` (${fmt(d.low)}–${fmt(d.high)})` : ""}
+              {d.low !== null && d.high !== null ? ` (${interval(d.low, d.high)})` : ""}
             </text>
           </g>
         );
