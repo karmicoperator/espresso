@@ -89,3 +89,6 @@ ignore = [
 "main.py" = ["E402"]                  # load_dotenv() MUST run before app imports
 "ingestion/arxiv_fetcher.py" = ["E402"]  # dotenv-before-arxiv-import, same reason
 "db/queries.py" = ["E402"]            # naive-utc helper defined before ORM imports
+# The provenance gate normalises publisher typography before matching, so its tables
+# of dash, quote and space variants are the point of the file, not a mistake.
+"agents/verify.py" = ["RUF001"]

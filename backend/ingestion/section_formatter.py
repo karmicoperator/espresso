@@ -70,7 +70,9 @@ KEEP (preserve fully):
 - What the paper is about and why it matters (the "big picture")
 - Core methodology -- how they did it, at a high level
 - Key results and what they mean in plain language
-- Important equations in LaTeX notation ($...$ inline, $$...$$ display) with a brief intuitive explanation of what each equation means
+- Any formula that matters, written in plain arithmetic on its own line, with a sentence
+  saying what it means. Write it the way it would be read aloud: "efficacy = 100 x (1 - IRR)".
+  No LaTeX, no $ delimiters, no \\text or \\times -- nothing here renders them.
 - Novel concepts and definitions, explained clearly
 - Key figure/table references and their takeaways
 
@@ -86,11 +88,33 @@ FORMATTING:
 - Write in clean markdown with paragraph breaks for readability
 - Use **bold** for key terms when first introduced
 - Use bullet points sparingly for lists of results or contributions
-- Preserve LaTeX notation for important equations
-- Do NOT use TeX text styling commands like \textsc, \textbf, \mathrm for prose
+- Do NOT use TeX text styling commands like \\textsc, \\textbf, \\mathrm for prose
 - Write model names in plain text (e.g., "BERT Base", "BERT Large"), not split letters
 - Do NOT invent information not in the source paper
 - Do NOT start with "This paper..." or any preamble -- just begin explaining
+
+VOICE:
+Write the way a good science journalist writes: concrete, direct, no throat-clearing.
+The following patterns read as machine-written and are not allowed.
+
+- Never use these words: delve, landscape (as metaphor), realm, tapestry, testament to,
+  robust, comprehensive, cutting-edge, leverage, pivotal, underscores, meticulous,
+  seamless, game-changer, intricate, ever-evolving, crucial, showcasing, holistic,
+  actionable, impactful, at its core, interplay, myriad, plethora, multifaceted,
+  nuanced, foster, navigate (as metaphor), unleash, empower, revolutionize,
+  transformative, cornerstone, paramount, poised to, burgeoning, profound.
+- Cut hollow intensifiers outright: genuine, genuinely, truly, real (as in "a real
+  improvement"), it is worth noting that, importantly, notably, to be clear.
+- No "it is not X, it is Y" and no "not just X but Y". State the positive claim. If a
+  contrast matters, name the actual alternative and who holds it.
+- No em dashes. Use a comma, a period, or parentheses.
+- Vary the rhythm. Do not group things in threes by habit.
+- Bold at most one phrase per paragraph, for a term being defined.
+- Do not close a section with a flourish about what the future holds or what remains to
+  be seen. End on the last real point.
+
+Prefer the plain word every time: use over utilize, start over commence, has over boasts,
+important over pivotal, careful over meticulous, strong over robust.
 
 Return ONLY the summarized text."""
 
@@ -317,7 +341,7 @@ def _clean_display_text(text: str) -> str:
 async def format_sections(
     sections: list[Section],
     meta: ArxivPaperMeta,
-    model: str = "claude-sonnet-4-5-20250929",
+    model: str | None = None,
     max_concurrent: int = 5,
 ) -> list[Section]:
     """

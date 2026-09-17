@@ -23,14 +23,20 @@ else:
     # Local development fallback
     DATABASE_URL = "sqlite+aiosqlite:///./arxiviz.db"
 
+# Connection pooling applies to PostgreSQL only. SQLite runs on NullPool, which does not
+# take pool_size or max_overflow and raises TypeError rather than ignoring them -- so
+# passing them unconditionally breaks the default local path at import time.
+_pool_settings = (
+    {"pool_pre_ping": True, "pool_size": 5, "max_overflow": 10}
+    if not DATABASE_URL.startswith("sqlite")
+    else {}
+)
+
 # Create async engine
 engine = create_async_engine(
     DATABASE_URL,
     echo=os.getenv("ENVIRONMENT", "development") == "development",  # Log SQL in dev
-    # Additional pool settings for PostgreSQL (ignored for SQLite)
-    pool_pre_ping=True,
-    pool_size=5,
-    max_overflow=10,
+    **_pool_settings,
 )
 
 # Session factory

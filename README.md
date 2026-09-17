@@ -1,116 +1,105 @@
 <div align="center">
-    <img alt="Logo" src="frontend/public/icon.png" width=100 />
+  <img alt="MedScroll" src="build/icon.png" width="96" />
 </div>
-<h1 align="center">
-  <a href="https://www.arxivisual.org/" target="_blank">arXivisual</a>
-</h1>
-<p align="center">
-   Transform research papers into visual stories
-</p>
 
-[![arXivisual Video](frontend/public/arXivisual.mp4)](https://github.com/user-attachments/assets/5453760b-5f82-4fd1-9a77-fe8818fea059)
+<h1 align="center">MedScroll</h1>
 
-![arXivisual Landing Page](frontend/public/landing.jpeg)
+<p align="center">Medical papers as scrollable explainers, with every number traceable to the source.</p>
 
-![arXivisual Manim](frontend/public/manim.png)
+---
 
-## What It Is
+Paste a PubMed link. It comes back as a short explainer with interactive charts built from
+the paper's own numbers, **every value checked against the source before it is drawn**.
 
-arXivisual turns any arXiv paper into an interactive scrollytelling page. Paste a paper URL and a multi-agent pipeline fetches the paper, breaks it into sections, finds the concepts worth animating, and generates 3Blue1Brown-style [Manim](https://www.manim.community/) animations with AI voice narration — then embeds them in a readable, scroll-driven presentation of the paper. Research papers arrive as monoliths; arXivisual turns the fragments into something you can watch.
+Private, local, single user. Nothing is published and nothing leaves the machine except
+requests to PubMed Central for the paper itself.
 
-## Key Features
+## Running it
 
-- **Scrollytelling reader** — papers render section by section with KaTeX math, summaries, and embedded videos that appear as they finish rendering
-- **AI-generated Manim animations** — an agent pipeline analyzes each section, storyboards the key concepts, and writes runnable Manim code, hardened by four validation gates (syntax, spatial layout, narration quality, runtime) with automatic retry on failure
-- **Voice narration** — animations are `VoiceoverScene`s narrated via Azure OpenAI text-to-speech (`gpt-4o-mini-tts`), timed so each beat matches its narration
-- **Explore gallery** — browse every previously processed paper without reprocessing
-- **Observable pipeline** — every LLM call and pipeline span is traced in Langfuse with token usage and cost per paper
+Double-click **`MedScroll.app`**, or run **`./start.command`** for the same thing with live
+output. Both start what is down, reuse what is already running, step past ports held by
+other programs, and open the browser.
 
-## Architecture
-
-```mermaid
-flowchart LR
-    A[arXiv paper] --> B[Ingest<br/>fetch + parse sections]
-    B --> C[Analyze<br/>SectionAnalyzer]
-    C --> D[Plan<br/>VisualizationPlanner]
-    D --> E[Generate<br/>ManimGenerator]
-    E --> F{Validation gates<br/>code · spatial · voiceover · render}
-    F -->|feedback, up to 5 attempts| E
-    F -->|pass| G[Render<br/>Manim + TTS voiceover]
-    G --> H[(Cloudflare R2)]
-    H --> I[Scrollytelling reader]
-```
-
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full walkthrough.
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js 16, React 19, Tailwind CSS 4, TanStack Query, Framer Motion, KaTeX |
-| Backend | FastAPI (Python 3.11+), managed with [uv](https://docs.astral.sh/uv/) |
-| LLM | Azure OpenAI (GPT-5 family) via a provider-switchable agent base |
-| Animation | Manim Community + manim-voiceover |
-| Text-to-speech | Azure OpenAI `gpt-4o-mini-tts` (gTTS fallback) |
-| Database | PostgreSQL in production, SQLite locally (SQLAlchemy async) |
-| Video storage | Cloudflare R2 (S3-compatible), local filesystem in dev |
-| Observability | Langfuse |
-| Hosting | Azure Container Apps (backend), Vercel (frontend) |
-| CI | GitHub Actions |
-
-## Quick Start
-
-### Prerequisites
-
-- Node.js 18+
-- Python 3.11+ and [uv](https://docs.astral.sh/uv/getting-started/installation/)
-- FFmpeg, Cairo, Pango (for Manim); a LaTeX distribution for `MathTex` scenes
-- An Azure OpenAI resource with a GPT-5-family deployment (Dedalus Labs works as a legacy fallback provider)
-
-### Backend
+First run needs the dependencies:
 
 ```bash
-cd backend
-cp .env.example .env          # Fill in your Azure OpenAI keys
-uv sync
-uv run uvicorn main:app --reload --host 0.0.0.0 --port 8000
+cd backend  && uv sync
+cd frontend && npm install
 ```
 
-API docs are served at http://localhost:8000/docs. With no `DATABASE_URL` set, the backend uses a local SQLite file; videos are written to `media/videos/`.
+The model backend is headless Claude Code, so there is no API key. It has to be signed in:
+run `claude` once in a terminal. `/api/health` reports `degraded` with the reason when it
+is not.
 
-### Frontend
+## What it does
 
-```bash
-cd frontend
-npm install
-npm run dev
+A build takes three to five minutes, almost all of it in one model call.
+
+```
+PubMed link ─→ resolve ─→ JATS from PubMed Central ─→ rewrite into ≤5 sections
+                                                            │
+                                    one planning call ──────┴──→ charts + figures + diagram
+                                                            │
+                                              PROVENANCE GATE (deterministic)
+                                                            │
+                                                    explainer JSON ─→ reader
 ```
 
-The app runs at http://localhost:3000 and talks to the backend at `http://localhost:8000` by default (override with `NEXT_PUBLIC_API_URL`).
+The capitalised step is the one that makes the rest trustworthy. Every plotted value carries
+a locator and a verbatim quote; three string checks confirm the locator exists, the quote
+appears there, and the number appears in the quote. Values that fail are dropped and listed.
+Nothing downstream can introduce a number the paper does not contain.
 
-### Environment
+**Charts** are typed specs the browser draws: `stat`, `bars`, `dots`, `forest`, `line`,
+`flow`, `diagram`. Hovering any mark shows the paper's own sentence.
 
-All backend configuration lives in environment variables — [backend/.env.example](backend/.env.example) documents every option: LLM provider selection, TTS voice and model, Langfuse keys, storage mode, and render mode.
+**Figures** are the paper's own images, taken only when a chart could not be rebuilt from
+printed numbers: radiographs, micrographs, specimens, clinical photos, schematics, and
+survival curves whose values are never tabulated. Captions are copied verbatim.
 
-## Testing
+**Diagrams** are mechanisms the paper argues, drawn as nodes and cited edges. Every arrow
+carries the sentence licensing it, and an arrow the paper only hedges is drawn dashed —
+derived from the quoted wording, not from the model.
 
-```bash
-cd backend
-uv sync --extra dev
-uv run pytest tests/
+## Coverage
+
+Within PubMed's open-access filter: **76/76 papers across 38 subspecialties**. Papers in PMC
+but outside the open-access subset work too.
+
+About a quarter of PubMed's "free full text" was never deposited in PMC. Those are often
+genuinely open access, but the publishers hosting them answer 403 to anything that is not a
+browser. They block programs, not people — so download the PDF and use **"open the PDF"** on
+the landing page. Same pipeline, same gate, with one honest cost: a PDF has no addressable
+table cells, so a number printed only inside a table cannot be cited and will not appear.
+The page says when it was built that way.
+
+## Layout
+
+```
+backend/     FastAPI. ingestion/ (JATS + PDF), agents/ (planner, gate, pipeline), api/
+frontend/    Next.js reader. components/ChartFigure.tsx draws every chart kind.
+scripts/     launch-lib.sh — port resolution shared by both launchers
+docs/        FINDINGS.md — what we learned, including what not to try
+MedScroll.app, start.command
 ```
 
-The suite is fully offline — CI runs it against dummy provider credentials on Python 3.11 and 3.13. Frontend checks are `npx tsc --noEmit` and `npm run build`.
+Papers are stored as JSON under `backend/data/explainers/`, figures under
+`backend/data/figures/`.
 
-## Deployment
+## Status
 
-The backend ships as a Docker image to **Azure Container Apps**; the frontend auto-deploys to **Vercel** from `main`. See [docs/DEPLOY.md](docs/DEPLOY.md) for the full procedure, environment reference, and rollback steps.
+Working. 74 tests, ruff and eslint clean.
 
-## Creators
+Known limits, all verified rather than assumed:
 
-| Name | X |
-|------|---|
-| Armaan Gupta | [@armaangupt0](https://x.com/armaangupt0) |
-| Raj Shah | [@_rajshah6](https://x.com/_rajshah6) |
-| Nikhil Hooda | [@_nikhilhooda](https://x.com/_nikhilhooda) |
-| Ajith Bondili | [@AjithBondili](https://x.com/AjithBondili) |
+- A paper neither in PMC nor downloadable by you cannot be built.
+- PDF-derived papers cannot cite table cells.
+- The diagram gate cannot check that a sentence asserts the *direction* an arrow points.
+  That stays the model's assertion, which is why hovering shows the sentence.
+
+## Provenance
+
+Forked from [arXivisual](https://github.com/rajshah6/arXivisual) for the reader, the
+sectioning and the visual language. The render pipeline, the ingest, the provenance gate and
+the chart system are new. arXivisual ships no licence file; this fork is private, local and
+undistributed.
