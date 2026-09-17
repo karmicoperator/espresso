@@ -67,10 +67,10 @@ export function RiskFigure({
                 <p className="text-[#e8e8e8]">
                   Of <span className="num">{people.toLocaleString()}</span> people like these,{" "}
                   {lowerIsGood ? "it happens to " : ""}
-                  <span className="num" style={{ color: "#c98a7a" }}>{n(c.value)}</span>{lowerIsGood ? "" : " reach it"} with{" "}
-                  <QuoteButton prov={c.provenance} value={c.value} onOpen={onOpen}>{c.label}</QuoteButton>{" "}
-                  and {lowerIsGood ? "to " : ""}<span className="num" style={{ color: "#7fb5a6" }}>{n(i.value)}</span> with{" "}
-                  <QuoteButton prov={i.provenance} value={i.value} onOpen={onOpen}>{i.label}</QuoteButton>.
+                  <span className="num figure" style={{ color: "#e8a993" }}>{n(c.value)}</span>{lowerIsGood ? "" : " reach it"} with{" "}
+                  <QuoteButton prov={c.provenance} value={c.value} colour="#e8a993" onOpen={onOpen}>{c.label}</QuoteButton>{" "}
+                  and {lowerIsGood ? "to " : ""}<span className="num figure" style={{ color: "#9fdccb" }}>{n(i.value)}</span> with{" "}
+                  <QuoteButton prov={i.provenance} value={i.value} colour="#9fdccb" onOpen={onOpen}>{i.label}</QuoteButton>.
                 </p>
                 <p className="mt-2">
                   That is <span className="num text-[#e8e8e8]">{n(changed)}</span> {derived.direction} per {people.toLocaleString()}
@@ -206,11 +206,13 @@ function Toggle({ active, onClick, children }: { active: boolean; onClick: () =>
 function QuoteButton({
   prov,
   value,
+  colour,
   onOpen,
   children,
 }: {
   prov: Provenance;
   value?: number;
+  colour: string;
   onOpen: (prov: Provenance, value?: number) => void;
   children: React.ReactNode;
 }) {
@@ -218,10 +220,11 @@ function QuoteButton({
     <button
       type="button"
       onClick={() => onOpen(prov, value)}
-      className="underline decoration-white/25 decoration-dotted underline-offset-4 hover:decoration-white"
+      className="pill pill-arm"
+      style={{ ["--arm" as string]: colour } as React.CSSProperties}
       title="Read the paper's sentence"
     >
-      {children}
+      {children} ↗
     </button>
   );
 }

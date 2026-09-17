@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ChartFigure, datumColour, type Lit } from "./ChartFigure";
+import { A_FILL, ArmsContext, B_FILL, C_FILL, ChartFigure, datumColour, textColour, type Lit } from "./ChartFigure";
 import { FigureFigure } from "./FigureFigure";
 import { ReadingRail } from "./ReadingRail";
 import { RiskFigure } from "./RiskFigure";
@@ -54,6 +54,11 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
 
   const terms = useMemo(() => explainer.terms ?? [], [explainer.terms]);
 
+  // The page's arms, intervention first: from the verified risk pair when there is one,
+  // else the first chart that compares two groups. Every chart and every mention in the
+  // prose colours by this order.
+  const arms = useMemo(() => armsOf(explainer), [explainer]);
+
   const words = explainer.sections.reduce((n, s) => n + s.markdown.split(/\s+/).length, 0);
   const minutes = Math.max(1, Math.ceil(words / 230));
 
@@ -80,20 +85,17 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
   const proseMisses = v.prose_unmatched?.length ?? 0;
 
   return (
+    <ArmsContext.Provider value={arms}>
     <main>
       <ReadingRail sections={explainer.sections.map((s) => ({ id: s.id, title: s.title }))} minutes={minutes} />
 
       <header className="border-b border-white/[0.08]">
         <div className="mx-auto max-w-[1180px] px-8 py-12">
           <div className="print-hide flex items-baseline justify-between gap-4">
-            <Link href="/" className="text-xs text-white/50 transition-colors hover:text-white">
+            <Link href="/" className="pill">
               ← Build another paper
             </Link>
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="text-xs text-white/50 transition-colors hover:text-white"
-            >
+            <button type="button" onClick={() => window.print()} className="pill">
               Print or save as PDF
             </button>
           </div>
@@ -112,13 +114,8 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           )}
           <div className="num mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
             {explainer.source_url && (
-              <a
-                href={explainer.source_url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-white/60 transition-colors hover:text-white hover:underline"
-              >
-                Read the original
+              <a href={explainer.source_url} target="_blank" rel="noreferrer" className="pill">
+                Read the original ↗
               </a>
             )}
             {explainer.doi && <span className="text-white/30">doi:{explainer.doi}</span>}
@@ -166,15 +163,19 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
             <p className="text-[11px] tracking-[0.16em] text-white/30 uppercase">Bottom line</p>
             <p className="mt-2 text-sm text-white/50">{explainer.bottom_line.question}</p>
             <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{explainer.bottom_line.answer}</p>
-            <button
-              type="button"
-              onClick={() => openSource(explainer.bottom_line!.provenance)}
-              className="mt-4 block w-full border-t border-white/[0.08] pt-3 text-left text-xs leading-relaxed text-white/45 hover:text-white/70"
-              title="Read this in the paper"
-            >
-              The paper: &ldquo;{explainer.bottom_line.provenance.quote}&rdquo;
-              <span className="text-white/30"> — {explainer.bottom_line.provenance.section || explainer.bottom_line.provenance.locator} ↗</span>
-            </button>
+            <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-white/[0.08] pt-3">
+              <p className="min-w-0 flex-1 text-xs leading-relaxed text-white/45">
+                The paper: &ldquo;{explainer.bottom_line.provenance.quote}&rdquo;
+                <span className="text-white/30"> — {explainer.bottom_line.provenance.section || explainer.bottom_line.provenance.locator}</span>
+              </p>
+              <button
+                type="button"
+                onClick={() => openSource(explainer.bottom_line!.provenance)}
+                className="pill pill-strong shrink-0"
+              >
+                Read in the paper ↗
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -214,6 +215,7 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
               const here = new Set(charts.map((c) => c.id));
               const prose = (
                 <Prose
+                  arms={arms}
                   sectionId={section.id}
                   markdown={section.markdown}
                   unprinted={unprinted.get(section.id) ?? []}
@@ -311,7 +313,20 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
         />
       )}
     </main>
+    </ArmsContext.Provider>
   );
+}
+
+/** The page's arms, intervention first: the verified risk pair, else the first two-group chart. */
+function armsOf(explainer: Explainer): string[] {
+  if (explainer.absolute_risk) {
+    return [explainer.absolute_risk.intervention.label, explainer.absolute_risk.comparator.label];
+  }
+  for (const c of explainer.charts) {
+    const groups = [...new Set(c.data.map((d) => d.group).filter(Boolean))] as string[];
+    if (groups.length > 1) return groups.slice(0, 2);
+  }
+  return [];
 }
 
 /**
@@ -377,6 +392,7 @@ function ChartColumn({
 
 /** Minimal markdown: paragraphs, bold, bullets, pipe tables. The rewrite emits little else. */
 function Prose({
+  arms,
   sectionId,
   markdown,
   unprinted,
@@ -387,6 +403,7 @@ function Prose({
   onActive,
   onOpen,
 }: {
+  arms: string[];
   sectionId: string;
   markdown: string;
   unprinted: string[];
@@ -400,6 +417,7 @@ function Prose({
   const blocks = markdown.split(/\n{2,}/).map(deLatex).filter(Boolean);
   const mark = useMemo(() => marker(unprinted), [unprinted]);
   const termRe = useMemo(() => termMatcher(terms), [terms]);
+  const armTint = useMemo(() => armMatcher(arms, charts), [arms, charts]);
   const seen = new Set<string>();
   const root = useRef<HTMLDivElement>(null);
 
@@ -439,8 +457,8 @@ function Prose({
   }, [links, sectionId, onActive]);
 
   const render = (text: string, key: string) =>
-    withLinks(text, links, charts, (piece, k, tint) =>
-      inline(piece, mark, termRe, terms, seen, onOpen, `${key}-${k}`, tint),
+    withLinks(text, links, charts, arms, (piece, k, tint) =>
+      inline(piece, mark, termRe, terms, seen, onOpen, `${key}-${k}`, tint, armTint),
     );
 
   return (
@@ -510,12 +528,12 @@ function Prose({
 /** What to colour inside a linked sentence: the datum's numbers and its arm's name. */
 type Tint = { colour: string; re: RegExp } | null;
 
-function tintFor(link: ProseLink, charts: Map<string, Chart>): Tint {
+function tintFor(link: ProseLink, charts: Map<string, Chart>, arms: string[]): Tint {
   if (link.kind !== "datum") return null;
   const chart = charts.get(link.chart_id);
   const d = chart?.data[link.index];
   if (!chart || !d) return null;
-  const colour = datumColour(chart, link.index);
+  const colour = datumColour(chart, link.index, arms);
   const nums = [d.value, d.low, d.high, d.events, d.n]
     .filter((v): v is number => v !== null && v !== undefined)
     .flatMap((v) => [String(v), v.toFixed(1), v.toFixed(2), v.toLocaleString()])
@@ -531,6 +549,7 @@ function withLinks(
   text: string,
   links: ProseLink[],
   charts: Map<string, Chart>,
+  arms: string[],
   render: (piece: string, k: number, tint: Tint) => React.ReactNode,
 ): React.ReactNode {
   const hits = links
@@ -545,7 +564,7 @@ function withLinks(
     if (at < pos) continue;
     const end = Math.min(text.length, at + l.sentence.length);
     if (at > pos) out.push(<span key={k++}>{render(text.slice(pos, at), k, null)}</span>);
-    const tint = tintFor(l, charts);
+    const tint = tintFor(l, charts, arms);
     out.push(
       <span
         key={k++}
@@ -569,7 +588,58 @@ function withTint(nodes: React.ReactNode[], tint: Tint, key: string): React.Reac
     if (typeof node !== "string") return [node];
     return node.split(tint.re).map((part, j) =>
       j % 2 === 1 ? (
-        <span key={`${key}-${i}-${j}`} className="num font-medium" style={{ color: tint.colour }}>
+        <span key={`${key}-${i}-${j}`} className="num figure" style={{ color: textColour(tint.colour) }}>
+          {part}
+        </span>
+      ) : (
+        part
+      ),
+    );
+  });
+}
+
+/** The arms' names, wherever they appear, in the arms' colours: a legend inside the text. */
+type ArmTint = { re: RegExp; colour: (name: string) => string } | null;
+
+/**
+ * The names an arm goes by in the text: its full label, the parenthetical in it ("Target
+ * below 120 mm Hg (intensive treatment)"), and the group names the charts use for it
+ * ("Intensive treatment", "Semaglutide"). Not the label's first word: on SPRINT that was
+ * "Target", which coloured every "target" in the prose as if it were an arm.
+ */
+function armMatcher(arms: string[], charts: Map<string, Chart>): ArmTint {
+  if (arms.length === 0) return null;
+  const fills = [A_FILL, B_FILL, C_FILL];
+  const groupNames = new Set<string>();
+  for (const c of charts.values()) for (const d of c.data) if (d.group) groupNames.add(d.group);
+  const same = (g: string, a: string) => {
+    const x = g.toLowerCase(), y = a.toLowerCase();
+    return x === y || y.includes(x) || x.includes(y);
+  };
+  const entries = arms.slice(0, 3).map((arm, i) => {
+    const inParens = arm.match(/\(([^)]+)\)/)?.[1];
+    const fromCharts = [...groupNames].filter((g) => same(g, arm));
+    const names = [...new Set([arm, inParens, ...fromCharts].filter((n): n is string => Boolean(n && n.length > 3)))];
+    return { names, colour: textColour(fills[i]) };
+  });
+  // A space in a name also matches a hyphen: the prose writes "intensive-treatment group".
+  const alts = entries.flatMap((e) => e.names).sort((a, b) => b.length - a.length)
+    .map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "[\\s-]+"));
+  if (alts.length === 0) return null;
+  const re = new RegExp(`(\\b(?:${alts.join("|")})\\b)`, "gi");
+  const fold = (t: string) => t.toLowerCase().replace(/[\s-]+/g, " ");
+  const colour = (name: string) =>
+    entries.find((e) => e.names.some((n) => fold(n) === fold(name)))?.colour ?? "#e8e8e8";
+  return { re, colour };
+}
+
+function withArms(nodes: React.ReactNode[], armTint: ArmTint, key: string): React.ReactNode[] {
+  if (!armTint) return nodes;
+  return nodes.flatMap((node, i): React.ReactNode[] => {
+    if (typeof node !== "string") return [node];
+    return node.split(armTint.re).map((part, j) =>
+      j % 2 === 1 ? (
+        <span key={`${key}-${i}-${j}`} className="arm" style={{ color: armTint.colour(part) }}>
           {part}
         </span>
       ) : (
@@ -664,16 +734,20 @@ function withTerms(
   onOpen: (prov: Provenance, value?: number) => void,
   key: string,
   tint: Tint = null,
+  armTint: ArmTint = null,
 ): React.ReactNode[] {
-  if (!termRe) return withTint(withMarks(text, mark, key), tint, key);
+  const plain = (t: string, k: string) => withArms(withTint(withMarks(t, mark, k), tint, k), armTint, k);
+  if (!termRe) return plain(text, key);
   return text.split(termRe).flatMap((part, i): React.ReactNode[] => {
-    if (i % 2 === 0) return withTint(withMarks(part, mark, `${key}-${i}`), tint, `${key}-${i}`);
+    if (i % 2 === 0) return plain(part, `${key}-${i}`);
     const t = terms.find((x) => x.term.toLowerCase() === part.toLowerCase());
-    if (!t || seen.has(t.term.toLowerCase())) return [part];
+    // A term that is also an arm ("intensive treatment" on SPRINT) keeps the arm's colour,
+    // whether it gets a popover or was already explained once.
+    if (!t || seen.has(t.term.toLowerCase())) return withArms([part], armTint, `${key}-${i}`);
     seen.add(t.term.toLowerCase());
     return [
       <span key={`${key}-${i}`} className="term" tabIndex={0}>
-        {part}
+        {withArms([part], armTint, `${key}-${i}a`)}
         <span role="tooltip" className="term-pop">
           {t.provenance ? (
             <>
@@ -681,9 +755,9 @@ function withTerms(
               <button
                 type="button"
                 onClick={() => onOpen(t.provenance!)}
-                className="mt-1.5 block text-[11px] text-white/45 underline decoration-white/20 underline-offset-2 hover:text-white"
+                className="pill mt-2"
               >
-                the paper&rsquo;s words · read in context
+                The paper&rsquo;s words · read in context ↗
               </button>
             </>
           ) : (
@@ -707,23 +781,24 @@ function inline(
   onOpen: (prov: Provenance, value?: number) => void,
   key: string,
   tint: Tint = null,
+  armTint: ArmTint = null,
 ) {
   // Bold before italic, so the ** in "**x**" is never read as a single emphasis marker.
   return text.split(/(\*\*[^*]+\*\*|\*[^*\n]+\*)/g).map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
         <strong key={i} className="font-medium text-[#e8e8e8]">
-          {withTerms(part.slice(2, -2), mark, termRe, terms, seen, onOpen, `${key}b${i}`, tint)}
+          {withTerms(part.slice(2, -2), mark, termRe, terms, seen, onOpen, `${key}b${i}`, tint, armTint)}
         </strong>
       );
     }
     if (part.length > 2 && part.startsWith("*") && part.endsWith("*")) {
       return (
         <em key={i} className="text-white/75 italic">
-          {withTerms(part.slice(1, -1), mark, termRe, terms, seen, onOpen, `${key}i${i}`, tint)}
+          {withTerms(part.slice(1, -1), mark, termRe, terms, seen, onOpen, `${key}i${i}`, tint, armTint)}
         </em>
       );
     }
-    return <span key={i}>{withTerms(part, mark, termRe, terms, seen, onOpen, `${key}t${i}`, tint)}</span>;
+    return <span key={i}>{withTerms(part, mark, termRe, terms, seen, onOpen, `${key}t${i}`, tint, armTint)}</span>;
   });
 }

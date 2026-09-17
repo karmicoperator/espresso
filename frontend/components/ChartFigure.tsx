@@ -1,10 +1,45 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { Chart, Datum, DiagramEdge, Provenance } from "@/lib/types";
 
 /** Which element of a chart the prose beside it is currently about. */
 export type Lit = { chart_id: string; kind: "datum" | "edge"; index: number };
+
+/**
+ * The page's arms, in colour order. The intervention takes the first series colour and
+ * the comparator the second on every chart, whatever order the planner listed them in;
+ * without this the same arm could be teal in one chart and rust in the next, and colour
+ * would mislead instead of explain.
+ */
+export const ArmsContext = createContext<string[]>([]);
+
+function sameArm(group: string, arm: string): boolean {
+  const g = group.toLowerCase();
+  const a = arm.toLowerCase();
+  return g === a || a.includes(g) || g.includes(a) || a.split(/\s+/)[0] === g.split(/\s+/)[0];
+}
+
+/** Groups in arm order first, then any others as they came. */
+export function orderGroups(groups: string[], arms: string[]): string[] {
+  const ordered: string[] = [];
+  for (const arm of arms) {
+    const g = groups.find((x) => !ordered.includes(x) && sameArm(x, arm));
+    if (g) ordered.push(g);
+  }
+  return [...ordered, ...groups.filter((g) => !ordered.includes(g))];
+}
+
+/** A brighter twin of each mark colour, for text on black; the fills read too dim as type. */
+export function textColour(fill: string): string {
+  const map: Record<string, string> = {
+    [A]: "#9fdccb",
+    [B]: "#e8a993",
+    [C]: "#b3c0e6",
+    "#b9a56f": "#dccb95",
+  };
+  return map[fill] ?? "#e8e8e8";
+}
 
 /**
  * The colour a chart draws a datum in, so the prose can use the same one. Kept in step
@@ -12,10 +47,10 @@ export type Lit = { chart_id: string; kind: "datum" | "edge"; index: number };
  * whether it favours treatment, everything else the intervention teal. Split rows of a
  * flow chart colour by position; other flow boxes and diagram edges are neutral.
  */
-export function datumColour(chart: Chart, index: number): string {
+export function datumColour(chart: Chart, index: number, arms: string[] = []): string {
   const d = chart.data[index];
   if (!d) return "#e8e8e8";
-  const groups = [...new Set(chart.data.map((x) => x.group).filter(Boolean))] as string[];
+  const groups = orderGroups([...new Set(chart.data.map((x) => x.group).filter(Boolean))] as string[], arms);
   switch (chart.kind) {
     case "bars":
     case "dots":
@@ -54,6 +89,9 @@ const A = "#7fb5a6"; // intervention
 const B = "#c98a7a"; // comparator
 const C = "#8f9bb8"; // third series
 const SERIES = [A, B, C, "#b9a56f"];
+export const A_FILL = A;
+export const B_FILL = B;
+export const C_FILL = C;
 
 /** "95%" but "162 cases": symbols close up to the number, words do not. */
 function withUnit(s: string, unit: string): string {
@@ -183,6 +221,11 @@ export function ChartFigure({
   const { ref, on } = useReveal<HTMLDivElement>();
   const [tip, setTip] = useState<TipState>(null);
   const focused = lit && lit.chart_id === chart.id ? lit : null;
+  const arms = useContext(ArmsContext);
+  // The card's edge takes the colour of the mark the prose is about, so the eye lands
+  // on the right card before it finds the mark.
+  const litColour = focused && focused.kind === "datum" ? datumColour(chart, focused.index, arms) : focused ? "#e8e8e8" : null;
+  const firstProv = chart.data[0]?.provenance ?? chart.edges?.[0]?.provenance;
 
   // The paper's sentence has to be reachable without a mouse: a keyboard reaches it by
   // focus, a finger by tap, a screen reader through the label.
@@ -242,8 +285,11 @@ export function ChartFigure({
     );
 
   return (
-    <figure ref={ref} className={`chart ${on ? "on" : ""} my-8`}>
-      <div className="rounded-2xl border border-white/[0.08] bg-white/[0.04] px-7 pt-6 pb-5 backdrop-blur-xl">
+    <figure ref={ref} className={`chart ${on ? "on" : ""} ${litColour ? "is-lit" : ""} my-8`}>
+      <div
+        className="rounded-2xl border border-white/[0.08] bg-white/[0.04] px-7 pt-6 pb-5 backdrop-blur-xl transition-[border-color,box-shadow] duration-300"
+        style={litColour ? ({ ["--lit-colour" as string]: litColour } as React.CSSProperties) : undefined}
+      >
         <h3 className="text-[14px] font-medium text-[#e8e8e8]">{chart.title}</h3>
         {chart.subtitle && <p className="mt-0.5 text-[12px] text-white/30">{chart.subtitle}</p>}
 
@@ -257,10 +303,20 @@ export function ChartFigure({
           {chart.kind === "diagram" && <Diagram chart={chart} showQuote={showQuote} />}
         </div>
 
-        {(chart.source || chart.caveat) && (
-          <footer className="mt-4 flex flex-wrap justify-between gap-3 border-t border-white/[0.08] pt-3 text-[11px]">
+        {(chart.source || chart.caveat || (onOpen && firstProv)) && (
+          <footer className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.08] pt-3 text-[11px]">
             <span className="num text-white/30">{chart.source}</span>
-            {chart.caveat && <span className="text-[#d9a441]">{chart.caveat}</span>}
+            {onOpen && firstProv && (
+              <button
+                type="button"
+                className="pill"
+                onClick={() => onOpen(firstProv)}
+                title="The paper's paragraph behind this chart"
+              >
+                Read in the paper ↗
+              </button>
+            )}
+            {chart.caveat && <span className="basis-full text-[#d9a441]">{chart.caveat}</span>}
           </footer>
         )}
       </div>
@@ -341,7 +397,8 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   // independent bars repeats every category label and makes the comparison the chart
   // exists for -- this arm against that one, within a category -- something the reader has
   // to reconstruct. Pair them instead, label the category once, and name the arms in a key.
-  const groups = [...new Set(data.map((d) => d.group).filter(Boolean))] as string[];
+  const arms = useContext(ArmsContext);
+  const groups = orderGroups([...new Set(data.map((d) => d.group).filter(Boolean))] as string[], arms);
   const grouped = groups.length > 1;
   const cats = [...new Set(data.map((d) => d.label))];
 
@@ -759,7 +816,8 @@ function Line({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   const W = 520;
   const H = 240;
   const [L, R, T, Bo] = [50, 30, 20, 52];
-  const groups = [...new Set(chart.data.map((d) => d.group || "series"))];
+  const arms = useContext(ArmsContext);
+  const groups = orderGroups([...new Set(chart.data.map((d) => d.group || "series"))], arms);
   // The x axis is the timepoints the paper names, in the order they first appear. Each
   // series places its points by timepoint, so two arms with the same labels share an axis
   // and an arm missing a timepoint leaves a gap rather than shifting the rest left.

@@ -360,6 +360,17 @@ name with them, and the sentence's highlight tints the same colour. The chart al
 draws in those colours, so "this 43.23 is that teal bar" needs no hunting. The colour
 comes from the same function the chart draws with, so the two cannot drift apart.
 
+Before making colour louder, make it mean one thing. Grouped charts coloured their arms
+by whichever the planner listed first, so the same drug could be teal in one chart and
+rust in the next; louder colour would have misled faster. The page now picks its arms
+once (the verified risk pair, else the first two-group chart) and every chart orders its
+groups by that, so an arm's colour holds across charts, the icon array and the prose,
+where arm names are coloured wherever they appear. The text variants are brighter twins
+of the fills, because a fill that reads on a bar reads dim as type. A linked sentence
+carries a thin bar in its mark's colour at the left edge, the sign that reading it will
+light something; lit, the bar goes solid, the sentence takes a wash of the colour and the
+chart's card edge takes it too. Anything pressable is a pill with a lift on hover.
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were
