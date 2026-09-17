@@ -1,5 +1,5 @@
 #!/bin/bash
-# MedScroll launcher.
+# Paper in Five launcher.
 #
 # Installs what is missing on first run, starts the API and the web app if our own
 # instances are not already up, then opens the browser. Running it twice is harmless, and
@@ -15,10 +15,10 @@ REPO="/Users/max-j/Desktop/ScrollyTelling"
 # provider, which fails later and further from the cause.
 export PATH="$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
 
-say()  { osascript -e "display notification \"$1\" with title \"MedScroll\"" >/dev/null 2>&1; }
+say()  { osascript -e "display notification \"$1\" with title \"Paper in Five\"" >/dev/null 2>&1; }
 fail() {
   local text=${1//\"/\\\"}
-  osascript -e "display dialog \"$text\" with title \"MedScroll\" buttons {\"OK\"} default button 1 with icon stop" >/dev/null 2>&1
+  osascript -e "display dialog \"$text\" with title \"Paper in Five\" buttons {\"OK\"} default button 1 with icon stop" >/dev/null 2>&1
   exit 1
 }
 
@@ -28,11 +28,11 @@ if [ ! -d "$REPO/backend" ]; then
   HERE="$(cd "$(dirname "$0")/../../.." && pwd)"
   [ -d "$HERE/backend" ] && REPO="$HERE"
 fi
-[ -d "$REPO/backend" ] || fail "Cannot find the MedScroll project. It was at:
+[ -d "$REPO/backend" ] || fail "Cannot find the Paper in Five project. It was at:
 
 $REPO
 
-Move the folder back, or keep MedScroll.app inside it."
+Move the folder back, or keep PaperInFive.app inside it."
 
 cd "$REPO" || fail "Cannot open $REPO"
 # shellcheck source=scripts/launch-lib.sh
@@ -49,7 +49,7 @@ URL="http://localhost:$WEB_PORT"
 
 # Both already ours: nothing to start, so offer the two things worth doing.
 if [ "$API_ACTION" = reuse ] && [ "$WEB_ACTION" = reuse ]; then
-  CHOICE=$(osascript -e "display dialog \"MedScroll is already running on port $WEB_PORT.\" with title \"MedScroll\" buttons {\"Stop\", \"Cancel\", \"Open\"} default button \"Open\"" 2>/dev/null)
+  CHOICE=$(osascript -e "display dialog \"Paper in Five is already running on port $WEB_PORT.\" with title \"Paper in Five\" buttons {\"Stop\", \"Cancel\", \"Open\"} default button \"Open\"" 2>/dev/null)
   case "$CHOICE" in
     *Open*) open "$URL" ;;
     *Stop*)
@@ -74,9 +74,9 @@ PROVIDER=$(llm_status "$API_PORT")
 ADVICE=$(llm_advice "${PROVIDER:-unconfigured}")
 if [ -n "$ADVICE" ]; then
   ADVICE=${ADVICE//\"/\\\"}
-  osascript -e "display dialog \"MedScroll started, but new papers cannot be built.
+  osascript -e "display dialog \"Paper in Five started, but new papers cannot be built.
 
-$ADVICE\" with title \"MedScroll\" buttons {\"Open anyway\"} default button 1 with icon caution" >/dev/null 2>&1
+$ADVICE\" with title \"Paper in Five\" buttons {\"Open anyway\"} default button 1 with icon caution" >/dev/null 2>&1
 else
   say "Ready on port $WEB_PORT${PROVIDER:+ · $PROVIDER}"
 fi

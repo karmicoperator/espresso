@@ -21,12 +21,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "MedScroll",
-    template: "%s · MedScroll",
+    default: "Paper in Five",
+    template: "%s · Paper in Five",
   },
   description:
     "Turns an open-access PubMed paper into a scrollable explainer, with every plotted number checked against the paper's own text.",
-  applicationName: "MedScroll",
+  applicationName: "Paper in Five",
   robots: { index: false, follow: false },
   icons: {
     icon: [{ url: "/icon.png", type: "image/png" }],

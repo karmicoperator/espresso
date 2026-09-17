@@ -35,8 +35,8 @@ EPMC = "https://www.ebi.ac.uk/europepmc/webservices/rest"
 # still 301s here, but a redirect is not a contract.
 IDCONV = "https://pmc.ncbi.nlm.nih.gov/tools/idconv/api/v1/articles/"
 #: OpenAlex asks for a contact so it can serve the faster pool.
-OPENALEX_CONTACT = os.getenv("OPENALEX_CONTACT", "medscroll@localhost")
-USER_AGENT = "medscroll/0.2 (personal research tool)"
+OPENALEX_CONTACT = os.getenv("OPENALEX_CONTACT", "paperinfive@localhost")
+USER_AGENT = "paperinfive/0.3 (personal research tool)"
 
 XLINK = "{http://www.w3.org/1999/xlink}href"
 
@@ -136,7 +136,7 @@ _limiter = _RateLimiter()
 
 
 def _eutils_params(**extra: str) -> dict[str, str]:
-    params = {"tool": "medscroll", **extra}
+    params = {"tool": "paperinfive", **extra}
     if email := os.getenv("NCBI_EMAIL"):
         params["email"] = email
     if key := os.getenv("NCBI_API_KEY"):
@@ -182,7 +182,7 @@ async def _idconv(key: str, client: httpx.AsyncClient) -> dict | None:
         try:
             r = await client.get(
                 IDCONV,
-                params={"ids": key, "format": "json", "tool": "medscroll"},
+                params={"ids": key, "format": "json", "tool": "paperinfive"},
                 timeout=20.0,
             )
             if r.status_code == 429:

@@ -1,8 +1,8 @@
 <div align="center">
-  <img alt="MedScroll" src="build/icon.png" width="96" />
+  <img alt="Paper in Five" src="build/icon.png" width="96" />
 </div>
 
-<h1 align="center">MedScroll</h1>
+<h1 align="center">Paper in Five</h1>
 
 <p align="center">Medical papers as scrollable explainers, with every number traceable to the source.</p>
 
@@ -16,7 +16,7 @@ requests to PubMed Central for the paper itself.
 
 ## Running it
 
-Double-click **`MedScroll.app`**, or run **`./start.command`** for the same thing with live
+Double-click **`PaperInFive.app`**, or run **`./start.command`** for the same thing with live
 output. Both install what is missing on first run, build the web app, start what is down,
 reuse what is already running, step past ports held by other programs, and open the
 browser. When a source file changes, the next start rebuilds and restarts the web app.
@@ -32,7 +32,7 @@ to get it:
   Groq, OpenRouter) or Azure OpenAI. Settings tests the model with one tiny call. Without
   a working model, papers already built still open; the landing page says so.
 
-Logs land in `logs/`. `MEDSCROLL_DEV=1 ./start.command` runs the web app's dev server
+Logs land in `logs/`. `PAPERINFIVE_DEV=1 ./start.command` runs the web app's dev server
 instead of a production build.
 
 ## What it does
@@ -99,7 +99,7 @@ backend/     FastAPI. ingestion/ (JATS + PDF), agents/ (planner, gate, pipeline)
 frontend/    Next.js reader. components/ChartFigure.tsx draws every chart kind.
 scripts/     launch-lib.sh — port resolution shared by both launchers
 docs/        FINDINGS.md — what we learned, including what not to try
-MedScroll.app, start.command
+PaperInFive.app, start.command
 ```
 
 Papers are stored as JSON under `backend/data/explainers/`, figures under

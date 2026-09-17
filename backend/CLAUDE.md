@@ -1,4 +1,4 @@
-# MedScroll backend — agent context
+# Paper in Five backend — agent context
 
 FastAPI service that turns a PubMed link into a verified explainer. Local and single-user.
 The `docs/FINDINGS.md` at the repo root is the useful history, including several things not

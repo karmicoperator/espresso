@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <!-- The app's mechanism in one glyph: a quotation, and a check on it. -->
+  <rect width="256" height="256" rx="56" fill="#0d0d0d"/>
+  <rect x="1" y="1" width="254" height="254" rx="55" fill="none" stroke="#ffffff" stroke-opacity="0.10" stroke-width="2"/>
+  <!-- Opening quotation mark, drawn as paths so no font is needed. -->
+  <g fill="#e8e8e8">
+    <path d="M62 172 C62 138 80 108 116 92 L124 106 C102 118 92 132 90 146 C104 144 118 152 118 170 C118 186 106 198 90 198 C72 198 62 188 62 172 Z"/>
+    <path d="M136 172 C136 138 154 108 190 92 L198 106 C176 118 166 132 164 146 C178 144 192 152 192 170 C192 186 180 198 164 198 C146 198 136 188 136 172 Z"/>
+  </g>
+  <!-- The check, in the verified green the page uses. -->
+  <circle cx="196" cy="196" r="34" fill="#0d0d0d"/>
+  <circle cx="196" cy="196" r="28" fill="#7dd19b"/>
+  <path d="M182 197 L192 207 L211 186" fill="none" stroke="#0d0d0d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

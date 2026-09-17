@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { ChartFigure } from "./ChartFigure";
 import { FigureFigure } from "./FigureFigure";
 import type { Chart, Explainer, FigurePlate } from "@/lib/types";
@@ -42,6 +42,14 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
     explainer.published?.slice(0, 4),
     explainer.paper_id,
   ].filter(Boolean);
+
+  // The tab should say which paper this is, not only which app.
+  useEffect(() => {
+    document.title = `${explainer.title} · Paper in Five`;
+    return () => {
+      document.title = "Paper in Five";
+    };
+  }, [explainer.title]);
 
   const v = explainer.verification;
   const pct = v.checked ? Math.round((v.passed / v.checked) * 100) : null;

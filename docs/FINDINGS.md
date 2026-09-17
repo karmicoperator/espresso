@@ -357,7 +357,7 @@ for every Node dev server and 8000 for every Python one. With `python3 -m http.s
 both, the app reported "already running" and would have opened the browser onto a stranger's
 directory listing.
 
-Identify the service, do not just knock: health carries `"app": "medscroll"`. And step past
+Identify the service, do not just knock: health carries `"app": "paperinfive"`. And step past
 an occupied port rather than adopting it. Scan order matters — look for **our** instance
 across the whole span first, then for a free port, or a second copy starts on the free base
 port while the first keeps running.
@@ -456,7 +456,7 @@ not appear" meant re-running a five-minute extraction.
 
 Three ways in, all idempotent, all reusing whatever is already listening:
 
-- **`MedScroll.app`** — double-click, or keep it in the Dock. Starts what is down, opens the
+- **`PaperInFive.app`** — double-click, or keep it in the Dock. Starts what is down, opens the
   browser, and if everything is already up offers Open or Stop. Failures surface as dialogs.
 - **`start.command`** — the same from Terminal, with live output and Ctrl-C to stop. Better
   when something is wrong and you want to watch it.

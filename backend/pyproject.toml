@@ -1,5 +1,5 @@
 [project]
-name = "medscroll"
+name = "paperinfive"
 version = "0.1.0"
 description = "Scrollable explainers with verified charts for open-access medical papers"
 requires-python = ">=3.11,<3.14"
