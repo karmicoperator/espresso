@@ -7,11 +7,19 @@ Now using SQLite database and local Manim rendering.
 import hmac
 import logging
 import os
-import uuid
+import tempfile
 from datetime import timedelta
+from pathlib import Path
 
-from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException, Request
-from fastapi.responses import FileResponse, RedirectResponse
+from fastapi import (
+    APIRouter,
+    BackgroundTasks,
+    Depends,
+    File,
+    HTTPException,
+    Request,
+    UploadFile,
+)
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -19,7 +27,6 @@ from db import queries
 from db.connection import get_db
 from db.queries import _utcnow_naive
 from jobs import process_paper_job
-from rendering import extract_scene_name, get_video_path, get_video_url, process_visualization
 
 from .schemas import (
     HealthResponse,
@@ -29,8 +36,6 @@ from .schemas import (
     PaperSummary,
     ProcessRequest,
     ProcessResponse,
-    RenderRequest,
-    RenderResponse,
     SectionResponse,
     StatusResponse,
     StepInfo,
@@ -142,10 +147,9 @@ async def start_processing(
 
     if temporal_enabled():
         try:
-            from temporalio.exceptions import WorkflowAlreadyStartedError
-
             from temporal_app.activities import PipelineInput
             from temporal_app.workflows import TASK_QUEUE, PaperPipelineWorkflow
+            from temporalio.exceptions import WorkflowAlreadyStartedError
 
             from .temporal_client import get_temporal_client
 
@@ -340,80 +344,170 @@ async def list_papers(db: AsyncSession = Depends(get_db)):
     )
 
 
-@router.get("/video/{video_id}")
-async def get_video(video_id: str):
-    """
-    Get a rendered visualization video.
 
-    Returns the actual video file if it exists locally,
-    or redirects to the cloud URL (R2) if available.
-    """
-    # Try local file first
-    video_path = get_video_path(video_id)
-    if video_path and video_path.exists():
-        return FileResponse(
-            path=str(video_path),
-            media_type="video/mp4",
-            filename=f"{video_id}.mp4"
+
+
+@router.get("/explainer/{paper_id}")
+async def get_explainer(paper_id: str):
+    """The built explainer: reader sections, charts, and the verification report."""
+    import store
+
+    explainer = store.load(paper_id)
+    if explainer is None:
+        raise HTTPException(
+            status_code=404,
+            detail=f"No explainer for {paper_id}. Submit it first via POST /api/process.",
         )
-
-    # Try cloud URL (R2 mode)
-    cloud_url = get_video_url(video_id)
-    if cloud_url and cloud_url.startswith("http"):
-        return RedirectResponse(url=cloud_url, status_code=302)
-
-    raise HTTPException(
-        status_code=404,
-        detail=f"Video '{video_id}' not found"
-    )
+    return explainer
 
 
-@router.post("/render", response_model=RenderResponse)
-async def render_manim(
-    request: RenderRequest,
-    x_render_secret: str | None = Header(default=None),
-):
+@router.post("/build/pdf")
+async def build_from_pdf(file: UploadFile = File(...)):
+    """Build from a PDF the reader downloaded themselves.
+
+    About a quarter of PubMed's free full text was never deposited in PubMed Central, and
+    the publishers that host it answer 403 to anything that is not a browser. They block
+    programs, not people, so the person downloads the paper and hands it over.
     """
-    Test endpoint to render Manim code directly.
+    import store
+    from agents.pipeline import build_visuals
+    from ingestion import ingest_pdf
+    from ingestion.pdf import MAX_PDF_BYTES
 
-    This is for testing/development purposes only — it executes caller-supplied
-    Python. It is disabled in production unless RENDER_API_SECRET is set and the
-    caller presents it via the X-Render-Secret header. In production, rendering
-    happens as part of the paper processing pipeline.
-    """
-    _authorize_render(x_render_secret)
+    name = Path(file.filename or "paper.pdf").name
+    if not name.lower().endswith(".pdf"):
+        raise HTTPException(status_code=415, detail="That is not a PDF.")
+
+    data = await file.read()
+    if len(data) > MAX_PDF_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail=f"{name} is {len(data) // 1_000_000} MB, over the "
+                   f"{MAX_PDF_BYTES // 1_000_000} MB limit.",
+        )
+    if not data.startswith(b"%PDF"):
+        raise HTTPException(status_code=415, detail=f"{name} does not look like a PDF.")
+
+    # Written under a name we choose, in a directory we own, so a crafted filename cannot
+    # steer the write anywhere.
+    with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
+        tmp.write(data)
+        tmp_path = Path(tmp.name)
+
     try:
-        # Generate a unique video ID
-        video_id = f"test_{uuid.uuid4().hex[:8]}"
+        try:
+            paper = await ingest_pdf(tmp_path, source_name=name)
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
 
-        # Extract scene name for response
-        scene_name = extract_scene_name(request.code)
+        explainer = await build_visuals(paper)
+        if not explainer.sections and not explainer.charts:
+            why = " ".join(explainer.notes) or "the model produced nothing for this paper."
+            raise HTTPException(status_code=502, detail=f"Nothing could be built from {name}. {why}")
 
-        # Render the visualization
-        video_url = await process_visualization(
-            viz_id=video_id,
-            manim_code=request.code,
-            quality=request.quality
+        # Say where it came from. A PDF has no addressable table cells, so a number printed
+        # only inside a table cannot be cited and will not appear.
+        explainer.notes.insert(
+            0,
+            f"Built from an uploaded PDF ({name}) rather than PubMed Central. Values are "
+            "still checked against the paper's text, but table cells are not addressable in "
+            "a PDF, so figures that appear only inside a table are not charted.",
+        )
+        store.save(explainer)
+        return explainer
+    finally:
+        tmp_path.unlink(missing_ok=True)
+
+
+@router.get("/figure/{paper_id}/{filename}")
+async def get_figure(paper_id: str, filename: str):
+    """Serve one cached figure image.
+
+    Both path parts are reduced to a bare name before use. They arrive from a URL, and
+    joining a caller-supplied string onto a directory is how a request for
+    ``../../../.env`` gets served.
+    """
+    from fastapi.responses import FileResponse
+
+    from ingestion.figures import DISPLAYABLE, figure_path
+
+    safe_id = Path(paper_id).name
+    safe_name = Path(filename).name
+    if not safe_id or not safe_name or Path(safe_name).suffix.lower() not in DISPLAYABLE:
+        raise HTTPException(status_code=404, detail="No such figure")
+
+    path = figure_path(safe_id, safe_name)
+    if not path.is_file():
+        raise HTTPException(status_code=404, detail="No such figure")
+
+    # Resolve and confirm the result is still inside the figure directory, so a symlink
+    # planted in the cache cannot redirect the read somewhere else.
+    from ingestion.figures import FIGURE_DIR
+
+    try:
+        path.resolve().relative_to(FIGURE_DIR.resolve())
+    except ValueError:
+        raise HTTPException(status_code=404, detail="No such figure") from None
+
+    return FileResponse(path, headers={"Cache-Control": "public, max-age=86400"})
+
+
+@router.get("/explainers")
+async def list_explainers():
+    """Everything built so far, newest first."""
+    import store
+
+    return store.listing()
+
+
+@router.post("/build")
+async def build_now(request: dict):
+    """Build synchronously and return the explainer.
+
+    The job queue exists for the long path; this is the one a person waiting at a browser
+    wants. A trial paper takes three to five minutes on the CLI provider, most of it in
+    chart planning.
+    """
+    import store
+    from agents.pipeline import build_visuals
+    from ingestion import IngestError, ingest_paper
+
+    reference = (request.get("input") or request.get("reference") or "").strip()
+    if not reference:
+        raise HTTPException(status_code=400, detail="Pass {\"input\": \"<PubMed link, PMCID or DOI>\"}")
+
+    if not request.get("force_refresh"):
+        try:
+            from ingestion import resolve
+            from ingestion.pubmed import make_client
+
+            async with make_client() as client:
+                ref = await resolve(reference, client)
+            if ref.pmcid and (cached := store.load(ref.pmcid)) is not None:
+                logger.info("Serving cached explainer for %s", ref.pmcid)
+                return cached
+        except IngestError:
+            pass  # fall through to the real error below
+
+    try:
+        paper = await ingest_paper(reference, force_refresh=bool(request.get("force_refresh")))
+    except IngestError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    explainer = await build_visuals(paper)
+
+    # A build that produced neither prose nor a chart is a failure, not a thin result.
+    # Storing it puts an empty page in the reader's library and, worse, caches that
+    # emptiness so retrying returns it instantly. Report why instead.
+    if not explainer.sections and not explainer.charts:
+        why = " ".join(explainer.notes) or "the model produced nothing for this paper."
+        raise HTTPException(
+            status_code=502,
+            detail=f"Nothing could be built for {explainer.paper_id or reference}. {why}",
         )
 
-        return RenderResponse(
-            video_id=video_id,
-            video_url=video_url,
-            scene_name=scene_name,
-            message=f"Successfully rendered {scene_name}"
-        )
-
-    except RuntimeError as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Rendering failed: {e!s}"
-        ) from e
-    except Exception:
-        logger.exception("Unexpected error while rendering Manim code")
-        raise HTTPException(
-            status_code=500,
-            detail="Internal error while rendering. See server logs.",
-        ) from None
+    store.save(explainer)
+    return explainer
 
 
 @router.get("/health", response_model=HealthResponse)
@@ -423,71 +517,46 @@ async def health_check(db: AsyncSession = Depends(get_db)):
 
     Returns status of the API and dependent services.
     """
-    import os
-    import subprocess
+    import store
+    from agents.base import get_provider
 
-    # Test database connection
+    # Database
     db_status = "connected"
     try:
         await db.execute(text("SELECT 1"))
     except Exception as e:
         db_status = f"error: {e!s}"
 
-    # Test Manim availability
-    manim_status = "not found"
+    # LLM provider. Reachability is only proven by a real call, so this reports what is
+    # configured, not that it works.
     try:
-        manim_exe = os.getenv("MANIM_EXECUTABLE", "manim")
-        result = subprocess.run(
-            [manim_exe, "--version"],
-            capture_output=True,
-            text=True,
-            timeout=5
-        )
-        if result.returncode == 0:
-            version = result.stdout.strip().split("\n")[0]
-            manim_status = f"available ({version})"
-        else:
-            detail = (result.stderr.strip() or result.stdout.strip()).splitlines()
-            manim_status = f"error: {detail[-1][:200] if detail else 'command failed'}"
-    except FileNotFoundError:
-        manim_status = "not installed"
+        provider_status = get_provider()
     except Exception as e:
-        manim_status = f"error: {e!s}"
+        provider_status = f"unconfigured ({e})"
 
-    # Test storage connectivity
-    from rendering.storage import STORAGE_MODE, get_backend
-    storage_status = "local"
-    if STORAGE_MODE == "r2":
-        backend = get_backend()
-        if hasattr(backend, "check_connectivity"):
-            try:
-                storage_status = "r2: connected" if backend.check_connectivity() else "r2: unreachable"
-            except Exception as e:
-                storage_status = f"r2: error ({e})"
-        else:
-            storage_status = "r2: configured"
+    # Being able to reach the model is the difference between "can open papers" and "can
+    # build one", so health says which. Probed once per process, and fast when broken.
+    if provider_status == "claude_cli":
+        from agents.claude_cli import check_auth
 
-    # Check Modal configuration
-    from rendering import RENDER_MODE
-    modal_status = "not configured"
-    if RENDER_MODE == "modal":
-        modal_token = os.getenv("MODAL_TOKEN_ID")
-        modal_status = "configured" if modal_token else "missing MODAL_TOKEN_ID"
+        signed_in, why = check_auth()
+        if not signed_in:
+            provider_status = f"claude_cli (cannot build: {why})"
 
-    # When using Modal, manim doesn't need to be local
-    if RENDER_MODE == "modal":
-        all_healthy = db_status == "connected"
-    else:
-        all_healthy = db_status == "connected" and "available" in manim_status
+    explainers = len(store.listing())
+    all_healthy = (
+        db_status == "connected"
+        and not provider_status.startswith("unconfigured")
+        and "cannot build" not in provider_status
+    )
 
     return HealthResponse(
+        app="medscroll",
         status="healthy" if all_healthy else "degraded",
         version="0.1.0",
         services={
             "database": db_status,
-            "manim": manim_status if RENDER_MODE != "modal" else f"offloaded to modal ({manim_status})",
-            "storage": storage_status,
-            "redis": "not configured",
-            "modal": modal_status
-        }
+            "llm_provider": provider_status,
+            "explainers_built": str(explainers),
+        },
     )

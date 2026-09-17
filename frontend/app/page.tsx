@@ -1,270 +1,222 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import { PlaceholdersAndVanishInput } from "@/components/ui/placeholders-and-vanish-input";
-import { MosaicBackground } from "@/components/ui/mosaic-background";
-import { ShardField } from "@/components/ui/glass-shard";
-import { GlassCard } from "@/components/ui/glass-card";
+import { api } from "@/lib/api";
+import type { ExplainerSummary } from "@/lib/types";
 
-function extractArxivId(inputRaw: string): string | null {
-  const input = inputRaw.trim();
-  if (!input) return null;
+const EXAMPLES = [
+  { paste: "https://pubmed.ncbi.nlm.nih.gov/32678530/", label: "Dexamethasone in Covid-19" },
+  { paste: "https://pubmed.ncbi.nlm.nih.gov/33378609/", label: "mRNA-1273 vaccine" },
+  { paste: "PMC2988224", label: "LDL meta-analysis" },
+];
 
-  const directNew = input.match(/^\d{4}\.\d{4,5}(v\d+)?$/i);
-  if (directNew) return directNew[0];
-
-  const directOld = input.match(/^[a-z-]+(\.[a-z]{2})?\/\d{7}(v\d+)?$/i);
-  if (directOld) return directOld[0];
-
-  const urlAbs = input.match(/arxiv\.org\/abs\/([^?\s#]+)/i);
-  if (urlAbs?.[1]) return decodeURIComponent(urlAbs[1]).replace(/\/$/, "");
-
-  const urlPdf = input.match(/arxiv\.org\/pdf\/([^?\s#]+?)(?:\.pdf)?$/i);
-  if (urlPdf?.[1]) return decodeURIComponent(urlPdf[1]).replace(/\/$/, "");
-
-  return null;
-}
-
-const placeholders = [
-  "Paste an arXiv URL or ID...",
-  "1706.03762 (Attention Is All You Need)",
-  "https://arxiv.org/abs/2005.14165",
-  "2303.08774 (GPT-4 Technical Report)",
-  "1810.04805 (BERT)",
+const STEPS = [
+  "Resolving the paper",
+  "Reading the full text",
+  "Rewriting it into sections",
+  "Choosing the charts",
+  "Checking every value against the source",
 ];
 
 export default function Home() {
   const router = useRouter();
-  const [value, setValue] = useState("");
-  const [touched, setTouched] = useState(false);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [step, setStep] = useState(0);
+  const [elapsed, setElapsed] = useState(0);
+  const [error, setError] = useState<string | null>(null);
+  const [built, setBuilt] = useState<ExplainerSummary[]>([]);
 
-  const parsedId = useMemo(() => extractArxivId(value), [value]);
-  const canSubmit = Boolean(parsedId);
+  useEffect(() => {
+    api.list().then(setBuilt).catch(() => setBuilt([]));
+  }, []);
 
-  function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setTouched(true);
-    if (!parsedId) return;
-    router.push(`/abs/${encodeURIComponent(parsedId)}`);
+  // The build is one synchronous request, so the only honest progress signal is a clock
+  // and a rough idea of where it is. Better than a spinner that says nothing.
+  useEffect(() => {
+    if (!busy) return;
+    const t = setInterval(() => setElapsed((s) => s + 1), 1000);
+    const s = setInterval(() => setStep((n) => Math.min(n + 1, STEPS.length - 1)), 42000);
+    return () => {
+      clearInterval(t);
+      clearInterval(s);
+    };
+  }, [busy]);
+
+  async function submit(reference: string) {
+    setError(null);
+    setBusy(true);
+    setStep(0);
+    setElapsed(0);
+    try {
+      const explainer = await api.build(reference);
+      router.push(`/paper/${encodeURIComponent(explainer.paper_id)}`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setBusy(false);
+    }
   }
 
+  /**
+   * The other way in. A quarter of PubMed's free full text was never deposited in PubMed
+   * Central, and the publishers hosting it refuse automated downloads. They do not refuse
+   * people, so a paper the reader can open they can also drop here.
+   */
+  async function submitPdf(file: File) {
+    setError(null);
+    setBusy(true);
+    setStep(0);
+    setElapsed(0);
+    try {
+      const explainer = await api.buildFromPdf(file);
+      router.push(`/paper/${encodeURIComponent(explainer.paper_id)}`);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setBusy(false);
+    }
+  }
+
+  const mmss = `${Math.floor(elapsed / 60)}:${String(elapsed % 60).padStart(2, "0")}`;
+
   return (
-    <main className="min-h-dvh relative overflow-hidden bg-black">
-      {/* Mosaic background with arXiv logo */}
-      <MosaicBackground showLogo logoYFraction={0.20} />
+    <main className="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center px-6 py-20 text-center">
+      <h1 className="text-6xl font-semibold tracking-tight text-[#e8e8e8] sm:text-7xl">
+        Med<span className="text-white/45">Scroll</span>
+      </h1>
+      <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-white/55">
+        Paste a PubMed link. It comes back as a short explainer with interactive charts built
+        from the paper&rsquo;s own numbers, every value checked against the source before it is
+        drawn.
+      </p>
 
-      {/* Floating glass shards */}
-      <ShardField />
-
-      {/* Explore the library — floating glass pill, top-right */}
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        className="fixed top-5 right-5 z-20"
-      >
-        <Link
-          href="/explore"
-          className="group inline-flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-xl px-4 py-2.5 text-sm text-white/50 border border-white/[0.08] transition-all hover:bg-black/80 hover:text-white/80 hover:border-white/[0.15] shadow-lg shadow-black/30"
-        >
-          <span className="text-white/40 select-none">&#9671;</span>
-          <span>Explore</span>
-          <span className="transition-transform group-hover:translate-x-0.5">&rarr;</span>
-        </Link>
-      </motion.div>
-
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6">
-        {/* ── First viewport: Logo (clear) + search bar below ── */}
-        <section className="min-h-dvh flex flex-col">
-          {/* Spacer — keeps the logo area clear */}
-          <div className="flex-1" />
-
-          {/* Search area — pinned to lower portion of viewport */}
-          <div className="max-w-4xl mx-auto w-full text-center pb-16 sm:pb-24">
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-lg sm:text-xl text-white/40 max-w-2xl mx-auto leading-relaxed font-light"
-            >
-              Paste any arXiv paper. Watch as it turns complex papers
-              into digestible and <span className="text-white/60 font-medium">visually</span> appealing video explanations.
-            </motion.p>
-
-            {/* Input Section */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="mt-10 max-w-xl mx-auto"
-            >
-              <div className="relative">
-                {/* Decorative brackets */}
-                <div className="absolute -left-4 top-1/2 -translate-y-1/2 text-3xl text-white/10 font-light select-none hidden sm:block">
-                  [
-                </div>
-                <div className="absolute -right-4 top-1/2 -translate-y-1/2 text-3xl text-white/10 font-light select-none hidden sm:block">
-                  ]
-                </div>
-
-                <PlaceholdersAndVanishInput
-                  placeholders={placeholders}
-                  value={value}
-                  onChange={(e) => {
-                    setValue(e.target.value);
-                    setTouched(true);
-                  }}
-                  onSubmit={onSubmit}
-                  disabled={!canSubmit && touched && value.length > 0}
+      {busy ? (
+        <div className="mt-12 w-full max-w-xl rounded-2xl border border-white/[0.08] bg-white/[0.04] p-7 text-left backdrop-blur-xl">
+          <div className="flex items-baseline justify-between">
+            <h2 className="text-sm font-medium text-[#e8e8e8]">{STEPS[step]}</h2>
+            <span className="num text-sm text-white/70">{mmss}</span>
+          </div>
+          <ol className="mt-5 space-y-2.5">
+            {STEPS.map((s, i) => (
+              <li key={s} className="flex items-start gap-3">
+                <span
+                  className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${
+                    i < step ? "bg-white/70" : i === step ? "animate-pulse bg-white" : "bg-white/15"
+                  }`}
                 />
-              </div>
-
-              {/* Status feedback */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.0 }}
-                className="mt-4 h-6 text-sm"
+                <p className={i > step ? "text-sm text-white/30" : "text-sm text-[#e8e8e8]"}>{s}</p>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-5 border-t border-white/[0.08] pt-4 text-xs leading-relaxed text-white/55">
+            Three to five minutes. Choosing the charts is the long pole: the model reads the
+            whole paper, and there is no prompt caching on the Claude Code backend.
+          </p>
+        </div>
+      ) : (
+        <>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (input.trim()) void submit(input.trim());
+            }}
+            className="mt-10 w-full max-w-xl"
+          >
+            <div className="flex items-center gap-2 rounded-full border border-white/[0.10] bg-white/[0.04] py-2 pr-2 pl-6 backdrop-blur-xl transition-colors focus-within:border-white/25">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="https://pubmed.ncbi.nlm.nih.gov/32678530/"
+                className="min-w-0 flex-1 bg-transparent py-2 text-sm text-[#e8e8e8] placeholder:text-white/25 focus:outline-none"
+              />
+              <button
+                type="submit"
+                disabled={!input.trim()}
+                aria-label="Build explainer"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/[0.12] bg-white/[0.06] text-white/70 transition-colors hover:border-white/30 hover:bg-white/[0.14] hover:text-white disabled:opacity-25"
               >
-                {parsedId ? (
-                  <span className="text-[#7dd19b] flex items-center justify-center gap-2">
-                    <span className="text-lg">✓</span>
-                    <span>Detected:{" "}</span>
-                    <span className="font-mono bg-[#7dd19b]/10 px-2 py-0.5 rounded">{parsedId}</span>
-                  </span>
-                ) : touched && value ? (
-                  <span className="text-[#f27066]">
-                    Enter a valid arXiv URL or paper ID
-                  </span>
-                ) : null}
-              </motion.div>
-            </motion.div>
-
-            {/* Quick Examples */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-              className="mt-8 flex flex-wrap items-center justify-center gap-3"
-            >
-              <span className="text-sm text-white/30">Try these:</span>
-              {[
-                { id: "1706.03762", label: "Transformers", icon: "◇" },
-                { id: "2005.14165", label: "GPT-3", icon: "◈" },
-                { id: "2303.08774", label: "GPT-4", icon: "◆" },
-              ].map((example) => (
-                <motion.button
-                  key={example.id}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => setValue(example.id)}
-                  className="group rounded-xl bg-white/[0.04] px-4 py-2.5 text-sm border border-white/[0.08] transition-all hover:bg-white/[0.07] hover:border-white/[0.14]"
-                >
-                  <span className="text-white/40 mr-2">{example.icon}</span>
-                  <span className="text-white/60 font-mono">{example.id}</span>
-                  <span className="text-white/30 ml-2">({example.label})</span>
-                </motion.button>
-              ))}
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Pro Tip Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 2.2 }}
-          className="mt-20 max-w-2xl mx-auto"
-        >
-          <GlassCard spotlight className="p-8">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="h-12 w-12 rounded-xl bg-white/[0.06] flex items-center justify-center border border-white/[0.10]">
-                <div
-                  className="h-4 w-4 bg-gradient-to-br from-white/50 to-white/20"
-                  style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
-                />
-              </div>
-              <div>
-                <h3 className="font-semibold text-white/90">Pro Tip</h3>
-                <p className="text-sm text-white/40">One edit turns arXiv into arXivisual</p>
-              </div>
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden>
+                  <path d="M5.5 3.5 10 8l-4.5 4.5" stroke="currentColor" strokeWidth="1.6"
+                        strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
             </div>
-            <div className="space-y-3 text-sm text-white/45 leading-relaxed">
-              <p>
-                If your link starts with{" "}
-                <code className="text-white/60 bg-white/[0.06] px-1.5 py-0.5 rounded text-xs font-mono">
-                  arxiv.org
-                </code>
-                , just add{" "}
-                <code className="text-white/60 bg-white/[0.06] px-1.5 py-0.5 rounded text-xs font-mono">
-                  isual
-                </code>
-                {" "}after{" "}
-                <code className="text-white/60 bg-white/[0.06] px-1.5 py-0.5 rounded text-xs font-mono">
-                  arxiv
-                </code>
-                .
-              </p>
-              <div className="rounded-lg border border-white/[0.08] bg-white/[0.03] p-3">
-                <p className="font-mono text-xs text-white/50">
-                  Before: arxiv.org/abs/1706.03762
-                </p>
-                <p className="font-mono text-xs text-white/70 mt-1">
-                  After:&nbsp;&nbsp;arxivisual.org/abs/1706.03762
-                </p>
-              </div>
-            </div>
-          </GlassCard>
-        </motion.div>
+          </form>
 
-        {/* Footer */}
-        <motion.footer
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 2.4 }}
-          className="mt-20 flex flex-col items-center justify-between gap-4 border-t border-white/[0.06] pt-8 text-sm sm:flex-row"
-        >
-          <div className="flex items-center gap-3 text-white/30">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="h-3 w-3 bg-gradient-to-br from-white/30 to-white/10"
-              style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
-            />
-            <span>Visualizing mathematics, one paper at a time</span>
+          <p className="mt-3 text-xs text-white/25">
+            PubMed or PMC links, a DOI, or a bare PMID. The full text is read from PubMed
+            Central.
+          </p>
+
+          <p className="mt-4 text-xs text-white/30">
+            Not in PubMed Central?{" "}
+            <label className="cursor-pointer text-white/60 underline decoration-white/20 underline-offset-4 transition-colors hover:text-white">
+              open the PDF
+              <input
+                type="file"
+                accept="application/pdf,.pdf"
+                className="hidden"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  // Cleared so choosing the same file twice still fires a change event.
+                  e.target.value = "";
+                  if (file) void submitPdf(file);
+                }}
+              />
+            </label>{" "}
+            and it will be built from that instead.
+          </p>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
+            <span className="text-white/25">Try these:</span>
+            {EXAMPLES.map((ex) => (
+              <button
+                key={ex.paste}
+                type="button"
+                onClick={() => setInput(ex.paste)}
+                className="rounded-full border border-white/[0.08] bg-white/[0.02] px-3.5 py-1.5 text-white/45 transition-colors hover:border-white/25 hover:text-white"
+              >
+                {ex.label}
+              </button>
+            ))}
           </div>
-          <div className="flex items-center gap-4">
-            <a
-              className="rounded-lg px-3 py-1.5 text-white/40 border border-white/[0.06] transition hover:bg-white/[0.04] hover:text-white/60 hover:border-white/[0.12]"
-              href="https://arxiv.org"
-              target="_blank"
-              rel="noreferrer"
-            >
-              arXiv
-            </a>
-            <a
-              className="rounded-lg px-3 py-1.5 text-white/40 border border-white/[0.06] transition hover:bg-white/[0.04] hover:text-white/60 hover:border-white/[0.12]"
-              href="https://www.manim.community/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Manim
-            </a>
-            <a
-              className="rounded-lg px-3 py-1.5 text-white/40 border border-white/[0.06] transition hover:bg-white/[0.04] hover:text-white/60 hover:border-white/[0.12]"
-              href="https://www.3blue1brown.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              3Blue1Brown
-            </a>
-          </div>
-        </motion.footer>
-      </div>
+
+          {error && (
+            <p className="mt-6 w-full max-w-xl rounded-xl border border-[#f27066]/30 bg-[#f27066]/10 p-3 text-sm text-[#f27066]">
+              {error}
+            </p>
+          )}
+
+          {built.length > 0 && (
+            <section className="mt-16 w-full text-left">
+              <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-white/25 uppercase">
+                Already built
+              </h2>
+              <div className="space-y-2">
+                {built.map((p) => (
+                  <button
+                    key={p.paper_id}
+                    onClick={() => router.push(`/paper/${encodeURIComponent(p.paper_id)}`)}
+                    className="flex w-full items-baseline justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-left backdrop-blur-xl transition-colors hover:border-white/[0.14] hover:bg-white/[0.07]"
+                  >
+                    <span className="min-w-0">
+                      {/* Wraps rather than truncating. A paper is identified by its title, and the
+                          half that gets cut is usually the half that distinguishes it. */}
+                      <span className="block text-sm leading-snug text-[#e8e8e8]">{p.title}</span>
+                      <span className="block text-xs text-white/30">
+                        {[p.journal, p.published?.slice(0, 4)].filter(Boolean).join(" · ")}
+                      </span>
+                    </span>
+                    <span className="num shrink-0 text-xs text-white/40">
+                      {p.chart_count} chart{p.chart_count === 1 ? "" : "s"}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </section>
+          )}
+        </>
+      )}
     </main>
   );
 }

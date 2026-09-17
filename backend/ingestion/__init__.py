@@ -1,197 +1,107 @@
+"""Paper ingestion.
+
+    paper = await ingest_paper("https://pubmed.ncbi.nlm.nih.gov/32678530/")
+
+Anything the user pastes — a PubMed link, a PMC link, a PMCID, a PMID, a DOI — resolves to
+a PubMed Central record and is parsed from JATS XML. JATS is the reason this project works:
+sections, tables and captions arrive already marked up, so every number can carry an
+address the provenance gate can check.
+
+Two stages, then the pipeline takes over:
+
+1. `pubmed.ingest_pubmed` produces the structured paper with stable locator ids.
+2. `section_formatter.format_sections` rewrites it into at most five readable sections at
+   roughly a third the length. Inherited from upstream and kept: the reader wants an
+   explainer, not the paper.
+
+The original section text stays on `Section.content` for verification. The rewrite lands on
+`Section.summary`. Charts are checked against the source, never against the rewrite.
 """
-Paper Ingestion Pipeline for ArXiviz.
 
-Main entry point: ingest_paper(arxiv_id) -> StructuredPaper
-
-Pipeline:
-1. Fetch metadata from arXiv API
-2. Check for ar5iv HTML availability
-3. Parse HTML (preferred) or PDF (fallback)
-4. Extract sections with hierarchy
-5. Cache and return StructuredPaper
-
-Team 1 owns this module. Output goes to Team 2's AI agents.
-"""
+from __future__ import annotations
 
 import logging
 
-from models.paper import (
-    ArxivPaperMeta,
-    ParsedContent,
-    Section,
-    StructuredPaper,
-)
+from models.paper import StructuredPaper
 
-from .arxiv_fetcher import (
-    download_pdf,
-    fetch_html_content,
-    fetch_paper_meta,
-    normalize_arxiv_id,
-    validate_arxiv_id,
-)
-from .html_parser import fetch_and_parse_html, parse_html
-from .pdf_parser import parse_pdf
-from .section_extractor import extract_sections
+from .pubmed import IngestError, ingest_pubmed, parse_identifiers, resolve
 from .section_formatter import format_sections
 
-# Configure logging
 logger = logging.getLogger(__name__)
 
-# Simple in-memory cache for development
-# In production, use Redis or database
+__all__ = [
+    "IngestError",
+    "clear_cache",
+    "format_sections",
+    "get_cached_paper",
+    "ingest_paper",
+    "ingest_pdf",
+    "parse_identifiers",
+    "resolve",
+]
+
+# Process-local cache. Ingest is cheap; the formatter behind it is not.
 _paper_cache: dict[str, StructuredPaper] = {}
 
 
-async def ingest_paper(
-    arxiv_id: str,
-    force_refresh: bool = False,
-    prefer_pdf: bool = False
-) -> StructuredPaper:
+async def ingest_pdf(path, source_name: str = "", rewrite: bool = True) -> StructuredPaper:
+    """A PDF the reader supplied, through the same rewrite the PMC path uses.
+
+    Nothing downstream is told which tier this came from, because nothing downstream should
+    behave differently: the gate still checks every number against the text it was given.
+    What the tier changes is what is in that text, and the reader is told so on the page.
     """
-    Main entry point for paper ingestion.
+    from ingestion.pdf import extract_pdf
 
-    Takes an arXiv ID and returns a fully structured paper ready for
-    Team 2's AI visualization pipeline.
+    paper = extract_pdf(path, source_name)
 
-    Args:
-        arxiv_id: arXiv paper ID (e.g., "1706.03762" or "1706.03762v1")
-        force_refresh: If True, bypass cache and re-fetch
-        prefer_pdf: If True, use PDF even if HTML is available
-
-    Returns:
-        StructuredPaper with metadata and extracted sections
-
-    Raises:
-        ValueError: If paper not found or parsing fails
-    """
-    # Normalize ID
-    arxiv_id = normalize_arxiv_id(arxiv_id)
-    logger.info(f"Starting ingestion for paper: {arxiv_id}")
-
-    # Check cache
-    if not force_refresh:
-        cached = await get_cached_paper(arxiv_id)
-        if cached:
-            logger.info(f"Returning cached paper: {arxiv_id}")
-            return cached
-
-    # Step 1: Fetch metadata from arXiv
-    logger.info(f"Fetching metadata for: {arxiv_id}")
-    meta = await fetch_paper_meta(arxiv_id)
-    logger.info(f"Got paper: {meta.title}")
-
-    # Step 2: Parse content (HTML preferred, PDF fallback)
-    content: ParsedContent
-
-    if meta.html_url and not prefer_pdf:
-        # Try HTML first (cleaner structure)
-        logger.info(f"Parsing ar5iv HTML: {meta.html_url}")
+    if rewrite and paper.sections:
         try:
-            content = await fetch_and_parse_html(meta.html_url)
-            logger.info("Successfully parsed HTML content")
-        except Exception as e:
-            logger.warning(f"HTML parsing failed, falling back to PDF: {e}")
-            content = await _parse_pdf_content(meta.pdf_url)
-    else:
-        # Use PDF
-        content = await _parse_pdf_content(meta.pdf_url)
+            source = [s.model_copy(deep=True) for s in paper.sections]
+            paper.reader_sections = await format_sections(source, paper.meta, model=None)
+        except Exception:
+            logger.exception("Section rewrite failed; falling back to the paper's own sections")
 
-    # Step 3: Extract sections
-    logger.info("Extracting sections from parsed content")
-    sections = extract_sections(content, meta)
-    raw_count = len(sections)
-    total_chars = sum(len(s.content) for s in sections)
-    logger.info(f"Extracted {raw_count} raw sections ({total_chars:,} chars total)")
-
-    # Step 4: Summarize + organize into <=5 sections (two-phase LLM pipeline)
-    try:
-        sections = await format_sections(sections, meta)
-        logger.info(
-            f"Section formatting succeeded: {raw_count} raw → {len(sections)} summarized sections"
-        )
-    except Exception as e:
-        logger.error(
-            f"Section formatting FAILED ({type(e).__name__}: {e}). "
-            f"Falling back to {raw_count} raw sections. "
-            f"This usually means the LLM call timed out or the API key is invalid."
-        )
-
-    # Step 5: Build final structure
-    paper = StructuredPaper(
-        meta=meta,
-        sections=sections
-    )
-
-    # Step 6: Cache result
-    await cache_paper(paper)
-
-    logger.info(f"Ingestion complete for: {arxiv_id}")
     return paper
 
 
-async def _parse_pdf_content(pdf_url: str) -> ParsedContent:
-    """Helper to download and parse PDF."""
-    logger.info(f"Downloading PDF: {pdf_url}")
-    pdf_bytes = await download_pdf(pdf_url)
-    logger.info(f"Downloaded {len(pdf_bytes)} bytes, parsing...")
+async def ingest_paper(
+    reference: str,
+    force_refresh: bool = False,
+    rewrite: bool = True,
+) -> StructuredPaper:
+    """Resolve, fetch, parse and (by default) rewrite into reader sections.
 
-    content = parse_pdf(pdf_bytes)
-    logger.info(
-        f"Parsed PDF: {len(content.raw_text)} chars, "
-        f"{len(content.equations)} equations, "
-        f"{len(content.figures)} figures, "
-        f"{len(content.tables)} tables"
-    )
-    return content
-
-
-async def get_cached_paper(arxiv_id: str) -> StructuredPaper | None:
+    Args:
+        reference: A PubMed/PMC/Europe PMC URL, a PMCID, a PMID or a DOI.
+        force_refresh: Bypass the process cache.
+        rewrite: Run the section formatter. Off for tests that only need the source text.
     """
-    Check cache for previously processed paper.
+    key = reference.strip()
+    if not force_refresh and (cached := _paper_cache.get(key)) is not None:
+        logger.info("Ingest cache hit for %s", key)
+        return cached
 
-    In production, this would check Redis/database.
-    """
-    return _paper_cache.get(arxiv_id)
+    paper = await ingest_pubmed(key)
+
+    if rewrite and paper.sections:
+        try:
+            # The formatter rewrites in place, so hand it a copy: `paper.sections` has to
+            # stay verbatim for the provenance gate.
+            source = [s.model_copy(deep=True) for s in paper.sections]
+            paper.reader_sections = await format_sections(source, paper.meta, model=None)
+        except Exception:
+            # A failed rewrite costs readability, not correctness: the source sections are
+            # still present and every chart is verified against them.
+            logger.exception("Section rewrite failed; falling back to the paper's own sections")
+
+    _paper_cache[key] = paper
+    return paper
 
 
-async def cache_paper(paper: StructuredPaper) -> None:
-    """
-    Cache processed paper for future requests.
-
-    In production, this would store in Redis/database.
-    """
-    _paper_cache[paper.meta.arxiv_id] = paper
-    logger.debug(f"Cached paper: {paper.meta.arxiv_id}")
+async def get_cached_paper(reference: str) -> StructuredPaper | None:
+    return _paper_cache.get(reference.strip())
 
 
 def clear_cache() -> None:
-    """Clear the paper cache (useful for testing)."""
     _paper_cache.clear()
-    logger.info("Paper cache cleared")
-
-
-# Export public API
-__all__ = [
-    # Models (re-exported for convenience)
-    "ArxivPaperMeta",
-    "ParsedContent",
-    "Section",
-    "StructuredPaper",
-    "cache_paper",
-    "clear_cache",
-    "download_pdf",
-    "extract_sections",
-    "fetch_and_parse_html",
-    "fetch_html_content",
-    # Lower-level functions for flexibility
-    "fetch_paper_meta",
-    "format_sections",
-    # Cache functions
-    "get_cached_paper",
-    # Main function
-    "ingest_paper",
-    "normalize_arxiv_id",
-    "parse_html",
-    "parse_pdf",
-    "validate_arxiv_id",
-]

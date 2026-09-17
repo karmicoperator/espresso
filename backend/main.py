@@ -57,17 +57,18 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# Configure CORS for frontend development
+# CORS.
+#
+# This runs on one machine for one reader, so the only callers that exist are local. The
+# upstream project's public hosts are gone with the rest of its deployment; keeping them
+# would allow a site nobody controls any more to read this API.
+#
+# The port has to be a wildcard rather than 3000. When something else already holds 3000,
+# the launcher moves the web app to 3001, and a hardcoded origin then blocks every request
+# the page makes: the app loads, looks fine, and lists nothing.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://arxivisual.org",
-        "https://www.arxivisual.org",
-        "http://localhost:3000",  # local frontend dev
-    ],
-    # This project's Vercel preview deploys only — not every *.vercel.app site
-    # (which any Vercel user controls). Anchored end-to-end via fullmatch.
-    allow_origin_regex=r"https://ar-xivisual-[a-z0-9-]+\.vercel\.app",
+    allow_origin_regex=r"http://(localhost|127\.0\.0\.1|\[::1\]):\d{1,5}",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

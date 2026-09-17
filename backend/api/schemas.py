@@ -151,6 +151,13 @@ class PaperListResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     """Response for GET /api/health."""
+    app: str = Field(
+        "medscroll",
+        description=(
+            "Identifies which service is answering. A launcher that only checks whether a "
+            "port is listening will happily adopt somebody else's dev server."
+        ),
+    )
     status: str = Field(..., description="'healthy' or 'unhealthy'")
     version: str
     services: dict[str, str] = Field(

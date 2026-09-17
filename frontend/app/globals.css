@@ -209,3 +209,47 @@ html {
     transition: none !important;
   }
 }
+
+
+/* ---------------------------------------------------------------------------
+   Charts. Nature's restraint on arXivisual's black: dotted gridlines, hairline
+   axes, muted marks, so the data is the darkest thing on the panel.
+   --------------------------------------------------------------------------- */
+.num { font-variant-numeric: tabular-nums; }
+
+.chart .grid   { stroke: rgba(255,255,255,0.13); stroke-width: 1; stroke-dasharray: 2 4; }
+.chart .axis   { stroke: rgba(255,255,255,0.28); stroke-width: 1; }
+.chart .tick   { fill: rgba(255,255,255,0.30); font-size: 11px; font-variant-numeric: tabular-nums; }
+.chart .cat    { fill: rgba(255,255,255,0.55); font-size: 12px; }
+.chart .val    { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.chart .lead   { stroke: rgba(255,255,255,0.45); stroke-width: 1; }
+.chart .note   { fill: #e8e8e8; font-size: 12px; }
+.chart .whisker line { stroke: #e8e8e8; stroke-width: 1.5; opacity: 0.75; }
+
+/* Reveal on approach. This is what replaces the rendered build-up: the chart assembles
+   in the order a reader needs it, then stops. Opt-in per element, so a chart that never
+   gets the .on class is still drawn and readable. */
+.chart .r-bar   { transform: scaleY(0); transition: transform .75s cubic-bezier(.2,.7,.3,1); }
+.chart .r-fade  { opacity: 0; transition: opacity .5s ease; }
+.chart .r-rise  { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+.chart .r-stat  { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+.chart .r-grow  { transform: scaleX(0); transition: transform .7s cubic-bezier(.2,.7,.3,1); }
+.chart .r-draw  { stroke-dasharray: var(--len, 120); stroke-dashoffset: var(--len, 120);
+                  transition: stroke-dashoffset .8s cubic-bezier(.2,.7,.3,1); }
+
+.chart.on .r-bar  { transform: scaleY(1); }
+.chart.on .r-fade { opacity: 1; }
+.chart.on .r-rise { opacity: 1; transform: translateY(0); }
+.chart.on .r-stat { opacity: 1; transform: translateY(0); }
+.chart.on .r-grow { transform: scaleX(1); }
+.chart.on .r-draw { stroke-dashoffset: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chart *, .chart.on * {
+    transition: none !important; transform: none !important;
+    opacity: 1 !important; stroke-dashoffset: 0 !important;
+  }
+}
+
+/* Section titles echo Nature's display serif; the rest of the shell stays Geist. */
+.serif { font-family: "Iowan Old Style", Palatino, Georgia, serif; }

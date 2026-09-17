@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 class ArxivPaperMeta(BaseModel):
     """Metadata about an arXiv paper."""
 
-    arxiv_id: str = Field(..., description="arXiv identifier, e.g., '1706.03762'")
+    arxiv_id: str = Field(..., description="Canonical id. A PMCID for PubMed Central papers.")
     title: str = Field(..., description="Paper title")
     authors: list[str] = Field(default_factory=list, description="List of author names")
     abstract: str = Field(..., description="Paper abstract")
@@ -16,7 +16,22 @@ class ArxivPaperMeta(BaseModel):
     updated: datetime | None = Field(None, description="Last update date")
     categories: list[str] = Field(default_factory=list, description="arXiv categories, e.g., ['cs.CL', 'cs.LG']")
     pdf_url: str = Field(..., description="Direct PDF download URL")
-    html_url: str | None = Field(None, description="ar5iv HTML URL if available")
+    html_url: str | None = Field(None, description="Reader URL for the source record")
+
+    # PubMed Central. The class name is inherited from upstream; the fields below are what
+    # a clinical paper actually carries.
+    journal: str | None = None
+    doi: str | None = None
+    pmid: str | None = None
+    pmcid: str | None = None
+    license_url: str | None = Field(None, description="Machine-readable licence from the source")
+    publication_types: list[str] = Field(
+        default_factory=list, description="e.g. 'Randomized Controlled Trial'"
+    )
+    mesh_terms: list[str] = Field(default_factory=list)
+    registration_ids: list[str] = Field(
+        default_factory=list, description="NCT / ISRCTN numbers found in the text"
+    )
 
 
 class Equation(BaseModel):
@@ -33,6 +48,14 @@ class Figure(BaseModel):
     id: str = Field(..., description="Figure identifier, e.g., 'figure-1'")
     caption: str = Field("", description="Figure caption text")
     page: int | None = Field(None, description="Page number where figure appears")
+    label: str = Field("", description="Printed label, e.g. 'Figure 2'")
+    graphic: str = Field(
+        "",
+        description=(
+            "Filename from the JATS <graphic xlink:href>, e.g. 'NEJMoa2021436_f2.jpg'. "
+            "This is what the image fetcher matches against."
+        ),
+    )
 
 
 class Table(BaseModel):
@@ -71,7 +94,17 @@ class StructuredPaper(BaseModel):
     """Complete structured representation of a paper from Team 1."""
 
     meta: ArxivPaperMeta = Field(..., description="Paper metadata")
-    sections: list[Section] = Field(default_factory=list, description="Parsed sections")
+    sections: list[Section] = Field(
+        default_factory=list,
+        description="The paper's own sections, verbatim. What the provenance gate indexes.",
+    )
+    reader_sections: list[Section] = Field(
+        default_factory=list,
+        description=(
+            "The rewritten explainer: at most five sections at roughly a third the length. "
+            "Shown to the reader. Never used for verification."
+        ),
+    )
 
     def to_dict(self) -> dict:
         """Serialize for API responses."""

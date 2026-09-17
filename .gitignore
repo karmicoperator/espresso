@@ -1,7 +1,5 @@
-# Environment / secrets
-.env
-.env.local
-.env.*.local
+# Environment / secrets (.env* also catches Finder copies like ".env 2")
+.env*
 # Allow .env.example to be committed
 !.env.example
 
@@ -49,6 +47,8 @@ Thumbs.db
 # Outputs / artifacts
 backend/generated_output/
 backend/media/
+# Local explainer store, fetched publisher figures and the PMC id cache; rebuilt on demand
+backend/data/
 server/outputs/*
 !server/outputs/.gitkeep
 

@@ -37,26 +37,49 @@ _AZURE_REASONING_HEADROOM = 4096
 
 def _detect_provider() -> str:
     """Resolve the LLM provider from env: LLM_PROVIDER wins, else auto-detect."""
-    explicit = os.environ.get("LLM_PROVIDER", "").strip().lower()
+    explicit = os.environ.get("LLM_PROVIDER", "").strip().lower().replace("-", "_")
+    aliases = {"cli": "claude_cli", "claude": "claude_cli", "claudecode": "claude_cli",
+               "claude_code": "claude_cli", "subscription": "claude_cli"}
+    explicit = aliases.get(explicit, explicit)
+
     if explicit == "azure":
         _require_azure_env()
         return "azure"
     if explicit == "dedalus":
         _require_dedalus_env()
         return "dedalus"
+    if explicit == "claude_cli":
+        _require_claude_cli()
+        return "claude_cli"
     if explicit:
         raise RuntimeError(
-            f"Unknown LLM_PROVIDER={explicit!r}. Use 'azure' or 'dedalus'."
+            f"Unknown LLM_PROVIDER={explicit!r}. Use 'claude_cli', 'azure' or 'dedalus'."
         )
 
     if os.environ.get("AZURE_OPENAI_API_KEY") and os.environ.get("AZURE_OPENAI_ENDPOINT"):
         return "azure"
     if os.environ.get("DEDALUS_API_KEY"):
         return "dedalus"
+
+    # No keys configured: fall back to a headless Claude Code session if one is available,
+    # so the pipeline runs on a subscription with nothing to provision.
+    from agents import claude_cli as _cli
+
+    if _cli.is_available()[0]:
+        return "claude_cli"
+
     raise RuntimeError(
-        "No LLM provider configured. Set AZURE_OPENAI_API_KEY + AZURE_OPENAI_ENDPOINT "
-        "(Azure OpenAI, GPT-5 family) or DEDALUS_API_KEY (Dedalus)."
+        "No LLM provider configured. Install Claude Code (LLM_PROVIDER=claude_cli), or set "
+        "AZURE_OPENAI_API_KEY + AZURE_OPENAI_ENDPOINT, or DEDALUS_API_KEY."
     )
+
+
+def _require_claude_cli() -> None:
+    from agents import claude_cli as _cli
+
+    ok, reason = _cli.is_available()
+    if not ok:
+        raise RuntimeError(f"LLM_PROVIDER=claude_cli but {reason}")
 
 
 def _require_azure_env() -> None:
@@ -230,6 +253,27 @@ async def call_llm(
     input_words = len(prompt.split())
     t0 = time.monotonic()
 
+    if provider == "claude_cli":
+        from agents import claude_cli as _cli
+
+        resolved = _cli.resolve_model(model)
+        logger.info(f"[LLM] Calling claude-cli/{resolved} ({input_words} input words)")
+        try:
+            output = await _cli.call(
+                prompt, model=resolved, system_prompt=system_prompt, label=name or "call"
+            )
+            logger.info(
+                f"[LLM] claude-cli/{resolved} responded in {time.monotonic() - t0:.1f}s "
+                f"({len(output.split())} output words)"
+            )
+            return output
+        except Exception as e:
+            logger.error(
+                f"[LLM] claude-cli/{resolved} FAILED after {time.monotonic() - t0:.1f}s: "
+                f"{type(e).__name__}: {e}"
+            )
+            raise
+
     if provider == "azure":
         resolved = _azure_model(model)
         logger.info(f"[LLM] Calling azure/{resolved} ({input_words} input words, max_tokens={max_tokens})")
@@ -279,6 +323,13 @@ def call_llm_sync(
 ) -> str:
     """Synchronous LLM call routed through the configured provider."""
     provider = get_provider()
+
+    if provider == "claude_cli":
+        from agents import claude_cli as _cli
+
+        return _cli.call_sync(
+            prompt, model=model, system_prompt=system_prompt, label=name or "call"
+        )
 
     if provider == "azure":
         resolved = _azure_model(model)

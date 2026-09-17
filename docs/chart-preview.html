@@ -1,0 +1,362 @@
+<meta charset="utf-8">
+<title>Chart vocabulary</title>
+<style>
+  :root {
+    --ground: #000;
+    --ink: #e8e8e8;
+    --dim: rgba(255,255,255,0.55);
+    --faint: rgba(255,255,255,0.30);
+    --hair: rgba(255,255,255,0.10);
+    --glass: rgba(255,255,255,0.04);
+
+    /* Muted on black. Nature's pastels glow oddly at low luminance, so these are
+       desaturated a step further and lean on value rather than chroma. */
+    --a: #7fb5a6;   /* intervention */
+    --b: #c98a7a;   /* comparator */
+    --c: #8f9bb8;   /* third series */
+    --accent: #e8e8e8;
+    --amber: #d9a441;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 64px 32px 120px; }
+  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 6px; }
+  .lede { color: var(--dim); font-size: 15px; max-width: 60ch; margin: 0 0 56px; line-height: 1.6; }
+
+  .divider {
+    margin: 72px -32px 40px; padding: 44px 32px;
+    border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+  }
+  .divider h2 {
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-size: 34px; font-weight: 500; margin: 0; text-align: center; letter-spacing: -0.01em;
+  }
+
+  .row { display: grid; grid-template-columns: minmax(0,0.85fr) minmax(0,1.15fr); gap: 44px; align-items: start; }
+  .prose { font-size: 15px; line-height: 1.75; color: var(--dim); }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  .card {
+    background: var(--glass); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 26px 28px 22px; backdrop-filter: blur(24px);
+  }
+  .card h3 { font-size: 14px; font-weight: 500; margin: 0 0 2px; }
+  .card .sub { font-size: 12px; color: var(--faint); margin: 0 0 20px; }
+  .card footer {
+    margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--hair);
+    display: flex; justify-content: space-between; gap: 16px;
+    font-size: 11px; color: var(--faint); font-variant-numeric: tabular-nums;
+  }
+  .caveat { color: var(--amber); }
+
+  svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid { stroke: rgba(255,255,255,0.13); stroke-width: 1; stroke-dasharray: 2 4; }
+  .axis { stroke: rgba(255,255,255,0.28); stroke-width: 1; }
+  .tick { fill: var(--faint); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .cat  { fill: var(--dim); font-size: 12px; }
+  .val  { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .lead { stroke: rgba(255,255,255,0.45); stroke-width: 1; }
+  .note { fill: var(--ink); font-size: 12px; }
+  .note tspan.small { fill: var(--faint); font-size: 11px; }
+  .whisker { stroke: var(--ink); stroke-width: 1.5; opacity: 0.75; }
+
+  /* Hover: the paper's own sentence, which is the span the checker matched the number
+     against. This is the thing a video could never do. */
+  .hit { cursor: default; }
+  .hit rect.mark, .hit circle.mark { transition: opacity .15s; }
+  .hit:hover rect.mark, .hit:hover circle.mark { opacity: 1 !important; }
+  .quote {
+    position: fixed; z-index: 20; max-width: 380px; pointer-events: none; opacity: 0;
+    transform: translateY(4px); transition: opacity .12s, transform .12s;
+    background: #0d0d0d; border: 1px solid rgba(255,255,255,0.14); border-radius: 10px;
+    padding: 12px 14px; font-size: 12px; line-height: 1.55; color: var(--dim);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.75);
+  }
+  .quote.on { opacity: 1; transform: translateY(0); }
+  .quote b { color: var(--ink); font-weight: 600; }
+  .quote .src { display: block; margin-top: 8px; color: var(--faint); font-size: 11px; }
+
+  .stat { display: flex; gap: 30px; align-items: flex-start; }
+  .stat .big { font-size: 66px; font-weight: 300; letter-spacing: -0.03em; color: var(--a); line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat .qt { border-left: 2px solid rgba(255,255,255,0.18); padding-left: 16px; font-size: 13px; line-height: 1.65; color: var(--dim); }
+  .stat .qt b { color: var(--a); font-weight: 600; }
+  .stat .qt .src { display: block; margin-top: 8px; color: var(--faint); font-size: 11px; }
+
+  /* Scroll-triggered reveal.
+
+     This is what replaces Manim's staged build-up: the chart assembles as it enters view,
+     in the order a reader needs it, then stops. CSS transitions rather than a render, so
+     it costs nothing and degrades to a finished chart when motion is off.
+
+     Everything below is opt-in per element via data-reveal order, so a chart is readable
+     the moment JS fails. */
+  .reveal .r-bar {
+    transform: scaleY(0); transform-origin: 0 100%;
+    transition: transform .75s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.on .r-bar { transform: scaleY(1); }
+
+  .reveal .r-fade { opacity: 0; transition: opacity .5s ease; }
+  .reveal.on .r-fade { opacity: 1; }
+
+  .reveal .r-rise { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; }
+  .reveal.on .r-rise { opacity: 1; transform: translateY(0); }
+
+  /* Whiskers and leader lines draw themselves rather than appearing. */
+  .reveal .r-draw {
+    stroke-dasharray: var(--len, 120); stroke-dashoffset: var(--len, 120);
+    transition: stroke-dashoffset .7s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.on .r-draw { stroke-dashoffset: 0; }
+
+  .reveal .r-grow { transform: scaleX(0); transform-origin: 50% 50%; transition: transform .7s cubic-bezier(.2,.7,.3,1); }
+  .reveal.on .r-grow { transform: scaleX(1); }
+
+  .stat .big { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.on .stat .big { opacity: 1; transform: translateY(0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal *, .reveal.on * { transition: none !important; transform: none !important; opacity: 1 !important;
+                              stroke-dashoffset: 0 !important; }
+  }
+
+  @media (max-width: 900px) { .row { grid-template-columns: 1fr; } }
+</style>
+
+<div class="wrap">
+  <h1>Chart vocabulary</h1>
+  <p class="lede">
+    Four of the six kinds, drawn with real numbers from the RECOVERY dexamethasone trial.
+    Live SVG, not video. Hover any mark to see the sentence in the paper the number was
+    checked against.
+  </p>
+
+  <div class="divider"><h2>What the trial found</h2></div>
+
+  <div class="row">
+    <div class="prose">
+      <p>The headline is one number, and it means nothing on its own. <strong>0.83</strong>
+      is a rate ratio, age-adjusted, for death within 28 days, with an interval that clears
+      1. The paper says all of that in one sentence.</p>
+      <p>So the sentence is the chart.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Rate ratio, 28-day mortality</h3>
+      <p class="sub">Age-adjusted, all randomised patients</p>
+      <div class="stat">
+        <div class="big">0.83</div>
+        <div class="qt r-fade" style="transition-delay:.35s">
+          Mortality at 28 days was significantly lower in the dexamethasone group than in
+          the usual care group, with deaths reported in 482 of 2104 patients (22.9%) and in
+          1110 of 4321 patients (25.7%), respectively (rate ratio, <b>0.83</b>; 95%
+          confidence interval [CI], 0.75 to 0.93)
+          <span class="src">— Results, primary outcome</span>
+        </div>
+      </div>
+      <footer><span>Table 2, primary outcome</span></footer>
+    </div>
+  </div>
+
+  <div class="divider"><h2>Who died, and in which arm</h2></div>
+
+  <div class="row">
+    <div class="prose">
+      <p>Two bars, two intervals, and one annotation on the value that carries the finding.
+      Everything else stays quiet.</p>
+      <p>The gridlines are dotted and the axis is a hairline, so the data is the darkest
+      thing on the panel.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Death within 28 days</h3>
+      <p class="sub">Percentage of randomised patients, with 95% intervals</p>
+      <svg viewBox="0 0 520 250" role="img" aria-label="28-day mortality by arm">
+        <!-- gridlines -->
+        <g class="grid">
+          <line x1="46" x2="330" y1="196" y2="196"/><line x1="46" x2="330" y1="152" y2="152"/>
+          <line x1="46" x2="330" y1="108" y2="108"/><line x1="46" x2="330" y1="64" y2="64"/>
+        </g>
+        <g class="tick" text-anchor="end">
+          <text x="38" y="200">0</text><text x="38" y="156">10</text>
+          <text x="38" y="112">20</text><text x="38" y="68">30</text>
+        </g>
+        <line class="axis" x1="46" x2="330" y1="196" y2="196"/>
+
+        <g class="hit" data-quote="deaths reported in <b>482 of 2104</b> patients (<b>22.9%</b>)"
+           data-src="Results, primary outcome">
+          <rect class="mark r-bar" x="86" y="95" width="72" height="101" rx="2" fill="var(--a)" opacity="0.85" style="transform-origin:122px 196px"/>
+          <text class="val r-rise" x="122" y="74" text-anchor="middle" fill="var(--a)" style="transition-delay:.45s">22.9%</text>
+          <line class="whisker r-fade" style="transition-delay:.6s" x1="122" x2="122" y1="88" y2="103"/>
+          <line class="whisker r-fade" style="transition-delay:.6s" x1="114" x2="130" y1="88" y2="88"/>
+          <line class="whisker r-fade" style="transition-delay:.6s" x1="114" x2="130" y1="103" y2="103"/>
+          <text class="cat" x="122" y="216" text-anchor="middle">Dexamethasone</text>
+          <text class="tick" x="122" y="232" text-anchor="middle">482/2,104</text>
+        </g>
+
+        <g class="hit" data-quote="in <b>1110 of 4321</b> patients (<b>25.7%</b>)"
+           data-src="Results, primary outcome">
+          <rect class="mark r-bar" x="220" y="83" width="72" height="113" rx="2" fill="var(--b)" opacity="0.85" style="transform-origin:256px 196px; transition-delay:.12s"/>
+          <text class="val r-rise" x="256" y="62" text-anchor="middle" fill="var(--b)" style="transition-delay:.57s">25.7%</text>
+          <line class="whisker r-fade" style="transition-delay:.72s" x1="256" x2="256" y1="76" y2="91"/>
+          <line class="whisker r-fade" style="transition-delay:.72s" x1="248" x2="264" y1="76" y2="76"/>
+          <line class="whisker r-fade" style="transition-delay:.72s" x1="248" x2="264" y1="91" y2="91"/>
+          <text class="cat" x="256" y="216" text-anchor="middle">Usual care</text>
+          <text class="tick" x="256" y="232" text-anchor="middle">1,110/4,321</text>
+        </g>
+
+        <!-- the one annotation -->
+        <line class="lead r-draw" style="--len:60; transition-delay:.95s" x1="296" x2="356" y1="139" y2="139"/>
+        <line class="lead r-fade" style="transition-delay:.95s" x1="158" x2="296" y1="139" y2="139" stroke-dasharray="2 3" opacity="0.5"/>
+        <text class="note r-rise" style="transition-delay:1.15s" x="364" y="135">2.8 percentage points
+          <tspan x="364" dy="15">fewer deaths</tspan>
+          <tspan class="small" x="364" dy="17">1 death avoided per 36 treated</tspan>
+        </text>
+      </svg>
+      <footer><span>Table 2, primary outcome</span></footer>
+    </div>
+  </div>
+
+  <div class="divider"><h2>Where the benefit came from</h2></div>
+
+  <div class="row">
+    <div class="prose">
+      <p>A forest plot on a log axis, because that is the only scale where halving and
+      doubling look like equal moves.</p>
+      <p>The dashed line is no effect. Everything left of it favours the steroid.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Rate ratio by respiratory support</h3>
+      <p class="sub">Prespecified subgroups, 95% intervals</p>
+      <svg viewBox="0 0 560 232" role="img" aria-label="Rate ratio by subgroup">
+        <line class="grid" x1="306" x2="306" y1="16" y2="176" stroke-dasharray="3 4"
+              stroke="rgba(255,255,255,0.35)"/>
+
+        <g class="hit" data-quote="rate ratio, <b>0.64</b>; 95% CI, 0.51 to 0.81"
+           data-src="Results, subgroup analysis">
+          <text class="cat" x="196" y="42" text-anchor="end">Invasive ventilation</text>
+          <line class="whisker r-grow" style="transform-origin:260px 38px; transition-delay:.15s" x1="237" x2="284" y1="38" y2="38"/>
+          <line class="whisker r-fade" style="transition-delay:0.45s" x1="237" x2="237" y1="33" y2="43"/>
+          <line class="whisker r-fade" style="transition-delay:0.45s" x1="284" x2="284" y1="33" y2="43"/>
+          <rect class="mark r-rise" style="transition-delay:.35s" x="254" y="32" width="12" height="12" fill="var(--a)" opacity="0.9"/>
+          <text class="tick r-fade" style="transition-delay:.55s" x="548" y="42" text-anchor="end">0.64 (0.51&#8211;0.81)</text>
+        </g>
+
+        <g class="hit" data-quote="rate ratio, <b>0.82</b>; 95% CI, 0.72 to 0.94"
+           data-src="Results, subgroup analysis">
+          <text class="cat" x="196" y="86" text-anchor="end">Oxygen only</text>
+          <line class="whisker r-grow" style="transform-origin:286px 82px; transition-delay:.30s" x1="272" x2="300" y1="82" y2="82"/>
+          <line class="whisker r-fade" style="transition-delay:0.60s" x1="272" x2="272" y1="77" y2="87"/>
+          <line class="whisker r-fade" style="transition-delay:0.60s" x1="300" x2="300" y1="77" y2="87"/>
+          <rect class="mark r-rise" style="transition-delay:.50s" x="280" y="76" width="12" height="12" fill="var(--a)" opacity="0.9"/>
+          <text class="tick r-fade" style="transition-delay:.70s" x="548" y="86" text-anchor="end">0.82 (0.72&#8211;0.94)</text>
+        </g>
+
+        <g class="hit" data-quote="rate ratio, <b>1.19</b>; 95% CI, 0.92 to 1.55"
+           data-src="Results, subgroup analysis">
+          <text class="cat" x="196" y="130" text-anchor="end">No oxygen received</text>
+          <line class="whisker r-grow" style="transform-origin:324px 126px; transition-delay:.45s" x1="297" x2="351" y1="126" y2="126"/>
+          <line class="whisker r-fade" style="transition-delay:0.75s" x1="297" x2="297" y1="121" y2="131"/>
+          <line class="whisker r-fade" style="transition-delay:0.75s" x1="351" x2="351" y1="121" y2="131"/>
+          <rect class="mark r-rise" style="transition-delay:.65s" x="318" y="120" width="12" height="12" fill="var(--c)" opacity="0.9"/>
+          <text class="tick r-fade" style="transition-delay:.85s" x="548" y="130" text-anchor="end">1.19 (0.92&#8211;1.55)</text>
+        </g>
+
+        <line class="axis" x1="212" x2="390" y1="176" y2="176"/>
+        <g class="tick" text-anchor="middle">
+          <text x="235" y="192">0.5</text><text x="306" y="192">1</text><text x="377" y="192">2</text>
+        </g>
+        <text class="tick" x="252" y="212" text-anchor="middle" fill="var(--a)">favours dexamethasone</text>
+        <text class="tick" x="372" y="212" text-anchor="middle" fill="var(--b)">favours usual care</text>
+      </svg>
+      <footer>
+        <span>Figure 2, prespecified subgroups</span>
+        <span class="caveat">Subgroup effects are exploratory</span>
+      </footer>
+    </div>
+  </div>
+
+  <div class="divider"><h2>How the trial ran</h2></div>
+
+  <div class="row">
+    <div class="prose">
+      <p>Participant flow as boxes, not a diagram to decode. The gap between randomised and
+      analysed is where quiet bias lives, so it gets its own row.</p>
+    </div>
+    <div class="card reveal">
+      <h3>Randomisation and analysis</h3>
+      <p class="sub">RECOVERY dexamethasone comparison</p>
+      <svg viewBox="0 0 520 220" role="img" aria-label="Participant flow">
+        <g class="hit" data-quote="Of the <b>11,303</b> patients who underwent randomization"
+           data-src="Results, participants">
+          <rect class="mark r-rise" x="150" y="10" width="220" height="46" rx="8"
+                fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.16)" opacity="0.95"/>
+          <text class="val" x="260" y="34" text-anchor="middle" fill="var(--ink)">11,303</text>
+          <text class="tick" x="260" y="49" text-anchor="middle">underwent randomisation</text>
+        </g>
+        <line class="axis r-draw" style="--len:26; transition-delay:.2s" x1="260" x2="260" y1="56" y2="82"/>
+        <path d="M255 78 L260 86 L265 78 Z" fill="rgba(255,255,255,0.35)"/>
+
+        <g class="hit" data-quote="<b>2104</b> patients assigned to dexamethasone"
+           data-src="Results, participants">
+          <rect class="mark r-rise" style="transition-delay:.35s" x="60" y="92" width="180" height="62" rx="8"
+                fill="rgba(127,181,166,0.10)" stroke="var(--a)" opacity="0.95"/>
+          <text class="cat" x="150" y="114" text-anchor="middle" fill="var(--a)">Dexamethasone</text>
+          <text class="val" x="150" y="136" text-anchor="middle" fill="var(--ink)">2,104</text>
+          <text class="tick" x="150" y="170" text-anchor="middle">2,104 analysed · none lost</text>
+        </g>
+
+        <g class="hit" data-quote="<b>4321</b> patients assigned to usual care alone"
+           data-src="Results, participants">
+          <rect class="mark r-rise" style="transition-delay:.5s" x="280" y="92" width="180" height="62" rx="8"
+                fill="rgba(201,138,122,0.10)" stroke="var(--b)" opacity="0.95"/>
+          <text class="cat" x="370" y="114" text-anchor="middle" fill="var(--b)">Usual care</text>
+          <text class="val" x="370" y="136" text-anchor="middle" fill="var(--ink)">4,321</text>
+          <text class="tick" x="370" y="170" text-anchor="middle">4,321 analysed · none lost</text>
+        </g>
+      </svg>
+      <footer><span>Figure 1, participant flow</span></footer>
+    </div>
+  </div>
+</div>
+
+<div class="quote" id="tip"></div>
+
+<script>
+  // Hover a mark, get the sentence the number was verified against. In the real build the
+  // quote and its locator come from the chart spec, not from a data attribute.
+  // Reveal on approach. A plain scroll listener plus getBoundingClientRect rather than an
+  // IntersectionObserver: "has this entered view" is a position question, and computing it
+  // directly needs no threshold tuning and behaves the same everywhere.
+  const panels = [...document.querySelectorAll('.reveal')];
+  function revealPass() {
+    const line = innerHeight * 0.85;
+    for (const el of panels) {
+      if (!el.classList.contains('on') && el.getBoundingClientRect().top < line) {
+        el.classList.add('on');
+      }
+    }
+  }
+  revealPass();
+  addEventListener('scroll', revealPass, { passive: true });
+  addEventListener('resize', revealPass, { passive: true });
+
+  const tip = document.getElementById('tip');
+  document.querySelectorAll('.hit').forEach(el => {
+    el.querySelectorAll('.mark').forEach(m => m.style.opacity = m.getAttribute('opacity'));
+    el.addEventListener('mousemove', e => {
+      tip.innerHTML = el.dataset.quote + '<span class="src">— ' + el.dataset.src + '</span>';
+      const pad = 16;
+      let x = e.clientX + pad, y = e.clientY + pad;
+      const r = tip.getBoundingClientRect();
+      if (x + r.width > innerWidth - 12) x = e.clientX - r.width - pad;
+      if (y + r.height > innerHeight - 12) y = e.clientY - r.height - pad;
+      tip.style.left = x + 'px';
+      tip.style.top = y + 'px';
+      tip.classList.add('on');
+    });
+    el.addEventListener('mouseleave', () => tip.classList.remove('on'));
+  });
+</script>

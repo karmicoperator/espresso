@@ -1,13 +1,26 @@
-"""Data models for ingestion + generation pipeline."""
+"""Data models.
 
+`paper` is the source-agnostic paper representation the ingest layer produces.
+`charts` is what the pipeline emits and the frontend draws.
+`generation` holds the planner's intermediate types.
+"""
+
+from .charts import (
+    Annotation,
+    Chart,
+    ChartKind,
+    Datum,
+    Explainer,
+    LocatorKind,
+    Provenance,
+    ReaderSection,
+    VerificationReport,
+)
 from .generation import (
     AnalyzerOutput,
-    GeneratedCode,
-    Scene,
-    ValidatorOutput,
-    Visualization,
     VisualizationCandidate,
-    VisualizationPlan,
+    VisualizationStatus,
+    VisualizationType,
 )
 from .paper import (
     ArxivPaperMeta,
@@ -18,22 +31,26 @@ from .paper import (
     StructuredPaper,
     Table,
 )
-from .voiceover import VoiceoverValidationOutput
 
 __all__ = [
     "AnalyzerOutput",
+    "Annotation",
     "ArxivPaperMeta",
+    "Chart",
+    "ChartKind",
+    "Datum",
     "Equation",
+    "Explainer",
     "Figure",
-    "GeneratedCode",
+    "LocatorKind",
     "ParsedContent",
-    "Scene",
+    "Provenance",
+    "ReaderSection",
     "Section",
     "StructuredPaper",
     "Table",
-    "ValidatorOutput",
-    "Visualization",
+    "VerificationReport",
     "VisualizationCandidate",
-    "VisualizationPlan",
-    "VoiceoverValidationOutput",
+    "VisualizationStatus",
+    "VisualizationType",
 ]
