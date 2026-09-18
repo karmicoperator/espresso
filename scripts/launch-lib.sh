@@ -15,6 +15,35 @@ WEB_PORT_BASE=${WEB_PORT_BASE:-3000}
 PORT_SPAN=${PORT_SPAN:-12}
 
 # ---------------------------------------------------------------------------
+# From espresso.app
+#
+# The app has no window and no Terminal, so without these a first start is minutes of
+# nothing and a failure is silence. The app's launcher sets ESPRESSO_APP=1 and shows a
+# "getting ready" notice (its pid in ESPRESSO_NOTICE_PID); these close it and, on a
+# failure, say so in a dialog whose button opens the folder of logs, so the person can see
+# what happened and send the logs to whoever helps them. From Terminal they do nothing.
+# ---------------------------------------------------------------------------
+
+app_notice_close() {
+  if [ -n "${ESPRESSO_NOTICE_PID:-}" ]; then kill "$ESPRESSO_NOTICE_PID" 2>/dev/null; fi
+  return 0
+}
+
+app_failure_dialog() {  # message
+  [ "${ESPRESSO_APP:-}" = 1 ] || return 0
+  app_notice_close
+  osascript - "${1:0:900}" "${ESPRESSO_HOME:-$LOGS}" >/dev/null 2>&1 <<'OSA'
+on run argv
+  activate
+  set msg to "espresso could not start." & return & return & (item 1 of argv)
+  set r to display dialog msg with title "espresso" buttons {"Show logs", "OK"} default button "OK" with icon caution
+  if button returned of r is "Show logs" then do shell script "open " & quoted form of (item 2 of argv)
+end run
+OSA
+  return 0
+}
+
+# ---------------------------------------------------------------------------
 # First run
 #
 # Each install step records a checksum of its lockfile and is skipped while the lockfile
@@ -186,7 +215,7 @@ start_api() {  # port
   # `cd; cmd & disown`, not `cd && cmd &`: backgrounding an AND-list makes the calling shell
   # own the job, and it then prints a "Terminated" line when the stop path kills the server.
   ( cd "$REPO/backend"; API_PORT="$1" nohup .venv/bin/python main.py >"$LOGS/api.log" 2>&1 & disown )
-  wait_for_service api "$1" 45 || fail "The API did not start on port $1. See:
+  wait_for_service api "$1" 120 || fail "The API did not start on port $1. See:
 
 $LOGS/api.log"
 }
@@ -199,7 +228,7 @@ start_web() {  # web port, api port
   [ "${ESPRESSO_DEV:-}" = 1 ] && cmd="dev"
   ( cd "$REPO/frontend"; API_URL="http://127.0.0.1:$2" \
       nohup ./node_modules/.bin/next "$cmd" -H 127.0.0.1 -p "$1" >"$LOGS/web.log" 2>&1 & disown )
-  wait_for_service web "$1" 90 || fail "The web app did not start on port $1. See:
+  wait_for_service web "$1" 120 || fail "The web app did not start on port $1. See:
 
 $LOGS/web.log"
 }

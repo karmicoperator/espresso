@@ -91,16 +91,30 @@ if [ "$WANT" != "$HAVE" ]; then
   if [ -d "$REPO/backend/data" ]; then KEEP=$(mktemp -d); mv "$REPO/backend/data" "$KEEP/data"; fi
   if [ -f "$REPO/backend/.env" ]; then ENVKEEP=$(mktemp); cp "$REPO/backend/.env" "$ENVKEEP"; else ENVKEEP=""; fi
   rm -rf "$REPO"; mkdir -p "$REPO"
-  cp -R "$BUNDLED/." "$REPO/"
+  # -X: no extended attributes, so the download's quarantine flag stays on the app and
+  # does not ride along onto the scripts this folder runs.
+  cp -RX "$BUNDLED/." "$REPO/"
   [ -n "$KEEP" ] && mv "$KEEP/data" "$REPO/backend/data"
   [ -n "$ENVKEEP" ] && cp "$ENVKEEP" "$REPO/backend/.env"
 fi
 
-export ESPRESSO_HOME="$PIF_HOME"
+export ESPRESSO_HOME="$PIF_HOME" ESPRESSO_APP=1
+
+# A first start, or the first after an update, downloads and builds for minutes with
+# nothing else on screen. Say so; start.command closes this once the browser opens.
+if [ "$WANT" != "$HAVE" ] || [ ! -f "$REPO/frontend/.next/BUILD_ID" ] || [ ! -x "$REPO/backend/.venv/bin/python" ]; then
+  osascript -e 'activate' -e 'display dialog "espresso is getting ready.
+
+The first start takes about five minutes while it downloads what it needs and builds itself. Your browser opens by itself when it is done." with title "espresso" buttons {"OK"} default button "OK" giving up after 1800' >/dev/null 2>&1 &
+  export ESPRESSO_NOTICE_PID=$!
+fi
+
 # shellcheck source=/dev/null
 . "$REPO/scripts/bootstrap.sh"
-ensure_uv || { osascript -e 'display alert "espresso" message "Could not fetch uv (Python). Check the connection and try again."'; exit 1; }
-ensure_node || { osascript -e 'display alert "espresso" message "Could not fetch Node.js. Check the connection and try again."'; exit 1; }
+# shellcheck source=/dev/null
+. "$REPO/scripts/launch-lib.sh"   # app_failure_dialog
+ensure_uv || { app_failure_dialog "Could not download uv, which brings Python. Check the internet connection, then open espresso again."; exit 1; }
+ensure_node || { app_failure_dialog "Could not download Node.js. Check the internet connection, then open espresso again."; exit 1; }
 
 cd "$REPO"
 exec ./start.command

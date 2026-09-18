@@ -675,6 +675,28 @@ detritus not allowed" when the bundle sits in an iCloud-synced folder, and `xatt
 not help because the file provider puts the attributes back. The packager assembles and
 signs in a temporary folder and copies only the finished image out.
 
+## 27. macOS runs one copy of an app, so a launcher that waits locks the app
+
+The app's executable hands over to a bash launcher, and that launcher ended in
+`start.command`'s wait loop, alive for as long as the servers ran. macOS starts an app
+only once: a second double-click on a running app just brings it forward. An app with no
+window and no Dock icon has nothing to bring forward, so from the first launch until
+logout every double-click did nothing. A first start is also five silent minutes, and
+every failure went to a log nobody sees. A tester clicked Open Anyway and reported that
+the app "just bugs".
+
+Now a first start puts up a "getting ready" notice, closed when the browser opens. A
+failure raises a dialog whose Show logs button opens the folder of logs. From the app,
+`start.command` exits once the browser is open, and the servers keep running (`nohup`,
+disowned), so the next double-click starts fresh, finds them and opens the browser. The
+earlier end-to-end test missed all of this: it launched with `open -n`, which forces a new
+copy, and ran on a machine that already had `uv` and Claude Code. The test that finds it
+uses a plain `open` and an empty home folder.
+
+The Windows launcher had its own version of the silent failure: it opened the browser four
+seconds after starting the servers, before either answered, so a first start showed a
+"can't reach this page". It now waits until both respond.
+
 # From the first build, which rendered video
 
 Kept because the lessons outlived the code.

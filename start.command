@@ -12,7 +12,7 @@ set -u
 cd "$(dirname "$0")"
 
 say()  { echo "  $1"; }
-fail() { echo; echo "  $1" | sed '2,$s/^/  /'; echo; exit 1; }
+fail() { echo; echo "  $1" | sed '2,$s/^/  /'; echo; app_failure_dialog "$1"; exit 1; }
 
 # shellcheck source=scripts/launch-lib.sh
 . scripts/launch-lib.sh
@@ -59,6 +59,12 @@ fi
 echo
 say "open http://localhost:$WEB_PORT"
 open "http://localhost:$WEB_PORT" 2>/dev/null
+app_notice_close
+
+# From the app, stop here and leave the servers running. macOS runs one copy of an app at a
+# time, so a launcher still waiting below would turn every later double-click into nothing;
+# exiting lets the next one start fresh, find the servers, and open the browser.
+if [ "${ESPRESSO_APP:-}" = 1 ]; then exit 0; fi
 
 if [ ${#STARTED[@]} -eq 0 ]; then
   echo
