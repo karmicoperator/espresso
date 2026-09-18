@@ -42,7 +42,6 @@ export const api = {
     api_key: string;
     base_url?: string | null;
     endpoint?: string | null;
-    contact_email?: string;
   }) =>
     fetch(`${API_BASE}/api/settings`, {
       method: "POST",

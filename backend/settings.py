@@ -44,6 +44,15 @@ PROVIDERS: dict[str, dict] = {
         "model_env": "AZURE_OPENAI_DEPLOYMENT",
         "endpoint_env": "AZURE_OPENAI_ENDPOINT",
     },
+    # DeepSeek, Kimi, Qwen and GLM: one row each in agents.base.COMPATIBLE.
+    **{
+        name: {
+            "label": spec["label"], "help": spec["help"], "key_env": spec["key_env"],
+            "model_env": spec["model_env"], "base_url_env": spec["base_url_env"],
+            "default_base_url": spec["base_url"], "base_url_hint": spec["base_url_hint"],
+        }
+        for name, spec in base.COMPATIBLE.items()
+    },
 }
 
 
@@ -74,9 +83,10 @@ def current() -> dict:
             "key_hint": _hint(key),
             "base_url": os.environ.get(spec.get("base_url_env", ""), "") if spec.get("base_url_env") else None,
             "endpoint": os.environ.get(spec.get("endpoint_env", ""), "") if spec.get("endpoint_env") else None,
+            "default_base_url": spec.get("default_base_url"),
+            "base_url_hint": spec.get("base_url_hint"),
         }
-    return {"provider": active, "problem": problem, "providers": providers, "env_path": str(ENV_PATH),
-            "contact_email": contact_email()}
+    return {"provider": active, "problem": problem, "providers": providers, "env_path": str(ENV_PATH)}
 
 
 def save(provider: str, model: str = "", api_key: str = "", base_url: str | None = None,
@@ -103,23 +113,6 @@ def save(provider: str, model: str = "", api_key: str = "", base_url: str | None
             os.environ.pop(env, None)
     base.reset()
     return current()
-
-
-CONTACT_ENV = "UNPAYWALL_EMAIL"
-
-
-def contact_email() -> str:
-    return _read(CONTACT_ENV)
-
-
-def save_contact(email: str) -> str:
-    """The address Unpaywall asks for when the app looks up where a paper's PDF lives."""
-    ENV_PATH.touch(exist_ok=True)
-    _set(CONTACT_ENV, email.strip())
-    load_dotenv(ENV_PATH, override=True)
-    if not email.strip():
-        os.environ.pop(CONTACT_ENV, None)
-    return contact_email()
 
 
 def _set(key: str, value: str) -> None:

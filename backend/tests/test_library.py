@@ -40,6 +40,6 @@ def test_the_contact_address_is_read_when_used(monkeypatch):
     from ingestion.pdf_fetch import contact_email
 
     monkeypatch.delenv("UNPAYWALL_EMAIL", raising=False)
-    assert contact_email() == "paperinfive@example.org"
+    assert contact_email() == "paperinfive@users.noreply.github.com"
     monkeypatch.setenv("UNPAYWALL_EMAIL", "me@example.org")
     assert contact_email() == "me@example.org"

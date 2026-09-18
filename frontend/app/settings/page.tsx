@@ -19,7 +19,6 @@ export default function SettingsPage() {
   const [apiKey, setApiKey] = useState("");
   const [baseUrl, setBaseUrl] = useState("");
   const [endpoint, setEndpoint] = useState("");
-  const [contact, setContact] = useState("");
   const [busy, setBusy] = useState<"" | "save" | "test">("");
   const [note, setNote] = useState<{ ok: boolean; text: string } | null>(null);
 
@@ -31,7 +30,6 @@ export default function SettingsPage() {
     setModel(p?.model ?? "");
     setBaseUrl(p?.base_url ?? "");
     setEndpoint(p?.endpoint ?? "");
-    setContact(v.contact_email ?? "");
     setApiKey("");
   }
 
@@ -43,7 +41,7 @@ export default function SettingsPage() {
     setBusy("save");
     setNote(null);
     try {
-      const v = await api.saveSettings({ provider, model, api_key: apiKey, base_url: baseUrl, endpoint, contact_email: contact });
+      const v = await api.saveSettings({ provider, model, api_key: apiKey, base_url: baseUrl, endpoint });
       adopt(v, provider);
       setNote({ ok: true, text: `Saved to ${v.env_path}. Test it to be sure it answers.` });
     } catch (e) {
@@ -68,7 +66,7 @@ export default function SettingsPage() {
 
   const p = view?.providers[provider];
   const dirty = view !== null && (provider !== view.provider || apiKey !== "" || model !== (p?.model ?? "") ||
-    baseUrl !== (p?.base_url ?? "") || endpoint !== (p?.endpoint ?? "") || contact !== (view.contact_email ?? ""));
+    baseUrl !== (p?.base_url ?? "") || endpoint !== (p?.endpoint ?? ""));
 
   return (
     <main className="mx-auto max-w-2xl px-6 py-16">
@@ -148,12 +146,12 @@ export default function SettingsPage() {
                   />
                 </Field>
               )}
-              {provider === "openai" && (
+              {p?.base_url !== null && p?.base_url !== undefined && (
                 <Field
                   label="Base URL"
-                  hint="Empty for OpenAI itself. For another provider, its OpenAI-compatible URL, e.g. http://localhost:11434/v1 for Ollama or https://api.groq.com/openai/v1."
+                  hint={p.base_url_hint ?? "Empty for OpenAI itself. For another provider, its OpenAI-compatible URL, e.g. http://localhost:11434/v1 for Ollama or https://api.groq.com/openai/v1."}
                 >
-                  <input value={baseUrl} onChange={(e) => setBaseUrl(e.target.value)} placeholder="https://api.openai.com/v1" className={inputClass} />
+                  <input value={baseUrl} onChange={(e) => setBaseUrl(e.target.value)} placeholder={p.default_base_url ?? "https://api.openai.com/v1"} className={inputClass} />
                 </Field>
               )}
               {provider === "azure" && (
@@ -166,12 +164,6 @@ export default function SettingsPage() {
                 hint={`Empty means ${p.default_model}.`}
               >
                 <input value={model} onChange={(e) => setModel(e.target.value)} placeholder={p.default_model} className={inputClass} />
-              </Field>
-              <Field
-                label="Your email, for PDF lookups"
-                hint="Unpaywall asks who is asking when the app looks up where a paper's open-access PDF lives. Optional; a placeholder is sent otherwise."
-              >
-                <input value={contact} onChange={(e) => setContact(e.target.value)} placeholder="you@example.org" className={inputClass} />
               </Field>
             </div>
           )}

@@ -20,7 +20,9 @@ requests to PubMed Central for the paper itself.
 move `Paper in Five` to Applications, right-click it and choose Open (it is not signed
 with an Apple certificate, so the first open asks). It fetches what it needs into
 `~/Library/Application Support/PaperInFive` on first run, about two minutes, then opens
-the browser. Then Settings, to choose a model: Claude Code if you have it, or an API key.
+the browser. Then Settings, to choose a model: Claude Code if you have it, or an API key from
+Anthropic, OpenAI, Azure, DeepSeek, Kimi (Moonshot), Qwen (DashScope) or GLM (Zhipu).
+Nothing else is asked for.
 
 **Windows.** Download the source zip, unzip, double-click `windows\PaperInFive.bat`. Same
 first run, into `%LOCALAPPDATA%\PaperInFive`. This launcher has not yet been run on a

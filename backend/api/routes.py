@@ -265,8 +265,6 @@ async def get_settings(request: Request):
 async def save_settings(request: Request, body: dict):
     _loopback_only(request)
     try:
-        if "contact_email" in body:
-            settings.save_contact(str(body.get("contact_email") or ""))
         return settings.save(
             provider=str(body.get("provider", "")),
             model=str(body.get("model", "") or ""),

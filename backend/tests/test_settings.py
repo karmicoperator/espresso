@@ -87,3 +87,21 @@ def test_openai_compatible_endpoints_get_plain_parameters():
     compat = base._chat_kwargs("llama3", "p", "s", 100, native=False)
     assert compat == {"model": "llama3", "max_tokens": 100,
                       "messages": [{"role": "system", "content": "s"}, {"role": "user", "content": "p"}]}
+
+
+def test_the_chinese_providers_are_rows_with_key_model_and_address(monkeypatch):
+    from agents import base
+
+    for name in ("deepseek", "kimi", "qwen", "glm"):
+        assert name in base.PROVIDERS
+        spec = base.COMPATIBLE[name]
+        monkeypatch.setenv(spec["key_env"], "k")
+        monkeypatch.delenv(spec["model_env"], raising=False)
+        assert base.resolve_model(name, "claude-opus-5") == spec["default_model"]
+        assert base.resolve_model(name, "custom-model") == "custom-model"
+    assert base.output_cap("deepseek", 16000) == 8192
+    assert base.output_cap("kimi", 16000) == 16000
+    assert base.output_cap("anthropic", 16000) == 16000
+    view = settings.current()
+    assert view["providers"]["qwen"]["default_base_url"].startswith("https://dashscope")
+    assert "contact_email" not in view

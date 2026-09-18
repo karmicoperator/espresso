@@ -236,6 +236,9 @@ export type ProviderView = {
   key_hint: string;
   base_url: string | null;
   endpoint: string | null;
+  /** Where an OpenAI-compatible provider lives by default, and how to choose between its regions. */
+  default_base_url?: string | null;
+  base_url_hint?: string | null;
 };
 
 export type SettingsView = {
@@ -243,8 +246,6 @@ export type SettingsView = {
   problem: string;
   providers: Record<string, ProviderView>;
   env_path: string;
-  /** The address Unpaywall asks for when the app looks up where a paper's PDF lives. */
-  contact_email?: string;
 };
 
 export type Health = {

@@ -29,14 +29,56 @@ try:
 except ImportError:
     pass  # python-dotenv not installed, use system env vars
 
-PROVIDERS = ("claude_cli", "anthropic", "openai", "azure")
+# Providers that speak the OpenAI chat API at their own address. One table, so adding one
+# is a row: the key and model variables, the address (China and international differ for
+# three of them; the reader picks in Settings), the model to start with, and the most
+# output tokens a request may ask for, since two of them refuse anything above 8k.
+COMPATIBLE: dict[str, dict] = {
+    "deepseek": {
+        "label": "DeepSeek", "key_env": "DEEPSEEK_API_KEY", "model_env": "DEEPSEEK_MODEL",
+        "base_url_env": "DEEPSEEK_BASE_URL", "base_url": "https://api.deepseek.com",
+        "default_model": "deepseek-chat", "max_output": 8192,
+        "help": "A key from platform.deepseek.com. deepseek-chat (V3) or deepseek-reasoner.",
+        "base_url_hint": "https://api.deepseek.com for everyone.",
+    },
+    "kimi": {
+        "label": "Kimi (Moonshot)", "key_env": "MOONSHOT_API_KEY", "model_env": "MOONSHOT_MODEL",
+        "base_url_env": "MOONSHOT_BASE_URL", "base_url": "https://api.moonshot.ai/v1",
+        "default_model": "kimi-k2-0905-preview", "max_output": 16384,
+        "help": "A key from platform.moonshot.ai (international) or platform.moonshot.cn (China).",
+        "base_url_hint": "https://api.moonshot.ai/v1 for an international key, https://api.moonshot.cn/v1 for a China key.",
+    },
+    "qwen": {
+        "label": "Qwen (Alibaba DashScope)", "key_env": "DASHSCOPE_API_KEY", "model_env": "DASHSCOPE_MODEL",
+        "base_url_env": "DASHSCOPE_BASE_URL", "base_url": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+        "default_model": "qwen-plus", "max_output": 8192,
+        "help": "A key from Alibaba Cloud Model Studio. qwen-plus, qwen-max or qwen3 models.",
+        "base_url_hint": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1 for an international key, https://dashscope.aliyuncs.com/compatible-mode/v1 for a China key.",
+    },
+    "glm": {
+        "label": "GLM (Zhipu)", "key_env": "ZHIPU_API_KEY", "model_env": "ZHIPU_MODEL",
+        "base_url_env": "ZHIPU_BASE_URL", "base_url": "https://api.z.ai/api/paas/v4/",
+        "default_model": "glm-4.5", "max_output": 16384,
+        "help": "A key from z.ai (international) or open.bigmodel.cn (China). glm-4.5 or glm-4-plus.",
+        "base_url_hint": "https://api.z.ai/api/paas/v4/ for an international key, https://open.bigmodel.cn/api/paas/v4/ for a China key.",
+    },
+}
+
+PROVIDERS = ("claude_cli", "anthropic", "openai", "azure", *COMPATIBLE)
 
 DEFAULT_MODELS = {
     "claude_cli": "claude-opus-5",
     "anthropic": "claude-opus-5",
     "openai": "gpt-5",
     "azure": "gpt-5",
+    **{name: spec["default_model"] for name, spec in COMPATIBLE.items()},
 }
+
+
+def output_cap(provider: str, max_tokens: int) -> int:
+    """The most output tokens a request may ask this provider for."""
+    cap = COMPATIBLE.get(provider, {}).get("max_output")
+    return min(max_tokens, cap) if cap else max_tokens
 
 # GPT-5 reasoning tokens count against max_completion_tokens. Agents size max_tokens for
 # the visible answer, so give the model extra room to think or it can return an empty
@@ -68,6 +110,9 @@ def _detect_provider() -> str:
         return "anthropic"
     if os.environ.get("OPENAI_API_KEY"):
         return "openai"
+    for name, spec in COMPATIBLE.items():
+        if os.environ.get(spec["key_env"]):
+            return name
     if os.environ.get("AZURE_OPENAI_API_KEY") and os.environ.get("AZURE_OPENAI_ENDPOINT"):
         return "azure"
 
@@ -102,6 +147,10 @@ def _require(provider: str) -> None:
         missing = [k for k in ("AZURE_OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT") if not os.environ.get(k)]
         if missing:
             raise RuntimeError(f"LLM_PROVIDER=azure but missing env vars: {', '.join(missing)}")
+    elif provider in COMPATIBLE:
+        key_env = COMPATIBLE[provider]["key_env"]
+        if not os.environ.get(key_env):
+            raise RuntimeError(f"LLM_PROVIDER={provider} but {key_env} is not set")
 
 
 def get_provider() -> str:
@@ -123,6 +172,11 @@ def resolve_model(provider: str, model: str | None = None) -> str:
         if model and not model.startswith("claude"):
             return model
         return os.environ.get("OPENAI_MODEL") or DEFAULT_MODELS["openai"]
+    if provider in COMPATIBLE:
+        # Agents name Claude models; those map to the provider's configured model.
+        if model and not model.startswith("claude"):
+            return model
+        return os.environ.get(COMPATIBLE[provider]["model_env"]) or DEFAULT_MODELS[provider]
     # azure: a deployment name. Claude model names from the agents map to it.
     if model and not model.startswith("claude") and "/" not in model:
         return model
@@ -169,6 +223,19 @@ def _openai_client():
             timeout=600.0,
         )
     return _clients["openai"]
+
+
+def _compatible_client(provider: str):
+    if provider not in _clients:
+        from openai import AsyncOpenAI
+
+        spec = COMPATIBLE[provider]
+        _clients[provider] = AsyncOpenAI(
+            api_key=os.environ[spec["key_env"]],
+            base_url=os.environ.get(spec["base_url_env"]) or spec["base_url"],
+            timeout=600.0,
+        )
+    return _clients[provider]
 
 
 def _azure_client():
@@ -265,6 +332,10 @@ async def call_llm(
         elif provider == "openai":
             native = not os.environ.get("OPENAI_BASE_URL")
             output = await _call_chat(_openai_client(), resolved, prompt, system_prompt, max_tokens, native)
+        elif provider in COMPATIBLE:
+            output = await _call_chat(
+                _compatible_client(provider), resolved, prompt, system_prompt, output_cap(provider, max_tokens), False,
+            )
         else:
             output = await _call_chat(_azure_client(), resolved, prompt, system_prompt, max_tokens, True)
     except Exception as e:
@@ -292,6 +363,7 @@ def _config_key() -> str:
         "LLM_PROVIDER", "ANTHROPIC_API_KEY", "ANTHROPIC_MODEL", "OPENAI_API_KEY", "OPENAI_MODEL",
         "OPENAI_BASE_URL", "AZURE_OPENAI_API_KEY", "AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT",
         "CLAUDE_CLI_MODEL",
+        *(v for spec in COMPATIBLE.values() for v in (spec["key_env"], spec["model_env"], spec["base_url_env"])),
     )]
     return hashlib.sha256("\x1f".join(parts).encode()).hexdigest()
 
@@ -346,11 +418,16 @@ async def _probe_api(provider: str) -> tuple[bool, str]:
         else:
             import openai
 
-            client = _openai_client() if provider == "openai" else _azure_client()
-            native = provider == "azure" or not os.environ.get("OPENAI_BASE_URL")
-            where = {"openai": "OpenAI", "azure": "Azure OpenAI"}[provider]
-            if provider == "openai" and os.environ.get("OPENAI_BASE_URL"):
-                where = os.environ["OPENAI_BASE_URL"]
+            if provider in COMPATIBLE:
+                client = _compatible_client(provider)
+                native = False
+                where = COMPATIBLE[provider]["label"]
+            else:
+                client = _openai_client() if provider == "openai" else _azure_client()
+                native = provider == "azure" or not os.environ.get("OPENAI_BASE_URL")
+                where = {"openai": "OpenAI", "azure": "Azure OpenAI"}[provider]
+                if provider == "openai" and os.environ.get("OPENAI_BASE_URL"):
+                    where = os.environ["OPENAI_BASE_URL"]
             try:
                 kwargs = _chat_kwargs(model, "Reply with the single word OK.", "", 32, native)
                 await client.with_options(max_retries=1, timeout=45.0).chat.completions.create(**kwargs)
