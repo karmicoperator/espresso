@@ -413,6 +413,19 @@ linked sentence stays lit until the next takes over or its section leaves the sc
 a lit arrow turns green and thick while the rest fade; the nodes never fade, because a
 diagram with its boxes dimmed cannot be read.
 
+Showing the whole chart (no fading) is what made the linker's false matches visible, and
+there were five kinds. A shared interval bound (0.64 on two forest rows); a row whose
+estimate equals another sentence's bound (stroke 0.89); the nulls 0 and 1 ("the whole
+interval lies below 1" lit the row whose estimate is 1); a digit glued to a name (KOOS4
+read as 4, 44.9 points read as 45 events under the rounding tolerance); and small counts
+that coincide (13 knees with arthritis, 13 knees with a normal Lachman test; 8% against 8
+events). The rules now: a link needs the estimate or a count, never a bound alone and
+never 0 or 1; estimates get rounding tolerance, counts are exact; a digit joined to a
+letter is part of a name; a count never matches a percentage; a small count alone links
+only when the sentence names the datum; every shared number counts double; and two shared
+numbers link on their own, after which the chart moves beside the sentence. Each rule
+has a test with the sentence that broke it.
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were

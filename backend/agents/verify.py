@@ -464,16 +464,25 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
                 if len(sentence) < 20:
                     continue
                 nums = numbers_in(sentence)
+                pct = percents_in(sentence)
+                plain = [a for a in nums if a not in pct]
                 words = _terms_of(sentence)
                 best: tuple[int, Link] | None = None
                 for c, j, kind, strong, counts, weak, terms in targets:
                     # An estimate may be rounded in the prose; a count is exact. 44.9
                     # points is not 45 events.
-                    matched = _shared(nums, strong) + _shared(nums, counts, exact=True)
+                    by_value = _shared(nums, strong)
+                    by_count = _shared(plain, counts, exact=True)
+                    named = len(terms & words)
+                    # A small count alone proves little: "13 knees" with arthritis is not
+                    # the 13 knees with a normal Lachman test. A count links on its own
+                    # only when the sentence names the datum or the count has three digits.
+                    if by_count and not by_value and not named and not any(b >= 100 for b in counts):
+                        by_count = 0
+                    matched = by_value + by_count
                     if not matched:
                         continue
                     matched += _shared(nums, weak)
-                    named = len(terms & words)
                     here = c.id in section.chart_ids
                     # A datum the sentence neither names nor sits beside still links when
                     # they share two printed numbers, the estimate and a bound: that pair
@@ -496,6 +505,21 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
                 if best is not None:
                     links.append(best[1])
     return links
+
+
+_PERCENT = re.compile(r"(?<![A-Za-z\d.])(?<![A-Za-z]-)(?:(?<!\d)-)?\d[\d,]*\.?\d*\s?%")
+
+
+def percents_in(text: str) -> set[float]:
+    """The numbers a span prints with a percent sign. A count never matches one of these."""
+    folded = (text or "").translate(_DASHES).replace(",", "")
+    out: set[float] = set()
+    for m in _PERCENT.finditer(folded):
+        try:
+            out.add(float(m.group().rstrip("% ")))
+        except ValueError:
+            continue
+    return out
 
 
 def _shared(printed: list[float], pool: set[float], exact: bool = False) -> int:

@@ -280,3 +280,23 @@ def test_a_count_links_only_when_exact_and_a_bullet_list_is_many_sentences():
     )]
     links = link_prose(sections, [bars])
     assert [k.sentence[:12] for k in links] == ["- **Early:**"]
+
+
+def test_a_small_count_alone_links_only_when_the_datum_is_named():
+    bars = Chart(id="stability", kind=ChartKind.BARS, title="Stable knees", section_id="r3",
+                 data=[Datum(label="Normal Lachman test", group="Optional delayed", value=33, events=13, n=40, provenance=_prov())])
+    sections = [ReaderSection(
+        id="r3", title="Found", chart_ids=["stability"],
+        markdown="By five years, 13 knees had osteoarthritis. "
+                 "A normal Lachman test was found in 13 knees of the optional group.",
+    )]
+    links = link_prose(sections, [bars])
+    assert [k.sentence[:8] for k in links] == ["A normal"]
+
+
+def test_a_percentage_never_matches_an_event_count():
+    bars = Chart(id="oa", kind=ChartKind.BARS, title="Osteoarthritis", section_id="r3", unit="%",
+                 data=[Datum(label="Patellofemoral joint", group="Rehabilitation", value=15, events=8, provenance=_prov())])
+    sections = [ReaderSection(id="r3", title="Found", chart_ids=["oa"],
+                              markdown="Knees treated with rehabilitation alone showed 12% and 8%.")]
+    assert link_prose(sections, [bars]) == []
