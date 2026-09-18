@@ -4,8 +4,11 @@
 
 # Paper in Five
 
-Turns a medical paper into a five-minute explainer: prose in sections, charts drawn from the
-paper's own numbers, and a bottom line. Every charted value is checked against the paper's
+Ever got bored halfway through a paper? Paper in Five turns a medical paper into a
+five-minute read with charts. You keep the time, and the will to live.
+
+The page is prose in sections, charts drawn from the paper's own numbers, and a bottom
+line. Every charted value is checked against the paper's
 text before it is drawn, and every sentence of the prose is tied to the sentence of the
 paper it came from, so a click opens the paper at that line. Local, single user; nothing
 leaves the machine except requests for the paper.
