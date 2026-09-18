@@ -118,6 +118,27 @@ export const A_FILL = A;
 export const B_FILL = B;
 export const C_FILL = C;
 
+/**
+ * Legend items placed by the width of their text, on a second row when the panel is too
+ * narrow for one. Fixed 150px slots put "Standard target (<140 mm Hg)" on top of the
+ * previous label's tail.
+ */
+function legendLayout(groups: string[], avail: number): { items: { x: number; y: number }[]; rows: number } {
+  const items: { x: number; y: number }[] = [];
+  let x = 0;
+  let row = 0;
+  for (const g of groups) {
+    const w = 14 + g.length * 6.4 + 18;
+    if (x > 0 && x + w - 18 > avail) {
+      x = 0;
+      row += 1;
+    }
+    items.push({ x, y: row * 14 });
+    x += w;
+  }
+  return { items, rows: row + 1 };
+}
+
 /** "95%" but "162 cases": symbols close up to the number, words do not. */
 function withUnit(s: string, unit: string): string {
   if (!unit) return s;
@@ -440,7 +461,9 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   // land on a value label.
   const noteLines = chart.annotation ? wrapLabel(chart.annotation.text, 44, 3) : [];
   const [L, R] = [48, 40];
-  const T = 26 + (noteLines.length ? noteLines.length * 13 + 12 : 0);
+  const legend = grouped ? legendLayout(groups, W - L - R) : { items: [], rows: 1 };
+  const legendExtra = (legend.rows - 1) * 14;
+  const T = 26 + legendExtra + (noteLines.length ? noteLines.length * 13 + 12 : 0);
 
   const labelLines = Math.max(
     ...cats.map((c) => wrapLabel(c, Math.floor(((W - L - R) / cats.length) / 6.4)).length),
@@ -499,7 +522,7 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
       {grouped && (
         <g>
           {groups.map((g, gi) => (
-            <g key={g} transform={`translate(${L + gi * 150}, ${T - 24})`}>
+            <g key={g} transform={`translate(${L + legend.items[gi].x}, ${T - 24 - legendExtra + legend.items[gi].y})`}>
               <rect x={0} y={2} width={9} height={9} rx={2} fill={SERIES[gi % SERIES.length]} />
               <text x={14} y={11} className="tick">
                 {g}
@@ -608,7 +631,8 @@ function HBars({
   // "per 100 years" on the longest bar still ends inside the panel.
   const valueChars = Math.max(0, ...data.map((d) => fmt(d.value, chart.unit, dp).length));
   const R = Math.max(40, valueChars * 6.6 + 14);
-  const T = grouped ? 24 : 6;
+  const legend = grouped ? legendLayout(groups, W - L - R) : { items: [], rows: 1 };
+  const T = grouped ? 10 + legend.rows * 14 : 6;
   const barH = grouped ? 13 : 18;
   const perCat = grouped ? groups.length : 1;
   const labelRows = Math.max(1, ...cats.map((c) => wrapLabel(c, Math.floor((labelW - 6) / 6.9), 3).length));
@@ -632,7 +656,7 @@ function HBars({
       {grouped && (
         <g>
           {groups.map((g, gi) => (
-            <g key={g} transform={`translate(${L + gi * 150}, 0)`}>
+            <g key={g} transform={`translate(${L + legend.items[gi].x}, ${legend.items[gi].y})`}>
               <rect x={0} y={2} width={9} height={9} rx={2} fill={SERIES[gi % SERIES.length]} />
               <text x={14} y={11} className="tick">
                 {g}

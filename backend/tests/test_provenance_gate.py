@@ -137,3 +137,12 @@ def test_a_dash_between_two_numbers_is_a_range_not_a_minus():
     assert numbers_in("0.75 (0.64\u20130.89)") == [0.75, 0.64, 0.89]
     assert numbers_in("(\u221211.56 to \u221210.66)") == [-11.56, -10.66]
     assert numbers_in("a 5-year follow-up of \u22128.7%") == [5, -8.7]
+
+
+def test_bottom_line_matches_a_signed_change_by_magnitude():
+    from agents.verify import _value_in_quote
+    quote = "through week 208 (\u221210.2% for the semaglutide group)"
+    assert _value_in_quote(10.2, quote, signless=True)
+    # A chart keeps the sign: the axis carries the direction.
+    assert not _value_in_quote(10.2, quote)
+    assert _value_in_quote(-10.2, quote)

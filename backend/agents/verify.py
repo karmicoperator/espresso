@@ -124,9 +124,17 @@ def _quote_is_real(prov: Provenance, index: LocatorIndex) -> tuple[bool, str]:
     return False, ("quote not found at locator" if source is not None else "unknown locator")
 
 
-def _value_in_quote(value: float, quote: str, tolerance: float = 0.011) -> bool:
-    """The number has to be visible in the quoted span, in some recognisable form."""
-    for candidate in numbers_in(quote):
+def _value_in_quote(value: float, quote: str, tolerance: float = 0.011, signless: bool = False) -> bool:
+    """The number has to be visible in the quoted span, in some recognisable form.
+
+    `signless` matches on magnitude: prose says "lost 10.2%" where the paper prints a
+    minus 10.2%, and the words carry the direction. A chart never gets this, because its
+    axis carries the direction and a flipped sign draws the bar the wrong way.
+    """
+    if signless:
+        value = abs(value)
+    for printed in numbers_in(quote):
+        candidate = abs(printed) if signless else printed
         if abs(candidate - value) <= max(tolerance, abs(value) * tolerance):
             return True
         # A proportion written as a percentage, or the reverse.
@@ -339,7 +347,7 @@ def verify_bottom_line(
         return None
     missing = [
         v for v in numbers_in(bottom_line.answer)
-        if not _value_in_quote(v, bottom_line.provenance.quote)
+        if not _value_in_quote(v, bottom_line.provenance.quote, signless=True)
     ]
     if missing:
         report.rejections.append(
