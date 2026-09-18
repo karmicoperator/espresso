@@ -697,6 +697,39 @@ The Windows launcher had its own version of the silent failure: it opened the br
 seconds after starting the servers, before either answered, so a first start showed a
 "can't reach this page". It now waits until both respond.
 
+## 28. On Windows, a zip and a batch file are not an install
+
+The first Windows download was the source in a zip with "Start espresso.bat" on top. A
+non-technical person has to extract it first (double-clicking the batch file inside the zip
+preview runs it without the rest of the folder), keep a console window open, and know that
+Ctrl-C stops it. Now `espresso-Windows-setup.exe`, built with NSIS, installs per user with
+no administrator prompt, adds Start menu and desktop shortcuts with the logo, and registers
+an uninstaller. The launcher runs hidden: a small window with a moving bar on a first start,
+then a cup in the notification area to open or quit.
+
+Windows PowerShell 5.1 has traps that do not show on a Mac:
+
+- `Start-Process` joins `-ArgumentList` with spaces and quotes nothing, so any path with a
+  space (a user named "Anna Muster") splits. Arguments are quoted one by one.
+- `Start-Process -PassThru` reports an empty `ExitCode` unless the process handle was read
+  before it exited.
+- It cannot start npm's `.cmd` and `.ps1` shims with redirected output, so npm and Next run
+  as `node.exe <script>`.
+- A progress bar redraw per block makes `Invoke-WebRequest` crawl; `$ProgressPreference` off.
+- A venv's `python.exe` is a launcher with the real interpreter as its child, so stopping
+  it takes `taskkill /T`, or the API keeps listening.
+- A long step on the window's own thread freezes it into "Not responding"; each step runs
+  as its own process while the window's messages are pumped.
+- A process started with redirected output inherits every inheritable handle of its
+  parent, the launcher's own stdout included, so whatever reads that output waits for
+  servers that never exit. The first CI run hung for its full 25 minutes on this. The
+  launcher now makes its standard handles non-inheritable before starting the servers.
+
+With no Windows machine at hand, `.github/workflows/windows.yml` is the test: it builds the
+installer on a GitHub Windows runner and goes through install, first start, second start,
+the tray, an update over the top that must keep the papers, stopping, and uninstalling. On
+its first passing run the first start took 3 min 52 s and a second start 1 s.
+
 # From the first build, which rendered video
 
 Kept because the lessons outlived the code.

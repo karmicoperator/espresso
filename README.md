@@ -10,7 +10,7 @@
 <p align="center">
   <a href="https://github.com/karmicoperator/espresso/releases/latest/download/espresso-macOS.dmg">Download for macOS</a>
   &nbsp;·&nbsp;
-  <a href="https://github.com/karmicoperator/espresso/releases/latest/download/espresso-windows.zip">Download for Windows</a>
+  <a href="https://github.com/karmicoperator/espresso/releases/latest/download/espresso-Windows-setup.exe">Download for Windows</a>
 </p>
 
 Ever got bored halfway through a paper? espresso turns a medical paper into a five-minute
@@ -43,20 +43,20 @@ rest was rebuilt for medical papers.
 
 ### Windows
 
-The Windows launcher has not been run on a real Windows machine yet. Reports are welcome.
+1. Download [espresso-Windows-setup.exe](https://github.com/karmicoperator/espresso/releases/latest/download/espresso-Windows-setup.exe) and open it.
+2. espresso is not yet signed with a paid code-signing certificate, so Windows asks twice
+   whether you trust it. If your browser says the file is not commonly downloaded, choose
+   **Keep**. If Windows says it protected your PC, click **More info**, then **Run anyway**.
+3. The installer needs no administrator password. Leave **Start espresso now** ticked and
+   click **Finish**.
+4. A small window says espresso is getting ready. The first start takes about five minutes
+   while it downloads Python and Node.js and builds itself. Then your browser opens
+   espresso at `http://localhost:3000`, with nine papers already in the library.
+5. From then on, open espresso from the Start menu or the desktop. While it runs, its cup
+   sits in the notification area by the clock (on Windows 11 it may be behind the **^**
+   arrow): click it to open espresso, right-click it to quit.
 
-1. Download [espresso-windows.zip](https://github.com/karmicoperator/espresso/releases/latest/download/espresso-windows.zip).
-2. Right-click it, choose **Extract All**, and open the extracted **espresso** folder.
-3. Double-click **Start espresso.bat**. If Windows warns that it cannot verify the
-   publisher, choose **Run**, or **More info** and then **Run anyway**.
-4. A black window opens and lists each step. The first start takes about five minutes
-   while it downloads Python and Node.js and builds espresso. When it is ready, your
-   browser opens espresso at `http://localhost:3000`; if it does not, type that address
-   into the browser yourself.
-5. Keep the window open while you use espresso. Press Ctrl-C in it to stop espresso.
-   Next time, double-click **Start espresso.bat** again; later starts take seconds. If a
-   step fails, the window says which one and where its log is, in
-   `%LOCALAPPDATA%\espresso\logs`.
+To remove it, open Settings, Apps, espresso, Uninstall. It asks whether to keep your papers.
 
 ### Then pick a model
 
@@ -71,10 +71,11 @@ Settings tests the choice with one small call. Nothing else is asked for, not ev
 ### Browser extension (optional)
 
 One click on a paper's page builds it and hands espresso the PDF your browser can see,
-fetched with your own access. The extension is the `extension` folder of the Windows zip
-or of a clone. On a Mac it is at `~/Library/Application Support/espresso/repo/extension`
-after the first start (in Finder: Go, Go to Folder). [extension/README.md](extension/README.md)
-covers loading it in Chrome, Edge, Brave, Firefox and Safari.
+fetched with your own access. The extension is the `extension` folder of the installed app:
+`%LOCALAPPDATA%\Programs\espresso\extension` on Windows, and on a Mac
+`~/Library/Application Support/espresso/repo/extension` after the first start (in Finder:
+Go, Go to Folder). A clone has it too. [extension/README.md](extension/README.md) covers
+loading it in Chrome, Edge, Brave, Firefox and Safari.
 
 ### From source
 
@@ -87,7 +88,8 @@ windows\espresso.bat      # Windows
 
 Both launchers fetch uv and Node when the machine has neither, reuse servers already
 running, step past taken ports, and rebuild the web app when a source file changed.
-`scripts/package-mac.sh` builds the disk image and `scripts/package-windows.sh` the zip.
+`scripts/package-mac.sh` builds the disk image and `scripts/package-windows.sh` the Windows
+installer, which `.github/workflows/windows.yml` also builds and runs end to end on Windows.
 With `ESPRESSO_SIGN_ID` and `ESPRESSO_NOTARY_PROFILE` set, the disk image is signed with a
 Developer ID and notarized, and the approval step on first open goes away.
 
