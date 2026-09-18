@@ -5,7 +5,7 @@
 # Paper in Five
 
 Ever got bored halfway through a paper? Paper in Five turns a medical paper into a
-five-minute read with charts. You keep the time, and the will to live.
+five-minute read with charts. Catch up on papers, and stay awake.
 
 The page is prose in sections, charts drawn from the paper's own numbers, and a bottom
 line. Every charted value is checked against the paper's text before it is drawn, and
