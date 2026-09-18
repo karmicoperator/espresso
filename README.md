@@ -14,22 +14,20 @@ opens the paper at that line. Local, single user; nothing leaves the machine exc
 requests for the paper.
 
 This is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual) by
-Raj Shah, which does this for arXiv papers. It keeps his idea and the reader's look;
-what is underneath was rebuilt for medical papers, where a wrong number is a different
-kind of wrong.
+Raj Shah, which does the same thing for arXiv papers. The idea and the reader's look are
+his. The rest was rebuilt for medical papers.
 
-The source is PubMed Central's JATS, with a PDF path for what PMC never got. A
-deterministic gate stands between the model and the page: every plotted value carries a
-locator and a verbatim quote, three string checks decide whether it is drawn, and what
-fails is dropped and listed. The model fills a fixed catalogue of chart blocks and never
-decides a layout; every layout is measured for overlapping text on every built page. A
-trial's primary outcome becomes a hundred people, the bottom line names a finding the
-gate verifies, and each sentence of the prose is anchored to the source sentence that
-prints its numbers, so a click opens the paper there, in the PDF or in its own text.
-Builds take about two minutes, on Claude or on OpenAI, Azure, DeepSeek, Kimi, Qwen or
-GLM; the app installs itself on an empty machine, and a browser extension hands it the
-PDF your session can see. The decisions that were measured and lost are in
-`docs/FINDINGS.md`.
+Papers come from PubMed Central's JATS, or from a PDF when PMC doesn't have them. A
+deterministic gate sits between the model and the page: each plotted value carries a
+locator and a verbatim quote, three string checks decide whether it gets drawn, and
+anything that fails is dropped and listed. The model fills a fixed set of chart blocks
+and never touches layout; each built page gets a DOM check for overlapping text. Trial
+results turn into a hundred people, the bottom line names a finding the gate verifies,
+and every sentence of the prose is anchored to the source sentence that prints its
+numbers, so a click opens the paper right there, PDF or text. Builds take about two
+minutes on Claude, OpenAI, Azure, DeepSeek, Kimi, Qwen or GLM. The app installs itself on
+an empty machine, and the browser extension hands it whatever PDF your session can see.
+Things that were measured and didn't make it are in `docs/FINDINGS.md`.
 
 ## What it does
 
