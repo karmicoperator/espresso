@@ -393,6 +393,26 @@ section that does, then the linker runs again. All string work, so `scripts/reli
 applies it to every stored paper without a model call: SPRINT 2 to 8 sentences shown,
 and the sixteen older papers went from none to real links.
 
+A chart the model is free to shape is a chart that will be cluttered. Diagrams came back
+with six nodes, crossing arrows and arrow labels a sentence long, and the renderer's
+layered layout put three labels in one gap and let a label overflow its box (the last
+wrapped line was allowed to run 1.5 times the box width). The fix is not a smarter
+layout. It is a catalogue of blocks, each with one fixed layout and hard limits, shown to
+the model as one line of what, one of limits and one example, so it fills a block with
+quoted numbers and never decides how anything is drawn. `fit_to_block` trims an over-full
+proposal before validation, one chart at a time, so one bad chart no longer costs the
+whole planning call, and a diagram is reduced to the shape that keeps the most arrows:
+chain, fork or join. Three shapes, three layouts, nothing to collide. The prompt lost
+about a third of its chart section in the process, which is tokens the model spent
+choosing shapes it could not draw well.
+
+The lit relation also had a behaviour bug on top of the linking one: a sentence was lit
+only while inside a band from 30% to 60% of the viewport, so the chart blinked on and off
+as the reader scrolled, and on a diagram the lit thing was a label glow. Now the last
+linked sentence stays lit until the next takes over or its section leaves the screen, and
+a lit arrow turns green and thick while the rest fade; the nodes never fade, because a
+diagram with its boxes dimmed cannot be read.
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were

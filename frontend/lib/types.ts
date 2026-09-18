@@ -61,6 +61,8 @@ export type Chart = {
   data: Datum[];
   nodes: DiagramNode[];
   edges: DiagramEdge[];
+  /** chain, fork or join; set by the backend. */
+  shape?: string;
   annotation: Annotation | null;
   unit: string;
   value_label: string;

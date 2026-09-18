@@ -443,17 +443,30 @@ function Prose({
           mine = true;
           const [chart_id, kind, index] = (top.dataset.link ?? "").split("|");
           onActive({ chart_id, kind: kind as Lit["kind"], index: Number(index) });
-        } else if (mine) {
-          // Only the section that lit the chart may put it out, or two sections' observers
-          // fight over one state as the reader crosses from one to the next.
-          mine = false;
-          onActive(null);
         }
+        // No sentence in the band: the last one stays lit. A link that blinks off the
+        // moment its sentence leaves a narrow band reads as noise, not as a relation.
       },
       { rootMargin: "-30% 0px -40% 0px", threshold: 0 },
     );
     spans.forEach((s) => io.observe(s));
-    return () => io.disconnect();
+    // The section leaving the screen is what puts its chart out. Only the section that
+    // lit the chart may do so, or two sections' observers fight over one state.
+    const leave = new IntersectionObserver(
+      ([entry]) => {
+        if (entry && !entry.isIntersecting && mine) {
+          mine = false;
+          spans.forEach((s) => s.classList.remove("sentence-lit"));
+          onActive(null);
+        }
+      },
+      { threshold: 0 },
+    );
+    leave.observe(el);
+    return () => {
+      io.disconnect();
+      leave.disconnect();
+    };
   }, [links, sectionId, onActive]);
 
   const render = (text: string, key: string) =>

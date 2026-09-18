@@ -23,6 +23,17 @@ store.py    JSON per paper under data/explainers/
 
 There is no database. An explainer is a JSON file, and a build is one request.
 
+## Charts are blocks
+
+`agents/blocks.py` is the catalogue: stat, bars, forest, line, flow, diagram, each with a
+fixed page layout and hard limits (rows, arms, nodes, arrows). The planner prompt shows
+the model this catalogue with one example per block, so it fills a block with quoted
+numbers and never designs a layout. `fit_to_block` trims a proposal to its block before
+validation and records what it dropped beside the gate's rejections; a diagram is reduced
+to the one shape the page can draw (chain, fork or join) and `chart.shape` says which.
+Add a block by adding to the catalogue and giving the reader one layout for it; do not
+loosen a limit to fit a paper.
+
 ## The gate is the point
 
 `agents/verify.py`. Every plotted value carries `provenance{locator, quote}`. Three string

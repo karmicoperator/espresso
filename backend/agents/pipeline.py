@@ -210,6 +210,8 @@ async def build_visuals(
     progress("verify", 0.70, "checking every value against the source")
     originals = [c.model_copy(deep=True) for c in planned]
     charts, report = verify_charts(planned, paper)
+    # Rows, arms and arrows past a block's limit are dropped before the gate; say so.
+    report.rejections.extend(plan.trims)
     index = LocatorIndex.build(paper)
 
     # Every value on the page is verified or it is not drawn. What can still be pushed up

@@ -22,6 +22,7 @@ import re
 from pydantic import BaseModel, Field, ValidationError
 
 from agents.base import call_llm
+from agents.blocks import catalogue, fit_to_block
 from ingestion.figures import _is_displayable
 from models.charts import AbsoluteRisk, BottomLine, Chart, Term
 from models.paper import StructuredPaper
@@ -46,6 +47,8 @@ class Plan(BaseModel):
     bottom_line: BottomLine | None = None
     absolute_risk: AbsoluteRisk | None = None
     terms: list[Term] = Field(default_factory=list)
+    # What `fit_to_block` left out of an over-full chart, reported beside the gate's drops.
+    trims: list[dict] = Field(default_factory=list)
 
 
 MAX_CHARTS = 6
@@ -75,38 +78,24 @@ NEVER
 - Report a number the paper does not state.
 
 WHICH CHARTS
-Pick at most {max_charts}, in the order a reader needs them. Prefer few and clear.
-- `stat` — one headline number. Use for the primary effect estimate. Exactly one datum.
-- `bars` — a value across arms or subgroups. Two to six data. Intervals when printed.
-- `forest` — several effect estimates with intervals. Set `log_scale: true` and
-  `null_value: 1` for ratios, `null_value: 0` for differences. `lower_is_better` says
-  which side of the null favours treatment for the chart as a whole. When one row runs
-  the other way — "discharged alive within 28 days" is a benefit ABOVE 1 while "death"
-  is a benefit below it — set that row's `higher_is_better` so it is not coloured as
-  though it were a harm. Leave the field out on every row that follows the chart.
-- `line` — a value at stated timepoints, one datum per point, `group` naming the arm.
-- `dots` — counts across a category or year axis where magnitude is the point.
-- `flow` — participant flow. One datum per box, label naming the stage.
-- `diagram` — a mechanism the paper argues, drawn as nodes and the arrows between them.
-  Two to six `nodes` and their `edges`, no `data`. At most one per paper.
+Pick at most {max_charts}, in the order a reader needs them. Prefer few and clear. Each
+chart is one of the blocks below. The page has one fixed layout per block, so give it the
+data and nothing about how to draw it; whatever is past a block's limit is dropped and the
+first entries kept.
 
-  Look in the Discussion, where authors explain why the result came out as it did. When a
-  paper says the late phase is dominated by immunopathology while early disease is
-  dominated by viral replication, and that this is why the benefit tracks severity, that
-  is a diagram: three or four nodes, arrows between them, each arrow quoting the sentence
-  that makes the claim. Papers argue this more often than they draw it, which is exactly
-  why it is worth drawing.
+{catalogue}
 
-  Every edge carries a `provenance` like a plotted number, and is checked the same way:
-  the quote must exist at the locator, and ONE SENTENCE inside it must name both ends of
-  the arrow. Quote the sentence where the paper links the two things. If no single
-  sentence links them, the paper has not made that claim and the arrow does not belong.
-
-  Do not set `hedged`. It is read from the wording you quote, so a link the paper only
-  suggests is drawn as a suggestion whether or not you noticed.
-
-  The rule that matters: diagram the paper's argument, never your own knowledge of
-  biology. A paper that offers no mechanism gets no diagram.
+Details that apply to a block:
+- `forest`: `log_scale: true` and `null_value: 1` for ratios, `null_value: 0` for
+  differences. `lower_is_better` says which side favours treatment for the chart; set a
+  row's `higher_is_better` when that row runs the other way ("discharged alive" is a
+  benefit above 1 while "death" is a benefit below it).
+- `diagram`: every edge carries a `provenance` and is checked like a number: ONE SENTENCE
+  in the quote must name both ends of the arrow. Where no single sentence links two
+  things, the paper has not made that claim and the arrow does not belong. Do not set
+  `hedged`; it is read from the quote's wording. Diagram the paper's argument, never your
+  own knowledge of biology; the Discussion is where authors explain why the result came
+  out as it did.
 BOTTOM LINE
 Return a `bottom_line` with the `question` the paper set out to answer and its `answer`,
 one plain sentence each. The answer is what a clinician would take away, with the main
@@ -285,7 +274,7 @@ def _schema_block() -> str:
 async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> Plan:
     """Ask for chart specs, validate them, retry with the validation error on failure."""
     body = _render_paper(paper)
-    system = SYSTEM.replace("{max_charts}", str(max_charts))
+    system = SYSTEM.replace("{max_charts}", str(max_charts)).replace("{catalogue}", catalogue())
     base = (
         f"{body}\n\n---\n"
         f"Specify at most {max_charts} charts for this paper, following every rule above.\n\n"
@@ -305,7 +294,19 @@ async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> P
         try:
             payload = json.loads(extract_json(reply))
             raw_charts = payload.get("charts", payload if isinstance(payload, list) else [])
-            charts = [Chart.model_validate(c) for c in raw_charts][:max_charts]
+            # Each chart is fitted to its block and validated on its own, so one over-full
+            # or malformed chart costs itself and not the call that produced the others.
+            charts: list[Chart] = []
+            trims: list[dict] = []
+            for c in raw_charts[:max_charts]:
+                fitted, dropped = fit_to_block(c) if isinstance(c, dict) else (c, [])
+                trims.extend(dropped)
+                try:
+                    charts.append(Chart.model_validate(fitted))
+                except ValidationError as exc:
+                    first = exc.errors()[0] if exc.errors() else {}
+                    trims.append({"what": str((fitted or {}).get("id") or "chart") if isinstance(fitted, dict) else "chart",
+                                  "locator": "", "reason": f"did not fit its block: {first.get('msg', '')[:80]}"})
             # A bad bottom line or figure pick should not cost the charts: the charts are
             # the expensive part of this call, and these are extras rather than the point.
             bottom_line: BottomLine | None = None
@@ -360,7 +361,7 @@ async def plan_charts(paper: StructuredPaper, max_charts: int = MAX_CHARTS) -> P
                 len(picks), ", ".join(f"{p.kind}:{p.figure_id}" for p in picks),
             )
         return Plan(charts=unique, figures=picks, bottom_line=bottom_line,
-                    absolute_risk=absolute_risk, terms=terms)
+                    absolute_risk=absolute_risk, terms=terms, trims=trims)
 
     raise RuntimeError(
         f"plan_charts: no valid chart JSON in {RETRIES} attempts. Last error: {last_error[:300]}"

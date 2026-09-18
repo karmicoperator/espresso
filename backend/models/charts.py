@@ -131,6 +131,7 @@ class Chart(BaseModel):
     # Diagrams only. A mechanism is a graph, not a series, so it does not fit Datum.
     nodes: list[DiagramNode] = Field(default_factory=list, max_length=10)
     edges: list[DiagramEdge] = Field(default_factory=list, max_length=12)
+    shape: str = Field("", max_length=8, description="chain, fork or join: set by the backend, never the model")
 
     # Axis and formatting hints. The frontend owns the drawing; these say what the numbers
     # mean, not how to paint them.

@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
-import type { Chart, Datum, DiagramEdge, Provenance } from "@/lib/types";
+import type { Chart, Datum, DiagramEdge, DiagramNode, Provenance } from "@/lib/types";
 
 /** Which element of a chart the prose beside it is currently about. */
 export type Lit = { chart_id: string; kind: "datum" | "edge"; index: number };
@@ -1083,87 +1083,76 @@ type QuoteFn = (
  * "may reflect" all the time; a solid arrow would quietly upgrade a suggestion into a
  * finding, which is the main way a diagram like this can lie.
  */
+/**
+ * The three shapes a diagram can be: a chain (A to B to C), a fork (one cause, up to
+ * three effects) or a join (the mirror). The backend reduces every diagram to one of
+ * them; older explainers are reduced here the same way. One layout per shape, boxes sized
+ * to their text, every arrow label on its own arrow with a backdrop, so nothing can land
+ * on anything else.
+ */
+function diagramShape(nodes: DiagramNode[], edges: DiagramEdge[]): { shape: string; edges: DiagramEdge[] } {
+  const ids = new Set(nodes.map((n) => n.id));
+  const valid = edges.filter((e) => ids.has(e.source) && ids.has(e.target) && e.source !== e.target);
+  const out = new Map<string, DiagramEdge[]>();
+  const inc = new Map<string, DiagramEdge[]>();
+  for (const e of valid) {
+    out.set(e.source, [...(out.get(e.source) ?? []), e]);
+    inc.set(e.target, [...(inc.get(e.target) ?? []), e]);
+  }
+  let chain: DiagramEdge[] = [];
+  const walk = (node: string, path: DiagramEdge[], seen: Set<string>) => {
+    if (path.length > chain.length) chain = path;
+    for (const e of out.get(node) ?? []) {
+      if (!seen.has(e.target)) walk(e.target, [...path, e], new Set([...seen, e.target]));
+    }
+  };
+  for (const id of ids) walk(id, [], new Set([id]));
+  const fork = [...out.values()].sort((x, y) => y.length - x.length)[0]?.slice(0, 3) ?? [];
+  const join = [...inc.values()].sort((x, y) => y.length - x.length)[0]?.slice(0, 3) ?? [];
+  if (chain.length >= fork.length && chain.length >= join.length) return { shape: "chain", edges: chain.slice(0, 3) };
+  return fork.length >= join.length ? { shape: "fork", edges: fork } : { shape: "join", edges: join };
+}
+
 function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
-  const nodes = chart.nodes ?? [];
-  const edges = chart.edges ?? [];
-  if (nodes.length < 2 || edges.length === 0) return null;
+  const allNodes = chart.nodes ?? [];
+  const reduced = diagramShape(allNodes, chart.edges ?? []);
+  const shape = reduced.shape;
+  const edges = reduced.edges;
+  if (edges.length === 0) return null;
+  const used = new Set(edges.flatMap((e) => [e.source, e.target]));
+  const nodes = allNodes.filter((n) => used.has(n.id));
 
   const W = 520;
-
-  // Rank by longest path from a node with nothing feeding it. The model never says where
-  // anything goes; the shape falls out of the claims themselves.
-  const rank = new Map<string, number>();
-  nodes.forEach((n) => rank.set(n.id, 0));
-  for (let pass = 0; pass < nodes.length; pass++) {
-    let moved = false;
-    for (const e of edges) {
-      const want = (rank.get(e.source) ?? 0) + 1;
-      if (want > (rank.get(e.target) ?? 0)) {
-        rank.set(e.target, want);
-        moved = true;
-      }
-    }
-    if (!moved) break;
-  }
-
-  const rows: string[][] = [];
-  nodes.forEach((n) => {
-    const r = rank.get(n.id) ?? 0;
-    (rows[r] ||= []).push(n.id);
-  });
-  const widest = Math.max(...rows.map((r) => r.length));
-  const boxW = Math.min(190, (W - 40) / widest - 14);
-  const chars = Math.floor(boxW / 6.2);
-
-  // One height for every box, from whichever node needs the most lines. Boxes of differing
-  // height in a row read as a hierarchy that is not there.
+  // Chain: one column. Fork and join: a hub and a row of leaves, each leaf as wide as
+  // the row allows. Boxes share one size so a taller box does not read as a bigger claim.
+  const leaves = shape === "chain" ? 1 : edges.length;
+  const boxW = Math.min(230, Math.max(132, Math.floor((W - 16) / leaves) - 12));
+  const perLine = Math.max(12, Math.floor((boxW - 24) / 7.2));
   const wrapped = new Map(
-    nodes.map((n) => [
-      n.id,
-      { label: wrapLabel(n.label, chars, 2), note: n.note ? wrapLabel(n.note, chars, 2) : [] },
-    ]),
+    nodes.map((n) => [n.id, { label: wrapLabel(n.label, perLine, 3), note: n.note ? wrapLabel(n.note, perLine + 4, 2) : [] }]),
   );
   const boxH = Math.max(
-    52,
-    ...[...wrapped.values()].map((w) => 22 + w.label.length * 13 + w.note.length * 12),
+    48,
+    ...[...wrapped.values()].map((w) => 22 + w.label.length * 15 + (w.note.length ? w.note.length * 13 + 4 : 0)),
   );
-
-  // Every arrow's label sits in the gap below its source row, on the arrow's own vertical
-  // run, stacked so no two labels in a gap share a line. The gap is then made tall enough
-  // for what it holds, so a label can never reach the row below.
-  const labelLines = new Map(edges.map((e, i) => [i, e.label ? wrapLabel(e.label, 26, 2) : []]));
-  const gapOf = (e: DiagramEdge) => rank.get(e.source) ?? 0;
-  const gapHeight: number[] = rows.map(() => 44);
-  const slotY = new Map<number, number>();
-  {
-    const used: number[] = rows.map(() => 0);
-    edges.forEach((e, i) => {
-      const g = gapOf(e);
-      const lines = labelLines.get(i) ?? [];
-      slotY.set(i, used[g]);
-      if (lines.length) used[g] += lines.length * 12 + 8;
-    });
-    used.forEach((u, g) => {
-      gapHeight[g] = Math.max(44, 30 + u);
-    });
-  }
-  const rowY: number[] = [];
-  rows.forEach((_, r) => {
-    rowY[r] = r === 0 ? 8 : rowY[r - 1] + boxH + gapHeight[r - 1];
-  });
+  const gap = shape === "chain" ? 58 : 84;
 
   const pos = new Map<string, { x: number; y: number }>();
-  rows.forEach((row, r) => {
-    const step = Math.min(boxW + 26, (W - 30) / row.length);
-    row.forEach((id, i) => {
-      pos.set(id, {
-        x: W / 2 + (i - (row.length - 1) / 2) * step,
-        y: rowY[r],
-      });
-    });
-  });
-
-  const H = rowY[rows.length - 1] + boxH + 26;
+  let H = 0;
+  if (shape === "chain") {
+    const seq = [edges[0].source, ...edges.map((e) => e.target)];
+    seq.forEach((id, i) => pos.set(id, { x: W / 2, y: 8 + i * (boxH + gap) }));
+    H = 8 + seq.length * (boxH + gap) - gap + 8;
+  } else {
+    const hub = shape === "fork" ? edges[0].source : edges[0].target;
+    const row = edges.map((e) => (shape === "fork" ? e.target : e.source));
+    const step = Math.min(boxW + 20, (W - 16) / row.length);
+    const hubY = shape === "fork" ? 8 : 8 + boxH + gap;
+    const rowY = shape === "fork" ? 8 + boxH + gap : 8;
+    pos.set(hub, { x: W / 2, y: hubY });
+    row.forEach((id, i) => pos.set(id, { x: W / 2 + (i - (row.length - 1) / 2) * step, y: rowY }));
+    H = 8 + 2 * boxH + gap + 8;
+  }
   const anyHedged = edges.some((e) => e.hedged);
 
   return (
@@ -1172,7 +1161,7 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
         <defs>
           <marker id="dg-head" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7"
                   markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 1 L 7 4 L 0 7 z" fill="rgba(255,255,255,0.5)" />
+            <path d="M 0 1 L 7 4 L 0 7 z" fill="currentColor" />
           </marker>
         </defs>
 
@@ -1183,20 +1172,23 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
           const x1 = a.x;
           const y1 = a.y + boxH;
           const x2 = b.x;
-          const y2 = b.y - 9;
-          const lines = labelLines.get(i) ?? [];
-          // The horizontal run sits just above the target row, below every label in the gap.
-          const elbow = b.y - 18;
-          const path = `M ${x1} ${y1} L ${x1} ${elbow} L ${x2} ${elbow} L ${x2} ${y2}`;
-          // Label beside the vertical run, on the side the arrow is heading.
-          const toRight = x2 >= x1;
-          const lx = toRight ? x1 + 7 : x1 - 7;
-          const ly = y1 + 16 + (slotY.get(i) ?? 0);
+          const y2 = b.y - 8;
+          const lines = e.label ? wrapLabel(e.label, 18, 2) : [];
           const widest = Math.max(0, ...lines.map((l) => l.length));
-
+          // Chain labels sit beside the arrow. Fork and join labels sit on their arrow,
+          // staggered along it so neighbours never share a height.
+          const t = shape === "chain" ? 0.5 : i % 2 === 0 ? 0.42 : 0.66;
+          const mx = x1 + (x2 - x1) * t;
+          const my = y1 + (y2 - y1) * t;
+          const beside = shape === "chain";
+          const lx = beside ? mx + 10 : mx;
+          const ly = my - ((lines.length - 1) * 12) / 2 + 4;
+          const boxLeft = beside ? lx - 3 : lx - (widest * 5.9) / 2 - 4;
           return (
             <g
               key={`${e.source}-${e.target}-${i}`}
+              className="edge"
+              style={{ color: e.hedged ? "rgba(255,255,255,0.34)" : "rgba(255,255,255,0.55)" }}
               {...showQuote(
                 e.provenance.quote,
                 e.provenance.section || e.provenance.locator,
@@ -1205,34 +1197,22 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
                 { kind: "edge", index: i },
               )}
             >
-              {/* A wide invisible path so the arrow is hoverable without being thick. */}
-              <path d={path} stroke="transparent" strokeWidth={16} fill="none" />
-              <path
-                className="r-draw"
-                d={path}
-                fill="none"
-                stroke={e.hedged ? "rgba(255,255,255,0.34)" : "rgba(255,255,255,0.55)"}
-                strokeWidth={1.3}
+              <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="transparent" strokeWidth={18} />
+              <line
+                className="r-draw arrow"
+                x1={x1} y1={y1} x2={x2} y2={y2}
+                stroke="currentColor"
+                strokeWidth={1.4}
                 strokeDasharray={e.hedged ? "5 4" : undefined}
                 markerEnd="url(#dg-head)"
-                style={{ ["--len" as string]: 500, transitionDelay: `${0.2 + i * 0.1}s` }}
+                style={{ ["--len" as string]: 400, transitionDelay: `${0.2 + i * 0.1}s` }}
               />
               {lines.length > 0 && (
                 <>
-                  {/* Sits on the ground colour so a label crossing a line stays readable. */}
-                  <rect
-                    x={toRight ? lx - 2 : lx - widest * 5.8 + 2}
-                    y={ly - 10}
-                    width={widest * 5.8}
-                    height={lines.length * 12 + 3}
-                    rx={3}
-                    fill="#0a0a0a"
-                  />
-                  <text x={lx} y={ly} textAnchor={toRight ? "start" : "end"} className="tick">
+                  <rect x={boxLeft} y={ly - 10} width={widest * 5.9 + 8} height={lines.length * 12 + 4} rx={3} fill="#0a0a0a" />
+                  <text x={lx} y={ly} textAnchor={beside ? "start" : "middle"} className="tick edge-label">
                     {lines.map((ln, k) => (
-                      <tspan key={k} x={lx} dy={k === 0 ? 0 : 12}>
-                        {ln}
-                      </tspan>
+                      <tspan key={k} x={lx} dy={k === 0 ? 0 : 12}>{ln}</tspan>
                     ))}
                   </text>
                 </>
@@ -1245,36 +1225,21 @@ function Diagram({ chart, showQuote }: { chart: Chart; showQuote: QuoteFn }) {
           const p = pos.get(n.id);
           const w = wrapped.get(n.id);
           if (!p || !w) return null;
-          const top = p.y + (boxH - (w.label.length * 13 + w.note.length * 12)) / 2 + 11;
+          const textH = w.label.length * 15 + (w.note.length ? w.note.length * 13 + 4 : 0);
+          const top = p.y + (boxH - textH) / 2 + 12;
           return (
             <g key={n.id} className="r-rise" style={{ transitionDelay: `${i * 0.08}s` }}>
-              <rect
-                x={p.x - boxW / 2}
-                y={p.y}
-                width={boxW}
-                height={boxH}
-                rx={9}
-                fill="rgba(255,255,255,0.05)"
-                stroke="rgba(255,255,255,0.18)"
-              />
+              <rect x={p.x - boxW / 2} y={p.y} width={boxW} height={boxH} rx={9}
+                    fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.18)" />
               <text x={p.x} y={top} textAnchor="middle" className="cat" fill="#e8e8e8">
                 {w.label.map((ln, k) => (
-                  <tspan key={k} x={p.x} dy={k === 0 ? 0 : 13}>
-                    {ln}
-                  </tspan>
+                  <tspan key={k} x={p.x} dy={k === 0 ? 0 : 15}>{ln}</tspan>
                 ))}
               </text>
               {w.note.length > 0 && (
-                <text
-                  x={p.x}
-                  y={top + w.label.length * 13 + 1}
-                  textAnchor="middle"
-                  className="tick"
-                >
+                <text x={p.x} y={top + w.label.length * 15 + 2} textAnchor="middle" className="tick">
                   {w.note.map((ln, k) => (
-                    <tspan key={k} x={p.x} dy={k === 0 ? 0 : 12}>
-                      {ln}
-                    </tspan>
+                    <tspan key={k} x={p.x} dy={k === 0 ? 0 : 13}>{ln}</tspan>
                   ))}
                 </text>
               )}
