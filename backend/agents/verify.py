@@ -430,16 +430,21 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
     Call this after the charts are attached to their sections, or `here` is never true.
     """
     links: list[Link] = []
-    targets: list[tuple[Chart, int, str, set[float], set[str]]] = []
+    targets: list[tuple[Chart, int, str, set[float], set[float], set[str]]] = []
     for c in charts:
         if c.kind is ChartKind.DIAGRAM:
             continue
         for j, d in enumerate(c.data):
-            nums = {float(d.value)}
-            for extra in (d.low, d.high, d.events, d.n):
-                if extra is not None:
-                    nums.add(float(extra))
-            targets.append((c, j, "datum", nums, _terms_of(f"{d.label} {d.group}")))
+            # The point value or a count identifies a datum; an interval bound does not.
+            # Two rows of one forest plot share a bound often enough that "0.64" alone
+            # linked the primary outcome's sentence to the myocardial infarction row.
+            strong = {float(d.value)} | {float(x) for x in (d.events, d.n) if x is not None}
+            weak = {float(x) for x in (d.low, d.high) if x is not None}
+            # 0 and 1 are the nulls of every ratio and difference, and "one" is in half
+            # the sentences of a paper; a row whose estimate is 1 is not what "the whole
+            # interval lies below 1" is about.
+            strong -= {0.0, 1.0}
+            targets.append((c, j, "datum", strong, weak, _terms_of(f"{d.label} {d.group}")))
     edges: list[tuple[Chart, int, set[str], set[str]]] = []
     for c in charts:
         if c.kind is not ChartKind.DIAGRAM:
@@ -459,15 +464,22 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
                 nums = numbers_in(sentence)
                 words = _terms_of(sentence)
                 best: tuple[int, Link] | None = None
-                for c, j, kind, target_nums, terms in targets:
-                    hit = any(abs(a - b) <= max(0.011, abs(b) * 0.011) for a in nums for b in target_nums)
-                    if not hit:
+                for c, j, kind, strong, weak, terms in targets:
+                    matched = _shared(nums, strong)
+                    if not matched:
                         continue
+                    matched += _shared(nums, weak)
                     named = len(terms & words)
                     here = c.id in section.chart_ids
-                    if not named and not here:
+                    # A datum the sentence neither names nor sits beside still links when
+                    # they share two printed numbers, the estimate and a bound: that pair
+                    # is specific enough, and place_charts then brings the chart over.
+                    if not named and not here and matched < 2:
                         continue
-                    score = named + (3 if here else 0)
+                    # Every printed number the sentence shares with the datum counts double,
+                    # so the datum that shares the estimate and both bounds beats the row
+                    # beside the section whose estimate happens to equal one bound.
+                    score = 2 * matched + named + (2 if here else 0)
                     if best is None or score > best[0]:
                         best = (score, Link(section_id=section.id, sentence=sentence[:600],
                                             chart_id=c.id, kind=kind, index=j))
@@ -480,6 +492,11 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
                 if best is not None:
                     links.append(best[1])
     return links
+
+
+def _shared(printed: list[float], pool: set[float]) -> int:
+    """How many numbers of `pool` the sentence prints, within rounding."""
+    return sum(1 for b in pool if any(abs(a - b) <= max(0.011, abs(b) * 0.011) for a in printed))
 
 
 def place_charts(sections: list[ReaderSection], links: list[Link]) -> bool:

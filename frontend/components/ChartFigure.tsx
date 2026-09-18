@@ -313,10 +313,9 @@ export function ChartFigure({
       style: {
         cursor: onOpen ? ("pointer" as const) : ("default" as const),
         outline: "none",
-        // Focus follows the prose: the element the sentence is about stays full, the
-        // rest of the chart steps back, and nothing moves.
-        opacity: focused && !mine ? 0.28 : 1,
-        transition: "opacity .35s ease",
+        // Focus follows the prose by adding to the mark the sentence is about (a halo,
+        // a brighter label), never by fading the rest: a bar only means something next
+        // to the bars it is compared with, and a faded chart cannot be read.
       },
     };
   };

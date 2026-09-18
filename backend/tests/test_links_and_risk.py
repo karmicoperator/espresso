@@ -235,3 +235,35 @@ def test_a_chart_its_own_section_mentions_stays_put():
     links = link_prose(sections, [chart])
     assert place_charts(sections, links) is False
     assert sections[0].chart_ids == ["mortality"]
+
+
+def test_a_shared_interval_bound_alone_does_not_link():
+    forest = Chart(id="forest", kind=ChartKind.FOREST, title="Components", section_id="r3",
+                   data=[Datum(label="Myocardial infarction", value=0.83, low=0.64, high=1.09, provenance=_prov())])
+    stat = Chart(id="hr-stat", kind=ChartKind.STAT, title="Hazard ratio", section_id="r1",
+                 data=[Datum(label="Primary outcome hazard ratio", value=0.75, low=0.64, high=0.89, provenance=_prov())])
+    sections = [
+        ReaderSection(id="r1", title="Question", chart_ids=["hr-stat"], markdown="Why treat lower?"),
+        ReaderSection(id="r3", title="Found", chart_ids=["forest"],
+                      markdown="The hazard ratio was 0.75 (95% confidence interval 0.64 to 0.89)."),
+    ]
+    links = link_prose(sections, [stat, forest])
+    # The forest row beside the section shares only the bound 0.64; the stat elsewhere
+    # shares the estimate and both bounds and is named. It wins.
+    assert [(k.chart_id, k.section_id) for k in links] == [("hr-stat", "r3")]
+
+
+def test_a_datum_sharing_three_numbers_beats_a_row_whose_estimate_equals_one_bound():
+    forest = Chart(id="forest", kind=ChartKind.FOREST, title="Components", section_id="r3",
+                   data=[Datum(label="Stroke", value=0.89, low=0.63, high=1.25, provenance=_prov()),
+                         Datum(label="Acute coronary syndrome", value=1.0, low=0.64, high=1.55, provenance=_prov())])
+    stat = Chart(id="hr-stat", kind=ChartKind.STAT, title="Hazard ratio", section_id="r1",
+                 data=[Datum(label="Intensive vs standard", value=0.75, low=0.64, high=0.89, provenance=_prov())])
+    sections = [
+        ReaderSection(id="r1", title="Question", chart_ids=["hr-stat"], markdown="Why treat lower?"),
+        ReaderSection(id="r3", title="Found", chart_ids=["forest"],
+                      markdown="The hazard ratio was 0.75, a 25% lower risk (95% confidence interval 0.64 to 0.89). "
+                               "For the primary outcome the whole interval lies below 1."),
+    ]
+    links = link_prose(sections, [stat, forest])
+    assert [(k.chart_id, k.index) for k in links] == [("hr-stat", 0)]
