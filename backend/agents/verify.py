@@ -38,8 +38,9 @@ _DASHES = dict.fromkeys(map(ord, "‐‑‒–—―−"), "-")
 _QUOTES = {ord("‘"): "'", ord("’"): "'", ord("“"): '"', ord("”"): '"'}
 _SPACES = dict.fromkeys(map(ord, "      "), " ")
 # A sign counts only when it does not follow a digit: after the dash fold, "0.64-0.89"
-# is a range with two positive bounds, "(-11.56 to -10.66)" two negatives.
-_NUM = re.compile(r"(?:(?<!\d)-)?\d[\d,]*\.?\d*")
+# is a range with two positive bounds, "(-11.56 to -10.66)" two negatives. A digit glued
+# to a letter, or joined to one by a dash, is part of a name: KOOS4, SF-36, COVID-19.
+_NUM = re.compile(r"(?<![A-Za-z\d.])(?<![A-Za-z]-)(?:(?<!\d)-)?\d[\d,]*\.?\d*")
 
 
 def normalise(text: str) -> str:
@@ -404,7 +405,8 @@ def verify_terms(terms: list[Term], index: LocatorIndex, report: VerificationRep
     return kept
 
 
-_PROSE_SENTENCE = re.compile(r'(?<=[.!?])\s+(?=[A-Z0-9"(\u201c])')
+# A line break ends a sentence too: a bullet list is not one sentence.
+_PROSE_SENTENCE = re.compile(r'(?<=[.!?])\s+(?=[A-Z0-9"(\u201c])|\n+')
 _WORD = re.compile(r"[a-z][a-z\-]{3,}")
 _STOP = {"with", "that", "than", "this", "from", "were", "have", "their", "been", "which",
          "there", "these", "those", "about", "after", "before", "group", "groups", "patients",
@@ -430,7 +432,7 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
     Call this after the charts are attached to their sections, or `here` is never true.
     """
     links: list[Link] = []
-    targets: list[tuple[Chart, int, str, set[float], set[float], set[str]]] = []
+    targets: list[tuple[Chart, int, str, set[float], set[float], set[float], set[str]]] = []
     for c in charts:
         if c.kind is ChartKind.DIAGRAM:
             continue
@@ -438,13 +440,13 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
             # The point value or a count identifies a datum; an interval bound does not.
             # Two rows of one forest plot share a bound often enough that "0.64" alone
             # linked the primary outcome's sentence to the myocardial infarction row.
-            strong = {float(d.value)} | {float(x) for x in (d.events, d.n) if x is not None}
-            weak = {float(x) for x in (d.low, d.high) if x is not None}
             # 0 and 1 are the nulls of every ratio and difference, and "one" is in half
             # the sentences of a paper; a row whose estimate is 1 is not what "the whole
             # interval lies below 1" is about.
-            strong -= {0.0, 1.0}
-            targets.append((c, j, "datum", strong, weak, _terms_of(f"{d.label} {d.group}")))
+            strong = {float(d.value)} - {0.0, 1.0}
+            counts = {float(x) for x in (d.events, d.n) if x is not None} - {0.0, 1.0}
+            weak = {float(x) for x in (d.low, d.high) if x is not None}
+            targets.append((c, j, "datum", strong, counts, weak, _terms_of(f"{d.label} {d.group}")))
     edges: list[tuple[Chart, int, set[str], set[str]]] = []
     for c in charts:
         if c.kind is not ChartKind.DIAGRAM:
@@ -464,8 +466,10 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
                 nums = numbers_in(sentence)
                 words = _terms_of(sentence)
                 best: tuple[int, Link] | None = None
-                for c, j, kind, strong, weak, terms in targets:
-                    matched = _shared(nums, strong)
+                for c, j, kind, strong, counts, weak, terms in targets:
+                    # An estimate may be rounded in the prose; a count is exact. 44.9
+                    # points is not 45 events.
+                    matched = _shared(nums, strong) + _shared(nums, counts, exact=True)
                     if not matched:
                         continue
                     matched += _shared(nums, weak)
@@ -494,9 +498,10 @@ def link_prose(sections: list[ReaderSection], charts: list[Chart]) -> list[Link]
     return links
 
 
-def _shared(printed: list[float], pool: set[float]) -> int:
-    """How many numbers of `pool` the sentence prints, within rounding."""
-    return sum(1 for b in pool if any(abs(a - b) <= max(0.011, abs(b) * 0.011) for a in printed))
+def _shared(printed: list[float], pool: set[float], exact: bool = False) -> int:
+    """How many numbers of `pool` the sentence prints, within rounding unless `exact`."""
+    tol = (lambda b: 1e-9) if exact else (lambda b: max(0.011, abs(b) * 0.011))
+    return sum(1 for b in pool if any(abs(a - b) <= tol(b) for a in printed))
 
 
 def place_charts(sections: list[ReaderSection], links: list[Link]) -> bool:

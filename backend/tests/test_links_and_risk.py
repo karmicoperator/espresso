@@ -267,3 +267,16 @@ def test_a_datum_sharing_three_numbers_beats_a_row_whose_estimate_equals_one_bou
     ]
     links = link_prose(sections, [stat, forest])
     assert [(k.chart_id, k.index) for k in links] == [("hr-stat", 0)]
+
+
+def test_a_count_links_only_when_exact_and_a_bullet_list_is_many_sentences():
+    bars = Chart(id="stability", kind=ChartKind.BARS, title="Stable knees", section_id="r3",
+                 data=[Datum(label="Normal Lachman test", group="Early", value=76, events=45, n=58, provenance=_prov())])
+    sections = [ReaderSection(
+        id="r3", title="Found", chart_ids=["stability"],
+        markdown="KOOS4 improved by 44.9 points with rehabilitation first.\n"
+                 "- **Early:** 45 of 58 knees had a normal Lachman test.\n"
+                 "- **Optional:** the rest did not.",
+    )]
+    links = link_prose(sections, [bars])
+    assert [k.sentence[:12] for k in links] == ["- **Early:**"]

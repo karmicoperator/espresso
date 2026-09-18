@@ -33,7 +33,9 @@ BLOCKS: list[Block] = [
         '"provenance":{"locator":"abstract","quote":"rate ratio, 0.83; 95% CI, 0.75 to 0.93"}}]}',
     ),
     Block(
-        "bars", "a value across categories, one bar per arm",
+        "bars", "a value across categories, one bar per arm. The primary outcome by arm, "
+        "when the paper prints it per arm, is always one of these: the two numbers a reader "
+        "looks for first, beside the `stat` of their difference",
         {"categories": 5, "groups": 2, "data": 10},
         '{"kind":"bars","id":"harms","title":"Serious adverse events, by arm","unit":"%",'
         '"data":[{"label":"Any serious event","group":"Intensive","value":38.3,"provenance":{...}},'

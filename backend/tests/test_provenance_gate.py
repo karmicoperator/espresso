@@ -146,3 +146,9 @@ def test_bottom_line_matches_a_signed_change_by_magnitude():
     # A chart keeps the sign: the axis carries the direction.
     assert not _value_in_quote(10.2, quote)
     assert _value_in_quote(-10.2, quote)
+
+
+def test_a_digit_glued_to_a_name_is_not_a_number():
+    from agents.verify import numbers_in
+    assert numbers_in("KOOS4 improved by 42.9 points; SF-36 and COVID-19 did not") == [42.9]
+    assert numbers_in("n=121, P<0.001, week 208, 2.4 mg") == [121, 0.001, 208, 2.4]

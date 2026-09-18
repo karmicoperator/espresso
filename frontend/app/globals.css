@@ -69,9 +69,12 @@ html {
 
 .chart .grid   { stroke: rgba(255,255,255,0.13); stroke-width: 1; stroke-dasharray: 2 4; }
 .chart .axis   { stroke: rgba(255,255,255,0.28); stroke-width: 1; }
-.chart .tick   { fill: rgba(255,255,255,0.30); font-size: 11px; font-variant-numeric: tabular-nums; }
-.chart .cat    { fill: rgba(255,255,255,0.55); font-size: 12px; }
-.chart .val    { font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+/* Chart type is white. The bar, the mark and the arrow carry the arm's colour; text in an
+   arm's colour on a black ground read as dim, and a label should never be dimmer than the
+   mark it names. Ticks and axis words sit back a little, still legible. */
+.chart .tick   { fill: rgba(255,255,255,0.55); font-size: 11px; font-variant-numeric: tabular-nums; }
+.chart .cat    { fill: #f2f2f2; font-size: 12px; }
+.chart .val    { fill: #ffffff; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .chart .lead   { stroke: rgba(255,255,255,0.45); stroke-width: 1; }
 .chart .note   { fill: #e8e8e8; font-size: 12px; }
 .chart .whisker line { stroke: #e8e8e8; stroke-width: 1.5; opacity: 0.75; }
