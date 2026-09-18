@@ -74,14 +74,15 @@ to that message and click Open Anyway; macOS asks for your password once. First 
 fetches `uv` and Node into `~/Library/Application Support/espresso`, builds, and opens the
 browser on a library of nine papers. Then Settings, to pick a model.
 
-Windows: download the source, double-click `windows\espresso.bat`. Same first run,
-into `%LOCALAPPDATA%\espresso`. Not yet run on a Windows machine; `logs\setup.log`
-says which step failed if one does.
+Windows: download `espresso-windows.zip` from the latest release, unzip, double-click
+`Start espresso.bat`. Windows may say the publisher could not be verified: More info, Run
+anyway. Same first run, into `%LOCALAPPDATA%\espresso`. Not yet run on a Windows
+machine; `logs\setup.log` says which step failed if one does.
 
 From a clone: `./start.command` on macOS or the Windows launcher above. Both fetch `uv`
 and Node when the machine has neither, reuse servers already running, step past taken
-ports, and rebuild the web app when a source file changed. `scripts/package-mac.sh` builds
-the disk image; with `ESPRESSO_SIGN_ID` and `ESPRESSO_NOTARY_PROFILE` set it signs and
+ports, and rebuild the web app when a source file changed. `scripts/package-windows.sh`
+builds the Windows zip and `scripts/package-mac.sh` the disk image; with `ESPRESSO_SIGN_ID` and `ESPRESSO_NOTARY_PROFILE` set it signs and
 notarizes it, and the first-open step goes away.
 
 Models: a signed-in Claude Code session (no key), or a key from Anthropic, OpenAI or any
