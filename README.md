@@ -1,10 +1,10 @@
 <div align="center">
-  <img alt="Paper in Five" src="frontend/public/icon.png" width="80" />
+  <img alt="espresso" src="frontend/public/icon.png" width="80" />
 </div>
 
-# Paper in Five
+# espresso
 
-Ever got bored halfway through a paper? Paper in Five turns a medical paper into a
+Ever got bored halfway through a paper? espresso turns a medical paper into a
 five-minute read with charts. Catch up on papers, and stay awake.
 
 The page is prose in sections, charts drawn from the paper's own numbers, and a bottom
@@ -67,13 +67,13 @@ planner names and the gate verifies. `docs/FINDINGS.md` keeps this kind of recor
 
 ## Getting it
 
-macOS: download `PaperInFive-mac.zip` from the latest release, unzip, move the app to
+macOS: download `espresso-mac.zip` from the latest release, unzip, move the app to
 Applications, right-click, Open (the bundle is unsigned, so the first open asks). First
-run fetches `uv` and Node into `~/Library/Application Support/PaperInFive`, builds, and
+run fetches `uv` and Node into `~/Library/Application Support/espresso`, builds, and
 opens the browser on a library of twenty papers. Then Settings, to pick a model.
 
-Windows: download the source, double-click `windows\PaperInFive.bat`. Same first run,
-into `%LOCALAPPDATA%\PaperInFive`. Not yet run on a Windows machine; `logs\setup.log`
+Windows: download the source, double-click `windows\espresso.bat`. Same first run,
+into `%LOCALAPPDATA%\espresso`. Not yet run on a Windows machine; `logs\setup.log`
 says which step failed if one does.
 
 From a clone: `./start.command` on macOS or the Windows launcher above. Both fetch `uv`

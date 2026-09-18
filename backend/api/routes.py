@@ -1,4 +1,4 @@
-"""Paper in Five API: start a build and watch it, read an explainer back, serve its figures."""
+"""espresso API: start a build and watch it, read an explainer back, serve its figures."""
 
 import logging
 import tempfile
@@ -310,7 +310,7 @@ async def health_check():
     )
 
     return HealthResponse(
-        app="paperinfive",
+        app="espresso",
         status="healthy" if all_healthy else "degraded",
         version="0.1.0",
         services={

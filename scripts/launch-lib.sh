@@ -1,4 +1,4 @@
-# Shared by PaperInFive.app and start.command: first-run setup, port resolution, starting.
+# Shared by espresso.app and start.command: first-run setup, port resolution, starting.
 #
 # The caller defines two functions before sourcing this:
 #   say  <text>   progress, non-fatal        (terminal line, or a notification)
@@ -45,14 +45,14 @@ need_tool() {  # name, what to do about it
 log_tail() { tail -n 12 "$LOGS/setup.log" 2>/dev/null; }
 
 setup_backend() {
-  local stamp="$REPO/backend/.venv/.paperinfive-synced" lock="$REPO/backend/uv.lock"
+  local stamp="$REPO/backend/.venv/.espresso-synced" lock="$REPO/backend/uv.lock"
   if [ -x "$REPO/backend/.venv/bin/python" ] && up_to_date "$stamp" "$lock"; then
     return 0
   fi
   need_tool uv "Install it with:
   curl -LsSf https://astral.sh/uv/install.sh | sh
 
-then start Paper in Five again."
+then start espresso again."
   say "Installing the API's Python packages. First run only, about a minute."
   # --frozen installs exactly the lockfile. Python itself is fetched by uv if the
   # machine has none of the right version, so there is nothing else to install.
@@ -66,10 +66,10 @@ $(log_tail)"
 
 setup_frontend() {
   local fe="$REPO/frontend" stamp lock built newer
-  stamp="$fe/node_modules/.paperinfive-installed"; lock="$fe/package-lock.json"
+  stamp="$fe/node_modules/.espresso-installed"; lock="$fe/package-lock.json"
   if [ ! -d "$fe/node_modules" ] || ! up_to_date "$stamp" "$lock"; then
     need_tool node "Install Node.js from https://nodejs.org (or: brew install node),
-then start Paper in Five again."
+then start espresso again."
     say "Installing the web app's packages. First run only, about a minute."
     if ! ( cd "$fe" && npm install --no-fund --no-audit ) >>"$LOGS/setup.log" 2>&1; then
       fail "Installing the web app's packages failed. The end of $LOGS/setup.log:
@@ -82,7 +82,7 @@ $(log_tail)"
   # The dev server is for working on the app. Everyone else gets a production build,
   # which loads faster and has no dev overlay. Rebuilt only when a source file is newer
   # than the last build.
-  [ "${PAPERINFIVE_DEV:-}" = 1 ] && return 0
+  [ "${ESPRESSO_DEV:-}" = 1 ] && return 0
   built="$fe/.next/BUILD_ID"
   if [ -f "$built" ]; then
     newer=$(cd "$fe" && find app components lib public next.config.ts package.json \
@@ -133,11 +133,11 @@ port_is_free() {
 
 is_our_api() {
   curl -fsS --max-time 3 "http://127.0.0.1:$1/api/health" 2>/dev/null \
-    | grep -qi '"app"[[:space:]]*:[[:space:]]*"paperinfive"'
+    | grep -qi '"app"[[:space:]]*:[[:space:]]*"espresso"'
 }
 
 is_our_web() {
-  curl -fsS --max-time 5 "http://127.0.0.1:$1/" 2>/dev/null | grep -q 'Paper in Five'
+  curl -fsS --max-time 5 "http://127.0.0.1:$1/" 2>/dev/null | grep -q 'espresso'
 }
 
 # resolve_port <api|web> -> prints "<port> <reuse|start>", or nothing when the whole span
@@ -196,7 +196,7 @@ start_web() {  # web port, api port
   # configuration and the build does not depend on it. Bound to localhost: this is a
   # private tool, and Next would otherwise listen on every interface.
   local cmd="start"
-  [ "${PAPERINFIVE_DEV:-}" = 1 ] && cmd="dev"
+  [ "${ESPRESSO_DEV:-}" = 1 ] && cmd="dev"
   ( cd "$REPO/frontend"; API_URL="http://127.0.0.1:$2" \
       nohup ./node_modules/.bin/next "$cmd" -H 127.0.0.1 -p "$1" >"$LOGS/web.log" 2>&1 & disown )
   wait_for_service web "$1" 90 || fail "The web app did not start on port $1. See:

@@ -1,12 +1,12 @@
 #!/bin/bash
-# Paper in Five: double-click to start, or run from Terminal.
+# espresso: double-click to start, or run from Terminal.
 #
 # Installs what is missing on first run, brings up the API and the web app, then opens a
 # browser. Reuses our own instances if they are already running, and steps past a port
 # held by somebody else's dev server rather than adopting it. Ctrl-C stops whatever this
 # invocation started; anything it found already running is left alone.
 #
-#   PAPERINFIVE_DEV=1 ./start.command     runs the web app's dev server instead of a build
+#   ESPRESSO_DEV=1 ./start.command     runs the web app's dev server instead of a build
 
 set -u
 cd "$(dirname "$0")"
@@ -17,7 +17,7 @@ fail() { echo; echo "  $1" | sed '2,$s/^/  /'; echo; exit 1; }
 # shellcheck source=scripts/launch-lib.sh
 . scripts/launch-lib.sh
 
-echo "Paper in Five"
+echo "espresso"
 echo
 
 setup_backend

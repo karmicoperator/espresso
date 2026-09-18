@@ -1,4 +1,4 @@
-// Paper in Five, browser side. Two jobs the local app cannot do for itself:
+// espresso, browser side. Two jobs the local app cannot do for itself:
 //
 //  1. One click from the paper's page. The tab's URL (PubMed, PMC, a DOI page) goes to
 //     the local API, which builds the explainer; the popup follows the job and opens it.
@@ -67,7 +67,7 @@ function bytesOf(base64) {
 async function apiOk(api) {
   try {
     const r = await fetch(`${api}/api/health`);
-    return r.ok && (await r.json()).app === "paperinfive";
+    return r.ok && (await r.json()).app === "espresso";
   } catch {
     return false;
   }
@@ -98,7 +98,7 @@ async function waitForJob(api, id, onStep) {
  */
 async function run(tab, report) {
   const { api, web } = await settings();
-  if (!(await apiOk(api))) throw new Error(`Paper in Five is not running at ${api}. Start the app, then try again.`);
+  if (!(await apiOk(api))) throw new Error(`espresso is not running at ${api}. Start the app, then try again.`);
   const what = classify(tab.url);
   if (what.kind === "other") throw new Error("Open a PubMed, PMC or DOI page, or a PDF, then click again.");
 

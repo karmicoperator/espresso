@@ -9,7 +9,7 @@ from pydantic import BaseModel, Field
 class HealthResponse(BaseModel):
     """Response for GET /api/health."""
     app: str = Field(
-        "paperinfive",
+        "espresso",
         description=(
             "Identifies which service is answering. A launcher that only checks whether a "
             "port is listening will happily adopt somebody else's dev server."

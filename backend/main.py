@@ -1,5 +1,5 @@
 """
-Paper in Five API entry point.
+espresso API entry point.
 
 Run with: python main.py   (or: uvicorn main:app --port 8000)
 Docs at: http://localhost:8000/docs
@@ -26,7 +26,7 @@ from fastapi.responses import RedirectResponse
 from api.routes import router as api_router
 
 app = FastAPI(
-    title="Paper in Five API",
+    title="espresso API",
     description="Turns an open-access medical paper into a verified scrollable explainer",
     version="0.1.0",
     docs_url="/docs",

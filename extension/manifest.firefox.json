@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Paper in Five",
+  "name": "espresso",
   "version": "0.1.0",
-  "description": "One click on a paper's page: build its five-minute explainer in Paper in Five, and hand it the PDF your browser can see.",
+  "description": "One click on a paper's page: build its five-minute explainer in espresso, and hand it the PDF your browser can see.",
   "icons": {
     "16": "icons/icon-16.png",
     "32": "icons/icon-32.png",
@@ -10,7 +10,7 @@
     "128": "icons/icon-128.png"
   },
   "action": {
-    "default_title": "Paper in Five",
+    "default_title": "espresso",
     "default_popup": "popup.html",
     "default_icon": {
       "16": "icons/icon-16.png",
@@ -33,7 +33,7 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "paperinfive@paperinfive.org",
+      "id": "espresso@espresso.local",
       "strict_min_version": "121.0"
     }
   }

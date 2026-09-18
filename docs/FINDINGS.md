@@ -488,6 +488,13 @@ browser can do the one thing the app cannot, fetch a paper's PDF as the person, 
 their session, from the page they are looking at. So the extension builds from the tab's
 URL and hands over the PDF it finds there. It talks only to localhost.
 
+The product was Paper in Five until the day it was announced, when it became espresso,
+all lowercase: a paper as a short, strong shot, and the tagline ("Catch up on papers, and
+stay awake") does double duty. The name is what changed; this log keeps the old one in
+the entries written under it. The logo is drawn in code (PyMuPDF: a cup on a saucer, two
+quotation marks in the app's green as the steam), so every size is regenerated from one
+script rather than kept as files nobody can edit.
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were

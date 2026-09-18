@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 # Unpaywall asks for a contact address with each lookup. The app sends its own; nobody is
 # asked for theirs. UNPAYWALL_EMAIL in the environment overrides it for whoever wants.
 def contact_email() -> str:
-    return os.environ.get("UNPAYWALL_EMAIL", "") or "paperinfive@users.noreply.github.com"
+    return os.environ.get("UNPAYWALL_EMAIL", "") or "espresso@users.noreply.github.com"
 # A browser's user agent, because the page is being fetched for a person to read; the
 # publishers that block programs outright do so regardless.
 BROWSER_UA = (

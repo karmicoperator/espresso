@@ -1,16 +1,16 @@
 #!/bin/bash
-# Paper in Five: fetch the two tools the app needs when the machine has neither.
+# espresso: fetch the two tools the app needs when the machine has neither.
 #
 # uv brings its own Python; Node comes from nodejs.org as a plain tarball. Both land under
 # the app's own folder, never in system paths and never through Homebrew, so a person who
 # has never opened Terminal can double-click the app and have it work. Sourced by
 # launch-lib.sh; safe to source twice.
 #
-#   PAPERINFIVE_HOME   where tools and logs live (default ~/Library/Application Support/PaperInFive)
+#   ESPRESSO_HOME   where tools and logs live (default ~/Library/Application Support/espresso)
 
-PIF_HOME=${PAPERINFIVE_HOME:-"$HOME/Library/Application Support/PaperInFive"}
+PIF_HOME=${ESPRESSO_HOME:-"$HOME/Library/Application Support/espresso"}
 PIF_TOOLS="$PIF_HOME/tools"
-NODE_VERSION=${PAPERINFIVE_NODE:-v22.12.0}
+NODE_VERSION=${ESPRESSO_NODE:-v22.12.0}
 
 mkdir -p "$PIF_TOOLS"
 export PATH="$PIF_TOOLS/bin:$PIF_TOOLS/node/bin:$HOME/.local/bin:$PATH"

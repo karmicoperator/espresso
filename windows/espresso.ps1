@@ -1,7 +1,7 @@
-# Paper in Five for Windows: double-click PaperInFive.bat, or run this in PowerShell.
+# espresso for Windows: double-click espresso.bat, or run this in PowerShell.
 #
 # On first run it fetches uv (which brings Python) and Node.js into
-# %LOCALAPPDATA%\PaperInFive\tools, never into system paths, installs the app's packages,
+# %LOCALAPPDATA%\espresso\tools, never into system paths, installs the app's packages,
 # builds the web app, starts both servers and opens the browser. Later runs skip what is
 # already done. Ctrl-C in the window stops the servers.
 #
@@ -10,7 +10,7 @@
 
 $ErrorActionPreference = "Stop"
 $Repo = Split-Path -Parent $PSScriptRoot
-$Home_ = Join-Path $env:LOCALAPPDATA "PaperInFive"
+$Home_ = Join-Path $env:LOCALAPPDATA "espresso"
 $Tools = Join-Path $Home_ "tools"
 $Logs = Join-Path $Home_ "logs"
 New-Item -ItemType Directory -Force -Path $Tools, $Logs | Out-Null
@@ -21,7 +21,7 @@ function Fail($t) { Write-Host ""; Write-Host "  $t"; Write-Host ""; Read-Host "
 
 $env:Path = "$Tools\bin;$Tools\node;$env:USERPROFILE\.local\bin;$env:Path"
 
-Write-Host "Paper in Five"; Write-Host ""
+Write-Host "espresso"; Write-Host ""
 
 if (-not (Get-Command uv -ErrorAction SilentlyContinue)) {
   Say "Fetching uv (brings Python with it)..."
@@ -42,7 +42,7 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 }
 
 # Backend packages, exactly the lockfile. Skipped while the lockfile is unchanged.
-$beStamp = Join-Path $Repo "backend\.venv\.paperinfive-installed"
+$beStamp = Join-Path $Repo "backend\.venv\.espresso-installed"
 $beLock = Get-FileHash (Join-Path $Repo "backend\uv.lock")
 if (-not (Test-Path $beStamp) -or (Get-Content $beStamp) -ne $beLock.Hash) {
   Say "Installing the API's packages. First run only, about a minute."
@@ -55,7 +55,7 @@ if (-not (Test-Path $beStamp) -or (Get-Content $beStamp) -ne $beLock.Hash) {
 
 # Web app packages and build. Rebuilt when a source file changed since the last build.
 $fe = Join-Path $Repo "frontend"
-$feStamp = Join-Path $fe "node_modules\.paperinfive-installed"
+$feStamp = Join-Path $fe "node_modules\.espresso-installed"
 $feLock = Get-FileHash (Join-Path $fe "package-lock.json")
 if (-not (Test-Path $feStamp) -or (Get-Content $feStamp) -ne $feLock.Hash) {
   Say "Installing the web app's packages. First run only, about a minute."
@@ -65,7 +65,7 @@ if (-not (Test-Path $feStamp) -or (Get-Content $feStamp) -ne $feLock.Hash) {
   Pop-Location
   Set-Content $feStamp $feLock.Hash
 }
-$buildStamp = Join-Path $fe ".next\.paperinfive-built"
+$buildStamp = Join-Path $fe ".next\.espresso-built"
 $newest = Get-ChildItem $fe -Recurse -Include *.ts,*.tsx,*.css,*.json -Exclude node_modules,.next |
   Where-Object { $_.FullName -notmatch "node_modules|\\.next" } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
 if (-not (Test-Path $buildStamp) -or $newest.LastWriteTime -gt (Get-Item $buildStamp).LastWriteTime) {

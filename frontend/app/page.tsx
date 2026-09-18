@@ -183,7 +183,7 @@ export default function Home() {
       )}
 
       <h1 className="text-6xl font-semibold tracking-tight text-[#e8e8e8] sm:text-7xl">
-        Paper in <span className="text-white/45">Five</span>
+        espresso
       </h1>
       <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-white/55">
         Paste a PubMed link. It comes back as a short explainer with interactive charts built

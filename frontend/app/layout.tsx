@@ -21,12 +21,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Paper in Five",
-    template: "%s · Paper in Five",
+    default: "espresso",
+    template: "%s · espresso",
   },
   description:
     "Turns an open-access PubMed paper into a scrollable explainer, with every plotted number checked against the paper's own text.",
-  applicationName: "Paper in Five",
+  applicationName: "espresso",
   robots: { index: false, follow: false },
   icons: {
     icon: [{ url: "/icon.png", type: "image/png" }],

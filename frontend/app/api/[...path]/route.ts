@@ -45,7 +45,7 @@ async function proxy(request: Request): Promise<Response> {
     return Response.json(
       {
         detail: down
-          ? "The API is not running. Start Paper in Five again, or see logs/api.log."
+          ? "The API is not running. Start espresso again, or see logs/api.log."
           : `The web app could not forward this request to the API: ${cause}`,
       },
       { status: 502 },

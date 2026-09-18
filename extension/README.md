@@ -1,6 +1,6 @@
-# Paper in Five, browser extension
+# espresso, browser extension
 
-One click on a paper's page builds its explainer in the Paper in Five app running on your
+One click on a paper's page builds its explainer in the espresso app running on your
 machine, and hands the app the PDF your browser can see. Publishers block programs, not
 people: a PDF fetched from the page you are looking at carries your own access, so it
 attaches even where the app's own fetch is refused.

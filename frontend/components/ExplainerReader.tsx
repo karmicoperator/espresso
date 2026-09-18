@@ -135,9 +135,9 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
 
   // The tab should say which paper this is, not only which app.
   useEffect(() => {
-    document.title = `${explainer.title} · Paper in Five`;
+    document.title = `${explainer.title} · espresso`;
     return () => {
-      document.title = "Paper in Five";
+      document.title = "espresso";
     };
   }, [explainer.title]);
 
