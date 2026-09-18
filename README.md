@@ -1,38 +1,91 @@
-<div align="center">
-  <img alt="espresso" src="frontend/public/icon.png" width="80" />
-</div>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/wordmark-dark.png">
+    <img alt="espresso" src="docs/assets/wordmark-light.png" width="280">
+  </picture>
+</p>
 
-# espresso
+<p align="center"><b>Catch up on papers, and stay awake.</b></p>
 
-Ever got bored halfway through a paper? espresso turns a medical paper into a
-five-minute read with charts. Catch up on papers, and stay awake.
+<p align="center">
+  <a href="https://github.com/karmicoperator/espresso/releases/latest/download/espresso-macOS.dmg">Download for macOS</a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/karmicoperator/espresso/releases/latest/download/espresso-windows.zip">Download for Windows</a>
+</p>
 
-The page is prose in sections, charts drawn from the paper's own numbers, and a bottom
-line. Every charted value is checked against the paper's text before it is drawn, and
-every sentence of the prose is tied to the sentence of the paper it came from, so a click
-opens the paper at that line. Local, single user; nothing leaves the machine except
-requests for the paper.
+Ever got bored halfway through a paper? espresso turns a medical paper into a five-minute
+read with charts. Paste a PubMed link and the paper comes back as short prose in sections,
+charts drawn from its own numbers, and a bottom line. Every charted value is checked
+against the paper's text before it is drawn, and a click on any sentence opens the paper
+at the line it came from. It runs on your computer; nothing leaves it except the request
+for the paper.
 
-This is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual) by
-Raj Shah, which does the same thing for arXiv papers. The idea and the reader's look are
-his. The rest was rebuilt for medical papers.
+espresso is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual) by
+Raj Shah, which does the same for arXiv papers. The idea and the reader's look are his; the
+rest was rebuilt for medical papers.
 
-Papers come from PubMed Central's JATS, or from a PDF when PMC doesn't have them. A
-deterministic gate sits between the model and the page: each plotted value carries a
-locator and a verbatim quote, three string checks decide whether it gets drawn, and
-anything that fails is dropped and listed. The model fills a fixed set of chart blocks
-and never touches layout; each built page gets a DOM check for overlapping text. Trial
-results turn into a hundred people, the bottom line names a finding the gate verifies,
-and every sentence of the prose is anchored to the source sentence that prints its
-numbers, so a click opens the paper right there, PDF or text. Builds take about two
-minutes on Claude, OpenAI, Azure, DeepSeek, Kimi, Qwen or GLM. The app installs itself on
-an empty machine, and the browser extension hands it whatever PDF your session can see.
-Things that were measured and didn't make it are in `docs/FINDINGS.md`.
+## Install
 
-## What it does
+### macOS
 
-Paste a PubMed or PMC link, a DOI or a PMID, or drop a PDF. Two to four minutes later
-(two model calls, run side by side) the paper opens as a page:
+1. Download [espresso-macOS.dmg](https://github.com/karmicoperator/espresso/releases/latest/download/espresso-macOS.dmg).
+2. Open it and drag **espresso** onto **Applications**.
+3. Open espresso from your Applications folder. The first time, macOS says it could not
+   verify the app, because espresso is not yet signed with an Apple Developer ID. Click
+   **Done**, open **System Settings**, go to **Privacy & Security**, scroll down to the note
+   about espresso and click **Open Anyway**, then enter your password. This happens once.
+4. The first start takes a few minutes while espresso fetches Python and Node.js into its
+   own folder and builds itself. Then your browser opens on espresso, with nine papers
+   already in the library.
+
+### Windows
+
+The Windows launcher has not been run on a real Windows machine yet. Reports are welcome.
+
+1. Download [espresso-windows.zip](https://github.com/karmicoperator/espresso/releases/latest/download/espresso-windows.zip).
+2. Right-click it, choose **Extract All**, and open the extracted **espresso** folder.
+3. Double-click **Start espresso.bat**. If Windows warns that it cannot verify the
+   publisher, choose **Run**, or **More info** and then **Run anyway**.
+4. The first start takes a few minutes, as on macOS. Keep the window open while you use
+   espresso and press Ctrl-C in it to stop. If a step fails,
+   `%LOCALAPPDATA%\espresso\logs\setup.log` says which one.
+
+### Then pick a model
+
+Open **Settings** in espresso and choose how it reaches a model:
+
+- **Claude Code**, if it is installed and signed in on this computer. No key needed.
+- **An API key** from Anthropic, OpenAI or any OpenAI-compatible endpoint, Azure, DeepSeek,
+  Kimi, Qwen or GLM.
+
+Settings tests the choice with one small call. Nothing else is asked for, not even an email.
+
+### Browser extension (optional)
+
+One click on a paper's page builds it and hands espresso the PDF your browser can see,
+fetched with your own access. The extension is the `extension` folder of the Windows zip
+or of a clone. On a Mac it is at `~/Library/Application Support/espresso/repo/extension`
+after the first start (in Finder: Go, Go to Folder). [extension/README.md](extension/README.md)
+covers loading it in Chrome, Edge, Brave, Firefox and Safari.
+
+### From source
+
+```
+git clone https://github.com/karmicoperator/espresso
+cd espresso
+./start.command           # macOS
+windows\espresso.bat      # Windows
+```
+
+Both launchers fetch uv and Node when the machine has neither, reuse servers already
+running, step past taken ports, and rebuild the web app when a source file changed.
+`scripts/package-mac.sh` builds the disk image and `scripts/package-windows.sh` the zip.
+With `ESPRESSO_SIGN_ID` and `ESPRESSO_NOTARY_PROFILE` set, the disk image is signed with a
+Developer ID and notarized, and the approval step on first open goes away.
+
+## What a paper becomes
+
+A build takes two to four minutes: two model calls, run side by side. The page has:
 
 - A bottom line: the question, the answer, and the one figure that is the finding, named
   by the planner and verified by the gate. Green when the treatment did better, red when
@@ -41,8 +94,9 @@ Paste a PubMed or PMC link, a DOI or a PMID, or drop a PDF. Two to four minutes 
   prints its numbers and shares its terms, or marked as untraced. Click a sentence and the
   paper opens at it, highlighted: in the PDF when one is stored, else in the paper's text.
 - Charts from a fixed catalogue (`stat`, `bars`, `forest`, `line`, `flow`, `diagram`), each
-  with one layout and hard limits. As the sentence that states a value scrolls into view,
-  its mark lights. Every value shows the paper's sentence on hover.
+  with one layout and hard limits. The model fills them and never touches layout, and every
+  built page is checked for overlapping text. As the sentence that states a value scrolls
+  into view, its mark lights. Every value shows the paper's sentence on hover.
 - The primary outcome as a hundred people, when the paper prints it as a rate per arm,
   with number needed to treat worked out from those two numbers and marked as derived.
 - The paper's own figures where a chart could not be rebuilt from printed numbers.
@@ -65,36 +119,6 @@ five false alarms, so it stays in the data and off the page. And the regex that 
 the bottom line's key figure lit "95%" in "95% CI"; it was replaced by a figure the
 planner names and the gate verifies. `docs/FINDINGS.md` keeps this kind of record.
 
-## Getting it
-
-macOS: download `espresso-macOS.dmg` from the latest release, open it, drag espresso onto
-Applications. The app has no Apple Developer ID signature yet, so the first open stops
-with "Apple could not verify espresso". Open System Settings, Privacy & Security, scroll
-to that message and click Open Anyway; macOS asks for your password once. First run
-fetches `uv` and Node into `~/Library/Application Support/espresso`, builds, and opens the
-browser on a library of nine papers. Then Settings, to pick a model.
-
-Windows: download `espresso-windows.zip` from the latest release, unzip, double-click
-`Start espresso.bat`. Windows may say the publisher could not be verified: More info, Run
-anyway. Same first run, into `%LOCALAPPDATA%\espresso`. Not yet run on a Windows
-machine; `logs\setup.log` says which step failed if one does.
-
-From a clone: `./start.command` on macOS or the Windows launcher above. Both fetch `uv`
-and Node when the machine has neither, reuse servers already running, step past taken
-ports, and rebuild the web app when a source file changed. `scripts/package-windows.sh`
-builds the Windows zip and `scripts/package-mac.sh` the disk image; with `ESPRESSO_SIGN_ID` and `ESPRESSO_NOTARY_PROFILE` set it signs and
-notarizes it, and the first-open step goes away.
-
-Models: a signed-in Claude Code session (no key), or a key from Anthropic, OpenAI or any
-OpenAI-compatible endpoint, Azure, DeepSeek, Kimi, Qwen or GLM. Settings tests the model
-with one small call. DeepSeek and Qwen refuse requests over 8k output tokens; the app
-caps them. Nothing else is asked for.
-
-Browser extension: `extension/` adds a button for Chrome, Edge, Brave and Firefox
-(Safari via Xcode's converter). One click on a paper's page builds it and hands the app
-the PDF the page offers, fetched with your own session. Publishers block programs, not
-people; this is how a PMC paper gets its PDF.
-
 ## Where the paper comes from
 
 PubMed Central's JATS XML, which gives paragraph and table-cell locators. A PDF gives
@@ -112,17 +136,20 @@ backend/    FastAPI. ingestion/ (JATS, PDF, PDF fetch), agents/ (blocks, planner
 frontend/   Next.js reader. ChartFigure.tsx draws every block; PaperView.tsx opens the
             paper (PDF.js or text) at a sentence.
 extension/  WebExtension, Manifest V3.
-windows/    PowerShell launcher.   scripts/   launchers, bootstrap, macOS packager.
-backend/examples/   the shipped library (explainers, source text, figures); seeded into
-                    backend/data/ on first start, which is not in git.
+windows/    PowerShell launcher.
+scripts/    launchers, bootstrap, the two packagers (mac/ holds the disk image's parts),
+            and the generators for the logo and the README header.
+backend/examples/   the shipped library (explainers, source text, figures) with its
+                    licences; seeded into backend/data/ on first start, which is not in git.
 docs/FINDINGS.md    what was tried, what failed, and why.
 ```
 
 ## Status
 
-117 backend tests; ruff, tsc and eslint clean. Limits, each one observed: a paper neither in PMC nor available to you as a PDF cannot be built; a PDF build cannot
-cite table cells; the anchoring cannot judge a paraphrase that keeps the numbers and the
-terms and changes the meaning, which is why the paper is one click away.
+117 backend tests; ruff, tsc and eslint clean. Limits, each one observed: a paper neither
+in PMC nor available to you as a PDF cannot be built; a PDF build cannot cite table cells;
+the anchoring cannot judge a paraphrase that keeps the numbers and the terms and changes
+the meaning, which is why the paper is one click away.
 
 ## Licence
 
