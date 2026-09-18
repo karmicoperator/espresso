@@ -128,3 +128,12 @@ def test_a_negative_printed_with_a_typographic_minus_verifies():
     assert numbers_in("treatment difference \u22128.7% (95% CI \u22129.42 to \u22127.88)") == [-8.7, 95.0, -9.42, -7.88]
     assert _value_in_quote(-8.7, "treatment difference \u22128.7%")
     assert not _value_in_quote(8.7, "treatment difference \u22128.7%")
+
+
+def test_a_dash_between_two_numbers_is_a_range_not_a_minus():
+    # An en dash folds to "-"; between digits it separates interval bounds, and reading
+    # "0.89" as "-0.89" dropped every confidence interval on SPRINT.
+    from agents.verify import numbers_in
+    assert numbers_in("0.75 (0.64\u20130.89)") == [0.75, 0.64, 0.89]
+    assert numbers_in("(\u221211.56 to \u221210.66)") == [-11.56, -10.66]
+    assert numbers_in("a 5-year follow-up of \u22128.7%") == [5, -8.7]

@@ -37,7 +37,9 @@ logger = logging.getLogger(__name__)
 _DASHES = dict.fromkeys(map(ord, "‐‑‒–—―−"), "-")
 _QUOTES = {ord("‘"): "'", ord("’"): "'", ord("“"): '"', ord("”"): '"'}
 _SPACES = dict.fromkeys(map(ord, "      "), " ")
-_NUM = re.compile(r"-?\d[\d,]*\.?\d*")
+# A sign counts only when it does not follow a digit: after the dash fold, "0.64-0.89"
+# is a range with two positive bounds, "(-11.56 to -10.66)" two negatives.
+_NUM = re.compile(r"(?:(?<!\d)-)?\d[\d,]*\.?\d*")
 
 
 def normalise(text: str) -> str:
