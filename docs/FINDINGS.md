@@ -704,7 +704,7 @@ not appear" meant re-running a five-minute extraction.
 
 Three ways in, all idempotent, all reusing whatever is already listening:
 
-- **`espresso.app`**, from `espresso.dmg`: drag it onto Applications, double-click. First run
+- **`espresso.app`**, from `espresso-macOS.dmg`: drag it onto Applications, double-click. First run
   copies the source into `~/Library/Application Support/espresso`, fetches `uv` and Node if
   they are missing, then runs `start.command` with no Terminal. Its log is `app.log` there.
 - **`start.command`** — the same from Terminal, with live output and Ctrl-C to stop. Better

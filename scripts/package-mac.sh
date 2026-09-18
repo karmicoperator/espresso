@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build dist/espresso.dmg, the download for a person who will never open Terminal: open it,
+# Build dist/espresso-macOS.dmg, the download for a person who will never open Terminal: open it,
 # drag espresso onto Applications, double-click.
 #
 # The app carries the source (git HEAD, no data), the logo as its icon, a small compiled
@@ -27,13 +27,13 @@ DIST="$REPO/dist"
 # bundle that carries any. Only the finished disk image is copied into dist/.
 WORK=$(mktemp -d); trap 'rm -rf "$WORK"' EXIT
 APP="$WORK/espresso.app"
-DMG="$WORK/espresso.dmg"
+DMG="$WORK/espresso-macOS.dmg"
 VERSION=$(git rev-parse --short HEAD)
 SIGN_ID=${ESPRESSO_SIGN_ID:-}
 NOTARY=${ESPRESSO_NOTARY_PROFILE:-}
 command -v uv >/dev/null || { echo "uv is needed to build the disk image: https://docs.astral.sh/uv/" >&2; exit 1; }
 
-rm -rf "$DIST/espresso.app" "$DIST/espresso.dmg" "$DIST/espresso-mac.zip"
+rm -rf "$DIST/espresso.app" "$DIST/espresso.dmg" "$DIST/espresso-mac.zip" "$DIST/espresso-macOS.dmg"  # old names too
 mkdir -p "$DIST" "$APP/Contents/MacOS" "$APP/Contents/Resources/repo"
 # Source: the tracked files as they are in the working tree, minus the data. A release
 # is built from a clean checkout, where that is HEAD; a test build carries staged work.
@@ -155,9 +155,9 @@ if [ -n "$SIGN_ID" ]; then
   if [ "$NOTARIZED" = 1 ]; then notarize "$DMG"; xcrun stapler staple "$DMG"; fi
 fi
 hdiutil verify -quiet "$DMG"
-cp "$DMG" "$DIST/espresso.dmg"
+cp "$DMG" "$DIST/espresso-macOS.dmg"
 
 if [ "$NOTARIZED" = 1 ]; then TRUST="signed and notarized"
 elif [ -n "$SIGN_ID" ]; then TRUST="signed, not notarized"
 else TRUST="ad hoc signature, first open needs approval"; fi
-echo "built $DIST/espresso.dmg ($VERSION), $(du -sh "$DMG" | cut -f1), $TRUST"
+echo "built $DIST/espresso-macOS.dmg ($VERSION), $(du -sh "$DMG" | cut -f1), $TRUST"

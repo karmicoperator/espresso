@@ -1,4 +1,4 @@
-# dmgbuild layout for espresso.dmg: the app on the left, Applications on the right, an arrow
+# dmgbuild layout for espresso-macOS.dmg: the app on the left, Applications on the right, an arrow
 # between them on the background. Paths arrive from package-mac.sh through -D.
 import os.path
 

@@ -67,7 +67,7 @@ planner names and the gate verifies. `docs/FINDINGS.md` keeps this kind of recor
 
 ## Getting it
 
-macOS: download `espresso.dmg` from the latest release, open it, drag espresso onto
+macOS: download `espresso-macOS.dmg` from the latest release, open it, drag espresso onto
 Applications. The app has no Apple Developer ID signature yet, so the first open stops
 with "Apple could not verify espresso". Open System Settings, Privacy & Security, scroll
 to that message and click Open Anyway; macOS asks for your password once. First run
