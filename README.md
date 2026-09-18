@@ -67,10 +67,12 @@ planner names and the gate verifies. `docs/FINDINGS.md` keeps this kind of recor
 
 ## Getting it
 
-macOS: download `espresso-mac.zip` from the latest release, unzip, move the app to
-Applications, right-click, Open (the bundle is unsigned, so the first open asks). First
-run fetches `uv` and Node into `~/Library/Application Support/espresso`, builds, and
-opens the browser on a library of twenty papers. Then Settings, to pick a model.
+macOS: download `espresso.dmg` from the latest release, open it, drag espresso onto
+Applications. The app has no Apple Developer ID signature yet, so the first open stops
+with "Apple could not verify espresso". Open System Settings, Privacy & Security, scroll
+to that message and click Open Anyway; macOS asks for your password once. First run
+fetches `uv` and Node into `~/Library/Application Support/espresso`, builds, and opens the
+browser on a library of nine papers. Then Settings, to pick a model.
 
 Windows: download the source, double-click `windows\espresso.bat`. Same first run,
 into `%LOCALAPPDATA%\espresso`. Not yet run on a Windows machine; `logs\setup.log`
@@ -78,7 +80,9 @@ says which step failed if one does.
 
 From a clone: `./start.command` on macOS or the Windows launcher above. Both fetch `uv`
 and Node when the machine has neither, reuse servers already running, step past taken
-ports, and rebuild the web app when a source file changed.
+ports, and rebuild the web app when a source file changed. `scripts/package-mac.sh` builds
+the disk image; with `ESPRESSO_SIGN_ID` and `ESPRESSO_NOTARY_PROFILE` set it signs and
+notarizes it, and the first-open step goes away.
 
 Models: a signed-in Claude Code session (no key), or a key from Anthropic, OpenAI or any
 OpenAI-compatible endpoint, Azure, DeepSeek, Kimi, Qwen or GLM. Settings tests the model

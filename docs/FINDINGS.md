@@ -582,7 +582,7 @@ for every Node dev server and 8000 for every Python one. With `python3 -m http.s
 both, the app reported "already running" and would have opened the browser onto a stranger's
 directory listing.
 
-Identify the service, do not just knock: health carries `"app": "paperinfive"`. And step past
+Identify the service, do not just knock: health carries `"app": "espresso"`. And step past
 an occupied port rather than adopting it. Scan order matters — look for **our** instance
 across the whole span first, then for a free port, or a second copy starts on the free base
 port while the first keeps running.
@@ -652,6 +652,29 @@ fire handlers.
 
 ---
 
+## 26. A download macOS will not open is not an installer
+
+The first Mac build was a zip holding an app whose executable was a bash script, unsigned.
+Downloaded through a browser it is quarantined, and Gatekeeper answers "no usable
+signature". The README said right-click, Open; macOS 15 removed that way round. What is
+left is System Settings, Privacy & Security, Open Anyway, once, with a password.
+
+Only a Developer ID signature plus Apple's notarization removes the prompt, and both need
+the paid developer programme. So the build does what it can without one and is ready for it:
+
+- a disk image with the app, an Applications link, and the one-time step written on the
+  window's background, since that is where the person is looking;
+- a small compiled executable in `Contents/MacOS` that hands over to the script, because a
+  Mach-O binary takes a hardened-runtime signature and notarizes where a script is shakier;
+- an ad hoc signature, so the bundle is sealed and a damaged copy is caught;
+- signing, notarization and stapling of app and image behind `ESPRESSO_SIGN_ID` and
+  `ESPRESSO_NOTARY_PROFILE`, off until they are set.
+
+One trap on the way: codesign fails with "resource fork, Finder information, or similar
+detritus not allowed" when the bundle sits in an iCloud-synced folder, and `xattr -cr` does
+not help because the file provider puts the attributes back. The packager assembles and
+signs in a temporary folder and copies only the finished image out.
+
 # From the first build, which rendered video
 
 Kept because the lessons outlived the code.
@@ -681,8 +704,9 @@ not appear" meant re-running a five-minute extraction.
 
 Three ways in, all idempotent, all reusing whatever is already listening:
 
-- **`PaperInFive.app`** — double-click, or keep it in the Dock. Starts what is down, opens the
-  browser, and if everything is already up offers Open or Stop. Failures surface as dialogs.
+- **`espresso.app`**, from `espresso.dmg`: drag it onto Applications, double-click. First run
+  copies the source into `~/Library/Application Support/espresso`, fetches `uv` and Node if
+  they are missing, then runs `start.command` with no Terminal. Its log is `app.log` there.
 - **`start.command`** — the same from Terminal, with live output and Ctrl-C to stop. Better
   when something is wrong and you want to watch it.
 - **A PDF you downloaded** — "open the PDF" on the landing page, for the roughly quarter of

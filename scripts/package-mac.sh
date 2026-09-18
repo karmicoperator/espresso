@@ -1,28 +1,47 @@
 #!/bin/bash
-# Build dist/espresso.app and dist/espresso-mac.zip: the download for a person who
-# will never open Terminal.
+# Build dist/espresso.dmg, the download for a person who will never open Terminal: open it,
+# drag espresso onto Applications, double-click.
 #
-# The bundle carries the source (git HEAD, no data), the logo as an icon, and a launcher
-# that on first run copies the source to ~/Library/Application Support/espresso, fetches
-# uv and Node if the machine has neither, builds, starts, and opens the browser. Later runs
-# reuse everything. The bundle is not signed: the first open is right-click, Open.
+# The app carries the source (git HEAD, no data), the logo as its icon, a small compiled
+# executable (scripts/mac/stub.c) and the launcher script that executable runs. On first
+# run the launcher copies the source to ~/Library/Application Support/espresso, fetches uv
+# and Node if the machine has neither, builds, starts, and opens the browser. Later runs
+# reuse everything.
+#
+# Signing. macOS opens a downloaded app without asking only when it is signed with a
+# Developer ID certificate and notarized by Apple, which needs the paid Apple Developer
+# Program. With both of these set, the build is signed, notarized and stapled:
+#   ESPRESSO_SIGN_ID="Developer ID Application: Your Name (TEAMID)"
+#   ESPRESSO_NOTARY_PROFILE=espresso   # once: xcrun notarytool store-credentials espresso
+# Without them the app is signed ad hoc. It runs, but the first open needs one approval in
+# System Settings, Privacy & Security, and the disk image's window says so. (Right-click,
+# Open stopped working as a way round this in macOS 15.)
+#
+# Needs: Xcode command line tools (clang, codesign, hdiutil) and uv.
 set -eu
 cd "$(dirname "$0")/.."
 REPO=$PWD
 DIST="$REPO/dist"
-APP="$DIST/espresso.app"
+# The app is assembled, signed and imaged in a local temporary folder. A synced folder
+# (an iCloud Desktop, say) keeps adding metadata to files, and codesign will not seal a
+# bundle that carries any. Only the finished disk image is copied into dist/.
+WORK=$(mktemp -d); trap 'rm -rf "$WORK"' EXIT
+APP="$WORK/espresso.app"
+DMG="$WORK/espresso.dmg"
 VERSION=$(git rev-parse --short HEAD)
+SIGN_ID=${ESPRESSO_SIGN_ID:-}
+NOTARY=${ESPRESSO_NOTARY_PROFILE:-}
+command -v uv >/dev/null || { echo "uv is needed to build the disk image: https://docs.astral.sh/uv/" >&2; exit 1; }
 
-rm -rf "$APP" "$DIST/espresso-mac.zip"
-mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources/repo"
-
+rm -rf "$DIST/espresso.app" "$DIST/espresso.dmg" "$DIST/espresso-mac.zip"
+mkdir -p "$DIST" "$APP/Contents/MacOS" "$APP/Contents/Resources/repo"
 # Source: the tracked files as they are in the working tree, minus the data. A release
 # is built from a clean checkout, where that is HEAD; a test build carries staged work.
 git ls-files -z | tar --null -T - -cf - | tar -xf - -C "$APP/Contents/Resources/repo"
 echo "$VERSION" > "$APP/Contents/Resources/repo/VERSION"
 
 # Icon: the logo, as the sizes macOS wants.
-ICONSET="$DIST/espresso.iconset"
+ICONSET="$WORK/espresso.iconset"
 rm -rf "$ICONSET"; mkdir -p "$ICONSET"
 for s in 16 32 64 128 256 512; do
   sips -z $s $s frontend/public/icon.png --out "$ICONSET/icon_${s}x${s}.png" >/dev/null
@@ -48,9 +67,10 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 </dict></plist>
 PLIST
 
-cat > "$APP/Contents/MacOS/espresso" <<'LAUNCH'
+cat > "$APP/Contents/Resources/launcher.sh" <<'LAUNCH'
 #!/bin/bash
-# espresso, from the app bundle. No Terminal: everything goes to a log, the browser opens.
+# espresso, from the app bundle, run by Contents/MacOS/espresso. No Terminal: everything
+# goes to a log, the browser opens.
 set -u
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 PIF_HOME=${ESPRESSO_HOME:-"$HOME/Library/Application Support/espresso"}
@@ -85,7 +105,59 @@ ensure_node || { osascript -e 'display alert "espresso" message "Could not fetch
 cd "$REPO"
 exec ./start.command
 LAUNCH
-chmod +x "$APP/Contents/MacOS/espresso"
+chmod +x "$APP/Contents/Resources/launcher.sh"
 
-( cd "$DIST" && ditto -c -k --keepParent espresso.app espresso-mac.zip )
-echo "built $APP ($VERSION), $(du -sh "$DIST/espresso-mac.zip" | cut -f1) zipped"
+# The executable: a universal binary that hands over to launcher.sh.
+clang -arch arm64 -arch x86_64 -mmacosx-version-min=12.0 -Os -Wall -Wextra \
+  -o "$APP/Contents/MacOS/espresso" scripts/mac/stub.c
+
+# Apple's notary service answers in JSON; plutil reads it, so no extra tools are needed.
+notarize() {
+  local out status id
+  out=$(xcrun notarytool submit "$1" --keychain-profile "$NOTARY" --wait --output-format json)
+  status=$(printf '%s' "$out" | plutil -extract status raw -o - -)
+  id=$(printf '%s' "$out" | plutil -extract id raw -o - -)
+  if [ "$status" != "Accepted" ]; then
+    echo "notarization of $(basename "$1") returned $status; details: xcrun notarytool log $id --keychain-profile $NOTARY" >&2
+    exit 1
+  fi
+}
+
+# Files copied out of a working tree can carry Finder metadata in extended attributes, and
+# codesign refuses to seal a bundle that has any.
+xattr -cr "$APP"
+
+NOTARIZED=0
+if [ -n "$SIGN_ID" ]; then
+  codesign --force --options runtime --timestamp --sign "$SIGN_ID" "$APP"
+else
+  codesign --force --sign - "$APP"
+fi
+codesign --verify --strict "$APP"
+if [ -n "$SIGN_ID" ] && [ -n "$NOTARY" ]; then
+  ditto -c -k --keepParent "$APP" "$WORK/app.zip"
+  notarize "$WORK/app.zip"
+  xcrun stapler staple "$APP"
+  NOTARIZED=1
+elif [ -n "$SIGN_ID" ]; then
+  echo "note: signed but not notarized (ESPRESSO_NOTARY_PROFILE is unset); macOS will still ask on first open" >&2
+fi
+
+# The disk image: app on the left, Applications on the right, the background between them.
+if [ "$NOTARIZED" = 1 ]; then NOTE=""; else NOTE="--unsigned"; fi
+uv run --quiet --project backend python scripts/mac/dmg-background.py "$WORK" $NOTE >/dev/null
+tiffutil -cathidpicheck "$WORK/background.png" "$WORK/background@2x.png" -out "$WORK/background.tiff" 2>/dev/null
+uvx --quiet --from 'dmgbuild==1.6.7' dmgbuild -s scripts/mac/dmg-settings.py \
+  -D app="$APP" -D volicon="$APP/Contents/Resources/espresso.icns" -D background="$WORK/background.tiff" \
+  espresso "$DMG" >/dev/null
+if [ -n "$SIGN_ID" ]; then
+  codesign --force --timestamp --sign "$SIGN_ID" "$DMG"
+  if [ "$NOTARIZED" = 1 ]; then notarize "$DMG"; xcrun stapler staple "$DMG"; fi
+fi
+hdiutil verify -quiet "$DMG"
+cp "$DMG" "$DIST/espresso.dmg"
+
+if [ "$NOTARIZED" = 1 ]; then TRUST="signed and notarized"
+elif [ -n "$SIGN_ID" ]; then TRUST="signed, not notarized"
+else TRUST="ad hoc signature, first open needs approval"; fi
+echo "built $DIST/espresso.dmg ($VERSION), $(du -sh "$DMG" | cut -f1), $TRUST"
