@@ -182,6 +182,10 @@ export default function Home() {
         </div>
       )}
 
+      {/* The cup above the word: the logo is the brand, the word is its name. A plain img:
+          the file is 37 KB and already the size it is shown at. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/icon.png" alt="" width={96} height={96} className="mb-5 h-24 w-24 rounded-[22px] shadow-[0_18px_50px_rgba(0,0,0,0.55)]" />
       <h1 className="text-6xl font-semibold tracking-tight text-[#e8e8e8] sm:text-7xl">
         espresso
       </h1>
