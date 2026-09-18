@@ -198,17 +198,23 @@ export default function Home() {
         </div>
       </form>
 
-      <p className="mt-3 text-xs text-white/25">
-        PubMed or PMC links, a DOI, or a bare PMID. The full text is read from PubMed
-        Central.
-      </p>
+      {/* How to start, in two sentences a reader can take in at a glance: what to paste,
+          and what to do when the paper is not in PubMed Central. The key words are
+          brighter than the sentence; the one action is a pill. */}
+      <div className="mt-6 max-w-xl space-y-2.5 text-[15px] leading-relaxed text-white/55">
+        <p>
+          Paste a <span className="text-[#e8e8e8]">PubMed</span> or <span className="text-[#e8e8e8]">PMC</span> link,
+          a <span className="text-[#e8e8e8]">DOI</span> or a <span className="text-[#e8e8e8]">PMID</span>.
+          The full text is read from PubMed Central.
+        </p>
+        <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1.5">
+          <span>Not in PubMed Central?</span>
+          <PdfPicker onPick={submitPdf} className="pill pill-strong">Open a PDF</PdfPicker>
+          <span>or drop one anywhere on this page.</span>
+        </p>
+      </div>
 
       <ProviderLine health={health} />
-
-      <p className="mt-4 text-xs text-white/30">
-        Not in PubMed Central? <PdfPicker onPick={submitPdf}>open the PDF</PdfPicker> or
-        drop one anywhere on this page, and it will be built from that instead.
-      </p>
 
       <div className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs">
         <span className="text-white/25">Try these:</span>
@@ -304,7 +310,7 @@ function ProviderLine({ health }: { health: Health | null }) {
   if (broken) {
     const why = raw.includes("cannot build: ") ? raw.split("cannot build: ")[1].replace(/\)$/, "") : "No model is set up yet";
     return (
-      <p className="mt-3 max-w-xl text-xs text-[#d9a441]">
+      <p className="mt-4 max-w-xl text-[13px] text-[#d9a441]">
         {why}. Papers already built still open.{" "}
         <Link href="/settings" className="underline decoration-[#d9a441]/40 underline-offset-4 hover:decoration-[#d9a441]">
           Set up a model
@@ -313,11 +319,11 @@ function ProviderLine({ health }: { health: Health | null }) {
     );
   }
   return (
-    <p className="mt-3 text-xs text-white/30">
-      Model: {PROVIDER_LABELS[name] ?? name}.{" "}
-      <Link href="/settings" className="text-white/45 underline decoration-white/20 underline-offset-4 hover:text-white">
-        Change
-      </Link>
+    <p className="mt-4 flex items-center justify-center gap-2 text-[13px] text-white/40">
+      <span>
+        Model: <span className="text-white/70">{PROVIDER_LABELS[name] ?? name}</span>
+      </span>
+      <Link href="/settings" className="pill">Change</Link>
     </p>
   );
 }
