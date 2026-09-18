@@ -18,75 +18,137 @@
   "published": "2025-05-17 00:00:00",
   "doi": "10.1093/bjsopen/zraf034",
   "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12084677/",
-  "question": "",
-  "bottom_line": null,
+  "question": "Which cancers can be treated with liver transplantation, and how well do carefully selected patients do?",
+  "bottom_line": {
+    "question": "Which cancers can be treated with liver transplantation, and how well do carefully selected patients do?",
+    "answer": "Liver transplantation is now an option for selected patients with several liver cancers. In the only randomised trial, for unresectable colorectal liver metastases, 5-year survival was 56.6% with transplant plus chemotherapy versus 12.6% with chemotherapy alone.",
+    "provenance": {
+      "locator": "zraf034-s2.1/p5",
+      "kind": "paragraph",
+      "quote": "After a median follow-up of 59.3 months, the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group compared with 12.6% in the chemotherapy group.",
+      "section": "Colorectal cancer liver metastases"
+    },
+    "effect": "56.6%",
+    "verdict": "better"
+  },
   "sections": [
     {
       "id": "PMC12084677-section-1",
-      "title": "From Contraindication to Cure: The Rise of Transplant Oncology",
-      "markdown": "For most of transplant surgery's history, cancer was a reason not to transplant. Early attempts to cure liver tumors by replacing the whole organ failed badly, and the field retreated to treating end-stage liver disease. That verdict is being overturned. A growing body of evidence shows that for carefully chosen patients with liver-confined cancer, removing the entire diseased organ and replacing it with a healthy one produces survival that no chemotherapy regimen can match. This review pulls together the current state of that field, called **transplant oncology**, across six tumor types.\n\n## The four questions behind every decision\n\nBefore any of the tumor-specific evidence makes sense, four concepts have to be separated, because clinicians often blur them.\n\n**Resectability** asks whether a surgeon can cut the tumor out and leave enough working liver behind. The definition is slippery and depends heavily on local expertise. Techniques that grow the future liver remnant before surgery (portal vein embolization, staged hepatectomy with portal vein ligation, hepatic vein deprivation) shift the boundary, and each center applies its own thresholds. Extreme operations, where the liver is removed, worked on outside the body, and reimplanted, exist only at a handful of institutions.\n\n**Operability** is about the patient rather than the tumor: can this person physiologically survive the intervention?\n\n**Transplantability** is an administrative and ethical judgment. It covers national or institutional listing rules, the risk that a patient will drop off the waiting list (through death or tumor progression), expected survival after transplant, and whether organs are available at all. A donor liver given to a cancer patient is a liver not given to someone else, which is why the field carries an ethical weight that ordinary cancer surgery does not.\n\n**Curability** means different things at different scales. For one patient it means never seeing the disease again, often measured as five-year recurrence-free survival. At population level it means something statistical, such as a group's mortality rate falling back to that of the general population.\n\nTying these together is the central metric of the field:\n\ntransplant benefit = survival after liver transplant minus survival with the best available alternative treatment\n\nThis is the number that matters when deciding whether an organ should go to a cancer patient. It is not enough that transplanted patients do well; they have to do better than they would have done with chemotherapy, ablation, or resection. The International Liver Transplantation Society consensus guidelines put transplant benefit at the center of how selection criteria should be built.\n\nBecause donor organs are scarce and many of these cancers need timed neoadjuvant treatment before surgery, **living donor liver transplantation** (LDLT) has become central to transplant oncology. It removes the waiting-list lottery and lets the operation be scheduled. It also means a healthy person undergoes major surgery, so the risk to the donor has to be weighed against the benefit to the recipient, a balance the field calls double equipoise.",
+      "title": "Transplant as a Cancer Treatment",
+      "markdown": "## Cancer as a reason to replace a liver\n\nLiver transplantation is usually thought of as a fix for a failing liver. For a growing group of patients it is a cancer treatment: surgeons remove the whole liver, tumours included, and put in a healthy one. This field is called **transplant oncology**, the treatment of cancer through transplant medicine and surgery. The review collects the current evidence for each cancer where transplant is used, the technical problems involved, and how centres cope with a shortage of donor livers. It is written for clinicians in specialist centres.\n\nFour judgements shape any decision. Resectability asks whether the tumour can be cut out while leaving enough liver behind. It is less objective than it sounds, because techniques that make the remaining liver grow before surgery are applied under different rules at different centres. Operability asks whether the patient is fit enough to survive surgery. Curability asks whether they will stay free of disease, often judged as no recurrence at 5 years. Transplantability asks whether they meet the rules for the waiting list. Those rules weigh the chance of dropping off the list, the risk of death after transplant, and how many organs are available. Donor livers are scarce, so giving one to a patient whose cancer may return raises an ethical question about allocation.\n\nThe review's main yardstick is **transplant benefit**, the survival a transplant adds over the best non-transplant option:\n\ntransplant benefit = survival after transplant - survival with the best alternative treatment\n\nThe International Liver Transplantation Society (ILTS) consensus says this should be one of the main factors in deciding who qualifies.\n\nLiving donor liver transplantation (LDLT), in which a healthy person gives part of their liver, has become important in this field. It bypasses the waiting list and lets surgeons time the operation around chemotherapy. The cost is the risk to a healthy donor.",
       "chart_ids": [],
       "figure_ids": []
     },
     {
       "id": "PMC12084677-section-2",
-      "title": "Colorectal Liver Metastases: The Level 1 Evidence Case",
-      "markdown": "## Colorectal cancer that has spread to the liver\n\nAbout half of all colorectal cancer patients develop metastases, and the liver is the organ most often hit. Surgical removal is the only established cure, and better chemotherapy plus liver-growing techniques have expanded who qualifies. Even so, 75 to 80 percent of patients with colorectal liver metastases have no option beyond palliative chemotherapy, and their five-year survival sits around 10 percent.\n\nThe Norwegian **SECA-I** trial, published in 2013, was the proof-of-concept study. Patients with unresectable liver-only metastases received transplants. Overall survival was 95 percent at one year, 68 percent at three years, and 60 percent at five. Disease-free survival looked terrible by comparison, only 35 percent at one year, but the recurrences told a different story than the number suggested: most were slow-growing lung metastases that could themselves be removed with curative intent. Patients recurred and still lived a long time.\n\nSECA-I identified four predictors of poor outcome: maximum tumor diameter above 5.5 cm, less than two years between primary cancer surgery and transplant, CEA above 80 micrograms per liter, and tumor progression on chemotherapy at the time of transplant. One point for each gives the **Oslo score**, a simple risk stratifier running from 0 to 4. Ten-year follow-up published in 2022 showed that patients with an Oslo score of 0 or 1 had actual overall survival of 75 percent at five years and 50 percent at ten.\n\nThe follow-up **SECA-II** trial tightened entry criteria along those lines. Overall survival reached 100 percent at one year, 83 percent at three, and 83 percent at five. Disease-free survival again looked worse (53, 44, and 35 percent at one, two, and three years), and again roughly 70 percent of recurrences were in the lung and mostly resectable. Survival after recurrence was 100 percent at one year and 73 percent at four. The lesson repeats: for this indication, disease-free survival is a poor measure of whether the treatment worked.\n\nSelection extends beyond the Oslo score. Right-sided primary tumors do worse after chemotherapy, resection, and transplant alike. BRAF mutation and undifferentiated or signet-ring histology carry poor prognosis. FDG PET/CT is used to rule out disease outside the liver, and a **metabolic tumor volume** below 70 cubic centimeters on pretransplant PET/CT strongly predicts good outcomes, so it belongs in routine workup.\n\nThe decisive study is **TRANSMET**, a randomized trial comparing transplant plus chemotherapy against chemotherapy alone in unresectable colorectal liver metastases. The patients were not early cases: median tumor count was 20 in both arms, and the transplant arm waited a median of 15.9 months from diagnosis to randomization. Nearly all transplanted patients had a low Oslo score. After a median follow-up of about five years, five-year survival by intention to treat was 56.6 percent with transplant versus 12.6 percent with chemotherapy. Among patients who actually received the assigned treatment, the figures were 73.3 percent and 9.3 percent. Colorectal liver metastasis is now the only transplant oncology indication backed by level 1 evidence.\n\nThe bottleneck is organs. Many programs use living donors, with results in line with deceased-donor series, though systematic LDLT programs are mostly Asian and Western uptake is thin. Split-liver transplantation could add grafts, but allocation policies built around MELD priority limit how many.\n\nA more inventive answer is **RAPID** (Resection And Partial Liver Segment 2/3 Transplantation With Delayed Total Hepatectomy), introduced in 2015. The surgeon removes the patient's left liver and implants a small segment 2+3 graft alongside the remaining diseased right liver. Portal blood flow is redirected into the small graft under pressure guidance, which drives it to grow fast. Graft size is checked weekly, and the diseased remainder comes out in a second operation, typically two to three weeks later. A seven-center European study found the approach safe, with good regeneration and second-stage hepatectomy at a median of two weeks. RAPID works with split deceased-donor livers and with living donors, and the living-donor version is attractive because a smaller graft means less risk to the donor. Colorectal metastasis patients usually have healthy livers without portal hypertension, so they tolerate smaller grafts than typical transplant candidates with cirrhosis. Small grafts are therefore a plausible route to meeting the demand this indication will create.",
+      "title": "Colorectal Metastases and Bile Duct Cancers",
+      "markdown": "## Colorectal cancer that has spread to the liver\n\nAbout half of people with colorectal cancer develop metastases, most often in the liver. Surgically removing these colorectal liver metastases (CRLM) is the only cure. Even so, 75 to 80% of patients cannot have surgery and receive palliative chemotherapy instead, and only about 10% of them are alive at 5 years.\n\nThe SECA-I trial (2013) was the first controlled test of transplant for CRLM that could not be removed surgically. Estimated overall survival (OS) was 95% at 1 year, 68% at 3 years and 60% at 5 years. Only 35% of patients were cancer-free at 1 year. Most recurrences, though, were slow-growing lung metastases that surgeons could remove, so patients lived long anyway.\n\nSECA-I identified four features linked to worse survival: a largest tumour over 5.5 cm, less than 2 years since the bowel cancer surgery, a CEA blood marker above 80 micrograms per litre, and cancer that kept growing during chemotherapy. Each feature scores one point in the **Oslo score**:\n\nOslo score = number of these four risk factors present (0 to 4)\n\nTen-year data published in 2022 showed that patients scoring 0 or 1 had actual survival of 75% at 5 years and 50% at 10 years. The follow-up SECA-II trial used stricter entry rules and reached estimated OS of 100%, 83% and 83% at 1, 3 and 5 years. Disease-free survival (DFS) was still only 35% at 3 years, yet survival after recurrence was 73% at 4 years. For this cancer, DFS is a poor measure of whether transplant works, because recurrence is often treatable.\n\nThe Oslo score alone is not enough to pick candidates. Other warning signs are a primary tumour on the right side of the colon, a BRAF mutation, and undifferentiated or signet ring cell tumours. A PET/CT scan is used to rule out spread outside the liver. A metabolic tumour volume under 70 cubic centimetres on that scan strongly predicts good survival, and the authors recommend measuring it routinely.\n\nThe strongest evidence comes from TransMet, a randomized trial of transplant plus chemotherapy against chemotherapy alone in patients with heavy disease (a median of 20 metastases). At 5 years:\n\n- counting every randomized patient (intention to treat): 56.6% alive with transplant vs 12.6% with chemotherapy\n- counting only those who received their assigned treatment (per protocol): 73.3% vs 9.3%\n\nThis makes CRLM the only transplant oncology indication supported by level 1 evidence, the highest grade.\n\nAs more centres adopt the approach, donor livers become the bottleneck. Living donation is common in Asia and rarer in the West. The RAPID procedure, introduced in 2015, stretches the supply. Surgeons remove the left side of the patient's liver, implant a small piece of donor liver (segments 2 and 3), and divert portal blood flow to the graft so it grows quickly. Once the graft is big enough, usually 2 to 3 weeks later, they remove the rest of the diseased liver. A study across seven European centres found RAPID safe, with the second operation at a median of 2 weeks. The graft can come from a split deceased donor liver or from a living donor. With a living donor, the donor gives a smaller piece (lower risk) while the recipient still gains a lot. This works because CRLM patients usually have otherwise healthy livers without portal hypertension, so they manage with smaller grafts than typical transplant patients.\n\n## Hilar cholangiocarcinoma\n\nHilar cholangiocarcinoma (hCCA) is a bile duct cancer at the point where the ducts leave the liver. Thomas Starzl first transplanted it in 1963. Of the eight patients his group treated up to the mid-1980s, five survived past 2 months, and four of those five died of recurrence. The approach was nearly abandoned. The authors blame poor patient selection and the lack of strict chemotherapy before transplant.\n\nThe Mayo Clinic protocol (2000) changed this by giving chemotherapy with radiation before transplant. Of 11 transplanted patients, only one recurred, and median survival was 44 months. A 2004 follow-up of 28 patients reported 82% survival at 5 years and a 14.2% recurrence rate.\n\n### Who qualifies\n\nThe Mayo rules were later adopted by the US allocation body UNOS. Under them:\n\n- the tumour must be unresectable and diagnosed by brush cytology from the duct\n- it must be under 3 cm and/or cause a malignant-looking narrowing with a CA19-9 marker above 100 U/ml\n- the patient must not have had prior surgical exploration or a needle biopsy through the skin\n\nBrush samples often miss cancer cells, and adding a genetic test (FISH) improves accuracy. Lymph nodes are biopsied by endoscopic ultrasound before treatment starts, because any spread rules out transplant.\n\n### Treatment before transplant\n\nChemoradiation before transplant (neoadjuvant therapy) shrinks the tumour and lowers recurrence. It also tests tumour biology: cancers that progress despite treatment are too aggressive to benefit. The original scheme gave external radiation with 5-FU, then radiation inside the bile duct, then capecitabine until transplant. Centres now differ in how they give radiation, and some use gemcitabine with cisplatin. Trials in advanced biliary cancer showed that adding the immunotherapy drugs durvalumab (2022) or pembrolizumab (2023) improves survival. Immunotherapy cannot be given after transplant because it would trigger rejection, so the authors think it reasonable to add it beforehand.\n\n### Surgery\n\nBefore listing, surgeons sample the lymph nodes at the entrance to the liver, often by keyhole or robotic surgery. About 28% of patients without primary sclerosing cholangitis (PSC, a chronic bile duct disease) turn out to have nodal or distant spread at this stage. Centres differ on when to do this staging operation, and no data show that timing affects outcome.",
       "chart_ids": [
-        "transmet-arms"
+        "seca-survival",
+        "transmet-survival"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC12084677-section-3",
-      "title": "Biliary and Neuroendocrine Indications",
-      "markdown": "## Hilar cholangiocarcinoma\n\nBile duct cancer at the liver hilum was one of Thomas Starzl's earliest transplant indications, starting in 1963. Of eight patients transplanted through the mid-1980s, five survived more than two months, and four of those five recurred and died of their tumors. The results effectively ended the practice for decades. In retrospect the failures came from poor patient selection and the absence of any structured pretransplant chemotherapy protocol.\n\nThe **Mayo protocol**, launched in 2000, changed that. Patients received combined 5-fluorouracil and radiation before transplant. The first report showed median survival of 44 months with one recurrence among 11 patients. A 2004 follow-up of 28 patients reported 82 percent five-year overall survival and a 14.2 percent recurrence rate.\n\nSelection under the Mayo protocol, adopted with modifications by UNOS, requires an unresectable tumor confirmed by brush cytology, or a malignant-appearing stricture with CA19-9 above 100 U/ml, with tumor size under 3 cm. Prior surgical exploration or percutaneous biopsy through the peritoneum disqualifies a patient, because of seeding risk. Getting the diagnosis is genuinely hard: brush cytology is insensitive, and adding fluorescence in situ hybridization to detect abnormal chromosome counts improves the yield. In practice a hilar mass causing biliary obstruction with atypical cells on cytology is often enough for a center to start therapy. Regional lymph nodes must be sampled by endoscopic ultrasound before chemoradiation begins, because any nodal or distant spread is an absolute bar to transplant.\n\n**Neoadjuvant therapy** does two jobs. It shrinks the tumor and reduces the chance of leftover disease, and it acts as a biological screening test: a tumor that progresses through treatment would not have benefited from a new liver. The original protocol combined high-dose external beam radiation with 5-FU over three weeks, then radiation delivered by catheter into the bile duct, then maintenance capecitabine until an organ became available. Centers vary widely in radiation dose and technique, some skip brachytherapy, and a few omit radiation altogether. Chemotherapy choices vary too, with gemcitabine plus cisplatin common based on the ABC-02 trial.\n\nImmunotherapy is an open question here. Adding durvalumab or pembrolizumab to gemcitabine-cisplatin improved survival in advanced biliary tract cancer in randomized trials. These drugs cannot be given after transplant, because checkpoint blockade in an immunosuppressed patient risks rejection and severe complications, which argues for using them before transplant if at all.\n\nBefore transplant, patients undergo full sampling of hilar and portal lymph nodes, often laparoscopically or robotically to minimize adhesions. Roughly 28 percent of patients without primary sclerosing cholangitis turn out to have positive nodes or metastases at this staging operation and are removed from consideration. Centers disagree on timing. Staging soon after neoadjuvant therapy gives cleaner tissue planes and faster listing decisions; staging closer to transplant adds a longer \"test of time\" that catches disease which developed during the wait. No data shows either timing changes outcomes.\n\nSurgically, the hard part is the irradiated hilum. Living donation gives a guaranteed, faster path to surgery, but the short vessels of a partial graft must be sewn to previously radiated recipient vessels. With deceased donors, surgeons can bypass the irradiated artery entirely using a conduit made from the donor's iliac artery, an option not available in living donation because third-party grafts are avoided. Biliary reconstruction is always a Roux-en-Y. Machine perfusion, by taking the pressure off cold storage time, will likely make more marginal deceased-donor grafts usable for these long operations.\n\nAfter transplant, vigilance centers on the vascular reconstructions. Early Mayo reports cited complication rates near 40 percent, including graft loss from delayed hepatic artery thrombosis; recent series report closer to 20 percent with fewer graft losses. High-volume centers report 90-day mortality below 5 percent in benchmark cases, comparable to other transplant indications. Daily Doppler ultrasound for the first three to seven days is recommended. Standard immunosuppression is used; mTOR inhibitor regimens have not shown clear benefit here. Adjuvant chemotherapy has no supporting evidence and is reserved for recurrence or worrying explant pathology. Surveillance mirrors post-resection practice: cross-sectional imaging and CA19-9 every three to four months for three years, then six-monthly to five years, with annual chest CT.\n\nThe honest picture of outcomes requires looking at dropout. Five-year survival in transplanted Mayo patients exceeds 65 percent and reaches 76 percent in the most selected series. Intention-to-treat survival, which counts everyone who started the protocol, is around 40 to 45 percent. A meta-analysis found dropout ranging from 26 to 86 percent across studies, most often from progression discovered at the staging operation. Median time to recurrence after transplant is about two years, with some as late as four or five. Recurrence risk rises with perineural or vascular invasion, high tumor grade, and nodal disease on the explant, and doubles with a positive distal bile duct margin. Patients whose cancer arose on a background of **primary sclerosing cholangitis** have half the recurrence risk of those with de novo tumors, probably because surveillance catches their cancers earlier and the biology is more favorable. For those patients, transplant is the treatment of choice.\n\n## Intrahepatic cholangiocarcinoma",
+      "title": "Neuroendocrine, Liver Cell and Vascular Tumours",
+      "markdown": "## Neuroendocrine tumour liver metastases\n\nNeuroendocrine tumours (NETs) are rare, about 0.5% of all cancers, and usually slow-growing. Most patients eventually develop liver metastases, often in both lobes. Removing as much tumour as possible prolongs life and eases hormone symptoms. When the spread is too diffuse to remove, transplant has been proposed as a cure.\n\nThe evidence comes mostly from registries and single centres. European registry data show 5-year survival of 47 to 70%. Patients transplanted after 2000 did better (59% at 5 years) than earlier patients (46%). The improvement came from better selection, as centres learned which features predict poor results: disease outside the liver, removing the primary tumour at the same time as the transplant, and vascular or nodal involvement.\n\nIn 2016 the Milan group reported 5-year and 10-year survival of 97% and 89%. Their criteria are now the standard in most programmes:\n\n- a low-grade tumour (Ki67 below 10%)\n- a primary tumour that drains into the portal vein and was fully removed beforehand\n- no more than half the liver involved\n- stable or responding disease for at least 6 months\n- age 55 or younger (later raised to 60)\n\nTransplant added an estimated 6.82 months of survival over 5 years and 38.43 months over 10 years.\n\nA 2021 comparison of patients within the Milan criteria found 10-year survival of 93% after transplant versus 75% after resection, and 10-year DFS of 52% versus 18%. A propensity-matched study, which pairs similar patients to reduce bias, found 10-year survival of 88.8% with transplant versus 22.4% with resection. European (ENETS) guidelines describe transplant as an option in highly selected, preferably young patients whose hormone symptoms resist medical therapy. It is still unclear how lutetium-177 radionuclide therapy fits in, either as an alternative to transplant or before it. The authors call for a prospective trial.\n\n## Hepatocellular carcinoma\n\nAbout 90% of hepatocellular carcinomas (HCC) arise in a damaged or cirrhotic liver. The causes include hepatitis B or C, alcohol, and metabolic fatty liver disease (MASLD). Unlike the other cancers in this review, HCC is driven by the diseased liver itself. It also tends to appear in several places at once: 50 to 60% of livers removed at transplant contain multiple tumours, and at least 30% of these were missed on scans. Transplant removes both the tumours and the organ that produced them. That is why it gives the best long-term results for HCC that is confined to the liver and has not invaded major vessels.\n\n### Early HCC\n\nThe Barcelona Clinic Liver Cancer (BCLC) system has guided HCC treatment for three decades. For very early tumours (a single tumour of 2 cm or less), ablation, which destroys the tumour with heat, works as well as surgery. For early tumours (up to three nodules of 3 cm or less), resection or ablation is offered to patients without significant portal hypertension or who cannot have a transplant. Transplant gives the best results, especially for patients within the size-based Milan or UCSF criteria.\n\nOne strategy is to resect first and transplant only if the cancer comes back (\"salvage\" transplant). It performs poorly, because only 33% of patients who recur actually get a curative transplant. For a single tumour up to 3 cm, resection matches transplant and beats ablation. For multiple tumours or tumours of 3 to 5 cm, transplant is probably best. If transplant is not possible, chemoembolization (TACE) combined with microwave ablation works better than either one alone.\n\n### Intermediate-stage HCC\n\nMost patients arrive with large or multiple tumours, and the MASLD epidemic has added more late-presenting, aggressive cases. Until 2022, the BCLC system offered these intermediate-stage (BCLC B) patients only non-curative therapy.\n\nIt turned out that well-selected patients beyond the Milan and UCSF limits survive about as well after transplant. Large series using expanded criteria (tumours up to 7.5 cm, up to three in number) report acceptable long-term results. Asian centres led this push because deceased donor livers are scarcer there, and patients would lose their chance while waiting. The focus moved away from tumour size and count, toward whether the cancer has spread outside the liver or into major vessels.\n\nWhat matters most is tumour biology, meaning how aggressively the cancer behaves. The markers used include:\n\n- blood levels of AFP and PIVKA-II, and how they change\n- how brightly tumours light up on PET scans\n- how the disease behaves over a waiting period (the \"test of time\")\n- inflammatory blood ratios and tumour grade\n\nSuccessful **downstaging** is itself a sign of favourable biology. It means shrinking the tumour with TACE, radioembolization (TARE) or radiotherapy until it meets the criteria.\n\nThis work led the 2022 BCLC update to recommend transplant for the first time in selected stage B patients, using extended criteria that include tumour size and AFP. The update also introduced \"treatment stage migration\", which lets doctors use another stage's treatment when the first-line option does not suit the patient.\n\nVitale and colleagues showed that transplant gives the largest benefit to patients with advanced cirrhosis and BCLC stage B or C HCC without spread outside the liver, because these patients lack good alternatives. Expanding the criteria lowers long-term survival by 10 to 15%, but results remain better than ablation or drug therapy. In the authors' own study, transplant added 42 months of survival over 5 years compared with TACE or TARE in patients at low risk of recurrence, and 25 months even in high-risk patients.\n\n### Tumour in the portal vein",
       "chart_ids": [
-        "seca-timeline"
+        "net-lt-vs-resection"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC12084677-section-4",
-      "title": "Primary Liver Tumors: Hepatocellular Carcinoma and Epithelioid Haemangioendothelioma",
-      "markdown": "## Hepatocellular carcinoma\n\nAbout 90 percent of hepatocellular carcinoma arises in a cirrhotic liver, whatever the cause. This makes it different from every other cancer in this review: the organ itself is the factory producing tumors. Explant pathology shows 50 to 60 percent of patients have multiple independent tumors, and at least 30 percent of those are invisible on pretransplant imaging. Removing the whole liver removes both the tumor and the tissue generating it, which is why transplant produces the best long-term results for liver-confined disease without major vascular invasion.\n\nFor **very early** disease (a single tumor 2 cm or smaller), radiofrequency or microwave ablation matches resection and transplant. For **early** disease under the Barcelona Clinic Liver Cancer system (up to three nodules of 3 cm or less with preserved liver function), resection or ablation is reasonable in patients without significant portal hypertension, but transplant gives the best curative results, particularly within the Milan or expanded UCSF criteria.\n\nOne tempting strategy is to resect first and transplant only if the cancer returns. The data argue against it: only about a third of patients who recur can actually get a curative transplant when analyzed by intention to treat. Upfront transplant produces better results in early disease. Within that band, a single tumor up to 3 cm does about as well with resection as with transplant and better than with ablation. Multiple tumors, or tumors between 3 and 5 cm, favor transplant, and when transplant is impossible the combination of chemoembolization plus microwave ablation beats either alone.\n\nThe harder question is **intermediate stage** disease, multifocal or large tumors without vascular invasion or spread outside the liver. Until the 2022 BCLC update these patients were sent to non-curative systemic therapy. Most patients actually present this way, and the rise of metabolic liver disease has increased late presentation with large, aggressive tumors.\n\nThe conventional Milan and UCSF criteria use only tumor size and number, and they turned out to be too restrictive. Patients outside them achieved comparable survival and recurrence rates when selected on tumor biology instead. Deceased-donor series of 31 to over 1500 patients have reported acceptable long-term survival with tumors up to 7.5 cm and up to three in number. The push came largely from Asia, where waiting for a deceased-donor organ often means losing the window entirely. The emphasis shifted from size and count to the absence of extrahepatic disease and gross vascular invasion.\n\nThe tools for reading **tumor biology** include alpha-fetoprotein and PIVKA-II (both absolute values and how they change), response to locoregional therapy, avidity on FDG-18 and FAPI PET, the waiting interval itself as a test of time, inflammatory markers such as the neutrophil-to-lymphocyte ratio, and tumor differentiation on histology. Successful **downstaging** with chemoembolization, radioembolization, or focused radiotherapy is itself a biological signal: a tumor that shrinks, drops its markers, and loses PET avidity is behaving well.\n\nThis work changed guidelines. The 2022 BCLC update gave transplant a place in intermediate-stage disease for selected patients under extended criteria incorporating size and AFP, and introduced **treatment stage migration**, which permits moving a patient to a different stage's treatment when the first-line option is not feasible.\n\nVitale and colleagues showed that the largest survival gain from transplant goes to patients with advanced cirrhosis and no extrahepatic disease, precisely because nothing else works for them. Expanding beyond Milan and UCSF does cost something, roughly 10 to 15 percent in long-term survival, but survival remains substantially better than ablation or systemic therapy in well-chosen cases. The review's authors report transplant benefit at five years of 42 months in patients classified as low recurrence risk and 25 months even in the high-risk group.\n\nThe most contested territory is **tumor thrombus in the portal vein**. Between 10 and 40 percent of patients present this way despite surveillance programs. Untreated, median survival runs two to six months and three-year survival is 5 percent. Tyrosine kinase inhibitors give median survival of 5 to 19 months with progression at about four months. Published series show that upfront living-donor transplant beats palliative or systemic therapy in patients with segmental thrombus (first- and second-order branches), low AFP, low PET avidity, and small tumors, and beats resection as well. The argument is that portal vein thrombus represents contiguous local spread rather than systemic disease, at least for a window of time. Downstaging the thrombus with radioembolization, stereotactic radiotherapy, or chemoembolization plus systemic therapy, then transplanting once inside institutional criteria, has produced five-year survival and recurrence-free survival above 50 percent. Grade matters: main portal vein (Vp4) thrombus, very high tumor markers, and large infiltrative tumors all warrant caution, and hepatic vein tumor thrombus behaves like systemic disease and is close to a contraindication.\n\n## Hepatic epithelioid haemangioendothelioma\n\nThis rare vascular liver tumor is transplanted infrequently, with five-year survival of 50 to 80 percent reported even in patients with lymph node or extrahepatic metastases and macrovascular invasion. Diagnosis used to be treacherous because the tumor resembles other vascular malignancies under the microscope. Two gene fusions found only in this disease, WWTR1-CAMTA1 and YAP1-TFE3, made diagnosis reliable. Biopsy is mandatory, mainly to exclude angiosarcoma, and extrahepatic disease is not an absolute contraindication.",
+      "title": "Anti-Rejection Drugs, Donor Livers and Follow-up",
+      "markdown": "## Do anti-rejection drugs help cancer return?\n\nTransplant patients need drugs to prevent rejection, and those drugs may weaken the body's defences against cancer. Most of the evidence comes from HCC.\n\nCalcineurin inhibitors (CNIs), namely cyclosporin and tacrolimus, are the backbone of most regimens. They appear to help tumours grow by raising growth signals such as VEGF. High blood levels (cyclosporin above 300 ng/ml, tacrolimus above 10 ng/ml) independently predict HCC recurrence. A CNI given alone carries more risk than a CNI combined with other drugs. With cyclosporin, the risk tracks the cumulative dose, especially in months 4 to 12 after transplant. With tacrolimus, the effect shows only in the first month, and the reason for the difference is unclear.\n\nmTOR inhibitors (sirolimus and everolimus) block a growth pathway and the formation of new tumour blood vessels. Compared with CNI regimens, they are linked to better survival and less recurrence. Adding sirolimus to a CNI improved recurrence-free survival for up to 5 years. In the only randomized trial, the benefit lasted up to 5 years, was largest in low-risk patients, and was greatest with sirolimus alone. Steroids, azathioprine and antibody induction drugs show no link to recurrence. Most of this evidence is retrospective, and the one trial had few patients on sirolimus alone. The authors therefore say firm recommendations must wait for prospective trials.\n\n## Organ shortage and machine perfusion\n\nAt some centres, up to 20% of patients die on the waiting list. Donors are older and more often diabetic or obese, and cancer indications add to demand. Centres increasingly use two kinds of higher-risk liver: livers from donors after circulatory death (DCD) and \"marginal\" livers from brain-dead donors (DBD).\n\nDCD livers carry higher risks of injury when blood flow returns, of grafts that never work, and of bile duct scarring. ILTS describes an ideal donor as aged 60 or younger, with a BMI of 30 or under, less than 30% fat in the liver, and less than 8 hours of cold storage. None of these limits is absolute. For DCD donors, the functional warm ischaemia time should not exceed 30 minutes. This interval runs from the moment oxygen saturation falls below 80% or blood pressure below 60 mmHg until the liver is flushed with cold fluid. Up to 50% of marginal DBD livers are declined.\n\nMachine perfusion pumps fluid through a liver outside the body, and it is changing which livers can be used:\n\n- Normothermic machine perfusion (NMP) keeps the liver at body temperature so its function can be tested before transplant. In the VITTAL trial it allowed 71% of previously discarded livers to be transplanted, with 100% patient and graft survival at 90 days.\n- Hypothermic oxygenated perfusion (HOPE) runs cold (4 to 10 degrees C), oxygenated fluid through the liver. This slows metabolism and reduces damage when blood flow returns. In a European randomized trial of DCD livers, the dual-vessel version (D-HOPE) cut bile duct strictures by 64% and early graft dysfunction by 39%.\n- Normothermic regional perfusion (NRP) restores blood flow in the donor's abdomen before the organs are retrieved. Its results are comparable to standard DBD livers.\n\nEarly data suggest HOPE may lower HCC recurrence. Perfusion also lets centres schedule transplants during the day. That helps in transplant oncology, where tissue samples are checked by frozen section pathology during the operation.\n\n## Follow-up\n\nFollow-up aims to catch recurrence early, especially when only a few spots appear that can be treated directly. One experienced unit treated HCC recurrence after living donor transplant with combined therapies and reported 57% survival at 1 year and 24% at 3 years. Its longest survivor lived 7.5 years after recurrence. A sample HCC protocol uses:\n\n- CT every 6 months for 2 years, then yearly\n- ultrasound every 3 months for 2 years, then every 6 months\n- AFP or PIVKA-II blood tests every 3 months for 2 years, then every 6 months\n\nWhere resources are tight, risk scores such as SIMAP500 can focus the intensive schedule on high-risk patients.",
       "chart_ids": [
-        "five-year-os-by-cancer"
+        "hehe-score-dfs"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC12084677-section-5",
-      "title": "Cross-Cutting Challenges: Immunosuppression, Organ Supply, and Surveillance",
-      "markdown": "## Does immunosuppression feed the cancer?\n\nSuppressing the immune system to protect the graft may also create conditions favoring tumor growth. Certain cancers are clearly associated with the immunosuppressed state, including skin cancer, post-transplant lymphoproliferative disorder, and genitourinary tumors. But the effect is drug-class specific, and hepatocellular carcinoma provides the clearest data.\n\n**Calcineurin inhibitors** (cyclosporin, tacrolimus) increase expression of transforming growth factor beta and vascular endothelial growth factor, both of which promote liver tumor growth. High exposure is an independent risk factor for recurrence and shorter recurrence-free survival, with thresholds around 300 ng/ml trough for cyclosporin and 10 ng/ml for tacrolimus. A large US cohort found calcineurin inhibitor monotherapy carried higher recurrence risk than a combination regimen with an antimetabolite and steroids. Cumulative cyclosporin exposure raises recurrence risk especially when given between four and twelve months after transplant, while the tacrolimus effect appears confined to the first month. Why the two drugs differ is unexplained.\n\n**mTOR inhibitors** (sirolimus, everolimus) run the other way, blocking the PI3K/Akt/mTOR pathway and reducing vascular endothelial growth factor, with antiangiogenic and antitumor effects. Studies comparing them against calcineurin-based regimens show better overall survival and less recurrence. Combining sirolimus with a calcineurin inhibitor improved recurrence-free survival out to five years compared with the calcineurin inhibitor alone, suggesting the mTOR drug counteracts the pro-tumor effect. A registry study found the sirolimus survival advantage larger in transplant patients with hepatocellular carcinoma than in those without. The single randomized trial found benefit out to five years, greatest in low-recurrence-risk patients and greatest of all on sirolimus alone. Steroids, azathioprine, interleukin-2 receptor antibodies, and anti-thymocyte globulin have not been linked to recurrence.\n\nThe evidence base is mostly retrospective, and the one randomized trial had few patients on mTOR monotherapy, so firm recommendations are not yet possible.\n\n## Not enough organs, and what to do about it\n\nWaitlist mortality reaches 20 percent at some centers. Meanwhile donor quality is falling as populations age and metabolic disease spreads. Adding cancer indications to the waiting list makes the arithmetic worse, so expanding the donor pool is inseparable from expanding indications.\n\n**Donation after circulatory death** (DCD) grafts, and marginal grafts from brain-dead donors, are the main lever. DCD livers carry higher risk of ischemia-reperfusion injury, primary non-function, delayed function, kidney injury, and non-anastomotic bile duct strictures. ILTS consensus defines an ideal donor as age 60 or under, BMI 30 or under, macrovesicular steatosis under 30 percent without machine perfusion, and cold ischemia under 8 hours. None of these is absolute, and careful matching of graft to recipient matters more than any single cutoff. Warm ischemia time is the key determinant for DCD grafts, with functional warm ischemia measured from the point where oxygen saturation drops below 80 percent or mean arterial pressure below 60 mmHg until cold flush. Both ILTS and the UK risk assessment cap this at 30 minutes, though successful transplants have been reported outside every one of these limits, including donors over 70.\n\nDecline rates for offered livers have run as high as 50 percent. **Machine perfusion** is changing that by replacing static criteria with functional testing. Normothermic machine perfusion keeps the liver alive at body temperature outside the body, allowing direct assessment of whether it works. The **VITTAL trial** perfused livers that had already been discarded and successfully transplanted 71 percent of them, with 100 percent patient and graft survival at 90 days.\n\n**Hypothermic oxygenated perfusion** (HOPE) circulates oxygenated solution at 4 to 10°C. The cold slows metabolism and lowers oxygen demand while the oxygen supports cellular repair, clearing waste that built up during warm ischemia and cutting the oxidative burst that follows reperfusion. Studies show lower early allograft dysfunction and fewer biliary complications. Perfusing through both the hepatic artery and portal vein (dual HOPE) reaches bile duct cells as well as hepatocytes. A European randomized trial of dual HOPE in DCD transplants found a 64 percent reduction in non-anastomotic strictures, 57 percent reduction in post-reperfusion syndrome, and 39 percent reduction in early allograft dysfunction.\n\n**Normothermic regional perfusion** restores circulation in the donor before organs are removed, reversing some warm ischemic damage. Retrospective work shows less early allograft dysfunction, fewer biliary complications, and less graft loss than standard marginal DCD grafts, with some studies finding results comparable to brain-dead donor livers.\n\nPerfusion also solves a logistical problem specific to transplant oncology. These operations often require frozen-section pathology during surgery, and perfusion lets centers schedule transplants during the day when full support is available. Early data hint at lower recurrence in hepatocellular carcinoma patients whose grafts were treated with HOPE, though the mechanism is not understood.\n\n## Watching for recurrence",
+      "title": "Where the Field Is Heading",
+      "markdown": "## Where this leaves the field\n\nCancer is now an established reason for liver transplantation. Across all these cancers, selection is moving from measuring tumours toward reading their biology. The authors expect radiomics (data extracted from medical scans), tumour genomics, and circulating tumour DNA and RNA to push this further. Colorectal liver metastases are the only indication with randomized trial evidence. For the others, the authors see international prospective registries as the practical way to overcome small patient numbers and build stronger evidence.",
       "chart_ids": [
-        "hehe-lt-score",
-        "transmet-5y-survival"
+        "immunosuppression-recurrence"
       ],
       "figure_ids": []
     }
   ],
   "charts": [
     {
-      "id": "transmet-5y-survival",
-      "kind": "stat",
-      "title": "Five-year survival after transplant plus chemotherapy in the TransMet trial",
-      "subtitle": "Intention-to-treat, unresectable colorectal liver metastases",
+      "id": "transmet-survival",
+      "kind": "bars",
+      "title": "Survival at 5 years in TransMet: transplant plus chemotherapy vs chemotherapy alone",
+      "subtitle": "Unresectable colorectal liver metastases, median follow-up 59.3 months",
       "data": [
         {
-          "label": "Transplant plus chemotherapy, 5-year intention-to-treat survival",
+          "label": "Intention to treat",
           "value": 56.6,
           "low": null,
           "high": null,
           "n": null,
           "events": null,
-          "group": "",
+          "group": "Transplant + chemotherapy",
           "note": "",
           "higher_is_better": null,
           "provenance": {
             "locator": "zraf034-s2.1/p5",
             "kind": "paragraph",
-            "quote": "the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group compared with 12.6% in the chemotherapy group",
+            "quote": "the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group",
+            "section": "Colorectal cancer liver metastases"
+          }
+        },
+        {
+          "label": "Intention to treat",
+          "value": 12.6,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Chemotherapy alone",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.1/p5",
+            "kind": "paragraph",
+            "quote": "compared with 12.6% in the chemotherapy group",
+            "section": "Colorectal cancer liver metastases"
+          }
+        },
+        {
+          "label": "Per protocol",
+          "value": 73.3,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Transplant + chemotherapy",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.1/p5",
+            "kind": "paragraph",
+            "quote": "In per-protocol analysis, the corresponding 5-year survival rates were 73.3% and 9.3%",
+            "section": "Colorectal cancer liver metastases"
+          }
+        },
+        {
+          "label": "Per protocol",
+          "value": 9.3,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Chemotherapy alone",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.1/p5",
+            "kind": "paragraph",
+            "quote": "In per-protocol analysis, the corresponding 5-year survival rates were 73.3% and 9.3%",
             "section": "Colorectal cancer liver metastases"
           }
         }
@@ -94,116 +156,24 @@
       "annotation": null,
       "nodes": [],
       "edges": [],
+      "shape": "",
       "unit": "%",
-      "value_label": "",
+      "value_label": "Alive at 5 years",
       "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "A randomized trial in a highly selected group: all transplanted patients but one had a low Oslo score.",
+      "caveat": "Trial results restated from the TransMet report. This review gives no patient numbers or confidence intervals for them.",
       "source": "Colorectal liver metastases section, TransMet trial",
       "section_id": "zraf034-s2.1"
     },
     {
-      "id": "transmet-arms",
-      "kind": "bars",
-      "title": "Five-year survival in TransMet, transplant plus chemotherapy versus chemotherapy alone",
-      "subtitle": "Intention-to-treat and per-protocol analyses, unresectable colorectal liver metastases",
-      "data": [
-        {
-          "label": "Transplant plus chemotherapy",
-          "value": 56.6,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Intention to treat",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "zraf034-s2.1/p5",
-            "kind": "paragraph",
-            "quote": "the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group compared with 12.6% in the chemotherapy group",
-            "section": "Colorectal cancer liver metastases"
-          }
-        },
-        {
-          "label": "Chemotherapy alone",
-          "value": 12.6,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Intention to treat",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "zraf034-s2.1/p5",
-            "kind": "paragraph",
-            "quote": "the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group compared with 12.6% in the chemotherapy group",
-            "section": "Colorectal cancer liver metastases"
-          }
-        },
-        {
-          "label": "Transplant plus chemotherapy, per protocol",
-          "value": 73.3,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Per protocol",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "zraf034-s2.1/p5",
-            "kind": "paragraph",
-            "quote": "In per-protocol analysis, the corresponding 5-year survival rates were 73.3% and 9.3%.",
-            "section": "Colorectal cancer liver metastases"
-          }
-        },
-        {
-          "label": "Chemotherapy alone, per protocol",
-          "value": 9.3,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Per protocol",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "zraf034-s2.1/p5",
-            "kind": "paragraph",
-            "quote": "In per-protocol analysis, the corresponding 5-year survival rates were 73.3% and 9.3%.",
-            "section": "Colorectal cancer liver metastases"
-          }
-        }
-      ],
-      "annotation": {
-        "target": "Chemotherapy alone",
-        "text": "12.6% at 5 years with chemotherapy alone in the intention-to-treat analysis."
-      },
-      "nodes": [],
-      "edges": [],
-      "unit": "%",
-      "value_label": "5-year overall survival (%)",
-      "category_label": "",
-      "log_scale": false,
-      "null_value": null,
-      "lower_is_better": true,
-      "favours_left": "",
-      "favours_right": "",
-      "caveat": "Median follow-up was 59.3 months. The two analyses count different patients, so the pairs are not interchangeable.",
-      "source": "Colorectal liver metastases section, TransMet trial",
-      "section_id": "zraf034-s2.1"
-    },
-    {
-      "id": "seca-timeline",
+      "id": "seca-survival",
       "kind": "line",
       "title": "Overall survival after transplant for colorectal liver metastases, SECA-I and SECA-II",
-      "subtitle": "Estimated overall survival at 1, 3 and 5 years",
+      "subtitle": "",
       "data": [
         {
           "label": "1 year",
@@ -311,119 +281,186 @@
       "annotation": null,
       "nodes": [],
       "edges": [],
+      "shape": "",
       "unit": "%",
-      "value_label": "Overall survival (%)",
-      "category_label": "Time since transplant",
+      "value_label": "Overall survival",
+      "category_label": "Years after transplant",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "Two single-arm studies with different inclusion criteria, not a randomized comparison. SECA-II used more stringent selection.",
+      "caveat": "Two separate non-randomised cohorts. SECA-II used more stringent inclusion criteria, and the two were not compared directly.",
       "source": "Colorectal liver metastases section, SECA-I and SECA-II",
       "section_id": "zraf034-s2.1"
     },
     {
-      "id": "five-year-os-by-cancer",
+      "id": "net-lt-vs-resection",
       "kind": "bars",
-      "title": "Reported five-year survival after transplant, by cancer indication",
-      "subtitle": "Figures as stated for each tumour type in this review",
+      "title": "Neuroendocrine liver metastases within Milan criteria: survival after transplant vs resection",
+      "subtitle": "",
       "data": [
         {
-          "label": "Hilar cholangiocarcinoma, Mayo follow-up",
-          "value": 82.0,
+          "label": "5-year overall survival",
+          "value": 95.0,
           "low": null,
           "high": null,
           "n": null,
           "events": null,
-          "group": "",
+          "group": "Transplant",
           "note": "",
           "higher_is_better": null,
           "provenance": {
-            "locator": "zraf034-s2.2/p1",
+            "locator": "zraf034-s2.4/p4",
             "kind": "paragraph",
-            "quote": "included 28 patients with hilar cholangiocarcinoma who underwent liver transplantation with an 82% 5-year OS and a 14.2% recurrence rate",
-            "section": "Hilar cholangiocarcinoma"
-          }
-        },
-        {
-          "label": "Intrahepatic cholangiocarcinoma, pooled",
-          "value": 42.0,
-          "low": 29.0,
-          "high": 55.0,
-          "n": null,
-          "events": null,
-          "group": "",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "zraf034-s2.3/p4",
-            "kind": "paragraph",
-            "quote": "A meta-analysis including studies up to May 2020 identified the pooled 5-year OS after LT as 42% (95% c.i. 29.0–55.0).",
-            "section": "Intrahepatic cholangiocarcinoma"
-          }
-        },
-        {
-          "label": "Neuroendocrine liver metastases, Milan group",
-          "value": 97.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "zraf034-s2.4/p3",
-            "kind": "paragraph",
-            "quote": "The Milan Group in 2016 published outstanding 5-year and 10-year OS of 97 and 89% respectively, with liver transplantation for NELM",
+            "quote": "The 5-year and 10-year OS were 95 and 93% for transplant cohort, 90% and 75% for resection cohort (P = 0.007).",
             "section": "Neuroendocrine tumours"
           }
         },
         {
-          "label": "Hepatic epithelioid haemangioendothelioma, registry",
-          "value": 79.5,
+          "label": "5-year overall survival",
+          "value": 90.0,
           "low": null,
           "high": null,
           "n": null,
           "events": null,
-          "group": "",
+          "group": "Resection",
           "note": "",
           "higher_is_better": null,
           "provenance": {
-            "locator": "zraf034-s2.6/p3",
+            "locator": "zraf034-s2.4/p4",
             "kind": "paragraph",
-            "quote": "The 5-year post-LT OS and DFS rates were 79.5% and 79.4% respectively.",
-            "section": "Hepatic epithelioid haemangioendothelioma"
+            "quote": "The 5-year and 10-year OS were 95 and 93% for transplant cohort, 90% and 75% for resection cohort (P = 0.007).",
+            "section": "Neuroendocrine tumours"
+          }
+        },
+        {
+          "label": "10-year overall survival",
+          "value": 93.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Transplant",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.4/p4",
+            "kind": "paragraph",
+            "quote": "The 5-year and 10-year OS were 95 and 93% for transplant cohort, 90% and 75% for resection cohort (P = 0.007).",
+            "section": "Neuroendocrine tumours"
+          }
+        },
+        {
+          "label": "10-year overall survival",
+          "value": 75.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Resection",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.4/p4",
+            "kind": "paragraph",
+            "quote": "The 5-year and 10-year OS were 95 and 93% for transplant cohort, 90% and 75% for resection cohort (P = 0.007).",
+            "section": "Neuroendocrine tumours"
+          }
+        },
+        {
+          "label": "5-year disease-free survival",
+          "value": 75.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Transplant",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.4/p4",
+            "kind": "paragraph",
+            "quote": "The 5-year and 10-year DFS rates were 75 and 52% for LT and 33 and 18% for LR (P < 0.001).",
+            "section": "Neuroendocrine tumours"
+          }
+        },
+        {
+          "label": "5-year disease-free survival",
+          "value": 33.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Resection",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.4/p4",
+            "kind": "paragraph",
+            "quote": "The 5-year and 10-year DFS rates were 75 and 52% for LT and 33 and 18% for LR (P < 0.001).",
+            "section": "Neuroendocrine tumours"
+          }
+        },
+        {
+          "label": "10-year disease-free survival",
+          "value": 52.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Transplant",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.4/p4",
+            "kind": "paragraph",
+            "quote": "The 5-year and 10-year DFS rates were 75 and 52% for LT and 33 and 18% for LR (P < 0.001).",
+            "section": "Neuroendocrine tumours"
+          }
+        },
+        {
+          "label": "10-year disease-free survival",
+          "value": 18.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Resection",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "zraf034-s2.4/p4",
+            "kind": "paragraph",
+            "quote": "The 5-year and 10-year DFS rates were 75 and 52% for LT and 33 and 18% for LR (P < 0.001).",
+            "section": "Neuroendocrine tumours"
           }
         }
       ],
-      "annotation": {
-        "target": "Intrahepatic cholangiocarcinoma, pooled",
-        "text": "The only figure here with a printed confidence interval, 29.0 to 55.0."
-      },
+      "annotation": null,
       "nodes": [],
       "edges": [],
+      "shape": "",
       "unit": "%",
-      "value_label": "5-year overall survival (%)",
+      "value_label": "Patients",
       "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "Separate cohorts with different selection criteria and eras, not a head-to-head comparison. Only the pooled iCCA estimate has a printed interval.",
-      "source": "Tumour-specific sections, reported 5-year overall survival",
-      "section_id": "zraf034-s2"
+      "caveat": "Not randomised. Resection was offered to patients who were radically resectable and transplant to those who were not.",
+      "source": "Neuroendocrine tumours section, 2021 long-term outcomes",
+      "section_id": "zraf034-s2.4"
     },
     {
-      "id": "hehe-lt-score",
+      "id": "hehe-score-dfs",
       "kind": "bars",
-      "title": "Five-year disease-free survival after transplant for HEHE, by HEHE-LT score",
-      "subtitle": "ELTR-ELITA registry, 149 recipients transplanted between 1984 and 2014",
+      "title": "Disease-free survival at 5 years after transplant for HEHE, by HEHE-LT score",
+      "subtitle": "149 recipients in the ELTR-ELITA registry, 1984 to 2014",
       "data": [
         {
-          "label": "Low score, 0 to 2",
+          "label": "Low score (0–2)",
           "value": 93.9,
           "low": null,
           "high": null,
@@ -435,12 +472,12 @@
           "provenance": {
             "locator": "zraf034-s2.6/p3",
             "kind": "paragraph",
-            "quote": "successfully stratified the patients into three groups by their 5-year DFS rates: low score (0–2), 93.9% (n = 58), intermediate score (3–5), 76.9% (n = 74) and high score (6–10), 38.5% (n = 17)",
+            "quote": "low score (0–2), 93.9% (n = 58), intermediate score (3–5), 76.9% (n = 74) and high score (6–10), 38.5% (n = 17)",
             "section": "Hepatic epithelioid haemangioendothelioma"
           }
         },
         {
-          "label": "Intermediate score, 3 to 5",
+          "label": "Intermediate score (3–5)",
           "value": 76.9,
           "low": null,
           "high": null,
@@ -452,12 +489,12 @@
           "provenance": {
             "locator": "zraf034-s2.6/p3",
             "kind": "paragraph",
-            "quote": "successfully stratified the patients into three groups by their 5-year DFS rates: low score (0–2), 93.9% (n = 58), intermediate score (3–5), 76.9% (n = 74) and high score (6–10), 38.5% (n = 17)",
+            "quote": "low score (0–2), 93.9% (n = 58), intermediate score (3–5), 76.9% (n = 74) and high score (6–10), 38.5% (n = 17)",
             "section": "Hepatic epithelioid haemangioendothelioma"
           }
         },
         {
-          "label": "High score, 6 to 10",
+          "label": "High score (6–10)",
           "value": 38.5,
           "low": null,
           "high": null,
@@ -469,123 +506,268 @@
           "provenance": {
             "locator": "zraf034-s2.6/p3",
             "kind": "paragraph",
-            "quote": "successfully stratified the patients into three groups by their 5-year DFS rates: low score (0–2), 93.9% (n = 58), intermediate score (3–5), 76.9% (n = 74) and high score (6–10), 38.5% (n = 17)",
+            "quote": "low score (0–2), 93.9% (n = 58), intermediate score (3–5), 76.9% (n = 74) and high score (6–10), 38.5% (n = 17)",
             "section": "Hepatic epithelioid haemangioendothelioma"
           }
         }
       ],
-      "annotation": {
-        "target": "High score, 6 to 10",
-        "text": "38.5% disease-free at 5 years in the high-score group, from 17 patients."
-      },
+      "annotation": null,
       "nodes": [],
       "edges": [],
+      "shape": "",
       "unit": "%",
-      "value_label": "5-year disease-free survival (%)",
-      "category_label": "HEHE-LT score group",
+      "value_label": "Disease-free at 5 years",
+      "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "A retrospective registry score built on the same patients it stratifies, spanning transplants from 1984 to 2014.",
-      "source": "HEHE section, ELTR-ELITA HEHE-LT score",
+      "caveat": "The score was derived in this same registry cohort. The review reports no separate validation.",
+      "source": "Hepatic epithelioid haemangioendothelioma section, Lai et al.",
       "section_id": "zraf034-s2.6"
+    },
+    {
+      "id": "immunosuppression-recurrence",
+      "kind": "diagram",
+      "title": "How the choice of anti-rejection drug may affect HCC recurrence",
+      "subtitle": "",
+      "data": [],
+      "annotation": null,
+      "nodes": [
+        {
+          "id": "cni",
+          "label": "High CNI exposure",
+          "note": ""
+        },
+        {
+          "id": "mtor",
+          "label": "mTORi such as sirolimus",
+          "note": ""
+        },
+        {
+          "id": "rec",
+          "label": "HCC recurrence",
+          "note": ""
+        }
+      ],
+      "edges": [
+        {
+          "source": "cni",
+          "target": "rec",
+          "label": "raises risk",
+          "provenance": {
+            "locator": "zraf034-s2.6.1/p3",
+            "kind": "paragraph",
+            "quote": "Several studies have shown that high CNI exposure is an independent risk factor for HCC recurrence and reduced recurrence-free survival.",
+            "section": "Immunosuppression and recurrence"
+          },
+          "hedged": false
+        },
+        {
+          "source": "mtor",
+          "target": "rec",
+          "label": "reduced",
+          "provenance": {
+            "locator": "zraf034-s2.6.1/p4",
+            "kind": "paragraph",
+            "quote": "Clinical studies comparing mTORi to tacrolimus-based immunosuppressive protocols showed statistically significant improved overall survival and reduced HCC recurrence in those receiving sirolimus.",
+            "section": "Immunosuppression and recurrence"
+          },
+          "hedged": false
+        }
+      ],
+      "shape": "join",
+      "unit": "",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Mostly retrospective cohort studies. The single randomised trial had few patients on mTOR monotherapy, so the review makes no firm recommendation.",
+      "source": "Immunosuppression and disease recurrence section",
+      "section_id": "zraf034-s2.6.1"
     }
   ],
   "figures": [],
   "absolute_risk": null,
   "absolute_risk_derived": null,
-  "terms": [],
+  "terms": [
+    {
+      "term": "Transplant benefit",
+      "definition": "The survival a liver transplant adds compared with the best alternative treatment.",
+      "provenance": {
+        "locator": "zraf034-s1/p3",
+        "kind": "paragraph",
+        "quote": "Transplant benefit is defined as the gain offered by liver transplantation (LT) compared with the best alternative therapy (survival after LT minus survival with the best alternative treatment).",
+        "section": "Introduction"
+      }
+    },
+    {
+      "term": "Oslo score",
+      "definition": "A risk score for colorectal liver metastases that gives one point each for a tumour over 5.5 cm, less than 2 years since primary surgery, CEA over 80 μg/l, and progression on chemotherapy.",
+      "provenance": null
+    },
+    {
+      "term": "Intention to treat",
+      "definition": "An analysis that counts every patient in the arm they were assigned to, including those who never actually received a transplant.",
+      "provenance": null
+    },
+    {
+      "term": "Disease-free survival",
+      "definition": "The share of patients who are alive with no sign that the cancer has come back at a given time.",
+      "provenance": null
+    },
+    {
+      "term": "Living donor liver transplantation",
+      "definition": "Transplanting part of a liver from a living donor instead of a whole liver from a deceased donor, which lets the operation be scheduled.",
+      "provenance": null
+    },
+    {
+      "term": "HEHE-LT score",
+      "definition": "A recurrence risk score for hepatic epithelioid haemangioendothelioma. It is built from macrovascular invasion, a pre-transplant wait of 120 days or less, and hilar lymph node invasion.",
+      "provenance": {
+        "locator": "zraf034-s2.6/p3",
+        "kind": "paragraph",
+        "quote": "The HEHE-LT score was developed based on these three factors that successfully stratified the patients into three groups by their 5-year DFS rates",
+        "section": "Hepatic epithelioid haemangioendothelioma"
+      }
+    },
+    {
+      "term": "Calcineurin inhibitor",
+      "definition": "A class of anti-rejection drugs, such as tacrolimus and cyclosporin, that is standard after liver transplant.",
+      "provenance": {
+        "locator": "zraf034-s2.6.1/p3",
+        "kind": "paragraph",
+        "quote": "Calcineurin inhibitors (CNIs), such as cyclosporin and tacrolimus, have long been used in immunosuppressive regimens post-transplantation.",
+        "section": "Immunosuppression and recurrence"
+      }
+    },
+    {
+      "term": "mTOR inhibitor",
+      "definition": "Anti-rejection drugs such as sirolimus and everolimus that also block a growth pathway that tumours use.",
+      "provenance": {
+        "locator": "zraf034-s2.6.1/p4",
+        "kind": "paragraph",
+        "quote": "In contrast to CNIs, mTORi, including sirolimus and everolimus, have antiangiogenic and antineoplastic effects by inhibiting the PI3K/Akt/mTOR pathway and reducing expression of vascular endothelial growth factor, resulting in reduced carcinogenesis.",
+        "section": "Immunosuppression and recurrence"
+      }
+    }
+  ],
   "links": [
     {
       "section_id": "PMC12084677-section-2",
-      "sentence": "Overall survival was 95 percent at one year, 68 percent at three years, and 60 percent at five.",
-      "chart_id": "seca-timeline",
+      "sentence": "Estimated overall survival (OS) was 95% at 1 year, 68% at 3 years and 60% at 5 years.",
+      "chart_id": "seca-survival",
       "kind": "datum",
       "index": 0
     },
     {
       "section_id": "PMC12084677-section-2",
-      "sentence": "Overall survival reached 100 percent at one year, 83 percent at three, and 83 percent at five.",
-      "chart_id": "seca-timeline",
+      "sentence": "Ten-year data published in 2022 showed that patients scoring 0 or 1 had actual survival of 75% at 5 years and 50% at 10 years.",
+      "chart_id": "net-lt-vs-resection",
       "kind": "datum",
       "index": 3
     },
     {
       "section_id": "PMC12084677-section-2",
-      "sentence": "Survival after recurrence was 100 percent at one year and 73 percent at four.",
-      "chart_id": "transmet-arms",
-      "kind": "datum",
-      "index": 2
-    },
-    {
-      "section_id": "PMC12084677-section-2",
-      "sentence": "After a median follow-up of about five years, five-year survival by intention to treat was 56.6 percent with transplant versus 12.6 percent with chemotherapy.",
-      "chart_id": "transmet-arms",
-      "kind": "datum",
-      "index": 0
-    },
-    {
-      "section_id": "PMC12084677-section-2",
-      "sentence": "Among patients who actually received the assigned treatment, the figures were 73.3 percent and 9.3 percent.",
-      "chart_id": "transmet-arms",
-      "kind": "datum",
-      "index": 2
-    },
-    {
-      "section_id": "PMC12084677-section-3",
-      "sentence": "A 2004 follow-up of 28 patients reported 82 percent five-year overall survival and a 14.2 percent recurrence rate.",
-      "chart_id": "five-year-os-by-cancer",
-      "kind": "datum",
-      "index": 0
-    },
-    {
-      "section_id": "PMC12084677-section-3",
-      "sentence": "Selection under the Mayo protocol, adopted with modifications by UNOS, requires an unresectable tumor confirmed by brush cytology, or a malignant-appearing stricture with CA19-9 above 100 U/ml, with tumor size under 3 cm.",
-      "chart_id": "seca-timeline",
+      "sentence": "The follow-up SECA-II trial used stricter entry rules and reached estimated OS of 100%, 83% and 83% at 1, 3 and 5 years.",
+      "chart_id": "seca-survival",
       "kind": "datum",
       "index": 3
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Disease-free survival (DFS) was still only 35% at 3 years, yet survival after recurrence was 73% at 4 years.",
+      "chart_id": "transmet-survival",
+      "kind": "datum",
+      "index": 2
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "- counting every randomized patient (intention to treat): 56.6% alive with transplant vs 12.6% with chemotherapy",
+      "chart_id": "transmet-survival",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "- counting only those who received their assigned treatment (per protocol): 73.3% vs 9.3%",
+      "chart_id": "transmet-survival",
+      "kind": "datum",
+      "index": 2
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "- it must be under 3 cm and/or cause a malignant-looking narrowing with a CA19-9 marker above 100 U/ml",
+      "chart_id": "seca-survival",
+      "kind": "datum",
+      "index": 3
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "A 2021 comparison of patients within the Milan criteria found 10-year survival of 93% after transplant versus 75% after resection, and 10-year DFS of 52% versus 18%.",
+      "chart_id": "net-lt-vs-resection",
+      "kind": "datum",
+      "index": 2
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "About 90% of hepatocellular carcinomas (HCC) arise in a damaged or cirrhotic liver.",
+      "chart_id": "net-lt-vs-resection",
+      "kind": "datum",
+      "index": 1
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "It performs poorly, because only 33% of patients who recur actually get a curative transplant.",
+      "chart_id": "net-lt-vs-resection",
+      "kind": "datum",
+      "index": 5
     },
     {
       "section_id": "PMC12084677-section-4",
-      "sentence": "The review's authors report transplant benefit at five years of 42 months in patients classified as low recurrence risk and 25 months even in the high-risk group.",
-      "chart_id": "five-year-os-by-cancer",
+      "sentence": "In the VITTAL trial it allowed 71% of previously discarded livers to be transplanted, with 100% patient and graft survival at 90 days.",
+      "chart_id": "net-lt-vs-resection",
       "kind": "datum",
       "index": 1
     },
     {
       "section_id": "PMC12084677-section-4",
-      "sentence": "This rare vascular liver tumor is transplanted infrequently, with five-year survival of 50 to 80 percent reported even in patients with lymph node or extrahepatic metastases and macrovascular invasion.",
-      "chart_id": "five-year-os-by-cancer",
-      "kind": "datum",
-      "index": 3
-    },
-    {
-      "section_id": "PMC12084677-section-5",
-      "sentence": "A European randomized trial of dual HOPE in DCD transplants found a 64 percent reduction in non-anastomotic strictures, 57 percent reduction in post-reperfusion syndrome, and 39 percent reduction in early allograft dysfunction.",
-      "chart_id": "transmet-5y-survival",
+      "sentence": "One experienced unit treated HCC recurrence after living donor transplant with combined therapies and reported 57% survival at 1 year and 24% at 3 years.",
+      "chart_id": "transmet-survival",
       "kind": "datum",
       "index": 0
     }
   ],
-  "sources": {},
+  "sources": {
+    "zraf034-s2.1/p5": "A recent randomized clinical trial, TransMet, has compared liver transplantation + chemotherapy to chemotherapy alone in patients with unresectable CRLM. The study population had a high tumour load with a median of 20 metastases in both groups, and the delay from diagnosis to randomization was 15.9 months in the transplant arm. All transplanted patients but one had a low Oslo-score (<2). After a median follow-up of 59.3 months, the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group compared with 12.6% in the chemotherapy group. In per-protocol analysis, the corresponding 5-year survival rates were 73.3% and 9.3%. The outcomes of the TRANSMET trial confirm the principal findings from all the previous clinical trials on LT for CRLM and have the potential to change clinical practice since CRLM is the only transplant oncology indication that is supported by level 1 evidence.",
+    "zraf034-s2.1/p2": "The first controlled ‘proof of concept’ SEcondary CAncer (SECA-I) trial to explore LT in non-resectable CRLM was published in 2013 and found an estimated overall survival (OS) of 95%, 68% and 60% at 1, 3 and 5 years respectively. However, disease-free survival (DFS) was only 35% at 1 year. Still, most recurrences were slow-growing lung metastases that could be offered curative intent resection, thereby yielding a favourable overall survival despite recurrence post-transplant. Risk factors for inferior survival were maximal tumour diameter >5.5 cm, time from primary cancer surgery <2 years, CEA levels >80 μg/l and disease progression after chemotherapy at the time of LT. The four factors constitute the ‘Oslo-Score’ by assigning 1 point to each for risk stratification. The 10-year outcome data of the SECA-I trial was published in 2022 and showed that a low Oslo score of 0–1 is associated with a 5-year and 10-year actual OS of 75 and 50% respectively.",
+    "zraf034-s2.1/p3": "In a follow-up study (SECA-II), the Oslo score factors were considered in the design of the inclusion criteria but were not applied directly. The study cohort, following more stringent inclusion criteria, resulted in Oslo scores of 02, and the estimated 1-, 3- and 5-year OS was 100%, 83% and 83% respectively. Median DFS was 53%, 44% and 35% at 1, 2 and 3 years respectively and about 70% of the recurrences observed were lung metastases where a majority could be offered resection. The OS after recurrence was 100%, 73% and 73% at 1, 2 and 4 years respectively, indicating the DFS has limitations as a parameter of treatment efficacy in liver transplantation for CRLM.",
+    "zraf034-s2.4/p4": "Long-term outcomes were published in 2021, comparing the patients who underwent liver resection with curative intent and liver transplantation within the Milan criteria. Resection was offered to patients considered radically resectable and transplantation to unresectable. The 5-year and 10-year OS were 95 and 93% for transplant cohort, 90% and 75% for resection cohort (P = 0.007). The 5-year and 10-year DFS rates were 75 and 52% for LT and 33 and 18% for LR (P < 0.001). The median disease-free interval between liver surgery and recurrence was longer in the transplant cohort compared to resection cohort (78 versus 24 months, P < 0.001). Transplant patients showed a tendency for multisite recurrence, while resected patients for intrahepatic recurrence. This study might suggest that any patient with disease presentation meeting the Milan criteria may achieve a significant survival advantage with LT. A propensity score-matched study of resection versus transplantation for the patients within the Milan criteria demonstrated superior survival and disease control in the LT group with 88.8% 10-year OS and 13.1% disease progression compared with 22.4 and 89% respectively, in the resection group.",
+    "zraf034-s2.6/p3": "Meanwhile, Lai et al. established a prognostic scoring system by analysing the outcomes of 149 recipients undergoing LT for HEHE between 1984 and 2014 in the ELTR-ELITA registry. The 5-year post-LT OS and DFS rates were 79.5% and 79.4% respectively. The disease recurred in 37 (24.8%) patients after a median time of 18 months. Macrovascular invasion detected at pathology (HR 4.9; 95% c.i. 2.4–9.9), pre-LT waiting time ≤120 days (HR 2.5; 95% c.i. 1.2–5.3) and hilar lymph node invasion (HR 2.2; 95% c.i. 1.1–4.5) but not extrahepatic metastases, were found to be significant risk factors for post-LT recurrence. The HEHE-LT score was developed based on these three factors that successfully stratified the patients into three groups by their 5-year DFS rates: low score (0–2), 93.9% (n = 58), intermediate score (3–5), 76.9% (n = 74) and high score (6–10), 38.5% (n = 17). In 2020, the European Society for Medical Oncology (ESMO) held a virtual consensus meeting involving >80 experts to reach a global consensus on HEHE management. This meeting concluded that LT for unresectable HEHE with no extrahepatic disease should be offered to patients ‘after full disclosure of the potential benefits and the risks’ associated with LT (level V evidence, Grade A recommendation).",
+    "zraf034-s2.6.1/p3": "Calcineurin inhibitors (CNIs), such as cyclosporin and tacrolimus, have long been used in immunosuppressive regimens post-transplantation. CNIs have been shown to create an environment which enables tumour development and growth. For example, they increase the expression of transforming growth factor-β and vascular endothelial growth factor, both of which are known to promote HCC tumourigenesis,. Several studies have shown that high CNI exposure is an independent risk factor for HCC recurrence and reduced recurrence-free survival. In these studies, high concentrations were defined as cyclosporin trough concentration of >300 ng/ml and tacrolimus trough concentration of >10 ng/ml. Further evidence of CNIs alone increasing HCC recurrence risk was shown in a large US retrospective cohort study with CNI monotherapy having a significantly increased risk compared with a combined CNI, antimetabolite and steroid immunosuppression regimen. Furthermore, cumulative dose exposure to cyclosporin has been shown to increase HCC recurrence post-transplant and reduce 5-year recurrence-free survival, particularly when these higher doses are administered in the 4–12 month interval post-transplantation. In contrast, these differences have only been observed in the first month with patients exposed to high-dose tacrolimus, with no significant difference noted after that,. The underlying reason for these differences between cyclosporin and tacrolimus is unclear and needs further assessment in larger prospective clinical trials.",
+    "zraf034-s2.6.1/p4": "In contrast to CNIs, mTORi, including sirolimus and everolimus, have antiangiogenic and antineoplastic effects by inhibiting the PI3K/Akt/mTOR pathway and reducing expression of vascular endothelial growth factor, resulting in reduced carcinogenesis. Clinical studies comparing mTORi to tacrolimus-based immunosuppressive protocols showed statistically significant improved overall survival and reduced HCC recurrence in those receiving sirolimus. This was also observed in studies in which cyclosporin or tacrolimus was used as the CNI agent, compared with sirolimus-only immunosuppression therapy,. It appears to be a potential class effect as similar significant differences in HCC recurrence and survival have been observed with everolimus compared with CNIs. Furthermore, the combined sirolimus/CNI regimen had significantly improved recurrence-free survival up to 5 years compared with the CNI-only regimen, suggesting potential antagonism of the known procarcinogenic effects of CNI in HCC recurrence and antitumour advantage. Interestingly, in a large retrospective registry-based cohort study, sirolimus survival benefit was greater in patients transplanted for HCC than patients without HCC, suggesting a specific benefit for the HCC cohort post-transplant. In the only randomized clinical trial, recurrence-free survival and OS were noted up to 5 years post-transplantation, particularly in those with low risk of HCC recurrence, and the greatest recurrence-free survival and OS was noted in those patients on sirolimus monotherapy compared with combined immunosuppression regimens.",
+    "zraf034-s1/p3": "Transplant benefit is defined as the gain offered by liver transplantation (LT) compared with the best alternative therapy (survival after LT minus survival with the best alternative treatment). The International Liver Transplantation Society (ILTS) Consensus guidelines on Transplant Oncology emphasized that transplant benefit should be one of the key parameters to be considered when defining optimal selection criteria for LT."
+  },
   "verification": {
-    "checked": 22,
-    "passed": 20,
+    "checked": 24,
+    "passed": 24,
     "rejections": [
       {
-        "what": "immunosuppression-recurrence:cni->growth_factors",
-        "locator": "zraf034-s2.6.1/p3",
-        "reason": "no sentence in the quote links both ends of the arrow"
+        "what": "survival-by-cancer",
+        "locator": "",
+        "reason": "did not fit its block: String should have at most 180 characters"
       },
       {
-        "what": "immunosuppression-recurrence:cni->recurrence",
-        "locator": "zraf034-s2.6.1/p3",
-        "reason": "no sentence in the quote links both ends of the arrow"
+        "what": "term 'Oslo score' (quote)",
+        "locator": "zraf034-s2.1/p2",
+        "reason": "the defining sentence is not in the paper, so the definition is shown as ours"
       }
     ],
-    "prose_checked": 0,
+    "prose_checked": 100,
     "prose_unmatched": []
   },
   "notes": []

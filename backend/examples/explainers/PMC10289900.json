@@ -15,80 +15,183 @@
   "published": "2023-04-28 00:00:00",
   "doi": "10.1007/s11695-023-06606-2",
   "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10289900/",
-  "question": "",
-  "bottom_line": null,
+  "question": "Does sleeve gastrectomy change how easily the gastroesophageal junction and the pylorus distend on EndoFlip, and does the junction measurement before surgery relate to reflux a year later?",
+  "bottom_line": {
+    "question": "Does sleeve gastrectomy change how easily the gastroesophageal junction and the pylorus distend on EndoFlip, and does the junction measurement before surgery relate to reflux a year later?",
+    "answer": "In nine patients, the distensibility index of the gastroesophageal junction at 40 ml filling rose from 1.4 to 2.9 mm2/mmHg a year after sleeve gastrectomy (p=0.046); this is a pilot result that the authors say needs confirming in larger studies.",
+    "provenance": {
+      "locator": "Sec3/p2",
+      "kind": "paragraph",
+      "quote": "EndoFlipTM at 40 ml the DI of the GEJ was significantly higher post-SG compared to the presurgical assessment (1.4 mm2/mmHg [1.1-2.6] vs. 2.9 mm2/mmHg [2.6–5.3], p value=0.046)",
+      "section": "Results"
+    },
+    "effect": "2.9 mm2/mmHg",
+    "verdict": ""
+  },
   "sections": [
     {
       "id": "PMC10289900-section-1",
-      "title": "The Reflux Problem After Sleeve Gastrectomy",
-      "markdown": "Sleeve gastrectomy, one of the most common weight-loss operations, has a well-known downside: many patients develop acid reflux afterward, or see existing reflux get worse. Surgeons still can't reliably predict who that will happen to. This pilot study asked whether a device called the **EndoFlip**, a balloon-tipped probe that measures how easily a muscular valve stretches open, could give an early warning.",
+      "title": "Why Reflux After Sleeve Gastrectomy Matters",
+      "markdown": "Sleeve gastrectomy is a weight-loss operation that removes most of the stomach. Its main drawback is reflux. Some patients develop gastroesophageal reflux disease (GERD) for the first time after surgery, and others find that existing reflux gets worse. GERD lowers quality of life and raises the risk of long-term complications. Much of it depends on the **gastroesophageal junction** (GEJ), the valve-like zone where the esophagus meets the stomach, also called the lower esophageal sphincter.",
       "chart_ids": [
-        "gej-di-headline"
+        "gej-di-change"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC10289900-section-2",
-      "title": "What Distensibility Measures",
-      "markdown": "The key measurement is the **distensibility index (DI)**, essentially how floppy a sphincter is. A higher number means the valve opens more readily under pressure, which for the **gastroesophageal junction (GEJ)**, the muscular gate between esophagus and stomach, means stomach acid can escape upward more easily. The team also measured the **pylorus**, the valve at the stomach's exit.",
+      "title": "Measuring How Easily the Valves Open",
+      "markdown": "The researchers used EndoFlip, a balloon probe placed during endoscopy that measures how easily a sphincter stretches open. It reports a **distensibility index** (DI) in square millimetres of opening per mmHg of pressure. A higher DI means a looser sphincter that opens more easily. The team predicted that the operation would raise the DI at both the GEJ and the pylorus, the valve at the stomach's outlet.",
       "chart_ids": [],
       "figure_ids": []
     },
     {
       "id": "PMC10289900-section-3",
-      "title": "How the Study Was Run",
-      "markdown": "Nine patients at a Swiss university hospital were tested before surgery, during surgery, and again a year later, using endoscopy, pH-impedance monitoring (the standard test for acid exposure), manometry, and the EndoFlip. Reflux was classified by the Lyon Consensus definition: acid exposure time above 6 percent and more than 80 reflux episodes.",
+      "title": "Who Was Studied and How",
+      "markdown": "This pilot study followed nine adults with severe obesity at a Swiss university hospital. Each had EndoFlip measurements before surgery, during it and one year later, plus endoscopy, pressure testing of the esophagus and acid monitoring. A patient counted as having GERD if both of these held:\n\nacid exposure time above 6% and more than 80 reflux episodes",
       "chart_ids": [
-        "gerd-groups"
+        "flow"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC10289900-section-4",
-      "title": "Key Results and Findings",
-      "markdown": "Two findings stand out. Both valves loosened after surgery: GEJ distensibility roughly doubled (1.4 to 2.9 square millimeters per millimeter of mercury, p = 0.046), and pyloric distensibility also rose significantly (6.0 to 13.1, p = 0.046). The looser pylorus may explain faster stomach emptying after sleeve gastrectomy, which contradicts an earlier report by Desprez and colleagues.\n\nMore interesting for prediction: patients who had reflux a year after surgery already had a significantly looser GEJ *before* the operation (2.6 versus 0.5, p = 0.031). Weight loss at one year did not differ between the reflux and no-reflux groups, so the valve measurement, not the amount of weight lost, tracked with reflux.",
+      "title": "Key Results",
+      "markdown": "Results, with the balloon filled to 40 ml:\n\n- GEJ DI roughly doubled after surgery, from 1.4 to 2.9 mm2/mmHg (p = 0.046).\n- Pylorus DI rose from 6.0 to 13.1 mm2/mmHg (p = 0.046).\n- Seven patients had usable reflux data. The four with reflux one year after surgery had a looser GEJ before surgery than the three without (2.6 vs 0.5 mm2/mmHg, p = 0.031).\n- Weight loss did not differ between the reflux and no-reflux groups. Measurements taken during surgery and at one year did not separate the two groups either.",
       "chart_ids": [
-        "preop-di-by-gerd",
+        "di-by-reflux",
         "di-pre-post"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC10289900-section-5",
-      "title": "Limitations and What Comes Next",
-      "markdown": "With only nine patients, this is a signal rather than a conclusion. The authors note that reference values for normal distensibility don't yet exist, and larger studies are needed before the measurement can guide surgical decisions.",
+      "title": "What It Means and Its Limits",
+      "markdown": "According to the authors, a pre-surgery EndoFlip reading might identify patients likely to develop reflux after the operation. They suggest the looser pylorus may be linked to faster stomach emptying. That finding disagrees with an earlier study by Desprez and colleagues, which did not see the pylorus loosen. With only nine patients, the study was too small to support firm predictions. EndoFlip also has no established normal values yet, so the result needs confirming in larger studies.",
       "chart_ids": [],
       "figure_ids": []
     }
   ],
   "charts": [
     {
-      "id": "gej-di-headline",
+      "id": "gej-di-change",
       "kind": "stat",
-      "title": "Distensibility of the gastroesophageal junction one year after sleeve gastrectomy",
-      "subtitle": "Distensibility index at 40 mL filling, nine patients, with the range printed beside it",
+      "title": "Change in junction distensibility, before to one year after sleeve gastrectomy",
+      "subtitle": "",
       "data": [
         {
-          "label": "One year after sleeve gastrectomy",
-          "value": 2.9,
-          "low": 2.6,
-          "high": 5.3,
+          "label": "GEJ distensibility index at 40 ml, after minus before SG",
+          "value": 1.6,
+          "low": -0.5,
+          "high": 3.2,
           "n": null,
           "events": null,
           "group": "",
-          "note": "before surgery: 1.4",
+          "note": "",
           "higher_is_better": null,
           "provenance": {
-            "locator": "Sec3/p2",
-            "kind": "paragraph",
-            "quote": "the DI of the GEJ was significantly higher post-SG compared to the presurgical assessment (1.4 mm2/mmHg [1.1-2.6] vs. 2.9 mm2/mmHg [2.6–5.3], p value=0.046)",
-            "section": "Results"
+            "locator": "Tab2/r1/c4",
+            "kind": "table_cell",
+            "quote": "1.6 (−0.5–3.2)",
+            "section": "Results, Table 2"
           }
         }
       ],
       "annotation": null,
       "nodes": [],
       "edges": [],
+      "shape": "",
+      "unit": "mm2/mmHg",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Nine patients. The paper reports p=0.046 (Mann–Whitney U) while its printed 95% CI for this change, −0.5 to 3.2, includes zero.",
+      "source": "Table 2, GEJ distensibility index, change pre to post",
+      "section_id": "Sec3"
+    },
+    {
+      "id": "di-pre-post",
+      "kind": "bars",
+      "title": "Distensibility index at 40 ml filling, before and one year after sleeve gastrectomy",
+      "subtitle": "Nine patients. Whiskers show the bracketed spread the paper prints beside each value.",
+      "data": [
+        {
+          "label": "Gastroesophageal junction",
+          "value": 1.4,
+          "low": 1.1,
+          "high": 2.6,
+          "n": null,
+          "events": null,
+          "group": "Before SG",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab2/r1/c1",
+            "kind": "table_cell",
+            "quote": "1.4 (1.1–2.6)",
+            "section": "Results, Table 2"
+          }
+        },
+        {
+          "label": "Gastroesophageal junction",
+          "value": 2.9,
+          "low": 2.6,
+          "high": 5.3,
+          "n": null,
+          "events": null,
+          "group": "After SG",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab2/r1/c3",
+            "kind": "table_cell",
+            "quote": "2.9 (2.6–5.3)",
+            "section": "Results, Table 2"
+          }
+        },
+        {
+          "label": "Pylorus",
+          "value": 6.0,
+          "low": 4.1,
+          "high": 10.7,
+          "n": null,
+          "events": null,
+          "group": "Before SG",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab2/r3/c1",
+            "kind": "table_cell",
+            "quote": "6.0 (4.1–10.7)",
+            "section": "Results, Table 2"
+          }
+        },
+        {
+          "label": "Pylorus",
+          "value": 13.1,
+          "low": 7.6,
+          "high": 19.2,
+          "n": null,
+          "events": null,
+          "group": "After SG",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab2/r3/c3",
+            "kind": "table_cell",
+            "quote": "13.1 (7.6–19.2)",
+            "section": "Results, Table 2"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "shape": "",
       "unit": "mm2/mmHg",
       "value_label": "Distensibility index (mm2/mmHg)",
       "category_label": "",
@@ -97,108 +200,18 @@
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "Pilot study of nine patients; the paper states it was insufficiently powered for in-depth analysis.",
-      "source": "Results, distensibility index at 40 mL",
+      "caveat": "The paper does not say what the bracketed spread is. Both changes are reported with p=0.046.",
+      "source": "Table 2, distensibility index at 40 ml",
       "section_id": "Sec3"
     },
     {
-      "id": "di-pre-post",
-      "kind": "bars",
-      "title": "Distensibility of the gastroesophageal junction and the pylorus, before and one year after surgery",
-      "subtitle": "Distensibility index at 40 mL filling, both comparisons reported at p=0.046",
-      "data": [
-        {
-          "label": "GEJ, before surgery",
-          "value": 1.4,
-          "low": 1.1,
-          "high": 2.6,
-          "n": null,
-          "events": null,
-          "group": "Gastroesophageal junction",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec3/p2",
-            "kind": "paragraph",
-            "quote": "the DI of the GEJ was significantly higher post-SG compared to the presurgical assessment (1.4 mm2/mmHg [1.1-2.6] vs. 2.9 mm2/mmHg [2.6–5.3], p value=0.046)",
-            "section": "Results"
-          }
-        },
-        {
-          "label": "GEJ, one year after surgery",
-          "value": 2.9,
-          "low": 2.6,
-          "high": 5.3,
-          "n": null,
-          "events": null,
-          "group": "Gastroesophageal junction",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec3/p2",
-            "kind": "paragraph",
-            "quote": "the DI of the GEJ was significantly higher post-SG compared to the presurgical assessment (1.4 mm2/mmHg [1.1-2.6] vs. 2.9 mm2/mmHg [2.6–5.3], p value=0.046)",
-            "section": "Results"
-          }
-        },
-        {
-          "label": "Pylorus, before surgery",
-          "value": 6.0,
-          "low": 4.1,
-          "high": 10.7,
-          "n": null,
-          "events": null,
-          "group": "Pylorus",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec3/p2",
-            "kind": "paragraph",
-            "quote": "Pylorus DI significantly increased post-SG (6.0 mm2/mmHg [4.1–10.7] vs. 13.1 mm2/mmHg [7.6–19.2], p value=0.046).",
-            "section": "Results"
-          }
-        },
-        {
-          "label": "Pylorus, one year after surgery",
-          "value": 13.1,
-          "low": 7.6,
-          "high": 19.2,
-          "n": null,
-          "events": null,
-          "group": "Pylorus",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec3/p2",
-            "kind": "paragraph",
-            "quote": "Pylorus DI significantly increased post-SG (6.0 mm2/mmHg [4.1–10.7] vs. 13.1 mm2/mmHg [7.6–19.2], p value=0.046).",
-            "section": "Results"
-          }
-        }
-      ],
-      "annotation": null,
-      "nodes": [],
-      "edges": [],
-      "unit": "mm2/mmHg",
-      "value_label": "Distensibility index (mm2/mmHg)",
-      "category_label": "Site and timepoint",
-      "log_scale": false,
-      "null_value": null,
-      "lower_is_better": true,
-      "favours_left": "",
-      "favours_right": "",
-      "caveat": "Nine patients. The bracketed ranges are those printed beside each value in the text, not confidence intervals for the change.",
-      "source": "Results and Table 2, distensibility index at 40 mL",
-      "section_id": "Sec3"
-    },
-    {
-      "id": "gerd-groups",
+      "id": "flow",
       "kind": "flow",
-      "title": "How the nine patients were grouped for the reflux comparison",
+      "title": "Who was measured and who entered the reflux comparison",
       "subtitle": "",
       "data": [
         {
-          "label": "Patients with complete EndoFlip data",
+          "label": "Enrolled with pre- and postoperative EndoFlip",
           "value": 9.0,
           "low": null,
           "high": null,
@@ -215,44 +228,45 @@
           }
         },
         {
-          "label": "Reflux disease at one year",
+          "label": "Reflux at 1 year (de novo or stable)",
           "value": 4.0,
           "low": null,
           "high": null,
           "n": null,
           "events": null,
           "group": "",
-          "note": "de novo or stable GERD",
+          "note": "",
           "higher_is_better": null,
           "provenance": {
             "locator": "Sec4/p1",
             "kind": "paragraph",
             "quote": "The post-GERD (pGERD) group (de novo or stable GERD, n=4/9)",
-            "section": "Results, Gastroesophageal reflux disease"
+            "section": "Gastroesophageal Reflux Disease"
           }
         },
         {
-          "label": "No reflux disease at one year",
+          "label": "No reflux at 1 year (resolved or never)",
           "value": 3.0,
           "low": null,
           "high": null,
           "n": null,
           "events": null,
           "group": "",
-          "note": "resolved or no GERD",
+          "note": "",
           "higher_is_better": null,
           "provenance": {
             "locator": "Sec4/p1",
             "kind": "paragraph",
-            "quote": "was compared to the no post-GERD (npGERD) group (resolution of or no GERD, n=3/9)",
-            "section": "Results, Gastroesophageal reflux disease"
+            "quote": "the no post-GERD (npGERD) group (resolution of or no GERD, n=3/9)",
+            "section": "Gastroesophageal Reflux Disease"
           }
         }
       ],
       "annotation": null,
       "nodes": [],
       "edges": [],
-      "unit": "patients",
+      "shape": "",
+      "unit": "",
       "value_label": "",
       "category_label": "",
       "log_scale": false,
@@ -260,107 +274,282 @@
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "Two patients with insufficient reflux data, one converted to gastric bypass and one without pH-impedance monitoring, were excluded from this comparison.",
-      "source": "Results, reflux disease groups",
+      "caveat": "Two of the nine lacked enough reflux data (one converted to gastric bypass, one had no pH-impedance monitoring) and were left out of the reflux comparison.",
+      "source": "Table 1 and the reflux section of the Results",
       "section_id": "Sec4"
     },
     {
-      "id": "preop-di-by-gerd",
+      "id": "di-by-reflux",
       "kind": "bars",
-      "title": "Distensibility of the gastroesophageal junction before surgery, by reflux status one year later",
-      "subtitle": "Distensibility index at 40 mL filling, measured before the operation",
+      "title": "Distensibility index by reflux status one year after sleeve gastrectomy",
+      "subtitle": "Measured before surgery and one year after, at 40 ml filling. Whiskers show the bracketed spread the paper prints.",
       "data": [
         {
-          "label": "Reflux disease at one year",
+          "label": "GEJ, before SG",
           "value": 2.6,
           "low": 1.9,
           "high": 3.5,
           "n": null,
           "events": null,
-          "group": "",
-          "note": "n=4",
+          "group": "Reflux at 1 year (n=4)",
+          "note": "",
           "higher_is_better": null,
           "provenance": {
-            "locator": "Sec4/p2",
-            "kind": "paragraph",
-            "quote": "Preoperatively obtained DI (40 ml) of the GEJ were significantly different between the pGERD group and npGERD group (2.6 mm2/mmHg [1.9–3.5] vs. 0.5 mm2/mmHg [0.5–1.1], p value=0.031)",
-            "section": "Results, Gastroesophageal reflux disease"
+            "locator": "Tab3/r2/c1",
+            "kind": "table_cell",
+            "quote": "2.6 (1.9–3.5)",
+            "section": "Gastroesophageal Reflux Disease, Table 3"
           }
         },
         {
-          "label": "No reflux disease at one year",
+          "label": "GEJ, before SG",
           "value": 0.5,
           "low": 0.5,
           "high": 1.1,
           "n": null,
           "events": null,
-          "group": "",
-          "note": "n=3",
+          "group": "No reflux at 1 year (n=3)",
+          "note": "",
           "higher_is_better": null,
           "provenance": {
-            "locator": "Sec4/p2",
-            "kind": "paragraph",
-            "quote": "Preoperatively obtained DI (40 ml) of the GEJ were significantly different between the pGERD group and npGERD group (2.6 mm2/mmHg [1.9–3.5] vs. 0.5 mm2/mmHg [0.5–1.1], p value=0.031)",
-            "section": "Results, Gastroesophageal reflux disease"
+            "locator": "Tab3/r2/c2",
+            "kind": "table_cell",
+            "quote": "0.5 (0.5–1.1)",
+            "section": "Gastroesophageal Reflux Disease, Table 3"
+          }
+        },
+        {
+          "label": "GEJ, after SG",
+          "value": 5.2,
+          "low": 3.7,
+          "high": 5.8,
+          "n": null,
+          "events": null,
+          "group": "Reflux at 1 year (n=4)",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab4/r2/c1",
+            "kind": "table_cell",
+            "quote": "5.2 (3.7–5.8)",
+            "section": "Gastroesophageal Reflux Disease, Table 4"
+          }
+        },
+        {
+          "label": "GEJ, after SG",
+          "value": 2.8,
+          "low": 1.7,
+          "high": 2.9,
+          "n": null,
+          "events": null,
+          "group": "No reflux at 1 year (n=3)",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab4/r2/c2",
+            "kind": "table_cell",
+            "quote": "2.8 (1.7–2.9)",
+            "section": "Gastroesophageal Reflux Disease, Table 4"
+          }
+        },
+        {
+          "label": "Pylorus, before SG",
+          "value": 7.7,
+          "low": 5.2,
+          "high": 10.7,
+          "n": null,
+          "events": null,
+          "group": "Reflux at 1 year (n=4)",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab3/r4/c1",
+            "kind": "table_cell",
+            "quote": "7.7 (5.2–10.7)",
+            "section": "Gastroesophageal Reflux Disease, Table 3"
+          }
+        },
+        {
+          "label": "Pylorus, before SG",
+          "value": 8.2,
+          "low": 3.8,
+          "high": 12.5,
+          "n": null,
+          "events": null,
+          "group": "No reflux at 1 year (n=3)",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab3/r4/c2",
+            "kind": "table_cell",
+            "quote": "8.2 (3.8–12.5)",
+            "section": "Gastroesophageal Reflux Disease, Table 3"
+          }
+        },
+        {
+          "label": "Pylorus, after SG",
+          "value": 10.7,
+          "low": 7.6,
+          "high": 14.6,
+          "n": null,
+          "events": null,
+          "group": "Reflux at 1 year (n=4)",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab4/r4/c1",
+            "kind": "table_cell",
+            "quote": "10.7 (7.6–14.6)",
+            "section": "Gastroesophageal Reflux Disease, Table 4"
+          }
+        },
+        {
+          "label": "Pylorus, after SG",
+          "value": 14.0,
+          "low": 5.3,
+          "high": 22.3,
+          "n": null,
+          "events": null,
+          "group": "No reflux at 1 year (n=3)",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Tab4/r4/c2",
+            "kind": "table_cell",
+            "quote": "14.0 (5.3–22.3)",
+            "section": "Gastroesophageal Reflux Disease, Table 4"
           }
         }
       ],
       "annotation": {
-        "target": "Reflux disease at one year",
-        "text": "Before surgery, 2.6 versus 0.5 mm2/mmHg, p value 0.031"
+        "target": "GEJ, before SG",
+        "text": "Before surgery, junction DI was 2.6 in the later-reflux group vs 0.5, p=0.031"
       },
       "nodes": [],
       "edges": [],
+      "shape": "",
       "unit": "mm2/mmHg",
       "value_label": "Distensibility index (mm2/mmHg)",
-      "category_label": "Reflux status one year after surgery",
+      "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "Seven patients in total. The pyloric distensibility index before surgery did not differ between the groups, p value 1.000.",
-      "source": "Table 3, preoperative EndoFlip by reflux status",
+      "caveat": "Four versus three patients. The authors say the study was insufficiently powered to predict reflux after SG. The other three comparisons had p above 0.05.",
+      "source": "Tables 3 and 4, distensibility index at 40 ml",
       "section_id": "Sec4"
     }
   ],
   "figures": [],
   "absolute_risk": null,
   "absolute_risk_derived": null,
-  "terms": [],
+  "terms": [
+    {
+      "term": "Distensibility index (DI)",
+      "definition": "An EndoFlip measure of how easily a sphincter opens: the narrowest cross-sectional area of the balloon divided by the pressure inside it, in mm2/mmHg.",
+      "provenance": null
+    },
+    {
+      "term": "EndoFlip",
+      "definition": "An endoscopic functional luminal imaging probe: a balloon catheter placed across a sphincter that measures its diameter and pressure as the balloon is filled, here to 40 ml.",
+      "provenance": null
+    },
+    {
+      "term": "Gastroesophageal junction (GEJ)",
+      "definition": "The valve region where the oesophagus meets the stomach, also called the lower oesophageal sphincter.",
+      "provenance": {
+        "locator": "Sec1/p1",
+        "kind": "paragraph",
+        "quote": "The gastroesophageal junction (GEJ) (often also referred to as the lower esophageal sphincter) plays an essential role in the complex pathophysiology of GERD",
+        "section": "Introduction"
+      }
+    },
+    {
+      "term": "GERD",
+      "definition": "Gastroesophageal reflux disease; in this study, acid exposure in the lower oesophagus above 6% of the time plus more than 80 reflux episodes on pH-impedance monitoring.",
+      "provenance": {
+        "locator": "Sec2/p1",
+        "kind": "paragraph",
+        "quote": "GERD was defined (Lyon Consensus 2018) as distal oesophageal acid (pH<4) exposure time >6% and a total number of reflux episodes >80 (as per pH-impedance monitoring)",
+        "section": "Materials and Methods"
+      }
+    },
+    {
+      "term": "Post-GERD group",
+      "definition": "Patients with reflux one year after surgery, whether new (de novo) or persisting (stable). The no post-GERD group had reflux that resolved or never had reflux.",
+      "provenance": {
+        "locator": "Sec4/p1",
+        "kind": "paragraph",
+        "quote": "The post-GERD (pGERD) group (de novo or stable GERD, n=4/9) was compared to the no post-GERD (npGERD) group (resolution of or no GERD, n=3/9).",
+        "section": "Gastroesophageal Reflux Disease"
+      }
+    },
+    {
+      "term": "Sleeve gastrectomy (SG)",
+      "definition": "A weight-loss operation that removes most of the stomach and leaves a narrow tube along the lesser curve.",
+      "provenance": null
+    },
+    {
+      "term": "Pylorus",
+      "definition": "The muscular valve at the stomach outlet that controls emptying into the duodenum.",
+      "provenance": null
+    }
+  ],
   "links": [
     {
       "section_id": "PMC10289900-section-4",
-      "sentence": "Both valves loosened after surgery: GEJ distensibility roughly doubled (1.4 to 2.9 square millimeters per millimeter of mercury, p = 0.046), and pyloric distensibility also rose significantly (6.0 to 13.1, p = 0.046).",
+      "sentence": "- GEJ DI roughly doubled after surgery, from 1.4 to 2.9 mm2/mmHg (p = 0.046).",
+      "chart_id": "di-pre-post",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "- Pylorus DI rose from 6.0 to 13.1 mm2/mmHg (p = 0.046).",
       "chart_id": "di-pre-post",
       "kind": "datum",
       "index": 2
     },
     {
       "section_id": "PMC10289900-section-4",
-      "sentence": "More interesting for prediction: patients who had reflux a year after surgery already had a significantly looser GEJ *before* the operation (2.6 versus 0.5, p = 0.031).",
-      "chart_id": "di-pre-post",
+      "sentence": "The four with reflux one year after surgery had a looser GEJ before surgery than the three without (2.6 vs 0.5 mm2/mmHg, p = 0.031).",
+      "chart_id": "di-by-reflux",
       "kind": "datum",
       "index": 1
     }
   ],
-  "sources": {},
+  "sources": {
+    "Tab2/r1/c4": "DI [mm2/mmHg] 1.6 (−0.5–3.2)",
+    "Tab2/r1/c1": "DI [mm2/mmHg] 1.4 (1.1–2.6)",
+    "Tab2/r1/c3": "DI [mm2/mmHg] 2.9 (2.6–5.3)",
+    "Tab2/r3/c1": "DI [mm2/mmHg] 6.0 (4.1–10.7)",
+    "Tab2/r3/c3": "DI [mm2/mmHg] 13.1 (7.6–19.2)",
+    "Tab1/r0/c0": "n=9 n=9",
+    "Sec4/p1": "The post-GERD (pGERD) group (de novo or stable GERD, n=4/9) was compared to the no post-GERD (npGERD) group (resolution of or no GERD, n=3/9). Two patients with insufficient GERD data (one conversion to gastric bypass and one without pH-impedance monitoring) were excluded from further analysis. Neither %EWL (p value=0.229), %TWL (p value=0.857), %EBMIL (p value=0.229), nor delta BMI (p value=0.114) at 1 year were significantly different between pGERD and npGERD.",
+    "Tab3/r2/c1": "DI [mm2/mmHg] 2.6 (1.9–3.5)",
+    "Tab3/r2/c2": "DI [mm2/mmHg] 0.5 (0.5–1.1)",
+    "Tab4/r2/c1": "DI [mm2/mmHg] 5.2 (3.7–5.8)",
+    "Tab4/r2/c2": "DI [mm2/mmHg] 2.8 (1.7–2.9)",
+    "Tab3/r4/c1": "DI [mm2/mmHg] 7.7 (5.2–10.7)",
+    "Tab3/r4/c2": "DI [mm2/mmHg] 8.2 (3.8–12.5)",
+    "Tab4/r4/c1": "DI [mm2/mmHg] 10.7 (7.6–14.6)",
+    "Tab4/r4/c2": "DI [mm2/mmHg] 14.0 (5.3–22.3)",
+    "Sec3/p2": "EndoFlipTM at 40 ml the DI of the GEJ was significantly higher post-SG compared to the presurgical assessment (1.4 mm2/mmHg [1.1-2.6] vs. 2.9 mm2/mmHg [2.6–5.3], p value=0.046) (Table , Fig. , and Suppl. Table & ). Pylorus DI significantly increased post-SG (6.0 mm2/mmHg [4.1–10.7] vs. 13.1 mm2/mmHg [7.6–19.2], p value=0.046).",
+    "Sec1/p1": "A major drawback of sleeve gastrectomy (SG) is the postoperative development of “de novo” or worsening gastroesophageal reflux disease (GERD) [–]. GERD is considered a risk factor for long-term complications and decreases the quality of life [–]. The gastroesophageal junction (GEJ) (often also referred to as the lower esophageal sphincter) plays an essential role in the complex pathophysiology of GERD, and a better understanding of the associated anatomical and functions is necessary. To date, the usefulness of an endoscopic functional luminal imaging probe (EndoFlip™) in bariatric patients before and after SG to assess the pathophysiological changes in the gastroesophageal junction (GEJ) and pylorus with regard to GERD is poorly described. We hypothesized that SG leads to increased distensibility indices (DI) of the GEJ and the pylorus.",
+    "Sec2/p1": "This prospective diagnostic observational study included patients (informed consent, ≥18 years, BMI ≥35 kg/m2, fulfillment of the Swiss Society for the Study of morbid obesity and metabolic disorders guidelines criteria) undergoing elective SG at a tertiary care university hospital. The study was approved by the local ethics committee (BASEC ID 2017-00923). Exclusion criteria were pregnancy or breastfeeding, oral anticoagulant, known bleeding disorder, and contraindication for endoscopic examination. Patients underwent esophago-gastro-duodenoscopy (EGD), pH-impedance monitoring, high-resolution manometry, and EndoFlip™ (Crospon Medical Devices, Galway, Ireland). GERD was defined (Lyon Consensus 2018) as distal oesophageal acid (pH<4) exposure time >6% and a total number of reflux episodes >80 (as per pH-impedance monitoring) [] and was differentiated between no, stable, de novo, or resolved status when comparing pre and postoperative data. Bariatric outcomes were reported in accordance with the American Society for Metabolic and Bariatric Surgery (ASMBS) guidelines []. Statistical analysis (categorical by Pearson chi-square test and continuous by Mann–Whitney U test) was performed using SPSS Statistics version 25 (IBM Corporation, Armonk, New York)."
+  },
   "verification": {
-    "checked": 14,
-    "passed": 12,
+    "checked": 19,
+    "passed": 18,
     "rejections": [
       {
-        "what": "proposed-pathway:sg->gej",
-        "locator": "Sec5/p1",
-        "reason": "no sentence in the quote links both ends of the arrow"
-      },
-      {
-        "what": "proposed-pathway:gej->gerd",
-        "locator": "Sec5/p1",
+        "what": "why-pylorus:sg->pyl",
+        "locator": "Sec5/p4",
         "reason": "no sentence in the quote links both ends of the arrow"
       }
     ],
-    "prose_checked": 0,
+    "prose_checked": 11,
     "prose_unmatched": []
   },
   "notes": []
