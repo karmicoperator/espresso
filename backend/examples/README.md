@@ -1,8 +1,10 @@
 # Seeded papers
 
-These explainers ship with the app so the library is not empty on first launch. Each
-file carries the paper's section text alongside the generated prose and charts, so
-only papers under a Creative Commons licence are included. Attribution:
+These papers ship with the app so the library is not empty on first launch. For each
+one, `explainers/` holds the generated page (prose, charts, and verbatim quotes as the
+provenance of every value), `papers/` the paper's section text, and `figures/` figures
+reproduced from the paper. Because all three copy or adapt the paper, only papers under
+a Creative Commons licence that allows it are included. Attribution:
 
 | PMC | Paper | Journal, year | Licence |
 |---|---|---|---|
@@ -18,5 +20,6 @@ only papers under a Creative Commons licence are included. Attribution:
 
 Each paper is at `https://pmc.ncbi.nlm.nih.gov/articles/<PMC>/`. The NC licences allow
 this non-commercial redistribution; the code's MIT licence does not extend to the papers.
-Papers under NC-ND or publisher terms (NEJM's SPRINT, RECOVERY and BNT162b2 reports) were
-removed before the repository went public; build them yourself from their PubMed links.
+Papers under NC-ND or publisher terms (NEJM's SPRINT, RECOVERY and BNT162b2 reports) and
+papers built from PDFs whose licence was not checked are not shipped; build them yourself
+from their PubMed links or PDFs.
