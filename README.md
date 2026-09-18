@@ -115,9 +115,13 @@ docs/FINDINGS.md    what was tried, what failed, and why.
 
 ## Status
 
-116 backend tests; ruff, tsc and eslint clean. Limits, each one observed: a paper neither in PMC nor available to you as a PDF cannot be built; a PDF build cannot
+117 backend tests; ruff, tsc and eslint clean. Limits, each one observed: a paper neither in PMC nor available to you as a PDF cannot be built; a PDF build cannot
 cite table cells; the anchoring cannot judge a paraphrase that keeps the numbers and the
 terms and changes the meaning, which is why the paper is one click away.
 
-Forked from [arXivisual](https://github.com/rajshah6/arXivisual), see the top of this
-page. The upstream repository ships no licence; this one is private.
+## Licence
+
+MIT, see `LICENSE`. That covers the work in this repository. The upstream
+[arXivisual](https://github.com/rajshah6/arXivisual) ships no licence file, so the parts
+that survive from it (the idea and the reader's look) stay with their author until he
+puts a licence on them.
