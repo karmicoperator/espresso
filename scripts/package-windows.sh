@@ -1,33 +1,28 @@
 #!/bin/bash
-# Build dist/espresso-windows.zip: the source at HEAD in an `espresso` folder, with
-# "Start espresso.bat" at its top so the first thing a person sees after unzipping is what
-# to double-click. That runs windows\espresso.ps1, which fetches uv and Node into
-# %LOCALAPPDATA%\espresso\tools, builds, starts and opens the browser.
+# Build dist/espresso-Windows-setup.exe: a per-user installer (windows/installer.nsi) holding
+# the source at HEAD. It installs without an administrator password, adds Start menu and
+# desktop shortcuts, and registers an uninstaller under Settings, Apps.
 #
-# Windows marks a downloaded zip as coming from the internet, so the first double-click may
-# say the publisher could not be verified: More info, Run anyway. The launcher is untested
-# on a real Windows machine; its log says which step failed if one does.
+# Needs makensis (NSIS 3): `brew install makensis` on a Mac; GitHub's Windows runners have it,
+# and .github/workflows/windows.yml builds the installer there and tests it end to end.
 set -eu
 cd "$(dirname "$0")/.."
 DIST="$PWD/dist"
 VERSION=$(git rev-parse --short HEAD)
+command -v makensis >/dev/null || { echo "makensis (NSIS 3) is needed: brew install makensis" >&2; exit 1; }
 WORK=$(mktemp -d); trap 'rm -rf "$WORK"' EXIT
-OUT="$WORK/espresso"
-mkdir -p "$OUT" "$DIST"
+PAYLOAD="$WORK/payload"
+mkdir -p "$PAYLOAD" "$DIST"
 
 # Tracked files only, so nothing local (data, .env, builds) can leak into the download.
-git ls-files -z | COPYFILE_DISABLE=1 tar --null -T - -cf - | tar -xf - -C "$OUT"
-echo "$VERSION" > "$OUT/VERSION"
-
-printf '%s\r\n' '@echo off' \
-  'rem espresso: double-click to start. The first run fetches Python and Node.js and builds' \
-  'rem the app, about five minutes; later runs take seconds. The browser opens by itself.' \
-  'rem Keep the window open while you use espresso; Ctrl-C in it stops espresso.' \
-  'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0windows\espresso.ps1"' \
-  > "$OUT/Start espresso.bat"
+git ls-files -z | COPYFILE_DISABLE=1 tar --null -T - -cf - | tar -xf - -C "$PAYLOAD"
+echo "$VERSION" > "$PAYLOAD/VERSION"
 # cmd.exe expects Windows line endings in batch files.
-perl -pi -e 's/\r?\n/\r\n/' "$OUT"/windows/*.bat
+perl -pi -e 's/\r?\n/\r\n/' "$PAYLOAD"/windows/*.bat
 
-rm -f "$DIST/espresso-windows.zip"
-( cd "$WORK" && zip -qrX "$DIST/espresso-windows.zip" espresso )
-echo "built $DIST/espresso-windows.zip ($VERSION), $(du -sh "$DIST/espresso-windows.zip" | cut -f1)"
+# makensis on Windows wants Windows paths; Git Bash's cygpath gives them.
+winpath() { if command -v cygpath >/dev/null; then cygpath -w "$1"; else echo "$1"; fi; }
+rm -f "$DIST/espresso-Windows-setup.exe" "$DIST/espresso-windows.zip"
+makensis -V2 -DVERSION="$VERSION" -DPAYLOAD="$(winpath "$PAYLOAD")" \
+  -DOUTFILE="$(winpath "$DIST/espresso-Windows-setup.exe")" windows/installer.nsi
+echo "built $DIST/espresso-Windows-setup.exe ($VERSION), $(du -sh "$DIST/espresso-Windows-setup.exe" | cut -f1)"

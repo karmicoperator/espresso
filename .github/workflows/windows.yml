@@ -1,0 +1,121 @@
+# Builds the Windows installer and runs it end to end on a real Windows machine, the way a
+# person would meet it: install, first start, a second start, an update over the top that
+# must keep the papers, the tray, stopping, and uninstalling.
+name: Windows installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [medical]
+    paths:
+      - "windows/**"
+      - "scripts/package-windows.sh"
+      - ".github/workflows/windows.yml"
+
+jobs:
+  install-and-run:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      # Git for Windows turns LF into CRLF on checkout, which breaks the bash packager.
+      - run: git config --global core.autocrlf false
+        shell: bash
+      - uses: actions/checkout@v4
+
+      - name: Build the installer
+        shell: bash
+        run: |
+          export PATH="/c/Program Files (x86)/NSIS:$PATH"
+          command -v makensis || choco install nsis -y --no-progress
+          export PATH="/c/Program Files (x86)/NSIS:$PATH"
+          bash scripts/package-windows.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: espresso-Windows-setup
+          path: dist/espresso-Windows-setup.exe
+
+      - name: Install, silently and without admin rights
+        shell: powershell
+        run: |
+          $p = Start-Process dist\espresso-Windows-setup.exe -ArgumentList "/S" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "installer exited $($p.ExitCode)" }
+          $app = "$env:LOCALAPPDATA\Programs\espresso"
+          foreach ($f in "$app\windows\espresso.ps1", "$app\uninstall.exe", "$app\VERSION",
+                         "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\espresso.lnk") {
+            if (-not (Test-Path $f)) { throw "missing after install: $f" }
+          }
+          $entry = Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\espresso"
+          "Installed version $($entry.DisplayVersion) at $($entry.InstallLocation)"
+
+      - name: First start, from nothing
+        shell: powershell
+        timeout-minutes: 25
+        run: |
+          $app = "$env:LOCALAPPDATA\Programs\espresso"
+          $t = Measure-Command { & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1" -NoUI }
+          Get-Content "$env:LOCALAPPDATA\espresso\logs\launcher.log"
+          if ($LASTEXITCODE -ne 0) { Get-Content "$env:LOCALAPPDATA\espresso\logs\setup.log" -Tail 60; throw "first start failed" }
+          "First start took $([int]$t.TotalMinutes) min $($t.Seconds) s"
+          $health = Invoke-RestMethod http://127.0.0.1:8000/api/health
+          if ($health.app -ne "espresso") { throw "API did not answer as espresso" }
+          $page = Invoke-WebRequest http://127.0.0.1:3000/ -UseBasicParsing
+          if ($page.Content -notmatch "espresso") { throw "web app did not answer as espresso" }
+          "API and web app answer; papers in the library: $($health.services.explainers_built)"
+
+      - name: A second start finds it running
+        shell: powershell
+        run: |
+          $app = "$env:LOCALAPPDATA\Programs\espresso"
+          $t = Measure-Command { & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1" -NoUI }
+          if ($LASTEXITCODE -ne 0) { throw "second start failed" }
+          if ($t.TotalSeconds -gt 60) { throw "second start took $($t.TotalSeconds) s" }
+          "Second start returned in $([int]$t.TotalSeconds) s"
+
+      - name: The tray starts, adopts the servers, and quits them
+        shell: powershell
+        timeout-minutes: 5
+        env:
+          ESPRESSO_TEST_QUIT: "1"
+        run: |
+          $app = "$env:LOCALAPPDATA\Programs\espresso"
+          & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1"
+          if ($LASTEXITCODE -ne 0) { Get-Content "$env:LOCALAPPDATA\espresso\logs\launcher.log"; throw "tray run failed" }
+          Start-Sleep -Seconds 3
+          $still = Get-NetTCPConnection -LocalPort 8000, 3000 -State Listen -ErrorAction SilentlyContinue
+          if ($still) { throw "Quit left a server listening" }
+          "Tray quit stopped both servers"
+
+      - name: An update over the top keeps the papers and packages
+        shell: powershell
+        timeout-minutes: 20
+        run: |
+          $app = "$env:LOCALAPPDATA\Programs\espresso"
+          Set-Content "$app\backend\data\explainers\marker-from-before.json" "{}"
+          $p = Start-Process dist\espresso-Windows-setup.exe -ArgumentList "/S" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "update exited $($p.ExitCode)" }
+          foreach ($keep in "backend\data\explainers\marker-from-before.json", "backend\.venv", "frontend\node_modules") {
+            if (-not (Test-Path "$app\$keep")) { throw "the update removed $keep" }
+          }
+          if (Test-Path "$app\frontend\.next") { throw "the update kept the old web build" }
+          Remove-Item "$app\backend\data\explainers\marker-from-before.json"
+          & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1" -NoUI
+          if ($LASTEXITCODE -ne 0) { Get-Content "$env:LOCALAPPDATA\espresso\logs\setup.log" -Tail 40; throw "start after update failed" }
+          "Update kept the papers and packages, rebuilt, and started"
+
+      - name: Stop, then uninstall
+        shell: powershell
+        run: |
+          $app = "$env:LOCALAPPDATA\Programs\espresso"
+          & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1" -Stop
+          Start-Sleep -Seconds 3
+          if (Get-NetTCPConnection -LocalPort 8000, 3000 -State Listen -ErrorAction SilentlyContinue) { throw "-Stop left a server listening" }
+          Start-Process "$app\uninstall.exe" -ArgumentList "/S" -Wait
+          # The uninstaller copies itself elsewhere and returns at once; wait for it to finish.
+          for ($i = 0; $i -lt 60 -and (Test-Path "$app\windows"); $i++) { Start-Sleep -Seconds 2 }
+          if (Test-Path "$app\windows") { throw "uninstall left the app" }
+          if (-not (Test-Path "$app\backend\data\explainers")) { throw "a silent uninstall must keep the papers" }
+          if (Test-Path "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\espresso.lnk") { throw "uninstall left the shortcut" }
+          if (Test-Path "$env:LOCALAPPDATA\espresso") { throw "uninstall left the downloaded tools" }
+          if (Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\espresso") { throw "uninstall left the Apps entry" }
+          "Stopped and uninstalled; the papers were kept"
