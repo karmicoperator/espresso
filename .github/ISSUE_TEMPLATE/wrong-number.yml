@@ -1,0 +1,58 @@
+name: A wrong number
+description: espresso shows a number, or says something, that the paper does not support.
+title: "Wrong number: "
+labels: ["wrong number"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you. Every value espresso charts should trace to a verbatim quote from the paper, so a
+        wrong one is exactly what needs finding. These fields are what it takes to check it.
+  - type: input
+    id: paper
+    attributes:
+      label: The paper
+      description: The PubMed, PMC or DOI link you built it from, or the PDF's title.
+      placeholder: https://pubmed.ncbi.nlm.nih.gov/38740993/
+    validations:
+      required: true
+  - type: textarea
+    id: shown
+    attributes:
+      label: What espresso shows
+      description: The number and where it is (the chart's title, or the section and the sentence).
+      placeholder: 'Chart "Patients moving into lower size categories": semaglutide 41.2%'
+    validations:
+      required: true
+  - type: textarea
+    id: paper-says
+    attributes:
+      label: What the paper says
+      description: The paper's own words or table cell, and where they are (section, table, page).
+      placeholder: 'Table 2, page 5: "41.2% vs 18.0%" ...'
+    validations:
+      required: true
+  - type: dropdown
+    id: model
+    attributes:
+      label: The model it was built with
+      description: From Settings in espresso.
+      options:
+        - Claude Code
+        - Anthropic API key
+        - OpenAI or an OpenAI-compatible endpoint
+        - Azure OpenAI
+        - DeepSeek
+        - Kimi
+        - Qwen
+        - GLM
+        - Not sure
+    validations:
+      required: false
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: A screenshot, if you have one
+      description: Drag it in here.
+    validations:
+      required: false
