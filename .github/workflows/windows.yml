@@ -53,10 +53,17 @@ jobs:
         timeout-minutes: 25
         run: |
           $app = "$env:LOCALAPPDATA\Programs\espresso"
-          $t = Measure-Command { & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1" -NoUI }
+          # Its own window, not this step's pipes, and a deadline: a hang shows as a failure
+          # with the launcher's log, not as a silent timeout.
+          $t0 = Get-Date
+          $p = Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$app\windows\espresso.ps1`" -NoUI" -PassThru
+          $null = $p.Handle
+          $done = $p.WaitForExit(20 * 60 * 1000)
           Get-Content "$env:LOCALAPPDATA\espresso\logs\launcher.log"
-          if ($LASTEXITCODE -ne 0) { Get-Content "$env:LOCALAPPDATA\espresso\logs\setup.log" -Tail 60; throw "first start failed" }
-          "First start took $([int]$t.TotalMinutes) min $($t.Seconds) s"
+          if (-not $done) { Get-Content "$env:LOCALAPPDATA\espresso\logs\setup.log" -Tail 60; throw "first start did not finish in 20 minutes" }
+          if ($p.ExitCode -ne 0) { Get-Content "$env:LOCALAPPDATA\espresso\logs\setup.log" -Tail 60; throw "first start failed ($($p.ExitCode))" }
+          $t = (Get-Date) - $t0
+          "First start took $([int][math]::Floor($t.TotalMinutes)) min $($t.Seconds) s"
           $health = Invoke-RestMethod http://127.0.0.1:8000/api/health
           if ($health.app -ne "espresso") { throw "API did not answer as espresso" }
           $page = Invoke-WebRequest http://127.0.0.1:3000/ -UseBasicParsing
@@ -65,12 +72,15 @@ jobs:
 
       - name: A second start finds it running
         shell: powershell
+        timeout-minutes: 3
         run: |
           $app = "$env:LOCALAPPDATA\Programs\espresso"
-          $t = Measure-Command { & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1" -NoUI }
+          # Called directly, sharing this step's output: this returns only if the launcher
+          # keeps the servers off its own output handles.
+          $t0 = Get-Date
+          & powershell -NoProfile -ExecutionPolicy Bypass -File "$app\windows\espresso.ps1" -NoUI
           if ($LASTEXITCODE -ne 0) { throw "second start failed" }
-          if ($t.TotalSeconds -gt 60) { throw "second start took $($t.TotalSeconds) s" }
-          "Second start returned in $([int]$t.TotalSeconds) s"
+          "Second start returned in $([int]((Get-Date) - $t0).TotalSeconds) s"
 
       - name: The tray starts, adopts the servers, and quits them
         shell: powershell
@@ -119,3 +129,17 @@ jobs:
           if (Test-Path "$env:LOCALAPPDATA\espresso") { throw "uninstall left the downloaded tools" }
           if (Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\espresso") { throw "uninstall left the Apps entry" }
           "Stopped and uninstalled; the papers were kept"
+
+      - name: Keep the logs
+        if: always()
+        shell: powershell
+        run: |
+          New-Item -ItemType Directory -Force ci-logs | Out-Null
+          if (Test-Path "$env:LOCALAPPDATA\espresso\logs") { Copy-Item "$env:LOCALAPPDATA\espresso\logs\*" ci-logs -Recurse }
+          Get-ChildItem ci-logs | ForEach-Object { "== $($_.Name)"; Get-Content $_.FullName -Tail 40 }
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: logs
+          path: ci-logs

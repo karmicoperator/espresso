@@ -337,6 +337,16 @@ $WebPort = 3000; while (-not (Free $WebPort) -and $WebPort -lt 3012) { $WebPort+
 # Both servers run from their own executables, not through npm or uv: Start-Process cannot
 # run npm's .cmd and .ps1 shims with redirected output, and uv run re-checks the environment.
 Status "Starting espresso..."
+# A process started with redirected output inherits every inheritable handle of its parent,
+# this launcher's own stdout included. Whatever reads that output (a script, a terminal,
+# CI) would then wait on servers that never exit. Make our standard handles private first.
+try {
+  Add-Type -Namespace Espresso -Name Handles -MemberDefinition @"
+[DllImport("kernel32.dll")] public static extern IntPtr GetStdHandle(int n);
+[DllImport("kernel32.dll")] public static extern bool SetHandleInformation(IntPtr h, uint mask, uint flags);
+"@
+  foreach ($n in -10, -11, -12) { [void][Espresso.Handles]::SetHandleInformation([Espresso.Handles]::GetStdHandle($n), 1, 0) }
+} catch { Log "could not detach the standard handles: $_" }
 $env:API_PORT = "$ApiPort"
 $api = Start-Process -PassThru -WindowStyle Hidden -WorkingDirectory $be `
   -FilePath (Join-Path $be ".venv\Scripts\python.exe") -ArgumentList "main.py" `
@@ -349,7 +359,8 @@ SaveState @("api=$($api.Id),$($api.StartTime.Ticks)", "web=$($webProc.Id),$($web
 
 # Open the browser only once both answer; earlier, it shows "can't reach this page".
 function WaitFor($what, $probe, $proc, $log) {
-  for ($i = 0; $i -lt 240; $i++) {
+  $deadline = (Get-Date).AddMinutes(2)
+  while ((Get-Date) -lt $deadline) {
     if (& $probe) { return }
     if ($proc.HasExited) { Fail "The $what stopped while starting. The details are in $log." }
     Pump; Start-Sleep -Milliseconds 500
