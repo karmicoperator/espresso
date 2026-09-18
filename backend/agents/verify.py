@@ -274,6 +274,15 @@ def check_datum(datum: Datum, index: LocatorIndex, what: str, report: Verificati
         )
         return False
 
+    # An estimate printed outside its own interval is the paper's inconsistency, not
+    # ours; it is drawn as printed and said on the card. Checked here, not by the model,
+    # whose own arithmetic once called 2.0 "outside" -8.5 to 4.5.
+    if datum.low is not None and datum.high is not None and not (datum.low <= datum.value <= datum.high):
+        report.rejections.append(
+            {"what": f"{what} (note)", "locator": prov.locator,
+             "reason": f"the estimate {datum.value:g} lies outside its printed interval {datum.low:g} to {datum.high:g}; drawn as printed"}
+        )
+
     # The point estimate stands even when the interval does not. Drop the interval only.
     if datum.low is not None and not (
         _value_in_quote(datum.low, prov.quote) and _value_in_quote(datum.high, prov.quote)

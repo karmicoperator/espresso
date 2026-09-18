@@ -165,7 +165,8 @@ Do not write a caption. The paper's own caption is used verbatim.
 
 HONESTY
 - Put what a chart cannot show in `caveat`: a schematic path, an exploratory subgroup,
-  figures restated from another paper.
+  figures restated from another paper. Never arithmetic of your own, such as whether an
+  estimate lies inside its interval: the gate checks that itself and says so when true.
 - `source` names where the numbers came from, e.g. "Table 2, primary outcome".
 
 WORDING

@@ -139,6 +139,12 @@ function legendLayout(groups: string[], avail: number): { items: { x: number; y:
   return { items, rows: row + 1 };
 }
 
+/** Width of one character of a value label (the .val class, 15px semibold), and the
+    vertical room a label needs above its mark. Every margin that holds a label is computed
+    from these, never guessed. */
+const VAL_PX = 8.4;
+const VAL_ROOM = 24;
+
 /** "95%" but "162 cases": symbols close up to the number, words do not. */
 function withUnit(s: string, unit: string): string {
   if (!unit) return s;
@@ -162,13 +168,23 @@ function fmt(v: number, unit = "", dp?: number): string {
  * number of significant figures than the source did.
  */
 function decimals(data: Datum[]): number {
-  return Math.max(
-    0,
-    ...data.map((d) => {
-      const frac = String(d.value).split(".")[1];
-      return frac ? Math.min(frac.length, 3) : 0;
-    }),
-  );
+  return Math.max(0, ...data.map(printedDecimals));
+}
+
+/**
+ * How many decimals the paper printed for a value. A float carries no trailing zero, so
+ * "2.0 points" stored as 2 came back as "2 points"; the quote still has the 2.0.
+ */
+function printedDecimals(d: Datum): number {
+  const quote = (d.provenance?.quote ?? "").replace(/[\u2212\u2013\u2014]/g, "-").replace(/,/g, "");
+  let best = -1;
+  for (const m of quote.matchAll(/-?\d+(?:\.(\d+))?/g)) {
+    const v = Math.abs(parseFloat(m[0]));
+    if (Math.abs(v - Math.abs(d.value)) <= Math.max(0.011, Math.abs(d.value) * 0.011)) best = Math.max(best, (m[1] ?? "").length);
+  }
+  if (best >= 0) return Math.min(best, 3);
+  const frac = String(d.value).split(".")[1];
+  return frac ? Math.min(frac.length, 3) : 0;
 }
 
 /** Nice round gridline steps, so the axis reads 0/10/20 rather than 0/8.3/16.6. */
@@ -413,7 +429,7 @@ function Stat({ chart, hover }: { chart: Chart; hover: HoverFn }) {
     <div className="flex flex-wrap items-start gap-7" {...hover(d)}>
       <div>
         <div className="r-stat num text-[64px] leading-none font-light tracking-tight text-[#00e676]">
-          {fmt(d.value, chart.unit)}
+          {fmt(d.value, chart.unit, decimals(chart.data))}
         </div>
         {ci && <div className="num mt-3 text-[11px] text-white/30">{ci}</div>}
       </div>
@@ -452,17 +468,26 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   // A negative value would hang below the axis, into the category labels. Horizontal bars
   // draw from a zero line in either direction and keep every label in its own row.
   const anyNegative = data.some((d) => d.value < 0 || (d.low ?? 0) < 0);
-  if (packedCategories(cats, grouped) || anyNegative) {
+  // A value label is as wide as its text; a bar is at least as wide as its label, and a
+  // row of bars that cannot hold its labels side by side is drawn horizontally instead,
+  // where the label follows the bar and always has room.
+  const dp = decimals(data);
+  const valueChars = Math.max(...data.map((d) => fmt(d.value, chart.unit, dp).length));
+  const valueW = valueChars * VAL_PX + 6;
+  const [L, R] = [48, 40];
+  const perCat = grouped ? groups.length : 1;
+  const slotW = ((W - L - R) / cats.length) * 0.72;
+  if (packedCategories(cats, grouped) || anyNegative || valueW * perCat > slotW) {
     return <HBars chart={chart} hover={hover} data={data} groups={groups} cats={cats} />;
   }
 
   // The annotation lives in a band above the plot, not in a corner of it, so it can never
   // land on a value label.
   const noteLines = chart.annotation ? wrapLabel(chart.annotation.text, 44, 3) : [];
-  const [L, R] = [48, 40];
   const legend = grouped ? legendLayout(groups, W - L - R) : { items: [], rows: 1 };
   const legendExtra = (legend.rows - 1) * 14;
-  const T = 26 + legendExtra + (noteLines.length ? noteLines.length * 13 + 12 : 0);
+  // Room above the tallest bar for its value label, on top of the legend and the note.
+  const T = 26 + legendExtra + VAL_ROOM + (noteLines.length ? noteLines.length * 13 + 12 : 0);
 
   const labelLines = Math.max(
     ...cats.map((c) => wrapLabel(c, Math.floor(((W - L - R) / cats.length) / 6.4)).length),
@@ -477,20 +502,16 @@ function Bars({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   const y = (v: number) => T + plotH - (v / max) * plotH;
 
   const slot = plotW / cats.length;
-  const perCat = grouped ? groups.length : 1;
-  const barW = Math.min(grouped ? 46 : 72, (slot * 0.72) / perCat);
+  const barW = Math.min(Math.max(grouped ? 46 : 72, valueW), (slot * 0.72) / perCat);
   const perLine = Math.floor(slot / 6.4);
 
-  const dp = decimals(data);
   const annotated = chart.annotation ? cats.indexOf(chart.annotation.target) : -1;
   const annotatedValue = chart.annotation
     ? Math.max(...data.filter((d) => d.label === chart.annotation!.target).map((d) => d.value))
     : 0;
 
-  // Value labels wider than their bar collide with the neighbour's in a grouped pair.
-  // Every second member of a pair is lifted a line, which keeps both readable.
-  const valueChars = Math.max(...data.map((d) => fmt(d.value, chart.unit, dp).length));
-  const stagger = grouped && valueChars * 6.5 > barW + 6;
+  // Bars are sized to their labels above, so neighbours' labels never touch; no stagger.
+  const stagger = false;
 
   const barNote = () => {
     if (annotated < 0 || !chart.annotation || !noteLines.length) return null;
@@ -629,7 +650,7 @@ function HBars({
   // The right margin is whatever the longest value string needs, so a unit like
   // "per 100 years" on the longest bar still ends inside the panel.
   const valueChars = Math.max(0, ...data.map((d) => fmt(d.value, chart.unit, dp).length));
-  const R = Math.max(40, valueChars * 6.6 + 14);
+  const R = Math.max(40, valueChars * VAL_PX + 16);
   const legend = grouped ? legendLayout(groups, W - L - R) : { items: [], rows: 1 };
   const T = grouped ? 10 + legend.rows * 14 : 6;
   const barH = grouped ? 13 : 18;
@@ -863,10 +884,12 @@ function Forest({ chart, hover }: { chart: Chart; hover: HoverFn }) {
 
 function Line({ chart, hover }: { chart: Chart; hover: HoverFn }) {
   const W = 520;
-  const H = 240;
   const [L, R, T, Bo] = [50, 30, 20, 52];
   const arms = useContext(ArmsContext);
   const groups = orderGroups([...new Set(chart.data.map((d) => d.group || "series"))], arms);
+  // The key is laid out by its text and may take two rows; the panel grows to hold it.
+  const legend = legendLayout(groups, W - L - R);
+  const H = 240 + (legend.rows - 1) * 14;
   // The x axis is the timepoints the paper names, in the order they first appear. Each
   // series places its points by timepoint, so two arms with the same labels share an axis
   // and an arm missing a timepoint leaves a gap rather than shifting the rest left.
@@ -913,7 +936,7 @@ function Line({ chart, hover }: { chart: Chart; hover: HoverFn }) {
       })}
       {groups.length > 1 &&
         groups.map((g, gi) => (
-          <g key={g} transform={`translate(${L + gi * 150}, ${T + plotH + 34})`}>
+          <g key={g} transform={`translate(${L + legend.items[gi].x}, ${T + plotH + 34 + legend.items[gi].y})`}>
             <rect x={0} y={2} width={9} height={9} rx={2} fill={SERIES[gi % SERIES.length]} />
             <text x={14} y={11} className="tick">
               {g}

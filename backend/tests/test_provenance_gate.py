@@ -152,3 +152,21 @@ def test_a_digit_glued_to_a_name_is_not_a_number():
     from agents.verify import numbers_in
     assert numbers_in("KOOS4 improved by 42.9 points; SF-36 and COVID-19 did not") == [42.9]
     assert numbers_in("n=121, P<0.001, week 208, 2.4 mg") == [121, 0.001, 208, 2.4]
+
+
+def test_an_estimate_outside_its_own_interval_is_noted_not_dropped():
+    from agents.verify import LocatorIndex, check_datum
+    from models.charts import Datum, Provenance, VerificationReport
+    from models.paper import ArxivPaperMeta, Section, StructuredPaper
+    paper = StructuredPaper(meta=ArxivPaperMeta(arxiv_id="P", title="t", abstract="a", pdf_url="u"),
+                            sections=[Section(id="s", title="R", level=1, content="difference 2.0 points, 95% CI -8.5 to 4.5")])
+    index = LocatorIndex.build(paper)
+    inside = Datum(label="d", value=2.0, low=-8.5, high=4.5, provenance=Provenance(locator="s", quote="difference 2.0 points, 95% CI -8.5 to 4.5"))
+    report = VerificationReport()
+    assert check_datum(inside, index, "x", report) and not any("outside" in r["reason"] for r in report.rejections)
+    outside = inside.model_copy(update={"value": 6.0, "provenance": Provenance(locator="s", quote="difference 2.0 points, 95% CI -8.5 to 4.5")})
+    # 6.0 is not in the quote, so it fails for that reason first; use a quote that prints it.
+    paper2 = StructuredPaper(meta=paper.meta, sections=[Section(id="s", title="R", level=1, content="difference 6.0 points, 95% CI -8.5 to 4.5")])
+    report2 = VerificationReport()
+    kept = check_datum(outside.model_copy(update={"provenance": Provenance(locator="s", quote="difference 6.0 points, 95% CI -8.5 to 4.5")}), LocatorIndex.build(paper2), "x", report2)
+    assert kept and any("outside its printed interval" in r["reason"] for r in report2.rejections)
