@@ -14,10 +14,31 @@ opens the paper at that line. Local, single user; nothing leaves the machine exc
 requests for the paper.
 
 This is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual) by
-Raj Shah, which does this for arXiv papers. It keeps his idea and the reader's look, and
-was rebuilt to read and visualise medical papers: PubMed Central as the source, a
-provenance gate on every number, trial charts and the icon array, and the anchoring
-that opens the paper at a sentence.
+Raj Shah, which does this for arXiv papers. It keeps his idea and the reader's look. Most
+of what is underneath was rebuilt for medical papers, where a wrong number is a different
+kind of wrong.
+
+The source is PubMed Central's JATS, parsed to paragraph and table-cell locators, with a
+PDF path for the quarter of "free full text" that PMC never got. A deterministic gate
+stands between the model and the page: every plotted value carries a locator and a
+verbatim quote, three string checks decide whether it is drawn, a failed value gets one
+repair round with the paper's own paragraph, and what still fails is dropped and listed.
+No second model, no rate; the badge counts what survived. The model fills a fixed
+catalogue of chart blocks (a stat, bars, a forest plot, a line, a participant flow, a
+three-shape diagram) with quoted numbers and never decides a layout; every layout is
+measured for overlapping text in the DOM on every built page. A trial's primary outcome
+becomes a hundred people with the number needed to treat marked as derived. The bottom
+line names its finding, the gate verifies it, and the colour says which way it went.
+Each sentence of the prose is anchored to the source sentence that prints its numbers,
+and a click opens the paper there, in the PDF (fetched from any publisher that serves it,
+attached by hand otherwise) or in the paper's own text. The two model calls run side by
+side, so a build takes about two minutes on Claude, and the same pipeline runs on
+OpenAI, Azure, DeepSeek, Kimi, Qwen or GLM. It installs itself on a machine with nothing
+on it, and a browser extension hands it the PDF your session can see.
+
+Every one of those decisions has a test, and the ones that were measured and lost are in
+`docs/FINDINGS.md`, including a direction-word check that was retired after all five of
+its flags turned out to be false alarms.
 
 ## What it does
 
