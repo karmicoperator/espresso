@@ -99,6 +99,10 @@ export type BottomLine = {
   question: string;
   answer: string;
   provenance: Provenance;
+  /** The figure in the answer that states the finding, verified by the gate; empty when none. */
+  effect?: string;
+  /** better, worse, no_difference or mixed: the colour of that figure. */
+  verdict?: string;
 };
 
 /** One arm's absolute rate for the primary outcome, verified against its quote. */

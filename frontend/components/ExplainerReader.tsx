@@ -7,7 +7,7 @@ import { FigureFigure } from "./FigureFigure";
 import { ReadingRail } from "./ReadingRail";
 import { RiskFigure } from "./RiskFigure";
 import { SourcePanel } from "./SourcePanel";
-import type { Chart, Explainer, FigurePlate, Link as ProseLink, Provenance, Term } from "@/lib/types";
+import type { BottomLine, Chart, Explainer, FigurePlate, Link as ProseLink, Provenance, Term } from "@/lib/types";
 
 /**
  * The explainer: at most five rewritten sections, each with the charts that belong to it.
@@ -162,7 +162,7 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           <div className="rounded-2xl border border-white/[0.10] bg-white/[0.04] px-7 py-6 backdrop-blur-xl">
             <p className="text-[11px] tracking-[0.16em] text-white/30 uppercase">Bottom line</p>
             <p className="mt-2 text-sm text-white/50">{explainer.bottom_line.question}</p>
-            <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{keyFigure(explainer.bottom_line.answer)}</p>
+            <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{keyFigure(explainer.bottom_line)}</p>
             <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-white/[0.08] pt-3">
               <p className="min-w-0 flex-1 text-xs leading-relaxed text-white/45">
                 The paper: &ldquo;{explainer.bottom_line.provenance.quote}&rdquo;
@@ -615,23 +615,21 @@ function withTint(nodes: React.ReactNode[], tint: Tint, key: string): React.Reac
 }
 
 /**
- * The one number the page is about, in the treatment colour: the effect in the bottom
- * line. It is the only highlight outside a linked sentence, so it is the first thing seen.
+ * The finding in the bottom line, highlighted only when the backend named it and the gate
+ * verified it. Green when the treatment did better, red when worse, white when the paper
+ * reports no difference. No effect, no highlight: a guess from a regex once lit "95%" in
+ * "95% CI", and a wrong highlight is worse than none.
  */
-function keyFigure(answer: string): React.ReactNode {
-  // The effect is a percentage when there is one, else a ratio or rate with a decimal,
-  // else the first number. "Below 120 mm Hg" is the target, not the finding.
-  const m =
-    answer.match(/\d[\d.,]*\s?(?:%|percent(?:age points?)?\b)/) ??
-    answer.match(/\b\d+\.\d+\b/) ??
-    answer.match(/\d[\d.,]*/);
-  if (!m || m.index === undefined) return answer;
-  const end = m.index + m[0].length;
+function keyFigure(line: BottomLine): React.ReactNode {
+  const effect = line.effect?.trim();
+  const at = effect ? line.answer.indexOf(effect) : -1;
+  if (!effect || at < 0) return line.answer;
+  const tone = line.verdict === "worse" ? "key-worse" : line.verdict === "better" ? "key-better" : "key-null";
   return (
     <>
-      {answer.slice(0, m.index)}
-      <span className="num key">{m[0]}</span>
-      {answer.slice(end)}
+      {line.answer.slice(0, at)}
+      <span className={`num key ${tone}`}>{effect}</span>
+      {line.answer.slice(at + effect.length)}
     </>
   );
 }

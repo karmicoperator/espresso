@@ -357,7 +357,31 @@ def verify_bottom_line(
         )
         return None
     report.passed += 1
-    return bottom_line
+    return _check_effect(bottom_line, report)
+
+
+def _check_effect(bottom_line: BottomLine, report: VerificationReport) -> BottomLine:
+    """The named finding has to be in the answer, with a number that is in the quote.
+
+    A finding that fails is cleared, not guessed at: the page then highlights nothing,
+    which is honest, where a regex picking "95%" out of "95% CI" was not.
+    """
+    effect = bottom_line.effect.strip()
+    if not effect:
+        return bottom_line
+    nums = numbers_in(effect)
+    ok = (
+        effect in bottom_line.answer
+        and bool(nums)
+        and all(_value_in_quote(v, bottom_line.provenance.quote, signless=True) for v in nums)
+    )
+    if ok:
+        return bottom_line
+    report.rejections.append(
+        {"what": "bottom line effect", "locator": bottom_line.provenance.locator,
+         "reason": f"'{effect}' is not a figure in the answer backed by the quote, so nothing is highlighted"}
+    )
+    return bottom_line.model_copy(update={"effect": ""})
 
 
 def verify_absolute_risk(

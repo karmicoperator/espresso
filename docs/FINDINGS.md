@@ -426,6 +426,16 @@ only when the sentence names the datum; every shared number counts double; and t
 numbers link on their own, after which the chart moves beside the sentence. Each rule
 has a test with the sentence that broke it.
 
+The finding in the bottom line was picked by a regex (first percentage, else first decimal,
+else first number), and on KANON it lit "95%" in "95% CI". A guess about which number is
+the finding cannot be made reliable, so it is no longer made: the planner names the
+`effect` (the figure in the answer that states the finding, copied as printed) and a
+`verdict` (better, worse, no_difference, mixed, as the paper concludes), the gate keeps
+the effect only when it is in the answer and its number is in the quote, and the page
+highlights that or nothing, green for better, red for worse, white for no difference.
+The three examples came back with "2.0 points" (no difference), "25%" (better) and
+"-8.7%" (better).
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were

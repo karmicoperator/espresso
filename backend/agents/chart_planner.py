@@ -102,6 +102,11 @@ one plain sentence each. The answer is what a clinician would take away, with th
 number in it, and it carries a `provenance` like a plotted value: one quoted span from the
 paper that contains every number the answer uses. It is checked the same way, so an
 answer whose numbers are not in its quote is dropped. No verdicts the paper does not give.
+Also give `effect`: the ONE figure in the answer that states the finding, copied exactly
+as the answer prints it ("2.0 points", "25%", "0.83"). Never a confidence interval, a P
+value, a sample size or a target. And `verdict`: one of `better` (the treatment did
+better on the primary outcome), `worse`, `no_difference` (the paper reports no
+significant difference) or `mixed`, as the paper's own conclusion states it.
 
 ABSOLUTE RISK
 When the paper prints the primary outcome as a proportion in each of two arms, return

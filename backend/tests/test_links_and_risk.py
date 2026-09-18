@@ -300,3 +300,19 @@ def test_a_percentage_never_matches_an_event_count():
     sections = [ReaderSection(id="r3", title="Found", chart_ids=["oa"],
                               markdown="Knees treated with rehabilitation alone showed 12% and 8%.")]
     assert link_prose(sections, [bars]) == []
+
+
+def test_the_named_effect_is_kept_only_when_in_the_answer_and_the_quote():
+    from agents.verify import verify_bottom_line
+    paper = _paper()
+    index = LocatorIndex.build(paper)
+    prov = Provenance(locator="sec-1", quote=QUOTE)
+    good = BottomLine(question="q", answer="Death fell: rate ratio 0.83 with dexamethasone.", provenance=prov,
+                      effect="0.83", verdict="better")
+    report = VerificationReport()
+    assert verify_bottom_line(good, index, report).effect == "0.83"
+    # "95%" is in the answer and the quote but was never the finding; a CI is refused by
+    # the prompt, and an effect not in the answer at all is cleared here.
+    bad = good.model_copy(update={"effect": "22.9%"})
+    kept = verify_bottom_line(bad.model_copy(update={"answer": "Death fell: rate ratio 0.83."}), index, report)
+    assert kept.effect == "" and any("nothing is highlighted" in r["reason"] for r in report.rejections)

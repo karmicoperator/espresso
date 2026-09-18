@@ -283,6 +283,14 @@ class BottomLine(BaseModel):
     question: str = Field(..., max_length=240)
     answer: str = Field(..., max_length=360)
     provenance: Provenance
+    # The finding itself, named rather than guessed: the one figure in the answer that
+    # states it, copied as the answer prints it ("2.0 points", "25%"). The gate clears it
+    # unless it is in the answer and its number is in the quote; the page highlights it
+    # only then, and highlights nothing otherwise.
+    effect: str = Field("", max_length=40)
+    # Which way the finding went, for the colour of that figure alone: better, worse,
+    # no_difference, mixed. The model's reading of the paper's own conclusion.
+    verdict: str = Field("", max_length=16)
 
 
 class RiskArm(BaseModel):
