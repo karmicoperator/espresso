@@ -81,3 +81,20 @@ def test_seed_installs_missing_examples_and_leaves_existing_ones(tmp_path, monke
     assert (tmp_path / "data" / "explainers" / "PMC2.json").read_text() == '{"mine": true}'
     assert (tmp_path / "data" / "figures" / "PMC1" / "f1.png").exists()
     assert store.seed_examples() == 0
+
+
+def test_a_failed_planner_still_yields_a_readable_explainer(monkeypatch):
+    async def bad_plan(paper, max_charts=6):
+        raise RuntimeError("model down")
+
+    async def fake_format(source, meta, model=None):
+        return [Section(id="r1", title="What they found", level=1, content="Death fell to 22.9%.")]
+
+    async def no_figures(paper, picks):
+        return []
+
+    monkeypatch.setattr(pipeline, "plan_charts", bad_plan)
+    monkeypatch.setattr(pipeline, "format_sections", fake_format)
+    monkeypatch.setattr(pipeline, "_build_figures", no_figures)
+    explainer = asyncio.run(pipeline.build_visuals(_paper(), rewrite=True))
+    assert explainer.charts == [] and explainer.sections and any("No charts" in n for n in explainer.notes)

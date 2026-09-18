@@ -238,7 +238,9 @@ async def build_visuals(
     originals = [c.model_copy(deep=True) for c in planned]
     charts, report = verify_charts(planned, paper)
     # Rows, arms and arrows past a block's limit are dropped before the gate; say so.
-    report.rejections.extend(plan.trims)
+    # A planner that failed outright has no trims to report.
+    if not isinstance(plan, BaseException):
+        report.rejections.extend(plan.trims)
     index = LocatorIndex.build(paper)
 
     # Every value on the page is verified or it is not drawn. What can still be pushed up
