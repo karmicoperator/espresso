@@ -8,10 +8,16 @@ Ever got bored halfway through a paper? Paper in Five turns a medical paper into
 five-minute read with charts. You keep the time, and the will to live.
 
 The page is prose in sections, charts drawn from the paper's own numbers, and a bottom
-line. Every charted value is checked against the paper's
-text before it is drawn, and every sentence of the prose is tied to the sentence of the
-paper it came from, so a click opens the paper at that line. Local, single user; nothing
-leaves the machine except requests for the paper.
+line. Every charted value is checked against the paper's text before it is drawn, and
+every sentence of the prose is tied to the sentence of the paper it came from, so a click
+opens the paper at that line. Local, single user; nothing leaves the machine except
+requests for the paper.
+
+This is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual) by
+Raj Shah, which does this for arXiv papers. It keeps his idea and the reader's look, and
+was rebuilt to read and visualise medical papers: PubMed Central as the source, a
+provenance gate on every number, trial charts and the icon array, and the anchoring
+that opens the paper at a sentence.
 
 ## What it does
 
@@ -103,6 +109,5 @@ docs/FINDINGS.md    what was tried, what failed, and why.
 cite table cells; the anchoring cannot judge a paraphrase that keeps the numbers and the
 terms and changes the meaning, which is why the paper is one click away.
 
-Forked from [arXivisual](https://github.com/rajshah6/arXivisual) for the reader's visual
-language; the ingest, the gate, the blocks, the anchoring and the viewer are new. The
-upstream repository ships no licence; this one is private.
+Forked from [arXivisual](https://github.com/rajshah6/arXivisual), see the top of this
+page. The upstream repository ships no licence; this one is private.
