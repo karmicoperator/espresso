@@ -161,6 +161,11 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
         <div className="mx-auto max-w-[1180px] px-8 pt-10">
           <div className="rounded-2xl border border-white/[0.10] bg-white/[0.04] px-7 py-6 backdrop-blur-xl">
             <p className="text-[11px] tracking-[0.16em] text-white/30 uppercase">Bottom line</p>
+            {verdictLabel(explainer.bottom_line.verdict) && (
+              <span className={`verdict verdict-${explainer.bottom_line.verdict}`}>
+                {verdictLabel(explainer.bottom_line.verdict)}
+              </span>
+            )}
             <p className="mt-2 text-sm text-white/50">{explainer.bottom_line.question}</p>
             <p className="mt-2 text-xl leading-snug text-[#e8e8e8]">{keyFigure(explainer.bottom_line)}</p>
             <div className="mt-4 flex flex-wrap items-end justify-between gap-3 border-t border-white/[0.08] pt-3">
@@ -597,14 +602,21 @@ function withLinks(
   return out;
 }
 
-/** The numbers a chart plots, in the chart's colour, inside a linked sentence. */
+/**
+ * The numbers a chart plots, in the chart's colour, inside a linked sentence.
+ *
+ * Keys carry a letter per pass (m, t, a): withMarks, withTint and withArms each wrap the
+ * same array in turn, and two spans sharing one key in one array made React duplicate
+ * nodes on every re-render, so a lit sentence grew another copy of its arm name each
+ * time the reader scrolled.
+ */
 function withTint(nodes: React.ReactNode[], tint: Tint, key: string): React.ReactNode[] {
   if (!tint) return nodes;
   return nodes.flatMap((node, i): React.ReactNode[] => {
     if (typeof node !== "string") return [node];
     return node.split(tint.re).map((part, j) =>
       j % 2 === 1 ? (
-        <span key={`${key}-${i}-${j}`} className="num figure" style={{ color: textColour(tint.colour) }}>
+        <span key={`${key}-t${i}-${j}`} className="num figure" style={{ color: textColour(tint.colour) }}>
           {part}
         </span>
       ) : (
@@ -612,6 +624,17 @@ function withTint(nodes: React.ReactNode[], tint: Tint, key: string): React.Reac
       ),
     );
   });
+}
+
+/** The verdict as a label beside the bottom line, so the direction is said, not only coloured. */
+function verdictLabel(verdict?: string): string {
+  switch (verdict) {
+    case "better": return "Treatment did better";
+    case "worse": return "Treatment did worse";
+    case "no_difference": return "No significant difference";
+    case "mixed": return "Mixed result";
+    default: return "";
+  }
 }
 
 /**
@@ -675,7 +698,7 @@ function withArms(nodes: React.ReactNode[], armTint: ArmTint, key: string): Reac
     if (typeof node !== "string") return [node];
     return node.split(armTint.re).map((part, j) =>
       j % 2 === 1 ? (
-        <span key={`${key}-${i}-${j}`} className="arm" style={{ color: armTint.colour(part) }}>
+        <span key={`${key}-a${i}-${j}`} className="arm" style={{ color: armTint.colour(part) }}>
           {part}
         </span>
       ) : (
@@ -747,7 +770,7 @@ function withMarks(text: string, mark: RegExp | null, key: string): React.ReactN
   if (!mark) return [text];
   return text.split(mark).map((part, i) =>
     i % 2 === 1 ? (
-      <mark key={`${key}-${i}`} className="unprinted" title={UNPRINTED_TITLE}>
+      <mark key={`${key}-m${i}`} className="unprinted" title={UNPRINTED_TITLE}>
         {part}
       </mark>
     ) : (

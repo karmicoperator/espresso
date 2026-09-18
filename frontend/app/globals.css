@@ -165,10 +165,20 @@ html {
    highlight outside those sentences. */
 .figure { font-weight: 600; }
 .arm { font-weight: 500; }
-.key { font-weight: 600; }
-.key-better { color: #5cff9e; }
-.key-worse { color: #ff6259; }
-.key-null { color: #ffffff; }
+/* The verified finding: green when the treatment did better, red when worse, and for no
+   difference a white chip, because white type on white type marks nothing. */
+.key { font-weight: 600; padding: 0 .28em; border-radius: 5px; }
+.key-better { color: #5cff9e; background: rgba(0,230,118,0.14); }
+.key-worse { color: #ff6259; background: rgba(255,59,48,0.16); }
+.key-null { color: #ffffff; background: rgba(255,255,255,0.16); }
+.verdict {
+  display: inline-block; margin-top: 8px; padding: 3px 9px; border-radius: 999px;
+  font-size: 11px; letter-spacing: .04em; font-weight: 600; border: 1px solid;
+}
+.verdict-better { color: #5cff9e; border-color: rgba(0,230,118,0.45); background: rgba(0,230,118,0.10); }
+.verdict-worse { color: #ff6259; border-color: rgba(255,59,48,0.45); background: rgba(255,59,48,0.10); }
+.verdict-no_difference { color: #ffffff; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.10); }
+.verdict-mixed { color: #ffffff; border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.10); }
 
 /* A chart element the prose is about gets a glow, and its card an edge in the same colour. */
 .chart .edge[data-lit="1"] { color: #00e676 !important; }
