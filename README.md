@@ -146,3 +146,12 @@ undistributed.
 show. On first start the API copies them into `backend/data/` (which is not in git), so
 a fresh clone opens on a full library and you can read before you build. A paper you
 rebuild replaces its copy in `data/`; the seed is never written over it.
+
+## Every sentence points at the paper
+
+Each sentence of the concise version is anchored to the sentence of the paper it rests
+on, by the numbers it prints and the terms it uses, or marked as not. Click any anchored
+sentence, charted value or the bottom line to open the paper at that sentence,
+highlighted: in the PDF when one is stored (papers you dropped in, or a PDF you drop onto
+a paper's page later, since PubMed Central blocks scripted downloads), else in the
+paper's own text.

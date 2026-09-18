@@ -764,6 +764,809 @@
       "index": 2
     }
   ],
+  "anchors": [
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "The **anterior cruciate ligament (ACL)** is one of the main ligaments in the knee.",
+      "locator": "sec-introduction-1/p1",
+      "quote": "Acute anterior cruciate ligament rupture is a common and serious knee injury in the young active population.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "It connects the thigh bone to the shin bone and stops the shin from sliding forward.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "Young, active people tear it often, and it is a serious injury.",
+      "locator": "sec-introduction-1/p1",
+      "quote": "Acute anterior cruciate ligament rupture is a common and serious knee injury in the young active population.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "Many end up with a knee that feels unstable, do less physical activity, and rate their knee-related quality of life lower.",
+      "locator": "sec-introduction-1/p1",
+      "quote": "Acute anterior cruciate ligament injury may lead to unsatisfactory knee function, decreased activity, and poor knee related quality of life, and many patients with a torn anterior cruciate ligament develop osteoarthritis of the knee irrespective of treatment.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "Many also develop knee osteoarthritis later on, whichever treatment they had.",
+      "locator": "sec-introduction-1/p1",
+      "quote": "Acute anterior cruciate ligament injury may lead to unsatisfactory knee function, decreased activity, and poor knee related quality of life, and many patients with a torn anterior cruciate ligament develop osteoarthritis of the knee irrespective of treatment.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "In surgical reconstruction, a surgeon replaces the torn ligament with a graft taken from one of the patient's own tendons, and the patient then does rehabilitation.",
+      "locator": "sec-introduction-1/p1",
+      "quote": "Our report represents the first mid-term study comparing the treatment strategy of early surgical reconstruction of a torn anterior cruciate ligament with that of structured rehabilitation and optional later reconstruction.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "The other option is structured rehabilitation (guided exercise and physiotherapy), with surgery held back for patients whose knee keeps giving way.",
+      "locator": "sec-discussion-16/p1",
+      "quote": "After five years in this randomised controlled trial, we found no statistically significant differences in pain, symptoms, function in activities of daily living, function in sports and recreation, knee related quality of life, general physical or mental health status, current physical activity level, return to pre-injury activity level, radiographic osteoarthritis, or meniscus surgery between patients assigned to rehabilitation plus early anterior cruciate ligament reconstruction and those assigned to initial rehabilitation with the option of having a later reconstruction if needed.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "Surgery is commonly recommended for people who want to get back to sport.",
+      "locator": "sec-comparison-with-other-studies-17/p2",
+      "quote": "Anterior cruciate ligament reconstruction is commonly recommended for people wishing to return to pre-injury sporting activities.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "How much it adds over rehabilitation is still debated, and there has been little trial evidence to settle it.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "The KANON trial in Sweden compared the two strategies head to head.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "Its two-year results found no difference in how patients rated their knees.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "This report follows the same patients to five years and adds X-ray evidence of osteoarthritis and a count of meniscus operations.",
+      "locator": "sec-treatment-4/p2",
+      "quote": "We report the number of index knees with meniscus surgery over the five year period and the proportion of meniscuses operated on (assuming two intact meniscuses in every index knee before injury) by using a “time to event” analysis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-1",
+      "sentence": "The authors say it is the first randomised trial to compare these strategies over the medium term.",
+      "locator": "abstract",
+      "quote": "Conclusion In this first high quality randomised controlled trial with minimal loss to follow-up, a strategy of rehabilitation plus early ACL reconstruction did not provide better results at five years than a strategy of initial rehabilitation with the option of having a later ACL reconstruction.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "The researchers enrolled 121 adults aged 18 to 35 (average age 26) at two Swedish hospitals.",
+      "locator": "sec-participants-3/p1",
+      "quote": "We enrolled active adults, 18 to 35 years of age, with an anterior cruciate ligament tear not more than four weeks old to a previously uninjured knee at the departments of orthopaedics at Skåne University Hospital and Helsingborg Hospital, Sweden (table 1).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Each had torn the ACL in the previous four weeks, in a knee with no earlier injury.",
+      "locator": "sec-treatment-4/p1",
+      "quote": "In addition to rehabilitation, patients randomised to early anterior cruciate ligament reconstruction had a reconstruction performed within 10 weeks of injury by one of four senior knee surgeons, each of whom did more than 40 anterior cruciate ligament reconstructions annually.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "The trial excluded professional athletes, people who were less than moderately active, and people with certain other major knee damage, such as a complete tear of a collateral ligament or a full-thickness cartilage defect on MRI.",
+      "locator": "sec-participants-3/p1",
+      "quote": "Major exclusion criteria were professional athletes (10 on the Tegner activity score; 0-10, lowest to highest activity level), less than moderately active people (<5 on the same scale), a total collateral ligament rupture, a full thickness cartilage lesion visualised on magnetic resonance imaging, and extensive meniscal fixation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "In a **randomised controlled trial**, chance decides which treatment each person gets.",
+      "locator": "sec-introduction-1/p1",
+      "quote": "In young active adults with an acute anterior cruciate ligament tear in a previously uninjured knee, we found no difference in the patient reported outcomes after two years in a randomised controlled trial comparing two treatment strategies: structured rehabilitation plus early anterior cruciate ligament reconstruction or the same structured rehabilitation with the option of having a later reconstruction if needed.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "That makes the groups alike at the start, so later differences can be put down to the treatment.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Early reconstruction:** 62 patients had rehabilitation plus ACL surgery within 10 weeks of the injury.",
+      "locator": "sec-treatment-4/p1",
+      "quote": "In addition to rehabilitation, patients randomised to early anterior cruciate ligament reconstruction had a reconstruction performed within 10 weeks of injury by one of four senior knee surgeons, each of whom did more than 40 anterior cruciate ligament reconstructions annually.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Rehabilitation with optional delayed reconstruction:** 59 patients had the same rehabilitation and could have surgery later if the knee became unstable.",
+      "locator": "fig2/caption",
+      "quote": "Fig 2 Proportion of meniscuses operated on in index knee (assuming two intact meniscuses in every index knee before injury) over five year follow-up period for knees treated with rehabilitation plus anterior cruciate ligament (ACL) reconstruction (n=61) and knees treated with initial rehabilitation with option of later ACL reconstruction if needed (n=59) (full analysis set)",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "The protocol defined instability as symptoms caused by the missing ACL together with a positive pivot shift test, an exam in which the doctor bends and rotates the knee to check whether the shin bone slips out of place.",
+      "locator": "sec-treatment-4/p1",
+      "quote": "Those randomised to rehabilitation with the option of delayed reconstruction had anterior cruciate ligament reconstruction by the same surgeons when presenting with symptomatic knee instability as determined by the study protocol (that is, instability induced by anterior cruciate ligament insufficiency in combination with a positive pivot shift test).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Four experienced knee surgeons did all the operations.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Each chose between a graft from the patellar tendon (just below the kneecap) and a graft from the hamstring tendons.",
+      "locator": "sec-comparison-with-other-studies-17/p3",
+      "quote": "As reported, we found patellofemoral radiographic osteoarthritis to be more frequent in knees with reconstruction (performed early or as delayed procedures) with patella tendon grafts compared with hamstring tendon grafts.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "In both groups, torn menisci were trimmed or repaired when needed.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "The menisci are the two rubbery cartilage pads that cushion the inside of the knee.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Only one patient was lost to follow-up by five years, so 120 of 121 were analysed.",
+      "locator": "sec-characteristics-of-patients-and-treatmen-10/p1",
+      "quote": "Consequently, we included 120/121 participants in this five year follow-up report, 61 of whom were assigned to early anterior cruciate ligament reconstruction and 59 to initial rehabilitation with the option of having a later reconstruction if needed (table 1).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Long-term surgical studies rarely keep that many patients, and it makes the results more trustworthy.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "The main outcome came from the **knee injury and osteoarthritis outcome score (KOOS)**, a questionnaire in which patients rate their own knee.",
+      "locator": "abstract",
+      "quote": "Main outcome measure The main outcome was the change from baseline to five years in the mean value of four of the five subscales of the knee injury and osteoarthritis outcome score (KOOS4).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "It has five subscales, each scored from 0 (worst) to 100 (best).",
+      "locator": "sec-patient-reported-outcomes-5/p1",
+      "quote": "Other outcomes include the crude KOOS4 score, all five separate KOOS subscales, the scores on the SF-36 physical and mental components (all 0-100 scales, worst to best), and the Tegner activity scale score (1-10, lowest to highest) at five years.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "The trial averaged four of them into one number:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "KOOS4 = (sum of four KOOS subscale scores) / 4",
+      "locator": "tbl2/r19",
+      "quote": "KOOS4 | 4 (1 to 8) | 5 (1 to 10) | −1.3 (−6.7 to 4.2) | 0.38",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "The primary result was how much that number improved:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "main outcome = KOOS4 at five years minus KOOS4 at the start",
+      "locator": "abstract",
+      "quote": "Main outcome measure The main outcome was the change from baseline to five years in the mean value of four of the five subscales of the knee injury and osteoarthritis outcome score (KOOS4).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "The trial enrolled about 120 patients so it would have an 80% chance of detecting a 10-point difference between the groups on this measure.",
+      "locator": "sec-statistical-analysis-8/p1",
+      "quote": "We considered inclusion of 120 patients sufficient to provide 80% power to detect the requisite 10 point difference in the primary outcome.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "the SF-36, a general health survey with a physical score and a mental score",
+      "locator": "sec-discussion-16/p1",
+      "quote": "After five years in this randomised controlled trial, we found no statistically significant differences in pain, symptoms, function in activities of daily living, function in sports and recreation, knee related quality of life, general physical or mental health status, current physical activity level, return to pre-injury activity level, radiographic osteoarthritis, or meniscus surgery between patients assigned to rehabilitation plus early anterior cruciate ligament reconstruction and those assigned to initial rehabilitation with the option of having a later reconstruction if needed.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "the Tegner activity scale (1 to 10), plus whether patients got back to their pre-injury activity level",
+      "locator": "sec-participants-3/p1",
+      "quote": "Major exclusion criteria were professional athletes (10 on the Tegner activity score; 0-10, lowest to highest activity level), less than moderately active people (<5 on the same scale), a total collateral ligament rupture, a full thickness cartilage lesion visualised on magnetic resonance imaging, and extensive meniscal fixation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "knee stability on two clinical tests, the Lachman and the pivot shift",
+      "locator": "sec-mechanical-stability-6/p1",
+      "quote": "We report knee stability measures as the number of knees without signs of mechanical instability on the manual Lachman and pivot shift tests.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "radiographic osteoarthritis**, meaning signs of joint wear on standing X-rays.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "A radiologist who did not know each patient's treatment graded the X-rays, separately for the joint between the thigh and shin bones (tibiofemoral) and the joint behind the kneecap (patellofemoral)",
+      "locator": "sec-knee-radiography-and-grading-of-images-7/p2",
+      "quote": "For the injured (index) knee, one experienced musculoskeletal radiologist (FWR), who was unaware of the treatment allocation and clinical data, graded baseline and five year radiographs for osteophytes (tibiofemoral and patellofemoral compartments) and joint space narrowing (tibiofemoral compartment only) according to the Osteoarthritis Research International atlas.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "meniscus surgery over the five years",
+      "locator": "sec-treatment-4/p2",
+      "quote": "We report the number of index knees with meniscus surgery over the five year period and the proportion of meniscuses operated on (assuming two intact meniscuses in every index knee before injury) by using a “time to event” analysis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "The **full analysis set** compares patients by the group they were randomly assigned to.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "The \"as treated\" analysis compares them by the treatment they actually received.",
+      "locator": "abstract",
+      "quote": "The results were similar when analysed by treatment actually received.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-3",
+      "sentence": "The second matters here because many patients in the rehabilitation group had surgery later.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Of the 59 patients assigned to rehabilitation first, 30 (51%) had a delayed reconstruction.",
+      "locator": "sec-discussion-16/p1",
+      "quote": "Over the five year study period, 30 (51%) of those assigned to initial rehabilitation had delayed anterior cruciate ligament reconstruction (seven patients between two and five years).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Seven of those operations happened between two and five years after the injury.",
+      "locator": "sec-characteristics-of-patients-and-treatmen-10/p2",
+      "quote": "Thirty (51%) patients assigned to initial rehabilitation with the option of having a later reconstruction chose to have (and had) a delayed anterior cruciate ligament reconstruction over the five year period (seven in the period between two and five years; median 867 (range 743-1695) days after injury) (fig 1).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The other 29 were treated with rehabilitation alone.",
+      "locator": "fig3/caption",
+      "quote": "Fig 3 Proportion of meniscuses operated on in index knee (assuming two intact meniscuses in every index knee before injury) over five year follow-up period for knees treated with rehabilitation plus early anterior cruciate ligament (ACL) reconstruction (n=60), knees treated with initial rehabilitation plus delayed ACL reconstruction (n=30), and knees treated with rehabilitation alone (n=29) (as treated analysis)",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Over the whole study, 61 patients had early reconstruction, 30 had delayed reconstruction, and 29 never had surgery.",
+      "locator": "sec-characteristics-of-patients-and-treatmen-10/p2",
+      "quote": "Over the five year period, 61 patients had an early anterior cruciate ligament reconstruction, 30 had a delayed reconstruction, and 29 were treated with rehabilitation alone.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "KOOS4 improved by 42.9 points in the early surgery group and by 44.9 points in the rehabilitation-first group.",
+      "locator": "abstract",
+      "quote": "The mean change in KOOS4 score from baseline to five years was 42.9 points for those assigned to rehabilitation plus early ACL reconstruction and 44.9 for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for baseline score).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The reported difference was 2.0 points, with a 95% confidence interval of −8.5 to 4.5 (P = 0.54).",
+      "locator": "abstract",
+      "quote": "The mean change in KOOS4 score from baseline to five years was 42.9 points for those assigned to rehabilitation plus early ACL reconstruction and 44.9 for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for baseline score).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "A confidence interval is the range of true differences the data are consistent with.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "This one includes zero, and both ends fall short of the 10-point difference the trial was designed to detect.",
+      "locator": "sec-statistical-analysis-8/p1",
+      "quote": "We considered inclusion of 120 patients sufficient to provide 80% power to detect the requisite 10 point difference in the primary outcome.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The P value is how likely a gap this size would be by chance if the treatments were equal.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "At 0.54, it is far above the usual 0.05 cut-off for statistical significance.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "At five years, there were also no significant differences in:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "KOOS4 itself (P = 0.45)",
+      "locator": "abstract",
+      "quote": "At five years, no significant between group differences were seen in KOOS4 (P=0.45), any of the KOOS subscales (P≥0.12), SF-36 (P≥0.34), Tegner activity scale (P=0.74), or incident radiographic osteoarthritis of the index knee (P=0.17).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "any of the five KOOS subscales (P ≥ 0.12)",
+      "locator": "abstract",
+      "quote": "At five years, no significant between group differences were seen in KOOS4 (P=0.45), any of the KOOS subscales (P≥0.12), SF-36 (P≥0.34), Tegner activity scale (P=0.74), or incident radiographic osteoarthritis of the index knee (P=0.17).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Tegner activity level (P = 0.74)",
+      "locator": "tbl2/r13",
+      "quote": "No (%) active at pre-injury Tegner activity scale level¶ | 14 (23) | 12 (20) | 2.6 (−12.4-17.6)‡ | 0.73",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The as-treated analysis gave similar results (Table 3).",
+      "locator": "sec-patient-reported-outcomes-11/p1",
+      "quote": "We found similar results in the as treated analysis (table 3).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Knees rebuilt early, knees rebuilt late and knees treated with rehabilitation alone all came out much the same.",
+      "locator": "abstract",
+      "quote": "Results did not differ between knees surgically reconstructed early or late and those treated with rehabilitation alone.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Knees assigned to early reconstruction were more stable on both the Lachman and the pivot shift tests (both P < 0.001).",
+      "locator": "sec-mechanical-stability-12/p1",
+      "quote": "Knee stability at rest at five years was statistically significantly better in knees assigned to early anterior cruciate ligament reconstruction compared with those assigned to initial rehabilitation with the option of having a later reconstruction if needed, as indicated by normal Lachman (P<0.001) and pivot shift (P<0.001) tests (table 2).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "That better stability did not show up in patients' own ratings of pain, function, activity or quality of life.",
+      "locator": "sec-discussion-16/p1",
+      "quote": "After five years in this randomised controlled trial, we found no statistically significant differences in pain, symptoms, function in activities of daily living, function in sports and recreation, knee related quality of life, general physical or mental health status, current physical activity level, return to pre-injury activity level, radiographic osteoarthritis, or meniscus surgery between patients assigned to rehabilitation plus early anterior cruciate ligament reconstruction and those assigned to initial rehabilitation with the option of having a later reconstruction if needed.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Both sets of X-rays (start and five years) were available for 113 knees.",
+      "locator": "sec-radiographic-osteoarthritis-13/p1",
+      "quote": "Weight bearing radiographs were available for 113 index knees (58 assigned to early anterior cruciate ligament reconstruction and 55 assigned to initial rehabilitation with the option of having a later reconstruction if needed).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "None showed osteoarthritis at the start.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "After five years, 13 knees (12%) had tibiofemoral osteoarthritis and 22 (19%) had patellofemoral osteoarthritis, with 6 knees showing both.",
+      "locator": "sec-radiographic-osteoarthritis-13/p2",
+      "quote": "The index knee of 13 (12%) patients had developed tibiofemoral radiographic osteoarthritis, and 22 (19%) had developed patellofemoral radiographic osteoarthritis (six knees had concomitant tibiofemoral and patellofemoral radiographic osteoarthritis).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The randomised groups did not differ significantly (P = 0.17), and neither did the as-treated groups.",
+      "locator": "abstract",
+      "quote": "At five years, no significant between group differences were seen in KOOS4 (P=0.45), any of the KOOS subscales (P≥0.12), SF-36 (P≥0.34), Tegner activity scale (P=0.74), or incident radiographic osteoarthritis of the index knee (P=0.17).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Among the 87 reconstructed knees, 11% had tibiofemoral and 23% had patellofemoral osteoarthritis.",
+      "locator": "sec-radiographic-osteoarthritis-13/p3",
+      "quote": "Of the 87 knees with radiographs and treated with reconstruction, done early or as delayed procedures, 10 (11%) had developed tibiofemoral radiographic osteoarthritis and 20 (23%) had developed patellofemoral radiographic osteoarthritis, whereas the corresponding frequency of tibiofemoral and patellofemoral radiographic osteoarthritis among the 26 knees that were treated with rehabilitation alone was 3 (12%) and 2 (8%).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Among the 26 knees treated with rehabilitation alone, the figures were 12% and 8%.",
+      "locator": "sec-radiographic-osteoarthritis-13/p3",
+      "quote": "Of the 87 knees with radiographs and treated with reconstruction, done early or as delayed procedures, 10 (11%) had developed tibiofemoral radiographic osteoarthritis and 20 (23%) had developed patellofemoral radiographic osteoarthritis, whereas the corresponding frequency of tibiofemoral and patellofemoral radiographic osteoarthritis among the 26 knees that were treated with rehabilitation alone was 3 (12%) and 2 (8%).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The patellofemoral gap was not statistically significant (P = 0.084).",
+      "locator": "sec-radiographic-osteoarthritis-13/p3",
+      "quote": "In the as treated analysis, we found no statistically significant differences in tibiofemoral radiographic osteoarthritis between those who had anterior cruciate ligament reconstruction (early or as delayed procedures) and those who received rehabilitation alone (P=0.995 for tibiofemoral radiographic osteoarthritis; P=0.084 for patellofemoral radiographic osteoarthritis).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Knees rebuilt with a patellar tendon graft had significantly more patellofemoral osteoarthritis than knees rebuilt with hamstring grafts (P = 0.001).",
+      "locator": "sec-radiographic-osteoarthritis-13/p3",
+      "quote": "We found statistically significantly more patellofemoral radiographic osteoarthritis (P=0.001), but not tibiofemoral radiographic osteoarthritis (P=0.269), in knees reconstructed using patella tendon procedures compared with hamstrings tendon procedures.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The authors point to two possible causes: the patellar tendon can shorten after surgery, which changes the load on the kneecap joint, and the bone where the graft was taken remodels as it heals.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The authors call it striking that this much osteoarthritis appears within five years in people around 30 years old.",
+      "locator": "sec-comparison-with-other-studies-17/p3",
+      "quote": "The high frequency of radiographic osteoarthritis of the knee already at five years after anterior cruciate ligament injury at an age of about 30 is striking, and the results of this study indicate that surgical reconstruction of the torn anterior cruciate ligament does not protect the injured knee from developing structural changes consistent with osteoarthritis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "They conclude that reconstructing the ACL does not protect the knee from these structural changes.",
+      "locator": "sec-comparison-with-other-studies-17/p3",
+      "quote": "The high frequency of radiographic osteoarthritis of the knee already at five years after anterior cruciate ligament injury at an age of about 30 is striking, and the results of this study indicate that surgical reconstruction of the torn anterior cruciate ligament does not protect the injured knee from developing structural changes consistent with osteoarthritis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "A common argument for operating early is that an unstable knee damages the menisci over time.",
+      "locator": "sec-treatment-4/p2",
+      "quote": "We report the number of index knees with meniscus surgery over the five year period and the proportion of meniscuses operated on (assuming two intact meniscuses in every index knee before injury) by using a “time to event” analysis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Earlier observational studies found more meniscus injuries when surgery was delayed.",
+      "locator": "sec-meniscus-surgery-during-the-five-year-fo-14/p1",
+      "quote": "When we accounted for repeated surgery on the same meniscus, we found a lower frequency of meniscus surgery procedures in patients treated with rehabilitation plus early anterior cruciate ligament reconstruction compared with those treated with initial rehabilitation with the option of having a later reconstruction (supplementary appendix).",
+      "supported": true,
+      "direction_conflict": true,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The authors note those studies are \"confounded by indication\": patients who delay surgery may differ in other ways from those who don't.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "In this trial, 61 knees (51%) had meniscus surgery during the five years: 29 in the early surgery group and 32 in the rehabilitation-first group (P = 0.48).",
+      "locator": "sec-meniscus-surgery-during-the-five-year-fo-14/p1",
+      "quote": "Sixty one (51%) knees, 29 treated with early anterior cruciate ligament reconstruction and 32 treated with initial rehabilitation with the option of a later reconstruction, had meniscus surgery over the five year period, with no statistically significant difference between the groups (P=0.483).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "A time-to-event analysis, which tracks when each meniscus was first operated on and compares the two groups over time, also found no difference (P = 0.77).",
+      "locator": "sec-meniscus-surgery-during-the-five-year-fo-14/p1",
+      "quote": "We found no statistically significant differences in a time to event analysis of the proportion of meniscuses operated on for the full analysis set (P=0.774; fig 2) or in the as treated comparison (P=0.210; fig 3).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "When repeat operations on the same meniscus were counted, the early surgery group had fewer procedures in total.",
+      "locator": "sec-meniscus-surgery-during-the-five-year-fo-14/p1",
+      "quote": "When we accounted for repeated surgery on the same meniscus, we found a lower frequency of meniscus surgery procedures in patients treated with rehabilitation plus early anterior cruciate ligament reconstruction compared with those treated with initial rehabilitation with the option of having a later reconstruction (supplementary appendix).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "This was an exploratory analysis reported in the supplementary appendix.",
+      "locator": "sec-treatment-4/p2",
+      "quote": "In addition, we report the proportion of meniscuses operated on and the total number of meniscus surgeries (including repeat surgery on either meniscus) at five years as exploratory outcomes in the supplementary appendix.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Grafts tore in 3 of 61 early reconstructions (5%) and 1 of 30 delayed reconstructions (3%).",
+      "locator": "sec-comparison-with-other-studies-17/p4",
+      "quote": "In this study, three of the 61 (5%) knees treated with early anterior cruciate ligament reconstruction, and one (3%) of the 30 knees treated with delayed reconstruction had a new severe injury resulting in a graft rupture over the five year period.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "That matches the 4.3% rupture rate reported in a five-year follow-up of 1415 reconstruction patients.",
+      "locator": "sec-comparison-with-other-studies-17/p4",
+      "quote": "These results are consistent with the 4.3% graft rupture rate reported from a five year follow-up of 1415 patients treated with anterior cruciate ligament reconstruction.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Two of the four patients chose a second (revision) operation.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-5",
+      "sentence": "At five years, starting with rehabilitation and keeping surgery as an option did as well as early reconstruction on patient-reported outcomes, X-ray osteoarthritis and meniscus surgery.",
+      "locator": "sec-conclusions-18/p1",
+      "quote": "In this five year prospective trial, we have shown that in young, active adults with an acute anterior cruciate ligament tear, a strategy of early reconstruction plus rehabilitation did not provide better results, whether measured as patient reported outcomes, radiographic osteoarthritis, or meniscus surgery, than a strategy of initial rehabilitation with the option of having a later anterior cruciate ligament reconstruction.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-5",
+      "sentence": "Half the patients who started with rehabilitation never needed a reconstruction.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-5",
+      "sentence": "The trial found no evidence that either strategy did more harm than the other.",
+      "locator": "sec-conclusions-18/p1",
+      "quote": "Over the five year observation time of this trial, we did not find any evidence of one treatment being more harmful than the other.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-5",
+      "sentence": "Early surgery gave better stability on clinical tests, but patients did not report better function because of it.",
+      "locator": "sec-mechanical-stability-12/p1",
+      "quote": "Knee stability at rest at five years was statistically significantly better in knees assigned to early anterior cruciate ligament reconstruction compared with those assigned to initial rehabilitation with the option of having a later reconstruction if needed, as indicated by normal Lachman (P<0.001) and pivot shift (P<0.001) tests (table 2).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-5",
+      "sentence": "The authors conclude that clinicians and young active adults should consider rehabilitation as a first-line treatment after an acute ACL tear.",
+      "locator": "abstract",
+      "quote": "These results should encourage clinicians and young active adult patients to consider rehabilitation as a primary treatment option after an acute ACL tear.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-5",
+      "sentence": "The findings do not apply to professional athletes or to people who are less than moderately active, since the trial excluded both groups.",
+      "locator": "sec-participants-3/p1",
+      "quote": "Major exclusion criteria were professional athletes (10 on the Tegner activity score; 0-10, lowest to highest activity level), less than moderately active people (<5 on the same scale), a total collateral ligament rupture, a full thickness cartilage lesion visualised on magnetic resonance imaging, and extensive meniscal fixation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC3553934-section-5",
+      "sentence": "Because osteoarthritis can take many years to develop, the authors call for continued long-term follow-up of this and other groups of patients treated with and without surgery.",
+      "locator": "sec-introduction-1/p1",
+      "quote": "Acute anterior cruciate ligament injury may lead to unsatisfactory knee function, decreased activity, and poor knee related quality of life, and many patients with a torn anterior cruciate ligament develop osteoarthritis of the knee irrespective of treatment.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    }
+  ],
   "sources": {
     "sec-patient-reported-outcomes-11/p1": "In the full analysis set, the mean change in KOOS4 score from baseline to five years was 42.9 points for patients assigned to rehabilitation plus early anterior cruciate ligament reconstruction and 44.9 points for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for the baseline score). We found no statistically significant differences in KOOS4, any of the five individual subscales of KOOS, SF-36, or Tegner activity scale between the two treatment strategies at five years or in the change between two and five years (table 2). We found similar results in the as treated analysis (table 3).",
     "abstract": "Objective To compare, in young active adults with an acute anterior cruciate ligament (ACL) tear, the mid-term (five year) patient reported and radiographic outcomes between those treated with rehabilitation plus early ACL reconstruction and those treated with rehabilitation and optional delayed ACL reconstruction. Design Extended follow-up of prospective randomised controlled trial. Setting Orthopaedic departments at two hospitals in Sweden. Participants 121 young, active adults (mean age 26 years) with acute ACL injury to a previously uninjured knee. One patient was lost to five year follow-up. Intervention All patients received similar structured rehabilitation. In addition to rehabilitation, 62 patients were assigned to early ACL reconstruction and 59 were assigned to the option of having a delayed ACL reconstruction if needed. Main outcome measure The main outcome was the change from baseline to five years in the mean value of four of the five subscales of the knee injury and osteoarthritis outcome score (KOOS4). Other outcomes included the absolute KOOS4 score, all five KOOS subscale scores, SF-36, Tegner activity scale, meniscal surgery, and radiographic osteoarthritis at five years. Results Thirty (51%) patients assigned to optional delayed ACL reconstruction had delayed ACL reconstruction (seven between two and five years). The mean change in KOOS4 score from baseline to five years was 42.9 points for those assigned to rehabilitation plus early ACL reconstruction and 44.9 for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for baseline score). At five years, no significant between group differences were seen in KOOS4 (P=0.45), any of the KOOS subscales (P≥0.12), SF-36 (P≥0.34), Tegner activity scale (P=0.74), or incident radiographic osteoarthritis of the index knee (P=0.17). No between group differences were seen in the number of knees h",
@@ -798,7 +1601,10 @@
         "number": "0.05",
         "context": "ual. At 0.54, it is far above the usual 0.05 cut-off for statistical significance.  "
       }
-    ]
+    ],
+    "sentences": 89,
+    "anchored": 66,
+    "direction_conflicts": 1
   },
   "notes": []
 }

@@ -18,6 +18,7 @@ import logging
 import time
 from collections.abc import Callable
 
+from agents.anchor import anchor_prose
 from agents.chart_planner import plan_charts, repair_bottom_line, repair_charts
 from agents.verify import (
     LocatorIndex,
@@ -293,6 +294,11 @@ async def build_visuals(
     if not sections:
         notes.append("The paper could not be summarised into readable sections.")
     check_prose(sections, index, report)
+    # Every sentence of the prose, tied to the paper's own sentence or marked as not.
+    anchors = anchor_prose(sections, index)
+    report.sentences = len(anchors)
+    report.anchored = sum(1 for a in anchors if a.supported)
+    report.direction_conflicts = sum(1 for a in anchors if a.direction_conflict)
     # Charts go beside their sections first, so the linker can prefer the one on screen;
     # then a chart whose own section never mentions it moves to the one that does.
     _attach_charts(sections, charts)
@@ -322,6 +328,7 @@ async def build_visuals(
         absolute_risk_derived=absolute_risk.derived() if absolute_risk else None,
         terms=terms,
         links=links,
+        anchors=anchors,
         sources=sources,
         sections=sections,
         charts=charts,

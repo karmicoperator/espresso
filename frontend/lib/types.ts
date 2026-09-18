@@ -92,9 +92,24 @@ export type VerificationReport = {
   /** Numbers in the prose looked up in the paper; misses are marked on the page. */
   prose_checked?: number;
   prose_unmatched?: { section_id: string; number: string; context: string }[];
+  sentences?: number;
+  anchored?: number;
+  direction_conflicts?: number;
 };
 
 /** What the paper asked and found, checked like a plotted value against its quote. */
+/** A sentence of the concise version and the paper's sentence it rests on. */
+export type Anchor = {
+  section_id: string;
+  sentence: string;
+  locator: string;
+  quote: string;
+  supported: boolean;
+  direction_conflict: boolean;
+  /** Page of the stored PDF where the quote was found, 1-based; 0 when unknown. */
+  page: number;
+};
+
 export type BottomLine = {
   question: string;
   answer: string;
@@ -164,6 +179,11 @@ export type Explainer = {
   absolute_risk_derived?: AbsoluteRiskDerived | null;
   terms?: Term[];
   links?: Link[];
+  anchors?: Anchor[];
+  /** Whether the paper's PDF is stored; decides whether a sentence opens in the PDF or the text. */
+  has_pdf?: boolean;
+  /** The stored PDF's modification time, part of its URL so an attached PDF is never stale. */
+  pdf_version?: number;
   /** The paper's own paragraph behind each cited locator. */
   sources?: Record<string, string>;
   sections: ReaderSection[];

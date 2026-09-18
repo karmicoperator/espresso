@@ -138,7 +138,65 @@ async def get_explainer(paper_id: str):
             status_code=404,
             detail=f"No explainer for {paper_id}. Build it first from the landing page.",
         )
-    return explainer
+    # Whether the paper's PDF is stored decides how a sentence opens: in the PDF or in
+    # the paper's text. Not a field of the explainer; it is a fact about the store.
+    pid = explainer.paper_id or paper_id
+    has_pdf = store.has_pdf(pid)
+    # The PDF's modification time goes into its URL, so a PDF attached after the page was
+    # first opened is never lost to a copy the browser cached.
+    version = int(store.pdf_path(pid).stat().st_mtime) if has_pdf else 0
+    return explainer.model_dump() | {"has_pdf": has_pdf, "pdf_version": version}
+
+
+@router.get("/paper/{paper_id}")
+async def get_paper(paper_id: str):
+    """The paper's own text, verbatim, with the locators the anchors and quotes cite."""
+    paper = store.load_paper(paper_id)
+    if paper is None:
+        raise HTTPException(status_code=404, detail="The source text for this paper was not kept.")
+    return {
+        "title": paper.meta.title,
+        "abstract": paper.meta.abstract,
+        "sections": [
+            {"id": s.id, "title": s.title, "content": s.content,
+             "tables": [{"id": t.id, "caption": t.caption, "headers": t.headers, "rows": t.rows}
+                        for t in (getattr(s, "tables", None) or [])]}
+            for s in paper.sections
+        ],
+    }
+
+
+@router.get("/pdf/{paper_id}")
+async def get_pdf(paper_id: str):
+    """The paper's PDF, when one was uploaded or attached."""
+    path = store.pdf_path(Path(paper_id).name)
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="No PDF is stored for this paper.")
+    # Revalidate every time: a PDF attached after the page was opened must not lose to a
+    # cached copy. FileResponse sets ETag and Last-Modified, so revalidation is cheap.
+    return FileResponse(path, media_type="application/pdf", headers={"Cache-Control": "no-cache"})
+
+
+@router.post("/pdf/{paper_id}")
+async def attach_pdf(paper_id: str, request: Request, file: UploadFile = File(...)):
+    """Attach the paper's PDF to a built explainer, so its sentences open in the PDF.
+
+    PubMed Central blocks scripted downloads, so a reader who has the PDF drops it here.
+    Only from this machine, like settings. The quotes are then located on the PDF's pages.
+    """
+    _loopback_only(request)
+    explainer = store.load(paper_id)
+    if explainer is None:
+        raise HTTPException(status_code=404, detail="Build the paper first.")
+    path, _name = await _stash_pdf(file)
+    import shutil
+
+    shutil.move(str(path), store.pdf_path(explainer.paper_id))
+    from agents.anchor import page_hints
+
+    pages = page_hints(store.pdf_path(explainer.paper_id), explainer)
+    store.save(explainer)
+    return {"paper_id": explainer.paper_id, "pages": pages}
 
 
 @router.get("/explainers")

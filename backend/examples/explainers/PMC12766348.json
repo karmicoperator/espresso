@@ -731,6 +731,890 @@
       "index": 1
     }
   ],
+  "anchors": [
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "In Türkiye, a doctor training in a medical specialty (a resident) must write an original research thesis before sitting the specialty exam.",
+      "locator": "sec-body/p1",
+      "quote": "In Türkiye, medical residency students are required to prepare an original thesis in their field of specialization to qualify for the specialty examination.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "National regulation sets this rule, and some European countries have similar ones.",
+      "locator": "sec-body/p1",
+      "quote": "Similar practices also exist in some European countries.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "The requirement produces a large amount of original research every year.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "The authors wanted to know how much of it reaches the wider scientific literature.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "They studied radiology using **bibliometrics**, the statistical analysis of academic documents (the term dates from 1969).",
+      "locator": "sec-body/p1",
+      "quote": "Bibliometrics, defined in 1969, is a method that enables the statistical analysis of academic documents.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "Counting what gets published, in which journals, how fast and how often it is cited shows which research areas get attention and what helps a thesis become a journal article.",
+      "locator": "sec-methods-1/p4",
+      "quote": "When a corresponding article was identified, the following data were recorded: article title, name of the journal, country of publication, year of publication, identity of the first author (i.e., whether the thesis author), number of citations (according to Google Scholar and PubMed), and the indexing status.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "Other Turkish specialties already had studies like this.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-1",
+      "sentence": "As of February 2025, radiology had none.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "A marked increase in the number of radiology residency theses has been observed, particularly since the 2000s, which is associated with the expansion of radiology residency quotas in Türkiye (e.g., from 38 positions in 2008 to 105 in 2018).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "The team collected every radiology residency thesis from the online database of the National Thesis Center, which is run by Türkiye's Council of Higher Education.",
+      "locator": "sec-methods-1/p1",
+      "quote": "Theses were retrieved from the online database of the National Thesis Center of the Council of Higher Education of Türkiye.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "They removed four kinds of record:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "theses from other specialties that had been filed under radiology by mistake",
+      "locator": "sec-methods-1/p1",
+      "quote": "Theses with incomplete data or access restrictions, as well as those belonging to other specialties but erroneously categorized under radiology due to user error, were excluded from the study.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "anything dated January 2025 or later, because turning a thesis into an article takes at least six months",
+      "locator": "sec-methods-1/p1",
+      "quote": "Additionally, based on the assumption that the conversion of a thesis into a publication generally requires a minimum of 6 months, theses dated January 2025 and later were excluded.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "That left 3,136 theses, from 1971 to December 2024.",
+      "locator": "sec-discussion-4/p9",
+      "quote": "In the study by Ozgen et al., which covered the period 1980–2005, the publication rate of radiology theses in SCIE-indexed journals was reported as 6.3%, whereas in our study (covering 1971–2024), this rate increased to 20.8%.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "For each thesis they recorded the author's and advisor's gender, the advisor's academic rank, the institution type (university hospital or training and research hospital), the year and the study design.",
+      "locator": "sec-methods-1/p2",
+      "quote": "For each thesis, variables such as the title, gender of the author, gender and academic title of the advisor, number of pages, year of publication, name and type of institution, number of advisors, study type, and sample size were recorded.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Two radiology consultants sorted each thesis into one of 14 subspecialty groups based on the Turkish Society of Radiology's working groups, and they agreed on every case.",
+      "locator": "sec-methods-1/p3",
+      "quote": "Thesis topics were categorized into 14 subgroups based on the subject areas defined with reference to the Education and Scientific Research Groups of the Turkish Society of Radiology (TSR): Neuroradiology, Head and Neck Radiology, Musculoskeletal Radiology, Breast Radiology, Thoracic Radiology, Abdominal Radiology, Genitourinary Radiology, Interventional Radiology, Cardiovascular Radiology, Imaging Physics and Radiation Safety, Obstetric Radiology, Emergency Radiology, Pediatric Radiology, and Other (for theses not falling into the aforementioned 13 groups).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "To find matching articles, they searched Google, Google Scholar, PubMed, Web of Science, TR Index (a Turkish national citation index) and DergiPark (a Turkish journal platform) using the author's and advisor's names plus topic keywords.",
+      "locator": "sec-methods-1/p4",
+      "quote": "Searches were conducted using the names of the thesis author and advisor, along with relevant keywords, across multiple databases and platforms: Google, Google Scholar, PubMed, Web of Science (WoS), and TR Index (a national citation index for Turkish academic journals)., , , , Additionally, DergiPark, an academic publication platform based in Türkiye, was included in the screening process.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Only full original research articles counted.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "For each match they recorded the journal, the first author, the citation count and the time to publication:",
+      "locator": "sec-methods-1/p4",
+      "quote": "When a corresponding article was identified, the following data were recorded: article title, name of the journal, country of publication, year of publication, identity of the first author (i.e., whether the thesis author), number of citations (according to Google Scholar and PubMed), and the indexing status.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "time to publication (days) = article publication date minus thesis completion date",
+      "locator": "sec-methods-1/p4",
+      "quote": "Furthermore, the number of days between the thesis completion date and the article publication date was calculated to determine the time to publication.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Journals were ranked into five tiers based on how they were indexed when the article came out.",
+      "locator": "sec-methods-1/p5",
+      "quote": "Publications were classified into the following five categories based on the indexing status of the journals:",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Each journal was placed only in its highest tier:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Science Citation Index Expanded (SCIE), the top tier",
+      "locator": "abstract",
+      "quote": "A total of 1,165 theses (37.1%) were published as journal articles, of which 651 (20.8% of all theses) appeared in Science Citation Index Expanded (SCIE)-indexed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Emerging Sources Citation Index (ESCI), a Web of Science index for newer or regional journals",
+      "locator": "sec-methods-1/p7",
+      "quote": "Journals indexed in the Emerging Sources Citation Index (ESCI)",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Other international indexes outside Web of Science",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Other national peer-reviewed journals",
+      "locator": "sec-methods-1/p10",
+      "quote": "Other national peer-reviewed journals not indexed in TR Index",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "For SCIE journals they also recorded the **impact factor quartile**.",
+      "locator": "abstract",
+      "quote": "For published articles, the journal name, indexing category, impact factor quartile, citation count, and time to publication were recorded.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Journals in a field are ranked by impact factor (roughly, how often their recent articles are cited) and split into four equal groups.",
+      "locator": "abstract",
+      "quote": "For published articles, the journal name, indexing category, impact factor quartile, citation count, and time to publication were recorded.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Publication delays and citation counts were skewed: most values were small and a few were very large.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "So the authors used rank-based tests (Mann-Whitney U, Kruskal-Wallis), which don't assume a bell curve.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "Chi-squared tests compared proportions.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "A regression model tested whether a thesis's chance of publication changed with its year.",
+      "locator": "sec-methods-1/p4",
+      "quote": "When a corresponding article was identified, the following data were recorded: article title, name of the journal, country of publication, year of publication, identity of the first author (i.e., whether the thesis author), number of citations (according to Google Scholar and PubMed), and the indexing status.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-2",
+      "sentence": "P below 0.05 counted as significant.",
+      "locator": "sec-results-3/p7",
+      "quote": "Similarly, there were no statistically significant differences in citation count (P = 0.322) or time to publication (P = 0.057) according to the academic title of the advisor.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Most theses came from university hospitals (83.1%).",
+      "locator": "abstract",
+      "quote": "RESULTS: Most theses were from university hospitals (83.1%) and supervised by professors (45.8%).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Professors supervised 45.8% and associate professors 33.4%.",
+      "locator": "sec-discussion-4/p2",
+      "quote": "The finding that the majority of theses were conducted in university hospitals (83.1%) and primarily under the supervision of professors (45.8%) and associate professors (33.4%) is consistent with trends observed in other medical specialties., , This distribution may be related to the number of residency students in these institutions and the academic experience of the advisors.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Thesis numbers rose sharply after 2000 and peaked at 198 in 2010.",
+      "locator": "abstract",
+      "quote": "METHODS: This retrospective study included 3,136 radiology residency theses completed between 1971 and December 2024, retrieved from the National Thesis Center.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Most theses (86.7%) were retrospective, meaning they looked back at existing records and images instead of following patients forward.",
+      "locator": "sec-discussion-4/p7",
+      "quote": "The literature emphasizes that experimental and prospective studies not only tend to have higher publication rates but are also more likely to be published in higher-impact and more prestigious journals., In this context, the fact that 86.7% of theses had a retrospective design highlights the need to encourage prospective and methodologically stronger studies.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Neuroradiology was the most common topic (16.0%), followed by abdominal (13.3%) and interventional radiology (12.4%).",
+      "locator": "sec-results-3/p2",
+      "quote": "Among thesis topics, neuroradiology (16.0%), abdominal radiology (13.3%), and interventional radiology (12.4%) were the most frequently selected fields, whereas imaging physics and radiation safety (1.6%) was the least preferred ().",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Imaging physics and radiation safety was the rarest at 1.6%, and obstetric radiology was about as rare.",
+      "locator": "sec-discussion-4/p5",
+      "quote": "In contrast, subspecialties such as imaging physics and radiation safety and obstetric radiology were represented in only 1.6% of the theses.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "In total, 1,165 theses became journal articles:",
+      "locator": "abstract",
+      "quote": "A total of 1,165 theses (37.1%) were published as journal articles, of which 651 (20.8% of all theses) appeared in Science Citation Index Expanded (SCIE)-indexed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "publication rate = 100 x (published theses / all theses) = 100 x 1,165 / 3,136 = 37.1%",
+      "locator": "sec-results-3/p3",
+      "quote": "Out of the 3,136 radiology residency theses, 1,165 (37.1%) were found to have been published as scientific articles in national or international peer-reviewed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Counting all theses, 651 (20.8%) reached SCIE journals.",
+      "locator": "abstract",
+      "quote": "A total of 1,165 theses (37.1%) were published as journal articles, of which 651 (20.8% of all theses) appeared in Science Citation Index Expanded (SCIE)-indexed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Counting only published articles, 55.9% were in SCIE journals, so a thesis that got published usually reached the top tier.",
+      "locator": "sec-results-3/p3",
+      "quote": "However, when considering only the published articles, more than half (55.9%) appeared in SCIE-indexed journals, and 39.2% of these were published in journals classified under the Q3 and Q4 quartiles ().",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Many of those were lower-ranked SCIE journals, though.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The abstract says 39.2% of SCIE publications were in Q3 or Q4.",
+      "locator": "abstract",
+      "quote": "Among the SCIE publications, 39.2% were in Q3 or Q4 journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The discussion instead reports 456 of 651 SCIE articles in Q3 or Q4, which is about 70%.",
+      "locator": "abstract",
+      "quote": "A total of 1,165 theses (37.1%) were published as journal articles, of which 651 (20.8% of all theses) appeared in Science Citation Index Expanded (SCIE)-indexed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The 39.2% figure matches 456 as a share of all 1,165 published articles.",
+      "locator": "abstract",
+      "quote": "A total of 1,165 theses (37.1%) were published as journal articles, of which 651 (20.8% of all theses) appeared in Science Citation Index Expanded (SCIE)-indexed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The two most common journals were Diagnostic and Interventional Radiology (7.0%) and the European Journal of Radiology (4.2%).",
+      "locator": "sec-results-3/p4",
+      "quote": "The most frequently published-in journals were Diagnostic and Interventional Radiology (7.0%) and the European Journal of Radiology (4.2%), and the detailed distribution of journals is provided in .",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The median time from thesis to article was 1,300 days, about three and a half years.",
+      "locator": "sec-results-3/p4",
+      "quote": "The time from thesis completion to publication ranged from 151 to 11,680 days, with a median of 1,300 days [interquartile range (IQR): 826–2,106].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The middle half of articles took between 826 and 2,106 days.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The median article had 3 citations.",
+      "locator": "sec-results-3/p4",
+      "quote": "The number of citations per publication ranged from 0 to 416, with a median of 3 (IQR: 0–17).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The mean was 14.7, pulled up by a few heavily cited papers (the maximum was 416).",
+      "locator": "sec-results-3/p4",
+      "quote": "The mean number of citations was 14.7 ± 30.2.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Over the decades, the chance of publication rose significantly (P = 0.045), and the time to publication fell (P < 0.001).",
+      "locator": "abstract",
+      "quote": "Publication rates significantly increased over time (P = 0.045), and time to publication decreased (P < 0.001), with a median of 1,300 days.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Publication rates by topic ranged from 51.0% for imaging physics and radiation safety down to 32.6% for breast radiology.",
+      "locator": "sec-discussion-4/p11",
+      "quote": "In our study, the highest publication rate was observed in the field of imaging physics and radiation safety (51.0%), whereas lower rates were noted in breast radiology (32.6%), thoracic radiology (33.2%), and neuroradiology (34.7%).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Topic had no statistically significant link with publication rate, citations or speed.",
+      "locator": "sec-results-3/p5",
+      "quote": "No statistically significant relationship was found between thesis topic and publication rate, number of citations, or time to publication (P = 0.296, P = 0.842, and P = 0.280, respectively) ().",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Resident gender:** no effect on whether a thesis was published or how often it was cited.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Female residents took significantly longer to publish (P < 0.001).",
+      "locator": "sec-results-3/p6",
+      "quote": "However, the time to publication was significantly longer for theses authored by female residents than by their male counterparts (P < 0.001).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The advisor's gender had no effect on any measure.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Advisor rank:** theses supervised by assistant professors, the most junior faculty rank, had the highest publication rate at 43.0%.",
+      "locator": "sec-results-3/p7",
+      "quote": "The highest publication rate (43.0%) was observed in theses supervised by advisors with the title of assistant professor, which was significantly higher than those supervised by professors (P = 0.001) and associate professors (P = 0.041).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "That was significantly above professors (34.8%) and associate professors.",
+      "locator": "sec-discussion-4/p13",
+      "quote": "The highest publication rate (43.0%) was observed in theses supervised by assistant professors, whereas the lowest rate (34.8%) was found in those supervised by professors.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Rank did not affect citations or speed.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Institution:** universities and training and research hospitals published at similar rates and speeds, but university articles were cited significantly more (P < 0.001).",
+      "locator": "sec-results-3/p8",
+      "quote": "However, when citation counts were compared, publications originating from universities had significantly higher citation numbers than those from training and research hospitals (P < 0.001) ().",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "First author:** residents led 76.4% of articles, advisors 12.9% and other researchers 10.7%.",
+      "locator": "sec-results-3/p4",
+      "quote": "In the vast majority of published articles (76.4%, n = 890), the first author was the residency student; in contrast, thesis advisors and other researchers were listed as first authors in 12.9% (n = 150) and 10.7% (n = 125) of publications, respectively.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Articles led by someone other than the resident did better on every measure.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "They reached SCIE journals more often (74.7% for advisors, 69.6% for other researchers, against 50.8% for residents).",
+      "locator": "sec-results-3/p9",
+      "quote": "Among the theses that were converted into publications, the rate of publication in SCIE-indexed journals was 50.8% when the residency student was the first author, whereas this rate was higher for publications where the advisor (74.7%) or another researcher (69.6%) was the first author.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "They were also cited more and published faster (all P < 0.001).",
+      "locator": "abstract",
+      "quote": "Articles with the advisor or another researcher as the first author were more frequently published in SCIE journals (P < 0.001), received more citations (P < 0.001), and had shorter time to publication (P < 0.001).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The growth in thesis numbers follows the growth in radiology training places, from 38 in 2008 to 105 in 2018.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "A marked increase in the number of radiology residency theses has been observed, particularly since the 2000s, which is associated with the expansion of radiology residency quotas in Türkiye (e.g., from 38 positions in 2008 to 105 in 2018).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Places rose sevenfold after 2022.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "Considering that residency training lasts 5 years, the sevenfold increase in quotas after 2022 is also expected to be reflected in the number of theses in the coming years.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Residency lasts five years, so the authors expect more theses to follow.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "Considering that residency training lasts 5 years, the sevenfold increase in quotas after 2022 is also expected to be reflected in the number of theses in the coming years.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The popular topics together account for 15 months of the national training curriculum and involve many patients and imaging methods.",
+      "locator": "sec-discussion-4/p4",
+      "quote": "A similar distribution has been observed in resident preferences in the United Kingdom and in Oral Presentations at National Radiology Congresses in Türkiye., According to the residency training curriculum of the Qualification Board of the TSR, these three subspecialties collectively account for 15 months of training duration.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The authors call the shortage of physics and radiation safety theses worrying, because Turkish radiology staff have documented gaps in radiation safety knowledge and physics affects image quality.",
+      "locator": "sec-discussion-4/p5",
+      "quote": "The low number of theses in the field of imaging physics and radiation safety in Türkiye is concerning, especially given the reported deficiencies in radiation safety knowledge among radiology personnel and the fundamental importance of physics for image quality., This limited representation may be attributed to residents’ tendency to focus on clinically oriented fields and the relatively low level of academic interest in these topics.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Obstetric radiology may be rare because training time is short and, in Türkiye, obstetricians do most obstetric imaging themselves.",
+      "locator": "sec-discussion-4/p6",
+      "quote": "The low proportion of theses in obstetric radiology may be attributed to several factors previously described in the literature, including insufficient training duration, limited theoretical content, and a lack of hands-on experience in this field., In addition, obstetric imaging in Türkiye is predominantly performed by obstetricians, which may reduce radiology residents’ exposure to this subspecialty and, consequently, their motivation to pursue thesis work in this area.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Radiology's 37.1% publication rate is above anesthesiology, general surgery, family medicine and emergency medicine in Türkiye, and below thoracic surgery, child and adolescent psychiatry and endocrinology.",
+      "locator": "sec-results-3/p3",
+      "quote": "Out of the 3,136 radiology residency theses, 1,165 (37.1%) were found to have been published as scientific articles in national or international peer-reviewed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The authors place radiology in the upper-middle range.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "They link the many lower-quartile articles partly to the heavy use of retrospective designs, since prospective and experimental studies tend to reach higher-impact journals.",
+      "locator": "sec-discussion-4/p7",
+      "quote": "The literature emphasizes that experimental and prospective studies not only tend to have higher publication rates but are also more likely to be published in higher-impact and more prestigious journals., In this context, the fact that 86.7% of theses had a retrospective design highlights the need to encourage prospective and methodologically stronger studies.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "They add that careful retrospective work still has value in a data-rich field like radiology.",
+      "locator": "sec-discussion-4/p7",
+      "quote": "Nevertheless, well-designed retrospective studies can also make significant contributions, particularly in data-rich fields, such as radiology.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Cost matters too: high article processing charges at prestigious journals push some Turkish researchers toward cheaper, lower-impact journals.",
+      "locator": "sec-discussion-4/p8",
+      "quote": "It has been reported that Turkish researchers place importance on journal prestige, yet high article processing charges pose a significant challenge.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "An earlier study of 1980 to 2005 found that 6.3% of Turkish radiology theses reached SCIE journals, against 20.8% here.",
+      "locator": "sec-discussion-4/p9",
+      "quote": "In the study by Ozgen et al., which covered the period 1980–2005, the publication rate of radiology theses in SCIE-indexed journals was reported as 6.3%, whereas in our study (covering 1971–2024), this rate increased to 20.8%.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The authors connect this to promotion rules from the Council of Higher Education that reward publication in internationally indexed journals.",
+      "locator": "sec-discussion-4/p10",
+      "quote": "This trend may be associated with the updated academic promotion criteria established by the Council of Higher Education., In particular, the increased academic credit awarded for publications in internationally indexed journals, such as those in the SCIE, has become a motivating factor for both advisors and residency students to publish their theses.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "National and secondary indexes also mattered.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "TR Index journals carried 20.2% of the articles and ESCI journals 11.6%, which gives early-career or under-resourced researchers somewhere to publish.",
+      "locator": "sec-discussion-4/p10",
+      "quote": "Additionally, 11.6% of the publications appeared in journals indexed in the ESCI, a component of the WoS that includes newer or regionally focused journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The advisor-rank result goes against the common assumption that senior professors produce the most publications.",
+      "locator": "sec-discussion-4/p13",
+      "quote": "This finding contrasts with the common assumption that professors, due to their greater academic experience, tend to produce more publications.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Anesthesiology, otorhinolaryngology and plastic surgery show the same pattern.",
+      "locator": "sec-discussion-4/p13",
+      "quote": "Although a study conducted in the field of neurosurgery reported no significant difference in publication rates based on advisor academic title, similar findings to ours have been documented in other specialties, such as anesthesiology, otorhinolaryngology, and plastic surgery, where theses supervised by assistant professors were more frequently published and converted into articles in a shorter time frame., , This may be related to the increased contribution of faculty members who are in the process of academic advancement and are therefore more engaged in the publication process.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The authors suggest that assistant professors, who still need publications for promotion, push harder to get a thesis into print.",
+      "locator": "sec-discussion-4/p13",
+      "quote": "Although a study conducted in the field of neurosurgery reported no significant difference in publication rates based on advisor academic title, similar findings to ours have been documented in other specialties, such as anesthesiology, otorhinolaryngology, and plastic surgery, where theses supervised by assistant professors were more frequently published and converted into articles in a shorter time frame., , This may be related to the increased contribution of faculty members who are in the process of academic advancement and are therefore more engaged in the publication process.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "The first-author results point to experience.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Advisors and other researchers know how to write for journals, choose where to submit and handle peer review.",
+      "locator": "sec-results-3/p9",
+      "quote": "Among the theses that were converted into publications, the rate of publication in SCIE-indexed journals was 50.8% when the residency student was the first author, whereas this rate was higher for publications where the advisor (74.7%) or another researcher (69.6%) was the first author.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-4",
+      "sentence": "Residents lead most articles, which shows they take part, but their slower path to publication suggests they need more help with writing and choosing journals.",
+      "locator": "sec-results-3/p9",
+      "quote": "Articles with the advisor or another researcher as the first author were significantly more likely to be published in SCIE-indexed journals than those authored by the residency student (P < 0.001 for both comparisons).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "The search used online databases only.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "Articles in small local journals may have been missed, and Scopus was not searched separately.",
+      "locator": "sec-discussion-4/p17",
+      "quote": "Since the thesis-to-publication status was investigated solely through online databases, some articles, particularly those published in local or low-visibility journals, may have been missed.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "Theses were matched to articles by names and content, without direct confirmation, so some matches may be wrong.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "Citation counts are a snapshot and undercount recent papers.",
+      "locator": "sec-discussion-4/p17",
+      "quote": "Due to the time-dependent nature of citation counts, the data—especially for recently published articles—represent only a snapshot and may underestimate long-term citation impact.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "Converting a thesis usually takes more than two years, so many 2023 and 2024 theses may not be published yet, which pulls recent rates down.",
+      "locator": "sec-discussion-4/p9",
+      "quote": "In the study by Ozgen et al., which covered the period 1980–2005, the publication rate of radiology theses in SCIE-indexed journals was reported as 6.3%, whereas in our study (covering 1971–2024), this rate increased to 20.8%.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "Theses outside the National Thesis Center database were not included.",
+      "locator": "abstract",
+      "quote": "METHODS: This retrospective study included 3,136 radiology residency theses completed between 1971 and December 2024, retrieved from the National Thesis Center.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "About one in three radiology residency theses in Türkiye becomes a journal article.",
+      "locator": "sec-methods-1/p1",
+      "quote": "This retrospective and descriptive study examined the bibliometric characteristics of radiology residency theses in Türkiye, as well as their publication rates in peer-reviewed journals.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "More than half of those appear in SCIE journals, often lower-ranked ones.",
+      "locator": "sec-results-3/p3",
+      "quote": "However, when considering only the published articles, more than half (55.9%) appeared in SCIE-indexed journals, and 39.2% of these were published in journals classified under the Q3 and Q4 quartiles ().",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "The publication rate has risen over time and the delay has shrunk.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "Articles led by an advisor or another experienced researcher reach better journals, come out faster and get cited more.",
+      "locator": "abstract",
+      "quote": "Articles with the advisor or another researcher as the first author were more frequently published in SCIE journals (P < 0.001), received more citations (P < 0.001), and had shorter time to publication (P < 0.001).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "The authors call for stronger mentorship, structured training in how to publish and better research infrastructure.",
+      "locator": "sec-discussion-4/p18",
+      "quote": "To sustain this progress, it is essential to promote effective mentorship practices, provide structured training on the publication process for early-career researchers, and strengthen institutional research infrastructure.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12766348-section-5",
+      "sentence": "They argue that institutions should treat residency theses as part of their academic research.",
+      "locator": "sec-discussion-4/p18",
+      "quote": "Ultimately, a holistic approach should be adopted in which residency theses are regarded not merely as a graduation requirement but as an integral part of academic research.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    }
+  ],
   "sources": {
     "sec-results-3/p3": "Out of the 3,136 radiology residency theses, 1,165 (37.1%) were found to have been published as scientific articles in national or international peer-reviewed journals. Among all theses, the publication rate in journals indexed in the SCIE was 20.8% (n = 651). However, when considering only the published articles, more than half (55.9%) appeared in SCIE-indexed journals, and 39.2% of these were published in journals classified under the Q3 and Q4 quartiles ().",
     "table-2/r1/c2": "SCIE 55.9%",
@@ -766,7 +1650,10 @@
         "number": "70",
         "context": "IE articles in Q3 or Q4, which is about 70%. The 39.2% figure matches 456 as a sha"
       }
-    ]
+    ],
+    "sentences": 98,
+    "anchored": 76,
+    "direction_conflicts": 0
   },
   "notes": []
 }

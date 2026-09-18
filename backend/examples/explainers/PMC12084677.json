@@ -742,6 +742,1547 @@
       "index": 0
     }
   ],
+  "anchors": [
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Liver transplantation is usually thought of as a fix for a failing liver.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "For a growing group of patients it is a cancer treatment: surgeons remove the whole liver, tumours included, and put in a healthy one.",
+      "locator": "abstract",
+      "quote": "Methods: A review of the most recent relevant literature was conducted for all the cancer indications of liver transplantation including colorectal cancer liver metastases, hilar cholangiocarcinoma, intrahepatic cholangiocarcinoma, neuroendocrine tumours, hepatocellular carcinoma and hepatic epitheloid haemangioendothelioma.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "This field is called **transplant oncology**, the treatment of cancer through transplant medicine and surgery.",
+      "locator": "zraf034-s1/p1",
+      "quote": "Transplant oncology is the treatment of cancer through transplant medicine and surgery.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "The review collects the current evidence for each cancer where transplant is used, the technical problems involved, and how centres cope with a shortage of donor livers.",
+      "locator": "abstract",
+      "quote": "This review is intended to optimize the care setting of liver transplant candidates by highlighting current indications, technical aspects and barriers with available solutions to facilitate the guidance of available strategies for healthcare professionals in specialized centres.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "It is written for clinicians in specialist centres.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Four judgements shape any decision.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Resectability asks whether the tumour can be cut out while leaving enough liver behind.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "It is less objective than it sounds, because techniques that make the remaining liver grow before surgery are applied under different rules at different centres.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Operability asks whether the patient is fit enough to survive surgery.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Curability asks whether they will stay free of disease, often judged as no recurrence at 5 years.",
+      "locator": "zraf034-s1/p2",
+      "quote": "On an individual level, ‘cure’ means that the patient never experiences disease after treatment (for example recurrence-free survival at 5 years).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Transplantability asks whether they meet the rules for the waiting list.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Those rules weigh the chance of dropping off the list, the risk of death after transplant, and how many organs are available.",
+      "locator": "zraf034-s1/p2",
+      "quote": "The term transplantability refers to the national or institutional criteria for transplant listing, relying on risk parameters for waitlist dropout (including but not limited to death or disease progression), post-transplant mortality rate and donor organ availability.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Donor livers are scarce, so giving one to a patient whose cancer may return raises an ethical question about allocation.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "The review's main yardstick is **transplant benefit**, the survival a transplant adds over the best non-transplant option:",
+      "locator": "zraf034-s1/p3",
+      "quote": "Transplant benefit is defined as the gain offered by liver transplantation (LT) compared with the best alternative therapy (survival after LT minus survival with the best alternative treatment).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "transplant benefit = survival after transplant - survival with the best alternative treatment",
+      "locator": "zraf034-s1/p3",
+      "quote": "Transplant benefit is defined as the gain offered by liver transplantation (LT) compared with the best alternative therapy (survival after LT minus survival with the best alternative treatment).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "The International Liver Transplantation Society (ILTS) consensus says this should be one of the main factors in deciding who qualifies.",
+      "locator": "zraf034-s1/p3",
+      "quote": "The International Liver Transplantation Society (ILTS) Consensus guidelines on Transplant Oncology emphasized that transplant benefit should be one of the key parameters to be considered when defining optimal selection criteria for LT.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "Living donor liver transplantation (LDLT), in which a healthy person gives part of their liver, has become important in this field.",
+      "locator": "zraf034-s1/p2",
+      "quote": "In light of organ shortages and neoadjuvant treatment protocols potentially requiring time-sensitive planning, living donor liver transplantation (LDLT) has gained a pivotal role in transplant oncology.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "It bypasses the waiting list and lets surgeons time the operation around chemotherapy.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-1",
+      "sentence": "The cost is the risk to a healthy donor.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "About half of people with colorectal cancer develop metastases, most often in the liver.",
+      "locator": "zraf034-s2.1/p1",
+      "quote": "Almost 50% of patients with colorectal cancer will develop metastatic disease, and the liver is the most often involved organ.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Surgically removing these colorectal liver metastases (CRLM) is the only cure.",
+      "locator": "zraf034-s2.1/p1",
+      "quote": "Liver resection remains the only potential curative treatment option for colorectal liver metastasis (CRLM).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Even so, 75 to 80% of patients cannot have surgery and receive palliative chemotherapy instead, and only about 10% of them are alive at 5 years.",
+      "locator": "zraf034-s2.1/p1",
+      "quote": "Nevertheless, for 75–80% of the patients with CRLM, the only treatment option remains palliative chemotherapy, with a 5-year overall survival rate of about 10%.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The SECA-I trial (2013) was the first controlled test of transplant for CRLM that could not be removed surgically.",
+      "locator": "zraf034-s2.1/p2",
+      "quote": "The first controlled ‘proof of concept’ SEcondary CAncer (SECA-I) trial to explore LT in non-resectable CRLM was published in 2013 and found an estimated overall survival (OS) of 95%, 68% and 60% at 1, 3 and 5 years respectively.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Estimated overall survival (OS) was 95% at 1 year, 68% at 3 years and 60% at 5 years.",
+      "locator": "zraf034-s2.1/p2",
+      "quote": "The first controlled ‘proof of concept’ SEcondary CAncer (SECA-I) trial to explore LT in non-resectable CRLM was published in 2013 and found an estimated overall survival (OS) of 95%, 68% and 60% at 1, 3 and 5 years respectively.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Only 35% of patients were cancer-free at 1 year.",
+      "locator": "zraf034-s2.1/p2",
+      "quote": "However, disease-free survival (DFS) was only 35% at 1 year.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Most recurrences, though, were slow-growing lung metastases that surgeons could remove, so patients lived long anyway.",
+      "locator": "zraf034-s2.1/p2",
+      "quote": "Still, most recurrences were slow-growing lung metastases that could be offered curative intent resection, thereby yielding a favourable overall survival despite recurrence post-transplant.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "SECA-I identified four features linked to worse survival: a largest tumour over 5.5 cm, less than 2 years since the bowel cancer surgery, a CEA blood marker above 80 micrograms per litre, and cancer that kept growing during chemotherapy.",
+      "locator": "zraf034-s2.1/p2",
+      "quote": "Risk factors for inferior survival were maximal tumour diameter >5.5 cm, time from primary cancer surgery <2 years, CEA levels >80 μg/l and disease progression after chemotherapy at the time of LT.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Each feature scores one point in the **Oslo score**:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Oslo score = number of these four risk factors present (0 to 4)",
+      "locator": "zraf034-T2/r6",
+      "quote": "French AFP 2012 | AFP ≤100, > 100–1000, > 1000; largest diameter ≤3 cm, > 3–6 cm, > 6 cm; no. of nodules 1–3, ≥4 | 537 in test cohort, 435 for validation | OS / recurrencescore ≤2: 67.8% ± 3.4% / 8.8% ± 1.7%Score >2: 47.5% ± 8.1% / 50.6% ± 10.2% | Incorporation of AFP in the model improves prediction of recurrence",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Ten-year data published in 2022 showed that patients scoring 0 or 1 had actual survival of 75% at 5 years and 50% at 10 years.",
+      "locator": "zraf034-s2.1/p2",
+      "quote": "The 10-year outcome data of the SECA-I trial was published in 2022 and showed that a low Oslo score of 0–1 is associated with a 5-year and 10-year actual OS of 75 and 50% respectively.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The follow-up SECA-II trial used stricter entry rules and reached estimated OS of 100%, 83% and 83% at 1, 3 and 5 years.",
+      "locator": "zraf034-s2.1/p3",
+      "quote": "The study cohort, following more stringent inclusion criteria, resulted in Oslo scores of 02, and the estimated 1-, 3- and 5-year OS was 100%, 83% and 83% respectively.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Disease-free survival (DFS) was still only 35% at 3 years, yet survival after recurrence was 73% at 4 years.",
+      "locator": "zraf034-T2/r6",
+      "quote": "French AFP 2012 | AFP ≤100, > 100–1000, > 1000; largest diameter ≤3 cm, > 3–6 cm, > 6 cm; no. of nodules 1–3, ≥4 | 537 in test cohort, 435 for validation | OS / recurrencescore ≤2: 67.8% ± 3.4% / 8.8% ± 1.7%Score >2: 47.5% ± 8.1% / 50.6% ± 10.2% | Incorporation of AFP in the model improves prediction of recurrence",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "For this cancer, DFS is a poor measure of whether transplant works, because recurrence is often treatable.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The Oslo score alone is not enough to pick candidates.",
+      "locator": "zraf034-s2.1/p4",
+      "quote": "The Oslo score alone is insufficient to suggest transplant candidacy; instead, a range of other negative predictive factors should be avoided.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Other warning signs are a primary tumour on the right side of the colon, a BRAF mutation, and undifferentiated or signet ring cell tumours.",
+      "locator": "zraf034-s2.1/p4",
+      "quote": "CRLM in patients with right-sided primary tumours are associated with worse outcomes after chemotherapy, liver resection and liver transplantation, and BRAF mutation and undifferentiated or signet ring cell differentiation are similarly associated with inferior prognosis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "A PET/CT scan is used to rule out spread outside the liver.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "A metabolic tumour volume under 70 cubic centimetres on that scan strongly predicts good survival, and the authors recommend measuring it routinely.",
+      "locator": "zraf034-s2.1/p4",
+      "quote": "A metabolic tumour volume (MTV) on pretransplant PET/CT <70 cm3 is highly predictive of good survival outcomes after liver transplantation for CRLM and should be a routine part of the selection strategy.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The strongest evidence comes from TransMet, a randomized trial of transplant plus chemotherapy against chemotherapy alone in patients with heavy disease (a median of 20 metastases).",
+      "locator": "zraf034-s2.1/p5",
+      "quote": "The study population had a high tumour load with a median of 20 metastases in both groups, and the delay from diagnosis to randomization was 15.9 months in the transplant arm.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "counting every randomized patient (intention to treat): 56.6% alive with transplant vs 12.6% with chemotherapy",
+      "locator": "zraf034-s2.1/p5",
+      "quote": "After a median follow-up of 59.3 months, the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group compared with 12.6% in the chemotherapy group.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "counting only those who received their assigned treatment (per protocol): 73.3% vs 9.3%",
+      "locator": "zraf034-s2.1/p3",
+      "quote": "The OS after recurrence was 100%, 73% and 73% at 1, 2 and 4 years respectively, indicating the DFS has limitations as a parameter of treatment efficacy in liver transplantation for CRLM.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "This makes CRLM the only transplant oncology indication supported by level 1 evidence, the highest grade.",
+      "locator": "zraf034-s2.1/p5",
+      "quote": "The outcomes of the TRANSMET trial confirm the principal findings from all the previous clinical trials on LT for CRLM and have the potential to change clinical practice since CRLM is the only transplant oncology indication that is supported by level 1 evidence.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "As more centres adopt the approach, donor livers become the bottleneck.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Living donation is common in Asia and rarer in the West.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The RAPID procedure, introduced in 2015, stretches the supply.",
+      "locator": "zraf034-s2.1/p6",
+      "quote": "In 2015, the RAPID concept (Resection And Partial Liver Segment 2/3 Transplantation With Delayed Total Hepatectomy) was introduced as a possible method to provide liver transplantation for more patients with CRLM.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Surgeons remove the left side of the patient's liver, implant a small piece of donor liver (segments 2 and 3), and divert portal blood flow to the graft so it grows quickly.",
+      "locator": "zraf034-s2.1/p6",
+      "quote": "In 2015, the RAPID concept (Resection And Partial Liver Segment 2/3 Transplantation With Delayed Total Hepatectomy) was introduced as a possible method to provide liver transplantation for more patients with CRLM.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Once the graft is big enough, usually 2 to 3 weeks later, they remove the rest of the diseased liver.",
+      "locator": "zraf034-s2.1/p6",
+      "quote": "Graft size is monitored weekly, and the second-stage hepatectomy can usually be performed 2–3 weeks post-transplant.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "A study across seven European centres found RAPID safe, with the second operation at a median of 2 weeks.",
+      "locator": "zraf034-s2.1/p6",
+      "quote": "A multicentre study among seven European centres has demonstrated that the RAPID procedure may be applied with adequate safety, good functional liver regeneration and second-stage hepatectomy after a median of 2 weeks.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The graft can come from a split deceased donor liver or from a living donor.",
+      "locator": "abstract",
+      "quote": "Innovative approaches to deal with organ shortages, including machine-perfused deceased grafts, living donor liver transplantation and RAPID procedures, are also explored.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "With a living donor, the donor gives a smaller piece (lower risk) while the recipient still gains a lot.",
+      "locator": "zraf034-s2.1/p6",
+      "quote": "The latter is particularly attractive, since it possibly allows for a reduction in living donor risk whilst simultaneously offering a substantial treatment benefit for the CRLM recipient according to the double equipoise principle.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "This works because CRLM patients usually have otherwise healthy livers without portal hypertension, so they manage with smaller grafts than typical transplant patients.",
+      "locator": "zraf034-s2.1/p6",
+      "quote": "Since patients with CRLM usually do not have portal hypertension or liver failure, they generally may tolerate lower graft size than conventional liver transplant recipients with chronic liver disease.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Hilar cholangiocarcinoma (hCCA) is a bile duct cancer at the point where the ducts leave the liver.",
+      "locator": "abstract",
+      "quote": "Methods: A review of the most recent relevant literature was conducted for all the cancer indications of liver transplantation including colorectal cancer liver metastases, hilar cholangiocarcinoma, intrahepatic cholangiocarcinoma, neuroendocrine tumours, hepatocellular carcinoma and hepatic epitheloid haemangioendothelioma.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Thomas Starzl first transplanted it in 1963.",
+      "locator": "zraf034-s2.2/p1",
+      "quote": "In fact, the first transplant for this disease was performed by Thomas Starzl in 1963.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Of the eight patients his group treated up to the mid-1980s, five survived past 2 months, and four of those five died of recurrence.",
+      "locator": "zraf034-s2.2/p1",
+      "quote": "A total of eight patients with Klatskin tumours were transplanted by Starzl's group up until the mid-1980s, five of whom survived more than 2 months.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The authors blame poor patient selection and the lack of strict chemotherapy before transplant.",
+      "locator": "zraf034-s2.2/p1",
+      "quote": "These poor outcomes can be attributed to poor patient selection and a lack of availability or adherence to strict chemotherapeutic protocols before transplantation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The Mayo Clinic protocol (2000) changed this by giving chemotherapy with radiation before transplant.",
+      "locator": "zraf034-s2.2/p1",
+      "quote": "The Mayo protocol came into existence in 2000, and presented a group of patients who underwent chemoradiation using a protocol that involved combined 5-Fluorouracil (5-FU) with radiation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Of 11 transplanted patients, only one recurred, and median survival was 44 months.",
+      "locator": "zraf034-s2.2/p1",
+      "quote": "The results showed a median survival of 44 months and a single recurrence among 11 patients transplanted.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "A 2004 follow-up of 28 patients reported 82% survival at 5 years and a 14.2% recurrence rate.",
+      "locator": "zraf034-s2.2/p1",
+      "quote": "In 2004, Heimbach et al. published a follow-up on the original Mayo study that included 28 patients with hilar cholangiocarcinoma who underwent liver transplantation with an 82% 5-year OS and a 14.2% recurrence rate.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The Mayo rules were later adopted by the US allocation body UNOS.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "the tumour must be unresectable and diagnosed by brush cytology from the duct",
+      "locator": "zraf034-s2.2.1/p1",
+      "quote": "Briefly, in order to qualify for a liver transplant, patients must have an unresectable tumour diagnosis which is established through brush cytology, the tumour must be under 3 cm in size and/or the patient has a malignant appearing stricture with a CA19-9 > 100 U/ml, and they must not have had a previous surgical exploration or a direct percutaneous/transperitoneal biopsy.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "it must be under 3 cm and/or cause a malignant-looking narrowing with a CA19-9 marker above 100 U/ml",
+      "locator": "zraf034-s2.2.1/p1",
+      "quote": "Briefly, in order to qualify for a liver transplant, patients must have an unresectable tumour diagnosis which is established through brush cytology, the tumour must be under 3 cm in size and/or the patient has a malignant appearing stricture with a CA19-9 > 100 U/ml, and they must not have had a previous surgical exploration or a direct percutaneous/transperitoneal biopsy.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "the patient must not have had prior surgical exploration or a needle biopsy through the skin",
+      "locator": "zraf034-s2.2.1/p1",
+      "quote": "Briefly, in order to qualify for a liver transplant, patients must have an unresectable tumour diagnosis which is established through brush cytology, the tumour must be under 3 cm in size and/or the patient has a malignant appearing stricture with a CA19-9 > 100 U/ml, and they must not have had a previous surgical exploration or a direct percutaneous/transperitoneal biopsy.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Brush samples often miss cancer cells, and adding a genetic test (FISH) improves accuracy.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Lymph nodes are biopsied by endoscopic ultrasound before treatment starts, because any spread rules out transplant.",
+      "locator": "zraf034-s2.2.1/p1",
+      "quote": "Routine endoscopic ultrasound (EUS)-guided biopsy of nodes should be performed before the commencement of chemoradiation to confirm the absence of metastases.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Chemoradiation before transplant (neoadjuvant therapy) shrinks the tumour and lowers recurrence.",
+      "locator": "zraf034-s2.3/p5",
+      "quote": "The MD Anderson-Methodist Transplant Center group reported radiological disease stability for 6 months under the neoadjuvant systemic therapy as a selection criterion for transplantation based on tumour biology in this setting.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "It also tests tumour biology: cancers that progress despite treatment are too aggressive to benefit.",
+      "locator": "zraf034-s2.2.2/p1",
+      "quote": "Additionally, new agent therapy provides a biologic test, as more aggressive behaving tumours that progress despite treatment likely would not benefit from transplantation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "The original scheme gave external radiation with 5-FU, then radiation inside the bile duct, then capecitabine until transplant.",
+      "locator": "zraf034-s2.2.2/p1",
+      "quote": "The original chemoradiation Mayo protocol involved the delivery of high-dose external beam radiation (EBRT) in combination with 5-FU for radio-sensitization as daily boluses for 3 weeks, followed by transcatheter radiation into the bile duct, followed by maintenance capecitabine until transplantation,.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Centres now differ in how they give radiation, and some use gemcitabine with cisplatin.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Trials in advanced biliary cancer showed that adding the immunotherapy drugs durvalumab (2022) or pembrolizumab (2023) improves survival.",
+      "locator": "zraf034-s2.2.2/p2",
+      "quote": "In 2022, Oh et al. noted that durvalumab (PDL-1 antibody) plus gemcitabine-cisplatin significantly improved survival compared with gemcitabine-cisplatin plus placebo in advanced biliary tract cancer.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Immunotherapy cannot be given after transplant because it would trigger rejection, so the authors think it reasonable to add it beforehand.",
+      "locator": "zraf034-s2.2.2/p2",
+      "quote": "While this has not become standard practice, since none of these patients will be able to get immunotherapy after transplant due to the risk of rejection and severe complications resulting from immunosuppression, it seems reasonable to include immunotherapy in the neoadjuvant protocols for hilar cholangiocarcinoma.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Before listing, surgeons sample the lymph nodes at the entrance to the liver, often by keyhole or robotic surgery.",
+      "locator": "zraf034-s2.2.3/p1",
+      "quote": "Before undergoing transplantation, patients must undergo a complete sampling of the lymph nodes in the hilum of the liver and around the porta hepatis, specifically the common hepatic artery lymph nodes along the bile duct, and the portal vein nodes must be sampled.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "About 28% of patients without primary sclerosing cholangitis (PSC, a chronic bile duct disease) turn out to have nodal or distant spread at this stage.",
+      "locator": "zraf034-s2.2.3/p1",
+      "quote": "Approximately 28% of patients with non-primary sclerosing cholangitis (PSC)-related hilar cholangiocarcinoma are found to have positive nodes or metastatic disease at the time of the staging operation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-2",
+      "sentence": "Centres differ on when to do this staging operation, and no data show that timing affects outcome.",
+      "locator": "zraf034-s2.2.3/p1",
+      "quote": "There is no data to suggest, however, that the timing of the staging operation impacts the outcome.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Neuroendocrine tumours (NETs) are rare, about 0.5% of all cancers, and usually slow-growing.",
+      "locator": "zraf034-s2.4/p1",
+      "quote": "Neuroendocrine tumours (NETs) are rare cancers with a low incidence of only 0.5% of all malignancies,.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Most patients eventually develop liver metastases, often in both lobes.",
+      "locator": "zraf034-s2.1/p1",
+      "quote": "Almost 50% of patients with colorectal cancer will develop metastatic disease, and the liver is the most often involved organ.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Removing as much tumour as possible prolongs life and eases hormone symptoms.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "When the spread is too diffuse to remove, transplant has been proposed as a cure.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "The evidence comes mostly from registries and single centres.",
+      "locator": "zraf034-s2.4/p2",
+      "quote": "Given the rare incidence and slow disease progression, high-quality data comparing the various treatment options is non-existent, and most of the evidence for surgical management of NELM is either from a retrospective registry or from single centres.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "European registry data show 5-year survival of 47 to 70%.",
+      "locator": "zraf034-s2.4/p2",
+      "quote": "Five-year survival rates from the European registry ranged from 47 to 70%, and cancer recurrence rates between 31.3 and 56.8%.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Patients transplanted after 2000 did better (59% at 5 years) than earlier patients (46%).",
+      "locator": "zraf034-s2.4/p2",
+      "quote": "The European Liver Transplant Registry-based multicentre retrospective data showed a significantly better 5-year survival at 59% among patients transplanted after 2000 compared with 46% who underwent LT before 2000.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "The improvement came from better selection, as centres learned which features predict poor results: disease outside the liver, removing the primary tumour at the same time as the transplant, and vascular or nodal involvement.",
+      "locator": "zraf034-s2.4/p2",
+      "quote": "Better results in the latter data are due to a improved patient selection with better understanding of poor prognostic factors that include presence of extrahepatic disease, resection of primary at the time of transplantation,,,, vascular or nodal involvement.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "In 2016 the Milan group reported 5-year and 10-year survival of 97% and 89%.",
+      "locator": "zraf034-s2.4/p3",
+      "quote": "The Milan Group in 2016 published outstanding 5-year and 10-year OS of 97 and 89% respectively, with liver transplantation for NELM,.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Their criteria are now the standard in most programmes:",
+      "locator": "zraf034-s2.4/p3",
+      "quote": "Milan NET-LT criteria are, therefore, generally accepted as a standard in most programmes.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "a low-grade tumour (Ki67 below 10%)",
+      "locator": "zraf034-s2.4/p3",
+      "quote": "These include low-grade NET (Ki67 index of less than 10%) regardless of function, a primary tumour with venous drainage via the portal system, which has been completely resected before transplantation, no more than 50% involvement of hepatic parenchyma, a responsive or stable disease for at least 6 months before transplantation and a recipient age of 55 years or younger (limit later increased to 60 years).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "a primary tumour that drains into the portal vein and was fully removed beforehand",
+      "locator": "zraf034-s2.4/p3",
+      "quote": "These include low-grade NET (Ki67 index of less than 10%) regardless of function, a primary tumour with venous drainage via the portal system, which has been completely resected before transplantation, no more than 50% involvement of hepatic parenchyma, a responsive or stable disease for at least 6 months before transplantation and a recipient age of 55 years or younger (limit later increased to 60 years).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "no more than half the liver involved",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "stable or responding disease for at least 6 months",
+      "locator": "zraf034-s2.4/p3",
+      "quote": "These include low-grade NET (Ki67 index of less than 10%) regardless of function, a primary tumour with venous drainage via the portal system, which has been completely resected before transplantation, no more than 50% involvement of hepatic parenchyma, a responsive or stable disease for at least 6 months before transplantation and a recipient age of 55 years or younger (limit later increased to 60 years).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "age 55 or younger (later raised to 60)",
+      "locator": "zraf034-s2.4/p3",
+      "quote": "These include low-grade NET (Ki67 index of less than 10%) regardless of function, a primary tumour with venous drainage via the portal system, which has been completely resected before transplantation, no more than 50% involvement of hepatic parenchyma, a responsive or stable disease for at least 6 months before transplantation and a recipient age of 55 years or younger (limit later increased to 60 years).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Transplant added an estimated 6.82 months of survival over 5 years and 38.43 months over 10 years.",
+      "locator": "zraf034-s2.1/p1",
+      "quote": "Nevertheless, for 75–80% of the patients with CRLM, the only treatment option remains palliative chemotherapy, with a 5-year overall survival rate of about 10%.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "A 2021 comparison of patients within the Milan criteria found 10-year survival of 93% after transplant versus 75% after resection, and 10-year DFS of 52% versus 18%.",
+      "locator": "zraf034-T2/r3",
+      "quote": "UCSF criteria, 2001/2007 | Single tumour ≤ 6.5 or ≤3 nodules ≤ 4.5 and TTD ≤ 8 cm | 168, 38 beyond Milan | 75.2% 5-year OS, RFS 93% | –",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "A propensity-matched study, which pairs similar patients to reduce bias, found 10-year survival of 88.8% with transplant versus 22.4% with resection.",
+      "locator": "zraf034-s2.4/p4",
+      "quote": "A propensity score-matched study of resection versus transplantation for the patients within the Milan criteria demonstrated superior survival and disease control in the LT group with 88.8% 10-year OS and 13.1% disease progression compared with 22.4 and 89% respectively, in the resection group.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "European (ENETS) guidelines describe transplant as an option in highly selected, preferably young patients whose hormone symptoms resist medical therapy.",
+      "locator": "zraf034-s2.4/p5",
+      "quote": "The most recent ENETS guidelines state that liver transplantation ‘is an option in highly selected, preferably young patients, with functional syndromes, demonstrating early resistance to medical therapy’.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "It is still unclear how lutetium-177 radionuclide therapy fits in, either as an alternative to transplant or before it.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "The authors call for a prospective trial.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "About 90% of hepatocellular carcinomas (HCC) arise in a damaged or cirrhotic liver.",
+      "locator": "zraf034-s2.5/p2",
+      "quote": "It is known that close to 90% of HCCs occur in a diseased or cirrhotic liver; the aetiology of the underlying liver disease could be hepatitis C virus (HCV) infection, hepatitis B virus (HBV) infection, ethanol, metabolic associated steatotic liver disease (MASLD) or others.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "The causes include hepatitis B or C, alcohol, and metabolic fatty liver disease (MASLD).",
+      "locator": "zraf034-s2.5/p2",
+      "quote": "It is known that close to 90% of HCCs occur in a diseased or cirrhotic liver; the aetiology of the underlying liver disease could be hepatitis C virus (HCV) infection, hepatitis B virus (HBV) infection, ethanol, metabolic associated steatotic liver disease (MASLD) or others.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Unlike the other cancers in this review, HCC is driven by the diseased liver itself.",
+      "locator": "zraf034-s2.5/p2",
+      "quote": "Unlike the other cancers managed in transplant oncology, the root cause of the development of HCC is the tumourigenic microenvironment provided by the cirrhotic liver.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "It also tends to appear in several places at once: 50 to 60% of livers removed at transplant contain multiple tumours, and at least 30% of these were missed on scans.",
+      "locator": "zraf034-s2.5/p2",
+      "quote": "In addition, HCC by nature is a multicentric disease and pathology of explanted livers in patients with HCC reveals that 50–60% have multicentric tumours, of which at least 30% are unrecognized by pretransplant imaging.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Transplant removes both the tumours and the organ that produced them.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "That is why it gives the best long-term results for HCC that is confined to the liver and has not invaded major vessels.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "The Barcelona Clinic Liver Cancer (BCLC) system has guided HCC treatment for three decades.",
+      "locator": "zraf034-s2.5.1/p1",
+      "quote": "The Barcelona Clinic Liver Cancer (BCLC) staging and treatment criteria have been used in most parts of the world over the last three decades, with several modifications made to these criteria in the intervening interval.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "For very early tumours (a single tumour of 2 cm or less), ablation, which destroys the tumour with heat, works as well as surgery.",
+      "locator": "zraf034-s2.5.1/p1",
+      "quote": "For HCC in the very early stage (single ≤2 cm), ablation is the treatment of choice and radiofrequency or microwave ablation is known to achieve results similar to liver resection (LR) or LT.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "For early tumours (up to three nodules of 3 cm or less), resection or ablation is offered to patients without significant portal hypertension or who cannot have a transplant.",
+      "locator": "zraf034-s2.5.1/p1",
+      "quote": "In tumours in the early stage according to the BCLC classification (single, or up to 3 nodules ≤3 cm, in patients with preserved liver function), resection or ablation may be offered to those with no clinically significant portal hypertension (CSPH) or those in whom LT is contraindicated.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Transplant gives the best results, especially for patients within the size-based Milan or UCSF criteria.",
+      "locator": "zraf034-s2.5.1/p1",
+      "quote": "LT offers the best curative option in this group of patients especially those within the conventional criteria for LT (Milan criteria) or the expanded and validated University of California San Francisco (UCSF) criteria.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "One strategy is to resect first and transplant only if the cancer comes back (\"salvage\" transplant).",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "It performs poorly, because only 33% of patients who recur actually get a curative transplant.",
+      "locator": "zraf034-s2.5.1/p2",
+      "quote": "However, series have shown that salvage LT is not an ideal strategy in these patients, since only 33% of patients who recur can actually have a curative LT on an intention-to-treat basis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "For a single tumour up to 3 cm, resection matches transplant and beats ablation.",
+      "locator": "zraf034-s2.5.1/p1",
+      "quote": "In tumours in the early stage according to the BCLC classification (single, or up to 3 nodules ≤3 cm, in patients with preserved liver function), resection or ablation may be offered to those with no clinically significant portal hypertension (CSPH) or those in whom LT is contraindicated.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "For multiple tumours or tumours of 3 to 5 cm, transplant is probably best.",
+      "locator": "zraf034-s2.5.1/p2",
+      "quote": "However, in multiple tumours and tumours between 3 and 5 cm in size, LT is probably the best curative option.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "If transplant is not possible, chemoembolization (TACE) combined with microwave ablation works better than either one alone.",
+      "locator": "zraf034-s2.5.1/p2",
+      "quote": "If contraindicated or not feasible, in tumours up to 3 cm, a single ablation with radiofrequency or microwave ablation or transarterial chemoembolization (TACE) may be indicated.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Most patients arrive with large or multiple tumours, and the MASLD epidemic has added more late-presenting, aggressive cases.",
+      "locator": "zraf034-s2.5.2/p1",
+      "quote": "The MASLD epidemic has further added to the late presentation, with large and biologically aggressive tumours.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Until 2022, the BCLC system offered these intermediate-stage (BCLC B) patients only non-curative therapy.",
+      "locator": "zraf034-s2.5.2/p1",
+      "quote": "Before the 2022 update of the BCLC staging system, patients with intermediate-stage HCC were relegated to receive non-curative systemic therapy alone.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "It turned out that well-selected patients beyond the Milan and UCSF limits survive about as well after transplant.",
+      "locator": "zraf034-s2.5.2/p6",
+      "quote": "Expanding criteria beyond Milan/UCSF (the conventional criteria) is indeed at the cost of 10–15% lower long-term survival, but the survival is significantly better in well selected cases compared with ablation or systemic therapy alone.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Large series using expanded criteria (tumours up to 7.5 cm, up to three in number) report acceptable long-term results.",
+      "locator": "zraf034-s2.5.2/p2",
+      "quote": "In the DDLT setting, large series (31 to 1556 patients) with expanded selection criteria for LT have reported acceptable long-term OS and DFS in patients with tumours up to 7.5 cm maximum diameter and up to three in number.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Asian centres led this push because deceased donor livers are scarcer there, and patients would lose their chance while waiting.",
+      "locator": "zraf034-s2.5.2/p2",
+      "quote": "If patients were to keep waiting for an organ, there is a high possibility that the patients with HCC would lose the chance to be transplanted due to the long waiting times.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "The focus moved away from tumour size and count, toward whether the cancer has spread outside the liver or into major vessels.",
+      "locator": "zraf034-T2/r8",
+      "quote": "NYCA 2018 | AFP response; tumour size 0–3, 3–6, > 6 cm; tumour number 1, 2–3, ≥4 | 1450, 235 outside Milan | OS: low risk: 75%acceptable risk: 62% high risk: 40%RFS: low risk: 90% acceptable risk: 70% high risk: 42% | AFP response consistently <200 ng/ml predicted the best outcome201/ 235 patients outside Milan critrial recategorized into NYCA low/acceptable-risk groups",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "What matters most is tumour biology, meaning how aggressively the cancer behaves.",
+      "locator": "zraf034-s2.2.2/p1",
+      "quote": "Additionally, new agent therapy provides a biologic test, as more aggressive behaving tumours that progress despite treatment likely would not benefit from transplantation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "blood levels of AFP and PIVKA-II, and how they change",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "how brightly tumours light up on PET scans",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "how the disease behaves over a waiting period (the \"test of time\")",
+      "locator": "zraf034-s2.2.3/p1",
+      "quote": "Postponing the staging operation until closer to the transplant date accounts for additional waiting time and a further assessment of the ‘test of time’ as it allows for the detection of metastatic disease that may have developed while waiting and, as outlined by Sonnendy, avoids the small risk of delays in listing due to complications from the staging procedure and reduces the chance of scar tissue and adhesions from the initial procedure complicating the portal dissection during transplantation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "inflammatory blood ratios and tumour grade",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Successful **downstaging** is itself a sign of favourable biology.",
+      "locator": "zraf034-s2.5.2/p4",
+      "quote": "In fact, successful downstaging is a surrogate marker for favourable tumour biology as indicated by a decrease in tumour number and size as per RECIST criteria, serum AFP or PIVKA-II levels, loss of 18F-FDG PET CT avidity.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "It means shrinking the tumour with TACE, radioembolization (TARE) or radiotherapy until it meets the criteria.",
+      "locator": "zraf034-s2.5.3/p3",
+      "quote": "Five-year OS and RFS of up to 53% and 52% respectively, have been reported using downstaging the tumour (especially ensuring that the PVTT is treated) using local ablation like TARE, SBRT and TACE, in combination with systemic therapy, and then going ahead with transplant once within institutional criteria.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "This work led the 2022 BCLC update to recommend transplant for the first time in selected stage B patients, using extended criteria that include tumour size and AFP.",
+      "locator": "zraf034-T2/r3",
+      "quote": "UCSF criteria, 2001/2007 | Single tumour ≤ 6.5 or ≤3 nodules ≤ 4.5 and TTD ≤ 8 cm | 168, 38 beyond Milan | 75.2% 5-year OS, RFS 93% | –",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "The update also introduced \"treatment stage migration\", which lets doctors use another stage's treatment when the first-line option does not suit the patient.",
+      "locator": "zraf034-s2.5.2/p5",
+      "quote": "A novel concept called treatment stage migration (TSM) has been introduced in these guidelines, allowing for personalized treatment decisions based on clinical judgement when first-line treatment is not feasible due to patient characteristics.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Vitale and colleagues showed that transplant gives the largest benefit to patients with advanced cirrhosis and BCLC stage B or C HCC without spread outside the liver, because these patients lack good alternatives.",
+      "locator": "zraf034-s2.5.2/p6",
+      "quote": "Vitale et al. demonstrated that the highest survival benefit of LT is, in fact, in patients with HCC who have advanced liver cirrhosis and no extrahepatic disease (BCLC stage B, C) because there are no other effective alternative therapies for these patients.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "Expanding the criteria lowers long-term survival by 10 to 15%, but results remain better than ablation or drug therapy.",
+      "locator": "zraf034-s2.5.2/p6",
+      "quote": "Expanding criteria beyond Milan/UCSF (the conventional criteria) is indeed at the cost of 10–15% lower long-term survival, but the survival is significantly better in well selected cases compared with ablation or systemic therapy alone.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-3",
+      "sentence": "In the authors' own study, transplant added 42 months of survival over 5 years compared with TACE or TARE in patients at low risk of recurrence, and 25 months even in high-risk patients.",
+      "locator": "zraf034-s2.5.2/p6",
+      "quote": "In our study, the transplant benefit at 5 years (as against local ablation with TACE or TARE) in patients who were classified as low risk for recurrence (based on a competing-risks regression model) was 42 months; it was 25 months even in those who were classified as high risk for recurrence.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Transplant patients need drugs to prevent rejection, and those drugs may weaken the body's defences against cancer.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Calcineurin inhibitors (CNIs), namely cyclosporin and tacrolimus, are the backbone of most regimens.",
+      "locator": "zraf034-s2.6.1/p3",
+      "quote": "Calcineurin inhibitors (CNIs), such as cyclosporin and tacrolimus, have long been used in immunosuppressive regimens post-transplantation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "They appear to help tumours grow by raising growth signals such as VEGF.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "High blood levels (cyclosporin above 300 ng/ml, tacrolimus above 10 ng/ml) independently predict HCC recurrence.",
+      "locator": "zraf034-s2.6.1/p3",
+      "quote": "In these studies, high concentrations were defined as cyclosporin trough concentration of >300 ng/ml and tacrolimus trough concentration of >10 ng/ml.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "A CNI given alone carries more risk than a CNI combined with other drugs.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "With cyclosporin, the risk tracks the cumulative dose, especially in months 4 to 12 after transplant.",
+      "locator": "zraf034-s2.6.1/p3",
+      "quote": "Furthermore, cumulative dose exposure to cyclosporin has been shown to increase HCC recurrence post-transplant and reduce 5-year recurrence-free survival, particularly when these higher doses are administered in the 4–12 month interval post-transplantation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "With tacrolimus, the effect shows only in the first month, and the reason for the difference is unclear.",
+      "locator": "zraf034-s2.6.1/p3",
+      "quote": "In contrast, these differences have only been observed in the first month with patients exposed to high-dose tacrolimus, with no significant difference noted after that,.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "mTOR inhibitors (sirolimus and everolimus) block a growth pathway and the formation of new tumour blood vessels.",
+      "locator": "zraf034-s2.6.1/p4",
+      "quote": "In contrast to CNIs, mTORi, including sirolimus and everolimus, have antiangiogenic and antineoplastic effects by inhibiting the PI3K/Akt/mTOR pathway and reducing expression of vascular endothelial growth factor, resulting in reduced carcinogenesis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Compared with CNI regimens, they are linked to better survival and less recurrence.",
+      "locator": "zraf034-s2.6.1/p4",
+      "quote": "Furthermore, the combined sirolimus/CNI regimen had significantly improved recurrence-free survival up to 5 years compared with the CNI-only regimen, suggesting potential antagonism of the known procarcinogenic effects of CNI in HCC recurrence and antitumour advantage.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Adding sirolimus to a CNI improved recurrence-free survival for up to 5 years.",
+      "locator": "zraf034-s2.6.1/p4",
+      "quote": "Furthermore, the combined sirolimus/CNI regimen had significantly improved recurrence-free survival up to 5 years compared with the CNI-only regimen, suggesting potential antagonism of the known procarcinogenic effects of CNI in HCC recurrence and antitumour advantage.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "In the only randomized trial, the benefit lasted up to 5 years, was largest in low-risk patients, and was greatest with sirolimus alone.",
+      "locator": "zraf034-s2.6.1/p4",
+      "quote": "In the only randomized clinical trial, recurrence-free survival and OS were noted up to 5 years post-transplantation, particularly in those with low risk of HCC recurrence, and the greatest recurrence-free survival and OS was noted in those patients on sirolimus monotherapy compared with combined immunosuppression regimens.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Steroids, azathioprine and antibody induction drugs show no link to recurrence.",
+      "locator": "zraf034-s2.6.1/p5",
+      "quote": "Further agents used for immunosuppression in liver transplantation, both for induction, acute rejection and maintenance, including corticosteroids, antimetabolites (for example azathioprine), anti-interleukin-2 receptor antibodies (ILR2a) and anti-thymoglobulin (ATG), have not been associated with HCC recurrence,,.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Most of this evidence is retrospective, and the one trial had few patients on sirolimus alone.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "The authors therefore say firm recommendations must wait for prospective trials.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "At some centres, up to 20% of patients die on the waiting list.",
+      "locator": "zraf034-s3/p1",
+      "quote": "Individual centres have reported waitlist mortality rates as high as 20%.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Donors are older and more often diabetic or obese, and cancer indications add to demand.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Centres increasingly use two kinds of higher-risk liver: livers from donors after circulatory death (DCD) and \"marginal\" livers from brain-dead donors (DBD).",
+      "locator": "zraf034-s3/p2",
+      "quote": "Several attempts have been made to deal with the shortage and match the demand for the grafts, including the usage of donor after cardiac death (DCD) grafts and marginal donor after brain death (DBD) livers.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "DCD livers carry higher risks of injury when blood flow returns, of grafts that never work, and of bile duct scarring.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "ILTS describes an ideal donor as aged 60 or younger, with a BMI of 30 or under, less than 30% fat in the liver, and less than 8 hours of cold storage.",
+      "locator": "zraf034-s3/p3",
+      "quote": "The causation is multifactorial based on which the ILTS consensus outlined criteria for ‘ideal’ donors, including donor age ≤60 years, donor BMI ≤30 kg/m2, macrovesicular steatosis <30% (in the absence of machine perfusion utilization) and cold ishemia time (CIT) <8 h.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "For DCD donors, the functional warm ischaemia time should not exceed 30 minutes.",
+      "locator": "zraf034-s3/p3",
+      "quote": "The causation is multifactorial based on which the ILTS consensus outlined criteria for ‘ideal’ donors, including donor age ≤60 years, donor BMI ≤30 kg/m2, macrovesicular steatosis <30% (in the absence of machine perfusion utilization) and cold ishemia time (CIT) <8 h.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "This interval runs from the moment oxygen saturation falls below 80% or blood pressure below 60 mmHg until the liver is flushed with cold fluid.",
+      "locator": "zraf034-s3/p3",
+      "quote": "ILTS consensus guidelines recommend the definitions of total donor WIT as the withdrawal of treatment to cold flush, and functional donor (fDWIT) is the time point when either SpO2 is <80% or mean arterial pressure is <60 mmHg until cold flush.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Up to 50% of marginal DBD livers are declined.",
+      "locator": "zraf034-s3/p4",
+      "quote": "Together with such risks and also due to ethical concerns, decline rates of livers as high as 50% have been reported.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Machine perfusion pumps fluid through a liver outside the body, and it is changing which livers can be used:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Normothermic machine perfusion (NMP) keeps the liver at body temperature so its function can be tested before transplant.",
+      "locator": "zraf034-s3/p5",
+      "quote": "Functional assessment of a liver on normothermic machine perfusion (NMP) allows for evaluating the viability (Birmingham, Cambridge, Groningen criteria) and function before transplantation and will enable logistics.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "In the VITTAL trial it allowed 71% of previously discarded livers to be transplanted, with 100% patient and graft survival at 90 days.",
+      "locator": "zraf034-s3/p6",
+      "quote": "In this prospective, non-randomized, phase 2 trial, viability assessment with NMP allowed transplantation of 71% of discarded livers that were perfused with the intent of transplantation, with 100% 90-day patient and graft survival.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Hypothermic oxygenated perfusion (HOPE) runs cold (4 to 10 degrees C), oxygenated fluid through the liver.",
+      "locator": "zraf034-s3/p7",
+      "quote": "During HOPE, the liver is perfused at a temperature of 4–10°C with an oxygenated solution.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "This slows metabolism and reduces damage when blood flow returns.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "In a European randomized trial of DCD livers, the dual-vessel version (D-HOPE) cut bile duct strictures by 64% and early graft dysfunction by 39%.",
+      "locator": "zraf034-s3/p7",
+      "quote": "A European multicentre, randomized clinical trial on D-HOPE in regular DCD liver transplantation demonstrated a 64% reduction of non-anastomotic strictures (NAS), a 57% reduction in postreperfusion syndrome and a 39% reduction in early allograft dysfunction after transplantation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Normothermic regional perfusion (NRP) restores blood flow in the donor's abdomen before the organs are retrieved.",
+      "locator": "zraf034-s3/p8",
+      "quote": "The use of abdominal normothermic regional perfusion (NRP) aims to restore blood flow before organ recovery in an attempt to reverse the effects of warm ischaemia and improve outcomes.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Its results are comparable to standard DBD livers.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Early data suggest HOPE may lower HCC recurrence.",
+      "locator": "zraf034-s3/p9",
+      "quote": "The influence of machine perfusion modalities on cancer recurrence is not fully understood, although early data suggests reduced recurrence rates in the HCC cohort using HOPE.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Perfusion also lets centres schedule transplants during the day.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "That helps in transplant oncology, where tissue samples are checked by frozen section pathology during the operation.",
+      "locator": "zraf034-s3/p9",
+      "quote": "Such flexibility in the logistics is beneficial in the field of transplant oncology, where frozen section evaluations are necessary.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Follow-up aims to catch recurrence early, especially when only a few spots appear that can be treated directly.",
+      "locator": "zraf034-s4/p1",
+      "quote": "Post-transplant follow-up protocols should be aimed at detecting early recurrence, especially when they are oligometastases since they are amenable to directed therapy, which can significantly prolong survival.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "One experienced unit treated HCC recurrence after living donor transplant with combined therapies and reported 57% survival at 1 year and 24% at 3 years.",
+      "locator": "zraf034-s4/p1",
+      "quote": "Experienced units have shown that with the use of multimodality treatment, 1-year and 3-year OS of 57 and 24% respectively, was achieved, with a maximum postrecurrence survival of 7.5 years among post-LDLT patients with HCC recurrence.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Its longest survivor lived 7.5 years after recurrence.",
+      "locator": "zraf034-s4/p1",
+      "quote": "Experienced units have shown that with the use of multimodality treatment, 1-year and 3-year OS of 57 and 24% respectively, was achieved, with a maximum postrecurrence survival of 7.5 years among post-LDLT patients with HCC recurrence.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "CT every 6 months for 2 years, then yearly",
+      "locator": "zraf034-s4/p1",
+      "quote": "One such example of post-LT follow-up protocol for patients with HCC is a CT scan (PET-CT if the tumour was initially FDG-18 PET avid) 6 monthly for 2 years and then yearly, ultrasound of the abdomen every 3 monthly for 2 years and then 6 monthly, and serum AFP and/or PIVKA-II levels 3 monthly for 2 years and then 6 monthly.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "ultrasound every 3 months for 2 years, then every 6 months",
+      "locator": "zraf034-s4/p1",
+      "quote": "One such example of post-LT follow-up protocol for patients with HCC is a CT scan (PET-CT if the tumour was initially FDG-18 PET avid) 6 monthly for 2 years and then yearly, ultrasound of the abdomen every 3 monthly for 2 years and then 6 monthly, and serum AFP and/or PIVKA-II levels 3 monthly for 2 years and then 6 monthly.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "AFP or PIVKA-II blood tests every 3 months for 2 years, then every 6 months",
+      "locator": "zraf034-s4/p1",
+      "quote": "One such example of post-LT follow-up protocol for patients with HCC is a CT scan (PET-CT if the tumour was initially FDG-18 PET avid) 6 monthly for 2 years and then yearly, ultrasound of the abdomen every 3 monthly for 2 years and then 6 monthly, and serum AFP and/or PIVKA-II levels 3 monthly for 2 years and then 6 monthly.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-4",
+      "sentence": "Where resources are tight, risk scores such as SIMAP500 can focus the intensive schedule on high-risk patients.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-5",
+      "sentence": "Cancer is now an established reason for liver transplantation.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-5",
+      "sentence": "Across all these cancers, selection is moving from measuring tumours toward reading their biology.",
+      "locator": "abstract",
+      "quote": "Conclusion: Cancer indications for liver transplantation are here to stay, and the selection criteria among all cancer groups are likely to evolve further with improved prognostication of tumour biology using adjuncts such as radiomics, cancer genomics, and circulating DNA and RNA status.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-5",
+      "sentence": "The authors expect radiomics (data extracted from medical scans), tumour genomics, and circulating tumour DNA and RNA to push this further.",
+      "locator": "abstract",
+      "quote": "Conclusion: Cancer indications for liver transplantation are here to stay, and the selection criteria among all cancer groups are likely to evolve further with improved prognostication of tumour biology using adjuncts such as radiomics, cancer genomics, and circulating DNA and RNA status.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-5",
+      "sentence": "Colorectal liver metastases are the only indication with randomized trial evidence.",
+      "locator": "abstract",
+      "quote": "Methods: A review of the most recent relevant literature was conducted for all the cancer indications of liver transplantation including colorectal cancer liver metastases, hilar cholangiocarcinoma, intrahepatic cholangiocarcinoma, neuroendocrine tumours, hepatocellular carcinoma and hepatic epitheloid haemangioendothelioma.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC12084677-section-5",
+      "sentence": "For the others, the authors see international prospective registries as the practical way to overcome small patient numbers and build stronger evidence.",
+      "locator": "abstract",
+      "quote": "International prospective registry-based studies could overcome the limitations of smaller patient cohorts and lack of level 1 evidence.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    }
+  ],
   "sources": {
     "zraf034-s2.1/p5": "A recent randomized clinical trial, TransMet, has compared liver transplantation + chemotherapy to chemotherapy alone in patients with unresectable CRLM. The study population had a high tumour load with a median of 20 metastases in both groups, and the delay from diagnosis to randomization was 15.9 months in the transplant arm. All transplanted patients but one had a low Oslo-score (<2). After a median follow-up of 59.3 months, the 5-year intention-to-treat survival in the LT cohort was 56.6% in the transplant group compared with 12.6% in the chemotherapy group. In per-protocol analysis, the corresponding 5-year survival rates were 73.3% and 9.3%. The outcomes of the TRANSMET trial confirm the principal findings from all the previous clinical trials on LT for CRLM and have the potential to change clinical practice since CRLM is the only transplant oncology indication that is supported by level 1 evidence.",
     "zraf034-s2.1/p2": "The first controlled ‘proof of concept’ SEcondary CAncer (SECA-I) trial to explore LT in non-resectable CRLM was published in 2013 and found an estimated overall survival (OS) of 95%, 68% and 60% at 1, 3 and 5 years respectively. However, disease-free survival (DFS) was only 35% at 1 year. Still, most recurrences were slow-growing lung metastases that could be offered curative intent resection, thereby yielding a favourable overall survival despite recurrence post-transplant. Risk factors for inferior survival were maximal tumour diameter >5.5 cm, time from primary cancer surgery <2 years, CEA levels >80 μg/l and disease progression after chemotherapy at the time of LT. The four factors constitute the ‘Oslo-Score’ by assigning 1 point to each for risk stratification. The 10-year outcome data of the SECA-I trial was published in 2022 and showed that a low Oslo score of 0–1 is associated with a 5-year and 10-year actual OS of 75 and 50% respectively.",
@@ -768,7 +2309,10 @@
       }
     ],
     "prose_checked": 100,
-    "prose_unmatched": []
+    "prose_unmatched": [],
+    "sentences": 171,
+    "anchored": 129,
+    "direction_conflicts": 0
   },
   "notes": []
 }

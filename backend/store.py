@@ -48,9 +48,52 @@ def seed_examples() -> int:
         figs = EXAMPLES / "figures" / src.stem
         if figs.is_dir() and not (FIGURE_DIR / src.stem).exists():
             shutil.copytree(figs, FIGURE_DIR / src.stem)
+        # The source text, so a sentence opens in the paper on a fresh install too.
+        text = EXAMPLES / "papers" / src.name
+        if text.exists() and not (_papers_root() / src.name).exists():
+            shutil.copyfile(text, _papers_root() / src.name)
     if installed:
         logger.info("Installed %d example explainers", installed)
     return installed
+
+
+def _papers_root() -> Path:
+    root = _root().parent / "papers"
+    root.mkdir(parents=True, exist_ok=True)
+    return root
+
+
+def _pdf_root() -> Path:
+    root = _root().parent / "pdfs"
+    root.mkdir(parents=True, exist_ok=True)
+    return root
+
+
+def save_paper(paper_id: str, paper) -> Path:
+    """The source text as fetched, verbatim, so the page can show a sentence where it stands."""
+    target = _papers_root() / f"{_safe_name(paper_id)}.json"
+    target.write_text(paper.model_dump_json(), encoding="utf-8")
+    return target
+
+
+def load_paper(paper_id: str):
+    from models.paper import StructuredPaper
+
+    target = _papers_root() / f"{_safe_name(paper_id)}.json"
+    if not target.exists():
+        return None
+    try:
+        return StructuredPaper.model_validate_json(target.read_text(encoding="utf-8"))
+    except (ValueError, json.JSONDecodeError):
+        return None
+
+
+def pdf_path(paper_id: str) -> Path:
+    return _pdf_root() / f"{_safe_name(paper_id)}.pdf"
+
+
+def has_pdf(paper_id: str) -> bool:
+    return pdf_path(paper_id).exists()
 
 
 def _safe_name(paper_id: str) -> str:

@@ -519,6 +519,566 @@
       "index": 1
     }
   ],
+  "anchors": [
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "After a total hip replacement (total hip arthroplasty, or THA), surgeons check how the new hip socket was placed.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "The socket is a cup fixed into the pelvis.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "If it sits at the wrong angle, the hip wears out faster, the implant can loosen, movement is more limited, and impingement and dislocation become more likely.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "Inclination is how steeply it tips upward and outward. **Anteversion** is how far it faces forward.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "The standard way to check both is a front-to-back (anteroposterior, or AP) X-ray of the pelvis.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "X-rays are cheap, easy to get and use little radiation.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "The problem is that an X-ray flattens a three-dimensional pelvis into a flat picture, and the way the patient lies or stands changes that picture.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "The main source of error is **pelvic tilt**, which is how far the pelvis rocks forward or backward relative to the X-ray plate.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "Tilt barely affects inclination.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "Anteversion is different, because it is read entirely from the shape of the oval that the cup's rim makes on the film, and tilting the pelvis changes that oval directly.",
+      "locator": "sec-introduction-1/p3",
+      "quote": "This error is generally considered negligible for inclination [], but anteversion is highly susceptible to changes in pelvic tilt since its measurement is based solely on the shape of the ellipsis created by the cup surface on the radiograph [].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-1",
+      "sentence": "The same cup can look more or less anteverted depending on the patient's posture.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "Several ways to correct for tilt have been proposed, but none is in routine clinical use.",
+      "locator": "abstract",
+      "quote": "Several methods for correcting the effects of pelvic tilt on radiographic anteversion have been proposed, with varying degrees of accuracy.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "One widely cited method, from Tannast and colleagues, uses the **symphococcygeal distance (SCD)**.",
+      "locator": "abstract",
+      "quote": "Corrected anteversion was calculated by measuring the vertical distance between the symphysis pubis and the sacrococcygeal joint, per the method outlined by Tannast et al.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "This is the vertical distance on the X-ray between the top of the pubic symphysis (the joint at the front of the pelvis) and the sacrococcygeal joint (where the tailbone meets the sacrum).",
+      "locator": "sec-materials-and-methods-2/p3",
+      "quote": "Pelvic tilt (deviation of the anterior pelvic plane (APP) from the coronal reference plane [-]) was estimated using the method described by Tannast et al. [], where the vertical distance between the upper edge of the pubic symphysis to the centre of the sacro-coccygeal joint is measured.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "They found that this distance tracks pelvic tilt well.",
+      "locator": "sec-introduction-1/p3",
+      "quote": "In a recent study, Tannast et al. [] evaluated several proposed measurements and found that the vertical distance from the pubic symphysis to the sacrococcygeal joint (symphococcygeal distance, (SCD)) correlated well with pelvic tilt.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "They then published nomograms, which are lookup charts with separate versions for men and women.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "You enter the SCD and the measured anteversion, and the chart returns a \"tilt-corrected\" anteversion.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "There are two reasons to doubt that the method carries over to hip replacement patients.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "Tannast's X-rays were taken under strict conditions that differ from routine practice.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "Their patients were also young (mean age 31.7) and had impingement or hip dysplasia, while hip replacement patients are older.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "Second, differences in population demographics (mean age: 31.7 yrs vs.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-2",
+      "sentence": "The authors here tested whether the method works on ordinary post-operative X-rays in THA patients.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "It covered patients who had a first or repeat hip replacement by one surgeon between February 2016 and February 2017.",
+      "locator": "abstract",
+      "quote": "Radiographs from patients who underwent primary or revision hip arthroplasty between February 2016 and February 2017 were retrospectively reviewed.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "During each operation the surgeon used the Intellijoint HIP navigation system.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "A camera is pinned to the pelvis and records the pelvis's orientation at the start of surgery.",
+      "locator": "sec-materials-and-methods-2/p5",
+      "quote": "As the camera remains fixed to the patient during surgery and intraoperative measurements are calculated relative to this initial registration orientation, the resulting anteversion measurements represent the true in situ anteversion, not one distorted by imaging or intraoperative changes in pelvic position or orientation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "Because the camera stays fixed to the patient, its anteversion reading reflects the cup's true position in the body and is unaffected by imaging or by the pelvis shifting on the table.",
+      "locator": "sec-materials-and-methods-2/p5",
+      "quote": "As the camera remains fixed to the patient during surgery and intraoperative measurements are calculated relative to this initial registration orientation, the resulting anteversion measurements represent the true in situ anteversion, not one distorted by imaging or intraoperative changes in pelvic position or orientation.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "The study used it as the reference value.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "Each image was scaled using the known size of the implanted femoral head.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "We scaled radiographs using the known head size of the femoral implant, a reliable method that has been used elsewhere [].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "One researcher, who did not know the navigation values, measured anteversion and the SCD three times per image, averaged the results, and applied Tannast's nomograms.",
+      "locator": "sec-materials-and-methods-2/p4",
+      "quote": "The measurements and application of the nomogram were completed by a single researcher (JV), who was blinded to navigation values.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "That gave three numbers per hip: uncorrected X-ray, corrected X-ray, and navigation.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-3",
+      "sentence": "Agreement was measured with Pearson's r, which runs from 1 (two measures move together perfectly) through 0 (no relationship) to -1 (they move in opposite directions).",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Of 77 eligible cases, 6 were excluded (one pelvic fracture, five X-rays too poor to measure), leaving 71.",
+      "locator": "abstract",
+      "quote": "A total of 71 cases were initially eligible for inclusion in the study.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "The tailbone joint could not be seen on 31 of the 71 X-rays (44%).",
+      "locator": "abstract",
+      "quote": "The correction method could not be applied in 44% (31/71) of the cases, chiefly due to difficulties in visualizing the required landmarks.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Of the remaining 40, 9 (23%) gave measurements outside the range the nomograms cover.",
+      "locator": "sec-results-3/p2",
+      "quote": "In the remaining 40 radiographs, the anteversion and/or SCD measurements calculated from the image were beyond the scale provided by the nomograms in 23% (9/40).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "The paper reports that the correction could be applied to only 31 of 71 cases.",
+      "locator": "abstract",
+      "quote": "The correction method could not be applied in 44% (31/71) of the cases, chiefly due to difficulties in visualizing the required landmarks.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "However, its comparisons describe a \"correction-eligible\" group of 40, so the counts do not fully line up.",
+      "locator": "sec-results-3/p8",
+      "quote": "In the correction-eligible cohort (n=40), uncorrected, corrected and navigation values differed significantly (F=27.38, p<0.0001).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Repeat measurements agreed almost perfectly (intraclass correlation 0.99 for both anteversion and SCD), so the problems below do not come from an unsteady measurer.",
+      "locator": "sec-results-3/p5",
+      "quote": "Intra-observer reliability between the three rounds of measurement was excellent for both anteversion measured from radiographs (intraclass correlation = 0.99, SD: 0.51°) and the symphococcygeal distance itself (intraclass correlation = 0.99, SD: 0.25 mm).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Uncorrected X-ray: 25.2° (SD 7.6°)",
+      "locator": "abstract",
+      "quote": "Mean corrected anteversion (36.9°, SD: 7.4°) differed from uncorrected anteversion (25.2°, SD: 7.6°) by an average of 13.5° (p<0.001).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Navigation: 27.4° (SD 5.7°)",
+      "locator": "abstract",
+      "quote": "Mean navigated anteversion (27.4°, SD: 5.7°) differed from corrected values by an average of 10.8° (p=0.16).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Corrected X-ray: 36.9° (SD 7.4°)",
+      "locator": "abstract",
+      "quote": "Mean corrected anteversion (36.9°, SD: 7.4°) differed from uncorrected anteversion (25.2°, SD: 7.6°) by an average of 13.5° (p<0.001).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "The correction raised anteversion in every case, by an average of 13.5° (p<0.001).",
+      "locator": "abstract",
+      "quote": "Mean corrected anteversion (36.9°, SD: 7.4°) differed from uncorrected anteversion (25.2°, SD: 7.6°) by an average of 13.5° (p<0.001).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Corrected values differed from navigation by an average of 10.8°.",
+      "locator": "abstract",
+      "quote": "Mean navigated anteversion (27.4°, SD: 5.7°) differed from corrected values by an average of 10.8° (p=0.16).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "The correlation between corrected and navigation values was r = -0.07, which means essentially no relationship.",
+      "locator": "abstract",
+      "quote": "In cases where it could be applied, corrected values correlated very poorly with navigation measurements (r = -0.07).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Corrected values did track the uncorrected ones (r = 0.73).",
+      "locator": "sec-results-3/p8",
+      "quote": "Corrected anteversion correlated very poorly with navigation values (r = -0.07) (Figure ) although moderately well with uncorrected values (r = 0.73) (Figure ).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "In other words, the correction mostly pushed every reading upward by a similar amount, without responding to each patient's actual tilt.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "The uncorrected X-ray also correlated weakly with navigation (r = 0.15), but it came much closer on average:",
+      "locator": "sec-results-3/p8",
+      "quote": "Corrected anteversion (mean: 36.9°, SD: 7.4°) differed from uncorrected anteversion (mean: 25.2°, SD: 7.6°) by an average of 13.5° (p<0.001) and from navigated anteversion (27.4°, SD: 5.7°) by an average of 10.8° (p=0.16).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "mean difference = uncorrected minus navigated = -2.2°",
+      "locator": "sec-results-3/p9",
+      "quote": "Uncorrected anteversion correlated poorly with navigation values (r = 0.15) but differed by an average of only -2.2° (SD: 8.7°) and demonstrated a more uniform distribution when compared with the uniform increase in anteversion values resulting from the correction method (Figure ).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "The standard deviation of that difference was 8.7°, and the two sets of values did not differ significantly (p=0.16).",
+      "locator": "sec-results-3/p9",
+      "quote": "Uncorrected anteversion correlated poorly with navigation values (r = 0.15) but differed by an average of only -2.2° (SD: 8.7°) and demonstrated a more uniform distribution when compared with the uniform increase in anteversion values resulting from the correction method (Figure ).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "For all its known flaws, the raw X-ray landed closer to the navigation value than the corrected one did.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "The upward bias carries a clinical risk.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "If corrected values read too high, a surgeon may conclude the cup has more forward tilt than it does and aim for less.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "Low anteversion is a risk factor for posterior dislocation, where the hip slips out backward.",
+      "locator": "sec-discussion-4/p2",
+      "quote": "This trend towards increasing anteversion has important implications, as it could lead to overestimation of intraoperative anteversion, resulting in lower true anteversion orientations, a risk factor for posterior dislocation [].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "The authors give several possible reasons the method failed here:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "Imaging setup.** Tannast used a fixed 1.2 m distance between the X-ray source and the plate, patients lying down, and a specific beam target.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "Firstly, Tannast et al. employed highly standardized radiographic techniques with a controlled source-to-image distance of 1.2m, patients in supine position, and the central beam aimed at the midpoint between the pubic symphysis and centre of the trans-ASIS line.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "Routine post-operative images are taken lying or standing, with the beam aimed at the pubic symphysis and small variations in distance.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "This highly regimented approach is in contrast with standard post-operative AP radiographs, which are taken in either supine or standing position, with the central beam aimed at the pubic symphysis, and commonly with small variations in source-to-image distance [].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "Patients.** The THA patients averaged 63.1 years old, and their anatomy differs from that of Tannast's younger group.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "Measurement details.** Tannast did not say whether \"vertical\" was measured relative to the pelvis or to the X-ray frame, or how images were scaled.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "Tannast et al. did not clarify whether their vertical distance was relative to a pelvic reference (such as the trans-ischial line) or relative to the plane of the X-ray, and failed to record if or how they scaled their radiographs.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "Software usually assumes 115% to 120%, but actual magnification ranges from 97% to 127%.",
+      "locator": "sec-discussion-4/p3",
+      "quote": "While most templating software assumes a magnification factor of 115% or 120% [-], true magnification can range from 97% to 127% [-].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "It was retrospective, so X-ray technique varied between patients.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "It also compares X-rays taken after surgery with navigation readings taken during surgery.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "The authors note that this navigation system has previously agreed with post-operative X-rays to within 3°.",
+      "locator": "sec-discussion-4/p4",
+      "quote": "However, navigation in general [-] and the system utilized in this study specifically [,-] have demonstrated excellent accuracy when compared with post-operative radiographs, with the Intellijoint system associated with an error of less than 3° when compared with radiographs [].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "The authors conclude that the SCD method could not be applied to nearly half the X-rays and, where it could, gave values that did not match navigation.",
+      "locator": "abstract",
+      "quote": "In cases where it could be applied, corrected values correlated very poorly with navigation measurements (r = -0.07).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC6051556-section-5",
+      "sentence": "They judge it unsuitable for correcting pelvic tilt in hip replacement patients and say a more accurate correction method is still needed.",
+      "locator": "abstract",
+      "quote": "Several methods for correcting the effects of pelvic tilt on radiographic anteversion have been proposed, with varying degrees of accuracy.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    }
+  ],
   "sources": {
     "abstract": "Despite inaccuracies due to artifact and variations in patient positioning, anteroposterior (AP) radiographs remain the clinical standard for post-operative evaluation of component placement following total hip arthroplasty (THA). However, cup position, specifically anteversion, can be significantly affected by variations in patient positioning on an X-ray. A major cause of such artifact is unaccounted for pelvic tilt. Several methods for correcting the effects of pelvic tilt on radiographic anteversion have been proposed, with varying degrees of accuracy. The purpose of this study was to evaluate the accuracy and reliability of a commonly referenced method for correcting acetabular cup anteversion in a cohort undergoing total hip arthroplasty and determine its appropriateness for use in this population of patients. Radiographs from patients who underwent primary or revision hip arthroplasty between February 2016 and February 2017 were retrospectively reviewed. Corrected anteversion was calculated by measuring the vertical distance between the symphysis pubis and the sacrococcygeal joint, per the method outlined by Tannast et al. This symphococcygeal distance was then applied to Tannast’s nomograms to calculate the magnitude of pelvic tilt. Corrected and uncorrected anteversion values were compared to anteversion values collected intraoperatively using an imageless computer-assisted navigation device. A total of 71 cases were initially eligible for inclusion in the study. The correction method could not be applied in 44% (31/71) of the cases, chiefly due to difficulties in visualizing the required landmarks. In cases where it could be applied, corrected values correlated very poorly with navigation measurements (r = -0.07). Mean corrected anteversion (36.9°, SD: 7.4°) differed from uncorrected anteversion (25.2°, SD: 7.6°) by an average of 13.5° (p<0.001). Mean navigated anteversion (27.4°, SD: 5.7°) differed from corrected values by an average of 10.8° (p=0.16). Th",
     "sec-results-3/p8": "In the correction-eligible cohort (n=40), uncorrected, corrected and navigation values differed significantly (F=27.38, p<0.0001). Corrected anteversion (mean: 36.9°, SD: 7.4°) differed from uncorrected anteversion (mean: 25.2°, SD: 7.6°) by an average of 13.5° (p<0.001) and from navigated anteversion (27.4°, SD: 5.7°) by an average of 10.8° (p=0.16). Navigation values did not differ significantly from uncorrected radiographic values (27.4° (SD: 5.7°) vs. 25.2° (SD: 7.6°), p=0.16). Corrected anteversion correlated very poorly with navigation values (r = -0.07) (Figure ) although moderately well with uncorrected values (r = 0.73) (Figure ).",
@@ -561,7 +1121,10 @@
         "number": "77",
         "context": "Of 77 eligible cases, 6 were excluded (one pe"
       }
-    ]
+    ],
+    "sentences": 62,
+    "anchored": 35,
+    "direction_conflicts": 0
   },
   "notes": []
 }

@@ -267,6 +267,11 @@ class VerificationReport(BaseModel):
     prose_checked: int = 0
     prose_unmatched: list[dict] = Field(default_factory=list)
 
+    # Sentences of the prose that a sentence of the paper supports, by number and term.
+    sentences: int = 0
+    anchored: int = 0
+    direction_conflicts: int = 0
+
     @property
     def pass_rate(self) -> float:
         return self.passed / self.checked if self.checked else 1.0
@@ -351,6 +356,25 @@ class Term(BaseModel):
     provenance: Provenance | None = None
 
 
+class Anchor(BaseModel):
+    """A sentence of the concise version and the sentence of the paper it rests on.
+
+    Found by string work alone, the way a chart's value is: shared printed numbers and
+    shared terms. `supported` is false when no source sentence qualifies; the page marks
+    the sentence rather than hiding it. `direction_conflict` says the two sentences use
+    opposite direction words (lower against higher), the sign of a flipped finding.
+    """
+
+    section_id: str
+    sentence: str = Field(..., max_length=600)
+    locator: str = Field("", max_length=60)
+    quote: str = Field("", max_length=600)
+    supported: bool = True
+    direction_conflict: bool = False
+    # Page of the stored PDF where the quote was found, 1-based; 0 when unknown.
+    page: int = 0
+
+
 class Link(BaseModel):
     """A sentence of the prose that states the same printed fact as a chart element.
 
@@ -388,6 +412,8 @@ class Explainer(BaseModel):
     absolute_risk_derived: dict | None = None
     terms: list[Term] = Field(default_factory=list, max_length=10)
     links: list[Link] = Field(default_factory=list)
+    # Every sentence of the prose, tied to the paper's own sentence or marked as not.
+    anchors: list[Anchor] = Field(default_factory=list)
     # The paper's own paragraph behind every locator a provenance points at, so the page
     # can show a value's sentence in its context without a second request.
     sources: dict[str, str] = Field(default_factory=dict)

@@ -436,6 +436,25 @@ highlights that or nothing, green for better, red for worse, white for no differ
 The three examples came back with "2.0 points" (no difference), "25%" (better) and
 "-8.7%" (better).
 
+The prose is now held to the charts' standard, sentence by sentence. Each sentence of the
+concise version is anchored to the source sentence that prints its numbers and shares
+its terms, or marked as unsupported, and opposite direction words are flagged. Across
+the fourteen PubMed papers, 66 to 76 percent of sentences anchor; the rest are the
+model's connective tissue or paraphrases that keep no number and fewer than four terms.
+The badge says the count, and a click on an anchored sentence opens the paper at that
+sentence, highlighted.
+
+The paper itself was the hard part. PubMed Central blocks scripted PDF downloads on
+every endpoint tried (Europe PMC's render service 403, both PMC PDF links return HTML,
+with a browser user agent too), which is finding 9 again. So the viewer has two sources:
+the PDF when the reader supplies it (uploaded, or dropped onto the page later) and the
+paper's verbatim text otherwise, which we always hold. Both open at the sentence. Two
+things about PDF.js cost an hour: text items split mid-line and need a space between
+them before the quote can be found, and display rendering waits for an animation frame
+that a hidden tab never gets, so the page rendered never; print intent draws at once.
+The synthetic PDF used to exercise the viewer was made from the paper's own text with
+PyMuPDF and removed afterwards; no real PDF was fetched.
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were

@@ -519,6 +519,224 @@
       "index": 1
     }
   ],
+  "anchors": [
+    {
+      "section_id": "PMC10289900-section-1",
+      "sentence": "Sleeve gastrectomy is a weight-loss operation that removes most of the stomach.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-1",
+      "sentence": "Some patients develop gastroesophageal reflux disease (GERD) for the first time after surgery, and others find that existing reflux gets worse.",
+      "locator": "Sec1/p1",
+      "quote": "A major drawback of sleeve gastrectomy (SG) is the postoperative development of “de novo” or worsening gastroesophageal reflux disease (GERD) [–].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-1",
+      "sentence": "GERD lowers quality of life and raises the risk of long-term complications.",
+      "locator": "Sec1/p1",
+      "quote": "GERD is considered a risk factor for long-term complications and decreases the quality of life [–].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-1",
+      "sentence": "Much of it depends on the **gastroesophageal junction** (GEJ), the valve-like zone where the esophagus meets the stomach, also called the lower esophageal sphincter.",
+      "locator": "Sec1/p1",
+      "quote": "The gastroesophageal junction (GEJ) (often also referred to as the lower esophageal sphincter) plays an essential role in the complex pathophysiology of GERD, and a better understanding of the associated anatomical and functions is necessary.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-2",
+      "sentence": "The researchers used EndoFlip, a balloon probe placed during endoscopy that measures how easily a sphincter stretches open.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-2",
+      "sentence": "It reports a **distensibility index** (DI) in square millimetres of opening per mmHg of pressure.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-2",
+      "sentence": "A higher DI means a looser sphincter that opens more easily.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-2",
+      "sentence": "The team predicted that the operation would raise the DI at both the GEJ and the pylorus, the valve at the stomach's outlet.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-3",
+      "sentence": "This pilot study followed nine adults with severe obesity at a Swiss university hospital.",
+      "locator": "Sec2/p1",
+      "quote": "This prospective diagnostic observational study included patients (informed consent, ≥18 years, BMI ≥35 kg/m2, fulfillment of the Swiss Society for the Study of morbid obesity and metabolic disorders guidelines criteria) undergoing elective SG at a tertiary care university hospital.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-3",
+      "sentence": "Each had EndoFlip measurements before surgery, during it and one year later, plus endoscopy, pressure testing of the esophagus and acid monitoring.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-3",
+      "sentence": "A patient counted as having GERD if both of these held:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-3",
+      "sentence": "acid exposure time above 6% and more than 80 reflux episodes",
+      "locator": "Sec2/p1",
+      "quote": "GERD was defined (Lyon Consensus 2018) as distal oesophageal acid (pH<4) exposure time >6% and a total number of reflux episodes >80 (as per pH-impedance monitoring) [] and was differentiated between no, stable, de novo, or resolved status when comparing pre and postoperative data.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "Results, with the balloon filled to 40 ml:",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "GEJ DI roughly doubled after surgery, from 1.4 to 2.9 mm2/mmHg (p = 0.046).",
+      "locator": "Tab2/r1",
+      "quote": "DI [mm2/mmHg] | 1.4 (1.1–2.6) | 3.8 (1.9–8.9) | 2.9 (2.6–5.3) | 1.6 (−0.5–3.2) | 0.046",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "Pylorus DI rose from 6.0 to 13.1 mm2/mmHg (p = 0.046).",
+      "locator": "Tab2/r3",
+      "quote": "DI [mm2/mmHg] | 6.0 (4.1–10.7) | 4.1 (2.3–9.9) | 13.1 (7.6–19.2) | 6.2 (0.4–12.0) | 0.046",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "Seven patients had usable reflux data.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "The four with reflux one year after surgery had a looser GEJ before surgery than the three without (2.6 vs 0.5 mm2/mmHg, p = 0.031).",
+      "locator": "Tab3/r2",
+      "quote": "DI [mm2/mmHg] | 2.6 (1.9–3.5) | 0.5 (0.5–1.1) | 2.0 (0.4–3.9) | 0.031",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "Weight loss did not differ between the reflux and no-reflux groups.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-4",
+      "sentence": "Measurements taken during surgery and at one year did not separate the two groups either.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-5",
+      "sentence": "According to the authors, a pre-surgery EndoFlip reading might identify patients likely to develop reflux after the operation.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-5",
+      "sentence": "They suggest the looser pylorus may be linked to faster stomach emptying.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-5",
+      "sentence": "That finding disagrees with an earlier study by Desprez and colleagues, which did not see the pylorus loosen.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-5",
+      "sentence": "With only nine patients, the study was too small to support firm predictions.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC10289900-section-5",
+      "sentence": "EndoFlip also has no established normal values yet, so the result needs confirming in larger studies.",
+      "locator": "Sec5/p5",
+      "quote": "The findings of this pilot study suggesting the usefulness of Endoflip™ to predict GERD after SG needs to be verified in larger studies.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    }
+  ],
   "sources": {
     "Tab2/r1/c4": "DI [mm2/mmHg] 1.6 (−0.5–3.2)",
     "Tab2/r1/c1": "DI [mm2/mmHg] 1.4 (1.1–2.6)",
@@ -550,7 +768,10 @@
       }
     ],
     "prose_checked": 11,
-    "prose_unmatched": []
+    "prose_unmatched": [],
+    "sentences": 24,
+    "anchored": 9,
+    "direction_conflicts": 0
   },
   "notes": []
 }

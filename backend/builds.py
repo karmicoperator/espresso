@@ -78,6 +78,7 @@ async def build_reference(
         raise BuildFailed(f"Nothing could be built for {explainer.paper_id or reference}. {why}")
 
     store.save(explainer)
+    store.save_paper(explainer.paper_id or reference, paper)
     return explainer
 
 
@@ -104,6 +105,12 @@ async def build_pdf(path: Path, name: str, progress: Progress | None = None) -> 
             "a PDF, so figures that appear only inside a table are not charted.",
         )
         store.save(explainer)
+        # The file itself stays, so the page can open the sentence in the paper, and the
+        # source text with it. Both live beside the explainer, not in git.
+        import shutil
+
+        store.save_paper(explainer.paper_id, paper)
+        shutil.copyfile(path, store.pdf_path(explainer.paper_id))
         return explainer
     finally:
         path.unlink(missing_ok=True)

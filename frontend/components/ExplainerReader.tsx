@@ -6,8 +6,8 @@ import { A_FILL, ArmsContext, B_FILL, C_FILL, ChartFigure, datumColour, textColo
 import { FigureFigure } from "./FigureFigure";
 import { ReadingRail } from "./ReadingRail";
 import { RiskFigure } from "./RiskFigure";
-import { SourcePanel } from "./SourcePanel";
-import type { BottomLine, Chart, Explainer, FigurePlate, Link as ProseLink, Provenance, Term } from "@/lib/types";
+import { PaperView, type Target } from "./PaperView";
+import type { Anchor, BottomLine, Chart, Explainer, FigurePlate, Link as ProseLink, Provenance, Term } from "@/lib/types";
 
 /**
  * The explainer: at most five rewritten sections, each with the charts that belong to it.
@@ -63,9 +63,55 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
   const minutes = Math.max(1, Math.ceil(words / 230));
 
   const [lit, setLit] = useState<Lit | null>(null);
-  const [source, setSource] = useState<{ prov: Provenance; value?: number } | null>(null);
-  const openSource = useCallback((prov: Provenance, value?: number) => setSource({ prov, value }), []);
+  // Anything the page quotes opens the paper itself at that sentence: a charted value,
+  // the bottom line, a term, or any sentence of the prose that has an anchor.
+  const [source, setSource] = useState<{ target: Target; value?: number } | null>(null);
+  const openSource = useCallback(
+    (prov: Provenance, value?: number) => setSource({ target: { locator: prov.locator, quote: prov.quote }, value }),
+    [],
+  );
+  const openAnchor = useCallback(
+    (a: Anchor) => setSource({ target: { locator: a.locator, quote: a.quote, page: a.page } }),
+    [],
+  );
   const closeSource = useCallback(() => setSource(null), []);
+
+  const anchorsBySection = useMemo(() => {
+    const m = new Map<string, Anchor[]>();
+    for (const a of explainer.anchors ?? []) m.set(a.section_id, [...(m.get(a.section_id) ?? []), a]);
+    return m;
+  }, [explainer.anchors]);
+
+  // The paper's PDF, dropped anywhere on the page, is stored beside the explainer and
+  // every sentence opens in it from then on. PubMed Central blocks scripted downloads,
+  // so this is how a PMC paper gets its PDF: from the reader, who can download it.
+  const [attaching, setAttaching] = useState<string | null>(null);
+  useEffect(() => {
+    const over = (e: DragEvent) => {
+      if (e.dataTransfer?.types.includes("Files")) e.preventDefault();
+    };
+    const drop = async (e: DragEvent) => {
+      const file = e.dataTransfer?.files?.[0];
+      if (!file || !file.name.toLowerCase().endsWith(".pdf")) return;
+      e.preventDefault();
+      setAttaching("Attaching the PDF…");
+      const body = new FormData();
+      body.append("file", file);
+      try {
+        const r = await fetch(`/api/pdf/${encodeURIComponent(explainer.paper_id)}`, { method: "POST", body });
+        if (!r.ok) throw new Error((await r.json().catch(() => ({})))?.detail ?? `HTTP ${r.status}`);
+        window.location.reload();
+      } catch (err) {
+        setAttaching(`Could not attach the PDF: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    };
+    document.addEventListener("dragover", over);
+    document.addEventListener("drop", drop);
+    return () => {
+      document.removeEventListener("dragover", over);
+      document.removeEventListener("drop", drop);
+    };
+  }, [explainer.paper_id]);
 
   const meta = [
     explainer.journal,
@@ -136,6 +182,28 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
                 {v.checked - v.passed} proposed {v.checked - v.passed === 1 ? "value" : "values"} dropped
               </span>
             )}
+            {(v.sentences ?? 0) > 0 && (
+              <span
+                className="rounded-full border px-2.5 py-0.5 text-white/60"
+                style={{ borderColor: "rgba(255,255,255,0.10)" }}
+                title="A sentence is anchored when a sentence of the paper prints the same numbers and terms. Click any anchored sentence to read it in the paper."
+              >
+                {v.anchored} of {v.sentences} sentences anchored to the paper
+              </span>
+            )}
+            {(v.direction_conflicts ?? 0) > 0 && (
+              <span className="text-[#ff6259]" title="The sentence and the paper's sentence use opposite direction words">
+                {v.direction_conflicts} direction {v.direction_conflicts === 1 ? "conflict" : "conflicts"}
+              </span>
+            )}
+            {explainer.has_pdf ? (
+              <span className="text-white/35">PDF attached</span>
+            ) : (
+              <span className="text-white/35" title="PubMed Central blocks scripted downloads; drop the paper's PDF on this page">
+                drop the PDF here to open sentences in it
+              </span>
+            )}
+            {attaching && <span className="text-white/60">{attaching}</span>}
           </div>
           {/* What was checked and what was not, in one line, because "verified" on its own
               reads as a claim about the whole page. */}
@@ -225,6 +293,8 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
                   markdown={section.markdown}
                   unprinted={unprinted.get(section.id) ?? []}
                   links={(linksBySection.get(section.id) ?? []).filter((l) => here.has(l.chart_id))}
+                  anchors={anchorsBySection.get(section.id) ?? []}
+                  onAnchor={openAnchor}
                   terms={terms}
                   charts={byId}
                   wide={charts.length === 0}
@@ -309,11 +379,11 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
       )}
 
       {source && (
-        <SourcePanel
-          prov={source.prov}
-          value={source.value}
-          text={explainer.sources?.[source.prov.locator]}
-          sourceUrl={explainer.source_url}
+        <PaperView
+          paperId={explainer.paper_id}
+          target={source.target}
+          hasPdf={Boolean(explainer.has_pdf)}
+          pdfVersion={explainer.pdf_version ?? 0}
           onClose={closeSource}
         />
       )}
@@ -402,22 +472,26 @@ function Prose({
   markdown,
   unprinted,
   links,
+  anchors,
   terms,
   charts,
   wide = false,
   onActive,
   onOpen,
+  onAnchor,
 }: {
   arms: string[];
   sectionId: string;
   markdown: string;
   unprinted: string[];
   links: ProseLink[];
+  anchors: Anchor[];
   terms: Term[];
   charts: Map<string, Chart>;
   wide?: boolean;
   onActive: (lit: Lit | null) => void;
   onOpen: (prov: Provenance, value?: number) => void;
+  onAnchor: (a: Anchor) => void;
 }) {
   const blocks = markdown.split(/\n{2,}/).map(deLatex).filter(Boolean);
   const mark = useMemo(() => marker(unprinted), [unprinted]);
@@ -475,7 +549,7 @@ function Prose({
   }, [links, sectionId, onActive]);
 
   const render = (text: string, key: string) =>
-    withLinks(text, links, charts, arms, (piece, k, tint) =>
+    withLinks(text, links, anchors, charts, arms, onAnchor, (piece, k, tint) =>
       // Arm names take colour only inside a sentence joined to a chart, where the colour
       // points at a mark. Coloured everywhere, they were decoration, and the figures the
       // sentence is about stopped standing out.
@@ -569,34 +643,67 @@ function tintFor(link: ProseLink, charts: Map<string, Chart>, arms: string[]): T
 function withLinks(
   text: string,
   links: ProseLink[],
+  anchors: Anchor[],
   charts: Map<string, Chart>,
   arms: string[],
+  onAnchor: (a: Anchor) => void,
   render: (piece: string, k: number, tint: Tint) => React.ReactNode,
 ): React.ReactNode {
-  const hits = links
-    .map((l) => ({ l, at: text.indexOf(l.sentence.slice(0, 80)) }))
-    .filter((h) => h.at >= 0)
-    .sort((a, b) => a.at - b.at);
+  // One span per sentence that is anchored, linked to a chart, or both. An anchored
+  // sentence opens the paper at its source on a click; a linked one also lights a mark
+  // as it is read; an unanchored one is marked, so the reader knows it stands on the
+  // model's word alone.
+  type Hit = { at: number; end: number; link?: ProseLink; anchor?: Anchor };
+  const byAt = new Map<number, Hit>();
+  for (const a of anchors) {
+    const at = text.indexOf(a.sentence.slice(0, 80));
+    if (at >= 0 && !byAt.has(at)) byAt.set(at, { at, end: Math.min(text.length, at + a.sentence.length), anchor: a });
+  }
+  for (const l of links) {
+    const at = text.indexOf(l.sentence.slice(0, 80));
+    if (at < 0) continue;
+    const h = byAt.get(at);
+    if (h) h.link = l;
+    else byAt.set(at, { at, end: Math.min(text.length, at + l.sentence.length), link: l });
+  }
+  const hits = [...byAt.values()].sort((a, b) => a.at - b.at);
   if (hits.length === 0) return render(text, 0, null);
   const out: React.ReactNode[] = [];
   let pos = 0;
   let k = 0;
-  for (const { l, at } of hits) {
-    if (at < pos) continue;
-    const end = Math.min(text.length, at + l.sentence.length);
-    if (at > pos) out.push(<span key={k++}>{render(text.slice(pos, at), k, null)}</span>);
-    const tint = tintFor(l, charts, arms);
+  for (const h of hits) {
+    if (h.at < pos) continue;
+    if (h.at > pos) out.push(<span key={k++}>{render(text.slice(pos, h.at), k, null)}</span>);
+    const tint = h.link ? tintFor(h.link, charts, arms) : null;
+    const a = h.anchor;
+    const cls = [
+      h.link ? "sentence" : "",
+      a ? (a.supported ? "anchored" : "untraced") : "",
+      a?.direction_conflict ? "conflict" : "",
+    ].filter(Boolean).join(" ");
+    const title = a
+      ? a.direction_conflict
+        ? "This sentence and the paper's sentence use opposite direction words. Click to read the paper's."
+        : a.supported
+          ? "Read this sentence in the paper"
+          : "Not traced to a sentence in the paper: no sentence there prints these numbers and terms"
+      : undefined;
     out.push(
       <span
         key={k++}
-        className="sentence"
-        data-link={`${l.chart_id}|${l.kind}|${l.index}`}
+        className={cls || undefined}
+        data-link={h.link ? `${h.link.chart_id}|${h.link.kind}|${h.link.index}` : undefined}
+        title={title}
+        role={a?.supported ? "button" : undefined}
+        tabIndex={a?.supported ? 0 : undefined}
+        onClick={a?.supported ? () => onAnchor(a) : undefined}
+        onKeyDown={a?.supported ? (e) => { if (e.key === "Enter") onAnchor(a); } : undefined}
         style={tint ? ({ ["--lit" as string]: tint.colour } as React.CSSProperties) : undefined}
       >
-        {render(text.slice(at, end), k, tint)}
+        {render(text.slice(h.at, h.end), k, tint)}
       </span>,
     );
-    pos = end;
+    pos = h.end;
   }
   if (pos < text.length) out.push(<span key={k++}>{render(text.slice(pos), k, null)}</span>);
   return out;
