@@ -19,8 +19,7 @@ const EXAMPLES = [
 const STEPS: [string, string][] = [
   ["resolve", "Resolving the paper"],
   ["fetch", "Reading the full text"],
-  ["rewrite", "Rewriting it into sections"],
-  ["plan", "Choosing the charts"],
+  ["plan", "Writing the sections and choosing the charts"],
   ["verify", "Checking every value against the source"],
   ["figures", "Fetching the paper's own figures"],
 ];

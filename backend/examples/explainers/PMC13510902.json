@@ -1,0 +1,360 @@
+{
+  "paper_id": "PMC13510902",
+  "title": "Pulmonary Metastases from a Hemangiopericytoma/Solitary Fibrous Tumor Spectrum Neoplasm in a Patient with a Poorly Documented Thigh Tumor: A Case Report",
+  "authors": [
+    "Justina Antonela Dragomir",
+    "Alexandru Stoichiță",
+    "Silviu Gabriel Vlăsceanu",
+    "Radu Matache",
+    "Beatrice Mahler"
+  ],
+  "journal": "Reports - Clinical Practice and Surgical Cases",
+  "published": "2026-08-16 00:00:00",
+  "doi": "10.3390/reports9030274",
+  "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13510902/",
+  "question": "",
+  "bottom_line": null,
+  "sections": [
+    {
+      "id": "PMC13510902-section-1",
+      "title": "A Young Woman Coughing Up Blood",
+      "markdown": "A 33-year-old woman walked into an emergency room coughing up blood. Chest X-rays showed two large, round masses in her lungs, one about 10 cm on the left and one about 4 cm on the right. What followed is a story about how a missing pathology report can shape a patient's entire treatment path, and it makes up the substance of this case report from Romania.",
+      "chart_ids": [
+        "lung-mass-size"
+      ],
+      "figure_ids": [
+        "reports-09-00274-f001",
+        "reports-09-00274-f002"
+      ]
+    },
+    {
+      "id": "PMC13510902-section-2",
+      "title": "Understanding the Tumor Type",
+      "markdown": "The tumor involved is a **solitary fibrous tumor (SFT)**, a rare growth arising from connective-tissue cells that can appear almost anywhere in the body. For decades, tumors with a distinctive pattern of growth around blood vessels were called **hemangiopericytoma (HPC)**, a separate name. Current World Health Organization classification folds those soft-tissue HPC cases into the SFT category. The authors keep the old term only when quoting the patient's original pathology records.\n\nThese tumors are unpredictable. Many stay put and are cured by surgery. Others come back locally or spread to distant organs, sometimes many years later. Pathologists estimate risk using patient age, tumor size, how fast the cells are dividing (mitotic activity), and whether dead tissue (necrosis) is present. The disease is rare enough that population data put its incidence at 0.023 per 100,000 people. Lung involvement is uncommon, and when a mass shows up in the chest it can either be a tumor that started there or a metastasis from somewhere else in the body. Telling those apart matters, and imaging alone cannot do it.\n\nOne technical caveat runs through the whole report. Modern confirmation of SFT relies on an immunohistochemistry stain called **STAT6**, a lab test that flags a protein specific to these tumors. That test was not available for this patient's archived tissue, so the authors deliberately describe the tumor as a \"hemangiopericytoma/solitary fibrous tumor spectrum neoplasm\" rather than claiming a definitive modern reclassification. It is an honest label for what the evidence supports.",
+      "chart_ids": [
+        "sft-incidence"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC13510902-section-3",
+      "title": "Workup, Diagnosis, and Surgical Treatment",
+      "markdown": "Emergency bronchoscopy found blood in the airways on both sides, with a clot blocking the left upper lobe bronchus that could not be cleared. No biopsy was attempted: there was no visible lesion to sample, and the tumor's suspected blood-vessel-rich nature raised the risk of serious bleeding.\n\nBlood tests were normal and antibodies for echinococcus (a parasite that forms cysts in the lung) were negative. CT scans measured the left mass at about 9 x 9.5 x 11 cm, invading the lining of the central chest, and the right mass at about 5.8 x 3.5 x 5 cm with invasion into the pleura on that side. No spread elsewhere showed up on the initial staging.\n\nThe differential diagnosis was wide: benign lung tumors, hydatid (parasitic) disease, two separate primary lung cancers occurring at once, and, considered least likely, metastases from an unknown source elsewhere. Because the patient was young, a non-smoker, and lived in a region where tuberculosis is common, TB was on the list early too.\n\nBoth masses looked removable, so surgeons operated in stages. A left upper lobectomy came first. Tissue examined during surgery suggested a sarcoma, and the final pathology confirmed a malignant hemangiopericytoma/SFT-spectrum tumor. Six cycles of cisplatin-based chemotherapy followed, then a right middle lobectomy, which produced the same diagnosis.",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC13510902-section-4",
+      "title": "The Missing Report and Rapid Decline",
+      "markdown": "Knowing this tumor type spreads, the team went back over the patient's history in detail. Only then did she describe two earlier operations on her right thigh. The first, five years before, had been reported as a \"myoma,\" a benign muscle growth. The second, two years before, was for a recurrence, and no pathology report was on hand. The family had not chased it down because they had been told the lesion was harmless.\n\nAfter the second lung surgery, the team retrieved that old report. The thigh tumor had been a malignant hemangiopericytoma all along. The lung masses were metastases from a cancer treated years earlier and never properly followed.\n\nThe disease then moved quickly. Within a year she had metastases in the frontal and occipital regions of the brain, more lesions throughout both lungs and the central chest, and a metastasis under the skin. She died within 18 months of the initial lung diagnosis.",
+      "chart_ids": [
+        "survival-after-diagnosis"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC13510902-section-5",
+      "title": "Clinical Lessons and Study Limitations",
+      "markdown": "Context from the literature frames the outcome. In a study of 213 patients with hemangiopericytoma of the brain followed for up to 372 months, the most common sites of spread were bone (19.6%), pleura and lung (18.4%), liver (17.6%), and vertebrae (14.1%). Coughing up blood, as this patient did, has been treated as an unfavorable sign. Romania had one prior published case of primary lung hemangiopericytoma; this appears to be the country's first documented metastatic one.\n\nThe practical lesson is narrow and concrete. When a patient turns up with unexplained masses in both lungs and any history of a recurrent soft-tissue lump, someone should actively retrieve and read the old pathology reports, even when the earlier lesion was called benign. Recurrent soft-tissue tumors also need long-term surveillance rather than a single reassurance.\n\nThe authors are candid about the report's limits: it is retrospective, the original thigh tumor documentation was thin, bronchoscopy and operative records were incomplete (surgical margins and lymph node status were never recorded), no scan was done between chemotherapy and the second surgery so treatment response could not be judged, chemotherapy dosing details were missing, and STAT6 testing was never performed. The patient's own perspective could not be included because she did not survive.",
+      "chart_ids": [
+        "metastatic-sites-cohort"
+      ],
+      "figure_ids": []
+    }
+  ],
+  "charts": [
+    {
+      "id": "sft-incidence",
+      "kind": "stat",
+      "title": "Reported incidence of solitary fibrous tumor",
+      "subtitle": "Population-based rate cited by the authors",
+      "data": [
+        {
+          "label": "Solitary fibrous tumor incidence",
+          "value": 0.023,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "per 100,000",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec1-reports-09-00274/p1",
+            "kind": "paragraph",
+            "quote": "The rarity of this entity is reflected in population-based data, with a reported incidence of 0.023 per 100,000",
+            "section": "Introduction and Clinical Significance"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "per 100,000",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "A population figure quoted from another study, not measured in this case report.",
+      "source": "Introduction, cited population-based data",
+      "section_id": "sec1-reports-09-00274"
+    },
+    {
+      "id": "lung-mass-size",
+      "kind": "bars",
+      "title": "Size of the two lung masses on chest radiography",
+      "subtitle": "Approximate diameters at first presentation",
+      "data": [
+        {
+          "label": "Left upper lung field lesion",
+          "value": 10.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2dot1-reports-09-00274/p1",
+            "kind": "paragraph",
+            "quote": "a large lesion of approximately 10 cm projected over the left upper lung field and a smaller lesion of approximately 4 cm projected over the right middle lung field",
+            "section": "Case Presentation, Diagnostic Assessment"
+          }
+        },
+        {
+          "label": "Right middle lung field lesion",
+          "value": 4.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2dot1-reports-09-00274/p1",
+            "kind": "paragraph",
+            "quote": "a large lesion of approximately 10 cm projected over the left upper lung field and a smaller lesion of approximately 4 cm projected over the right middle lung field",
+            "section": "Case Presentation, Diagnostic Assessment"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "cm",
+      "value_label": "Approximate diameter (cm)",
+      "category_label": "Lesion",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": false,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Radiographic estimates. CT measured the lesions at 9.1 x 9.5 x 11 cm and 5.8 x 3.5 x 5 cm.",
+      "source": "Case Presentation, chest radiography",
+      "section_id": "sec2dot1-reports-09-00274"
+    },
+    {
+      "id": "survival-after-diagnosis",
+      "kind": "stat",
+      "title": "Time from pulmonary diagnosis to death",
+      "subtitle": "Course after staged resections and chemotherapy",
+      "data": [
+        {
+          "label": "Survival after initial pulmonary diagnosis",
+          "value": 18.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "died of progressive metastatic disease",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "abstract",
+            "kind": "abstract",
+            "quote": "The patient died within 18 months of the initial pulmonary diagnosis.",
+            "section": "Abstract"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "months",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "A single patient. One case cannot give a survival estimate for this tumor type.",
+      "source": "Abstract and Follow-Up and Outcomes",
+      "section_id": "sec2dot3-reports-09-00274"
+    },
+    {
+      "id": "metastatic-sites-cohort",
+      "kind": "bars",
+      "title": "Most frequent metastatic sites in a cerebral hemangiopericytoma series",
+      "subtitle": "213 patients followed for up to 372 months",
+      "data": [
+        {
+          "label": "Bone",
+          "value": 19.6,
+          "low": null,
+          "high": null,
+          "n": 213,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec3-reports-09-00274/p2",
+            "kind": "paragraph",
+            "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1%",
+            "section": "Discussion"
+          }
+        },
+        {
+          "label": "Pleura and lung",
+          "value": 18.4,
+          "low": null,
+          "high": null,
+          "n": 213,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec3-reports-09-00274/p2",
+            "kind": "paragraph",
+            "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1%",
+            "section": "Discussion"
+          }
+        },
+        {
+          "label": "Liver",
+          "value": 17.6,
+          "low": null,
+          "high": null,
+          "n": 213,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec3-reports-09-00274/p2",
+            "kind": "paragraph",
+            "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1%",
+            "section": "Discussion"
+          }
+        },
+        {
+          "label": "Vertebrae",
+          "value": 14.1,
+          "low": null,
+          "high": null,
+          "n": 213,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec3-reports-09-00274/p2",
+            "kind": "paragraph",
+            "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1%",
+            "section": "Discussion"
+          }
+        }
+      ],
+      "annotation": {
+        "target": "Pleura and lung",
+        "text": "Pleura and lung involvement in 18.4% of that series, the site seen in this patient."
+      },
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "Patients with metastasis at this site (%)",
+      "category_label": "Site",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Figures come from a separate series of cerebral hemangiopericytoma, not from this patient or a thigh primary.",
+      "source": "Discussion, cited series of 213 patients",
+      "section_id": "sec3-reports-09-00274"
+    }
+  ],
+  "figures": [
+    {
+      "id": "reports-09-00274-f001",
+      "label": "Figure 1",
+      "caption": "Figure 1: Chest radiography and computed tomography findings at initial presentation. (A). Posteroanterior chest radiograph showing two well-defined rounded pulmonary masses, including a large lesion projected over the left upper lung field and a smaller lesion projected over the right middle lung field. (B). Lateral chest radiograph confirming the posterior/apical projection of the larger thoracic mass. (C,D). Axial chest CT images showing a large solid mass in the left upper lobe/apical region, with broad pleural and mediastinal contact. (E). Axial chest CT image showing a second well-defined solid lesion in the right middle lobe, with pleural contact and lateral pleural involvement.",
+      "file": "reports-09-00274-g001.webp",
+      "width": 1600,
+      "height": 1417,
+      "kind": "imaging",
+      "why": "Shows the actual radiograph and CT appearance of the two masses, including pleural and mediastinal contact, which a size chart cannot convey.",
+      "section_id": "sec2dot1-reports-09-00274"
+    },
+    {
+      "id": "reports-09-00274-f002",
+      "label": "Figure 2",
+      "caption": "Figure 2: Histopathological features of malignant hemangiopericytoma/solitary fibrous tumor spectrum neoplasm. (A) Low-power hematoxylin and eosin staining showing a highly cellular spindle-cell tumor with prominent branching, thin-walled vascular spaces arranged in a characteristic “staghorn” pattern. (B) Intermediate-power view demonstrating densely packed spindle cells surrounding irregular vascular channels. (C) High-power view showing spindle-to-oval tumor cells with moderate nuclear atypia and increased cellularity. (D) High-power view (400×) showing tumor cells with moderate nuclear atypia.",
+      "file": "reports-09-00274-g002.webp",
+      "width": 1600,
+      "height": 1203,
+      "kind": "imaging",
+      "why": "Histology showing the spindle-cell tumor and staghorn vascular pattern that established the diagnosis.",
+      "section_id": "sec2dot2-reports-09-00274"
+    }
+  ],
+  "absolute_risk": null,
+  "absolute_risk_derived": null,
+  "terms": [],
+  "links": [
+    {
+      "section_id": "PMC13510902-section-1",
+      "sentence": "Chest X-rays showed two large, round masses in her lungs, one about 10 cm on the left and one about 4 cm on the right.",
+      "chart_id": "lung-mass-size",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC13510902-section-2",
+      "sentence": "The disease is rare enough that population data put its incidence at 0.023 per 100,000 people.",
+      "chart_id": "sft-incidence",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC13510902-section-4",
+      "sentence": "She died within 18 months of the initial lung diagnosis.",
+      "chart_id": "survival-after-diagnosis",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "In a study of 213 patients with hemangiopericytoma of the brain followed for up to 372 months, the most common sites of spread were bone (19.6%), pleura and lung (18.4%), liver (17.6%), and vertebrae (14.1%).",
+      "chart_id": "metastatic-sites-cohort",
+      "kind": "datum",
+      "index": 1
+    }
+  ],
+  "sources": {},
+  "verification": {
+    "checked": 8,
+    "passed": 8,
+    "rejections": [],
+    "prose_checked": 0,
+    "prose_unmatched": []
+  },
+  "notes": []
+}

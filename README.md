@@ -139,3 +139,10 @@ Forked from [arXivisual](https://github.com/rajshah6/arXivisual) for the reader,
 sectioning and the visual language. The render pipeline, the ingest, the provenance gate and
 the chart system are new. arXivisual ships no licence file; this fork is private, local and
 undistributed.
+
+## The shipped library
+
+`backend/examples/` holds every explainer built so far, with the paper figures they
+show. On first start the API copies them into `backend/data/` (which is not in git), so
+a fresh clone opens on a full library and you can read before you build. A paper you
+rebuild replaces its copy in `data/`; the seed is never written over it.

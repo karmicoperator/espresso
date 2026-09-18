@@ -1,0 +1,482 @@
+{
+  "paper_id": "PMC6051556",
+  "title": "Evaluation of Tilt-correction of Anteversion on Anteroposterior Pelvic Radiographs in Total Hip Arthroplasty",
+  "authors": [
+    "Jeffrey M Muir",
+    "John Vincent",
+    "Joseph Schipper",
+    "Meinusha Govindarajan",
+    "Wayne G Paprosky"
+  ],
+  "journal": "Cureus",
+  "published": "2018-05-18 00:00:00",
+  "doi": "10.7759/cureus.2647",
+  "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6051556/",
+  "question": "",
+  "bottom_line": null,
+  "sections": [
+    {
+      "id": "PMC6051556-section-1",
+      "title": "Why Cup Angle Measurement Matters",
+      "markdown": "When a surgeon replaces a hip, one of the things that determines whether the new joint works well is how the artificial socket, the acetabular cup, is angled inside the pelvis. Get it wrong and the implant wears faster, loosens sooner, and the hip is more likely to dislocate. So checking that angle afterward matters. In practice, that check is almost always done with a plain X-ray taken from the front, an **anteroposterior (AP) pelvic radiograph**, because X-rays are cheap, available, and involve little radiation.\n\nThe problem is that an X-ray flattens a three-dimensional pelvis onto a two-dimensional image, and the answer you get depends on how the patient was lying or standing. The main culprit is **pelvic tilt**: how far the pelvis is rotated forward or backward relative to the vertical plane of the image. Tilt barely affects one of the two cup angles (inclination, the side-to-side tilt of the cup), but it badly distorts the other. **Anteversion**, how far the cup faces forward, is read off the shape of the ellipse the cup rim traces on the film, and that ellipse changes shape as soon as the pelvis rotates.\n\nResearchers have proposed several ways to mathematically undo this distortion. This study tested the most widely cited one and asked a simple question: does it actually work on the kind of X-rays hospitals really take, in the kind of patients who really get hip replacements?",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC6051556-section-2",
+      "title": "The Tilt-Correction Method Being Tested",
+      "markdown": "## The method being tested\n\nThe correction comes from work by Tannast and colleagues. They found that the vertical distance on an X-ray between the top of the pubic symphysis (the joint at the front of the pelvis) and the sacrococcygeal joint (where the tailbone meets the sacrum) tracks pelvic tilt closely. That measurement is called the **symphococcygeal distance (SCD)**. Measure it, look it up on a sex-specific nomogram (a printed lookup chart) alongside the raw anteversion reading, and the chart returns a tilt-corrected anteversion value.\n\nTwo things made the authors suspicious. Tannast's original X-rays were taken under tightly controlled conditions, with a fixed 1.2 m source-to-image distance, patients supine, and the beam aimed at a specific landmark. Routine post-operative films are not taken that way. And Tannast's patients averaged about 32 years old and were being treated for impingement or hip dysplasia, not hip replacement.",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC6051556-section-3",
+      "title": "Study Design and Navigation Reference Standard",
+      "markdown": "## How they checked it\n\nThe team retrospectively reviewed patients who had a primary or revision hip replacement by one surgeon between February 2016 and February 2017, all done using the Intellijoint HIP navigation system. Standing AP X-rays taken two weeks after surgery were measured with templating software, scaled using the known diameter of the implanted femoral head. Every measurement was made three times and averaged, by a single researcher who did not know the navigation values.\n\nThe reference standard was the navigation system itself. During surgery, a camera is pinned to the patient's iliac crest and a tracker is attached to the femur or to surgical tools. Because the camera moves with the patient, the angle it reports is the cup's actual orientation in the body, unaffected by how the patient is positioned or imaged. That gives an independent ground truth to compare against.\n\nOf 77 eligible cases, one was dropped for a pelvic fracture and five for X-rays too poor to measure, leaving 71 in the baseline group.",
+      "chart_ids": [
+        "mean-anteversion"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC6051556-section-4",
+      "title": "Results: Limited Applicability and Systematic Overcorrection",
+      "markdown": "## What they found\n\nThe correction method mostly could not be used at all. The sacrococcygeal joint simply was not visible on 44% of the X-rays (31 of 71). Among the 40 films where it was visible, another 9 produced values that fell off the edge of the nomogram's printed scale. In the end the correction worked on only 31 of the original 71 cases, 44%.\n\nWhere it did work, it made things worse rather than better:\n\n- Corrected anteversion averaged 36.9° (SD 7.4°), versus 25.2° (SD 7.6°) uncorrected, a shift of 13.5° (p<0.001).\n- Navigation, the ground truth, gave 27.4° (SD 5.7°) — much closer to the uncorrected reading than to the corrected one.\n- Correlation between corrected values and navigation was essentially nil, r = -0.07. Corrected values tracked uncorrected values reasonably well (r = 0.73), meaning the correction was mostly just adding a roughly constant amount rather than responding to actual tilt.\n- Raw uncorrected X-ray readings differed from navigation by an average of only -2.2° (SD 8.7°).\n\nThe measurements themselves were reliable, so the failure was not sloppy reading. Repeat measurements agreed almost perfectly, with intraclass correlations of 0.99 for both anteversion and SCD.\n\nThe direction of the error carries clinical weight. The correction inflated anteversion in every single case. A surgeon who trusts that inflated number would believe the cup is turned further forward than it is, and might aim for less anteversion next time, which raises the risk of posterior dislocation.",
+      "chart_ids": [
+        "mean-differences",
+        "applicability",
+        "case-flow"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC6051556-section-5",
+      "title": "Explaining the Failure and What It Means",
+      "markdown": "## Why it failed here\n\nThe authors point to the gap between Tannast's laboratory-grade imaging protocol and everyday clinical radiography, the large age and diagnosis difference between the two patient groups, and an ambiguity in the original paper: Tannast never specified whether the vertical SCD was measured relative to a pelvic landmark or to the X-ray plane, nor how the images were scaled. Magnification on clinical films can vary from 97% to 127%, while templating software typically assumes a fixed 115% or 120%.\n\nThe conclusion is narrow and clear. On ordinary post-operative X-rays of hip replacement patients, the SCD correction cannot be applied most of the time, and when it can, it does not recover the true cup angle. Correcting for pelvic tilt on plain radiographs still needs a workable method.",
+      "chart_ids": [
+        "correlations"
+      ],
+      "figure_ids": []
+    }
+  ],
+  "charts": [
+    {
+      "id": "applicability",
+      "kind": "stat",
+      "title": "The tilt correction could not be applied to 44% of cases",
+      "subtitle": "Cases from the 71 analysed radiographs where the method could not be used",
+      "data": [
+        {
+          "label": "Correction could not be applied",
+          "value": 44.0,
+          "low": null,
+          "high": null,
+          "n": 71,
+          "events": 31,
+          "group": "",
+          "note": "31/71 cases",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "abstract",
+            "kind": "abstract",
+            "quote": "The correction method could not be applied in 44% (31/71) of the cases, chiefly due to difficulties in visualizing the required landmarks.",
+            "section": "Abstract"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "A single-centre retrospective series of hip arthroplasty cases, not a prospective test of the method.",
+      "source": "Abstract, applicability of the correction method",
+      "section_id": "results"
+    },
+    {
+      "id": "case-flow",
+      "kind": "flow",
+      "title": "How many radiographs the correction method reached",
+      "subtitle": "From the analysed sample to the cases where a corrected value could be calculated",
+      "data": [
+        {
+          "label": "Included for analysis",
+          "value": 71.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p1",
+            "kind": "paragraph",
+            "quote": "A final sample of 71 cases for which navigation data and uncorrected radiographs were available was included for analysis and comprised the baseline group.",
+            "section": "Results"
+          }
+        },
+        {
+          "label": "Sacrococcygeal joint not visible",
+          "value": 31.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p2",
+            "kind": "paragraph",
+            "quote": "In this baseline group, the sacrococcygeal joint was not visible in 44% (31/71) of radiographs.",
+            "section": "Results"
+          }
+        },
+        {
+          "label": "Landmarks visible",
+          "value": 40.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p2",
+            "kind": "paragraph",
+            "quote": "In the remaining 40 radiographs, the anteversion and/or SCD measurements calculated from the image were beyond the scale provided by the nomograms in 23% (9/40).",
+            "section": "Results"
+          }
+        },
+        {
+          "label": "Measurements beyond nomogram scale",
+          "value": 9.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p2",
+            "kind": "paragraph",
+            "quote": "the anteversion and/or SCD measurements calculated from the image were beyond the scale provided by the nomograms in 23% (9/40)",
+            "section": "Results"
+          }
+        },
+        {
+          "label": "Correction successfully applied",
+          "value": 31.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p2",
+            "kind": "paragraph",
+            "quote": "the correction method was able to be successfully applied to only 44% (31/71) of radiographs from the initially eligible cases",
+            "section": "Results"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "The paper reports the correction applied to 31 of 71 cases but analyses a correction-eligible cohort of n=40. Both figures are shown as printed.",
+      "source": "Results, case flow-through",
+      "section_id": "results"
+    },
+    {
+      "id": "mean-anteversion",
+      "kind": "bars",
+      "title": "Mean anteversion by measurement method",
+      "subtitle": "Correction-eligible cohort, n=40",
+      "data": [
+        {
+          "label": "Uncorrected radiographic",
+          "value": 25.2,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "SD: 7.6 degrees",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p8",
+            "kind": "paragraph",
+            "quote": "differed from uncorrected anteversion (mean: 25.2°, SD: 7.6°)",
+            "section": "Results, Effect of correction"
+          }
+        },
+        {
+          "label": "Tilt-corrected radiographic",
+          "value": 36.9,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "SD: 7.4 degrees",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p8",
+            "kind": "paragraph",
+            "quote": "Corrected anteversion (mean: 36.9°, SD: 7.4°)",
+            "section": "Results, Effect of correction"
+          }
+        },
+        {
+          "label": "Navigation, intraoperative",
+          "value": 27.4,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "SD: 5.7 degrees",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p8",
+            "kind": "paragraph",
+            "quote": "and from navigated anteversion (27.4°, SD: 5.7°)",
+            "section": "Results, Effect of correction"
+          }
+        }
+      ],
+      "annotation": {
+        "target": "Tilt-corrected radiographic",
+        "text": "Corrected values sit 10.8 degrees above the navigation mean, the reference measurement here."
+      },
+      "nodes": [],
+      "edges": [],
+      "unit": "degrees",
+      "value_label": "Anteversion (degrees)",
+      "category_label": "Measurement method",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Bars show means with standard deviations in the notes. The paper prints no confidence intervals.",
+      "source": "Results, correction-eligible cohort means",
+      "section_id": "results"
+    },
+    {
+      "id": "mean-differences",
+      "kind": "bars",
+      "title": "Average difference between the three measurements",
+      "subtitle": "Correction-eligible cohort, n=40",
+      "data": [
+        {
+          "label": "Corrected vs uncorrected",
+          "value": 13.5,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "p<0.001",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p8",
+            "kind": "paragraph",
+            "quote": "differed from uncorrected anteversion (mean: 25.2°, SD: 7.6°) by an average of 13.5° (p<0.001)",
+            "section": "Results, Effect of correction"
+          }
+        },
+        {
+          "label": "Corrected vs navigated",
+          "value": 10.8,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "p=0.16",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p8",
+            "kind": "paragraph",
+            "quote": "and from navigated anteversion (27.4°, SD: 5.7°) by an average of 10.8° (p=0.16)",
+            "section": "Results, Effect of correction"
+          }
+        },
+        {
+          "label": "Uncorrected vs navigated",
+          "value": -2.2,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "SD: 8.7 degrees",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p9",
+            "kind": "paragraph",
+            "quote": "but differed by an average of only -2.2° (SD: 8.7°)",
+            "section": "Results, Effect of correction"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "degrees",
+      "value_label": "Mean difference (degrees)",
+      "category_label": "Comparison",
+      "log_scale": false,
+      "null_value": 0.0,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Signs are as printed in the paper. The two corrected comparisons are reported without a sign.",
+      "source": "Results, mean differences between methods",
+      "section_id": "results"
+    },
+    {
+      "id": "correlations",
+      "kind": "bars",
+      "title": "Correlation of each radiographic measure with the others",
+      "subtitle": "Pearson r, correction-eligible cohort",
+      "data": [
+        {
+          "label": "Corrected vs navigated",
+          "value": -0.07,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p8",
+            "kind": "paragraph",
+            "quote": "Corrected anteversion correlated very poorly with navigation values (r = -0.07)",
+            "section": "Results, Effect of correction"
+          }
+        },
+        {
+          "label": "Uncorrected vs navigated",
+          "value": 0.15,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p9",
+            "kind": "paragraph",
+            "quote": "Uncorrected anteversion correlated poorly with navigation values (r = 0.15)",
+            "section": "Results, Effect of correction"
+          }
+        },
+        {
+          "label": "Corrected vs uncorrected",
+          "value": 0.73,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-results-3/p8",
+            "kind": "paragraph",
+            "quote": "although moderately well with uncorrected values (r = 0.73)",
+            "section": "Results, Effect of correction"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "r",
+      "value_label": "Pearson correlation coefficient",
+      "category_label": "Pair of measurements",
+      "log_scale": false,
+      "null_value": 0.0,
+      "lower_is_better": false,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Correlation coefficients are printed without confidence intervals or p-values.",
+      "source": "Results, Pearson correlations",
+      "section_id": "results"
+    }
+  ],
+  "figures": [],
+  "absolute_risk": null,
+  "absolute_risk_derived": null,
+  "terms": [],
+  "links": [
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "The sacrococcygeal joint simply was not visible on 44% of the X-rays (31 of 71).",
+      "chart_id": "case-flow",
+      "kind": "datum",
+      "index": 1
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Among the 40 films where it was visible, another 9 produced values that fell off the edge of the nomogram's printed scale.",
+      "chart_id": "case-flow",
+      "kind": "datum",
+      "index": 3
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "In the end the correction worked on only 31 of the original 71 cases, 44%.",
+      "chart_id": "applicability",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "- Corrected anteversion averaged 36.9° (SD 7.4°), versus 25.2° (SD 7.6°) uncorrected, a shift of 13.5° (p<0.001).\n- Navigation, the ground truth, gave 27.4° (SD 5.7°) — much closer to the uncorrected reading than to the corrected one.\n- Correlation between corrected values and navigation was essentially nil, r = -0.07.",
+      "chart_id": "mean-differences",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC6051556-section-4",
+      "sentence": "Corrected values tracked uncorrected values reasonably well (r = 0.73), meaning the correction was mostly just adding a roughly constant amount rather than responding to actual tilt.\n- Raw uncorrected X-ray readings differed from navigation by an average of only -2.2° (SD 8.7°).",
+      "chart_id": "mean-differences",
+      "kind": "datum",
+      "index": 2
+    }
+  ],
+  "sources": {},
+  "verification": {
+    "checked": 15,
+    "passed": 15,
+    "rejections": [],
+    "prose_checked": 0,
+    "prose_unmatched": []
+  },
+  "notes": []
+}

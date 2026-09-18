@@ -53,6 +53,17 @@ app.add_middleware(
 app.include_router(api_router)
 
 
+@app.on_event("startup")
+async def _seed() -> None:
+    """A fresh install opens on a library, not an empty page."""
+    import store
+
+    try:
+        store.seed_examples()
+    except Exception:
+        logging.getLogger(__name__).exception("Could not install the example explainers")
+
+
 @app.get("/", include_in_schema=False)
 async def root():
     """Redirect root to API documentation."""

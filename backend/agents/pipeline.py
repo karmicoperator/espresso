@@ -13,6 +13,7 @@ MP4. The pipeline emits data and the frontend draws it.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import time
 from collections.abc import Callable
@@ -30,6 +31,7 @@ from agents.verify import (
     verify_terms,
 )
 from ingestion.figures import fetch_figures, image_size
+from ingestion.section_formatter import format_sections
 from models.charts import Chart, Explainer, FigurePlate, ReaderSection, VerificationReport
 from models.paper import StructuredPaper
 
@@ -181,30 +183,54 @@ def _attach_figures(sections: list[ReaderSection], figures: list[FigurePlate]) -
         target.figure_ids.append(fig.id)
 
 
+async def _rewrite(paper: StructuredPaper) -> None:
+    """The reader sections, written from a copy so `paper.sections` stays verbatim."""
+    source = [s.model_copy(deep=True) for s in paper.sections]
+    paper.reader_sections = await format_sections(source, paper.meta, model=None)
+
+
 async def build_visuals(
     paper: StructuredPaper,
     progress: Progress | None = None,
     max_charts: int = 6,
+    rewrite: bool = False,
 ) -> Explainer:
-    """Paper in, explainer out. Never raises for a paper that simply has nothing to chart."""
+    """Paper in, explainer out. Never raises for a paper that simply has nothing to chart.
+
+    With `rewrite`, the reader sections are written here, at the same time as the charts
+    are planned. The two model calls read the same source text and neither needs the
+    other: the planner cites source locators, and `place_charts` puts each chart beside
+    the prose that states its values afterwards. Sequential, they were most of a build.
+    """
     progress = progress or _noop
     started = time.monotonic()
     notes: list[str] = []
 
-    progress("plan", 0.15, "choosing the charts")
+    do_rewrite = rewrite and bool(paper.sections) and not paper.reader_sections
+    progress("plan", 0.12, "writing the sections and choosing the charts, at the same time" if do_rewrite else "choosing the charts")
     mark = time.monotonic()
     figure_picks: list = []
     bottom_line = None
     absolute_risk = None
     terms = []
-    try:
-        plan = await plan_charts(paper, max_charts=max_charts)
+    planned: list[Chart] = []
+
+    async def _plan():
+        return await plan_charts(paper, max_charts=max_charts)
+
+    jobs = [_plan()] + ([_rewrite(paper)] if do_rewrite else [])
+    results = await asyncio.gather(*jobs, return_exceptions=True)
+    plan = results[0]
+    if isinstance(plan, BaseException):
+        logger.error("Chart planning failed", exc_info=plan)
+        notes.append(f"No charts could be planned for this paper: {plan}")
+    else:
         planned, figure_picks, bottom_line = plan.charts, plan.figures, plan.bottom_line
         absolute_risk, terms = plan.absolute_risk, plan.terms
-    except Exception as exc:
-        logger.exception("Chart planning failed")
-        notes.append(f"No charts could be planned for this paper: {exc}")
-        planned = []
+    if do_rewrite and isinstance(results[1], BaseException):
+        # A failed rewrite costs readability, not correctness: the source sections are
+        # still present and every chart is verified against them.
+        logger.error("Section rewrite failed; falling back to the paper's own sections", exc_info=results[1])
     plan_seconds = time.monotonic() - mark
 
     progress("verify", 0.70, "checking every value against the source")

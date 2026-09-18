@@ -1,0 +1,368 @@
+{
+  "paper_id": "PMC9425604",
+  "title": "Patient-Reported Outcome Measures in Dermatology: A Systematic Review",
+  "authors": [
+    "Rachael L. PATTINSON",
+    "Nirohshah TRIALONIS-SUTHAKHARAN",
+    "Sunnia GUPTA",
+    "Alasdair L. HENRY",
+    "Jacqueline F. LAVALLÉE",
+    "Marina OTTEN",
+    "Timothy PICKLES",
+    "Nick COURTIER",
+    "Jennifer AUSTIN",
+    "Christine JANUS",
+    "Matthias AUGUSTIN",
+    "Chris BUNDY"
+  ],
+  "journal": "Acta Dermato-Venereologica",
+  "published": "2021-09-28 00:00:00",
+  "doi": "10.2340/00015555-3884",
+  "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9425604/",
+  "question": "",
+  "bottom_line": null,
+  "sections": [
+    {
+      "id": "PMC9425604-section-1",
+      "title": "The Burden Nobody Can Measure Properly",
+      "markdown": "Skin conditions hurt, disfigure, and stigmatize. They cost people money, strain relationships, and shape major life decisions. Yet almost everything researchers know about that burden comes from questionnaires that may not be measuring the right thing. This systematic review examined every questionnaire designed for use across skin conditions generally, judged them against the field's strictest quality standard, and found that not one could be recommended for use without reservation.",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC9425604-section-2",
+      "title": "The Problem With Existing Questionnaires",
+      "markdown": "A **patient-reported outcome measure**, or PROM, is a questionnaire filled out by the patient rather than the clinician. In dermatology these mostly measure **quality of life** (QoL), and they matter because dermatological treatment usually aims to make life better rather than longer. If the measuring stick is bent, so is everything built on it.\n\nThe authors identify four specific problems with the QoL questionnaires currently in use.\n\nFirst, they measure the wrong direction of effect. Most are built to detect whether a treatment improved a patient's life, not to capture how much the skin condition itself is affecting that life in the first place.\n\nSecond, they miss whole areas of experience. The psychological sections tend to ask about emotions, sometimes about coping, and almost never about **cognitions**, meaning the beliefs patients hold about their condition. That gap matters: in psoriasis, what patients believe about their disease predicts outcomes better than a clinician's severity rating does, and those beliefs are tightly linked to whether patients take their medication.\n\nThird, skin conditions accumulate. Research on **cumulative life course impairment** (CLCI) shows that living with a skin disease shapes major life decisions over years, career, relationships, education. Existing questionnaires contain no items that can track this accumulation over time, and asking patients to recall long stretches of the past introduces bias.\n\nFourth, most of these questionnaires have never been properly evaluated. Whether a questionnaire is valid, reliable, and responsive to change determines whether its numbers mean anything at all. Without that evidence, you cannot judge the instrument or trust its data.\n\nThe authors' own qualitative work with dermatology patients produced a conceptual framework defining **impact** as a construct spanning five areas: physical, psychological, social, financial, and daily functioning. This review is the first step toward building a new questionnaire, the **Patient-Reported Impact of Dermatological Diseases** (PRIDD), designed to capture all five.",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC9425604-section-3",
+      "title": "How the Review Was Done",
+      "markdown": "The protocol was registered in advance on PROSPERO, an international registry of planned systematic reviews. The team searched PubMed, PsycInfo, and CINAHL from each database's beginning through 25 June 2018, with no language restriction; non-English papers were translated. The search combined three sets of terms: skin conditions, life impact, and a validated filter for studies about measurement properties.\n\nEverything was assessed using **COSMIN**, the Consensus-based Standards for the Selection of Health Measurement Instruments. COSMIN is the field's accepted critical appraisal tool for reviews of questionnaires, developed by a mixed group of psychometricians, statisticians, qualitative researchers, clinicians, and questionnaire developers.\n\nCOSMIN separates two things that are easy to conflate. One is the **methodological quality of a study**, meaning whether the validation research was done properly. The other is the **quality of the measurement property itself**, meaning whether the questionnaire actually performed well. A well-run study can show that an instrument performs badly, and a sloppy study tells you nothing either way.\n\nEvidence for each questionnaire was then pooled into a **best-evidence synthesis**, which combines all studies of a given property into a single verdict carrying both a confidence level (high, moderate, low, very low) and a performance rating (sufficient, insufficient, indeterminate, inconsistent). Confidence levels were assigned using a modified version of GRADE, a standard system that downgrades evidence for risk of bias, inconsistency between studies, indirectness of the evidence, and imprecision. GRADE's usual fifth factor, publication bias, was dropped because no registry of measurement-property studies exists to check against.\n\nThe headline output is a traffic-light judgment. Each questionnaire lands in one of three categories: **A** (green, ready for use as is), **B** (amber, promising but needs more validation before it can be trusted), or **C** (red, not recommended). Three reviewers independently screened, and six independently rated quality, with cross-checking of each other's samples to measure agreement.\n\nA note on scope: this review covers only **dermatology-specific** questionnaires, those meant to work across skin conditions. Disease-specific instruments, for example ones written only for atopic dermatitis, were left to a separate paper because of the sheer volume of literature retrieved.",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC9425604-section-4",
+      "title": "What They Found",
+      "markdown": "The search returned 12,925 abstracts. After screening, 36 dermatology-specific questionnaires reported across 46 articles entered the COSMIN analysis.\n\nThe traffic-light result:\n\n- **Category A: zero.** No questionnaire met the standard for use without further validation.\n- **Category B: 31.** Recommended only with the caveat that more validation is needed.\n- **Category C: 5.** High-quality evidence of insufficient measurement properties, not recommended. These were the Sinhala version of the Dermatology Life Quality Index, the short form of the Questionnaire on Experience with Skin Complaints, the Serbian and Spanish versions of Skindex-29, and the Chinese version of Skindex-16.\n\nBecause nothing reached category A, COSMIN's fallback rule applies: provisionally recommend whichever category B instrument has the best content-validity evidence. Two qualify, the **Patient Benefit Index** (PBI), which measures patient needs and treatment benefits, and the **Turkish Quality of Life instrument** (TQL), which measures quality of life. Both come with a warning. Their content validity studies were methodologically acceptable, but the results were inconsistent.\n\nThe domain-level comparison answers the review's other question. Most instruments (83%) measure quality of life. The recurring domains are symptoms, emotional and psychological functioning, physical functioning, social functioning, and daily activities. None covers financial impact. None covers cumulative life course impairment. On the authors' definition, no existing instrument measures impact.\n\nThe evidence base is thin in a specific and telling way. No questionnaire was tested on every measurement property; the number tested per instrument ranged from one to six. **Internal consistency**, whether items on a scale hang together, was by far the most tested property, appearing in 37 studies. **Measurement invariance**, whether a translated version measures the same thing the same way as the original, was tested twice. **Measurement error** was never tested at all.\n\nThe weakest link is **content validity**, whether the questions actually cover what matters to patients, which COSMIN treats as the single most important property. Content validity evidence came almost entirely from original development and pilot studies, and 86% of those were of very low methodological quality. The most common reason for downgrading was that no cognitive interview was done, or it was done poorly. A cognitive interview is where you sit with patients and check they understand the questions the way you intended. Only three development studies rated adequate or better: the PBI, the TQL, and the Spanish Skindex-29, which is the only instrument to have had a dedicated content validity study performed after development.\n\nFor the widely used **Dermatology Life Quality Index** (DLQI), high-quality evidence supports sufficient internal consistency, construct validity, and responsiveness, with reliability rated indeterminate. Several instruments showed floor or ceiling effects, where large blocks of patients cluster at one end of the scale and the instrument stops discriminating between them. The Dermatology-specific Quality of Life measure had floor effects on its work/school subscale affecting 41% and 54% of patients in two studies. The PBI developers reported a \"major floor effect.\"",
+      "chart_ids": [
+        "properties-tested",
+        "selection-flow",
+        "recommendation-categories",
+        "development-study-quality"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC9425604-section-5",
+      "title": "Why It Matters",
+      "markdown": "Four of the five red-light instruments were translations. That points at a problem in how questionnaires are adapted across languages. Measurement invariance testing, which establishes that a translated item still measures the same underlying idea, was absent across every recommendation category. Without it, you cannot pool or compare results between language versions, which undercuts multi-country research. The authors call for standardized methods for cross-cultural translation studies.\n\nUsing questionnaires of poor or unknown quality is wasteful and, the authors argue, unethical, because invalid instruments produce misleading results. That is sharper in dermatology than in some fields, since these instruments feed both clinical trials and individual treatment decisions. An imperfect measure may still beat no measure, but only if its limitations are known and conclusions are tempered accordingly.\n\nOne could argue the COSMIN bar is set too high, given that nothing cleared it. The authors point out that an independent COSMIN review of eczema quality-of-life instruments reached a similar verdict, finding only 26 of 135 evaluated measurement properties backed by both adequate study quality and sufficient performance. They also note that COSMIN has been judged more lenient than the earlier OMERACT approach it replaced.\n\nTwo limitations cut the other way. COSMIN conflates poor reporting with poor underlying method, so a well-conducted study that was written up badly gets penalized. And COSMIN's tools do not properly handle studies using Rasch analysis, a modern approach many consider superior to classical test theory, because the checklists barely reference Rasch statistics. Both weaken the best-evidence synthesis. The team also did not search reference lists of included studies, which may explain why some known translations never surfaced.\n\nThe single most common reason questionnaires scored badly was the lack of patient input during their initial development. That is the gap PRIDD is meant to close.",
+      "chart_ids": [],
+      "figure_ids": []
+    }
+  ],
+  "charts": [
+    {
+      "id": "selection-flow",
+      "kind": "flow",
+      "title": "From 12,925 abstracts to 46 articles in the analysis",
+      "subtitle": "Screening and selection of studies on dermatology-specific patient-reported outcome measures",
+      "data": [
+        {
+          "label": "Abstracts identified",
+          "value": 12925.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2/p1",
+            "kind": "paragraph",
+            "quote": "The search identified 12,925 abstracts.",
+            "section": "Results"
+          }
+        },
+        {
+          "label": "Dermatology-specific PROM articles identified",
+          "value": 53.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2/p1",
+            "kind": "paragraph",
+            "quote": "Of the 53 dermatology-specific PROM articles identified, data were extracted from 52 articles.",
+            "section": "Results"
+          }
+        },
+        {
+          "label": "Articles with data extracted",
+          "value": 52.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2/p1",
+            "kind": "paragraph",
+            "quote": "Of the 53 dermatology-specific PROM articles identified, data were extracted from 52 articles.",
+            "section": "Results"
+          }
+        },
+        {
+          "label": "Articles included in the COSMIN analysis",
+          "value": 46.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "36 PROMs",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2/p1",
+            "kind": "paragraph",
+            "quote": "In all, 36 PROMs (Tables SII and SIII), reported in 46 articles (Table SIV), were included in the COSMIN analysis.",
+            "section": "Results"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Three further articles were found through reference lists and expert input; six articles meeting inclusion criteria were not carried into the COSMIN analysis.",
+      "source": "Results, article selection",
+      "section_id": "sec2"
+    },
+    {
+      "id": "recommendation-categories",
+      "kind": "bars",
+      "title": "Recommendation for use, by COSMIN category",
+      "subtitle": "Counts of dermatology-specific measures in each category",
+      "data": [
+        {
+          "label": "Category B: recommended, but only with further validation",
+          "value": 31.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "abstract",
+            "kind": "abstract",
+            "quote": "Zero patient-reported outcome measures were assigned to category A (ready for use without further validation), 31 to category B (recommended for use, but only with further validation) and 5 to category C (not recommended for use).",
+            "section": "Abstract"
+          }
+        },
+        {
+          "label": "Category C: not recommended for use",
+          "value": 5.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "abstract",
+            "kind": "abstract",
+            "quote": "Zero patient-reported outcome measures were assigned to category A (ready for use without further validation), 31 to category B (recommended for use, but only with further validation) and 5 to category C (not recommended for use).",
+            "section": "Abstract"
+          }
+        }
+      ],
+      "annotation": {
+        "target": "Category B: recommended, but only with further validation",
+        "text": "No measure was assigned to category A, ready for use without further validation."
+      },
+      "nodes": [],
+      "edges": [],
+      "unit": "measures",
+      "value_label": "Number of measures",
+      "category_label": "Recommendation category",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Category A is not plotted because its count is zero. The Discussion gives 30 in category B and 6 not recommended, which differs from the abstract counts shown here.",
+      "source": "Abstract, primary outcome; Table VII",
+      "section_id": "sec2.3"
+    },
+    {
+      "id": "development-study-quality",
+      "kind": "stat",
+      "title": "Development studies rated very low methodological quality",
+      "subtitle": "Share of the studies that developed these measures",
+      "data": [
+        {
+          "label": "Very low methodological quality",
+          "value": 86.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "development studies",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2.2/p1",
+            "kind": "paragraph",
+            "quote": "The majority (86%) of the development studies were of very low methodological quality.",
+            "section": "Results, Methodological quality"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Only three measures had development or content validity studies of adequate methodological quality: PBI, TQL and the Spanish version of Skindex-29.",
+      "source": "Results, methodological quality of included studies",
+      "section_id": "sec2.2"
+    },
+    {
+      "id": "properties-tested",
+      "kind": "bars",
+      "title": "How often each measurement property was tested",
+      "subtitle": "Most tested and least tested property across the included studies",
+      "data": [
+        {
+          "label": "Internal consistency",
+          "value": 37.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2.2/p2",
+            "kind": "paragraph",
+            "quote": "Internal consistency was the most popular psychometric test (n = 37), measurement invariance the least (n = 2) and measurement error was not tested at all.",
+            "section": "Results, Measurement properties"
+          }
+        },
+        {
+          "label": "Measurement invariance",
+          "value": 2.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2.2/p2",
+            "kind": "paragraph",
+            "quote": "Internal consistency was the most popular psychometric test (n = 37), measurement invariance the least (n = 2) and measurement error was not tested at all.",
+            "section": "Results, Measurement properties"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "tests",
+      "value_label": "Number of tests (n)",
+      "category_label": "Measurement property",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Measurement error was not tested at all, and the paper prints no count for it, so it cannot be plotted. No measure was tested for all properties.",
+      "source": "Results, measurement properties tested",
+      "section_id": "sec2.2"
+    }
+  ],
+  "figures": [],
+  "absolute_risk": null,
+  "absolute_risk_derived": null,
+  "terms": [],
+  "links": [
+    {
+      "section_id": "PMC9425604-section-4",
+      "sentence": "The search returned 12,925 abstracts.",
+      "chart_id": "selection-flow",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC9425604-section-4",
+      "sentence": "After screening, 36 dermatology-specific questionnaires reported across 46 articles entered the COSMIN analysis.",
+      "chart_id": "selection-flow",
+      "kind": "datum",
+      "index": 3
+    },
+    {
+      "section_id": "PMC9425604-section-4",
+      "sentence": "- **Category A: zero.** No questionnaire met the standard for use without further validation.\n- **Category B: 31.** Recommended only with the caveat that more validation is needed.\n- **Category C: 5.** High-quality evidence of insufficient measurement properties, not recommended.",
+      "chart_id": "recommendation-categories",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC9425604-section-4",
+      "sentence": "No questionnaire was tested on every measurement property; the number tested per instrument ranged from one to six. **Internal consistency**, whether items on a scale hang together, was by far the most tested property, appearing in 37 studies. **Measurement invariance**, whether a translated version measures the same thing the same way as the original, was tested twice. **Measurement error** was never tested at all.",
+      "chart_id": "properties-tested",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC9425604-section-4",
+      "sentence": "Content validity evidence came almost entirely from original development and pilot studies, and 86% of those were of very low methodological quality.",
+      "chart_id": "development-study-quality",
+      "kind": "datum",
+      "index": 0
+    }
+  ],
+  "sources": {},
+  "verification": {
+    "checked": 12,
+    "passed": 11,
+    "rejections": [
+      {
+        "what": "why-quality-was-low:quality->misleading",
+        "locator": "sec3/p3",
+        "reason": "the sentence linking these denies the link rather than asserting it"
+      }
+    ],
+    "prose_checked": 0,
+    "prose_unmatched": []
+  },
+  "notes": []
+}

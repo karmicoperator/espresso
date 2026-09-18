@@ -1,0 +1,399 @@
+{
+  "paper_id": "PMC11569675",
+  "title": "Evidence-Based Update on the Surgical Technique and Clinical Outcomes of Retrograde Drilling: A Systematic Review",
+  "authors": [
+    "Youichi Yasui",
+    "Wataru Miyamoto",
+    "Yoshiharu Shimozono",
+    "Keisuke Tsukada",
+    "Hirotaka Kawano",
+    "Masato Takao"
+  ],
+  "journal": "Cartilage",
+  "published": "2024-03-20 00:00:00",
+  "doi": "10.1177/19476035241239303",
+  "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11569675/",
+  "question": "",
+  "bottom_line": null,
+  "sections": [
+    {
+      "id": "PMC11569675-section-1",
+      "title": "The Problem and the Procedure",
+      "markdown": "An **osteochondral lesion of the talus (OLT)** is damage to the cartilage and the bone just beneath it in the talus, the bone that forms the lower half of the ankle joint. These lesions usually follow an injury. An earlier review found that about half of symptomatic cases don't get better with conservative care such as rest, painkillers or a cast. Surgery gives good-to-excellent results in roughly 85% of patients. Surgeons have many operations to choose from, no single one has been shown to beat the others, and there are long-term worries that the repaired tissue breaks down over time.\n\n**Retrograde drilling** is one of those operations. The surgeon drills into the damaged area from below, through the bone, and never enters the joint surface. The aim is to restore blood flow to the weakened bone under the cartilage (the **subchondral bone**) and prompt new bone to grow, while leaving the overlying cartilage alone. That cartilage is often still intact in these patients. The technique was first described for knee lesions in 1981 and applied to the ankle in 1999. An earlier systematic review of 80 ankle cases reported success rates of 68% to 90%. Its authors could not combine the studies statistically, though, because the studies differed too much from one another.\n\nThat problem drives the present review. When studies measure and report outcomes in different ways, their results can't be pooled, and without pooled evidence it is hard to write clinical guidelines. The authors set out to measure how inconsistent (in research terms, how **heterogeneous**) the published work on retrograde drilling for OLT is. They expected to find a high level of inconsistency.",
+      "chart_ids": [
+        "quality-bands"
+      ],
+      "figure_ids": [
+        "fig1-19476035241239303"
+      ]
+    },
+    {
+      "id": "PMC11569675-section-2",
+      "title": "How the Review Was Done",
+      "markdown": "A **systematic review** searches the literature with a fixed, pre-stated method, which keeps the authors from picking only the studies that suit them. Two orthopedic surgeons, each with more than 10 years in foot and ankle surgery, searched four databases (MEDLINE, Web of Science, EMBASE and the Cochrane Library) independently. The search covered January 1996 to August 27, 2022, and followed the PRISMA reporting guidelines. They combined search terms for the ankle, for cartilage damage and for \"retrograde drilling\", and they checked reference lists by hand. When the two reviewers disagreed, a senior author decided.\n\nStudies had to report clinical outcomes of retrograde drilling for OLT, appear in a peer-reviewed journal and be written in English. The authors excluded animal and lab studies, case reports, review articles, studies with fewer than 5 patients, and studies whose outcomes were reported poorly or mixed together with other surgical sites.\n\nEach study was graded two ways:\n\n- **Level of evidence (LoE)** ranks the study design. Lower numbers mean stronger designs, and level 4 is the weakest level any included study reached.\n- **Quality of evidence (QoE)** was scored with the Modified Coleman Methodology Score, a checklist of methodological quality out of 100 that had been adapted for this kind of ankle surgery. Scores of 85 to 100 count as excellent, 70 to 84 as good, 55 to 69 as fair, and below 55 as poor.\n\nFrom each study the reviewers recorded the design, the imaging used, the lesion classification system, the conservative treatment given before surgery, and patient details. They also recorded lesion location and size, cysts, how the drill was aimed, drill diameter, whether bone graft was added, the rehabilitation protocol, outcomes, complications and return to sport.",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC11569675-section-3",
+      "title": "What They Found: Study Quality, Patients and Lesions",
+      "markdown": "### Few studies, weak designs\n\nThe search turned up 189 studies, and 11 of them, covering 207 ankles, met the criteria. Two studies were level 3 and nine were level 4, for a mean LoE of 3.8 (± 0.4). The mean quality score was 50.8 (± 6.9, range 43 to 62). Three studies rated fair and eight rated poor. None reached good or excellent.\n\nPatients had a weighted mean age of 34.4 years, and 53% were male. A weighted mean gives larger studies more influence:\n\nweighted mean = sum of (each study's mean x its number of patients) / total patients\n\nWeighted mean follow-up was 31.1 months (range 8 to 69) across the 10 studies that reported it in months. No study followed patients beyond 5 years. The length of conservative treatment before surgery varied, and only six studies described what that treatment was.\n\n### Diagnosis and the lesions themselves\n\nEvery study used at least two ways of examining the lesion. All used plain X-rays, 10 used MRI, 1 used CT and 10 used arthroscopy (a camera inserted into the joint). Nine studies classified the lesions, and five of those used two or three classification systems. Arthroscopic classification was the most common (7 studies), followed by MRI-based classification (6), but the specific systems differed from study to study, so their grades can't be compared.\n\nTen studies reported where the lesions were. Of the 138 lesions with location data, 118 were on the inner (medial) side of the talus, 10 were central and 10 were on the outer (lateral) side:\n\nshare medial = 118 / 138 = about 86%\n\nOther reviews put the medial share at about 70% and 77%. The authors suggest that some surgeons in the included studies drilled only medial lesions, and that lateral lesions tend to be more superficial injuries.\n\nOnly five studies reported lesion size. Apart from one study that used a different core-decompression technique with artificial bone graft, every lesion was under 15 mm across or under 150 mm² in area. Three studies mentioned **subchondral cysts**, fluid-filled cavities in the bone. In one study all 8 patients had them, and the other two studies had one case each. No study reported cyst size.",
+      "chart_ids": [
+        "drill-diameter"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC11569675-section-4",
+      "title": "What They Found: Surgery, Rehabilitation and Outcomes",
+      "markdown": "### Surgical technique\n\nTen of the 11 studies checked the lesion with arthroscopy before drilling. All used fluoroscopy (live X-ray) to aim the drill, and one also used 3D computer-assisted navigation. Drill width varied a lot: five studies used drills of 2 mm or less, three used 3 to 5 mm, and three used drills wider than 6 mm. Of the six studies using drills wider than 3 mm, four filled the holes with the patient's own bone or an artificial substitute. One case series tried shock wave therapy after surgery.\n\n### Rehabilitation\n\nEight studies described their protocols for restoring ankle motion and for putting weight on the foot. Most started motion exercises within the first week (88%), and the rest waited 4 weeks. Partial weight-bearing began at 3 weeks in one study, 4 weeks in three, and 6 weeks in one, and two studies didn't say. Five studies allowed full weight-bearing at 6 weeks. In four of the seven studies that described activity, patients could jog at 3 months. Return to full activity came at 6 months in four studies and at 3 to 4 months in one.\n\n### Outcomes\n\nTen studies used the American Orthopedic Foot and Ankle Society (AOFAS) score, a function score where higher is better. The weighted mean rose from 57.9 before surgery to 86.1 at follow-up:\n\nimprovement = 86.1 - 57.9 = 28.2 points\n\nThese are weighted averages reported without confidence intervals. Only one study reported return to sport (6 months for all its patients). Eight studies used MRI after surgery, and most described improvement or healing only in general terms. Nine studies, covering 191 ankles, reported complications: three patients had reduced sensation in the foot, and one had a superficial wound infection.",
+      "chart_ids": [
+        "drill-size-mechanism",
+        "aofas-pre-post"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC11569675-section-5",
+      "title": "What It Means",
+      "markdown": "The authors conclude that the short-term results look acceptable but that the evidence is too weak and too inconsistent for firm conclusions. This puts them at odds with a 2023 review that judged retrograde drilling effective. They reach a different verdict because they give more weight to the studies' poor methods and low reproducibility.\n\nThey compare each gap with the recommendations of the International Consensus Meeting on Cartilage Repair of the Ankle (ICCRA), published in 2018 and 2019:\n\n- **Conservative care.** ICCRA recommends 4 to 6 weeks in a cast or boot, with the foot only touching the ground, for acute lesions that haven't shifted out of place. Anti-inflammatory drugs can be added for pain, and improvement may take 3 to 6 months. No included study described its own protocol adequately.\n- **Diagnosis.** This part was consistent across studies. X-rays detect OLT only moderately well, so MRI or CT is added, and arthroscopy confirms that the cartilage surface is intact, which is the usual reason to choose retrograde drilling.\n- **Classification.** Many systems exist, and in 2019 ICCRA could not agree on a single one.\n- **Lesion size and cysts.** Earlier work recommends marrow-stimulating procedures for lesions under 10.2 mm across and 107.4 mm² in area. ICCRA says grafting is needed for lesions over 1 cm wide or deep, or for cysts over 100 mm³. Whether size or cysts change the results of drilling is unknown. No study compared the patient's own bone graft with bone void substitutes, paste-like fillers that can flow into irregular, saucer-shaped cavities.\n- **Aiming the drill.** Reported rates of missing the lesion run as high as 20%. Navigation, MRI guidance and electromagnetic tracking exist but are rarely used, and ICCRA considers computer or robotic navigation unnecessary. Aiming devices can be too bulky for the ankle and damage the cartilage. The authors call for an accurate aiming method that ordinary clinics can use.\n- **Drill size.** A cadaver study found that 1 to 1.25 mm holes damage subchondral bone less than 2 mm holes do, and ICCRA recommends a 1 to 2 mm wire. Damage to subchondral bone may contribute to later breakdown of repaired cartilage. From their own experience, the authors warn that thin drills can bend or break in the harder bone of young patients, though no included study reported this.\n- **Rehabilitation.** ICCRA suggests limiting shear forces on the lesion for 3 months, starting sport-specific training at 3 to 6 months, and returning to competition at 6 to 12 months.\n\nThe discussion states that most studies reported a \">85-point increase\" in AOFAS score. That can't be literal for a score that starts near 58, and it most likely means the scores ended above 85, in line with the pooled 86.1.\n\nThe authors list several limitations. The search was about a year old by publication, within the typical lag for systematic reviews. Most included studies were small retrospective case series with short to mid-term follow-up, which raises the risk of bias. The AOFAS score has never been validated specifically for retrograde drilling of OLT. Newer approaches, such as adding stem cells taken from fat tissue during arthroscopy, fall outside the review.\n\nTheir recommendation is well-designed clinical trials that use standard criteria for choosing patients, describing and classifying lesions, performing the surgery and running rehabilitation, and that measure outcomes with validated tools, so that clinical guidelines for retrograde drilling can be written.",
+      "chart_ids": [],
+      "figure_ids": []
+    }
+  ],
+  "charts": [
+    {
+      "id": "quality-bands",
+      "kind": "bars",
+      "title": "Methodological quality of the 11 included studies",
+      "subtitle": "Share of studies in each Modified Coleman Methodology Score band. No study reached good (70 to 84) or excellent (85 to 100).",
+      "data": [
+        {
+          "label": "Fair (55 to 69 points)",
+          "value": 27.3,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "section13-19476035241239303/p1",
+            "kind": "paragraph",
+            "quote": "the QoE being classified as “fair” for three studies (27.3%),, and “poor” for eight studies (72.7%)",
+            "section": "Results, Literature Search"
+          }
+        },
+        {
+          "label": "Poor (below 55 points)",
+          "value": 72.7,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "section13-19476035241239303/p1",
+            "kind": "paragraph",
+            "quote": "the QoE being classified as “fair” for three studies (27.3%),, and “poor” for eight studies (72.7%)",
+            "section": "Results, Literature Search"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "Share of included studies",
+      "category_label": "Quality band",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "The score bands follow the authors' adapted Modified Coleman score. The mean score was 50.8, and nine of the 11 studies were level 4 evidence.",
+      "source": "Results, Literature Search",
+      "section_id": "section13-19476035241239303"
+    },
+    {
+      "id": "aofas-pre-post",
+      "kind": "bars",
+      "title": "Ankle function score before and after retrograde drilling",
+      "subtitle": "Weighted mean AOFAS score across the 10 studies that used it, at a weighted mean follow-up of 31.1 months",
+      "data": [
+        {
+          "label": "Before surgery",
+          "value": 57.9,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "section18-19476035241239303/p1",
+            "kind": "paragraph",
+            "quote": "the weighted mean AOFAS score improved from 57.9 points preoperatively to 86.1 points at a weighted mean period of 31.1 months of follow-up",
+            "section": "Results, Outcomes"
+          }
+        },
+        {
+          "label": "After surgery",
+          "value": 86.1,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "section18-19476035241239303/p1",
+            "kind": "paragraph",
+            "quote": "the weighted mean AOFAS score improved from 57.9 points preoperatively to 86.1 points at a weighted mean period of 31.1 months of follow-up",
+            "section": "Results, Outcomes"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "points",
+      "value_label": "AOFAS score (points)",
+      "category_label": "Timepoint",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": false,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Pooled from mostly retrospective case series. The paper prints no interval, and the AOFAS score has not been validated for retrograde drilling.",
+      "source": "Results, Outcomes",
+      "section_id": "section18-19476035241239303"
+    },
+    {
+      "id": "drill-diameter",
+      "kind": "bars",
+      "title": "Drill diameter used across the 11 studies",
+      "subtitle": "Number of studies in each drill diameter group",
+      "data": [
+        {
+          "label": "Up to 2 mm",
+          "value": 5.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "section16-19476035241239303/p1",
+            "kind": "paragraph",
+            "quote": "five of the used a drill with a diameter within 2 mm,,,- three used a drill diameter within 3 to 5 mm,,, and the remaining three used a drill with a diameter >6 mm.",
+            "section": "Results, Surgical Technique"
+          }
+        },
+        {
+          "label": "3 to 5 mm",
+          "value": 3.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "section16-19476035241239303/p1",
+            "kind": "paragraph",
+            "quote": "five of the used a drill with a diameter within 2 mm,,,- three used a drill diameter within 3 to 5 mm,,, and the remaining three used a drill with a diameter >6 mm.",
+            "section": "Results, Surgical Technique"
+          }
+        },
+        {
+          "label": "Above 6 mm",
+          "value": 3.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "section16-19476035241239303/p1",
+            "kind": "paragraph",
+            "quote": "five of the used a drill with a diameter within 2 mm,,,- three used a drill diameter within 3 to 5 mm,,, and the remaining three used a drill with a diameter >6 mm.",
+            "section": "Results, Surgical Technique"
+          }
+        }
+      ],
+      "annotation": {
+        "target": "Up to 2 mm",
+        "text": "The 2018 ICCRA consensus says a 1 to 2 mm K-wire can be used"
+      },
+      "nodes": [],
+      "edges": [],
+      "unit": "studies",
+      "value_label": "Number of studies",
+      "category_label": "Drill diameter",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "The paper does not link drill size to outcome. The authors call for research to find the best diameter.",
+      "source": "Results, Surgical Technique",
+      "section_id": "section16-19476035241239303"
+    },
+    {
+      "id": "drill-size-mechanism",
+      "kind": "diagram",
+      "title": "How drill size may affect the repair, as the authors argue",
+      "subtitle": "The Discussion's reasons for preferring a small-diameter drill",
+      "data": [],
+      "annotation": null,
+      "nodes": [
+        {
+          "id": "large_holes",
+          "label": "Larger drill holes",
+          "note": "2 mm, against 1 or 1.25 mm, in a cadaveric study"
+        },
+        {
+          "id": "subchondral",
+          "label": "Subchondral bone",
+          "note": "damage and deterioration"
+        },
+        {
+          "id": "deterioration",
+          "label": "Deterioration",
+          "note": "of the regenerated or grafted cartilage"
+        }
+      ],
+      "edges": [
+        {
+          "source": "large_holes",
+          "target": "subchondral",
+          "label": "more damage than smaller holes",
+          "provenance": {
+            "locator": "section19-19476035241239303/p9",
+            "kind": "paragraph",
+            "quote": "An experimental cadaveric study showed that smaller drill holes (1 or 1.25 mm) posed less damage to the subchondral bone compared with larger drill holes (2 mm). Therefore, it is reasonable to suggest that a small-diameter drill may help avert or at least minimize damage to the subchondral bone.",
+            "section": "Discussion"
+          },
+          "hedged": true
+        },
+        {
+          "source": "subchondral",
+          "target": "deterioration",
+          "label": "bone deterioration as a possible risk factor",
+          "provenance": {
+            "locator": "section19-19476035241239303/p9",
+            "kind": "paragraph",
+            "quote": "A recent challenge has been the inevitable deterioration of the regenerated or grafted cartilage. Several risk factors for this deterioration have been described—recent clinical studies regarding microfractures suggest that subchondral bone deterioration may be one of the risk factors.",
+            "section": "Discussion"
+          },
+          "hedged": true
+        }
+      ],
+      "unit": "",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "From the Discussion. Both links rest on outside work the authors cite, a cadaveric study and microfracture studies, not on the 11 included studies.",
+      "source": "Discussion, drill diameter",
+      "section_id": "section19-19476035241239303"
+    }
+  ],
+  "figures": [
+    {
+      "id": "fig1-19476035241239303",
+      "label": "Figure 1.",
+      "caption": "Figure 1.: Flow diagram of the Preferred Reporting Items for Systematic Reviews and Meta-Analyses (PRISMA) guidelines.",
+      "file": "10.1177_19476035241239303-fig1.jpg",
+      "width": null,
+      "height": null,
+      "kind": "schematic",
+      "why": "Shows each screening and exclusion step. The text gives only the 189 studies evaluated and the 11 included, so the full flow cannot be charted.",
+      "section_id": "section13-19476035241239303"
+    }
+  ],
+  "absolute_risk": null,
+  "absolute_risk_derived": null,
+  "terms": [],
+  "links": [
+    {
+      "section_id": "PMC11569675-section-3",
+      "sentence": "Two studies were level 3 and nine were level 4, for a mean LoE of 3.8 (± 0.4).",
+      "chart_id": "drill-diameter",
+      "kind": "datum",
+      "index": 1
+    },
+    {
+      "section_id": "PMC11569675-section-3",
+      "sentence": "No study followed patients beyond 5 years.",
+      "chart_id": "drill-diameter",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC11569675-section-4",
+      "sentence": "Of the six studies using drills wider than 3 mm, four filled the holes with the patient's own bone or an artificial substitute.",
+      "chart_id": "drill-size-mechanism",
+      "kind": "edge",
+      "index": 0
+    },
+    {
+      "section_id": "PMC11569675-section-4",
+      "sentence": "The weighted mean rose from 57.9 before surgery to 86.1 at follow-up:",
+      "chart_id": "aofas-pre-post",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC11569675-section-4",
+      "sentence": "improvement = 86.1 - 57.9 = 28.2 points",
+      "chart_id": "aofas-pre-post",
+      "kind": "datum",
+      "index": 0
+    }
+  ],
+  "sources": {},
+  "verification": {
+    "checked": 9,
+    "passed": 9,
+    "rejections": [
+      {
+        "what": "quality-bands:Fair (55 to 69 points) (event count)",
+        "locator": "section13-19476035241239303/p1",
+        "reason": "event count 3 not in the quoted text"
+      },
+      {
+        "what": "quality-bands:Fair (55 to 69 points) (denominator)",
+        "locator": "section13-19476035241239303/p1",
+        "reason": "denominator 11 not in the quoted text"
+      },
+      {
+        "what": "quality-bands:Poor (below 55 points) (event count)",
+        "locator": "section13-19476035241239303/p1",
+        "reason": "event count 8 not in the quoted text"
+      },
+      {
+        "what": "quality-bands:Poor (below 55 points) (denominator)",
+        "locator": "section13-19476035241239303/p1",
+        "reason": "denominator 11 not in the quoted text"
+      }
+    ],
+    "prose_checked": 0,
+    "prose_unmatched": []
+  },
+  "notes": []
+}

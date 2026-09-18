@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import shutil
 from pathlib import Path
 
 from models.charts import Explainer
@@ -24,6 +25,32 @@ def _root() -> Path:
     root = Path(os.getenv("EXPLAINER_DIR", "data/explainers"))
     root.mkdir(parents=True, exist_ok=True)
     return root
+
+
+EXAMPLES = Path(__file__).resolve().parent / "examples"
+
+
+def seed_examples() -> int:
+    """Copy the shipped examples into the store, once, so a fresh install has a library.
+
+    `examples/explainers` and `examples/figures` are in git; `data/` is not. A file the
+    store already has is left alone, so a rebuilt paper is never overwritten by its seed.
+    Returns how many explainers were installed.
+    """
+    from ingestion.figures import FIGURE_DIR
+
+    installed = 0
+    for src in sorted((EXAMPLES / "explainers").glob("*.json")):
+        dst = _root() / src.name
+        if not dst.exists():
+            shutil.copyfile(src, dst)
+            installed += 1
+        figs = EXAMPLES / "figures" / src.stem
+        if figs.is_dir() and not (FIGURE_DIR / src.stem).exists():
+            shutil.copytree(figs, FIGURE_DIR / src.stem)
+    if installed:
+        logger.info("Installed %d example explainers", installed)
+    return installed
 
 
 def _safe_name(paper_id: str) -> str:

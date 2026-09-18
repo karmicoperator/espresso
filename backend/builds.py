@@ -31,8 +31,7 @@ logger = logging.getLogger(__name__)
 STEPS = [
     ("resolve", "Resolving the paper"),
     ("fetch", "Reading the full text"),
-    ("rewrite", "Rewriting it into sections"),
-    ("plan", "Choosing the charts"),
+    ("plan", "Writing the sections and choosing the charts"),
     ("verify", "Checking every value against the source"),
     ("figures", "Fetching the paper's own figures"),
 ]
@@ -68,8 +67,8 @@ async def build_reference(
             pass  # fall through to the real error below
 
     progress("fetch", 0.05, "from PubMed Central")
-    paper = await ingest_paper(reference, force_refresh=force_refresh, progress=progress)
-    explainer = await build_visuals(paper, progress=progress)
+    paper = await ingest_paper(reference, force_refresh=force_refresh, rewrite=False, progress=progress)
+    explainer = await build_visuals(paper, progress=progress, rewrite=True)
 
     # A build that produced neither prose nor a chart is a failure, not a thin result.
     # Storing it puts an empty page in the reader's library and, worse, caches that
@@ -87,11 +86,11 @@ async def build_pdf(path: Path, name: str, progress: Progress | None = None) -> 
     progress = progress or _noop
     try:
         try:
-            paper = await ingest_pdf(path, source_name=name, progress=progress)
+            paper = await ingest_pdf(path, source_name=name, rewrite=False, progress=progress)
         except ValueError as exc:
             raise IngestError(str(exc)) from exc
 
-        explainer = await build_visuals(paper, progress=progress)
+        explainer = await build_visuals(paper, progress=progress, rewrite=True)
         if not explainer.sections and not explainer.charts:
             why = " ".join(explainer.notes) or "the model produced nothing for this paper."
             raise BuildFailed(f"Nothing could be built from {name}. {why}")

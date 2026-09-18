@@ -1,0 +1,675 @@
+{
+  "paper_id": "PMC12766348",
+  "title": "Bibliometric analysis of radiology residency theses in Türkiye: publication metrics and trends",
+  "authors": [
+    "Ali Salbas",
+    "Ali Murat Koc"
+  ],
+  "journal": "Diagnostic and Interventional Radiology",
+  "published": "2026-01-01 00:00:00",
+  "doi": "10.4274/dir.2025.253525",
+  "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12766348/",
+  "question": "",
+  "bottom_line": null,
+  "sections": [
+    {
+      "id": "PMC12766348-section-1",
+      "title": "Why Turkish Residency Theses Are Worth Counting",
+      "markdown": "In Türkiye, every doctor training in a medical specialty has to write an original thesis before sitting the specialty exam. It is a legal requirement, written into the country's regulation on specialty training, and similar rules exist in parts of Europe. That means decades of research sitting in a national archive. The question this study asks is simple: how much of that work ever reaches a journal, and what separates the theses that get published from the ones that do not?\n\nThe method used to answer it is **bibliometrics**, the statistical analysis of academic documents. Bibliometric studies count things like publication rates, citations, and topic distributions to reveal where a field's attention goes and where the gaps are. Other Turkish specialties (anesthesiology, general surgery, neurosurgery, family medicine) have been analyzed this way. Radiology had not been, and this is the first study to cover it.",
+      "chart_ids": [],
+      "figure_ids": [
+        "figure-2",
+        "figure-5",
+        "figure-6"
+      ]
+    },
+    {
+      "id": "PMC12766348-section-2",
+      "title": "How the Theses Were Collected, Classified, and Tracked",
+      "markdown": "## What they did\n\nThe team pulled every radiology residency thesis from the online database of the National Thesis Center of Türkiye's Council of Higher Education, searching under both \"Radiology\" and \"Radiodiagnostics\" with no date limit. After removing theses with missing data, access restrictions, or wrong department labels, 3,136 theses remained, spanning 1971 through December 2024. Theses dated January 2025 or later were dropped on the reasoning that turning a thesis into a paper takes at least six months, so recent ones would look unpublished simply because there had not been time.\n\nFor each thesis they recorded the title, the author's gender, the advisor's gender and academic title, page count, year, institution name and type, number of advisors, study design, and sample size. Where two advisors were listed, the one with the higher academic rank was treated as primary.\n\nTwo radiology consultants sorted every thesis into one of 14 subspecialty groups drawn from the Turkish Society of Radiology's scientific research groupings: neuroradiology, head and neck, musculoskeletal, breast, thoracic, abdominal, genitourinary, interventional, cardiovascular, imaging physics and radiation safety, obstetric, emergency, pediatric, and \"other.\" They reached agreement on all of them.\n\nThen came the manual part. To find out whether a thesis had become a paper, the authors searched the thesis author's name, the advisor's name, and relevant keywords across Google, Google Scholar, PubMed, Web of Science, TR Index (Türkiye's national citation index), and DergiPark (a Turkish academic publishing platform). Conference abstracts and presentations were not counted. When a matching article turned up, they logged the journal, country, publication year, whether the resident was first author, citation counts from Google Scholar and PubMed, and how the journal was indexed at the time the article appeared.\n\nTwo derived measures carry most of the analysis:\n\npublication rate = (number of theses found as published articles / total theses) x 100\n\nThis is the share of theses that made it into a peer-reviewed journal.\n\ntime to publication = article publication date - thesis completion date, measured in days\n\nThis is how long the thesis-to-paper conversion took.\n\nJournals were sorted into a five-tier hierarchy: Science Citation Index Expanded (**SCIE**, the highest tier), Emerging Sources Citation Index (**ESCI**, a Web of Science category for newer or regionally focused journals), other international journals outside Web of Science, national journals in TR Index, and national journals outside it. A journal listed in more than one database was counted only at its highest tier. For SCIE journals, the authors also recorded the impact factor quartile (Q1 through Q4) from Journal Citation Reports for the year of publication, where Q1 means the top quarter of journals in that field.\n\nStatistics were standard for this kind of data: chi-squared tests for categorical comparisons, Mann-Whitney U and Kruskal-Wallis for skewed continuous variables like citation counts, Poisson regression for the annual thesis count, and logistic regression for publication probability by year. Significance was set at P below 0.05.",
+      "chart_ids": [],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC12766348-section-3",
+      "title": "Publication Rates, Timing, and What Predicted Success",
+      "markdown": "## What they found\n\nThe structural picture first. Most theses (83.1%) came out of university hospitals rather than training and research hospitals, and most were supervised by senior faculty: 45.8% by professors, 33.4% by associate professors. Thesis output rose sharply after 2000, peaking at 198 in 2010. The authors tie this to expanding residency quotas, which went from 38 positions in 2008 to 105 in 2018, and note that a sevenfold quota increase after 2022 should show up in thesis counts within a few years, since training lasts five.\n\nTopic choice clustered heavily. Neuroradiology (16.0%), abdominal radiology (13.3%), and interventional radiology (12.4%) were the three most common subjects. Imaging physics and radiation safety came last at 1.6%, with obstetric radiology similarly thin. The authors read the top three as tracking clinical exposure: broad patient populations, varied imaging techniques, and 15 months of combined training time in the official curriculum.\n\nThe headline number: **1,165 of 3,136 theses (37.1%) were published** as journal articles. Of all theses, 20.8% (n = 651) landed in SCIE-indexed journals. Looking only at the theses that did get published, 55.9% went to SCIE journals. But quality within that tier skewed low. Of the 651 SCIE articles, 456 (39.2% of published articles) appeared in Q3 or Q4 journals, the bottom half of the impact factor distribution. Diagnostic and Interventional Radiology (7.0%) and the European Journal of Radiology (4.2%) were the most common destinations.\n\nTiming was slow. The gap between thesis completion and publication ranged from 151 days to 11,680 days, with a median of 1,300 days (roughly three and a half years) and a mean of about 1,663 days. Citations were modest: median 3 per article, mean 14.7, range 0 to 416. The resident was first author on 76.4% of published articles, the advisor on 12.9%, and someone else on 10.7%.\n\nTwo trends moved in the right direction over time. The probability that a thesis got published rose significantly (P = 0.045), and time to publication fell significantly (P < 0.001). Both shifts concentrated after 2000. For scale, an earlier study by Ozgen and colleagues covering 1980 to 2005 found that only 6.3% of radiology theses reached SCIE journals; this study's 20.8% across 1971 to 2024 represents a large improvement.\n\nSeveral comparisons that might have been expected to matter did not. Thesis topic showed no significant relationship with publication rate, citations, or time to publication. Publication rates by subspecialty ranged from 51.0% for imaging physics and radiation safety down to 32.6% for breast radiology, but the spread was not statistically significant. Advisor gender made no difference to anything measured. Resident gender made no difference to publication rate or citations, though theses by female residents took significantly longer to reach publication (P < 0.001), matching findings from psychiatry and ophthalmology.\n\nThree findings did hold up:\n\n- **Advisor rank cut against seniority.** Theses supervised by assistant professors had the highest publication rate at 43.0%, significantly above professors (34.8%) and associate professors. The authors attribute this to faculty who are mid-promotion having a stronger personal stake in getting papers out. The same pattern appears in anesthesiology, otorhinolaryngology, and plastic surgery.\n- **Institution type affected citations, not output.** University hospitals and training and research hospitals published at similar rates and similar speeds, but university publications drew significantly more citations (P < 0.001).\n- **First authorship predicted everything.** When the advisor or another researcher led the paper, it reached an SCIE journal 74.7% or 69.6% of the time, versus 50.8% when the resident led. Those articles also collected more citations and appeared faster (all P < 0.001). The likely explanation is experience: knowing how to write for journals, how to pick a target, and how to manage revisions.",
+      "chart_ids": [
+        "scie-quartiles",
+        "publication-rate-headline",
+        "index-distribution",
+        "advisor-title"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC12766348-section-4",
+      "title": "The Quality Ceiling and What Should Change",
+      "markdown": "## Why it matters\n\nPlaced against other Turkish specialties, radiology sits in the upper-middle range. Its publication rate beats anesthesiology, general surgery, public health, family medicine, physical medicine and rehabilitation, and emergency medicine, and trails thoracic surgery, child and adolescent psychiatry, and endocrinology. Cross-specialty comparisons are noisy, since studies differ in period covered, indexing rules, and methods.\n\nThe quality ceiling is the more interesting problem. Getting into SCIE at all is one bar; getting into Q1 or Q2 is another, and most of these papers cleared only the first. The authors point to study design as one likely cause, since 86.7% of the theses were retrospective, and prospective and experimental work tends to publish more often and in stronger journals. They also raise a structural reason that has nothing to do with science: article processing charges. Turkish researchers value journal prestige, but high open-access fees push some toward cheaper, lower-impact venues.\n\nThe underrepresentation of imaging physics and radiation safety draws a pointed comment. Radiology personnel in Türkiye have documented gaps in radiation safety knowledge, and physics governs image quality, yet the topic drew 1.6% of theses. Obstetric radiology's low share is linked to short training time, thin theoretical content, and the fact that obstetricians perform most obstetric imaging in Türkiye, so residents get little exposure.\n\nThe recommendations follow from the data: strengthen mentorship, give residents structured training in academic writing and journal selection (the three-and-a-half-year median lag suggests they are working without much support), invest in institutional research infrastructure so publications get read as well as printed, and encourage stronger study designs. The framing the authors push is that a residency thesis is a piece of scholarly work with a publication plan attached, and it should be treated that way from the start.",
+      "chart_ids": [
+        "specialty-comparison"
+      ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC12766348-section-5",
+      "title": "What the Study Could Not Capture",
+      "markdown": "## Limitations\n\nPublication status was checked only through online databases, so articles in local or low-visibility journals may have been missed. Scopus was not queried separately, and anything indexed exclusively there could have been overlooked. Thesis-to-article matching relied on name and content similarity rather than direct verification, which allows occasional mismatches. Conference abstracts, proceedings, and book chapters were excluded. Citation counts are a snapshot and understate long-term impact for recent papers. And because conversion typically takes more than two years, theses from 2023 and 2024 are likely undercounted, which biases the recent publication rate downward.",
+      "chart_ids": [
+        "time-by-first-author"
+      ],
+      "figure_ids": []
+    }
+  ],
+  "charts": [
+    {
+      "id": "publication-rate-headline",
+      "kind": "stat",
+      "title": "Radiology residency theses published as journal articles",
+      "subtitle": "3,136 theses completed between 1971 and December 2024",
+      "data": [
+        {
+          "label": "Published as a journal article",
+          "value": 37.1,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": 1165,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "abstract",
+            "kind": "abstract",
+            "quote": "A total of 1,165 theses (37.1%) were published as journal articles",
+            "section": "Abstract, Results"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "Share of all theses",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Publication status was traced through database searches only, so articles in low-visibility journals may have been missed.",
+      "source": "Abstract, main result",
+      "section_id": "sec-results-3"
+    },
+    {
+      "id": "index-distribution",
+      "kind": "bars",
+      "title": "Where the published theses appeared, by journal index",
+      "subtitle": "Share of the 1,165 published theses in each indexing category",
+      "data": [
+        {
+          "label": "SCIE",
+          "value": 55.9,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r1/c2",
+            "kind": "table_cell",
+            "quote": "55.9%",
+            "section": "Table 2"
+          }
+        },
+        {
+          "label": "TR Index",
+          "value": 20.2,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r7/c2",
+            "kind": "table_cell",
+            "quote": "20.2%",
+            "section": "Table 2"
+          }
+        },
+        {
+          "label": "ESCI",
+          "value": 11.6,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r6/c2",
+            "kind": "table_cell",
+            "quote": "11.6%",
+            "section": "Table 2"
+          }
+        },
+        {
+          "label": "Other national",
+          "value": 9.7,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r9/c2",
+            "kind": "table_cell",
+            "quote": "9.7%",
+            "section": "Table 2"
+          }
+        },
+        {
+          "label": "Other international",
+          "value": 2.7,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r8/c2",
+            "kind": "table_cell",
+            "quote": "2.7%",
+            "section": "Table 2"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "Share of published theses",
+      "category_label": "Journal index",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Journals indexed in more than one database were counted only in the highest-ranking category.",
+      "source": "Table 2, journal index distribution",
+      "section_id": "sec-results-3"
+    },
+    {
+      "id": "scie-quartiles",
+      "kind": "bars",
+      "title": "Impact factor quartile of the SCIE publications",
+      "subtitle": "Share of the 1,165 published theses, by quartile of the SCIE journal",
+      "data": [
+        {
+          "label": "Q1",
+          "value": 4.6,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r2/c2",
+            "kind": "table_cell",
+            "quote": "4.6%",
+            "section": "Table 2"
+          }
+        },
+        {
+          "label": "Q2",
+          "value": 12.1,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r3/c2",
+            "kind": "table_cell",
+            "quote": "12.1%",
+            "section": "Table 2"
+          }
+        },
+        {
+          "label": "Q3",
+          "value": 19.1,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r4/c2",
+            "kind": "table_cell",
+            "quote": "19.1%",
+            "section": "Table 2"
+          }
+        },
+        {
+          "label": "Q4",
+          "value": 20.1,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-2/r5/c2",
+            "kind": "table_cell",
+            "quote": "20.1%",
+            "section": "Table 2"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "Share of published theses",
+      "category_label": "Journal quartile",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Percentages are shares of all 1,165 published theses, not of the 651 SCIE articles. Quartiles were taken from the year of publication.",
+      "source": "Table 2, quartile distribution",
+      "section_id": "sec-results-3"
+    },
+    {
+      "id": "specialty-comparison",
+      "kind": "bars",
+      "title": "Thesis publication rate, radiology beside other Turkish specialties",
+      "subtitle": "Rates reported by separate studies, each covering its own period",
+      "data": [
+        {
+          "label": "General surgery",
+          "value": 20.5,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-4/r1/c3",
+            "kind": "table_cell",
+            "quote": "20.5",
+            "section": "Table 4"
+          }
+        },
+        {
+          "label": "Anesthesiology",
+          "value": 25.7,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-4/r2/c3",
+            "kind": "table_cell",
+            "quote": "25.7",
+            "section": "Table 4"
+          }
+        },
+        {
+          "label": "Emergency medicine",
+          "value": 35.5,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-4/r7/c3",
+            "kind": "table_cell",
+            "quote": "35.5",
+            "section": "Table 4"
+          }
+        },
+        {
+          "label": "Radiology, current study",
+          "value": 37.1,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-4/r8/c3",
+            "kind": "table_cell",
+            "quote": "37.1",
+            "section": "Table 4"
+          }
+        },
+        {
+          "label": "Child and adolescent psychiatry",
+          "value": 50.6,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-4/r12/c3",
+            "kind": "table_cell",
+            "quote": "50.6",
+            "section": "Table 4"
+          }
+        },
+        {
+          "label": "Endocrinology",
+          "value": 51.3,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-4/r13/c3",
+            "kind": "table_cell",
+            "quote": "51.3",
+            "section": "Table 4"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "Publication rate",
+      "category_label": "Specialty",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Rates come from different studies with different years, indexing criteria and methods, so they are not directly comparable. Six of the thirteen rows in Table 4 are shown.",
+      "source": "Table 4, publication rates by specialty",
+      "section_id": "sec-discussion-4"
+    },
+    {
+      "id": "advisor-title",
+      "kind": "bars",
+      "title": "Publication rate by academic title of the thesis advisor",
+      "subtitle": "Share of theses published as journal articles, P = 0.013 across titles",
+      "data": [
+        {
+          "label": "Professor",
+          "value": 34.8,
+          "low": null,
+          "high": null,
+          "n": 1437,
+          "events": 500,
+          "group": "",
+          "note": "500/1,437",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-3/r7/c2",
+            "kind": "table_cell",
+            "quote": "34.8 (500/1,437)",
+            "section": "Table 3"
+          }
+        },
+        {
+          "label": "Associate professor",
+          "value": 37.5,
+          "low": null,
+          "high": null,
+          "n": 1047,
+          "events": 393,
+          "group": "",
+          "note": "393/1,047",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-3/r8/c1",
+            "kind": "table_cell",
+            "quote": "37.5 (393/1,047)",
+            "section": "Table 3"
+          }
+        },
+        {
+          "label": "Assistant professor",
+          "value": 43.0,
+          "low": null,
+          "high": null,
+          "n": 498,
+          "events": 214,
+          "group": "",
+          "note": "214/498",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-3/r9/c1",
+            "kind": "table_cell",
+            "quote": "43.0 (214/498)",
+            "section": "Table 3"
+          }
+        },
+        {
+          "label": "Consultant",
+          "value": 37.7,
+          "low": null,
+          "high": null,
+          "n": 154,
+          "events": 58,
+          "group": "",
+          "note": "58/154",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-3/r10/c1",
+            "kind": "table_cell",
+            "quote": "37.7 (58/154)",
+            "section": "Table 3"
+          }
+        }
+      ],
+      "annotation": {
+        "target": "Assistant professor",
+        "text": "Highest publication rate, 43.0%, higher than professors (P = 0.001) and associate professors (P = 0.041)."
+      },
+      "nodes": [],
+      "edges": [],
+      "unit": "%",
+      "value_label": "Publication rate",
+      "category_label": "Advisor title",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "An observational comparison, not a randomised one. Citation count and time to publication did not differ significantly by advisor title.",
+      "source": "Table 3, advisor academic title",
+      "section_id": "sec-results-3"
+    },
+    {
+      "id": "time-by-first-author",
+      "kind": "bars",
+      "title": "Time from thesis completion to publication, by first author",
+      "subtitle": "Median days with interquartile range, P < 0.001 across groups",
+      "data": [
+        {
+          "label": "Resident",
+          "value": 1430.0,
+          "low": 882.0,
+          "high": 2300.0,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "IQR 882 to 2,300",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-3/r29/c4",
+            "kind": "table_cell",
+            "quote": "1,430 (882–2,300)",
+            "section": "Table 3"
+          }
+        },
+        {
+          "label": "Supervisor",
+          "value": 916.0,
+          "low": 638.0,
+          "high": 1393.0,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "IQR 638 to 1,393",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-3/r30/c3",
+            "kind": "table_cell",
+            "quote": "916 (638–1,393)",
+            "section": "Table 3"
+          }
+        },
+        {
+          "label": "Other researcher",
+          "value": 1072.0,
+          "low": 700.0,
+          "high": 1734.0,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "IQR 700 to 1,734",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "table-3/r31/c3",
+            "kind": "table_cell",
+            "quote": "1,072 (700–1,734)",
+            "section": "Table 3"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "unit": "days",
+      "value_label": "Days to publication",
+      "category_label": "First author of the article",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Bars show medians with interquartile ranges, not confidence intervals. The resident was first author in 76.4% of published articles.",
+      "source": "Table 3, first author identity",
+      "section_id": "sec-results-3"
+    }
+  ],
+  "figures": [
+    {
+      "id": "figure-2",
+      "label": "Figure 2",
+      "caption": "Figure 2: Distribution of radiology residency theses by year range. The number of theses shows a marked increase starting from the 2000s, with the highest number of theses observed during the 2010–2014 period.",
+      "file": "DiagnIntervRadiol-32-1-71-figure-2.jpg",
+      "width": 714,
+      "height": 428,
+      "kind": "plot",
+      "why": "Year-by-year thesis counts are not tabulated; only the 2010 peak is given in the text.",
+      "section_id": "sec-results-3"
+    },
+    {
+      "id": "figure-5",
+      "label": "Figure 5",
+      "caption": "Figure 5: Article publication rates of radiology residency theses by year (1971–2024). Years indicate the thesis completion year. Percentages represent the proportion of theses that were published as journal articles.",
+      "file": "DiagnIntervRadiol-32-1-71-figure-5.jpg",
+      "width": 727,
+      "height": 363,
+      "kind": "plot",
+      "why": "Shows the yearly publication rate behind the P = 0.045 trend; the per-year percentages are never printed.",
+      "section_id": "sec-results-3"
+    },
+    {
+      "id": "figure-6",
+      "label": "Figure 6",
+      "caption": "Figure 6: Time to conversion into a published article by thesis year. Each dot represents a thesis that was eventually published as a journal article. The red regression line indicates a statistically significant decrease in time to publication over the years (β = -58.1; P < 0.001).",
+      "file": "DiagnIntervRadiol-32-1-71-figure-6.jpg",
+      "width": 713,
+      "height": 447,
+      "kind": "plot",
+      "why": "Scatter of each published thesis with the fitted decline in time to publication; only the slope is printed.",
+      "section_id": "sec-results-3"
+    }
+  ],
+  "absolute_risk": null,
+  "absolute_risk_derived": null,
+  "terms": [],
+  "links": [
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The authors tie this to expanding residency quotas, which went from 38 positions in 2008 to 105 in 2018, and note that a sevenfold quota increase after 2022 should show up in thesis counts within a few years, since training lasts five.",
+      "chart_id": "advisor-title",
+      "kind": "datum",
+      "index": 3
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "The headline number: **1,165 of 3,136 theses (37.1%) were published** as journal articles.",
+      "chart_id": "publication-rate-headline",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "Looking only at the theses that did get published, 55.9% went to SCIE journals.",
+      "chart_id": "index-distribution",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC12766348-section-3",
+      "sentence": "- **Advisor rank cut against seniority.** Theses supervised by assistant professors had the highest publication rate at 43.0%, significantly above professors (34.8%) and associate professors.",
+      "chart_id": "advisor-title",
+      "kind": "datum",
+      "index": 2
+    }
+  ],
+  "sources": {},
+  "verification": {
+    "checked": 23,
+    "passed": 23,
+    "rejections": [
+      {
+        "what": "publication-rate-headline:Published as a journal article (denominator)",
+        "locator": "abstract",
+        "reason": "denominator 3136 not in the quoted text"
+      }
+    ],
+    "prose_checked": 0,
+    "prose_unmatched": []
+  },
+  "notes": []
+}

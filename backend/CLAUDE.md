@@ -14,11 +14,13 @@ POST /api/build, /api/build/pdf   the same builds as one long request, for scrip
 GET  /api/explainer/{paper_id}   GET /api/explainers   GET /api/figure/{paper_id}/{file}
 GET  /api/health      reports degraded, with the reason, when it cannot build
 
-ingestion/  resolve → fetch JATS → parse to StructuredPaper → rewrite into ≤5 sections
+ingestion/  resolve → fetch JATS → parse to StructuredPaper (the rewrite runs in the pipeline,
+            beside the planner: two model calls on the same text, at the same time)
 agents/     chart_planner (one LLM call) → verify (deterministic gate) → pipeline assembles
 models/     charts.py is the contract the frontend is built against
 builds.py   the two build paths, and the in-memory job registry (one build at a time)
-store.py    JSON per paper under data/explainers/
+store.py    JSON per paper under data/explainers/; seeds data/ from examples/ on startup
+examples/   the shipped library (explainers + figures), in git; data/ is not
 ```
 
 There is no database. An explainer is a JSON file, and a build is one request.
