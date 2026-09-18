@@ -39,6 +39,27 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [jobs, setJobs] = useState<Job[]>([]);
   const [built, setBuilt] = useState<ExplainerSummary[]>([]);
+  const [query, setQuery] = useState("");
+  const [order, setOrder] = useState<"newest" | "title" | "shortest">("newest");
+  const [removing, setRemoving] = useState<string | null>(null);
+  const shown = built
+    .filter((p) => {
+      const q = query.trim().toLowerCase();
+      return !q || `${p.title} ${p.journal ?? ""} ${p.published ?? ""}`.toLowerCase().includes(q);
+    })
+    .sort((a, b) =>
+      order === "title" ? a.title.localeCompare(b.title)
+      : order === "shortest" ? (a.reading_minutes ?? 0) - (b.reading_minutes ?? 0)
+      : 0,
+    );
+  async function removePaper(paperId: string) {
+    try {
+      await api.remove(paperId);
+      setBuilt((b) => b.filter((p) => p.paper_id !== paperId));
+    } finally {
+      setRemoving(null);
+    }
+  }
   const [health, setHealth] = useState<Health | null>(null);
   // A start that failed before there was a job: bad input, or a file that is not a PDF.
   const [error, setError] = useState<ApiError | null>(null);
@@ -264,14 +285,34 @@ export default function Home() {
           <h2 className="mb-3 text-center text-[11px] tracking-[0.16em] text-white/25 uppercase">
             Already built
           </h2>
+          {/* A library past a dozen papers needs a filter and an order; both stay out of the
+              way until there is something to type. */}
+          {built.length > 5 && (
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Filter by title, journal or year"
+                className="min-w-0 flex-1 rounded-full border border-white/[0.10] bg-white/[0.04] px-4 py-2 text-sm text-[#e8e8e8] placeholder:text-white/25 focus:border-white/25 focus:outline-none"
+              />
+              {(["newest", "title", "shortest"] as const).map((k) => (
+                <button key={k} type="button" onClick={() => setOrder(k)} className={`pill ${order === k ? "pill-strong" : ""}`}>
+                  {k === "newest" ? "Newest" : k === "title" ? "A to Z" : "Shortest read"}
+                </button>
+              ))}
+            </div>
+          )}
           <div className="space-y-2">
-            {built.map((p) => (
-              <button
+            {shown.map((p) => (
+              <div
                 key={p.paper_id}
-                onClick={() => router.push(`/paper/${encodeURIComponent(p.paper_id)}`)}
-                className="flex w-full items-baseline justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-left backdrop-blur-xl transition-colors hover:border-white/[0.14] hover:bg-white/[0.07]"
+                className="group flex w-full items-baseline justify-between gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.04] px-5 py-3.5 text-left backdrop-blur-xl transition-colors hover:border-white/[0.14] hover:bg-white/[0.07]"
               >
-                <span className="min-w-0">
+                <button
+                  type="button"
+                  onClick={() => router.push(`/paper/${encodeURIComponent(p.paper_id)}`)}
+                  className="min-w-0 flex-1 text-left"
+                >
                   {/* Wraps rather than truncating. A paper is identified by its title, and the
                       half that gets cut is usually the half that distinguishes it. */}
                   <span className="block text-sm leading-snug text-[#e8e8e8]">{p.title}</span>
@@ -279,14 +320,32 @@ export default function Home() {
                     {[p.journal, p.published?.slice(0, 4), p.source === "pdf" ? "from a PDF" : null]
                       .filter(Boolean)
                       .join(" · ")}
+                    {p.has_pdf && <span className="ml-2 rounded-full border border-white/[0.14] px-1.5 py-px text-[10px] text-white/50" title="The original PDF is stored; sentences open in it">PDF</span>}
+                    {p.source === "pdf" && !p.has_text && <span className="ml-2 text-[#d9a441]" title="Built before the paper's text was kept; drop its PDF on the paper's page to rebuild">rebuild</span>}
                   </span>
-                </span>
+                </button>
                 <span className="num shrink-0 text-right text-xs text-white/40">
                   {p.chart_count} chart{p.chart_count === 1 ? "" : "s"}
                   {p.reading_minutes ? <span className="block text-white/25">{p.reading_minutes} min</span> : null}
+                  {/* Removing is two clicks, in place, so no dialog and no accident. */}
+                  {removing === p.paper_id ? (
+                    <span className="mt-1 flex justify-end gap-1">
+                      <button type="button" className="pill" onClick={() => void removePaper(p.paper_id)}>Remove</button>
+                      <button type="button" className="pill" onClick={() => setRemoving(null)}>Keep</button>
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setRemoving(p.paper_id)}
+                      className="mt-1 block w-full text-right text-[11px] text-white/25 opacity-0 transition-opacity group-hover:opacity-100 hover:text-white/60"
+                    >
+                      remove
+                    </button>
+                  )}
                 </span>
-              </button>
+              </div>
             ))}
+            {shown.length === 0 && <p className="text-center text-xs text-white/30">Nothing matches.</p>}
           </div>
         </section>
       )}

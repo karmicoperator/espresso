@@ -94,15 +94,29 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
       const file = e.dataTransfer?.files?.[0];
       if (!file || !file.name.toLowerCase().endsWith(".pdf")) return;
       e.preventDefault();
-      setAttaching("Attaching the PDF…");
       const body = new FormData();
       body.append("file", file);
       try {
+        if (explainer.has_text === false && explainer.paper_id.startsWith("pdf-")) {
+          // A PDF paper built before its text was kept has nothing to anchor to. The
+          // same file rebuilds it on the current pipeline, with anchors and the PDF.
+          setAttaching("Rebuilding from the PDF, a few minutes…");
+          const r = await fetch("/api/jobs/pdf", { method: "POST", body });
+          if (!r.ok) throw new Error((await r.json().catch(() => ({})))?.detail ?? `HTTP ${r.status}`);
+          const job = (await r.json()) as { id: string };
+          for (;;) {
+            await new Promise((res) => setTimeout(res, 4000));
+            const j = (await fetch(`/api/jobs/${job.id}`).then((x) => x.json())) as { status: string; error?: { message?: string } | null };
+            if (j.status === "done") { window.location.reload(); return; }
+            if (j.status === "failed" || j.status === "error") throw new Error(j.error?.message ?? "the build failed");
+          }
+        }
+        setAttaching("Attaching the PDF…");
         const r = await fetch(`/api/pdf/${encodeURIComponent(explainer.paper_id)}`, { method: "POST", body });
         if (!r.ok) throw new Error((await r.json().catch(() => ({})))?.detail ?? `HTTP ${r.status}`);
         window.location.reload();
       } catch (err) {
-        setAttaching(`Could not attach the PDF: ${err instanceof Error ? err.message : String(err)}`);
+        setAttaching(`Could not use the PDF: ${err instanceof Error ? err.message : String(err)}`);
       }
     };
     document.addEventListener("dragover", over);
@@ -111,7 +125,7 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
       document.removeEventListener("dragover", over);
       document.removeEventListener("drop", drop);
     };
-  }, [explainer.paper_id]);
+  }, [explainer.paper_id, explainer.has_text]);
 
   const meta = [
     explainer.journal,
@@ -191,13 +205,12 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
                 {v.anchored} of {v.sentences} sentences anchored to the paper
               </span>
             )}
-            {(v.direction_conflicts ?? 0) > 0 && (
-              <span className="text-[#ff6259]" title="The sentence and the paper's sentence use opposite direction words">
-                {v.direction_conflicts} direction {v.direction_conflicts === 1 ? "conflict" : "conflicts"}
-              </span>
-            )}
             {explainer.has_pdf ? (
-              <span className="text-white/35">PDF attached</span>
+              <span className="text-white/35">PDF stored</span>
+            ) : explainer.has_text === false ? (
+              <span className="text-[#d9a441]" title="Built before the paper's text was kept">
+                drop the PDF here to rebuild with anchors
+              </span>
             ) : (
               <span className="text-white/35" title="PubMed Central blocks scripted downloads; drop the paper's PDF on this page">
                 drop the PDF here to open sentences in it
@@ -384,6 +397,7 @@ export function ExplainerReader({ explainer }: { explainer: Explainer }) {
           target={source.target}
           hasPdf={Boolean(explainer.has_pdf)}
           pdfVersion={explainer.pdf_version ?? 0}
+          value={source.value}
           onClose={closeSource}
         />
       )}
@@ -679,14 +693,12 @@ function withLinks(
     const cls = [
       h.link ? "sentence" : "",
       a ? (a.supported ? "anchored" : "untraced") : "",
-      a?.direction_conflict ? "conflict" : "",
+
     ].filter(Boolean).join(" ");
     const title = a
-      ? a.direction_conflict
-        ? "This sentence and the paper's sentence use opposite direction words. Click to read the paper's."
-        : a.supported
-          ? "Read this sentence in the paper"
-          : "Not traced to a sentence in the paper: no sentence there prints these numbers and terms"
+      ? a.supported
+        ? "Read this sentence in the paper"
+        : "Not traced to a sentence in the paper: no sentence there prints these numbers and terms"
       : undefined;
     out.push(
       <span

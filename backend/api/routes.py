@@ -145,7 +145,18 @@ async def get_explainer(paper_id: str):
     # The PDF's modification time goes into its URL, so a PDF attached after the page was
     # first opened is never lost to a copy the browser cached.
     version = int(store.pdf_path(pid).stat().st_mtime) if has_pdf else 0
-    return explainer.model_dump() | {"has_pdf": has_pdf, "pdf_version": version}
+    return explainer.model_dump() | {
+        "has_pdf": has_pdf, "pdf_version": version, "has_text": store.load_paper(pid) is not None,
+    }
+
+
+@router.delete("/explainer/{paper_id}")
+async def delete_explainer(paper_id: str, request: Request):
+    """Remove a built paper from the library, with its text, PDF and figures. This machine only."""
+    _loopback_only(request)
+    if not store.remove(Path(paper_id).name):
+        raise HTTPException(status_code=404, detail="No such paper.")
+    return {"removed": paper_id}
 
 
 @router.get("/paper/{paper_id}")
@@ -254,6 +265,8 @@ async def get_settings(request: Request):
 async def save_settings(request: Request, body: dict):
     _loopback_only(request)
     try:
+        if "contact_email" in body:
+            settings.save_contact(str(body.get("contact_email") or ""))
         return settings.save(
             provider=str(body.get("provider", "")),
             model=str(body.get("model", "") or ""),

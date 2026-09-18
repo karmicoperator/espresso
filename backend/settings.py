@@ -75,7 +75,8 @@ def current() -> dict:
             "base_url": os.environ.get(spec.get("base_url_env", ""), "") if spec.get("base_url_env") else None,
             "endpoint": os.environ.get(spec.get("endpoint_env", ""), "") if spec.get("endpoint_env") else None,
         }
-    return {"provider": active, "problem": problem, "providers": providers, "env_path": str(ENV_PATH)}
+    return {"provider": active, "problem": problem, "providers": providers, "env_path": str(ENV_PATH),
+            "contact_email": contact_email()}
 
 
 def save(provider: str, model: str = "", api_key: str = "", base_url: str | None = None,
@@ -102,6 +103,23 @@ def save(provider: str, model: str = "", api_key: str = "", base_url: str | None
             os.environ.pop(env, None)
     base.reset()
     return current()
+
+
+CONTACT_ENV = "UNPAYWALL_EMAIL"
+
+
+def contact_email() -> str:
+    return _read(CONTACT_ENV)
+
+
+def save_contact(email: str) -> str:
+    """The address Unpaywall asks for when the app looks up where a paper's PDF lives."""
+    ENV_PATH.touch(exist_ok=True)
+    _set(CONTACT_ENV, email.strip())
+    load_dotenv(ENV_PATH, override=True)
+    if not email.strip():
+        os.environ.pop(CONTACT_ENV, None)
+    return contact_email()
 
 
 def _set(key: str, value: str) -> None:

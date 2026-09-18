@@ -18,12 +18,15 @@ export function PaperView({
   target,
   hasPdf,
   pdfVersion = 0,
+  value,
   onClose,
 }: {
   paperId: string;
   target: Target;
   hasPdf: boolean;
   pdfVersion?: number;
+  /** The value a chart plotted, when a chart opened the paper; said beside the locator. */
+  value?: number;
   onClose: () => void;
 }) {
   const [mode, setMode] = useState<"pdf" | "text">(hasPdf ? "pdf" : "text");
@@ -44,7 +47,10 @@ export function PaperView({
       <div className="flex items-start justify-between gap-4 px-6 pt-5 pb-3">
         <div className="min-w-0">
           <p className="text-[11px] tracking-[0.16em] text-white/30 uppercase">In the paper</p>
-          <p className="num mt-1 truncate text-xs text-white/50">{target.locator || "full text"}</p>
+          <p className="num mt-1 truncate text-xs text-white/50">
+            {target.locator || "full text"}
+            {value !== undefined && <span className="text-white/35"> · plotted value {value}</span>}
+          </p>
         </div>
         <div className="flex items-center gap-2">
           {hasPdf && (

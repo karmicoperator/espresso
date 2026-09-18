@@ -459,6 +459,15 @@ of the fourteen PubMed papers got theirs (Nature Medicine, Cureus, a university
 repository, two society journals); NEJM, BMJ, Springer, Elsevier, SAGE and MDPI refused
 a program. Those open in the text until the reader drops the PDF on the page.
 
+The direction check (opposite direction words between a sentence and its anchor) was
+measured before it was trusted: five flags across the library, five false alarms.
+"Dropped a BMI category" against "achieved improvement in BMI category"; "more injuries
+when delayed" against "lower frequency with early", the same claim from the other side;
+"increased metabolic risk" in a cutoff's name. Comparatives state one finding from either
+end, so word lists cannot see a flip. The flag stays in the data and off the page until a
+rule has a measured precision; a check that cries wolf every time teaches the reader to
+ignore the marks that matter.
+
 A red tick on every sentence the anchoring could not tie down was the first thing a
 reader asked about. It was noise: a mark should say something worth the attention it
 takes, and "not traced" is not that. The tick is gone; the explanation stays on hover.

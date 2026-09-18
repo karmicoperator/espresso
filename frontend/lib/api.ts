@@ -42,6 +42,7 @@ export const api = {
     api_key: string;
     base_url?: string | null;
     endpoint?: string | null;
+    contact_email?: string;
   }) =>
     fetch(`${API_BASE}/api/settings`, {
       method: "POST",
@@ -53,6 +54,9 @@ export const api = {
   testSettings: () =>
     fetch(`${API_BASE}/api/settings/test`, { method: "POST" }).then(json<{ ok: boolean; message: string }>),
 
+  /** Removes a built paper with its text, PDF and figures. This machine only. */
+  remove: (paperId: string) =>
+    fetch(`${API_BASE}/api/explainer/${encodeURIComponent(paperId)}`, { method: "DELETE" }).then(json<{ removed: string }>),
   list: () =>
     fetch(`${API_BASE}/api/explainers`, { cache: "no-store" }).then(json<ExplainerSummary[]>),
 

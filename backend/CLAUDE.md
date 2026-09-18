@@ -42,7 +42,8 @@ loosen a limit to fit a paper.
 
 `agents/anchor.py`. Every sentence of the concise version is tied to one sentence of the
 paper by the numbers it prints and the terms it uses (the chart linker's rule), or marked
-unsupported. Opposite direction words between the two are flagged. The page opens the
+unsupported. Opposite direction words are recorded (`direction_conflict`) but not shown:
+five of five flags on the library were false alarms; see FINDINGS. The page opens the
 paper at the anchor on a click: in the stored PDF when there is one (`data/pdfs/`: fetched at
 build time from a publisher that serves it, via Unpaywall by DOI, `ingestion/pdf_fetch.py`;
 else from an upload or a drop onto the page; PubMed Central blocks scripted downloads), else in the

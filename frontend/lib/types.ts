@@ -184,6 +184,8 @@ export type Explainer = {
   has_pdf?: boolean;
   /** The stored PDF's modification time, part of its URL so an attached PDF is never stale. */
   pdf_version?: number;
+  /** Whether the paper's verbatim text was kept; without it a PDF-built paper needs a rebuild. */
+  has_text?: boolean;
   /** The paper's own paragraph behind each cited locator. */
   sources?: Record<string, string>;
   sections: ReaderSection[];
@@ -203,6 +205,9 @@ export type ExplainerSummary = {
   source?: "pmc" | "pdf";
   /** Built with the bottom line and prose check; older builds were not. */
   checked?: boolean;
+  /** Whether a sentence opens in the PDF, in the paper's text, or in neither. */
+  has_pdf?: boolean;
+  has_text?: boolean;
 };
 
 /** A build in progress or recently finished. Mirrors backend/builds.py Job.public(). */
@@ -238,6 +243,8 @@ export type SettingsView = {
   problem: string;
   providers: Record<string, ProviderView>;
   env_path: string;
+  /** The address Unpaywall asks for when the app looks up where a paper's PDF lives. */
+  contact_email?: string;
 };
 
 export type Health = {

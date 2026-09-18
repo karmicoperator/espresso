@@ -144,6 +144,27 @@ def listing() -> list[dict]:
                 "reading_minutes": max(1, -(-words // 230)),
                 "source": "pdf" if str(data.get("paper_id", "")).startswith("pdf-") else "pmc",
                 "checked": bool(data.get("bottom_line")) or "prose_checked" in (data.get("verification") or {}),
+                # Whether a sentence opens in the PDF, in the paper's text, or in neither.
+                "has_pdf": pdf_path(path.stem).exists(),
+                "has_text": (_papers_root() / path.name).exists(),
             }
         )
     return out
+
+
+def remove(paper_id: str) -> bool:
+    """Delete an explainer with its source text, PDF and figures. True when it existed."""
+    from ingestion.figures import FIGURE_DIR
+
+    target = path_for(paper_id)
+    if not target.exists():
+        return False
+    target.unlink()
+    for extra in (_papers_root() / target.name, pdf_path(paper_id)):
+        if extra.exists():
+            extra.unlink()
+    figs = FIGURE_DIR / _safe_name(paper_id)
+    if figs.is_dir():
+        shutil.rmtree(figs)
+    logger.info("Removed explainer %s", paper_id)
+    return True

@@ -17,8 +17,10 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
-# Unpaywall asks for a contact address; a real one from the reader is better than this.
-UNPAYWALL_EMAIL = os.environ.get("UNPAYWALL_EMAIL", "paperinfive@example.org")
+# Unpaywall asks for a contact address; the reader's own, from Settings, is better than
+# the placeholder. Read when used, so a saved address takes effect without a restart.
+def contact_email() -> str:
+    return os.environ.get("UNPAYWALL_EMAIL", "") or "paperinfive@example.org"
 # A browser's user agent, because the page is being fetched for a person to read; the
 # publishers that block programs outright do so regardless.
 BROWSER_UA = (
@@ -55,7 +57,7 @@ async def fetch_pdf(doi: str | None, target: Path, client: httpx.AsyncClient | N
     try:
         try:
             r = await client.get(
-                f"https://api.unpaywall.org/v2/{doi}", params={"email": UNPAYWALL_EMAIL}, timeout=20.0
+                f"https://api.unpaywall.org/v2/{doi}", params={"email": contact_email()}, timeout=20.0
             )
             record = r.json() if r.status_code == 200 else {}
         except (httpx.HTTPError, ValueError):
