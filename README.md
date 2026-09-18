@@ -20,9 +20,10 @@ against the paper's text before it is drawn, and a click on any sentence opens t
 at the line it came from. It runs on your computer. What leaves it is the request for the
 paper and the calls to the model you pick, which receive the paper's text.
 
-espresso is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual) by
-Raj Shah, which does the same for arXiv papers. The idea and the reader's look are his; the
-rest was rebuilt for medical papers.
+espresso is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual), which
+Raj Shah, Ajith Bondili, Armaan Gupta and Nikhil Hooda built for arXiv papers and won
+TartanHacks '26 with. The idea and the reader's look are theirs; the rest was rebuilt for
+medical papers.
 
 ## Install
 
@@ -165,5 +166,5 @@ the meaning, which is why the paper is one click away.
 
 MIT, see `LICENSE`. That covers the work in this repository. The upstream
 [arXivisual](https://github.com/rajshah6/arXivisual) ships no licence file, so the parts
-that survive from it (the idea and the reader's look) stay with their author until he
-puts a licence on them.
+that survive from it (the idea and the reader's look) stay with its four creators until
+they put a licence on them.
