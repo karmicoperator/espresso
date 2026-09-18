@@ -12,10 +12,10 @@
   "published": "2026-08-16 00:00:00",
   "doi": "10.3390/reports9030274",
   "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13510902/",
-  "question": "What does a case of lung metastases from a poorly documented thigh hemangiopericytoma/solitary fibrous tumor show about how this disease is diagnosed and how it progresses?",
+  "question": "How can lung metastases from a poorly documented thigh hemangiopericytoma/solitary fibrous tumor be missed, and how was their origin found?",
   "bottom_line": {
-    "question": "What does a case of lung metastases from a poorly documented thigh hemangiopericytoma/solitary fibrous tumor show about how this disease is diagnosed and how it progresses?",
-    "answer": "Two lung masses that presented with coughing up blood turned out to be metastases from a thigh tumor once thought to be benign. Despite surgery on both lungs and chemotherapy, the patient died within 18 months. Earlier pathology reports should be retrieved for anyone with a recurrent soft tissue tumor.",
+    "question": "How can lung metastases from a poorly documented thigh hemangiopericytoma/solitary fibrous tumor be missed, and how was their origin found?",
+    "answer": "A young woman with hemoptysis had two lung masses. They were metastases from a thigh tumor that had been assumed benign, and this was recognised only after the old thigh pathology report was retrieved. Despite both lung resections and chemotherapy, she died within 18 months.",
     "provenance": {
       "locator": "abstract",
       "kind": "abstract",
@@ -28,8 +28,8 @@
   "sections": [
     {
       "id": "PMC13510902-section-1",
-      "title": "A Young Woman with Unexplained Lung Masses",
-      "markdown": "A 33-year-old woman went to an emergency department because she was coughing up blood. Scans found two large masses, one in each lung, and surgeons removed both. Only after that did the key fact come out. She had twice had a tumor removed from her thigh in earlier years. She and her family believed it was benign, but it had been malignant, and the lung masses had spread from it. The case report comes from Romania. Its lesson is practical: when a patient has unexplained lung masses and any history of a soft tissue tumor that keeps coming back, doctors should find the old pathology reports early.",
+      "title": "A Missing Thigh Tumor Record Delays a Lung Diagnosis",
+      "markdown": "A 33-year-old woman came to an emergency department in Romania coughing up blood. Scans showed a large mass in each lung. Her doctors considered lung tumors, a parasitic cyst and benign growths. The real cause came to light only after surgeons had removed both masses. She had twice had surgery for a thigh tumor, her records on it were poor, and that tumor had been malignant. The lung masses were metastases from it. The report shows how this gap in her history delayed the diagnosis.",
       "chart_ids": [],
       "figure_ids": [
         "reports-09-00274-f001",
@@ -38,48 +38,187 @@
     },
     {
       "id": "PMC13510902-section-2",
-      "title": "What Kind of Tumor This Is",
-      "markdown": "**Solitary fibrous tumor (SFT)** is a rare tumor of connective tissue that can arise almost anywhere in the body. Tumors once called hemangiopericytoma (HPC), after their distinctive growth around blood vessels, are now grouped with SFT. Population data put its incidence at about 0.023 cases per 100,000 people.\n\nHow it behaves varies a lot. Many SFTs stay in one place and are cured by surgery. Others come back where they started or spread to other organs, sometimes years later. Doctors estimate the risk from four things: the patient's age, the tumor's size, how fast its cells are dividing and whether parts of it have died (necrosis). Because relapse can come late, long-term follow-up is advised.\n\nThe authors call the tumor a \"hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.\" They use this combined label because the standard confirming test, a stain for a protein called STAT6, was never available. Without it, the tumor could not be formally reclassified in modern terms.",
-      "chart_ids": [],
+      "title": "The Tumor: Solitary Fibrous Tumor, Once Called Hemangiopericytoma",
+      "markdown": "**Solitary fibrous tumor (SFT)** is a rare connective tissue tumor that can arise almost anywhere in the body. Older pathology reports often called it hemangiopericytoma (HPC), after the way its cells cluster around blood vessels under the microscope. The current WHO classification places soft tissue tumors once labeled HPC in the SFT category. The authors use \"HPC\" only where the patient's old records did.\n\nSFT is uncommon, with a reported incidence of 0.023 cases per 100,000 people, and it behaves in different ways. Many cases are cured by surgery. Others come back or spread, sometimes years later. Doctors judge the risk from the patient's age, the tumor's size, its mitotic activity (how fast its cells divide) and necrosis (areas of dead tumor tissue). Because relapse can come late, long follow-up is advised. Imaging can show how far the disease extends but cannot identify it. That takes tissue under a microscope. The stain that confirms SFT, called STAT6 immunohistochemistry, was not available in this retrospective case. So the authors describe the tumor cautiously as a \"hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.\"",
+      "chart_ids": [
+        "tracing-origin"
+      ],
       "figure_ids": []
     },
     {
       "id": "PMC13510902-section-3",
-      "title": "From Diagnosis to Death: How the Case Unfolded",
-      "markdown": "The patient did not smoke, had no workplace exposures and had no significant medical history. Her father had had lung cancer. Emergency bronchoscopy (a camera passed into the airways) found blood in both lungs and a clot blocking an airway on the left. No biopsy was taken. There was nothing visible inside the airways to sample, and a tumor full of blood vessels risked heavy bleeding.\n\nThe CT scan showed a mass of about 9 x 9.5 x 11 cm in the upper part of the left lung and one of about 6 x 3.5 x 5 cm in the middle part of the right lung. Both had grown into the pleura, the lining around the lungs. The scans found no spread anywhere else.\n\nAt first the list of possible causes was broad. Coughing up blood in a young person from a country where tuberculosis is common suggested TB. The sharply outlined masses then pointed toward other options:\n\n- hydatid cysts, a tapeworm disease (her blood test for it was negative)\n- benign lung tumors\n- two separate lung cancers\n\nSpread from a cancer elsewhere seemed less likely, because nobody knew what the thigh tumor had really been.\n\nSurgeons removed the upper lobe of the left lung first. Tests on the tissue confirmed a malignant HPC/SFT spectrum tumor. She then had six cycles of chemotherapy based on the drug cisplatin, and after that the middle lobe of the right lung was removed. It contained the same tumor.\n\nThat result led the doctors to go back over her history in more detail. She then described two operations on her right thigh. The first, five years earlier, had been reported as a \"myoma,\" a benign muscle tumor. The second, two years earlier, removed a regrowth. The family never collected the pathology report from that second operation. When the doctors retrieved it, it showed malignant hemangiopericytoma, and the lung masses were reclassified as metastases from the thigh.\n\n## Outcome\n\nSurgery and chemotherapy did not stop the disease. Within a year she had tumors in the front and back of the brain, new lesions in both lungs and the central chest, and one under the skin. She died within 18 months of the lung diagnosis.",
+      "title": "How the Case Unfolded: Workup, Surgery and the Missing Thigh Report",
+      "markdown": "She did not smoke, had no workplace exposure to lung toxins and had no relevant medical history. Her father had had lung cancer. Bronchoscopy (a camera passed into the airways) found blood in both lungs and a clot blocking the airway to the left upper lobe. No biopsy was taken. There was no visible lesion inside the airways to sample, and because the tumor was thought to be full of blood vessels, a biopsy risked bleeding.\n\nCT showed a solid mass up to 11 cm across in the left upper lobe, growing into the membrane that lines the central chest. A second mass, up to about 6 cm, sat in the right middle lobe and had grown into the outer lining of the lung. There was no sign of spread elsewhere. A blood test for hydatid disease (a tapeworm infection) was negative. Tuberculosis is common in Romania, so it was an early suspect, but the solid, well-defined masses pointed toward cancer.\n\nBoth masses looked removable, so she had two operations. The left upper lobe came out first, and the final pathology showed a malignant tumor in the HPC/SFT spectrum. Six cycles of cisplatin-based chemotherapy followed. Then surgeons removed the right middle lobe, which held the same tumor.\n\nBecause this tumor type is known to spread, the team went back over her history. She then told them about two thigh operations. The first, five years earlier, had reportedly been diagnosed as a \"myoma,\" a benign muscle tumor. The second, two years earlier, treated a recurrence. The family never obtained that pathology report because they assumed the lump was benign. When the report was finally retrieved, it showed malignant hemangiopericytoma, and the lung masses were reinterpreted as metastases from the thigh.",
       "chart_ids": [
-        "why-hard",
-        "survival",
         "lesion-size"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC13510902-section-4",
-      "title": "Why This Case Matters for Doctors",
-      "markdown": "The authors believe this is the first documented Romanian case of hemangiopericytoma that spread to the lungs. For context, they cite a study of 213 patients with hemangiopericytoma of the brain. In that study the pleura and lung made up 18.4% of metastatic sites, second only to bone at 19.6%.\n\nThe main point concerns a diagnostic trap. The scans showed the masses were probably malignant but could not show where they came from. The answer needed tissue from surgery plus the old thigh report. The delay came from missing records and a history the patient had not fully given. The authors recommend that doctors:\n\n- ask directly about past soft tissue tumors when lung masses are unexplained\n- retrieve earlier pathology reports, even for tumors described as benign\n- keep patients with recurring soft tissue tumors under long-term surveillance\n- have a multidisciplinary team plan treatment for advanced disease, because evidence for chemotherapy is limited",
+      "title": "Outcome",
+      "markdown": "Within a year she had metastases in the front and back of the brain, new lesions in both lungs and the mediastinum (the central chest compartment), and one under the skin. Further treatment did not control the disease. She died within 18 months of the lung diagnosis.",
       "chart_ids": [
-        "met-sites-literature"
+        "survival"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC13510902-section-5",
-      "title": "Limitations of the Report",
-      "markdown": "The report was written after the fact from incomplete records. Several things are missing: the STAT6 stain, surgical margins, lymph node findings and details of the chemotherapy. No scan was taken between chemotherapy and the second operation, so no one can say whether the right lung tumor shrank, stayed the same or grew. The patient's own account could not be collected. On the other side, both lung tumors were confirmed under the microscope, and the original pathology report established the link to the thigh.",
-      "chart_ids": [],
+      "title": "Lessons, Context and Limitations",
+      "markdown": "The main lesson is about diagnosis. The thigh pathology report settled where the lung tumors came from. Without it, the list of possible causes stayed broad and the answer came late. The authors make three recommendations for patients who have unexplained masses in both lungs and a history of recurring soft tissue tumors:\n\n- Retrieve earlier pathology reports, even for lumps that were called benign.\n- Keep these patients under long-term surveillance.\n- Don't expect imaging alone to settle the diagnosis.\n\nFor context, they cite a study of 213 patients with HPC of the brain. The most common sites of spread were bone (19.6%), pleura and lung (18.4%), liver (17.6%) and vertebrae (14.1%). HPC that starts in the lung is rarer still. In those cases, coughing blood and pain have been linked to worse outcomes, and growth into the airway (seen in about 10%) to better ones. The authors believe this is the first documented Romanian case of HPC spreading to the lung. One earlier Romanian report described a tumor that started in the lung.\n\nThere is little evidence on chemotherapy for advanced SFT, so treatment should be planned case by case by a team of specialists. In this case the regimen details were not recorded. No scan exists from between the chemotherapy and the second surgery, so it can't be known whether the drugs shrank the right-lung tumor.\n\nThe authors state the report's limits. It is retrospective. The records for the thigh tumor, the bronchoscopy and the operations are incomplete, so the surgical margins and lymph node status are unknown. The STAT6 result and full chemotherapy details are missing. Because the patient died, her own account could not be collected.",
+      "chart_ids": [
+        "metastatic-sites"
+      ],
       "figure_ids": []
     }
   ],
   "charts": [
     {
-      "id": "survival",
-      "kind": "stat",
-      "title": "Time from lung diagnosis to death",
+      "id": "lesion-size",
+      "kind": "bars",
+      "title": "Size of the two lung masses on CT at presentation",
       "subtitle": "",
       "data": [
         {
-          "label": "Death, months after the first lung diagnosis",
+          "label": "Left upper lobe mass",
+          "value": 11.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "CT at presentation",
+          "note": "9.1 × 9.5 × 11 cm",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2dot1-reports-09-00274/p2",
+            "kind": "paragraph",
+            "quote": "one measuring 9.1 × 9.5 × 11 cm, located in the apical segment of the left upper lobe, with invasion of the mediastinal pleura",
+            "section": "Case Presentation, Diagnostic Assessment"
+          }
+        },
+        {
+          "label": "Right middle lobe mass",
+          "value": 5.8,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "CT at presentation",
+          "note": "5.8 × 3.5 × 5 cm",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec2dot1-reports-09-00274/p2",
+            "kind": "paragraph",
+            "quote": "a second lesion measuring 5.8 × 3.5 × 5 cm, located in the right middle lobe, with lateral pleural infiltration",
+            "section": "Case Presentation, Diagnostic Assessment"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "shape": "",
+      "unit": "cm",
+      "value_label": "Largest printed dimension (cm)",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Each bar is the largest of the three CT dimensions printed for that mass. One patient.",
+      "source": "Diagnostic Assessment, chest CT",
+      "section_id": "sec2dot1-reports-09-00274"
+    },
+    {
+      "id": "tracing-origin",
+      "kind": "diagram",
+      "title": "How the lung masses were traced to the thigh tumor",
+      "subtitle": "",
+      "data": [],
+      "annotation": null,
+      "nodes": [
+        {
+          "id": "potential",
+          "label": "Known metastatic potential",
+          "note": "of the tumor type found in the lung"
+        },
+        {
+          "id": "history",
+          "label": "Medical history reassessed",
+          "note": ""
+        },
+        {
+          "id": "report",
+          "label": "Thigh pathology report retrieved",
+          "note": ""
+        },
+        {
+          "id": "origin",
+          "label": "Metastatic origin established",
+          "note": ""
+        }
+      ],
+      "edges": [
+        {
+          "source": "potential",
+          "target": "history",
+          "label": "prompted",
+          "provenance": {
+            "locator": "sec2dot2-reports-09-00274/p3",
+            "kind": "paragraph",
+            "quote": "Because of the known recurrence and metastatic potential of this tumor type, the patient’s medical history was reassessed in detail.",
+            "section": "Case Presentation, Therapeutic Intervention"
+          },
+          "hedged": true
+        },
+        {
+          "source": "history",
+          "target": "report",
+          "label": "led to",
+          "provenance": {
+            "locator": "sec3-reports-09-00274/p5",
+            "kind": "paragraph",
+            "quote": "This finding prompted a more detailed reassessment of the patient’s medical history and led to retrieval of the previous thigh tumor pathology report.",
+            "section": "Discussion"
+          },
+          "hedged": false
+        },
+        {
+          "source": "report",
+          "target": "origin",
+          "label": "was decisive",
+          "provenance": {
+            "locator": "sec3-reports-09-00274/p2",
+            "kind": "paragraph",
+            "quote": "In the present patient, retrieval of the previous thigh pathology report was decisive in establishing the metastatic origin of the bilateral pulmonary lesions.",
+            "section": "Discussion"
+          },
+          "hedged": false
+        }
+      ],
+      "shape": "chain",
+      "unit": "",
+      "value_label": "",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "",
+      "source": "Case Presentation and Discussion",
+      "section_id": "sec3-reports-09-00274"
+    },
+    {
+      "id": "survival",
+      "kind": "stat",
+      "title": "Time from first lung diagnosis to death",
+      "subtitle": "",
+      "data": [
+        {
+          "label": "Death after initial pulmonary diagnosis",
           "value": 18.0,
           "low": null,
           "high": null,
@@ -108,135 +247,15 @@
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "The paper says only that she died within 18 months. It does not give the exact survival time.",
-      "source": "Section 2.3, Follow-Up and Outcomes",
+      "caveat": "One patient. The paper says death came within 18 months, so this is an upper limit, not an exact survival time.",
+      "source": "Follow-Up and Outcomes",
       "section_id": "sec2dot3-reports-09-00274"
     },
     {
-      "id": "lesion-size",
+      "id": "metastatic-sites",
       "kind": "bars",
-      "title": "Size of the two lung masses on CT at presentation",
-      "subtitle": "Longest of the three dimensions printed for each mass",
-      "data": [
-        {
-          "label": "Left upper lobe mass",
-          "value": 11.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "CT",
-          "note": "9.1 × 9.5 × 11 cm, invading mediastinal pleura",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "sec2dot1-reports-09-00274/p2",
-            "kind": "paragraph",
-            "quote": "one measuring 9.1 × 9.5 × 11 cm, located in the apical segment of the left upper lobe",
-            "section": "Case Presentation, Diagnostic Assessment"
-          }
-        },
-        {
-          "label": "Right middle lobe mass",
-          "value": 5.8,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "CT",
-          "note": "5.8 × 3.5 × 5 cm, lateral pleural infiltration",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "sec2dot1-reports-09-00274/p2",
-            "kind": "paragraph",
-            "quote": "a second lesion measuring 5.8 × 3.5 × 5 cm, located in the right middle lobe",
-            "section": "Case Presentation, Diagnostic Assessment"
-          }
-        }
-      ],
-      "annotation": null,
-      "nodes": [],
-      "edges": [],
-      "shape": "",
-      "unit": "cm",
-      "value_label": "Longest dimension (cm)",
-      "category_label": "",
-      "log_scale": false,
-      "null_value": null,
-      "lower_is_better": true,
-      "favours_left": "",
-      "favours_right": "",
-      "caveat": "Each bar is the longest of the three CT dimensions the paper prints. The full measurements are shown under each label.",
-      "source": "Section 2.1, chest CT findings",
-      "section_id": "sec2dot1-reports-09-00274"
-    },
-    {
-      "id": "why-hard",
-      "kind": "diagram",
-      "title": "Why the diagnosis was hard to reach",
+      "title": "Most frequent metastatic sites in a cited series of 213 patients with cerebral hemangiopericytoma",
       "subtitle": "",
-      "data": [],
-      "annotation": null,
-      "nodes": [
-        {
-          "id": "recognition",
-          "label": "Delayed recognition of previous tumor",
-          "note": ""
-        },
-        {
-          "id": "hemoptysis",
-          "label": "Hemoptysis in tuberculosis-endemic region",
-          "note": ""
-        },
-        {
-          "id": "pathway",
-          "label": "Challenging diagnostic pathway",
-          "note": ""
-        }
-      ],
-      "edges": [
-        {
-          "source": "recognition",
-          "target": "pathway",
-          "label": "contributed to",
-          "provenance": {
-            "locator": "sec4-reports-09-00274/p1",
-            "kind": "paragraph",
-            "quote": "In the present case, delayed recognition of a previous recurrent soft tissue tumor, together with the non-specific presentation of hemoptysis in a tuberculosis-endemic region, contributed to a challenging diagnostic pathway.",
-            "section": "Conclusions"
-          },
-          "hedged": false
-        },
-        {
-          "source": "hemoptysis",
-          "target": "pathway",
-          "label": "contributed to",
-          "provenance": {
-            "locator": "sec4-reports-09-00274/p1",
-            "kind": "paragraph",
-            "quote": "In the present case, delayed recognition of a previous recurrent soft tissue tumor, together with the non-specific presentation of hemoptysis in a tuberculosis-endemic region, contributed to a challenging diagnostic pathway.",
-            "section": "Conclusions"
-          },
-          "hedged": false
-        }
-      ],
-      "shape": "join",
-      "unit": "",
-      "value_label": "",
-      "category_label": "",
-      "log_scale": false,
-      "null_value": null,
-      "lower_is_better": true,
-      "favours_left": "",
-      "favours_right": "",
-      "caveat": "This is the authors' reading of a single case, not a tested causal pathway.",
-      "source": "Conclusions",
-      "section_id": "sec4-reports-09-00274"
-    },
-    {
-      "id": "met-sites-literature",
-      "kind": "bars",
-      "title": "Where hemangiopericytoma spreads: sites in a cited series of cerebral tumors",
-      "subtitle": "Share of cases with metastases at each site, from a study the authors cite",
       "data": [
         {
           "label": "Bone",
@@ -309,21 +328,21 @@
       ],
       "annotation": {
         "target": "Pleura and lung",
-        "text": "The site where this patient's metastases were first found"
+        "text": "Where this patient's metastases were first found: 18.4% of cases in the cited series."
       },
       "nodes": [],
       "edges": [],
       "shape": "",
       "unit": "%",
-      "value_label": "Cases (%)",
+      "value_label": "Share of cases",
       "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "These figures come from another paper, a series of patients with cerebral hemangiopericytoma. They are not data from this patient.",
-      "source": "Discussion, cited study of 213 patients",
+      "caveat": "Figures restated from another study of cerebral hemangiopericytoma. They do not come from this patient or from a thigh primary.",
+      "source": "Discussion, cited literature",
       "section_id": "sec3-reports-09-00274"
     }
   ],
@@ -336,7 +355,7 @@
       "width": null,
       "height": null,
       "kind": "imaging",
-      "why": "Shows the two large, well-defined lung masses and their contact with the pleura, which the size measurements alone cannot convey.",
+      "why": "Shows where the two lung masses sit and their contact with the pleura and mediastinum, which sizes alone cannot show.",
       "section_id": "sec2dot1-reports-09-00274"
     },
     {
@@ -347,7 +366,7 @@
       "width": null,
       "height": null,
       "kind": "micrograph",
-      "why": "Shows the spindle cells and branching staghorn vessels behind the diagnosis, which only the stained sections can show.",
+      "why": "Shows the staghorn vessels and atypical spindle cells behind the diagnosis.",
       "section_id": "sec2dot2-reports-09-00274"
     }
   ],
@@ -355,75 +374,80 @@
   "absolute_risk_derived": null,
   "terms": [
     {
-      "term": "Solitary fibrous tumor",
-      "definition": "A rare tumor of fibroblast-like connective tissue cells that can arise almost anywhere in the body.",
+      "term": "Solitary fibrous tumor (SFT)",
+      "definition": "A rare tumor of fibroblast-type connective tissue cells that can arise almost anywhere in the body.",
       "provenance": {
         "locator": "sec1-reports-09-00274/p1",
         "kind": "paragraph",
         "quote": "Solitary fibrous tumor (SFT) is a rare fibroblastic mesenchymal neoplasm that may arise at virtually any anatomical site.",
-        "section": "Introduction"
+        "section": "Introduction and Clinical Significance"
       }
     },
     {
-      "term": "Hemangiopericytoma",
-      "definition": "An older name for soft-tissue tumors that current classification places within the solitary fibrous tumor spectrum.",
-      "provenance": null
+      "term": "Hemangiopericytoma (HPC)",
+      "definition": "An older name for tumors that grow around blood vessels. These tumors are now classed within the solitary fibrous tumor spectrum.",
+      "provenance": {
+        "locator": "sec1-reports-09-00274/p1",
+        "kind": "paragraph",
+        "quote": "The term “hemangiopericytoma” (HPC), initially used for tumors with a characteristic perivascular growth pattern, has historical significance; however, current classifications incorporate soft-tissue tumors previously designated as HPC within the SFT spectrum",
+        "section": "Introduction and Clinical Significance"
+      }
     },
     {
       "term": "STAT6 immunohistochemistry",
-      "definition": "A tissue stain for the STAT6 protein that is used to confirm a solitary fibrous tumor. It was not available in this case.",
+      "definition": "A tissue stain for the STAT6 protein. Staining in the cell nucleus is used to confirm a solitary fibrous tumor.",
       "provenance": null
     },
     {
       "term": "Hemoptysis",
-      "definition": "Coughing up blood from the airways or lungs.",
+      "definition": "Coughing up blood that comes from the airways or lungs.",
+      "provenance": null
+    },
+    {
+      "term": "Hydatid disease",
+      "definition": "Infection with the Echinococcus tapeworm. It forms fluid-filled cysts that can look like round masses in the lung.",
       "provenance": null
     },
     {
       "term": "Lobectomy",
-      "definition": "Surgical removal of one lobe of a lung.",
+      "definition": "An operation that removes one lobe of a lung.",
       "provenance": null
     },
     {
       "term": "Frozen section",
-      "definition": "A tissue sample frozen and examined under the microscope during surgery to give a quick provisional diagnosis.",
+      "definition": "Tissue frozen, cut and examined under the microscope during surgery, giving a quick diagnosis before the final pathology report.",
       "provenance": null
     },
     {
       "term": "Staghorn vessels",
-      "definition": "Branching, thin-walled blood vessels shaped like a stag's antlers, a typical feature of this tumor under the microscope.",
+      "definition": "Branching, thin-walled blood vessels shaped like antlers. This pattern is typical of this tumor type.",
       "provenance": {
         "locator": "reports-09-00274-f002/caption",
         "kind": "figure_caption",
         "quote": "prominent branching, thin-walled vascular spaces arranged in a characteristic “staghorn” pattern",
         "section": "Figure 2"
       }
-    },
-    {
-      "term": "Hydatid disease",
-      "definition": "Infection with the Echinococcus tapeworm, which forms cysts that can look like round masses in the lung.",
-      "provenance": null
     }
   ],
   "links": [
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "The CT scan showed a mass of about 9 x 9.5 x 11 cm in the upper part of the left lung and one of about 6 x 3.5 x 5 cm in the middle part of the right lung.",
+      "sentence": "CT showed a solid mass up to 11 cm across in the left upper lobe, growing into the membrane that lines the central chest.",
       "chart_id": "lesion-size",
       "kind": "datum",
       "index": 0
     },
     {
-      "section_id": "PMC13510902-section-3",
+      "section_id": "PMC13510902-section-4",
       "sentence": "She died within 18 months of the lung diagnosis.",
       "chart_id": "survival",
       "kind": "datum",
       "index": 0
     },
     {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "In that study the pleura and lung made up 18.4% of metastatic sites, second only to bone at 19.6%.",
-      "chart_id": "met-sites-literature",
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The most common sites of spread were bone (19.6%), pleura and lung (18.4%), liver (17.6%) and vertebrae (14.1%).",
+      "chart_id": "metastatic-sites",
       "kind": "datum",
       "index": 1
     }
@@ -431,7 +455,7 @@
   "anchors": [
     {
       "section_id": "PMC13510902-section-1",
-      "sentence": "A 33-year-old woman went to an emergency department because she was coughing up blood.",
+      "sentence": "A 33-year-old woman came to an emergency department in Romania coughing up blood.",
       "locator": "sec2-reports-09-00274/p1",
       "quote": "A 33-year-old woman presented to the emergency department with sudden-onset hemoptysis.",
       "supported": true,
@@ -440,7 +464,7 @@
     },
     {
       "section_id": "PMC13510902-section-1",
-      "sentence": "Scans found two large masses, one in each lung, and surgeons removed both.",
+      "sentence": "Scans showed a large mass in each lung.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -449,7 +473,7 @@
     },
     {
       "section_id": "PMC13510902-section-1",
-      "sentence": "She had twice had a tumor removed from her thigh in earlier years.",
+      "sentence": "Her doctors considered lung tumors, a parasitic cyst and benign growths.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -458,7 +482,7 @@
     },
     {
       "section_id": "PMC13510902-section-1",
-      "sentence": "She and her family believed it was benign, but it had been malignant, and the lung masses had spread from it.",
+      "sentence": "The real cause came to light only after surgeons had removed both masses.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -467,25 +491,25 @@
     },
     {
       "section_id": "PMC13510902-section-1",
-      "sentence": "The case report comes from Romania.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-1",
-      "sentence": "Its lesson is practical: when a patient has unexplained lung masses and any history of a soft tissue tumor that keeps coming back, doctors should find the old pathology reports early.",
-      "locator": "sec3-reports-09-00274/p6",
-      "quote": "In patients presenting with unexplained bilateral pulmonary masses and a history of recurrent soft tissue lesions, even when previously considered benign, earlier histopathological reports should be actively retrieved and reviewed.",
+      "sentence": "She had twice had surgery for a thigh tumor, her records on it were poor, and that tumor had been malignant.",
+      "locator": "abstract",
+      "quote": "Subsequent reassessment of the patient’s medical history revealed previous surgeries for a poorly documented recurrent thigh tumor, later confirmed to represent the primary malignant hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.",
       "supported": true,
       "direction_conflict": false,
       "page": 0
     },
     {
+      "section_id": "PMC13510902-section-1",
+      "sentence": "The report shows how this gap in her history delayed the diagnosis.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Solitary fibrous tumor (SFT)** is a rare tumor of connective tissue that can arise almost anywhere in the body.",
+      "sentence": "Solitary fibrous tumor (SFT)** is a rare connective tissue tumor that can arise almost anywhere in the body.",
       "locator": "sec1-reports-09-00274/p1",
       "quote": "Solitary fibrous tumor (SFT) is a rare fibroblastic mesenchymal neoplasm that may arise at virtually any anatomical site.",
       "supported": true,
@@ -494,7 +518,7 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Tumors once called hemangiopericytoma (HPC), after their distinctive growth around blood vessels, are now grouped with SFT.",
+      "sentence": "Older pathology reports often called it hemangiopericytoma (HPC), after the way its cells cluster around blood vessels under the microscope.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -503,7 +527,25 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Population data put its incidence at about 0.023 cases per 100,000 people.",
+      "sentence": "The current WHO classification places soft tissue tumors once labeled HPC in the SFT category.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-2",
+      "sentence": "The authors use \"HPC\" only where the patient's old records did.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-2",
+      "sentence": "SFT is uncommon, with a reported incidence of 0.023 cases per 100,000 people, and it behaves in different ways.",
       "locator": "sec1-reports-09-00274/p1",
       "quote": "The rarity of this entity is reflected in population-based data, with a reported incidence of 0.023 per 100,000 [].",
       "supported": true,
@@ -512,7 +554,7 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Many SFTs stay in one place and are cured by surgery.",
+      "sentence": "Many cases are cured by surgery.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -521,7 +563,7 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Others come back where they started or spread to other organs, sometimes years later.",
+      "sentence": "Others come back or spread, sometimes years later.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -530,7 +572,7 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Doctors estimate the risk from four things: the patient's age, the tumor's size, how fast its cells are dividing and whether parts of it have died (necrosis).",
+      "sentence": "Doctors judge the risk from the patient's age, the tumor's size, its mitotic activity (how fast its cells divide) and necrosis (areas of dead tumor tissue).",
       "locator": "sec1-reports-09-00274/p1",
       "quote": "Risk assessment incorporates clinicopathological variables such as patient age, tumor size, mitotic activity, and necrosis; therefore, long-term surveillance is warranted [,,].",
       "supported": true,
@@ -539,7 +581,7 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Because relapse can come late, long-term follow-up is advised.",
+      "sentence": "Because relapse can come late, long follow-up is advised.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -548,7 +590,25 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "The authors call the tumor a \"hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.\" They use this combined label because the standard confirming test, a stain for a protein called STAT6, was never available.",
+      "sentence": "Imaging can show how far the disease extends but cannot identify it.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-2",
+      "sentence": "That takes tissue under a microscope.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-2",
+      "sentence": "The stain that confirms SFT, called STAT6 immunohistochemistry, was not available in this retrospective case.",
       "locator": "abstract",
       "quote": "In this retrospective case, confirmatory STAT6 immunohistochemistry was unavailable; therefore, the tumor is described as a hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.",
       "supported": true,
@@ -557,115 +617,25 @@
     },
     {
       "section_id": "PMC13510902-section-2",
-      "sentence": "Without it, the tumor could not be formally reclassified in modern terms.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
+      "sentence": "So the authors describe the tumor cautiously as a \"hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.\"",
+      "locator": "abstract",
+      "quote": "In this retrospective case, confirmatory STAT6 immunohistochemistry was unavailable; therefore, the tumor is described as a hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.",
+      "supported": true,
       "direction_conflict": false,
       "page": 0
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "The patient did not smoke, had no workplace exposures and had no significant medical history.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "Emergency bronchoscopy (a camera passed into the airways) found blood in both lungs and a clot blocking an airway on the left.",
+      "sentence": "She did not smoke, had no workplace exposure to lung toxins and had no relevant medical history.",
       "locator": "sec2-reports-09-00274/p1",
-      "quote": "Emergency bronchoscopy revealed a small amount of blood within the bronchial tree bilaterally, more prominent on the left side.",
+      "quote": "She had no relevant personal medical history, was a non-smoker, and reported no occupational exposure to respiratory toxins.",
       "supported": true,
       "direction_conflict": false,
       "page": 0
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "There was nothing visible inside the airways to sample, and a tumor full of blood vessels risked heavy bleeding.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "The CT scan showed a mass of about 9 x 9.5 x 11 cm in the upper part of the left lung and one of about 6 x 3.5 x 5 cm in the middle part of the right lung.",
-      "locator": "sec2dot1-reports-09-00274/p2",
-      "quote": "Chest computed tomography revealed two solid pulmonary masses: one measuring 9.1 × 9.5 × 11 cm, located in the apical segment of the left upper lobe, with invasion of the mediastinal pleura, and a second lesion measuring 5.8 × 3.5 × 5 cm, located in the right middle lobe, with lateral pleural infiltration (C–E).",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "Both had grown into the pleura, the lining around the lungs.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "The scans found no spread anywhere else.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "At first the list of possible causes was broad.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "Coughing up blood in a young person from a country where tuberculosis is common suggested TB.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "The sharply outlined masses then pointed toward other options:",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "hydatid cysts, a tapeworm disease (her blood test for it was negative)",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "Spread from a cancer elsewhere seemed less likely, because nobody knew what the thigh tumor had really been.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "Surgeons removed the upper lobe of the left lung first.",
+      "sentence": "Bronchoscopy (a camera passed into the airways) found blood in both lungs and a clot blocking the airway to the left upper lobe.",
       "locator": "sec2-reports-09-00274/p1",
       "quote": "The left upper lobe bronchus was obstructed by a blood clot that could not be removed by bronchial toileting.",
       "supported": true,
@@ -674,16 +644,25 @@
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "Tests on the tissue confirmed a malignant HPC/SFT spectrum tumor.",
-      "locator": "abstract",
-      "quote": "Subsequent reassessment of the patient’s medical history revealed previous surgeries for a poorly documented recurrent thigh tumor, later confirmed to represent the primary malignant hemangiopericytoma/solitary fibrous tumor spectrum neoplasm.",
+      "sentence": "There was no visible lesion inside the airways to sample, and because the tumor was thought to be full of blood vessels, a biopsy risked bleeding.",
+      "locator": "sec2-reports-09-00274/p1",
+      "quote": "Bronchoscopic biopsy was not attempted because no endobronchial lesion suitable for sampling was identified.",
       "supported": true,
       "direction_conflict": false,
       "page": 0
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "She then had six cycles of chemotherapy based on the drug cisplatin, and after that the middle lobe of the right lung was removed.",
+      "sentence": "CT showed a solid mass up to 11 cm across in the left upper lobe, growing into the membrane that lines the central chest.",
+      "locator": "sec2dot1-reports-09-00274/p2",
+      "quote": "Chest computed tomography revealed two solid pulmonary masses: one measuring 9.1 × 9.5 × 11 cm, located in the apical segment of the left upper lobe, with invasion of the mediastinal pleura, and a second lesion measuring 5.8 × 3.5 × 5 cm, located in the right middle lobe, with lateral pleural infiltration (C–E).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-3",
+      "sentence": "A second mass, up to about 6 cm, sat in the right middle lobe and had grown into the outer lining of the lung.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -692,7 +671,7 @@
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "That result led the doctors to go back over her history in more detail.",
+      "sentence": "A blood test for hydatid disease (a tapeworm infection) was negative.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -701,7 +680,7 @@
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "She then described two operations on her right thigh.",
+      "sentence": "Tuberculosis is common in Romania, so it was an early suspect, but the solid, well-defined masses pointed toward cancer.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -710,7 +689,61 @@
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "The first, five years earlier, had been reported as a \"myoma,\" a benign muscle tumor.",
+      "sentence": "Both masses looked removable, so she had two operations.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-3",
+      "sentence": "The left upper lobe came out first, and the final pathology showed a malignant tumor in the HPC/SFT spectrum.",
+      "locator": "reports-09-00274-t001/r4",
+      "quote": "First thoracic intervention | Left upper lobectomy; histopathology confirmed the malignant tumor.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-3",
+      "sentence": "Six cycles of cisplatin-based chemotherapy followed.",
+      "locator": "sec2dot2-reports-09-00274/p2",
+      "quote": "Following the first pulmonary resection, the patient received six cycles of cisplatin-based systemic chemotherapy.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-3",
+      "sentence": "Then surgeons removed the right middle lobe, which held the same tumor.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-3",
+      "sentence": "Because this tumor type is known to spread, the team went back over her history.",
+      "locator": "sec2dot2-reports-09-00274/p3",
+      "quote": "Because of the known recurrence and metastatic potential of this tumor type, the patient’s medical history was reassessed in detail.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-3",
+      "sentence": "She then told them about two thigh operations.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-3",
+      "sentence": "The first, five years earlier, had reportedly been diagnosed as a \"myoma,\" a benign muscle tumor.",
       "locator": "sec2dot2-reports-09-00274/p3",
       "quote": "The first procedure, performed five years earlier, had reportedly resulted in a diagnosis of “myoma.” The second intervention, performed two years earlier for local recurrence, had no available histopathological report at the time of pulmonary diagnosis, as the patient and her family had not pursued further documentation, assuming the lesion was benign.",
       "supported": true,
@@ -719,7 +752,7 @@
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "The second, two years earlier, removed a regrowth.",
+      "sentence": "The second, two years earlier, treated a recurrence.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -728,25 +761,34 @@
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "The family never collected the pathology report from that second operation.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "When the doctors retrieved it, it showed malignant hemangiopericytoma, and the lung masses were reclassified as metastases from the thigh.",
-      "locator": "sec2dot1-reports-09-00274/p2",
-      "quote": "At initial pulmonary staging, no distant metastases were identified; however, the presence of bilateral large pulmonary lesions and subsequent confirmation of a prior malignant thigh hemangiopericytoma supported metastatic disease with poor prognostic implications.",
+      "sentence": "The family never obtained that pathology report because they assumed the lump was benign.",
+      "locator": "sec2dot2-reports-09-00274/p3",
+      "quote": "The first procedure, performed five years earlier, had reportedly resulted in a diagnosis of “myoma.” The second intervention, performed two years earlier for local recurrence, had no available histopathological report at the time of pulmonary diagnosis, as the patient and her family had not pursued further documentation, assuming the lesion was benign.",
       "supported": true,
       "direction_conflict": false,
       "page": 0
     },
     {
       "section_id": "PMC13510902-section-3",
-      "sentence": "Surgery and chemotherapy did not stop the disease.",
+      "sentence": "When the report was finally retrieved, it showed malignant hemangiopericytoma, and the lung masses were reinterpreted as metastases from the thigh.",
+      "locator": "sec2dot2-reports-09-00274/p3",
+      "quote": "After the second pulmonary surgery, the previous pathology report was retrieved and confirmed that the thigh lesion had been a malignant hemangiopericytoma.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-4",
+      "sentence": "Within a year she had metastases in the front and back of the brain, new lesions in both lungs and the mediastinum (the central chest compartment), and one under the skin.",
+      "locator": "sec2dot3-reports-09-00274/p1",
+      "quote": "Within one year, the patient developed frontal and occipital cerebral metastases, multiple bilateral pulmonary and mediastinal lesions, and a subcutaneous metastasis.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-4",
+      "sentence": "Further treatment did not control the disease.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -754,16 +796,7 @@
       "page": 0
     },
     {
-      "section_id": "PMC13510902-section-3",
-      "sentence": "Within a year she had tumors in the front and back of the brain, new lesions in both lungs and the central chest, and one under the skin.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-3",
+      "section_id": "PMC13510902-section-4",
       "sentence": "She died within 18 months of the lung diagnosis.",
       "locator": "abstract",
       "quote": "The patient died within 18 months of the initial pulmonary diagnosis.",
@@ -772,35 +805,17 @@
       "page": 0
     },
     {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "The authors believe this is the first documented Romanian case of hemangiopericytoma that spread to the lungs.",
-      "locator": "sec3-reports-09-00274/p3",
-      "quote": "To our knowledge, the present case represents the first documented Romanian case of metastatic pulmonary hemangiopericytoma.",
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The thigh pathology report settled where the lung tumors came from.",
+      "locator": "sec3-reports-09-00274/p5",
+      "quote": "This finding prompted a more detailed reassessment of the patient’s medical history and led to retrieval of the previous thigh tumor pathology report.",
       "supported": true,
       "direction_conflict": false,
       "page": 0
     },
     {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "For context, they cite a study of 213 patients with hemangiopericytoma of the brain.",
-      "locator": "sec3-reports-09-00274/p2",
-      "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1% [].",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "In that study the pleura and lung made up 18.4% of metastatic sites, second only to bone at 19.6%.",
-      "locator": "sec3-reports-09-00274/p2",
-      "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1% [].",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "The main point concerns a diagnostic trap.",
+      "section_id": "PMC13510902-section-5",
+      "sentence": "Without it, the list of possible causes stayed broad and the answer came late.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -808,35 +823,8 @@
       "page": 0
     },
     {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "The scans showed the masses were probably malignant but could not show where they came from.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "The answer needed tissue from surgery plus the old thigh report.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "The delay came from missing records and a history the patient had not fully given.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "ask directly about past soft tissue tumors when lung masses are unexplained",
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The authors make three recommendations for patients who have unexplained masses in both lungs and a history of recurring soft tissue tumors:",
       "locator": "sec3-reports-09-00274/p6",
       "quote": "In patients presenting with unexplained bilateral pulmonary masses and a history of recurrent soft tissue lesions, even when previously considered benign, earlier histopathological reports should be actively retrieved and reviewed.",
       "supported": true,
@@ -844,26 +832,89 @@
       "page": 0
     },
     {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "retrieve earlier pathology reports, even for tumors described as benign",
-      "locator": "abstract",
-      "quote": "It emphasizes the importance of detailed clinical history, retrieval of previous histopathological reports, and long-term surveillance in patients with soft tissue tumors, even when initially considered benign.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "keep patients with recurring soft tissue tumors under long-term surveillance",
+      "section_id": "PMC13510902-section-5",
+      "sentence": "Retrieve earlier pathology reports, even for lumps that were called benign.",
       "locator": "sec3-reports-09-00274/p6",
-      "quote": "This case also emphasizes that imaging alone may not establish the diagnosis, that long-term surveillance is essential after recurrent soft tissue tumors, and that management of rare aggressive tumors requires individualized multidisciplinary decision-making.",
+      "quote": "In patients presenting with unexplained bilateral pulmonary masses and a history of recurrent soft tissue lesions, even when previously considered benign, earlier histopathological reports should be actively retrieved and reviewed.",
       "supported": true,
       "direction_conflict": false,
       "page": 0
     },
     {
-      "section_id": "PMC13510902-section-4",
-      "sentence": "have a multidisciplinary team plan treatment for advanced disease, because evidence for chemotherapy is limited",
+      "section_id": "PMC13510902-section-5",
+      "sentence": "Keep these patients under long-term surveillance.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "Don't expect imaging alone to settle the diagnosis.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "For context, they cite a study of 213 patients with HPC of the brain.",
+      "locator": "sec3-reports-09-00274/p2",
+      "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1% [].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The most common sites of spread were bone (19.6%), pleura and lung (18.4%), liver (17.6%) and vertebrae (14.1%).",
+      "locator": "sec3-reports-09-00274/p2",
+      "quote": "In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1% [].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "HPC that starts in the lung is rarer still.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "In those cases, coughing blood and pain have been linked to worse outcomes, and growth into the airway (seen in about 10%) to better ones.",
+      "locator": "sec3-reports-09-00274/p2",
+      "quote": "Radiologically, endobronchial growth, reported in approximately 10% of cases, may be associated with a more favorable prognosis [,].",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The authors believe this is the first documented Romanian case of HPC spreading to the lung.",
+      "locator": "sec3-reports-09-00274/p3",
+      "quote": "To our knowledge, the present case represents the first documented Romanian case of metastatic pulmonary hemangiopericytoma.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "One earlier Romanian report described a tumor that started in the lung.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "There is little evidence on chemotherapy for advanced SFT, so treatment should be planned case by case by a team of specialists.",
       "locator": "sec1-reports-09-00274/p1",
       "quote": "The management of locally advanced or metastatic disease should be individualized through multidisciplinary discussion because evidence supporting systemic treatment remains limited [].",
       "supported": true,
@@ -872,73 +923,77 @@
     },
     {
       "section_id": "PMC13510902-section-5",
-      "sentence": "The report was written after the fact from incomplete records.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-5",
-      "sentence": "Several things are missing: the STAT6 stain, surgical margins, lymph node findings and details of the chemotherapy.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-5",
-      "sentence": "No scan was taken between chemotherapy and the second operation, so no one can say whether the right lung tumor shrank, stayed the same or grew.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-5",
-      "sentence": "The patient's own account could not be collected.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC13510902-section-5",
-      "sentence": "On the other side, both lung tumors were confirmed under the microscope, and the original pathology report established the link to the thigh.",
-      "locator": "sec3-reports-09-00274/p7",
-      "quote": "The strength of this case report lies in the histopathological confirmation of both pulmonary lesions and the subsequent retrieval of the previous thigh tumor pathology report, which clarified the metastatic origin of the disease.",
+      "sentence": "In this case the regimen details were not recorded.",
+      "locator": "sec2dot2-reports-09-00274/p2",
+      "quote": "Detailed information regarding the complete regimen, dose, treatment schedule, and rationale for treatment selection was not available in the records reviewed for this case report.",
       "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "No scan exists from between the chemotherapy and the second surgery, so it can't be known whether the drugs shrank the right-lung tumor.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The authors state the report's limits.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The records for the thigh tumor, the bronchoscopy and the operations are incomplete, so the surgical margins and lymph node status are unknown.",
+      "locator": "sec3-reports-09-00274/p7",
+      "quote": "The main limitations are its retrospective nature, incomplete initial documentation of the primary thigh tumor, limited availability of detailed bronchoscopy and operative records, lack of an interim radiological assessment after chemotherapy, unavailability of a complete immunohistochemical profile including STAT6, incomplete details regarding chemotherapy regimen, dosing, treatment rationale, and tolerability, and the inability to obtain the patient’s perspective because of the fatal outcome.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "The STAT6 result and full chemotherapy details are missing.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC13510902-section-5",
+      "sentence": "Because the patient died, her own account could not be collected.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
       "direction_conflict": false,
       "page": 0
     }
   ],
   "sources": {
-    "sec2dot3-reports-09-00274/p1": "Despite aggressive surgical and oncological management, the disease progressed rapidly. Within one year, the patient developed frontal and occipital cerebral metastases, multiple bilateral pulmonary and mediastinal lesions, and a subcutaneous metastasis. Further oncological management was attempted; however, the disease followed an aggressive course with rapid systemic dissemination. The patient died within 18 months of the initial pulmonary diagnosis.",
     "sec2dot1-reports-09-00274/p2": "Chest computed tomography revealed two solid pulmonary masses: one measuring 9.1 × 9.5 × 11 cm, located in the apical segment of the left upper lobe, with invasion of the mediastinal pleura, and a second lesion measuring 5.8 × 3.5 × 5 cm, located in the right middle lobe, with lateral pleural infiltration (C–E). No distant metastases were identified at the initial staging evaluation. Although histopathological confirmation was pending, the imaging characteristics raised strong suspicion of malignancy. The main diagnostic challenge was the absence of complete documentation regarding the patient’s previous recurrent thigh tumor at the time of pulmonary presentation. Because the prior lesion had reportedly been considered benign, metastatic hemangiopericytoma was not initially suspected. This delayed recognition of the extrapulmonary primary tumor and contributed to a broad initial differential diagnosis. At initial pulmonary staging, no distant metastases were identified; however, the presence of bilateral large pulmonary lesions and subsequent confirmation of a prior malignant thigh hemangiopericytoma supported metastatic disease with poor prognostic implications.",
+    "sec2dot3-reports-09-00274/p1": "Despite aggressive surgical and oncological management, the disease progressed rapidly. Within one year, the patient developed frontal and occipital cerebral metastases, multiple bilateral pulmonary and mediastinal lesions, and a subcutaneous metastasis. Further oncological management was attempted; however, the disease followed an aggressive course with rapid systemic dissemination. The patient died within 18 months of the initial pulmonary diagnosis.",
     "sec3-reports-09-00274/p2": "Pulmonary involvement may represent a primary thoracic tumor or metastatic disease from an extrapulmonary SFT. In the present patient, retrieval of the previous thigh pathology report was decisive in establishing the metastatic origin of the bilateral pulmonary lesions. This diagnostic step is particularly important when imaging is non-specific and the initial history of a recurrent soft-tissue tumor is incomplete. In a study of 213 patients with cerebral hemangiopericytoma followed for up to 372 months, the most frequent metastatic sites were bone, reported in 19.6% of cases; pleura and lung, in 18.4%; liver, in 17.6%; and vertebrae, in 14.1% []. Primary pulmonary hemangiopericytoma is even rarer, with only a limited number of cases described in the literature. These tumors are often minimally symptomatic; however, when present, hemoptysis and pain have been considered unfavorable prognostic indicators. Radiologically, endobronchial growth, reported in approximately 10% of cases, may be associated with a more favorable prognosis [,].",
-    "sec4-reports-09-00274/p1": "This case highlights the diagnostic and therapeutic complexity of malignant hemangiopericytoma with pulmonary metastases, a clinical entity so rare that it may not be considered during the initial diagnostic work-up. In the present case, delayed recognition of a previous recurrent soft tissue tumor, together with the non-specific presentation of hemoptysis in a tuberculosis-endemic region, contributed to a challenging diagnostic pathway.",
+    "sec2dot2-reports-09-00274/p3": "Because of the known recurrence and metastatic potential of this tumor type, the patient’s medical history was reassessed in detail. At that point, she disclosed two previous surgical interventions for a right thigh tumor. The first procedure, performed five years earlier, had reportedly resulted in a diagnosis of “myoma.” The second intervention, performed two years earlier for local recurrence, had no available histopathological report at the time of pulmonary diagnosis, as the patient and her family had not pursued further documentation, assuming the lesion was benign. After the second pulmonary surgery, the previous pathology report was retrieved and confirmed that the thigh lesion had been a malignant hemangiopericytoma. The bilateral pulmonary tumors were therefore interpreted as metastatic lesions originating from the previously treated soft tissue tumor.",
+    "sec3-reports-09-00274/p5": "Definitive diagnosis was established only after histopathological examination of the resected pulmonary lesions. This finding prompted a more detailed reassessment of the patient’s medical history and led to retrieval of the previous thigh tumor pathology report. The final interpretation was metastatic malignant hemangiopericytoma originating from a previously undertreated and insufficiently documented soft tissue tumor.",
     "abstract": "Background and Clinical Significance: Solitary fibrous tumor (SFT), historically termed hemangiopericytoma (HPC), is a rare fibroblastic mesenchymal neoplasm with variable biological behavior. Pulmonary involvement is uncommon and may represent either a primary thoracic tumor or metastatic disease from an extrapulmonary site. Its clinical course ranges from indolent, surgically curable disease to aggressive malignancy with local recurrence and distant dissemination. In this retrospective case, confirmatory STAT6 immunohistochemistry was unavailable; therefore, the tumor is described as a hemangiopericytoma/solitary fibrous tumor spectrum neoplasm. Case Presentation: We report the case of a 33-year-old woman who presented with sudden-onset hemoptysis and was found to have two large, well-defined bilateral pulmonary masses. Initial clinical and radiological evaluation raised suspicion of primary pulmonary tumors or other benign lesions. Because both lesions were considered resectable, staged pulmonary resections were performed. Subsequent reassessment of the patient’s medical history revealed previous surgeries for a poorly documented recurrent thigh tumor, later confirmed to represent the primary malignant hemangiopericytoma/solitary fibrous tumor spectrum neoplasm. Despite staged pulmonary resections, systemic chemotherapy, and further oncologic management, the disease progressed rapidly, with cerebral, bilateral pulmonary, mediastinal, and subcutaneous metastases. The patient died within 18 months of the initial pulmonary diagnosis. Conclusions: This case highlights the diagnostic difficulty of metastatic pulmonary hemangiopericytoma, particularly when the primary soft tissue tumor is inadequately documented. It emphasizes the importance of detailed clinical history, retrieval of previous histopathological reports, and long-term surveillance in patients with soft tissue tumors, even when initially considered benign.",
     "sec1-reports-09-00274/p1": "Solitary fibrous tumor (SFT) is a rare fibroblastic mesenchymal neoplasm that may arise at virtually any anatomical site. The term “hemangiopericytoma” (HPC), initially used for tumors with a characteristic perivascular growth pattern, has historical significance; however, current classifications incorporate soft-tissue tumors previously designated as HPC within the SFT spectrum [,,]. In this report, the term HPC is retained only when referring to the historical terminology used in the available pathology records. SFT exhibits heterogeneous biological behavior. Although many tumors remain localized, local recurrence and distant metastasis, including delayed relapse, may occur. Risk assessment incorporates clinicopathological variables such as patient age, tumor size, mitotic activity, and necrosis; therefore, long-term surveillance is warranted [,,]. The rarity of this entity is reflected in population-based data, with a reported incidence of 0.023 per 100,000 []. Thoracic involvement is uncommon and may represent either a primary thoracic SFT or metastatic disease from an extrapulmonary primary. Malignant thoracic tumors may show local invasion and distant dissemination, emphasizing the importance of complete staging and prolonged follow-up []. Imaging is essential for assessing tumor extent and planning treatment but is not diagnostic; histopathological examination, supported by immunohistochemistry when tissue is available, remains central to diagnosis [,]. Complete surgical resection is the principal treatment when technically feasible. The management of locally advanced or metastatic disease should be individualized through multidisciplinary discussion because evidence supporting systemic treatment remains limited []. In patients presenting with unusual pulmonary masses and a history of recurrent soft-tissue tumors, active retrieval and review of prior pathology are essential to establish the origin of the pulmonary lesions. Here, we report a patient with bilat",
     "reports-09-00274-f002/caption": "Figure 2: Histopathological features of malignant hemangiopericytoma/solitary fibrous tumor spectrum neoplasm. (A) Low-power hematoxylin and eosin staining showing a highly cellular spindle-cell tumor with prominent branching, thin-walled vascular spaces arranged in a characteristic “staghorn” pattern. (B) Intermediate-power view demonstrating densely packed spindle cells surrounding irregular vascular channels. (C) High-power view showing spindle-to-oval tumor cells with moderate nuclear atypia and increased cellularity. (D) High-power view (400×) showing tumor cells with moderate nuclear atypia."
   },
   "verification": {
-    "checked": 10,
-    "passed": 10,
-    "rejections": [
-      {
-        "what": "term 'Hemangiopericytoma' (quote)",
-        "locator": "sec3-reports-09-00274/p1",
-        "reason": "the defining sentence is not in the paper, so the definition is shown as ours"
-      }
-    ],
-    "prose_checked": 10,
+    "checked": 11,
+    "passed": 11,
+    "rejections": [],
+    "prose_checked": 11,
     "prose_unmatched": [],
-    "sentences": 54,
-    "anchored": 21,
+    "sentences": 58,
+    "anchored": 29,
     "direction_conflicts": 0
   },
   "notes": []

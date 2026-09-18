@@ -27,65 +27,67 @@
   "published": "2024-05-13 00:00:00",
   "doi": "10.1038/s41591-024-02996-7",
   "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11271387/",
-  "question": "In adults with cardiovascular disease and overweight or obesity but no diabetes, how much weight did weekly semaglutide 2.4 mg take off over 4 years compared with placebo, and was it safe across body sizes?",
+  "question": "How much weight do adults with cardiovascular disease and overweight or obesity, but no diabetes, lose on weekly semaglutide compared with placebo over up to 4 years, and does the loss last?",
   "bottom_line": {
-    "question": "In adults with cardiovascular disease and overweight or obesity but no diabetes, how much weight did weekly semaglutide 2.4 mg take off over 4 years compared with placebo, and was it safe across body sizes?",
-    "answer": "By week 208, mean body weight had changed by −10.2% with semaglutide and −1.5% with placebo, a treatment difference of −8.7%; weight fell until week 65 and then held.",
+    "question": "How much weight do adults with cardiovascular disease and overweight or obesity, but no diabetes, lose on weekly semaglutide compared with placebo over up to 4 years, and does the loss last?",
+    "answer": "With semaglutide, body weight kept falling until week 65 and then stayed down: at week 208 it was 10.2% below baseline, against 1.5% with placebo, a treatment difference of 8.7%.",
     "provenance": {
       "locator": "Sec5/p1",
       "kind": "paragraph",
-      "quote": "For those in the semaglutide group, the weight-loss trajectory continued to week 65 and then was sustained for the study period through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001).",
+      "quote": "the weight-loss trajectory continued to week 65 and then was sustained for the study period through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001)",
       "section": "Results, Percentage weight loss"
     },
-    "effect": "−8.7%",
+    "effect": "8.7%",
     "verdict": "better"
   },
   "sections": [
     {
       "id": "PMC11271387-section-1",
-      "title": "Why the Study Was Done",
-      "markdown": "Worldwide obesity, defined as a body mass index (BMI) of 30 or more, has nearly tripled since 1975. Excess body fat drives cardiovascular disease and adds to diabetes, kidney disease and cancer. The most harmful kinds are **visceral fat**, which is packed around the organs, and ectopic fat, which is stored in places it doesn't belong. Health measures such as heart risk factors, blood sugar and quality of life start to improve after about 5% weight loss, and larger losses help more. Diet and exercise alone rarely produce weight loss that is both large and lasting.\n\nDrugs that change appetite make a loss of 10% or more more likely. Semaglutide belongs to a class of these drugs called GLP-1 receptor agonists. As a once-weekly 2.4 mg injection under the skin, it is approved for long-term weight management. Lower doses are approved for type 2 diabetes.\n\nThe SELECT trial tested whether semaglutide 2.4 mg prevents heart attacks, strokes and cardiovascular deaths in people who already had heart disease and were overweight or obese but did not have diabetes. It cut these events by 20% (hazard ratio 0.80, 95% confidence interval 0.72 to 0.90). The analysis summarized here was planned before the data came in. It asks different questions of the same trial:\n\n- how much weight people lost, and whether they kept it off for four years\n- how waist size changed\n- whether safety depended on starting body size\n\nBecause SELECT ran for up to 208 weeks, it is the longest placebo-controlled trial of semaglutide's effect on weight.",
-      "chart_ids": [],
+      "title": "The Question and Why It Matters",
+      "markdown": "Semaglutide is a once-weekly injected drug that reduces appetite. It belongs to a class called glucagon-like peptide-1 (GLP-1) receptor agonists, and at a dose of 2.4 mg it is approved for long-term weight management. The SELECT trial had already shown that in 17,604 adults with cardiovascular disease and overweight or obesity, but no diabetes, semaglutide lowered the risk of major cardiovascular events (heart attack, stroke or cardiovascular death) by 20%. This analysis returns to the same trial with a different question. How much weight did people lose, did they keep it off, and did the answer change with body size, sex, race, region or health status?\n\nSELECT ran for 208 weeks (about four years), which makes it the longest placebo-controlled trial of semaglutide's effect on weight. Its participants came from 41 countries.\n\n## Why measure more than weight\n\nObesity is defined as a body mass index (BMI) of 30 or more, and its worldwide rate has nearly tripled since 1975. BMI works well for tracking whole populations. For one person, though, it says little about how much fat they carry or where it is. Fat packed around the organs (visceral fat) or stored where it does not belong (ectopic fat) drives heart disease and contributes to diabetes, kidney disease and cancer.\n\nLosing about 5% of body weight starts to improve heart risk factors, blood sugar and quality of life, and larger losses bring larger gains. Lifestyle changes alone have struggled to produce lasting, clinically significant weight loss. Drugs that change appetite make a loss of 10% or more more likely.\n\nBecause BMI is a blunt measure, the authors also tracked **anthropometric measures**, simple body measurements that stand in for how much fat a person has and where it sits. Besides BMI, the two main ones were waist circumference and waist-to-height ratio:\n\nwaist-to-height ratio = waist circumference / height\n\nA ratio above 0.5 is a standard marker of raised cardiometabolic risk, meaning risk of heart and metabolic disease.",
+      "chart_ids": [
+        "primary-difference"
+      ],
       "figure_ids": [
         "Fig1",
-        "Fig6"
+        "Fig6",
+        "Fig4"
       ]
     },
     {
       "id": "PMC11271387-section-2",
-      "title": "How the Trial Was Run and What Was Measured",
-      "markdown": "## The trial\n\nSELECT enrolled 17,604 adults from 41 countries between 2018 and 2021. Everyone was at least 45, had a BMI of 27 or more, and had established cardiovascular disease: a previous heart attack, a previous stroke, or symptomatic peripheral artery disease. The average participant was 61.6 years old with a BMI of 33.3, and 72.3% were men.\n\nParticipants were randomly split 1:1 between weekly semaglutide and placebo, and the trial was double-blind (neither patients nor doctors knew who got which). The semaglutide dose started at 0.24 mg and rose every four weeks until it reached 2.4 mg at week 16. If side effects were a problem, doctors could slow the increases, pause treatment, or keep a patient on a lower dose. Both groups got standard heart-disease care, which included lifestyle counseling that was not aimed at weight loss.\n\nThe team sorted participants into four BMI groups: overweight (under 30), class I obesity (30 to under 35), class II (35 to under 40) and class III (40 or more). These groups differed in makeup. Asian participants were 14.5% of the overweight group but only 2.2% of class III. Women were 20.8% of the overweight group and 45.5% of class III.\n\n## What was measured\n\nBesides weight, the researchers tracked **anthropometric measures**, simple body measurements that stand in for how much fat a person carries and where it sits. BMI is the best known:\n\nBMI = weight in kilograms / (height in meters x height in meters)\n\nBMI tracks body fat well across a population, but for one person it can mislead because it ignores where the fat is. So the team also measured waist circumference (halfway between the lowest rib and the top of the hip bone) and the waist-to-height ratio:\n\nwaist-to-height ratio = waist circumference / height\n\nA ratio above 0.5 is the usual sign of raised cardiometabolic risk, meaning risk of heart and metabolic disease. The team also counted how many people fell below waist cutoffs that depend on sex and race: 80 cm for Asian women, 88 cm for non-Asian women and Asian men, and 102 cm for non-Asian men.\n\nThere are two ways of counting in the results. The main **in-trial** analysis follows the intention-to-treat principle: everyone who was randomized counts in their assigned group, whether or not they kept taking the drug. The \"first on-treatment\" analysis counts each person only until the first time they went more than 35 days without the drug. That shows what the drug does for people who stay on it. Most results are reported as a treatment difference:\n\ntreatment difference = change with semaglutide - change with placebo\n\nMissing measurements were filled in statistically. The confidence intervals were not adjusted for the many comparisons made, so the authors warn against treating any single one as definitive.",
+      "title": "Who Took Part and How the Study Worked",
+      "markdown": "## Who was in the trial\n\nTo qualify, people had to be 45 or older, have a BMI of at least 27, and have established cardiovascular disease: a prior heart attack, a prior stroke, or symptomatic peripheral artery disease. Anyone with diabetes was excluded. Participants were 72.3% male, with an average age of 61.6 and an average BMI of 33.3.\n\nThe mix of people changed across BMI groups. Asian participants made up 14.5% of those with a BMI under 30 but only 2.2% of those at 40 or above. Women followed the opposite pattern, rising from 20.8% of the overweight group to 45.5% of the heaviest group. Raised C-reactive protein, a blood marker of inflammation, also rose with BMI, from 36.4% of the overweight group to 72.0% of the heaviest.\n\n## How the study worked\n\nThis was a **prespecified analysis**, meaning the weight questions were planned before the results were known. That keeps researchers from searching the data afterward for a flattering pattern. SELECT was randomized and double-blind. People were assigned by chance, in equal numbers, to semaglutide or placebo, and neither they nor their doctors knew which one they got.\n\nThe dose started at 0.24 mg a week and stepped up every four weeks until it reached 2.4 mg at week 16. If side effects got in the way, doctors could slow the increases, pause treatment or keep someone on a lower dose. Both groups received standard heart care, including lifestyle advice, but that advice did not target weight loss. SELECT was a heart trial, and weight was a secondary outcome.\n\nThe main results follow the **intention-to-treat** principle: everyone counts in the group they were assigned to, whether or not they kept taking the drug. This shows what happens when the drug is prescribed, including to people who stop taking it. About 97% of each arm stayed in the trial, but 30.6% of the semaglutide group and 27.0% of the placebo group stopped their assigned treatment at some point. Missing measurements were filled in with multiple imputation, a method that generates many plausible complete datasets and pools the answers.\n\nA second approach, the **first on-treatment analysis**, uses each person's data only up to the first time they went more than 35 days without the drug. It estimates the effect in people who actually take it.\n\nThe headline number throughout is the treatment difference:\n\ntreatment difference = average change on semaglutide - average change on placebo\n\nEach difference comes with a 95% confidence interval (CI), a range likely to contain the true value. The authors warn that these intervals were not adjusted for the many comparisons made, so no single subgroup result should be treated as definitive.",
       "chart_ids": [
-        "primary-by-arm"
+        "weight-by-arm"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC11271387-section-3",
-      "title": "Weight Loss, Waist Size and Who Benefited Most",
-      "markdown": "## Weight and waist results\n\nPeople on semaglutide kept losing weight until about week 65 (roughly 15 months) and then held steady through week 208. At four years, the semaglutide group had lost an average of 10.2% of body weight, compared with 1.5% on placebo:\n\ntreatment difference = -10.2% - (-1.5%) = -8.7 percentage points (95% CI -9.42 to -7.88)\n\nPeople who stayed on the drug (the first on-treatment analysis) lost 11.7%, compared with 1.5% on placebo, a difference of 10.2 points. The gap between the two analyses comes from people who stopped taking semaglutide.\n\nAt two years, these were the shares of each group reaching each weight-loss milestone:\n\n- 5% or more: 67.8% on semaglutide vs 21.3% on placebo\n- 10% or more: 44.2% vs 6.9%\n- 15% or more: 22.9% vs 1.7%\n- 20% or more: 11.0% vs 0.6%\n- 25% or more: 4.9% vs 0.1%\n\nPlots of each person's weight change show wide variation between individuals in both groups, with the semaglutide group shifted toward larger losses.\n\nWaist size followed the same pattern as weight. At four years, waists had shrunk by 7.7 cm on semaglutide and 1.3 cm on placebo, a difference of 6.4 cm. The waist-cutoff analysis covered only people starting with a BMI under 35, because above that level waist measurement is harder and less accurate. In this group, about 15% of each arm started below their sex- and race-specific cutoff. At two years, 41.2% of the semaglutide group was below it, compared with 18.0% on placebo.\n\nThe average waist-to-height ratio at the start was 0.66. Even the lowest third of participants averaged above 0.62, well past the 0.5 threshold, so this population had large waists. At four years, the ratio had fallen by 6.9% on semaglutide and 1.0% on placebo.\n\nBMI categories shifted as well. At two years, 52.4% of semaglutide patients had dropped at least one BMI category, compared with 15.7% on placebo. On semaglutide, 12.0% reached a healthy BMI under 25, compared with 1.2% on placebo. No one started in that range, because the entry criteria required a BMI of 27 or more. The share with obesity fell from 71.0% to 43.3% on semaglutide and from 71.9% to 67.9% on placebo.\n\n## Who lost more and who lost less\n\nA forest plot of prespecified subgroups showed clinically meaningful weight loss in every group, but the amount varied:\n\n- Relative to placebo, women lost more than men (11.1 vs 7.5 percentage points).\n- Younger participants lost slightly more than older ones.\n- People with a lower starting BMI lost slightly less.\n- Asian participants lost somewhat less (7.3 points more than placebo). The authors note that they were concentrated in the lowest BMI group, which lost less overall.\n\nThe age and BMI differences were statistically significant but small. Three factors made no difference: ethnicity (Hispanic or not), blood sugar status (prediabetes or normal) and kidney function. Every one of those subgroups showed a treatment difference of about 8.5 points.",
+      "title": "How Much Weight People Lost, and Who Lost More",
+      "markdown": "## Weight and body measurements\n\nOn semaglutide, weight fell steadily until about week 65 and then held steady through week 208. At four years:\n\ntreatment difference = -10.2% - (-1.5%) = -8.7%\n\nPeople on semaglutide lost 10.2% of their body weight on average, compared with 1.5% on placebo (95% CI for the difference, -9.42 to -7.88). Counting only time on the drug, the loss was 11.7%, a gap of 10.2 points over placebo.\n\nAverages hide how much people vary, so the authors also counted how many people passed each weight-loss threshold at two years:\n\n- At least 5% lost: 67.8% on semaglutide versus 21.3% on placebo\n- At least 10%: 44.2% versus 6.9%\n- At least 15%: 22.9% versus 1.7%\n- At least 20%: 11.0% versus 0.6%\n- At least 25%: 4.9% versus 0.1%\n\nWaterfall plots, which draw each person's weight change as a separate bar, show wide individual variation in both groups. Losses on semaglutide were larger and more frequent.\n\nWaist size moved with weight. At four years, waist circumference fell by 7.7 cm on semaglutide and 1.3 cm on placebo (a 6.4 cm difference). Waist-to-height ratio fell by 6.9% versus 1.0%. The average starting ratio was 0.66, and even the third of participants with the lowest ratios were above the 0.5 risk marker. This was a group with large waists.\n\nThe team also checked how many people got below waist **cutoff points**, thresholds that differ by sex and race: 80 cm for Asian women, 88 cm for non-Asian women and for Asian men, and 102 cm for non-Asian men. They limited this check to people with a BMI under 35, because at higher BMI the waist is harder to measure and predicts risk less well. About 15% of each group started below the cutoff. By two years, 41.2% of the semaglutide group were below it, compared with 18.0% on placebo.\n\nPeople also moved between BMI classes. At two years, 52.4% on semaglutide had dropped at least one class, compared with 15.7% on placebo. On semaglutide, 12.0% reached a BMI under 25, the healthy range, compared with 1.2% on placebo. Nobody started in that range, because entry required a BMI of at least 27. The share with obesity fell from 71.0% to 43.3% on semaglutide and from 71.9% to 67.9% on placebo.\n\n## Who lost more and who lost less\n\nThe authors split results into prespecified subgroups and showed them in a forest plot, a chart that places each subgroup's treatment difference and confidence interval side by side. Every subgroup reached clinically meaningful weight loss, but by different amounts:\n\n- Women lost more than men: 11.1 points more than placebo, against 7.5 for men.\n- Younger people lost slightly more than older people, but the gaps were small.\n- People with a BMI under 30 lost a smaller percentage. Above 30, the three obesity classes lost similar amounts.\n- Asian participants lost a little less, about 7.3 points more than placebo. This may reflect how many of them were in the lowest BMI group.\n- Hispanic ethnicity, blood sugar status (prediabetes or normal) and kidney function made no difference.",
       "chart_ids": [
-        "categorical-loss",
-        "primary-difference",
-        "size-categories"
+        "categorical-weight-loss",
+        "body-size-thresholds"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC11271387-section-4",
-      "title": "Safety and Tolerability",
-      "markdown": "In SELECT's main results, 16.6% of semaglutide patients stopped the drug because of an adverse event, twice the 8.2% on placebo. Broken down by body size, the pattern was graded: the lower the starting BMI, the more often people stopped semaglutide. Placebo showed no such trend. The authors think people with smaller bodies may get a higher effective dose of the drug. They also say differences in motivation or in cultural attitudes toward body size could play a part.\n\nSerious adverse events were less common on semaglutide overall (33.4% of patients vs 36.4% on placebo), mainly because there were fewer cardiovascular events and infections. This held in every BMI group. The rates below are events per 100 years of observation, which allows a fair comparison when people were followed for different lengths of time:\n\n| BMI group | Semaglutide | Placebo |\n|---|---|---|\n| under 30 | 43.23 | 50.48 |\n| 30 to under 35 | 43.54 | 49.66 |\n| 35 to under 40 | 51.07 | 52.73 |\n| 40 or more | 47.06 | 60.85 |\n\nThere was no evidence that the effect differed between BMI groups. Serious gut, liver or gallbladder events were no more common on semaglutide in any group, and no new safety signals appeared.",
-      "chart_ids": [],
-      "figure_ids": []
-    },
-    {
-      "id": "PMC11271387-section-5",
-      "title": "What the Results Mean, Limitations and Bottom Line",
-      "markdown": "## Why the weight loss was smaller than in an earlier trial\n\nThe earlier STEP 1 trial of the same dose found 14.9% weight loss at 68 weeks, compared with 2.4% on placebo. That is a 12.5-point difference, against 8.7 points in SELECT. The authors argue the smaller figure is expected, for three reasons:\n\n- **Trial purpose.** SELECT was a heart-outcomes trial in which weight was a secondary measure. STEP 1 volunteers joined to lose weight and followed a structured program: eating 500 fewer calories a day and exercising 150 minutes a week.\n- **Population.** STEP 1 enrolled younger, healthier people, many more women (73.1% vs 27.7% of the semaglutide groups), and people with a higher average BMI (37.8 vs 33.3).\n- **Dosing.** SELECT's dosing was more flexible. By week 104, about 77% of SELECT patients still taking the drug were on the full 2.4 mg, compared with 89.6% in STEP 1 at week 68.\n\nThe larger loss in SELECT's on-treatment analysis fits this explanation.\n\n## Why people with lower BMI lost less\n\nPeople with a BMI under 30 lost a smaller share of their weight than people with obesity, even though they got the same drug and possibly a higher effective dose. Above a BMI of 30, losses were similar across the obesity classes. Look AHEAD, a trial of diet and exercise, saw the same pattern.\n\nThe authors offer an explanation based on the **settling point**, also called the set point. Every weight-loss treatment eventually levels off at a weight that matches a person's genes and environment, and people with a lower BMI may already be close to that point. The authors add that the health gains come from losing visceral and ectopic fat, not fat stored on the hips and thighs. If so, people with heart disease and a lower BMI may need to lose less total weight to benefit. They present this as a hypothesis for future studies to test.\n\n## Limitations\n\n- **Not a prevention trial.** Everyone in SELECT already had heart disease, so its heart results should not be applied to everyone with excess weight.\n- **Small subgroups.** Some racial subgroups were too small to show differences.\n- **BMI floor of 27.** The trial left out people with a BMI under 27. That excludes many Asian patients who qualify for obesity drugs at lower BMI and waist thresholds under their own countries' guidelines. The authors call for trials in this group.\n- **No body composition data.** The trial did not measure fat mass, lean mass or muscle, so it cannot say what kind of tissue was lost.\n\n## Bottom line\n\nFor four years, weekly semaglutide 2.4 mg was tested in a large, diverse group of adults with heart disease and excess weight but no diabetes. It produced 8.7 percentage points more weight loss than placebo, along with matching drops in waist size and waist-to-height ratio. Weight loss peaked at around 15 months and was maintained. Clinically meaningful loss occurred in both sexes and in every race, region and body-size group. Serious adverse events were less frequent than on placebo in every BMI group, although people with a lower BMI stopped the drug more often. The authors see these results as support for broad use of semaglutide 2.4 mg to reduce cardiovascular events in people with overweight or obesity and existing heart disease.",
+      "title": "Safety and Side Effects",
+      "markdown": "## Safety and side effects\n\nThe main SELECT report found that side effects led 16.6% of the semaglutide group to stop treatment, compared with 8.2% on placebo. When the authors broke this down by BMI, a gradient appeared: the lower the BMI, the more often people stopped semaglutide. Placebo showed no such pattern. The authors suspect that a fixed 2.4 mg dose gives smaller people more drug relative to their size. Differences in motivation and in cultural attitudes toward body size could also contribute.\n\nSerious adverse events were less common on semaglutide, both overall (33.4% of patients versus 36.4%) and within every BMI group. The authors expressed them as a rate:\n\nrate = number of serious events / total years of observation x 100\n\nThis gives events per 100 years of observation. For BMI under 30, 30 to 35, 35 to 40, and 40 or more, the rates were 43.23, 43.54, 51.07 and 47.06 on semaglutide, compared with 50.48, 49.66, 52.73 and 60.85 on placebo. Most of the gap came from fewer cardiovascular events and fewer infections. In no BMI group were serious gut, liver or gallbladder problems more common on semaglutide, and no new safety signals appeared.",
       "chart_ids": [
         "subgroups",
         "sae-by-bmi"
       ],
+      "figure_ids": []
+    },
+    {
+      "id": "PMC11271387-section-5",
+      "title": "What the Results Mean and Where They Stop",
+      "markdown": "## Why less weight loss than in STEP 1?\n\nSTEP 1 was an earlier semaglutide trial in people without diabetes. There, weight loss at 68 weeks was 14.9% on the drug against 2.4% on placebo, a 12.5-point difference, well above SELECT's 8.7. The authors give three reasons to expect a smaller number in SELECT. First, STEP 1 enrolled people who wanted to lose weight and put them on a structured program (500 fewer calories a day and 150 minutes of exercise a week). SELECT enrolled heart patients who got general advice. Second, STEP 1's participants were younger, healthier, heavier (average BMI 37.8 versus 33.3) and mostly women (73.1% versus 27.7%). Third, SELECT let doctors slow, reduce or pause the dose. At two years, about 77% of SELECT patients still on treatment were taking the full 2.4 mg, compared with 89.6% in STEP 1 at week 68. The larger loss in SELECT's on-treatment analysis supports this last point.\n\n## The lower-BMI puzzle\n\nPeople with a BMI under 30 lost a smaller share of their weight, even though they probably received more drug per kilogram. Look AHEAD, a lifestyle weight-loss study, found the same pattern. The authors point to the **settling point** (or set point). Every weight-loss treatment eventually reaches a plateau, a weight that matches a person's genetic and environmental makeup, and people who start at a lower BMI may already be closer to it. The authors also note that the heart and metabolic benefits of weight loss come from shrinking visceral and ectopic fat rather than fat on the hips and thighs. A person with heart disease and a BMI under 30 might therefore need less total weight loss to get the same health benefit. The authors present this as an idea that still needs testing.\n\n## Limitations\n\nSELECT enrolled only people who already had cardiovascular disease. Its results should not be applied to preventing a first heart attack or stroke in everyone with excess weight. Racial subgroups were too small to show differences between them reliably. Nobody with a BMI under 27 was included, which leaves out many Asian patients whose national guidelines recommend obesity drugs at lower BMI and waist thresholds, and the authors call for trials in that group. The trial measured weight and waist but not body composition, so it cannot say how much of the loss was fat and how much was muscle or other lean tissue.\n\n## Bottom line\n\nIn people with cardiovascular disease and overweight or obesity but no diabetes, weekly semaglutide 2.4 mg produced about 10% weight loss that lasted four years, along with matching drops in waist size and waist-to-height ratio. The effect held across sex, age, race, region, blood sugar status, kidney function and body size. Serious adverse events were lower than on placebo in every BMI group. The drawback was tolerability: more people stopped taking the drug, especially those with a lower BMI. The authors conclude that the results support broad use of semaglutide to reduce cardiovascular events in this population.",
+      "chart_ids": [],
       "figure_ids": []
     }
   ],
@@ -94,10 +96,10 @@
       "id": "primary-difference",
       "kind": "stat",
       "title": "Weight change at week 208, semaglutide versus placebo",
-      "subtitle": "Difference in mean percentage change in body weight, all randomised patients",
+      "subtitle": "Difference between groups in mean percentage change from baseline, in-trial analysis",
       "data": [
         {
-          "label": "Treatment difference, in-trial",
+          "label": "Semaglutide vs placebo, week 208",
           "value": -8.7,
           "low": -9.42,
           "high": -7.88,
@@ -109,7 +111,7 @@
           "provenance": {
             "locator": "Sec5/p1",
             "kind": "paragraph",
-            "quote": "−1.5% for the placebo group; treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001",
+            "quote": "treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001",
             "section": "Results, Percentage weight loss"
           }
         }
@@ -126,18 +128,18 @@
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "Weight was a supportive secondary endpoint in a cardiovascular outcomes trial, and the in-trial analysis includes patients who stopped semaglutide.",
-      "source": "Results, percentage weight loss, week 208",
+      "caveat": "",
+      "source": "Results, Percentage weight loss",
       "section_id": "Sec5"
     },
     {
-      "id": "primary-by-arm",
+      "id": "weight-by-arm",
       "kind": "bars",
-      "title": "Mean weight change at week 208, by arm",
-      "subtitle": "Everyone randomised, and patients analysed only while they were taking the drug",
+      "title": "Mean change in body weight at week 208, by group",
+      "subtitle": "Percentage change from baseline",
       "data": [
         {
-          "label": "In-trial (everyone randomised)",
+          "label": "In-trial analysis",
           "value": -10.2,
           "low": null,
           "high": null,
@@ -149,12 +151,12 @@
           "provenance": {
             "locator": "Sec5/p1",
             "kind": "paragraph",
-            "quote": "through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group",
+            "quote": "through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%",
             "section": "Results, Percentage weight loss"
           }
         },
         {
-          "label": "In-trial (everyone randomised)",
+          "label": "In-trial analysis",
           "value": -1.5,
           "low": null,
           "high": null,
@@ -166,12 +168,12 @@
           "provenance": {
             "locator": "Sec5/p1",
             "kind": "paragraph",
-            "quote": "through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group",
+            "quote": "through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%",
             "section": "Results, Percentage weight loss"
           }
         },
         {
-          "label": "First on-treatment",
+          "label": "First on-treatment analysis",
           "value": -11.7,
           "low": null,
           "high": null,
@@ -188,7 +190,7 @@
           }
         },
         {
-          "label": "First on-treatment",
+          "label": "First on-treatment analysis",
           "value": -1.5,
           "low": null,
           "high": null,
@@ -210,25 +212,25 @@
       "edges": [],
       "shape": "",
       "unit": "%",
-      "value_label": "Change in body weight from baseline",
+      "value_label": "Change in body weight (%)",
       "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "On-treatment data stop at a patient's first gap of more than 35 days off the drug, so they describe patients who kept taking it.",
-      "source": "Results, percentage weight loss (Fig. 1)",
+      "caveat": "The first on-treatment analysis follows each patient only until they first spent more than 35 days off treatment.",
+      "source": "Results, Percentage weight loss",
       "section_id": "Sec5"
     },
     {
-      "id": "categorical-loss",
+      "id": "categorical-weight-loss",
       "kind": "bars",
       "title": "Share of patients reaching each weight-loss threshold at week 104",
-      "subtitle": "In-trial population",
+      "subtitle": "",
       "data": [
         {
-          "label": "≥5% loss",
+          "label": "At least 5%",
           "value": 67.8,
           "low": null,
           "high": null,
@@ -245,7 +247,7 @@
           }
         },
         {
-          "label": "≥5% loss",
+          "label": "At least 5%",
           "value": 21.3,
           "low": null,
           "high": null,
@@ -262,7 +264,7 @@
           }
         },
         {
-          "label": "≥10% loss",
+          "label": "At least 10%",
           "value": 44.2,
           "low": null,
           "high": null,
@@ -279,7 +281,7 @@
           }
         },
         {
-          "label": "≥10% loss",
+          "label": "At least 10%",
           "value": 6.9,
           "low": null,
           "high": null,
@@ -296,7 +298,7 @@
           }
         },
         {
-          "label": "≥15% loss",
+          "label": "At least 15%",
           "value": 22.9,
           "low": null,
           "high": null,
@@ -313,7 +315,7 @@
           }
         },
         {
-          "label": "≥15% loss",
+          "label": "At least 15%",
           "value": 1.7,
           "low": null,
           "high": null,
@@ -330,7 +332,7 @@
           }
         },
         {
-          "label": "≥20% loss",
+          "label": "At least 20%",
           "value": 11.0,
           "low": null,
           "high": null,
@@ -347,7 +349,7 @@
           }
         },
         {
-          "label": "≥20% loss",
+          "label": "At least 20%",
           "value": 0.6,
           "low": null,
           "high": null,
@@ -364,7 +366,7 @@
           }
         },
         {
-          "label": "≥25% loss",
+          "label": "At least 25%",
           "value": 4.9,
           "low": null,
           "high": null,
@@ -381,7 +383,7 @@
           }
         },
         {
-          "label": "≥25% loss",
+          "label": "At least 25%",
           "value": 0.1,
           "low": null,
           "high": null,
@@ -398,152 +400,30 @@
           }
         }
       ],
-      "annotation": null,
+      "annotation": {
+        "target": "At least 10%",
+        "text": "44.2% on semaglutide lost at least 10% of body weight, against 6.9% on placebo"
+      },
       "nodes": [],
       "edges": [],
       "shape": "",
       "unit": "%",
-      "value_label": "Patients reaching the threshold",
-      "category_label": "",
+      "value_label": "Patients (%)",
+      "category_label": "Weight lost from baseline",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "",
-      "source": "Results, categorical weight loss at week 104 (Fig. 2a)",
+      "caveat": "In-trial population at week 104 (2 years), not week 208.",
+      "source": "Results, Categorical weight loss",
       "section_id": "Sec6"
-    },
-    {
-      "id": "size-categories",
-      "kind": "bars",
-      "title": "Patients moving into lower size categories by week 104",
-      "subtitle": "In-trial population",
-      "data": [
-        {
-          "label": "Moved to a lower BMI class",
-          "value": 52.4,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Semaglutide",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec10/p1",
-            "kind": "paragraph",
-            "quote": "At week 104, 52.4% of patients treated with semaglutide achieved improvement in BMI category compared with 15.7% of those receiving placebo.",
-            "section": "Results, BMI category change"
-          }
-        },
-        {
-          "label": "Moved to a lower BMI class",
-          "value": 15.7,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Placebo",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec10/p1",
-            "kind": "paragraph",
-            "quote": "At week 104, 52.4% of patients treated with semaglutide achieved improvement in BMI category compared with 15.7% of those receiving placebo.",
-            "section": "Results, BMI category change"
-          }
-        },
-        {
-          "label": "Waist below risk cutoff (baseline BMI under 35)",
-          "value": 41.2,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Semaglutide",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec8/p1",
-            "kind": "paragraph",
-            "quote": "At week 104, 41.2% fell below the sex- and race-specific cutoff points for the semaglutide group, compared with only 18.0% for the placebo group",
-            "section": "Results, WC cutoff points"
-          }
-        },
-        {
-          "label": "Waist below risk cutoff (baseline BMI under 35)",
-          "value": 18.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Placebo",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec8/p1",
-            "kind": "paragraph",
-            "quote": "At week 104, 41.2% fell below the sex- and race-specific cutoff points for the semaglutide group, compared with only 18.0% for the placebo group",
-            "section": "Results, WC cutoff points"
-          }
-        },
-        {
-          "label": "Reached healthy BMI (under 25)",
-          "value": 12.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Semaglutide",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec10/p1",
-            "kind": "paragraph",
-            "quote": "In the semaglutide group, 12.0% of patients achieved a BMI <25 kg m−2, which is considered the healthy BMI category, compared with 1.2% for placebo",
-            "section": "Results, BMI category change"
-          }
-        },
-        {
-          "label": "Reached healthy BMI (under 25)",
-          "value": 1.2,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "Placebo",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "Sec10/p1",
-            "kind": "paragraph",
-            "quote": "In the semaglutide group, 12.0% of patients achieved a BMI <25 kg m−2, which is considered the healthy BMI category, compared with 1.2% for placebo",
-            "section": "Results, BMI category change"
-          }
-        }
-      ],
-      "annotation": null,
-      "nodes": [],
-      "edges": [],
-      "shape": "",
-      "unit": "%",
-      "value_label": "Patients",
-      "category_label": "",
-      "log_scale": false,
-      "null_value": null,
-      "lower_is_better": true,
-      "favours_left": "",
-      "favours_right": "",
-      "caveat": "Waist cutoffs are shown for baseline BMI under 35 only. At baseline 15.0% (semaglutide) and 14.3% (placebo) were already below them. No one started below BMI 25.",
-      "source": "Results, WC cutoff points and BMI category change",
-      "section_id": "Sec10"
     },
     {
       "id": "subgroups",
       "kind": "forest",
-      "title": "Weight change versus placebo at week 104, by subgroup",
-      "subtitle": "Estimated treatment difference in percentage body weight change",
+      "title": "Extra weight loss with semaglutide at week 104, by subgroup",
+      "subtitle": "Estimated treatment difference in percentage change in body weight, with 95% CI",
       "data": [
         {
           "label": "Women",
@@ -558,7 +438,7 @@
           "provenance": {
             "locator": "Sec11/p1",
             "kind": "paragraph",
-            "quote": "Women had a greater difference in mean weight loss with semaglutide versus placebo (−11.1% (95% CI −11.56 to −10.66)",
+            "quote": "Women had a greater difference in mean weight loss with semaglutide versus placebo (−11.1% (95% CI −11.56 to −10.66) versus −7.5% in men (95% CI −7.78 to −7.23); P < 0.0001).",
             "section": "Results, Subgroups"
           }
         },
@@ -575,7 +455,7 @@
           "provenance": {
             "locator": "Sec11/p1",
             "kind": "paragraph",
-            "quote": "versus −7.5% in men (95% CI −7.78 to −7.23); P < 0.0001)",
+            "quote": "Women had a greater difference in mean weight loss with semaglutide versus placebo (−11.1% (95% CI −11.56 to −10.66) versus −7.5% in men (95% CI −7.78 to −7.23); P < 0.0001).",
             "section": "Results, Subgroups"
           }
         },
@@ -609,7 +489,7 @@
           "provenance": {
             "locator": "Sec11/p1",
             "kind": "paragraph",
-            "quote": "estimated treatment difference for prediabetes −8.53% (95% CI −8.83 to −8.24)",
+            "quote": "glycemic status (estimated treatment difference for prediabetes −8.53% (95% CI −8.83 to −8.24) or normoglycemia −8.48% (95% CI −8.88 to −8.07; P = 0.8188)",
             "section": "Results, Subgroups"
           }
         },
@@ -626,7 +506,7 @@
           "provenance": {
             "locator": "Sec11/p1",
             "kind": "paragraph",
-            "quote": "normoglycemia −8.48% (95% CI −8.88 to −8.07; P = 0.8188)",
+            "quote": "glycemic status (estimated treatment difference for prediabetes −8.53% (95% CI −8.83 to −8.24) or normoglycemia −8.48% (95% CI −8.88 to −8.07; P = 0.8188)",
             "section": "Results, Subgroups"
           }
         },
@@ -648,10 +528,7 @@
           }
         }
       ],
-      "annotation": {
-        "target": "Women",
-        "text": "Women: −11.1% versus placebo, against −7.5% in men"
-      },
+      "annotation": null,
       "nodes": [],
       "edges": [],
       "shape": "",
@@ -663,18 +540,143 @@
       "lower_is_better": true,
       "favours_left": "Semaglutide",
       "favours_right": "Placebo",
-      "caveat": "Prespecified subgroups at week 104. Confidence intervals are not adjusted for multiplicity. Fig. 5 in the paper holds the full set.",
-      "source": "Results, subgroups (Fig. 5)",
+      "caveat": "Six of the paper's prespecified subgroups, at week 104. The paper states its confidence intervals were not adjusted for multiplicity.",
+      "source": "Results, Subgroups (Fig. 5 as reported in text)",
       "section_id": "Sec11"
+    },
+    {
+      "id": "body-size-thresholds",
+      "kind": "bars",
+      "title": "Patients reaching healthier body-size thresholds at week 104",
+      "subtitle": "",
+      "data": [
+        {
+          "label": "Moved down a BMI category",
+          "value": 52.4,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Semaglutide",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Sec10/p1",
+            "kind": "paragraph",
+            "quote": "At week 104, 52.4% of patients treated with semaglutide achieved improvement in BMI category compared with 15.7% of those receiving placebo.",
+            "section": "Results, BMI category change"
+          }
+        },
+        {
+          "label": "Moved down a BMI category",
+          "value": 15.7,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Placebo",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Sec10/p1",
+            "kind": "paragraph",
+            "quote": "At week 104, 52.4% of patients treated with semaglutide achieved improvement in BMI category compared with 15.7% of those receiving placebo.",
+            "section": "Results, BMI category change"
+          }
+        },
+        {
+          "label": "Reached healthy BMI (below 25)",
+          "value": 12.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Semaglutide",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Sec10/p1",
+            "kind": "paragraph",
+            "quote": "In the semaglutide group, 12.0% of patients achieved a BMI <25 kg m−2, which is considered the healthy BMI category, compared with 1.2% for placebo",
+            "section": "Results, BMI category change"
+          }
+        },
+        {
+          "label": "Reached healthy BMI (below 25)",
+          "value": 1.2,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Placebo",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Sec10/p1",
+            "kind": "paragraph",
+            "quote": "In the semaglutide group, 12.0% of patients achieved a BMI <25 kg m−2, which is considered the healthy BMI category, compared with 1.2% for placebo",
+            "section": "Results, BMI category change"
+          }
+        },
+        {
+          "label": "Below waist cutoff (baseline BMI below 35)",
+          "value": 41.2,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Semaglutide",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Sec8/p1",
+            "kind": "paragraph",
+            "quote": "At week 104, 41.2% fell below the sex- and race-specific cutoff points for the semaglutide group, compared with only 18.0% for the placebo group",
+            "section": "Results, WC cutoff points"
+          }
+        },
+        {
+          "label": "Below waist cutoff (baseline BMI below 35)",
+          "value": 18.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "Placebo",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "Sec8/p1",
+            "kind": "paragraph",
+            "quote": "At week 104, 41.2% fell below the sex- and race-specific cutoff points for the semaglutide group, compared with only 18.0% for the placebo group",
+            "section": "Results, WC cutoff points"
+          }
+        }
+      ],
+      "annotation": null,
+      "nodes": [],
+      "edges": [],
+      "shape": "",
+      "unit": "%",
+      "value_label": "Patients (%)",
+      "category_label": "",
+      "log_scale": false,
+      "null_value": null,
+      "lower_is_better": true,
+      "favours_left": "",
+      "favours_right": "",
+      "caveat": "Waist cutoffs differ by sex and race and cover only patients with baseline BMI below 35; 15.0% and 14.3% were already below them at baseline.",
+      "source": "Results, BMI category change and WC cutoff points",
+      "section_id": "Sec10"
     },
     {
       "id": "sae-by-bmi",
       "kind": "bars",
-      "title": "Serious adverse events by baseline BMI class",
-      "subtitle": "Events per 100 years of observation",
+      "title": "Serious adverse events per 100 years of observation, by baseline BMI",
+      "subtitle": "",
       "data": [
         {
-          "label": "BMI under 30",
+          "label": "BMI below 30",
           "value": 43.23,
           "low": null,
           "high": null,
@@ -691,7 +693,7 @@
           }
         },
         {
-          "label": "BMI under 30",
+          "label": "BMI below 30",
           "value": 50.48,
           "low": null,
           "high": null,
@@ -816,14 +818,14 @@
       "shape": "",
       "unit": "per 100 years",
       "value_label": "Serious adverse events per 100 years",
-      "category_label": "Baseline BMI, kg/m2",
+      "category_label": "Baseline BMI (kg/m2)",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "With semaglutide, stopping the drug for adverse events became more common as BMI class fell. The paper shows this only as curves (Fig. 6), not as printed rates.",
-      "source": "Results, safety and tolerability by baseline BMI",
+      "caveat": "Rates are events per 100 years of observation. The paper reports no evidence of heterogeneity across BMI classes.",
+      "source": "Results, Safety by baseline BMI category",
       "section_id": "Sec12"
     }
   ],
@@ -836,7 +838,7 @@
       "width": null,
       "height": null,
       "kind": "curve",
-      "why": "Shows mean weight at every visit through week 208 in both analyses. The text prints only the week 208 values.",
+      "why": "Shows weight in both groups across all 208 weeks. The text prints only the week 208 values, not the shape of the curve.",
       "section_id": "Sec5"
     },
     {
@@ -847,26 +849,27 @@
       "width": null,
       "height": null,
       "kind": "curve",
-      "why": "Shows cumulative discontinuation for adverse events over time in each BMI class. The text prints no rates for it.",
+      "why": "Shows discontinuations for adverse events over time in each BMI class. The paper prints none of these values.",
       "section_id": "Sec12"
+    },
+    {
+      "id": "Fig4",
+      "label": "Fig. 4",
+      "caption": "Fig. 4: Change in BMI category (healthy, overweight, class I obesity, class II obesity and class III obesity) at baseline and week 104 for in-trial patients.In the semaglutide group, 12.0% of patients achieved normal weight status at week 104 (from 0% at baseline), compared with 1.2% (from 0% at baseline) for placebo. BMI classes: healthy (BMI <25 kg m−2), overweight (25 to <30 kg m−2), class I obesity (30 to <35 kg m−2), class II obesity (35 to <40 kg m−2) and class III obesity (BMI ≥40 kg m−2).",
+      "file": "41591_2024_2996_Fig4_HTML.jpg",
+      "width": null,
+      "height": null,
+      "kind": "plot",
+      "why": "Shows all five BMI classes at baseline and week 104. The text prints only two of them.",
+      "section_id": "Sec10"
     }
   ],
   "absolute_risk": null,
   "absolute_risk_derived": null,
   "terms": [
     {
-      "term": "First on-treatment analysis",
-      "definition": "An analysis that uses each patient's data only until the first time they are off the drug for more than 35 days, so it shows the effect while patients are taking it.",
-      "provenance": {
-        "locator": "Sec5/p1",
-        "kind": "paragraph",
-        "quote": "To estimate the treatment effect while on medication, we performed a first on-treatment analysis (observation period until the first time being off treatment for >35 days).",
-        "section": "Results, Percentage weight loss"
-      }
-    },
-    {
       "term": "In-trial analysis",
-      "definition": "An intention-to-treat analysis that counts every randomised patient, whether or not they kept taking the study drug.",
+      "definition": "The main analysis: it counts every randomised patient in the group they were assigned to, whether or not they kept taking the drug.",
       "provenance": {
         "locator": "Sec20/p1",
         "kind": "paragraph",
@@ -875,28 +878,33 @@
       }
     },
     {
-      "term": "Treatment difference",
-      "definition": "The mean change in the semaglutide group minus the mean change in the placebo group, adjusted for the baseline value. A negative figure means more weight lost with semaglutide.",
+      "term": "First on-treatment analysis",
+      "definition": "An analysis that follows each patient only until the first time they were off treatment for more than 35 days, to show the effect while patients were taking the drug.",
+      "provenance": {
+        "locator": "Sec5/p1",
+        "kind": "paragraph",
+        "quote": "To estimate the treatment effect while on medication, we performed a first on-treatment analysis (observation period until the first time being off treatment for >35 days).",
+        "section": "Results, Percentage weight loss"
+      }
+    },
+    {
+      "term": "Estimated treatment difference",
+      "definition": "The difference in mean change between the semaglutide and placebo groups, adjusted for each patient's baseline value.",
       "provenance": null
     },
     {
       "term": "Waist circumference",
-      "definition": "Waist size measured around the abdomen, halfway between the lowest rib and the top of the hip bone.",
+      "definition": "Distance around the abdomen, measured midway between the lowest rib and the top of the hip bone.",
       "provenance": null
     },
     {
       "term": "Waist-to-height ratio",
-      "definition": "Waist circumference divided by height. It indicates where body fat sits, and values above 0.5 are used to flag higher cardiometabolic risk.",
+      "definition": "Waist circumference divided by height, used as a stand-in for fat around the abdomen; the paper treats 0.5 as the cutoff for increased cardiometabolic risk.",
       "provenance": null
     },
     {
-      "term": "Waist circumference cutoff points",
-      "definition": "Waist sizes, set separately by sex and by Asian or non-Asian race, above which metabolic risk counts as increased.",
-      "provenance": null
-    },
-    {
-      "term": "BMI class",
-      "definition": "Body mass index bands: healthy below 25, overweight 25 to below 30, and obesity classes I, II and III starting at 30, 35 and 40 kg/m2.",
+      "term": "Improvement in BMI category",
+      "definition": "Moving down at least one BMI class (healthy, overweight, or class I, II or III obesity) between baseline and week 104.",
       "provenance": {
         "locator": "Sec19/p1",
         "kind": "paragraph",
@@ -905,126 +913,111 @@
       }
     },
     {
-      "term": "Serious adverse event",
-      "definition": "A harmful medical event that causes death, is life threatening, needs a hospital stay or makes one longer, or leaves lasting disability.",
+      "term": "Waist cutoff points",
+      "definition": "Sex- and race-specific waist sizes above which cardiometabolic risk is considered increased.",
       "provenance": null
+    },
+    {
+      "term": "Settling point",
+      "definition": "The weight at which loss levels off, set by a person's genes and environment.",
+      "provenance": {
+        "locator": "Sec13/p6",
+        "kind": "paragraph",
+        "quote": "This plateau has been termed the ‘set point’ or ‘settling point’, a body weight that is in harmony with the genetic and environmental determinants of body weight and adiposity.",
+        "section": "Discussion"
+      }
     }
   ],
   "links": [
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "treatment difference = -10.2% - (-1.5%) = -8.7 percentage points (95% CI -9.42 to -7.88)",
-      "chart_id": "primary-difference",
+      "sentence": "- At least 5% lost: 67.8% on semaglutide versus 21.3% on placebo",
+      "chart_id": "categorical-weight-loss",
       "kind": "datum",
       "index": 0
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "- 5% or more: 67.8% on semaglutide vs 21.3% on placebo",
-      "chart_id": "categorical-loss",
-      "kind": "datum",
-      "index": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "- 10% or more: 44.2% vs 6.9%",
-      "chart_id": "categorical-loss",
+      "sentence": "- At least 10%: 44.2% versus 6.9%",
+      "chart_id": "categorical-weight-loss",
       "kind": "datum",
       "index": 2
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "- 15% or more: 22.9% vs 1.7%",
-      "chart_id": "categorical-loss",
+      "sentence": "- At least 15%: 22.9% versus 1.7%",
+      "chart_id": "categorical-weight-loss",
       "kind": "datum",
       "index": 4
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "- 20% or more: 11.0% vs 0.6%",
-      "chart_id": "categorical-loss",
+      "sentence": "- At least 20%: 11.0% versus 0.6%",
+      "chart_id": "categorical-weight-loss",
       "kind": "datum",
       "index": 6
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "- 25% or more: 4.9% vs 0.1%",
-      "chart_id": "categorical-loss",
+      "sentence": "- At least 25%: 4.9% versus 0.1%",
+      "chart_id": "categorical-weight-loss",
       "kind": "datum",
       "index": 8
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "At two years, 41.2% of the semaglutide group was below it, compared with 18.0% on placebo.",
-      "chart_id": "size-categories",
-      "kind": "datum",
-      "index": 2
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "At four years, the ratio had fallen by 6.9% on semaglutide and 1.0% on placebo.",
-      "chart_id": "categorical-loss",
+      "sentence": "Waist-to-height ratio fell by 6.9% versus 1.0%.",
+      "chart_id": "categorical-weight-loss",
       "kind": "datum",
       "index": 3
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "At two years, 52.4% of semaglutide patients had dropped at least one BMI category, compared with 15.7% on placebo.",
-      "chart_id": "size-categories",
-      "kind": "datum",
-      "index": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "On semaglutide, 12.0% reached a healthy BMI under 25, compared with 1.2% on placebo.",
-      "chart_id": "size-categories",
+      "sentence": "By two years, 41.2% of the semaglutide group were below it, compared with 18.0% on placebo.",
+      "chart_id": "body-size-thresholds",
       "kind": "datum",
       "index": 4
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "The share with obesity fell from 71.0% to 43.3% on semaglutide and from 71.9% to 67.9% on placebo.",
-      "chart_id": "categorical-loss",
+      "sentence": "At two years, 52.4% on semaglutide had dropped at least one class, compared with 15.7% on placebo.",
+      "chart_id": "body-size-thresholds",
       "kind": "datum",
       "index": 0
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "- Relative to placebo, women lost more than men (11.1 vs 7.5 percentage points).",
-      "chart_id": "categorical-loss",
+      "sentence": "On semaglutide, 12.0% reached a BMI under 25, the healthy range, compared with 1.2% on placebo.",
+      "chart_id": "body-size-thresholds",
+      "kind": "datum",
+      "index": 2
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "The share with obesity fell from 71.0% to 43.3% on semaglutide and from 71.9% to 67.9% on placebo.",
+      "chart_id": "categorical-weight-loss",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "- Women lost more than men: 11.1 points more than placebo, against 7.5 for men.",
+      "chart_id": "categorical-weight-loss",
       "kind": "datum",
       "index": 6
     },
     {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "The earlier STEP 1 trial of the same dose found 14.9% weight loss at 68 weeks, compared with 2.4% on placebo.",
-      "chart_id": "categorical-loss",
+      "section_id": "PMC11271387-section-4",
+      "sentence": "For BMI under 30, 30 to 35, 35 to 40, and 40 or more, the rates were 43.23, 43.54, 51.07 and 47.06 on semaglutide, compared with 50.48, 49.66, 52.73 and 60.85 on placebo.",
+      "chart_id": "sae-by-bmi",
       "kind": "datum",
-      "index": 0
+      "index": 2
     }
   ],
   "anchors": [
     {
       "section_id": "PMC11271387-section-1",
-      "sentence": "Worldwide obesity, defined as a body mass index (BMI) of 30 or more, has nearly tripled since 1975.",
-      "locator": "Sec1/p1",
-      "quote": "The worldwide obesity prevalence, defined by body mass index (BMI) ≥30 kg m−2, has nearly tripled since 1975 (ref. ).",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 1
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "Excess body fat drives cardiovascular disease and adds to diabetes, kidney disease and cancer.",
-      "locator": "Sec1/p1",
-      "quote": "Excess abnormal body fat, especially visceral adiposity and ectopic fat, is a driver of cardiovascular (CV) disease (CVD)–, and contributes to the global chronic disease burden of diabetes, chronic kidney disease, cancer and other chronic conditions,.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 1
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "The most harmful kinds are **visceral fat**, which is packed around the organs, and ectopic fat, which is stored in places it doesn't belong.",
+      "sentence": "Semaglutide is a once-weekly injected drug that reduces appetite.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1033,7 +1026,97 @@
     },
     {
       "section_id": "PMC11271387-section-1",
-      "sentence": "Health measures such as heart risk factors, blood sugar and quality of life start to improve after about 5% weight loss, and larger losses help more.",
+      "sentence": "It belongs to a class called glucagon-like peptide-1 (GLP-1) receptor agonists, and at a dose of 2.4 mg it is approved for long-term weight management.",
+      "locator": "Sec1/p2",
+      "quote": "Once-weekly subcutaneous semaglutide 2.4 mg, a glucagon-like peptide-1 receptor agonist, is approved for chronic weight management– and at doses of up to 2.0 mg is approved for type 2 diabetes treatment–.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 2
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "The SELECT trial had already shown that in 17,604 adults with cardiovascular disease and overweight or obesity, but no diabetes, semaglutide lowered the risk of major cardiovascular events (heart attack, stroke or cardiovascular death) by 20%.",
+      "locator": "abstract",
+      "quote": "In the SELECT cardiovascular outcomes trial, semaglutide showed a 20% reduction in major adverse cardiovascular events in 17,604 adults with preexisting cardiovascular disease, overweight or obesity, without diabetes.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 1
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "This analysis returns to the same trial with a different question.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "How much weight did people lose, did they keep it off, and did the answer change with body size, sex, race, region or health status?",
+      "locator": "Fig4/caption",
+      "quote": "4: Change in BMI category (healthy, overweight, class I obesity, class II obesity and class III obesity) at baseline and week 104 for in-trial patients.In the semaglutide group, 12.0% of patients achieved normal weight status at week 104 (from 0% at baseline), compared with 1.2% (from 0% at baseline) for placebo.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "SELECT ran for 208 weeks (about four years), which makes it the longest placebo-controlled trial of semaglutide's effect on weight.",
+      "locator": "Sec1/p2",
+      "quote": "Data derived from the SELECT trial offer the opportunity to evaluate the weight loss efficacy, in a geographically and racially diverse population, of semaglutide compared with placebo over 208 weeks when both are given in addition to standard-of-care recommendations for secondary CVD prevention (but without a focus on targeting weight loss).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 3
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "Its participants came from 41 countries.",
+      "locator": "Sec3/p1",
+      "quote": "The SELECT study enrolled 17,604 patients (72.3% male) from 41 countries between October 2018 and March 2021, with a mean (s.d.) age of 61.6 (8.9) years and BMI of 33.3 (5.0) kg m−2 (ref. ).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 3
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "Obesity is defined as a body mass index (BMI) of 30 or more, and its worldwide rate has nearly tripled since 1975.",
+      "locator": "Sec1/p1",
+      "quote": "The worldwide obesity prevalence, defined by body mass index (BMI) ≥30 kg m−2, has nearly tripled since 1975 (ref. ).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 1
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "BMI works well for tracking whole populations.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "For one person, though, it says little about how much fat they carry or where it is.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "Fat packed around the organs (visceral fat) or stored where it does not belong (ectopic fat) drives heart disease and contributes to diabetes, kidney disease and cancer.",
+      "locator": "Sec1/p1",
+      "quote": "Excess abnormal body fat, especially visceral adiposity and ectopic fat, is a driver of cardiovascular (CV) disease (CVD)–, and contributes to the global chronic disease burden of diabetes, chronic kidney disease, cancer and other chronic conditions,.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 1
+    },
+    {
+      "section_id": "PMC11271387-section-1",
+      "sentence": "Losing about 5% of body weight starts to improve heart risk factors, blood sugar and quality of life, and larger losses bring larger gains.",
       "locator": "Sec1/p2",
       "quote": "Improvements in CV risk factors, glycemia and quality-of-life measures including personal well-being and physical functioning generally begin with modest weight loss of 5%, whereas greater weight loss is associated with more improvement in these measures–.",
       "supported": true,
@@ -1042,7 +1125,7 @@
     },
     {
       "section_id": "PMC11271387-section-1",
-      "sentence": "Diet and exercise alone rarely produce weight loss that is both large and lasting.",
+      "sentence": "Lifestyle changes alone have struggled to produce lasting, clinically significant weight loss.",
       "locator": "Sec1/p2",
       "quote": "Producing and sustaining durable and clinically significant weight loss with lifestyle intervention alone has been challenging.",
       "supported": true,
@@ -1060,7 +1143,7 @@
     },
     {
       "section_id": "PMC11271387-section-1",
-      "sentence": "Semaglutide belongs to a class of these drugs called GLP-1 receptor agonists.",
+      "sentence": "Because BMI is a blunt measure, the authors also tracked **anthropometric measures**, simple body measurements that stand in for how much fat a person has and where it sits.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1069,43 +1152,7 @@
     },
     {
       "section_id": "PMC11271387-section-1",
-      "sentence": "As a once-weekly 2.4 mg injection under the skin, it is approved for long-term weight management.",
-      "locator": "Sec1/p2",
-      "quote": "Once-weekly subcutaneous semaglutide 2.4 mg, a glucagon-like peptide-1 receptor agonist, is approved for chronic weight management– and at doses of up to 2.0 mg is approved for type 2 diabetes treatment–.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 2
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "Lower doses are approved for type 2 diabetes.",
-      "locator": "Sec1/p2",
-      "quote": "Once-weekly subcutaneous semaglutide 2.4 mg, a glucagon-like peptide-1 receptor agonist, is approved for chronic weight management– and at doses of up to 2.0 mg is approved for type 2 diabetes treatment–.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 2
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "The SELECT trial tested whether semaglutide 2.4 mg prevents heart attacks, strokes and cardiovascular deaths in people who already had heart disease and were overweight or obese but did not have diabetes.",
-      "locator": "Sec15/p1",
-      "quote": "SELECT evaluated once-weekly subcutaneous semaglutide 2.4 mg versus placebo to reduce the risk of major adverse cardiac events (a composite endpoint comprising CV death, nonfatal myocardial infarction or nonfatal stroke) in individuals with established CVD and overweight or obesity, without diabetes.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 10
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "It cut these events by 20% (hazard ratio 0.80, 95% confidence interval 0.72 to 0.90).",
-      "locator": "Sec1/p2",
-      "quote": "In SELECT, semaglutide was associated with a 20% reduction in major adverse CV events (hazard ratio 0.80, 95% confidence interval (CI) 0.72 to 0.90; P < 0.001).",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 2
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "The analysis summarized here was planned before the data came in.",
+      "sentence": "Besides BMI, the two main ones were waist circumference and waist-to-height ratio:",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1114,52 +1161,16 @@
     },
     {
       "section_id": "PMC11271387-section-1",
-      "sentence": "It asks different questions of the same trial:",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "how much weight people lost, and whether they kept it off for four years",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "whether safety depended on starting body size",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-1",
-      "sentence": "Because SELECT ran for up to 208 weeks, it is the longest placebo-controlled trial of semaglutide's effect on weight.",
-      "locator": "Sec1/p2",
-      "quote": "Data derived from the SELECT trial offer the opportunity to evaluate the weight loss efficacy, in a geographically and racially diverse population, of semaglutide compared with placebo over 208 weeks when both are given in addition to standard-of-care recommendations for secondary CVD prevention (but without a focus on targeting weight loss).",
+      "sentence": "A ratio above 0.5 is a standard marker of raised cardiometabolic risk, meaning risk of heart and metabolic disease.",
+      "locator": "Sec9/p1",
+      "quote": "The lowest tertile of the SELECT population at baseline had a mean WHtR <0.62, which is higher than the cutoff point of 0.5 used to indicate increased cardiometabolic risk, suggesting that the trial population had high WCs.",
       "supported": true,
       "direction_conflict": false,
-      "page": 3
+      "page": 4
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "SELECT enrolled 17,604 adults from 41 countries between 2018 and 2021.",
-      "locator": "Sec3/p1",
-      "quote": "The SELECT study enrolled 17,604 patients (72.3% male) from 41 countries between October 2018 and March 2021, with a mean (s.d.) age of 61.6 (8.9) years and BMI of 33.3 (5.0) kg m−2 (ref. ).",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 3
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "Everyone was at least 45, had a BMI of 27 or more, and had established cardiovascular disease: a previous heart attack, a previous stroke, or symptomatic peripheral artery disease.",
+      "sentence": "To qualify, people had to be 45 or older, have a BMI of at least 27, and have established cardiovascular disease: a prior heart attack, a prior stroke, or symptomatic peripheral artery disease.",
       "locator": "Sec15/p1",
       "quote": "Eligible patients were aged ≥45 years, with a BMI of ≥27 kg m−2 and established CVD defined as at least one of the following: prior myocardial infarction, prior ischemic or hemorrhagic stroke, or symptomatic peripheral artery disease.",
       "supported": true,
@@ -1168,61 +1179,16 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "The average participant was 61.6 years old with a BMI of 33.3, and 72.3% were men.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "Participants were randomly split 1:1 between weekly semaglutide and placebo, and the trial was double-blind (neither patients nor doctors knew who got which).",
-      "locator": "Sec15/p1",
-      "quote": "The current work complies with all relevant ethical regulations and reports a prespecified analysis of the randomized, double-blind, placebo-controlled SELECT trial (NCT03574597), details of which have been reported in papers describing study design and rationale, baseline characteristics and the primary outcome.",
+      "sentence": "Participants were 72.3% male, with an average age of 61.6 and an average BMI of 33.3.",
+      "locator": "Sec3/p1",
+      "quote": "The SELECT study enrolled 17,604 patients (72.3% male) from 41 countries between October 2018 and March 2021, with a mean (s.d.) age of 61.6 (8.9) years and BMI of 33.3 (5.0) kg m−2 (ref. ).",
       "supported": true,
       "direction_conflict": false,
-      "page": 10
+      "page": 3
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "The semaglutide dose started at 0.24 mg and rose every four weeks until it reached 2.4 mg at week 16.",
-      "locator": "Sec17/p1",
-      "quote": "The starting dose was 0.24 mg once weekly, with dose increases every 4 weeks (to doses of 0.5, 1.0, 1.7 and 2.4 mg per week) until the target dose of 2.4 mg was reached after 16 weeks.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 10
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "If side effects were a problem, doctors could slow the increases, pause treatment, or keep a patient on a lower dose.",
-      "locator": "Sec17/p1",
-      "quote": "Patients who were unable to tolerate dose escalation due to AEs could be managed by extension of dose-escalation intervals, treatment pauses or maintenance at doses below the 2.4 mg per week target dose.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 10
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "Both groups got standard heart-disease care, which included lifestyle counseling that was not aimed at weight loss.",
-      "locator": "Sec13/p4",
-      "quote": "In the SELECT trial, patients did not enroll for the specific purpose of weight loss and received standard of care covering management of CV risk factors, including medical treatment and healthy lifestyle counseling, but without a specific focus on weight loss.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 7
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "The team sorted participants into four BMI groups: overweight (under 30), class I obesity (30 to under 35), class II (35 to under 40) and class III (40 or more).",
-      "locator": "Fig4/caption",
-      "quote": "BMI classes: healthy (BMI <25 kg m−2), overweight (25 to <30 kg m−2), class I obesity (30 to <35 kg m−2), class II obesity (35 to <40 kg m−2) and class III obesity (BMI ≥40 kg m−2).",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 5
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "Asian participants were 14.5% of the overweight group but only 2.2% of class III.",
+      "sentence": "Asian participants made up 14.5% of those with a BMI under 30 but only 2.2% of those at 40 or above.",
       "locator": "Sec3/p1",
       "quote": "Of note, in the lower BMI categories (<30 kg m−2 (overweight) and 30 to <35 kg m−2 (class I obesity)), the proportion of Asian individuals was higher (14.5% and 7.4%, respectively) compared with the proportion of Asian individuals in the higher BMI categories (BMI 35 to <40 kg m−2 (class II obesity; 3.8%) and ≥40 kg m−2 (class III obesity; 2.2%), respectively).",
       "supported": true,
@@ -1231,7 +1197,7 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "Women were 20.8% of the overweight group and 45.5% of class III.",
+      "sentence": "Women followed the opposite pattern, rising from 20.8% of the overweight group to 45.5% of the heaviest group.",
       "locator": "Sec3/p1",
       "quote": "As the BMI categories increased, the proportion of women was higher: in the class III BMI category, 45.5% were female, compared with 20.8%, 25.7% and 33.0% in the overweight, class I and class II categories, respectively.",
       "supported": true,
@@ -1240,16 +1206,16 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "Besides weight, the researchers tracked **anthropometric measures**, simple body measurements that stand in for how much fat a person carries and where it sits.",
-      "locator": "Sec1/p2",
-      "quote": "Improvements in CV risk factors, glycemia and quality-of-life measures including personal well-being and physical functioning generally begin with modest weight loss of 5%, whereas greater weight loss is associated with more improvement in these measures–.",
+      "sentence": "Raised C-reactive protein, a blood marker of inflammation, also rose with BMI, from 36.4% of the overweight group to 72.0% of the heaviest.",
+      "locator": "Sec3/p1",
+      "quote": "A high-sensitivity C-reactive protein >2.0 mg dl−1 was present in 36.4% of patients in the overweight BMI category, with a progressive increase to 43.3%, 57.3% and 72.0% for patients in the class I, II and III obesity categories, respectively.",
       "supported": true,
       "direction_conflict": false,
-      "page": 1
+      "page": 4
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "BMI = weight in kilograms / (height in meters x height in meters)",
+      "sentence": "This was a **prespecified analysis**, meaning the weight questions were planned before the results were known.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1258,16 +1224,7 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "BMI tracks body fat well across a population, but for one person it can mislead because it ignores where the fat is.",
-      "locator": "Sec11/p1",
-      "quote": "The effect of semaglutide (versus placebo) on mean percentage body weight loss as well as reduction in WC was found to be heterogeneous across several population subgroups.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 4
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "So the team also measured waist circumference (halfway between the lowest rib and the top of the hip bone) and the waist-to-height ratio:",
+      "sentence": "That keeps researchers from searching the data afterward for a flattering pattern.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1276,34 +1233,88 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "A ratio above 0.5 is the usual sign of raised cardiometabolic risk, meaning risk of heart and metabolic disease.",
-      "locator": "Sec9/p1",
-      "quote": "The lowest tertile of the SELECT population at baseline had a mean WHtR <0.62, which is higher than the cutoff point of 0.5 used to indicate increased cardiometabolic risk, suggesting that the trial population had high WCs.",
-      "supported": true,
+      "sentence": "People were assigned by chance, in equal numbers, to semaglutide or placebo, and neither they nor their doctors knew which one they got.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
       "direction_conflict": false,
-      "page": 4
+      "page": 0
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "The team also counted how many people fell below waist cutoffs that depend on sex and race: 80 cm for Asian women, 88 cm for non-Asian women and Asian men, and 102 cm for non-Asian men.",
-      "locator": "Fig3/caption",
-      "quote": "3: Proportion (%) of in-trial patients achieving sex- and race-specific WC cutoff points for increased metabolic risk according to baseline BMI <35 or ≥35 kg m−2.WC cutoff points; Asian women <80 cm, non-Asian women <88 cm, Asian men <88 cm, non-Asian men <102 cm.",
-      "supported": true,
-      "direction_conflict": true,
-      "page": 4
-    },
-    {
-      "section_id": "PMC11271387-section-2",
-      "sentence": "The main **in-trial** analysis follows the intention-to-treat principle: everyone who was randomized counts in their assigned group, whether or not they kept taking the drug.",
-      "locator": "Sec20/p1",
-      "quote": "The statistical analyses for the in-trial period were based on the intention-to-treat principle and included all randomized patients irrespective of adherence to semaglutide or placebo or changes to background medications.",
+      "sentence": "The dose started at 0.24 mg a week and stepped up every four weeks until it reached 2.4 mg at week 16.",
+      "locator": "Sec17/p1",
+      "quote": "The starting dose was 0.24 mg once weekly, with dose increases every 4 weeks (to doses of 0.5, 1.0, 1.7 and 2.4 mg per week) until the target dose of 2.4 mg was reached after 16 weeks.",
       "supported": true,
       "direction_conflict": false,
       "page": 10
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "The \"first on-treatment\" analysis counts each person only until the first time they went more than 35 days without the drug.",
+      "sentence": "If side effects got in the way, doctors could slow the increases, pause treatment or keep someone on a lower dose.",
+      "locator": "Sec17/p1",
+      "quote": "Patients who were unable to tolerate dose escalation due to AEs could be managed by extension of dose-escalation intervals, treatment pauses or maintenance at doses below the 2.4 mg per week target dose.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 10
+    },
+    {
+      "section_id": "PMC11271387-section-2",
+      "sentence": "Both groups received standard heart care, including lifestyle advice, but that advice did not target weight loss.",
+      "locator": "Sec13/p4",
+      "quote": "In the SELECT trial, patients did not enroll for the specific purpose of weight loss and received standard of care covering management of CV risk factors, including medical treatment and healthy lifestyle counseling, but without a specific focus on weight loss.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 7
+    },
+    {
+      "section_id": "PMC11271387-section-2",
+      "sentence": "SELECT was a heart trial, and weight was a secondary outcome.",
+      "locator": "Sec13/p4",
+      "quote": "First, SELECT was designed as a CV outcomes trial and not a weight-loss trial, and weight loss was only a supportive secondary endpoint in the trial design.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 5
+    },
+    {
+      "section_id": "PMC11271387-section-2",
+      "sentence": "The main results follow the **intention-to-treat** principle: everyone counts in the group they were assigned to, whether or not they kept taking the drug.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-2",
+      "sentence": "This shows what happens when the drug is prescribed, including to people who stop taking it.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-2",
+      "sentence": "About 97% of each arm stayed in the trial, but 30.6% of the semaglutide group and 27.0% of the placebo group stopped their assigned treatment at some point.",
+      "locator": "Sec19/p2",
+      "quote": "During the study, 30.6% of those assigned to semaglutide did not complete drug treatment, compared with 27.0% for placebo.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 10
+    },
+    {
+      "section_id": "PMC11271387-section-2",
+      "sentence": "Missing measurements were filled in with multiple imputation, a method that generates many plausible complete datasets and pools the answers.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-2",
+      "sentence": "A second approach, the **first on-treatment analysis**, uses each person's data only up to the first time they went more than 35 days without the drug.",
       "locator": "Sec20/p1",
       "quote": "Because some patients in both arms continued to be followed but were off treatment, we also analyzed weight loss by first on-treatment group (observation period until first time being off treatment for >35 days) to assess a more realistic picture of weight loss in those adhering to treatment.",
       "supported": true,
@@ -1312,7 +1323,7 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "That shows what the drug does for people who stay on it.",
+      "sentence": "It estimates the effect in people who actually take it.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1321,7 +1332,7 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "Most results are reported as a treatment difference:",
+      "sentence": "The headline number throughout is the treatment difference:",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1330,34 +1341,34 @@
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "treatment difference = change with semaglutide - change with placebo",
-      "locator": "Fig5/caption",
-      "quote": "5: Effect of semaglutide treatment or placebo on mean percentage change in body weight from baseline to week 104 by subgroups.Data from the in-trial period.",
+      "sentence": "treatment difference = average change on semaglutide - average change on placebo",
+      "locator": "Sec7/p1",
+      "quote": "At week 208, average reduction in WC was −7.7 cm with semaglutide versus −1.3 cm with placebo, with a treatment difference of −6.4 cm (95% CI −7.18 to −5.61; P < 0.0001).",
       "supported": true,
       "direction_conflict": false,
-      "page": 6
+      "page": 4
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "Missing measurements were filled in statistically.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
+      "sentence": "Each difference comes with a 95% confidence interval (CI), a range likely to contain the true value.",
+      "locator": "Sec1/p2",
+      "quote": "In SELECT, semaglutide was associated with a 20% reduction in major adverse CV events (hazard ratio 0.80, 95% confidence interval (CI) 0.72 to 0.90; P < 0.001).",
+      "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 2
     },
     {
       "section_id": "PMC11271387-section-2",
-      "sentence": "The confidence intervals were not adjusted for the many comparisons made, so the authors warn against treating any single one as definitive.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
+      "sentence": "The authors warn that these intervals were not adjusted for the many comparisons made, so no single subgroup result should be treated as definitive.",
+      "locator": "Sec20/p1",
+      "quote": "CIs were not adjusted for multiplicity and should therefore not be used to infer definitive treatment effects.",
+      "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 10
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "People on semaglutide kept losing weight until about week 65 (roughly 15 months) and then held steady through week 208.",
+      "sentence": "On semaglutide, weight fell steadily until about week 65 and then held steady through week 208.",
       "locator": "Sec5/p1",
       "quote": "For those in the semaglutide group, the weight-loss trajectory continued to week 65 and then was sustained for the study period through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001).",
       "supported": true,
@@ -1366,16 +1377,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "At four years, the semaglutide group had lost an average of 10.2% of body weight, compared with 1.5% on placebo:",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "treatment difference = -10.2% - (-1.5%) = -8.7 percentage points (95% CI -9.42 to -7.88)",
+      "sentence": "treatment difference = -10.2% - (-1.5%) = -8.7%",
       "locator": "Sec5/p1",
       "quote": "For those in the semaglutide group, the weight-loss trajectory continued to week 65 and then was sustained for the study period through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001).",
       "supported": true,
@@ -1384,88 +1386,16 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "People who stayed on the drug (the first on-treatment analysis) lost 11.7%, compared with 1.5% on placebo, a difference of 10.2 points.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "The gap between the two analyses comes from people who stopped taking semaglutide.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "At two years, these were the shares of each group reaching each weight-loss milestone:",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "5% or more: 67.8% on semaglutide vs 21.3% on placebo",
-      "locator": "Sec13/p2",
-      "quote": "Individual changes in body weight with semaglutide and placebo were striking; still, 67.8% achieved 5% or more weight loss and 44.2% achieved 10% weight loss with semaglutide at 2 years, compared with 21.3% and 6.9%, respectively, for those receiving placebo.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 5
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "10% or more: 44.2% vs 6.9%",
-      "locator": "Sec13/p2",
-      "quote": "Individual changes in body weight with semaglutide and placebo were striking; still, 67.8% achieved 5% or more weight loss and 44.2% achieved 10% weight loss with semaglutide at 2 years, compared with 21.3% and 6.9%, respectively, for those receiving placebo.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 5
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "15% or more: 22.9% vs 1.7%",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "20% or more: 11.0% vs 0.6%",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "25% or more: 4.9% vs 0.1%",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "Plots of each person's weight change show wide variation between individuals in both groups, with the semaglutide group shifted toward larger losses.",
-      "locator": "Sec6/p1",
-      "quote": "These waterfall plots show the variation in weight-loss response that occurs with semaglutide and placebo and show that weight loss is more prominent with semaglutide than placebo.",
+      "sentence": "People on semaglutide lost 10.2% of their body weight on average, compared with 1.5% on placebo (95% CI for the difference, -9.42 to -7.88).",
+      "locator": "Sec5/p1",
+      "quote": "For those in the semaglutide group, the weight-loss trajectory continued to week 65 and then was sustained for the study period through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001).",
       "supported": true,
       "direction_conflict": false,
       "page": 4
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "Waist size followed the same pattern as weight.",
+      "sentence": "Counting only time on the drug, the loss was 11.7%, a gap of 10.2 points over placebo.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1474,7 +1404,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "At four years, waists had shrunk by 7.7 cm on semaglutide and 1.3 cm on placebo, a difference of 6.4 cm.",
+      "sentence": "Averages hide how much people vary, so the authors also counted how many people passed each weight-loss threshold at two years:",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1483,52 +1413,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "The waist-cutoff analysis covered only people starting with a BMI under 35, because above that level waist measurement is harder and less accurate.",
-      "locator": "Sec8/p1",
-      "quote": "We analyzed achievement of sex- and race-specific cutoff points for WC by BMI <35 kg m−2 or ≥35 kg m−2, because for BMI >35 kg m−2, WC is more difficult technically and, thus, less accurate as a risk predictor,,.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 4
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "In this group, about 15% of each arm started below their sex- and race-specific cutoff.",
-      "locator": "Sec8/p1",
-      "quote": "Within the SELECT population with BMI <35 kg m−2 at baseline, 15.0% and 14.3% of the semaglutide and placebo groups, respectively, were below the sex- and race-specific WC cutoff points.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 4
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "At two years, 41.2% of the semaglutide group was below it, compared with 18.0% on placebo.",
-      "locator": "Sec8/p1",
-      "quote": "At week 104, 41.2% fell below the sex- and race-specific cutoff points for the semaglutide group, compared with only 18.0% for the placebo group (Fig. ).",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 4
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "The average waist-to-height ratio at the start was 0.66.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "Even the lowest third of participants averaged above 0.62, well past the 0.5 threshold, so this population had large waists.",
-      "locator": "Sec9/p1",
-      "quote": "The lowest tertile of the SELECT population at baseline had a mean WHtR <0.62, which is higher than the cutoff point of 0.5 used to indicate increased cardiometabolic risk, suggesting that the trial population had high WCs.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 4
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "At four years, the ratio had fallen by 6.9% on semaglutide and 1.0% on placebo.",
+      "sentence": "At least 5% lost: 67.8% on semaglutide versus 21.3% on placebo",
       "locator": "Sec6/p1",
       "quote": "Among in-trial (intention-to-treat principle) patients at week 104, weight loss of ≥5%, ≥10%, ≥15%, ≥20% and ≥25% was achieved by 67.8%, 44.2%, 22.9%, 11.0% and 4.9%, respectively, of those treated with semaglutide compared with 21.3%, 6.9%, 1.7%, 0.6% and 0.1% of those receiving placebo (Fig. ).",
       "supported": true,
@@ -1537,7 +1422,142 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "At two years, 52.4% of semaglutide patients had dropped at least one BMI category, compared with 15.7% on placebo.",
+      "sentence": "At least 10%: 44.2% versus 6.9%",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "At least 15%: 22.9% versus 1.7%",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "At least 20%: 11.0% versus 0.6%",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "At least 25%: 4.9% versus 0.1%",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "Waterfall plots, which draw each person's weight change as a separate bar, show wide individual variation in both groups.",
+      "locator": "Sec6/p1",
+      "quote": "These waterfall plots show the variation in weight-loss response that occurs with semaglutide and placebo and show that weight loss is more prominent with semaglutide than placebo.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 4
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "Losses on semaglutide were larger and more frequent.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "Waist size moved with weight.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "At four years, waist circumference fell by 7.7 cm on semaglutide and 1.3 cm on placebo (a 6.4 cm difference).",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "Waist-to-height ratio fell by 6.9% versus 1.0%.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "The average starting ratio was 0.66, and even the third of participants with the lowest ratios were above the 0.5 risk marker.",
+      "locator": "Sec9/p1",
+      "quote": "The lowest tertile of the SELECT population at baseline had a mean WHtR <0.62, which is higher than the cutoff point of 0.5 used to indicate increased cardiometabolic risk, suggesting that the trial population had high WCs.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 4
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "The team also checked how many people got below waist **cutoff points**, thresholds that differ by sex and race: 80 cm for Asian women, 88 cm for non-Asian women and for Asian men, and 102 cm for non-Asian men.",
+      "locator": "Fig3/caption",
+      "quote": "3: Proportion (%) of in-trial patients achieving sex- and race-specific WC cutoff points for increased metabolic risk according to baseline BMI <35 or ≥35 kg m−2.WC cutoff points; Asian women <80 cm, non-Asian women <88 cm, Asian men <88 cm, non-Asian men <102 cm.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 4
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "They limited this check to people with a BMI under 35, because at higher BMI the waist is harder to measure and predicts risk less well.",
+      "locator": "Sec8/p1",
+      "quote": "We analyzed achievement of sex- and race-specific cutoff points for WC by BMI <35 kg m−2 or ≥35 kg m−2, because for BMI >35 kg m−2, WC is more difficult technically and, thus, less accurate as a risk predictor,,.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 4
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "About 15% of each group started below the cutoff.",
+      "locator": "Sec8/p1",
+      "quote": "Within the SELECT population with BMI <35 kg m−2 at baseline, 15.0% and 14.3% of the semaglutide and placebo groups, respectively, were below the sex- and race-specific WC cutoff points.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 4
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "By two years, 41.2% of the semaglutide group were below it, compared with 18.0% on placebo.",
+      "locator": "Sec8/p1",
+      "quote": "At week 104, 41.2% fell below the sex- and race-specific cutoff points for the semaglutide group, compared with only 18.0% for the placebo group (Fig. ).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 4
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "People also moved between BMI classes.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "At two years, 52.4% on semaglutide had dropped at least one class, compared with 15.7% on placebo.",
       "locator": "Sec10/p1",
       "quote": "At week 104, 52.4% of patients treated with semaglutide achieved improvement in BMI category compared with 15.7% of those receiving placebo.",
       "supported": true,
@@ -1546,7 +1566,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "On semaglutide, 12.0% reached a healthy BMI under 25, compared with 1.2% on placebo.",
+      "sentence": "On semaglutide, 12.0% reached a BMI under 25, the healthy range, compared with 1.2% on placebo.",
       "locator": "Sec10/p1",
       "quote": "In the semaglutide group, 12.0% of patients achieved a BMI <25 kg m−2, which is considered the healthy BMI category, compared with 1.2% for placebo; per study inclusion criteria, no patients were in this category at baseline.",
       "supported": true,
@@ -1555,12 +1575,12 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "No one started in that range, because the entry criteria required a BMI of 27 or more.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
+      "sentence": "Nobody started in that range, because entry required a BMI of at least 27.",
+      "locator": "Sec13/p4",
+      "quote": "In STEP 1, a large phase 3 study of once-weekly subcutaneous semaglutide 2.4 mg in individuals without diabetes but with BMI >30 kg m−2 or 27 kg m−2 with at least one obesity-related comorbidity, the mean weight loss was −14.9% at week 68, compared with −2.4% with placebo.",
+      "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 5
     },
     {
       "section_id": "PMC11271387-section-3",
@@ -1573,7 +1593,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "A forest plot of prespecified subgroups showed clinically meaningful weight loss in every group, but the amount varied:",
+      "sentence": "The authors split results into prespecified subgroups and showed them in a forest plot, a chart that places each subgroup's treatment difference and confidence interval side by side.",
       "locator": "Sec11/p1",
       "quote": "The forest plot illustrated in Fig. displays mean body weight percentage change from baseline to week 104 for semaglutide relative to placebo in prespecified subgroups.",
       "supported": true,
@@ -1582,7 +1602,16 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "Relative to placebo, women lost more than men (11.1 vs 7.5 percentage points).",
+      "sentence": "Every subgroup reached clinically meaningful weight loss, but by different amounts:",
+      "locator": "Sec13/p2",
+      "quote": "With semaglutide, lower BMI was associated with less percentage weight loss, and women lost more weight on average than men (−11.1% versus −7.5% treatment difference from placebo); however, in all cases, clinically meaningful mean weight loss was achieved.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 5
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "Women lost more than men: 11.1 points more than placebo, against 7.5 for men.",
       "locator": "Sec6/p1",
       "quote": "Among in-trial (intention-to-treat principle) patients at week 104, weight loss of ≥5%, ≥10%, ≥15%, ≥20% and ≥25% was achieved by 67.8%, 44.2%, 22.9%, 11.0% and 4.9%, respectively, of those treated with semaglutide compared with 21.3%, 6.9%, 1.7%, 0.6% and 0.1% of those receiving placebo (Fig. ).",
       "supported": true,
@@ -1591,7 +1620,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "Younger participants lost slightly more than older ones.",
+      "sentence": "Younger people lost slightly more than older people, but the gaps were small.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1600,7 +1629,25 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "People with a lower starting BMI lost slightly less.",
+      "sentence": "People with a BMI under 30 lost a smaller percentage.",
+      "locator": "Sec13/p2",
+      "quote": "Although Asian patients lost less weight on average than patients of other races (−7.3% more than placebo), Asian patients were more likely to be in the lowest BMI category (<30 kg m−2), which is known to be associated with less weight loss, as discussed below.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 5
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "Above 30, the three obesity classes lost similar amounts.",
+      "locator": "Sec13/p6",
+      "quote": "Furthermore, as BMI exceeds 30 kg m−2, weight loss amounts are more similar for class I, II and III obesity.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 7
+    },
+    {
+      "section_id": "PMC11271387-section-3",
+      "sentence": "Asian participants lost a little less, about 7.3 points more than placebo.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1609,7 +1656,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "Asian participants lost somewhat less (7.3 points more than placebo).",
+      "sentence": "This may reflect how many of them were in the lowest BMI group.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1618,25 +1665,7 @@
     },
     {
       "section_id": "PMC11271387-section-3",
-      "sentence": "The authors note that they were concentrated in the lowest BMI group, which lost less overall.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "The age and BMI differences were statistically significant but small.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "Three factors made no difference: ethnicity (Hispanic or not), blood sugar status (prediabetes or normal) and kidney function.",
+      "sentence": "Hispanic ethnicity, blood sugar status (prediabetes or normal) and kidney function made no difference.",
       "locator": "Sec11/p1",
       "quote": "There was no difference in weight loss with semaglutide associated with ethnicity (estimated treatment difference for Hispanic −8.53% (95% CI −9.28 to −7.76) or non-Hispanic −8.52% (95% CI −8.77 to 8.26); P = 0.9769), glycemic status (estimated treatment difference for prediabetes −8.53% (95% CI −8.83 to −8.24) or normoglycemia −8.48% (95% CI −8.88 to −8.07; P = 0.8188) or renal function (estimated treatment difference for estimated glomerular filtration rate (eGFR) <60 or ≥60 ml min−1 1.73 m−2 being −8.50% (95% CI −9.23 to −7.76) and −8.52% (95% CI −8.77 to −8.26), respectively (P = 0.9519)).",
       "supported": true,
@@ -1644,17 +1673,8 @@
       "page": 5
     },
     {
-      "section_id": "PMC11271387-section-3",
-      "sentence": "Every one of those subgroups showed a treatment difference of about 8.5 points.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
       "section_id": "PMC11271387-section-4",
-      "sentence": "In SELECT's main results, 16.6% of semaglutide patients stopped the drug because of an adverse event, twice the 8.2% on placebo.",
+      "sentence": "The main SELECT report found that side effects led 16.6% of the semaglutide group to stop treatment, compared with 8.2% on placebo.",
       "locator": "Sec12/p1",
       "quote": "We reported in the primary outcome of the SELECT trial that adverse events (AEs) leading to permanent discontinuation of the trial product occurred in 1,461 patients (16.6%) in the semaglutide group and 718 patients (8.2%) in the placebo group (P < 0.001).",
       "supported": true,
@@ -1663,7 +1683,7 @@
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "Broken down by body size, the pattern was graded: the lower the starting BMI, the more often people stopped semaglutide.",
+      "sentence": "When the authors broke this down by BMI, a gradient appeared: the lower the BMI, the more often people stopped semaglutide.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1672,7 +1692,7 @@
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "Placebo showed no such trend.",
+      "sentence": "Placebo showed no such pattern.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1681,16 +1701,16 @@
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "The authors think people with smaller bodies may get a higher effective dose of the drug.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
+      "sentence": "The authors suspect that a fixed 2.4 mg dose gives smaller people more drug relative to their size.",
+      "locator": "Sec13/p4",
+      "quote": "Patients in the semaglutide treatment arm of STEP 1 were more likely to be exposed to the medication at the full dose of 2.4 mg than those in SELECT.",
+      "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 7
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "They also say differences in motivation or in cultural attitudes toward body size could play a part.",
+      "sentence": "Differences in motivation and in cultural attitudes toward body size could also contribute.",
       "locator": "Sec13/p3",
       "quote": "Potential contributors may include a possibility of higher drug exposure in lower BMI classes, although other explanations, including differences in motivation and cultural mores regarding body size, cannot be excluded.",
       "supported": true,
@@ -1699,7 +1719,7 @@
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "Serious adverse events were less common on semaglutide overall (33.4% of patients vs 36.4% on placebo), mainly because there were fewer cardiovascular events and infections.",
+      "sentence": "Serious adverse events were less common on semaglutide, both overall (33.4% of patients versus 36.4%) and within every BMI group.",
       "locator": "Sec12/p2",
       "quote": "We reported in the primary SELECT analysis that serious adverse events (SAEs) were reported by 2,941 patients (33.4%) in the semaglutide arm and by 3,204 patients (36.4%) in the placebo arm (P < 0.001).",
       "supported": true,
@@ -1708,7 +1728,7 @@
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "The rates below are events per 100 years of observation, which allows a fair comparison when people were followed for different lengths of time:",
+      "sentence": "rate = number of serious events / total years of observation x 100",
       "locator": "abstract",
       "quote": "For each BMI category (<30, 30 to <35, 35 to <40 and ≥40 kg m−2) there were lower rates (events per 100 years of observation) of serious adverse events with semaglutide (43.23, 43.54, 51.07 and 47.06 for semaglutide and 50.48, 49.66, 52.73 and 60.85 for placebo).",
       "supported": true,
@@ -1717,7 +1737,25 @@
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "There was no evidence that the effect differed between BMI groups.",
+      "sentence": "This gives events per 100 years of observation.",
+      "locator": "abstract",
+      "quote": "For each BMI category (<30, 30 to <35, 35 to <40 and ≥40 kg m−2) there were lower rates (events per 100 years of observation) of serious adverse events with semaglutide (43.23, 43.54, 51.07 and 47.06 for semaglutide and 50.48, 49.66, 52.73 and 60.85 for placebo).",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 1
+    },
+    {
+      "section_id": "PMC11271387-section-4",
+      "sentence": "For BMI under 30, 30 to 35, 35 to 40, and 40 or more, the rates were 43.23, 43.54, 51.07 and 47.06 on semaglutide, compared with 50.48, 49.66, 52.73 and 60.85 on placebo.",
+      "locator": "abstract",
+      "quote": "For each BMI category (<30, 30 to <35, 35 to <40 and ≥40 kg m−2) there were lower rates (events per 100 years of observation) of serious adverse events with semaglutide (43.23, 43.54, 51.07 and 47.06 for semaglutide and 50.48, 49.66, 52.73 and 60.85 for placebo).",
+      "supported": true,
+      "direction_conflict": true,
+      "page": 1
+    },
+    {
+      "section_id": "PMC11271387-section-4",
+      "sentence": "Most of the gap came from fewer cardiovascular events and fewer infections.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1726,7 +1764,7 @@
     },
     {
       "section_id": "PMC11271387-section-4",
-      "sentence": "Serious gut, liver or gallbladder events were no more common on semaglutide in any group, and no new safety signals appeared.",
+      "sentence": "In no BMI group were serious gut, liver or gallbladder problems more common on semaglutide, and no new safety signals appeared.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1735,43 +1773,34 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "The earlier STEP 1 trial of the same dose found 14.9% weight loss at 68 weeks, compared with 2.4% on placebo.",
-      "locator": "Sec13/p4",
-      "quote": "In STEP 1, a large phase 3 study of once-weekly subcutaneous semaglutide 2.4 mg in individuals without diabetes but with BMI >30 kg m−2 or 27 kg m−2 with at least one obesity-related comorbidity, the mean weight loss was −14.9% at week 68, compared with −2.4% with placebo.",
+      "sentence": "STEP 1 was an earlier semaglutide trial in people without diabetes.",
+      "locator": "abstract",
+      "quote": "In the SELECT cardiovascular outcomes trial, semaglutide showed a 20% reduction in major adverse cardiovascular events in 17,604 adults with preexisting cardiovascular disease, overweight or obesity, without diabetes.",
       "supported": true,
       "direction_conflict": false,
-      "page": 5
+      "page": 1
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "That is a 12.5-point difference, against 8.7 points in SELECT.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "The authors argue the smaller figure is expected, for three reasons:",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "Trial purpose.** SELECT was a heart-outcomes trial in which weight was a secondary measure.",
-      "locator": "Sec1/p2",
-      "quote": "Data derived from the SELECT trial offer the opportunity to evaluate the weight loss efficacy, in a geographically and racially diverse population, of semaglutide compared with placebo over 208 weeks when both are given in addition to standard-of-care recommendations for secondary CVD prevention (but without a focus on targeting weight loss).",
+      "sentence": "There, weight loss at 68 weeks was 14.9% on the drug against 2.4% on placebo, a 12.5-point difference, well above SELECT's 8.7.",
+      "locator": "Sec6/p1",
+      "quote": "Among in-trial (intention-to-treat principle) patients at week 104, weight loss of ≥5%, ≥10%, ≥15%, ≥20% and ≥25% was achieved by 67.8%, 44.2%, 22.9%, 11.0% and 4.9%, respectively, of those treated with semaglutide compared with 21.3%, 6.9%, 1.7%, 0.6% and 0.1% of those receiving placebo (Fig. ).",
       "supported": true,
       "direction_conflict": false,
-      "page": 3
+      "page": 4
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "STEP 1 volunteers joined to lose weight and followed a structured program: eating 500 fewer calories a day and exercising 150 minutes a week.",
+      "sentence": "The authors give three reasons to expect a smaller number in SELECT.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "First, STEP 1 enrolled people who wanted to lose weight and put them on a structured program (500 fewer calories a day and 150 minutes of exercise a week).",
       "locator": "Sec13/p4",
       "quote": "Patients in STEP 1 were desirous of weight loss as a reason for study participation and received structured lifestyle intervention (which included a −500 kcal per day diet with 150 min per week of physical activity).",
       "supported": true,
@@ -1780,7 +1809,16 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "Population.** STEP 1 enrolled younger, healthier people, many more women (73.1% vs 27.7% of the semaglutide groups), and people with a higher average BMI (37.8 vs 33.3).",
+      "sentence": "SELECT enrolled heart patients who got general advice.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "Second, STEP 1's participants were younger, healthier, heavier (average BMI 37.8 versus 33.3) and mostly women (73.1% versus 27.7%).",
       "locator": "Sec13/p4",
       "quote": "Second, the respective study populations were quite different, with STEP 1 including a younger, healthier population with more women (73.1% of the semaglutide arm in STEP 1 versus 27.7% in SELECT) and higher mean BMI (37.8 kg m−2 versus 33.3 kg m−2, respectively),.",
       "supported": true,
@@ -1789,7 +1827,7 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "Dosing.** SELECT's dosing was more flexible.",
+      "sentence": "Third, SELECT let doctors slow, reduce or pause the dose.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1798,7 +1836,7 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "By week 104, about 77% of SELECT patients still taking the drug were on the full 2.4 mg, compared with 89.6% in STEP 1 at week 68.",
+      "sentence": "At two years, about 77% of SELECT patients still on treatment were taking the full 2.4 mg, compared with 89.6% in STEP 1 at week 68.",
       "locator": "Sec13/p4",
       "quote": "By 104 weeks, approximately 77% of SELECT patients on dose were receiving the target semaglutide 2.4 mg weekly dose, which is lower than the corresponding proportion of patients in STEP 1 (89.6% were receiving the target dose at week 68),.",
       "supported": true,
@@ -1807,7 +1845,7 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "The larger loss in SELECT's on-treatment analysis fits this explanation.",
+      "sentence": "The larger loss in SELECT's on-treatment analysis supports this last point.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1816,7 +1854,7 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "People with a BMI under 30 lost a smaller share of their weight than people with obesity, even though they got the same drug and possibly a higher effective dose.",
+      "sentence": "People with a BMI under 30 lost a smaller share of their weight, even though they probably received more drug per kilogram.",
       "locator": "Sec13/p6",
       "quote": "The proportion (percentage) of weight loss seems to be less, on average, in the BMI <30 kg m−2 category relative to higher BMI categories, despite their receiving of the same treatment and even potentially higher exposure to the drug for weight loss.",
       "supported": true,
@@ -1825,43 +1863,25 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "Above a BMI of 30, losses were similar across the obesity classes.",
+      "sentence": "Look AHEAD, a lifestyle weight-loss study, found the same pattern.",
       "locator": "Sec13/p6",
-      "quote": "Furthermore, as BMI exceeds 30 kg m−2, weight loss amounts are more similar for class I, II and III obesity.",
+      "quote": "This was also observed in Look AHEAD, a lifestyle intervention study for weight loss.",
       "supported": true,
       "direction_conflict": false,
       "page": 7
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "Look AHEAD, a trial of diet and exercise, saw the same pattern.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "The authors offer an explanation based on the **settling point**, also called the set point.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "Every weight-loss treatment eventually levels off at a weight that matches a person's genes and environment, and people with a lower BMI may already be close to that point.",
+      "sentence": "Every weight-loss treatment eventually reaches a plateau, a weight that matches a person's genetic and environmental makeup, and people who start at a lower BMI may already be closer to it.",
       "locator": "Sec13/p6",
-      "quote": "Perhaps persons with BMI <30 kg m−2 are closer to their settling point and have less weight to lose to reach it.",
+      "quote": "This plateau has been termed the ‘set point’ or ‘settling point’, a body weight that is in harmony with the genetic and environmental determinants of body weight and adiposity.",
       "supported": true,
       "direction_conflict": false,
       "page": 7
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "The authors add that the health gains come from losing visceral and ectopic fat, not fat stored on the hips and thighs.",
+      "sentence": "The authors also note that the heart and metabolic benefits of weight loss come from shrinking visceral and ectopic fat rather than fat on the hips and thighs.",
       "locator": "Sec13/p6",
       "quote": "Furthermore, the cardiometabolic benefits of weight loss are driven by reduction in the abnormal ectopic and visceral depots of fat, not by reduction of subcutaneous fat stores in the hips and thighs.",
       "supported": true,
@@ -1870,70 +1890,52 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "If so, people with heart disease and a lower BMI may need to lose less total weight to benefit.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "They present this as a hypothesis for future studies to test.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "Not a prevention trial.** Everyone in SELECT already had heart disease, so its heart results should not be applied to everyone with excess weight.",
-      "locator": "Sec1/p2",
-      "quote": "The SELECT trial (Semaglutide Effects on Heart Disease and Stroke in Patients with Overweight or Obesity) studied patients with established CVD and overweight or obesity but without diabetes.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 2
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "Small subgroups.** Some racial subgroups were too small to show differences.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "BMI floor of 27.** The trial left out people with a BMI under 27.",
-      "locator": "",
-      "quote": "",
-      "supported": false,
-      "direction_conflict": false,
-      "page": 0
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "That excludes many Asian patients who qualify for obesity drugs at lower BMI and waist thresholds under their own countries' guidelines.",
-      "locator": "Sec13/p5",
-      "quote": "Thus, the study did not include Asian patients who qualify for treatment with obesity medications at lower BMI and WC cutoff points according to guidelines in their countries.",
+      "sentence": "A person with heart disease and a BMI under 30 might therefore need less total weight loss to get the same health benefit.",
+      "locator": "Sec13/p6",
+      "quote": "The proportion (percentage) of weight loss seems to be less, on average, in the BMI <30 kg m−2 category relative to higher BMI categories, despite their receiving of the same treatment and even potentially higher exposure to the drug for weight loss.",
       "supported": true,
       "direction_conflict": false,
       "page": 7
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "No body composition data.** The trial did not measure fat mass, lean mass or muscle, so it cannot say what kind of tissue was lost.",
-      "locator": "Sec13/p5",
-      "quote": "It would be meaningful to have quantitation of fat mass, lean mass and muscle mass, especially given the wide range of body size in the SELECT population.",
-      "supported": true,
+      "sentence": "The authors present this as an idea that still needs testing.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
       "direction_conflict": false,
-      "page": 7
+      "page": 0
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "For four years, weekly semaglutide 2.4 mg was tested in a large, diverse group of adults with heart disease and excess weight but no diabetes.",
+      "sentence": "SELECT enrolled only people who already had cardiovascular disease.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "Its results should not be applied to preventing a first heart attack or stroke in everyone with excess weight.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "Racial subgroups were too small to show differences between them reliably.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "Nobody with a BMI under 27 was included, which leaves out many Asian patients whose national guidelines recommend obesity drugs at lower BMI and waist thresholds, and the authors call for trials in that group.",
       "locator": "Sec13/p4",
       "quote": "In STEP 1, a large phase 3 study of once-weekly subcutaneous semaglutide 2.4 mg in individuals without diabetes but with BMI >30 kg m−2 or 27 kg m−2 with at least one obesity-related comorbidity, the mean weight loss was −14.9% at week 68, compared with −2.4% with placebo.",
       "supported": true,
@@ -1942,7 +1944,25 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "It produced 8.7 percentage points more weight loss than placebo, along with matching drops in waist size and waist-to-height ratio.",
+      "sentence": "The trial measured weight and waist but not body composition, so it cannot say how much of the loss was fat and how much was muscle or other lean tissue.",
+      "locator": "Sec1/p3",
+      "quote": "This prespecified analysis of the SELECT trial investigated weight loss and changes in anthropometric indices in patients with established CVD and overweight or obesity without diabetes, who met inclusion and exclusion criteria, within a range of baseline categories for glycemia, renal function and body anthropometric measures.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 3
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "In people with cardiovascular disease and overweight or obesity but no diabetes, weekly semaglutide 2.4 mg produced about 10% weight loss that lasted four years, along with matching drops in waist size and waist-to-height ratio.",
+      "locator": "Sec13/p4",
+      "quote": "In STEP 1, a large phase 3 study of once-weekly subcutaneous semaglutide 2.4 mg in individuals without diabetes but with BMI >30 kg m−2 or 27 kg m−2 with at least one obesity-related comorbidity, the mean weight loss was −14.9% at week 68, compared with −2.4% with placebo.",
+      "supported": true,
+      "direction_conflict": false,
+      "page": 5
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "The effect held across sex, age, race, region, blood sugar status, kidney function and body size.",
       "locator": "",
       "quote": "",
       "supported": false,
@@ -1951,25 +1971,7 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "Weight loss peaked at around 15 months and was maintained.",
-      "locator": "Fig2/caption",
-      "quote": "Bars depict the proportion (%) of patients receiving semaglutide or placebo who achieved ≥5%, ≥10%, ≥15%, ≥20% and ≥25% weight loss. b,c, Percentage change in body weight for individual patients from baseline to week 104 for semaglutide (b) and placebo (c).",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 3
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "Clinically meaningful loss occurred in both sexes and in every race, region and body-size group.",
-      "locator": "abstract",
-      "quote": "Clinically meaningful weight loss occurred in both sexes and all races, body sizes and regions.",
-      "supported": true,
-      "direction_conflict": false,
-      "page": 1
-    },
-    {
-      "section_id": "PMC11271387-section-5",
-      "sentence": "Serious adverse events were less frequent than on placebo in every BMI group, although people with a lower BMI stopped the drug more often.",
+      "sentence": "Serious adverse events were lower than on placebo in every BMI group.",
       "locator": "abstract",
       "quote": "For each BMI category (<30, 30 to <35, 35 to <40 and ≥40 kg m−2) there were lower rates (events per 100 years of observation) of serious adverse events with semaglutide (43.23, 43.54, 51.07 and 47.06 for semaglutide and 50.48, 49.66, 52.73 and 60.85 for placebo).",
       "supported": true,
@@ -1978,7 +1980,16 @@
     },
     {
       "section_id": "PMC11271387-section-5",
-      "sentence": "The authors see these results as support for broad use of semaglutide 2.4 mg to reduce cardiovascular events in people with overweight or obesity and existing heart disease.",
+      "sentence": "The drawback was tolerability: more people stopped taking the drug, especially those with a lower BMI.",
+      "locator": "",
+      "quote": "",
+      "supported": false,
+      "direction_conflict": false,
+      "page": 0
+    },
+    {
+      "section_id": "PMC11271387-section-5",
+      "sentence": "The authors conclude that the results support broad use of semaglutide to reduce cardiovascular events in this population.",
       "locator": "Sec13/p7",
       "quote": "In conclusion, this analysis of the SELECT study supports the broad use of once-weekly subcutaneous semaglutide 2.4 mg as an aid to CV event reduction in individuals with overweight or obesity without diabetes but with preexisting CVD.",
       "supported": true,
@@ -1989,12 +2000,13 @@
   "sources": {
     "Sec5/p1": "The average percentage weight-loss trajectories with semaglutide and placebo over 4 years of observation are shown in Fig. (ref. ). For those in the semaglutide group, the weight-loss trajectory continued to week 65 and then was sustained for the study period through week 208 (−10.2% for the semaglutide group, −1.5% for the placebo group; treatment difference −8.7%; 95% CI −9.42 to −7.88; P < 0.0001). To estimate the treatment effect while on medication, we performed a first on-treatment analysis (observation period until the first time being off treatment for >35 days). At week 208, mean weight loss in the semaglutide group analyzed as first on-treatment was −11.7% compared with −1.5% for the placebo group (Fig. ; treatment difference −10.2%; 95% CI −11.0 to −9.42; P < 0.0001).",
     "Sec6/p1": "Among in-trial (intention-to-treat principle) patients at week 104, weight loss of ≥5%, ≥10%, ≥15%, ≥20% and ≥25% was achieved by 67.8%, 44.2%, 22.9%, 11.0% and 4.9%, respectively, of those treated with semaglutide compared with 21.3%, 6.9%, 1.7%, 0.6% and 0.1% of those receiving placebo (Fig. ). Individual weight changes at 104 weeks for the in-trial populations for semaglutide and placebo are depicted in Fig. and Fig. , respectively. These waterfall plots show the variation in weight-loss response that occurs with semaglutide and placebo and show that weight loss is more prominent with semaglutide than placebo.",
+    "Sec11/p1": "The forest plot illustrated in Fig. displays mean body weight percentage change from baseline to week 104 for semaglutide relative to placebo in prespecified subgroups. Similar relationships are depicted for WC changes in prespecified subgroups shown in Extended Data Fig. . The effect of semaglutide (versus placebo) on mean percentage body weight loss as well as reduction in WC was found to be heterogeneous across several population subgroups. Women had a greater difference in mean weight loss with semaglutide versus placebo (−11.1% (95% CI −11.56 to −10.66) versus −7.5% in men (95% CI −7.78 to −7.23); P < 0.0001). There was a linear relationship between age category and degree of mean weight loss, with younger age being associated with progressively greater mean weight loss, but the actual mean difference by age group is small. Similarly, BMI category had small, although statistically significant, associations. Those with WHtR less than the median experienced slightly lower mean body weight change than those above the median, with estimated treatment differences −8.04% (95% CI −8.37 to −7.70) and −8.99% (95% CI −9.33 to −8.65), respectively (P < 0.0001). Patients from Asia and of Asian race experienced slightly lower mean weight loss (estimated treatment difference with semaglutide for Asian race −7.27% (95% CI −8.09 to −6.46; P = 0.0147) and for Asia −7.30 (95% CI −7.97 to −6.62; P = 0.0016)). There was no difference in weight loss with semaglutide associated with ethnicity (estimated treatment difference for Hispanic −8.53% (95% CI −9.28 to −7.76) or non-Hispanic −8.52% (95% CI −8.77 to 8.26); P = 0.9769), glycemic status (estimated treatment difference for prediabetes −8.53% (95% CI −8.83 to −8.24) or normoglycemia −8.48% (95% CI −8.88 to −8.07; P = 0.8188) or renal function (estimated treatment difference for estimated glomerular filtration rate (eGFR) <60 or ≥60 ml min−1 1.73 m−2 being −8.50% (95% CI −9.23 to −7.76) and −8.52% (95% CI −8.77 to −8.26), respecti",
     "Sec10/p1": "At week 104, 52.4% of patients treated with semaglutide achieved improvement in BMI category compared with 15.7% of those receiving placebo. Proportions of patients in the BMI categories at baseline and week 104 are shown in Fig. , which depicts in-trial patients receiving semaglutide and placebo. The BMI category change reflects the superior weight loss with semaglutide, which resulted in fewer patients being in the higher BMI categories after 104 weeks. In the semaglutide group, 12.0% of patients achieved a BMI <25 kg m−2, which is considered the healthy BMI category, compared with 1.2% for placebo; per study inclusion criteria, no patients were in this category at baseline. The proportion of patients with obesity (BMI ≥30 kg m−2) fell from 71.0% to 43.3% in the semaglutide group versus 71.9% to 67.9% in the placebo group.",
     "Sec8/p1": "We analyzed achievement of sex- and race-specific cutoff points for WC by BMI <35 kg m−2 or ≥35 kg m−2, because for BMI >35 kg m−2, WC is more difficult technically and, thus, less accurate as a risk predictor,,. Within the SELECT population with BMI <35 kg m−2 at baseline, 15.0% and 14.3% of the semaglutide and placebo groups, respectively, were below the sex- and race-specific WC cutoff points. At week 104, 41.2% fell below the sex- and race-specific cutoff points for the semaglutide group, compared with only 18.0% for the placebo group (Fig. ).",
-    "Sec11/p1": "The forest plot illustrated in Fig. displays mean body weight percentage change from baseline to week 104 for semaglutide relative to placebo in prespecified subgroups. Similar relationships are depicted for WC changes in prespecified subgroups shown in Extended Data Fig. . The effect of semaglutide (versus placebo) on mean percentage body weight loss as well as reduction in WC was found to be heterogeneous across several population subgroups. Women had a greater difference in mean weight loss with semaglutide versus placebo (−11.1% (95% CI −11.56 to −10.66) versus −7.5% in men (95% CI −7.78 to −7.23); P < 0.0001). There was a linear relationship between age category and degree of mean weight loss, with younger age being associated with progressively greater mean weight loss, but the actual mean difference by age group is small. Similarly, BMI category had small, although statistically significant, associations. Those with WHtR less than the median experienced slightly lower mean body weight change than those above the median, with estimated treatment differences −8.04% (95% CI −8.37 to −7.70) and −8.99% (95% CI −9.33 to −8.65), respectively (P < 0.0001). Patients from Asia and of Asian race experienced slightly lower mean weight loss (estimated treatment difference with semaglutide for Asian race −7.27% (95% CI −8.09 to −6.46; P = 0.0147) and for Asia −7.30 (95% CI −7.97 to −6.62; P = 0.0016)). There was no difference in weight loss with semaglutide associated with ethnicity (estimated treatment difference for Hispanic −8.53% (95% CI −9.28 to −7.76) or non-Hispanic −8.52% (95% CI −8.77 to 8.26); P = 0.9769), glycemic status (estimated treatment difference for prediabetes −8.53% (95% CI −8.83 to −8.24) or normoglycemia −8.48% (95% CI −8.88 to −8.07; P = 0.8188) or renal function (estimated treatment difference for estimated glomerular filtration rate (eGFR) <60 or ≥60 ml min−1 1.73 m−2 being −8.50% (95% CI −9.23 to −7.76) and −8.52% (95% CI −8.77 to −8.26), respecti",
     "Sec12/p2": "We reported in the primary SELECT analysis that serious adverse events (SAEs) were reported by 2,941 patients (33.4%) in the semaglutide arm and by 3,204 patients (36.4%) in the placebo arm (P < 0.001). For this study, we analyzed SAE rates by person-years of treatment exposure for BMI classes (<30 kg m−2, 30 to <35 kg m−2, 35 to <40 kg m−2, and ≥40 kg m−2) and provide these data in . We also provide an analysis of the most common categories of SAEs. Semaglutide was associated with lower SAEs, primarily driven by CV event and infections. Within each obesity class (<30 kg m−2, 30 to <35 kg m−2, 35 to <40 kg m−2, and ≥40 kg m−2), there were fewer SAEs in the group receiving semaglutide compared with placebo. Rates (events per 100 years of observation) of SAEs were 43.23, 43.54, 51.07 and 47.06 for semaglutide and 50.48, 49.66, 52.73 and 60.85 for placebo, with no evidence of heterogeneity. There was no detectable difference in hepatobiliary or gastrointestinal SAEs comparing semaglutide with placebo in any of the four BMI classes we evaluated.",
     "Sec20/p1": "The statistical analyses for the in-trial period were based on the intention-to-treat principle and included all randomized patients irrespective of adherence to semaglutide or placebo or changes to background medications. Continuous endpoints were analyzed using an analysis of covariance model with treatment as a fixed factor and baseline value of the endpoint as a covariate. Missing data at the landmark visit, for example, week 104, were imputed using a multiple imputation model and done separately for each treatment arm and included baseline value as a covariate and fit to patients having an observed data point (irrespective of adherence to randomized treatment) at week 104. The fit model is used to impute values for all patients with missing data at week 104 to create 500 complete data sets. Rubin’s rules were used to combine the results. Estimated means are provided with s.e.m., and estimated treatment differences are provided with 95% CI. Binary endpoints were analyzed using logistic regression with treatment and baseline value as a covariate, where missing data were imputed by first using multiple imputation as described above and then categorizing the imputed data according to the endpoint, for example, body weight percentage change at week 104 of <0%. Subgroup analyses for continuous and binary endpoints also included the subgroup and interaction between treatment and subgroup as fixed factors. Because some patients in both arms continued to be followed but were off treatment, we also analyzed weight loss by first on-treatment group (observation period until first time being off treatment for >35 days) to assess a more realistic picture of weight loss in those adhering to treatment. CIs were not adjusted for multiplicity and should therefore not be used to infer definitive treatment effects. All statistical analyses were performed with SAS software, version 9.4 TS1M5 (SAS Institute).",
-    "Sec19/p1": "The following endpoints relevant to this paper were assessed at randomization (week 0) to years 2, 3 and 4: change in body weight (%); proportion achieving weight loss ≥5%, ≥10%, ≥15% and ≥20%; change in WC (cm); and percentage change in WHtR (cm cm−1). Improvement in BMI category (defined as being in a lower BMI class) was assessed at week 104 compared with baseline according to BMI classes: healthy (BMI <25 kg m−2), overweight (25 to <30 kg m−2), class I obesity (30 to <35 kg m−2), class II obesity (35 to <40 kg m−2) and class III obesity (≥40 kg m−2). The proportions of individuals with BMI <35 or ≥35 kg m−2 who achieved sex- and race-specific cutoff points for WC (indicating increased metabolic risk) were evaluated at week 104. The WC cutoff points were as follows: Asian women <80 cm, non-Asian women <88 cm, Asian men <88 cm and non-Asian men <102 cm."
+    "Sec19/p1": "The following endpoints relevant to this paper were assessed at randomization (week 0) to years 2, 3 and 4: change in body weight (%); proportion achieving weight loss ≥5%, ≥10%, ≥15% and ≥20%; change in WC (cm); and percentage change in WHtR (cm cm−1). Improvement in BMI category (defined as being in a lower BMI class) was assessed at week 104 compared with baseline according to BMI classes: healthy (BMI <25 kg m−2), overweight (25 to <30 kg m−2), class I obesity (30 to <35 kg m−2), class II obesity (35 to <40 kg m−2) and class III obesity (≥40 kg m−2). The proportions of individuals with BMI <35 or ≥35 kg m−2 who achieved sex- and race-specific cutoff points for WC (indicating increased metabolic risk) were evaluated at week 104. The WC cutoff points were as follows: Asian women <80 cm, non-Asian women <88 cm, Asian men <88 cm and non-Asian men <102 cm.",
+    "Sec13/p6": "An interesting observation from this SELECT weight loss data is that when BMI is ≤30 kg m−2, weight loss on a percentage basis is less than that observed across higher classes of BMI severity. Furthermore, as BMI exceeds 30 kg m−2, weight loss amounts are more similar for class I, II and III obesity. This was also observed in Look AHEAD, a lifestyle intervention study for weight loss. The proportion (percentage) of weight loss seems to be less, on average, in the BMI <30 kg m−2 category relative to higher BMI categories, despite their receiving of the same treatment and even potentially higher exposure to the drug for weight loss. Weight loss cannot continue indefinitely. There is a plateau of weight that occurs after weight loss with all treatments for weight management. This plateau has been termed the ‘set point’ or ‘settling point’, a body weight that is in harmony with the genetic and environmental determinants of body weight and adiposity. Perhaps persons with BMI <30 kg m−2 are closer to their settling point and have less weight to lose to reach it. Furthermore, the cardiometabolic benefits of weight loss are driven by reduction in the abnormal ectopic and visceral depots of fat, not by reduction of subcutaneous fat stores in the hips and thighs. The phenotype of cardiometabolic disease but lower BMI (<30 kg m−2) may be one where reduction of excess abnormal and dysfunctional body fat does not require as much body mass reduction to achieve health improvement. We suspect this may be the case and suggest further studies to explore this aspect of weight-loss physiology."
   },
   "verification": {
     "checked": 36,
@@ -2006,21 +2018,21 @@
         "reason": "the defining sentence is not in the paper, so the definition is shown as ours"
       },
       {
-        "what": "term 'Waist circumference cutoff points' (quote)",
+        "what": "term 'Waist cutoff points' (quote)",
         "locator": "Sec19/p1",
         "reason": "the defining sentence is not in the paper, so the definition is shown as ours"
       }
     ],
-    "prose_checked": 127,
+    "prose_checked": 119,
     "prose_unmatched": [
       {
-        "section_id": "PMC11271387-section-3",
-        "number": "8.5",
-        "context": " showed a treatment difference of about 8.5 points."
+        "section_id": "PMC11271387-section-2",
+        "number": "97",
+        "context": "ing to people who stop taking it. About 97% of each arm stayed in the trial, but 3"
       }
     ],
     "sentences": 109,
-    "anchored": 63,
+    "anchored": 67,
     "direction_conflicts": 2
   },
   "notes": []
