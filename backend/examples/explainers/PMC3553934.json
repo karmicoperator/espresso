@@ -13,15 +13,15 @@
   "published": "2013-01-24 00:00:00",
   "doi": "10.1136/bmj.f232",
   "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3553934/",
-  "question": "In young, active adults with an acute ACL tear, does rehabilitation plus early ACL reconstruction give better knee outcomes at five years than rehabilitation with the option of a later reconstruction?",
+  "question": "In young, active adults with an acute ACL tear, does rehabilitation plus early reconstruction give better five year results than rehabilitation with the option of a later reconstruction?",
   "bottom_line": {
-    "question": "In young, active adults with an acute ACL tear, does rehabilitation plus early ACL reconstruction give better knee outcomes at five years than rehabilitation with the option of a later reconstruction?",
-    "answer": "Early reconstruction was no better at five years: the KOOS4 knee score improved by 42.9 points with early reconstruction and 44.9 points with rehabilitation plus optional later reconstruction (difference 2.0 points, P=0.54), so rehabilitation can be offered as the first treatment.",
+    "question": "In young, active adults with an acute ACL tear, does rehabilitation plus early reconstruction give better five year results than rehabilitation with the option of a later reconstruction?",
+    "answer": "Five years after an acute ACL tear, the KOOS4 knee score improved by 42.9 points with early reconstruction and 44.9 points with rehabilitation plus optional later reconstruction, a difference of 2.0 points that was not statistically significant.",
     "provenance": {
-      "locator": "abstract",
-      "kind": "abstract",
-      "quote": "The mean change in KOOS4 score from baseline to five years was 42.9 points for those assigned to rehabilitation plus early ACL reconstruction and 44.9 for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54",
-      "section": "Abstract"
+      "locator": "sec-patient-reported-outcomes-11/p1",
+      "kind": "paragraph",
+      "quote": "the mean change in KOOS4 score from baseline to five years was 42.9 points for patients assigned to rehabilitation plus early anterior cruciate ligament reconstruction and 44.9 points for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for the baseline score)",
+      "section": "Results, Patient reported outcomes"
     },
     "effect": "2.0 points",
     "verdict": "no_difference"
@@ -29,8 +29,8 @@
   "sections": [
     {
       "id": "PMC3553934-section-1",
-      "title": "The Question: Surgery First or Rehabilitation First?",
-      "markdown": "Early surgery for a torn anterior cruciate ligament (ACL), one of the main ligaments that stabilises the knee, did no better over five years than trying rehabilitation first. That is the result of the KANON trial in Sweden. An ACL tear is a common and serious injury in young, active people. It can leave a knee that feels unreliable, lower activity levels and worse quality of life. Many patients go on to develop knee osteoarthritis whatever treatment they receive.\n\nOne standard response is **ACL reconstruction**, surgery that replaces the torn ligament with a graft taken from one of the patient's own tendons. The alternative is structured rehabilitation (supervised exercise therapy), with surgery only if the knee keeps giving way. Doctors have long debated how much each approach contributes to short-term and long-term results.\n\nKANON compared these two strategies directly. At two years it found no difference in patient reported outcomes. This report follows the same patients to five years and adds X-ray evidence of osteoarthritis and a count of meniscus operations. The authors describe it as the first mid-term randomised comparison of the two strategies.",
+      "title": "The Question: Surgery or Rehabilitation After an ACL Tear",
+      "markdown": "The **anterior cruciate ligament (ACL)** is one of the main ligaments in the knee. It connects the thigh bone to the shin bone and stops the shin from sliding forward. Young, active people tear it often, and it is a serious injury. Many end up with a knee that feels unstable, do less physical activity, and rate their knee-related quality of life lower. Many also develop knee osteoarthritis later on, whichever treatment they had.\n\nThere are two main ways to treat it. In surgical reconstruction, a surgeon replaces the torn ligament with a graft taken from one of the patient's own tendons, and the patient then does rehabilitation. The other option is structured rehabilitation (guided exercise and physiotherapy), with surgery held back for patients whose knee keeps giving way. Surgery is commonly recommended for people who want to get back to sport. How much it adds over rehabilitation is still debated, and there has been little trial evidence to settle it.\n\nThe KANON trial in Sweden compared the two strategies head to head. Its two-year results found no difference in how patients rated their knees. This report follows the same patients to five years and adds X-ray evidence of osteoarthritis and a count of meniscus operations. The authors say it is the first randomised trial to compare these strategies over the medium term.",
       "chart_ids": [],
       "figure_ids": [
         "fig1",
@@ -39,51 +39,51 @@
     },
     {
       "id": "PMC3553934-section-2",
-      "title": "How the Trial Was Designed and Measured",
-      "markdown": "## How the trial worked\n\nThe researchers enrolled 121 active adults aged 18 to 35 (average age 26) at two Swedish hospitals. Each had an ACL tear no more than four weeks old in a knee that had never been injured before. The trial excluded professional athletes, people who were less than moderately active, and patients with some other serious knee damage.\n\nEveryone received the same structured rehabilitation. In addition, patients were randomly assigned to one of two strategies:\n\n- Early reconstruction (62 patients), done within 10 weeks of injury by one of four experienced knee surgeons.\n- Optional delayed reconstruction (59 patients). These patients had surgery only if the knee became unstable enough to cause symptoms and a positive pivot shift test confirmed it. In that exam, the doctor feels the shinbone slip out of place.\n\nEach surgeon chose whether to take the graft from the patellar tendon (below the kneecap) or from the hamstrings. In both groups, torn menisci (the cartilage pads that cushion the knee) were trimmed or repaired when needed. Only one patient was lost by five years, which left 120 for analysis.\n\n## What was measured\n\nThe main measure was the **KOOS** (Knee injury and Osteoarthritis Outcome Score), a questionnaire that patients fill in themselves. It has five subscales: pain, symptoms, daily function, sport and recreation function, and knee-related quality of life. Each is scored from 0 (worst) to 100 (best). KOOS4 is the average of four of these subscales, and the primary outcome was how much it improved:\n\nmain outcome = KOOS4 at five years minus KOOS4 at the start of the trial\n\nThe researchers sized the trial so that 120 patients gave an 80% chance of detecting a 10-point difference between the groups.\n\nThe other outcomes were:\n\n- general health (the SF-36 survey)\n- activity level (the Tegner scale, 1 to 10) and whether patients returned to their pre-injury activity level\n- knee stability on two hands-on tests (Lachman and pivot shift)\n- meniscus surgery\n- osteoarthritis on weight-bearing X-rays\n\nA radiologist who did not know which group each patient was in graded the X-rays. The radiologist looked for bony spurs and narrowing of the joint space, the standard signs of osteoarthritis.\n\nThe results were analysed in two ways. The **full analysis set** compares patients by the group they were randomly assigned to, whatever surgery they had later. This tests the strategy. The as treated analysis compares patients by what they actually received: early surgery, delayed surgery or rehabilitation alone. This tests the treatments.",
+      "title": "How the Trial Worked",
+      "markdown": "The researchers enrolled 121 adults aged 18 to 35 (average age 26) at two Swedish hospitals. Each had torn the ACL in the previous four weeks, in a knee with no earlier injury. The trial excluded professional athletes, people who were less than moderately active, and people with certain other major knee damage, such as a complete tear of a collateral ligament or a full-thickness cartilage defect on MRI.\n\nIn a **randomised controlled trial**, chance decides which treatment each person gets. That makes the groups alike at the start, so later differences can be put down to the treatment. Patients were assigned to one of two strategies:\n\n- **Early reconstruction:** 62 patients had rehabilitation plus ACL surgery within 10 weeks of the injury.\n- **Rehabilitation with optional delayed reconstruction:** 59 patients had the same rehabilitation and could have surgery later if the knee became unstable. The protocol defined instability as symptoms caused by the missing ACL together with a positive pivot shift test, an exam in which the doctor bends and rotates the knee to check whether the shin bone slips out of place.\n\nFour experienced knee surgeons did all the operations. Each chose between a graft from the patellar tendon (just below the kneecap) and a graft from the hamstring tendons. In both groups, torn menisci were trimmed or repaired when needed. The menisci are the two rubbery cartilage pads that cushion the inside of the knee.\n\nOnly one patient was lost to follow-up by five years, so 120 of 121 were analysed. Long-term surgical studies rarely keep that many patients, and it makes the results more trustworthy.",
       "chart_ids": [],
       "figure_ids": []
     },
     {
       "id": "PMC3553934-section-3",
-      "title": "How Patients Fared: Surgery Rates, Symptoms and Knee Stability",
-      "markdown": "## Half the rehabilitation group never had surgery\n\nOf the 59 patients offered delayed reconstruction, 30 (51%) had it within five years, seven of them between years two and five. The other 29 managed with rehabilitation alone. Across the whole trial, 61 patients had early reconstruction, 30 had delayed reconstruction and 29 had none.\n\n## No difference in how patients felt\n\nBoth groups improved a great deal. KOOS4 rose by an average of 42.9 points with early reconstruction and 44.9 points with optional delayed reconstruction. The paper reports a difference between the groups of 2.0 points (95% confidence interval −8.5 to 4.5; P=0.54 after adjusting for starting scores). The whole interval stays within the 10-point difference the trial was designed to detect.\n\nAt five years there were no significant differences in:\n\n- KOOS4 itself (P=0.45)\n- any KOOS subscale\n- SF-36 physical or mental scores\n- Tegner activity level\n- return to pre-injury activity\n\nThe as treated analysis gave the same picture: early surgery, late surgery and no surgery ended up in similar places. Return to pre-injury activity was modest overall. This matches a meta-analysis of 5,770 reconstruction patients, in which only 63% got back to their previous activity level and 44% returned to competitive sport.\n\n## Tighter knees, same outcomes\n\nSurgery did make knees more stable. At five years, knees in the early reconstruction group were significantly more likely to pass the Lachman and pivot shift tests (both P<0.001). That mechanical difference did not show up in pain, function, activity or quality of life.",
+      "title": "What They Measured",
+      "markdown": "The main outcome came from the **knee injury and osteoarthritis outcome score (KOOS)**, a questionnaire in which patients rate their own knee. It has five subscales, each scored from 0 (worst) to 100 (best). The trial averaged four of them into one number:\n\nKOOS4 = (sum of four KOOS subscale scores) / 4\n\nThe primary result was how much that number improved:\n\nmain outcome = KOOS4 at five years minus KOOS4 at the start\n\nThe trial enrolled about 120 patients so it would have an 80% chance of detecting a 10-point difference between the groups on this measure.\n\nSecondary outcomes included:\n\n- the SF-36, a general health survey with a physical score and a mental score\n- the Tegner activity scale (1 to 10), plus whether patients got back to their pre-injury activity level\n- knee stability on two clinical tests, the Lachman and the pivot shift\n- **radiographic osteoarthritis**, meaning signs of joint wear on standing X-rays. A radiologist who did not know each patient's treatment graded the X-rays, separately for the joint between the thigh and shin bones (tibiofemoral) and the joint behind the kneecap (patellofemoral)\n- meniscus surgery over the five years\n\nThe data were analysed in two ways. The **full analysis set** compares patients by the group they were randomly assigned to. The \"as treated\" analysis compares them by the treatment they actually received. The second matters here because many patients in the rehabilitation group had surgery later.",
       "chart_ids": [
-        "flow",
-        "primary-diff",
-        "primary-by-arm"
+        "flow"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC3553934-section-4",
-      "title": "Osteoarthritis, Meniscus Surgery and Graft Failures",
-      "markdown": "## Osteoarthritis appeared early, whatever the treatment\n\nX-rays were available for 113 knees, and none showed osteoarthritis at the start. By five years:\n\n- 12% had osteoarthritis in the main joint between the thighbone and shinbone (tibiofemoral).\n- 19% had it behind the kneecap (patellofemoral).\n\nThe randomised groups did not differ significantly (P=0.17).\n\nComparing by treatment received:\n\n- Reconstructed knees: 11% tibiofemoral and 23% patellofemoral osteoarthritis.\n- Knees treated with rehabilitation alone: 12% and 8%.\n\nNeither gap was statistically significant (P=0.995 and P=0.084). Among reconstructed knees, patellar tendon grafts were linked to significantly more osteoarthritis behind the kneecap than hamstring grafts (P=0.001). The authors point to evidence that the patellar tendon can shorten after surgery, changing how load passes through the joint behind the kneecap.\n\nThe authors call it striking that this much osteoarthritis appears five years after an injury at around age 30. They conclude that reconstruction does not protect the knee from these structural changes. Earlier long-term studies, including a 15-year randomised trial, also found no difference in osteoarthritis between treatments.\n\n## Meniscus surgery and graft failures\n\nObservational studies have suggested that waiting longer before reconstruction leads to more meniscus injury. The authors note that those studies suffer from confounding: patients who get early surgery and patients who get late surgery differ in ways that affect the outcome.\n\nIn this trial, 61 of 120 knees (51%) had meniscus surgery over five years: 29 in the early group and 32 in the delayed-option group (P=0.48). A time-to-event analysis, which accounts for when each meniscus was operated on, also found no difference (P=0.77). The early group did have fewer meniscus operations in total once repeat operations on the same meniscus were counted. That result is exploratory and appears in the supplementary appendix.\n\nFour grafts ruptured: three of the 61 early reconstructions (5%) and one of the 30 delayed ones (3%). That is in line with the 4.3% rate found in a five-year follow-up of 1,415 reconstruction patients.",
+      "title": "Five-Year Results",
+      "markdown": "### Half the rehabilitation group never had surgery\n\nOf the 59 patients assigned to rehabilitation first, 30 (51%) had a delayed reconstruction. Seven of those operations happened between two and five years after the injury. The other 29 were treated with rehabilitation alone. Over the whole study, 61 patients had early reconstruction, 30 had delayed reconstruction, and 29 never had surgery.\n\n### Patients rated their knees the same\n\nKOOS4 improved by 42.9 points in the early surgery group and by 44.9 points in the rehabilitation-first group. The reported difference was 2.0 points, with a 95% confidence interval of −8.5 to 4.5 (P = 0.54). A confidence interval is the range of true differences the data are consistent with. This one includes zero, and both ends fall short of the 10-point difference the trial was designed to detect. The P value is how likely a gap this size would be by chance if the treatments were equal. At 0.54, it is far above the usual 0.05 cut-off for statistical significance.\n\nAt five years, there were also no significant differences in:\n\n- KOOS4 itself (P = 0.45)\n- any of the five KOOS subscales (P ≥ 0.12)\n- SF-36 (P ≥ 0.34)\n- Tegner activity level (P = 0.74)\n- return to pre-injury activity\n\nThe as-treated analysis gave similar results (Table 3). Knees rebuilt early, knees rebuilt late and knees treated with rehabilitation alone all came out much the same.\n\n### Surgery gave a more stable knee on examination\n\nKnees assigned to early reconstruction were more stable on both the Lachman and the pivot shift tests (both P < 0.001). That better stability did not show up in patients' own ratings of pain, function, activity or quality of life.\n\n### Osteoarthritis appeared early whatever the treatment\n\nBoth sets of X-rays (start and five years) were available for 113 knees. None showed osteoarthritis at the start. After five years, 13 knees (12%) had tibiofemoral osteoarthritis and 22 (19%) had patellofemoral osteoarthritis, with 6 knees showing both. The randomised groups did not differ significantly (P = 0.17), and neither did the as-treated groups.\n\nAmong the 87 reconstructed knees, 11% had tibiofemoral and 23% had patellofemoral osteoarthritis. Among the 26 knees treated with rehabilitation alone, the figures were 12% and 8%. The patellofemoral gap was not statistically significant (P = 0.084). Graft type did matter. Knees rebuilt with a patellar tendon graft had significantly more patellofemoral osteoarthritis than knees rebuilt with hamstring grafts (P = 0.001). The authors point to two possible causes: the patellar tendon can shorten after surgery, which changes the load on the kneecap joint, and the bone where the graft was taken remodels as it heals.\n\nThe authors call it striking that this much osteoarthritis appears within five years in people around 30 years old. They conclude that reconstructing the ACL does not protect the knee from these structural changes.\n\n### Meniscus surgery and graft ruptures\n\nA common argument for operating early is that an unstable knee damages the menisci over time. Earlier observational studies found more meniscus injuries when surgery was delayed. The authors note those studies are \"confounded by indication\": patients who delay surgery may differ in other ways from those who don't.\n\nIn this trial, 61 knees (51%) had meniscus surgery during the five years: 29 in the early surgery group and 32 in the rehabilitation-first group (P = 0.48). A time-to-event analysis, which tracks when each meniscus was first operated on and compares the two groups over time, also found no difference (P = 0.77). When repeat operations on the same meniscus were counted, the early surgery group had fewer procedures in total. This was an exploratory analysis reported in the supplementary appendix.\n\nGrafts tore in 3 of 61 early reconstructions (5%) and 1 of 30 delayed reconstructions (3%). That matches the 4.3% rupture rate reported in a five-year follow-up of 1415 reconstruction patients. Two of the four patients chose a second (revision) operation.",
       "chart_ids": [
-        "koos-5y"
+        "koos-subscales",
+        "primary-difference",
+        "primary-by-arm"
       ],
       "figure_ids": []
     },
     {
       "id": "PMC3553934-section-5",
-      "title": "What It Means for Patients and Doctors",
-      "markdown": "## What it means\n\nIn young, active adults with a fresh ACL tear, early reconstruction plus rehabilitation did no better than rehabilitation first with surgery held in reserve. This held for patient reported outcomes, osteoarthritis and meniscus surgery. Under the second strategy, about half the patients never needed a reconstruction, and the trial found no evidence that either approach did more harm. The authors conclude that clinicians and patients should consider rehabilitation as a primary treatment option.\n\nThe results do not apply to professional athletes or to people who are less than moderately active, because neither group was enrolled. Patients and doctors learned the group assignments after two years. However, the five-year X-ray analysis was planned in the original protocol, and the radiologist grading the images did not know each patient's treatment.",
+      "title": "What It Means for Patients and Clinicians",
+      "markdown": "At five years, starting with rehabilitation and keeping surgery as an option did as well as early reconstruction on patient-reported outcomes, X-ray osteoarthritis and meniscus surgery. Half the patients who started with rehabilitation never needed a reconstruction. The trial found no evidence that either strategy did more harm than the other. Early surgery gave better stability on clinical tests, but patients did not report better function because of it.\n\nThe authors conclude that clinicians and young active adults should consider rehabilitation as a first-line treatment after an acute ACL tear. The findings do not apply to professional athletes or to people who are less than moderately active, since the trial excluded both groups. Because osteoarthritis can take many years to develop, the authors call for continued long-term follow-up of this and other groups of patients treated with and without surgery.",
       "chart_ids": [
         "stability",
-        "oa"
+        "osteoarthritis"
       ],
       "figure_ids": []
     }
   ],
   "charts": [
     {
-      "id": "primary-diff",
+      "id": "primary-difference",
       "kind": "stat",
-      "title": "Difference between arms in five year KOOS4 improvement",
-      "subtitle": "Mean change in KOOS4 from baseline to five years, adjusted for baseline score. P=0.54",
+      "title": "Difference in KOOS4 knee score improvement at five years, between arms",
+      "subtitle": "",
       "data": [
         {
-          "label": "Early vs optional delayed reconstruction",
+          "label": "Early reconstruction vs rehabilitation with optional later reconstruction",
           "value": 2.0,
           "low": -8.5,
           "high": 4.5,
@@ -95,7 +95,7 @@
           "provenance": {
             "locator": "sec-patient-reported-outcomes-11/p1",
             "kind": "paragraph",
-            "quote": "between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54",
+            "quote": "between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for the baseline score",
             "section": "Results, Patient reported outcomes"
           }
         }
@@ -112,18 +112,18 @@
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "Copied as printed. The estimate of 2.0 lies outside the printed 95% CI of −8.5 to 4.5, so one of the signs may be a misprint.",
-      "source": "Results text and abstract, primary outcome",
+      "caveat": "The paper prints this difference without a sign, adjusted for baseline score. The trial was sized to detect a 10 point difference.",
+      "source": "Results text, primary outcome",
       "section_id": "sec-patient-reported-outcomes-11"
     },
     {
       "id": "primary-by-arm",
       "kind": "bars",
-      "title": "Mean KOOS4 improvement from baseline to five years, by arm",
-      "subtitle": "Higher means more improvement on a 0 to 100 scale",
+      "title": "Improvement in KOOS4 knee score from baseline to five years, by arm",
+      "subtitle": "",
       "data": [
         {
-          "label": "KOOS4 change",
+          "label": "Change in KOOS4, baseline to five years",
           "value": 42.9,
           "low": null,
           "high": null,
@@ -140,13 +140,13 @@
           }
         },
         {
-          "label": "KOOS4 change",
+          "label": "Change in KOOS4, baseline to five years",
           "value": 44.9,
           "low": null,
           "high": null,
           "n": null,
           "events": null,
-          "group": "Optional delayed reconstruction",
+          "group": "Rehab, optional later surgery",
           "note": "",
           "higher_is_better": null,
           "provenance": {
@@ -162,21 +162,21 @@
       "edges": [],
       "shape": "",
       "unit": "points",
-      "value_label": "",
+      "value_label": "Mean change, points",
       "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "",
-      "source": "Results, Patient reported outcomes",
+      "caveat": "Randomised arms. In the optional surgery arm, 30 patients went on to have a delayed reconstruction.",
+      "source": "Results text, primary outcome",
       "section_id": "sec-patient-reported-outcomes-11"
     },
     {
       "id": "flow",
       "kind": "flow",
-      "title": "Who was randomised, and who ended up having surgery",
+      "title": "Who was randomised, followed to five years, and operated on",
       "subtitle": "",
       "data": [
         {
@@ -192,76 +192,8 @@
           "provenance": {
             "locator": "abstract",
             "kind": "abstract",
-            "quote": "121 young, active adults (mean age 26 years) with acute ACL injury",
+            "quote": "Participants 121 young, active adults (mean age 26 years) with acute ACL injury to a previously uninjured knee",
             "section": "Abstract"
-          }
-        },
-        {
-          "label": "Assigned early reconstruction",
-          "value": 62.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "abstract",
-            "kind": "abstract",
-            "quote": "62 patients were assigned to early ACL reconstruction",
-            "section": "Abstract"
-          }
-        },
-        {
-          "label": "Assigned rehabilitation, optional delayed reconstruction",
-          "value": 59.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "abstract",
-            "kind": "abstract",
-            "quote": "59 were assigned to the option of having a delayed ACL reconstruction if needed",
-            "section": "Abstract"
-          }
-        },
-        {
-          "label": "Later had delayed reconstruction",
-          "value": 30.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "sec-characteristics-of-patients-and-treatmen-10/p2",
-            "kind": "paragraph",
-            "quote": "Over the five year period, 61 patients had an early anterior cruciate ligament reconstruction, 30 had a delayed reconstruction, and 29 were treated with rehabilitation alone.",
-            "section": "Results, Characteristics of patients"
-          }
-        },
-        {
-          "label": "Rehabilitation alone",
-          "value": 29.0,
-          "low": null,
-          "high": null,
-          "n": null,
-          "events": null,
-          "group": "",
-          "note": "",
-          "higher_is_better": null,
-          "provenance": {
-            "locator": "sec-characteristics-of-patients-and-treatmen-10/p2",
-            "kind": "paragraph",
-            "quote": "Over the five year period, 61 patients had an early anterior cruciate ligament reconstruction, 30 had a delayed reconstruction, and 29 were treated with rehabilitation alone.",
-            "section": "Results, Characteristics of patients"
           }
         },
         {
@@ -280,12 +212,77 @@
             "quote": "we included 120/121 participants in this five year follow-up report",
             "section": "Results, Characteristics of patients"
           }
+        },
+        {
+          "label": "Early reconstruction arm",
+          "value": 61.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-characteristics-of-patients-and-treatmen-10/p1",
+            "kind": "paragraph",
+            "quote": "61 of whom were assigned to early anterior cruciate ligament reconstruction",
+            "section": "Results, Characteristics of patients"
+          }
+        },
+        {
+          "label": "Rehab with optional later surgery arm",
+          "value": 59.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-characteristics-of-patients-and-treatmen-10/p1",
+            "kind": "paragraph",
+            "quote": "59 to initial rehabilitation with the option of having a later reconstruction if needed",
+            "section": "Results, Characteristics of patients"
+          }
+        },
+        {
+          "label": "Had a delayed reconstruction",
+          "value": 30.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-characteristics-of-patients-and-treatmen-10/p2",
+            "kind": "paragraph",
+            "quote": "30 had a delayed reconstruction, and 29 were treated with rehabilitation alone",
+            "section": "Results, Characteristics of patients"
+          }
+        },
+        {
+          "label": "Rehabilitation alone",
+          "value": 29.0,
+          "low": null,
+          "high": null,
+          "n": null,
+          "events": null,
+          "group": "",
+          "note": "",
+          "higher_is_better": null,
+          "provenance": {
+            "locator": "sec-characteristics-of-patients-and-treatmen-10/p2",
+            "kind": "paragraph",
+            "quote": "30 had a delayed reconstruction, and 29 were treated with rehabilitation alone",
+            "section": "Results, Characteristics of patients"
+          }
         }
       ],
-      "annotation": {
-        "target": "Later had delayed reconstruction",
-        "text": "30 of the 59 in the rehabilitation arm (51%) chose reconstruction, seven of them between two and five years."
-      },
+      "annotation": null,
       "nodes": [],
       "edges": [],
       "shape": "",
@@ -297,18 +294,18 @@
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "One early arm patient missed the five year visit. The fourth and fifth boxes show treatment received, not the arm patients were assigned to.",
-      "source": "Abstract and Results, patient flow",
+      "caveat": "Two patients assigned to early reconstruction did not receive it as planned. They stay in the full analysis but are left out of the as treated analysis.",
+      "source": "Results, characteristics of patients and treatment",
       "section_id": "sec-characteristics-of-patients-and-treatmen-10"
     },
     {
-      "id": "koos-5y",
+      "id": "koos-subscales",
       "kind": "forest",
-      "title": "KOOS scores at five years: difference between arms",
-      "subtitle": "Mean difference in points, 95% CI. KOOS runs 0 to 100, worst to best",
+      "title": "KOOS knee scores at five years: difference between arms, by subscale",
+      "subtitle": "",
       "data": [
         {
-          "label": "KOOS4",
+          "label": "KOOS4 at five years",
           "value": -1.5,
           "low": -7.4,
           "high": 4.4,
@@ -420,17 +417,17 @@
       "log_scale": false,
       "null_value": 0.0,
       "lower_is_better": false,
-      "favours_left": "Optional delayed reconstruction",
+      "favours_left": "Optional later surgery",
       "favours_right": "Early reconstruction",
-      "caveat": "Secondary outcomes, none significant (P≥0.12). Table 2 does not say which arm was subtracted. The signs match early minus delayed in its arm means.",
-      "source": "Table 2, patient reported outcomes at 5 years",
+      "caveat": "Secondary outcomes, scored 0 to 100 where higher is better. No subscale differed significantly between arms.",
+      "source": "Table 2, KOOS at five years, full analysis set",
       "section_id": "sec-patient-reported-outcomes-11"
     },
     {
       "id": "stability",
       "kind": "bars",
-      "title": "Knees stable on clinical examination at five years, by arm",
-      "subtitle": "Both differences P<0.001",
+      "title": "Knees with a normal stability test at five years, by arm",
+      "subtitle": "",
       "data": [
         {
           "label": "Normal Lachman test",
@@ -456,7 +453,7 @@
           "high": null,
           "n": 58,
           "events": 19,
-          "group": "Optional delayed reconstruction",
+          "group": "Rehab, optional later surgery",
           "note": "",
           "higher_is_better": null,
           "provenance": {
@@ -490,7 +487,7 @@
           "high": null,
           "n": 58,
           "events": 23,
-          "group": "Optional delayed reconstruction",
+          "group": "Rehab, optional later surgery",
           "note": "",
           "higher_is_better": null,
           "provenance": {
@@ -501,30 +498,33 @@
           }
         }
       ],
-      "annotation": null,
+      "annotation": {
+        "target": "Normal Lachman test",
+        "text": "On examination, knees were more stable after early surgery. Patient reported scores did not differ."
+      },
       "nodes": [],
       "edges": [],
       "shape": "",
       "unit": "%",
-      "value_label": "",
+      "value_label": "Knees with a normal test, %",
       "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "The optional arm mixes 30 knees reconstructed later with 29 never reconstructed. Patient reported scores did not differ between arms.",
+      "caveat": "These are examination findings, not symptoms. The optional surgery arm includes 30 knees that were reconstructed later.",
       "source": "Table 2, mechanical knee stability",
       "section_id": "sec-mechanical-stability-12"
     },
     {
-      "id": "oa",
+      "id": "osteoarthritis",
       "kind": "bars",
       "title": "Knee osteoarthritis on X-ray at five years, by arm",
-      "subtitle": "Knees with radiographs: 58 early, 55 optional delayed",
+      "subtitle": "",
       "data": [
         {
-          "label": "Main knee joint (tibiofemoral)",
+          "label": "Tibiofemoral osteoarthritis",
           "value": 16.0,
           "low": null,
           "high": null,
@@ -541,13 +541,13 @@
           }
         },
         {
-          "label": "Main knee joint (tibiofemoral)",
+          "label": "Tibiofemoral osteoarthritis",
           "value": 7.0,
           "low": null,
           "high": null,
           "n": null,
           "events": 4,
-          "group": "Optional delayed reconstruction",
+          "group": "Rehab, optional later surgery",
           "note": "",
           "higher_is_better": null,
           "provenance": {
@@ -558,7 +558,7 @@
           }
         },
         {
-          "label": "Kneecap joint (patellofemoral)",
+          "label": "Patellofemoral osteoarthritis",
           "value": 24.0,
           "low": null,
           "high": null,
@@ -575,13 +575,13 @@
           }
         },
         {
-          "label": "Kneecap joint (patellofemoral)",
+          "label": "Patellofemoral osteoarthritis",
           "value": 15.0,
           "low": null,
           "high": null,
           "n": null,
           "events": 8,
-          "group": "Optional delayed reconstruction",
+          "group": "Rehab, optional later surgery",
           "note": "",
           "higher_is_better": null,
           "provenance": {
@@ -597,15 +597,15 @@
       "edges": [],
       "shape": "",
       "unit": "%",
-      "value_label": "",
+      "value_label": "Knees with radiographic osteoarthritis, %",
       "category_label": "",
       "log_scale": false,
       "null_value": null,
       "lower_is_better": true,
       "favours_left": "",
       "favours_right": "",
-      "caveat": "No knee had radiographic osteoarthritis at baseline. Neither difference was significant (P=0.17 and P=0.20).",
-      "source": "Table 4, radiographic osteoarthritis",
+      "caveat": "Radiographs were available for 113 knees. Neither difference was statistically significant (P=0.17 tibiofemoral, P=0.20 patellofemoral).",
+      "source": "Table 4, radiographic osteoarthritis, full analysis set",
       "section_id": "sec-radiographic-osteoarthritis-13"
     }
   ],
@@ -618,7 +618,7 @@
       "width": null,
       "height": null,
       "kind": "curve",
-      "why": "Shows when the delayed reconstructions happened across five years. The text gives only the total and the median timing.",
+      "why": "Shows when delayed reconstructions happened across five years. The text gives only the total and a median.",
       "section_id": "sec-characteristics-of-patients-and-treatmen-10"
     },
     {
@@ -629,7 +629,7 @@
       "width": null,
       "height": null,
       "kind": "curve",
-      "why": "Time to event curves for meniscus surgery by arm. The paper prints only the P value, not the values along the curves.",
+      "why": "Shows the timing of meniscus surgery in each arm over five years. The text reports only a P value for this comparison.",
       "section_id": "sec-meniscus-surgery-during-the-five-year-fo-14"
     }
   ],
@@ -638,12 +638,12 @@
   "terms": [
     {
       "term": "KOOS",
-      "definition": "Knee injury and osteoarthritis outcome score: a questionnaire the patient fills in, with five subscales (pain, symptoms, daily living, sport and recreation, knee related quality of life), each scored 0 to 100 from worst to best.",
+      "definition": "Knee injury and osteoarthritis outcome score: a patient questionnaire with five subscales covering pain, symptoms, daily activities, sport and recreation, and knee related quality of life, each scored 0 to 100 from worst to best.",
       "provenance": null
     },
     {
       "term": "KOOS4",
-      "definition": "The mean of four of the five KOOS subscales. The trial's main outcome was the change in this score from baseline to five years.",
+      "definition": "The average of four of the five KOOS subscales on a 0 to 100 scale. The change in this score from baseline to five years was the trial's main outcome.",
       "provenance": {
         "locator": "sec-patient-reported-outcomes-5/p1",
         "kind": "paragraph",
@@ -653,117 +653,122 @@
     },
     {
       "term": "Tegner activity scale",
-      "definition": "A single rating of how physically active a person is, from lowest to highest, where 10 means professional sport.",
+      "definition": "A score for physical activity level, from lowest to highest. Professional athletes score 10, and a score below 5 means less than moderately active.",
       "provenance": {
         "locator": "sec-participants-3/p1",
         "kind": "paragraph",
-        "quote": "Major exclusion criteria were professional athletes (10 on the Tegner activity score; 0-10, lowest to highest activity level)",
+        "quote": "professional athletes (10 on the Tegner activity score; 0-10, lowest to highest activity level), less than moderately active people (<5 on the same scale)",
         "section": "Methods, Participants"
       }
     },
     {
       "term": "Lachman test",
-      "definition": "A bedside examination that pulls the shin forward on the thigh with the knee slightly bent, to see whether the ACL holds the joint in place.",
+      "definition": "A bedside test in which the examiner pulls the shin forward with the knee slightly bent. Too much forward movement means the ACL is not holding the knee.",
       "provenance": null
     },
     {
       "term": "Pivot shift test",
-      "definition": "A bedside examination that tries to bring on the rotational giving way felt when the ACL does not work. A normal result means no instability.",
+      "definition": "A bedside test that tries to reproduce the giving way of a knee without a working ACL. A normal result means no rotational instability.",
       "provenance": null
     },
     {
       "term": "Radiographic osteoarthritis",
-      "definition": "Osteoarthritis seen on standing X-rays as joint space narrowing or bony spurs (osteophytes) above set atlas grades. For the main knee joint, the cut-off is close to Kellgren and Lawrence grade 2.",
-      "provenance": null
+      "definition": "Osteoarthritis seen on weight bearing X-ray, graded by joint space narrowing and bony spurs (osteophytes) in a knee compartment above set thresholds.",
+      "provenance": {
+        "locator": "sec-knee-radiography-and-grading-of-images-7/p3",
+        "kind": "paragraph",
+        "quote": "we considered radiographic osteoarthritis to be present if any of the following criteria were achieved in either of the medial or lateral tibiofemoral compartments or in the patellofemoral compartment",
+        "section": "Methods, Knee radiography"
+      }
     },
     {
-      "term": "Full analysis set",
-      "definition": "Every patient analysed in the group they were randomised to, whatever treatment they actually had.",
+      "term": "Tibiofemoral and patellofemoral",
+      "definition": "The tibiofemoral compartment is the main joint between the thigh bone and the shin bone. The patellofemoral compartment is where the kneecap glides on the thigh bone.",
       "provenance": null
     },
     {
       "term": "As treated analysis",
-      "definition": "Patients grouped by the treatment they actually had: early reconstruction, delayed reconstruction or rehabilitation alone. These groups were not formed by randomisation.",
+      "definition": "A comparison of patients grouped by the treatment they actually received (early reconstruction, delayed reconstruction or rehabilitation alone), not by the arm they were randomised to.",
       "provenance": null
     }
   ],
   "links": [
     {
       "section_id": "PMC3553934-section-2",
-      "sentence": "- Early reconstruction (62 patients), done within 10 weeks of injury by one of four experienced knee surgeons.",
-      "chart_id": "flow",
-      "kind": "datum",
-      "index": 1
-    },
-    {
-      "section_id": "PMC3553934-section-2",
-      "sentence": "- Optional delayed reconstruction (59 patients).",
-      "chart_id": "flow",
-      "kind": "datum",
-      "index": 2
-    },
-    {
-      "section_id": "PMC3553934-section-2",
-      "sentence": "Only one patient was lost by five years, which left 120 for analysis.",
-      "chart_id": "flow",
-      "kind": "datum",
-      "index": 5
-    },
-    {
-      "section_id": "PMC3553934-section-3",
-      "sentence": "Of the 59 patients offered delayed reconstruction, 30 (51%) had it within five years, seven of them between years two and five.",
-      "chart_id": "flow",
-      "kind": "datum",
-      "index": 2
-    },
-    {
-      "section_id": "PMC3553934-section-3",
-      "sentence": "The other 29 managed with rehabilitation alone.",
-      "chart_id": "flow",
-      "kind": "datum",
-      "index": 4
-    },
-    {
-      "section_id": "PMC3553934-section-3",
-      "sentence": "Across the whole trial, 61 patients had early reconstruction, 30 had delayed reconstruction and 29 had none.",
+      "sentence": "- **Rehabilitation with optional delayed reconstruction:** 59 patients had the same rehabilitation and could have surgery later if the knee became unstable.",
       "chart_id": "flow",
       "kind": "datum",
       "index": 3
     },
     {
-      "section_id": "PMC3553934-section-3",
-      "sentence": "KOOS4 rose by an average of 42.9 points with early reconstruction and 44.9 points with optional delayed reconstruction.",
-      "chart_id": "primary-by-arm",
+      "section_id": "PMC3553934-section-2",
+      "sentence": "Only one patient was lost to follow-up by five years, so 120 of 121 were analysed.",
+      "chart_id": "flow",
       "kind": "datum",
       "index": 1
     },
     {
       "section_id": "PMC3553934-section-3",
-      "sentence": "The paper reports a difference between the groups of 2.0 points (95% confidence interval −8.5 to 4.5; P=0.54 after adjusting for starting scores).",
-      "chart_id": "primary-diff",
+      "sentence": "The trial enrolled about 120 patients so it would have an 80% chance of detecting a 10-point difference between the groups on this measure.",
+      "chart_id": "flow",
       "kind": "datum",
       "index": 0
     },
     {
       "section_id": "PMC3553934-section-4",
-      "sentence": "In this trial, 61 of 120 knees (51%) had meniscus surgery over five years: 29 in the early group and 32 in the delayed-option group (P=0.48).",
+      "sentence": "Of the 59 patients assigned to rehabilitation first, 30 (51%) had a delayed reconstruction.",
+      "chart_id": "flow",
+      "kind": "datum",
+      "index": 4
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The other 29 were treated with rehabilitation alone.",
       "chart_id": "flow",
       "kind": "datum",
       "index": 5
     },
     {
       "section_id": "PMC3553934-section-4",
-      "sentence": "Four grafts ruptured: three of the 61 early reconstructions (5%) and one of the 30 delayed ones (3%).",
+      "sentence": "Over the whole study, 61 patients had early reconstruction, 30 had delayed reconstruction, and 29 never had surgery.",
       "chart_id": "flow",
       "kind": "datum",
-      "index": 3
+      "index": 2
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "KOOS4 improved by 42.9 points in the early surgery group and by 44.9 points in the rehabilitation-first group.",
+      "chart_id": "primary-by-arm",
+      "kind": "datum",
+      "index": 1
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "The reported difference was 2.0 points, with a 95% confidence interval of −8.5 to 4.5 (P = 0.54).",
+      "chart_id": "primary-difference",
+      "kind": "datum",
+      "index": 0
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "In this trial, 61 knees (51%) had meniscus surgery during the five years: 29 in the early surgery group and 32 in the rehabilitation-first group (P = 0.48).",
+      "chart_id": "flow",
+      "kind": "datum",
+      "index": 2
+    },
+    {
+      "section_id": "PMC3553934-section-4",
+      "sentence": "Grafts tore in 3 of 61 early reconstructions (5%) and 1 of 30 delayed reconstructions (3%).",
+      "chart_id": "flow",
+      "kind": "datum",
+      "index": 2
     }
   ],
   "sources": {
     "sec-patient-reported-outcomes-11/p1": "In the full analysis set, the mean change in KOOS4 score from baseline to five years was 42.9 points for patients assigned to rehabilitation plus early anterior cruciate ligament reconstruction and 44.9 points for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for the baseline score). We found no statistically significant differences in KOOS4, any of the five individual subscales of KOOS, SF-36, or Tegner activity scale between the two treatment strategies at five years or in the change between two and five years (table 2). We found similar results in the as treated analysis (table 3).",
     "abstract": "Objective To compare, in young active adults with an acute anterior cruciate ligament (ACL) tear, the mid-term (five year) patient reported and radiographic outcomes between those treated with rehabilitation plus early ACL reconstruction and those treated with rehabilitation and optional delayed ACL reconstruction. Design Extended follow-up of prospective randomised controlled trial. Setting Orthopaedic departments at two hospitals in Sweden. Participants 121 young, active adults (mean age 26 years) with acute ACL injury to a previously uninjured knee. One patient was lost to five year follow-up. Intervention All patients received similar structured rehabilitation. In addition to rehabilitation, 62 patients were assigned to early ACL reconstruction and 59 were assigned to the option of having a delayed ACL reconstruction if needed. Main outcome measure The main outcome was the change from baseline to five years in the mean value of four of the five subscales of the knee injury and osteoarthritis outcome score (KOOS4). Other outcomes included the absolute KOOS4 score, all five KOOS subscale scores, SF-36, Tegner activity scale, meniscal surgery, and radiographic osteoarthritis at five years. Results Thirty (51%) patients assigned to optional delayed ACL reconstruction had delayed ACL reconstruction (seven between two and five years). The mean change in KOOS4 score from baseline to five years was 42.9 points for those assigned to rehabilitation plus early ACL reconstruction and 44.9 for those assigned to rehabilitation plus optional delayed reconstruction (between group difference 2.0 points, 95% confidence interval −8.5 to 4.5; P=0.54 after adjustment for baseline score). At five years, no significant between group differences were seen in KOOS4 (P=0.45), any of the KOOS subscales (P≥0.12), SF-36 (P≥0.34), Tegner activity scale (P=0.74), or incident radiographic osteoarthritis of the index knee (P=0.17). No between group differences were seen in the number of knees h",
-    "sec-characteristics-of-patients-and-treatmen-10/p2": "Thirty (51%) patients assigned to initial rehabilitation with the option of having a later reconstruction chose to have (and had) a delayed anterior cruciate ligament reconstruction over the five year period (seven in the period between two and five years; median 867 (range 743-1695) days after injury) (fig 1). Fifteen anterior cruciate ligaments were reconstructed using patella tendon procedures and 15 using hamstrings tendon procedures. Over the five year period, 61 patients had an early anterior cruciate ligament reconstruction, 30 had a delayed reconstruction, and 29 were treated with rehabilitation alone. Of the 91 primary reconstructions performed, 40 used patella tendon procedures and 51 used hamstrings tendon procedures.",
     "sec-characteristics-of-patients-and-treatmen-10/p1": "Despite several contacts by mail and telephone, one patient assigned to early anterior cruciate ligament reconstruction did not attend the five year clinical visit. Consequently, we included 120/121 participants in this five year follow-up report, 61 of whom were assigned to early anterior cruciate ligament reconstruction and 59 to initial rehabilitation with the option of having a later reconstruction if needed (table 1). Two patients assigned to early reconstruction did not have reconstruction or had less than 10 rehabilitation visits; we excluded them from the as treated analysis but included them in the full analysis set.",
+    "sec-characteristics-of-patients-and-treatmen-10/p2": "Thirty (51%) patients assigned to initial rehabilitation with the option of having a later reconstruction chose to have (and had) a delayed anterior cruciate ligament reconstruction over the five year period (seven in the period between two and five years; median 867 (range 743-1695) days after injury) (fig 1). Fifteen anterior cruciate ligaments were reconstructed using patella tendon procedures and 15 using hamstrings tendon procedures. Over the five year period, 61 patients had an early anterior cruciate ligament reconstruction, 30 had a delayed reconstruction, and 29 were treated with rehabilitation alone. Of the 91 primary reconstructions performed, 40 used patella tendon procedures and 51 used hamstrings tendon procedures.",
     "tbl2/r3/c3": "KOOS4† −1.5 (−7.4 to 4.4)",
     "tbl2/r4/c3": "Pain −0.3 (−4.6 to 4.0)",
     "tbl2/r5/c3": "Symptoms −4.4 (−10.2 to 1.4)",
@@ -779,14 +784,21 @@
     "tbl4/r12/c1": "Radiographic osteoarthritis†: 14 (24)",
     "tbl4/r12/c2": "Radiographic osteoarthritis†: 8 (15)",
     "sec-patient-reported-outcomes-5/p1": "Patient reported outcomes included the knee injury and osteoarthritis outcome score (KOOS), the Medical Outcomes Study 36-item short-form health survey (SF-36), and the Tegner activity scale. Consistent with our previous publication, the main outcome of this report was the change from baseline to five years in the mean value of four of the five KOOS subscales (KOOS4). Other outcomes include the crude KOOS4 score, all five separate KOOS subscales, the scores on the SF-36 physical and mental components (all 0-100 scales, worst to best), and the Tegner activity scale score (1-10, lowest to highest) at five years. In addition, we report return to pre-injury activity level as patients who reported similar or higher Tegner activity scale scores at five years compared with their pre-injury scores.",
-    "sec-participants-3/p1": "We enrolled active adults, 18 to 35 years of age, with an anterior cruciate ligament tear not more than four weeks old to a previously uninjured knee at the departments of orthopaedics at Skåne University Hospital and Helsingborg Hospital, Sweden (table 1). Major exclusion criteria were professional athletes (10 on the Tegner activity score; 0-10, lowest to highest activity level), less than moderately active people (<5 on the same scale), a total collateral ligament rupture, a full thickness cartilage lesion visualised on magnetic resonance imaging, and extensive meniscal fixation. Details of the recruitment process, full inclusion and exclusion criteria, and the randomisation process have been published. All patients provided fully informed written consent to participate in the study."
+    "sec-participants-3/p1": "We enrolled active adults, 18 to 35 years of age, with an anterior cruciate ligament tear not more than four weeks old to a previously uninjured knee at the departments of orthopaedics at Skåne University Hospital and Helsingborg Hospital, Sweden (table 1). Major exclusion criteria were professional athletes (10 on the Tegner activity score; 0-10, lowest to highest activity level), less than moderately active people (<5 on the same scale), a total collateral ligament rupture, a full thickness cartilage lesion visualised on magnetic resonance imaging, and extensive meniscal fixation. Details of the recruitment process, full inclusion and exclusion criteria, and the randomisation process have been published. All patients provided fully informed written consent to participate in the study.",
+    "sec-knee-radiography-and-grading-of-images-7/p3": "We report presence of radiographic osteoarthritis separately for the tibiofemoral and patellofemoral compartments. In agreement with previous reports, we considered radiographic osteoarthritis to be present if any of the following criteria were achieved in either of the medial or lateral tibiofemoral compartments or in the patellofemoral compartment: joint space narrowing grade 2 or above (tibiofemoral compartment only); sum of the two marginal osteophyte grades from the same compartment 2 or above; grade 1 joint space narrowing in combination with grade 1 osteophytes in the same compartment (tibiofemoral compartment only). For the tibiofemoral compartment, this cut-off approximates to grade 2 radiographic osteoarthritis based on the Kellgren and Lawrence scale."
   },
   "verification": {
     "checked": 24,
     "passed": 24,
     "rejections": [],
-    "prose_checked": 57,
-    "prose_unmatched": []
+    "prose_checked": 62,
+    "prose_unmatched": [
+      {
+        "section_id": "PMC3553934-section-4",
+        "number": "0.05",
+        "context": "ual. At 0.54, it is far above the usual 0.05 cut-off for statistical significance.  "
+      }
+    ]
   },
   "notes": []
 }
