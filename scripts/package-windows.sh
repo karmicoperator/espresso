@@ -21,7 +21,8 @@ echo "$VERSION" > "$OUT/VERSION"
 
 printf '%s\r\n' '@echo off' \
   'rem espresso: double-click to start. The first run fetches Python and Node.js and builds' \
-  'rem the app, a few minutes; later runs take seconds. Ctrl-C in this window stops espresso.' \
+  'rem the app, about five minutes; later runs take seconds. The browser opens by itself.' \
+  'rem Keep the window open while you use espresso; Ctrl-C in it stops espresso.' \
   'powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0windows\espresso.ps1"' \
   > "$OUT/Start espresso.bat"
 # cmd.exe expects Windows line endings in batch files.

@@ -34,9 +34,12 @@ rest was rebuilt for medical papers.
    verify the app, because espresso is not yet signed with an Apple Developer ID. Click
    **Done**, open **System Settings**, go to **Privacy & Security**, scroll down to the note
    about espresso and click **Open Anyway**, then enter your password. This happens once.
-4. The first start takes a few minutes while espresso fetches Python and Node.js into its
-   own folder and builds itself. Then your browser opens on espresso, with nine papers
-   already in the library.
+4. A message says espresso is getting ready. The first start takes about five minutes
+   while it downloads Python and Node.js into its own folder and builds itself. Then your
+   browser opens espresso at `http://localhost:3000`, with nine papers already in the
+   library. From then on, double-click espresso whenever you want it; it opens in
+   seconds. If something goes wrong, a dialog says so, and its **Show logs** button opens
+   the logs to send to whoever helps you.
 
 ### Windows
 
@@ -46,9 +49,14 @@ The Windows launcher has not been run on a real Windows machine yet. Reports are
 2. Right-click it, choose **Extract All**, and open the extracted **espresso** folder.
 3. Double-click **Start espresso.bat**. If Windows warns that it cannot verify the
    publisher, choose **Run**, or **More info** and then **Run anyway**.
-4. The first start takes a few minutes, as on macOS. Keep the window open while you use
-   espresso and press Ctrl-C in it to stop. If a step fails,
-   `%LOCALAPPDATA%\espresso\logs\setup.log` says which one.
+4. A black window opens and lists each step. The first start takes about five minutes
+   while it downloads Python and Node.js and builds espresso. When it is ready, your
+   browser opens espresso at `http://localhost:3000`; if it does not, type that address
+   into the browser yourself.
+5. Keep the window open while you use espresso. Press Ctrl-C in it to stop espresso.
+   Next time, double-click **Start espresso.bat** again; later starts take seconds. If a
+   step fails, the window says which one and where its log is, in
+   `%LOCALAPPDATA%\espresso\logs`.
 
 ### Then pick a model
 
