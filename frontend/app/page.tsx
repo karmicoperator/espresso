@@ -12,7 +12,7 @@ import type { ExplainerSummary, Health, Job } from "@/lib/types";
 const EXAMPLES = [
   { paste: "https://pubmed.ncbi.nlm.nih.gov/38740993/", label: "Semaglutide, 4 years (SELECT)" },
   { paste: "https://pubmed.ncbi.nlm.nih.gov/23349407/", label: "ACL tear: surgery or rehab (KANON)" },
-  { paste: "https://pubmed.ncbi.nlm.nih.gov/26551272/", label: "Blood pressure targets (SPRINT)" },
+  { paste: "https://pubmed.ncbi.nlm.nih.gov/40380811/", label: "Liver transplant for cancer (review)" },
 ];
 
 /** Mirrors backend/builds.py STEPS: the stages a build reports, in order. */
@@ -206,7 +206,7 @@ export default function Home() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="https://pubmed.ncbi.nlm.nih.gov/26551272/"
+            placeholder="https://pubmed.ncbi.nlm.nih.gov/38740993/"
             className="min-w-0 flex-1 bg-transparent py-2 text-sm text-[#e8e8e8] placeholder:text-white/25 focus:outline-none"
           />
           <button
