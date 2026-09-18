@@ -1,181 +1,105 @@
 <div align="center">
-  <img alt="Paper in Five" src="build/icon.png" width="96" />
+  <img alt="Paper in Five" src="frontend/public/icon.png" width="80" />
 </div>
 
-<h1 align="center">Paper in Five</h1>
+# Paper in Five
 
-<p align="center">Medical papers as scrollable explainers, with every number traceable to the source.</p>
-
----
-
-Paste a PubMed link. It comes back as a short explainer with interactive charts built from
-the paper's own numbers, **every value checked against the source before it is drawn**.
-
-Private, local, single user. Nothing is published and nothing leaves the machine except
-requests to PubMed Central for the paper itself.
-
-## Getting it
-
-**macOS, no Terminal.** Download `PaperInFive-mac.zip` from the latest release, unzip,
-move `Paper in Five` to Applications, right-click it and choose Open (it is not signed
-with an Apple certificate, so the first open asks). It fetches what it needs into
-`~/Library/Application Support/PaperInFive` on first run, about two minutes, then opens
-the browser. Then Settings, to choose a model: Claude Code if you have it, or an API key from
-Anthropic, OpenAI, Azure, DeepSeek, Kimi (Moonshot), Qwen (DashScope) or GLM (Zhipu).
-Nothing else is asked for.
-
-**Windows.** Download the source zip, unzip, double-click `windows\PaperInFive.bat`. Same
-first run, into `%LOCALAPPDATA%\PaperInFive`. This launcher has not yet been run on a
-Windows machine; if a step fails, `logs\setup.log` says which, and an issue with that
-line is welcome.
-
-**From the repo.** `git clone`, then `./start.command` (macOS) or `windows\PaperInFive.bat`.
-Both fetch `uv` and Node themselves if the machine has neither.
-
-**Browser extension.** `extension/` adds a Paper in Five button to Chrome, Edge, Brave
-and Firefox (Safari via Xcode): one click on a paper's page builds it and attaches the
-PDF your browser can see. See `extension/README.md`.
-
-To build the macOS download yourself: `scripts/package-mac.sh` writes `dist/PaperInFive-mac.zip`.
-
-## Running it
-
-Double-click **`PaperInFive.app`**, or run **`./start.command`** for the same thing with live
-output. Both install what is missing on first run, build the web app, start what is down,
-reuse what is already running, step past ports held by other programs, and open the
-browser. When a source file changes, the next start rebuilds and restarts the web app.
-
-Three tools have to be on the machine, and the launcher says which one is missing and how
-to get it:
-
-- [`uv`](https://docs.astral.sh/uv/) for the API. It fetches Python itself if needed.
-- [Node.js](https://nodejs.org) for the web app.
-- A model. By default a signed-in [Claude Code](https://claude.com/claude-code) session
-  (`claude` once in a terminal), with no API key. Or open **Settings** in the app and
-  paste your own key: the Anthropic API, OpenAI, any OpenAI-compatible endpoint (Ollama,
-  Groq, OpenRouter) or Azure OpenAI. Settings tests the model with one tiny call. Without
-  a working model, papers already built still open; the landing page says so.
-
-Logs land in `logs/`. `PAPERINFIVE_DEV=1 ./start.command` runs the web app's dev server
-instead of a production build.
+Turns a medical paper into a five-minute explainer: prose in sections, charts drawn from the
+paper's own numbers, and a bottom line. Every charted value is checked against the paper's
+text before it is drawn, and every sentence of the prose is tied to the sentence of the
+paper it came from, so a click opens the paper at that line. Local, single user; nothing
+leaves the machine except requests for the paper.
 
 ## What it does
 
-A build takes three to five minutes, almost all of it in one model call. Builds run on the
-API one at a time: paste several and they queue, the page shows the stage each is at,
-and reloading or leaving the page loses nothing.
+Paste a PubMed or PMC link, a DOI or a PMID, or drop a PDF. Two to four minutes later
+(two model calls, run side by side) the paper opens as a page:
 
-```
-PubMed link ─→ resolve ─→ JATS from PubMed Central ─→ rewrite into ≤5 sections
-                                                            │
-                                    one planning call ──────┴──→ charts + figures + diagram
-                                                            │
-                                              PROVENANCE GATE (deterministic)
-                                                            │
-                                                    explainer JSON ─→ reader
-```
+- A bottom line: the question, the answer, and the one figure that is the finding, named
+  by the planner and verified by the gate. Green when the treatment did better, red when
+  worse, white for no difference.
+- Prose in at most five sections. Each sentence is anchored to the source sentence that
+  prints its numbers and shares its terms, or marked as untraced. Click a sentence and the
+  paper opens at it, highlighted: in the PDF when one is stored, else in the paper's text.
+- Charts from a fixed catalogue (`stat`, `bars`, `forest`, `line`, `flow`, `diagram`), each
+  with one layout and hard limits. As the sentence that states a value scrolls into view,
+  its mark lights. Every value shows the paper's sentence on hover.
+- The primary outcome as a hundred people, when the paper prints it as a rate per arm,
+  with number needed to treat worked out from those two numbers and marked as derived.
+- The paper's own figures where a chart could not be rebuilt from printed numbers.
 
-The capitalised step is the one that makes the rest trustworthy. Every plotted value carries
-a locator and a verbatim quote; three string checks confirm the locator exists, the quote
-appears there, and the number appears in the quote. Values that fail get one repair round,
-handed back to the model with the paper's own paragraphs, and are dropped and listed if
-they still fail. Every value on the page is verified; that is a rule, not a rate. Nothing
-downstream can introduce a number the paper does not contain.
+## How the numbers are kept honest
 
-**Bottom line** opens the page: what the paper asked and what it found, one sentence each,
-checked like a plotted value against the quoted span shown beneath it, and dropped if it
-fails.
+The planner is a transcriber. Every value it returns carries a locator and a verbatim
+quote, and three string checks decide whether it is drawn: the locator exists in the
+paper, the quote appears there, the number appears in the quote. A value that fails is
+handed back once with the paper's paragraph, then dropped and listed. There is no second
+model judging the first. Diagram arrows are checked the same way plus one rule: a single
+sentence in the quote must name both ends. The prose is checked by the same machinery,
+sentence by sentence, and the page states the counts ("All 24 charted values verified",
+"66 of 89 sentences anchored"). What is not checked is said too: the summary is a
+model's, and it is not clinical advice.
 
-**Prose** is the model's summary, so every number in it is looked up in the paper. One
-that is not printed there as such (a percentage the summary worked out from a rate ratio,
-a rounded mean) is marked with a dotted underline rather than removed, and the header
-says how many there are. The page also says plainly what was checked and what was not,
-and that it is not clinical advice.
+Two things were measured before being trusted. A direction-word check (lower against
+higher between a sentence and its anchor) flagged five sentences across the library, all
+five false alarms, so it stays in the data and off the page. And the regex that picked
+the bottom line's key figure lit "95%" in "95% CI"; it was replaced by a figure the
+planner names and the gate verifies. `docs/FINDINGS.md` keeps this kind of record.
 
-**The effect, as people.** When a trial prints its primary outcome as a rate in each arm,
-the two rates are verified like plotted values and drawn as a hundred people: the ones who
-have the outcome either way, the ones the treatment changes, the rest. A per-1,000 count
-and the number needed to treat are worked out from the same two numbers and marked as
-derived. Toggle relative against absolute, or imagine 1,000 or 10,000 people.
+## Getting it
 
-**Prose joined to charts.** A sentence that states a plotted value is linked to that mark
-by the printed number, not by a model. As the sentence reaches the middle of the screen
-the mark lights and the rest of its chart steps back. Clicking any mark, the bottom line,
-a risk arm or a defined term opens the paper's own paragraph with the sentence marked.
+macOS: download `PaperInFive-mac.zip` from the latest release, unzip, move the app to
+Applications, right-click, Open (the bundle is unsigned, so the first open asks). First
+run fetches `uv` and Node into `~/Library/Application Support/PaperInFive`, builds, and
+opens the browser on a library of twenty papers. Then Settings, to pick a model.
 
-**Terms** the explainer uses are defined on hover; when the paper defines the term itself,
-its sentence is shown as the paper's words, otherwise the definition is marked as ours.
+Windows: download the source, double-click `windows\PaperInFive.bat`. Same first run,
+into `%LOCALAPPDATA%\PaperInFive`. Not yet run on a Windows machine; `logs\setup.log`
+says which step failed if one does.
 
-**Charts** are typed specs the browser draws: `stat`, `bars`, `dots`, `forest`, `line`,
-`flow`, `diagram`. Hovering, tapping or tabbing to any mark shows the paper's own
-sentence. "Print or save as PDF" gives a light handout with every chart drawn.
+From a clone: `./start.command` on macOS or the Windows launcher above. Both fetch `uv`
+and Node when the machine has neither, reuse servers already running, step past taken
+ports, and rebuild the web app when a source file changed.
 
-**Figures** are the paper's own images, taken only when a chart could not be rebuilt from
-printed numbers: radiographs, micrographs, specimens, clinical photos, schematics, and
-survival curves whose values are never tabulated. Captions are copied verbatim.
+Models: a signed-in Claude Code session (no key), or a key from Anthropic, OpenAI or any
+OpenAI-compatible endpoint, Azure, DeepSeek, Kimi, Qwen or GLM. Settings tests the model
+with one small call. DeepSeek and Qwen refuse requests over 8k output tokens; the app
+caps them. Nothing else is asked for.
 
-**Diagrams** are mechanisms the paper argues, drawn as nodes and cited edges. Every arrow
-carries the sentence licensing it, and an arrow the paper only hedges is drawn dashed —
-derived from the quoted wording, not from the model.
+Browser extension: `extension/` adds a button for Chrome, Edge, Brave and Firefox
+(Safari via Xcode's converter). One click on a paper's page builds it and hands the app
+the PDF the page offers, fetched with your own session. Publishers block programs, not
+people; this is how a PMC paper gets its PDF.
 
-## Coverage
+## Where the paper comes from
 
-Within PubMed's open-access filter: **76/76 papers across 38 subspecialties**. Papers in PMC
-but outside the open-access subset work too.
-
-About a quarter of PubMed's "free full text" was never deposited in PMC. Those are often
-genuinely open access, but the publishers hosting them answer 403 to anything that is not a
-browser. They block programs, not people — so download the PDF and drop it anywhere on the
-landing page, or use **"open the PDF"** there. When a pasted link turns out to be one of
-these, the message says so and links to the publisher's page, with the PDF route beside it.
-Same pipeline, same gate, with one honest cost: a PDF has no addressable
-table cells, so a number printed only inside a table cannot be cited and will not appear.
-The page says when it was built that way.
+PubMed Central's JATS XML, which gives paragraph and table-cell locators. A PDF gives
+paragraph locators only, so a number printed only inside a table cannot be cited from a
+PDF; the page says when it was built that way. The PDF itself is fetched at build time
+from a publisher that serves it (Unpaywall names the location by DOI; Nature and several
+society journals do, NEJM, BMJ, Springer, Elsevier, SAGE and MDPI do not), else attached
+when you drop it on the paper's page.
 
 ## Layout
 
 ```
-backend/     FastAPI. ingestion/ (JATS + PDF), agents/ (planner, gate, pipeline), api/
-frontend/    Next.js reader. components/ChartFigure.tsx draws every chart kind.
-scripts/     launch-lib.sh — port resolution shared by both launchers
-docs/        FINDINGS.md — what we learned, including what not to try
-PaperInFive.app, start.command
+backend/    FastAPI. ingestion/ (JATS, PDF, PDF fetch), agents/ (blocks, planner, gate,
+            anchors, pipeline), api/, store.py, scripts/ (relink, reanchor, fetch_pdfs)
+frontend/   Next.js reader. ChartFigure.tsx draws every block; PaperView.tsx opens the
+            paper (PDF.js or text) at a sentence.
+extension/  WebExtension, Manifest V3.
+windows/    PowerShell launcher.   scripts/   launchers, bootstrap, macOS packager.
+backend/examples/   the shipped library (explainers, source text, figures); seeded into
+                    backend/data/ on first start, which is not in git.
+docs/FINDINGS.md    what was tried, what failed, and why.
 ```
-
-Papers are stored as JSON under `backend/data/explainers/`, figures under
-`backend/data/figures/`.
 
 ## Status
 
-Working. 80 tests, ruff and eslint clean. A reading rail with progress and minutes left on
-wide screens; on a phone the section's chart pins to the top while its prose scrolls.
+116 backend tests; ruff, tsc and eslint clean. Limits, each one observed: a paper neither in PMC nor available to you as a PDF cannot be built; a PDF build cannot
+cite table cells; the anchoring cannot judge a paraphrase that keeps the numbers and the
+terms and changes the meaning, which is why the paper is one click away.
 
-Known limits, all verified rather than assumed:
-
-- A paper neither in PMC nor downloadable by you cannot be built.
-- PDF-derived papers cannot cite table cells.
-- The diagram gate cannot check that a sentence asserts the *direction* an arrow points.
-  That stays the model's assertion, which is why hovering shows the sentence.
-
-## Provenance
-
-Forked from [arXivisual](https://github.com/rajshah6/arXivisual) for the reader, the
-sectioning and the visual language. The render pipeline, the ingest, the provenance gate and
-the chart system are new. arXivisual ships no licence file; this fork is private, local and
-undistributed.
-
-## The shipped library
-
-`backend/examples/` holds every explainer built so far, with the paper figures they
-show. On first start the API copies them into `backend/data/` (which is not in git), so
-a fresh clone opens on a full library and you can read before you build. A paper you
-rebuild replaces its copy in `data/`; the seed is never written over it.
-
-## Every sentence points at the paper
-
-Each sentence of the concise version is anchored to the sentence of the paper it rests
-on, by the numbers it prints and the terms it uses, or marked as not. Click any anchored
-sentence, charted value or the bottom line to open the paper at that sentence,
-highlighted: in the PDF when one is stored (papers you dropped in, or a PDF you drop onto
-a paper's page later, since PubMed Central blocks scripted downloads), else in the
-paper's own text.
+Forked from [arXivisual](https://github.com/rajshah6/arXivisual) for the reader's visual
+language; the ingest, the gate, the blocks, the anchoring and the viewer are new. The
+upstream repository ships no licence; this one is private.
