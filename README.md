@@ -14,6 +14,28 @@ the paper's own numbers, **every value checked against the source before it is d
 Private, local, single user. Nothing is published and nothing leaves the machine except
 requests to PubMed Central for the paper itself.
 
+## Getting it
+
+**macOS, no Terminal.** Download `PaperInFive-mac.zip` from the latest release, unzip,
+move `Paper in Five` to Applications, right-click it and choose Open (it is not signed
+with an Apple certificate, so the first open asks). It fetches what it needs into
+`~/Library/Application Support/PaperInFive` on first run, about two minutes, then opens
+the browser. Then Settings, to choose a model: Claude Code if you have it, or an API key.
+
+**Windows.** Download the source zip, unzip, double-click `windows\PaperInFive.bat`. Same
+first run, into `%LOCALAPPDATA%\PaperInFive`. This launcher has not yet been run on a
+Windows machine; if a step fails, `logs\setup.log` says which, and an issue with that
+line is welcome.
+
+**From the repo.** `git clone`, then `./start.command` (macOS) or `windows\PaperInFive.bat`.
+Both fetch `uv` and Node themselves if the machine has neither.
+
+**Browser extension.** `extension/` adds a Paper in Five button to Chrome, Edge, Brave
+and Firefox (Safari via Xcode): one click on a paper's page builds it and attaches the
+PDF your browser can see. See `extension/README.md`.
+
+To build the macOS download yourself: `scripts/package-mac.sh` writes `dist/PaperInFive-mac.zip`.
+
 ## Running it
 
 Double-click **`PaperInFive.app`**, or run **`./start.command`** for the same thing with live

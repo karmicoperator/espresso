@@ -472,6 +472,22 @@ A red tick on every sentence the anchoring could not tie down was the first thin
 reader asked about. It was noise: a mark should say something worth the attention it
 takes, and "not traced" is not that. The tick is gone; the explanation stays on hover.
 
+A person who will never open Terminal needs an app that provisions itself. The macOS
+bundle carries the source; on first run it copies it to Application Support, fetches uv
+(which brings Python) and a Node tarball from nodejs.org into its own folder, never
+Homebrew and never a system path, then runs the same launcher as a developer does.
+Tested from an empty home directory with nothing but /usr/bin on the path: two minutes to
+a served page and the "choose a model" state. What cannot be fixed without an Apple
+developer account is Gatekeeper: the bundle is unsigned, so the first open is
+right-click, Open. The Windows launcher mirrors the macOS one step for step but has not
+run on a Windows machine, and says so in its header and in the README; claiming more
+would be the kind of thing this log exists to prevent.
+
+The browser extension is thin on purpose: the app cannot run in a browser, but the
+browser can do the one thing the app cannot, fetch a paper's PDF as the person, with
+their session, from the page they are looking at. So the extension builds from the tab's
+URL and hands over the PDF it finds there. It talks only to localhost.
+
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped
 proposals separately; "65% verified" had read as though a third of the page were

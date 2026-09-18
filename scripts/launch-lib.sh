@@ -31,9 +31,15 @@ checksum() { cksum < "$1" | cut -d' ' -f1; }
 up_to_date() { [ -f "$1" ] && [ "$(cat "$1")" = "$(checksum "$2")" ]; }
 
 need_tool() {  # name, what to do about it
-  command -v "$1" >/dev/null 2>&1 || fail "$1 was not found.
-
-$2"
+  command -v "$1" >/dev/null 2>&1 && return 0
+  # Fetch it into the app's own folder first; only fail when that cannot be done.
+  # shellcheck source=scripts/bootstrap.sh
+  . "$REPO/scripts/bootstrap.sh"
+  case "$1" in
+    uv) ensure_uv && return 0 ;;
+    node|npm) ensure_node && return 0 ;;
+  esac
+  fail "$1 is not installed. $2"
 }
 
 log_tail() { tail -n 12 "$LOGS/setup.log" 2>/dev/null; }
