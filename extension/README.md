@@ -5,7 +5,8 @@ machine, and hands the app the PDF your browser can see. Publishers block progra
 people: a PDF fetched from the page you are looking at carries your own access, so it
 attaches even where the app's own fetch is refused.
 
-Talks only to `localhost`. Nothing leaves the machine except what the page itself loads.
+Talks only to `localhost`, the espresso app on your machine; the extension itself sends
+nothing anywhere else. The app then sends the paper's text to the model you picked.
 
 ## Chrome, Edge, Brave
 1. `chrome://extensions`, turn on Developer mode.

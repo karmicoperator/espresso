@@ -17,8 +17,8 @@ Ever got bored halfway through a paper? espresso turns a medical paper into a fi
 read with charts. Paste a PubMed link and the paper comes back as short prose in sections,
 charts drawn from its own numbers, and a bottom line. Every charted value is checked
 against the paper's text before it is drawn, and a click on any sentence opens the paper
-at the line it came from. It runs on your computer; nothing leaves it except the request
-for the paper.
+at the line it came from. It runs on your computer. What leaves it is the request for the
+paper and the calls to the model you pick, which receive the paper's text.
 
 espresso is an unofficial fork of [arXivisual](https://github.com/rajshah6/arXivisual) by
 Raj Shah, which does the same for arXiv papers. The idea and the reader's look are his; the

@@ -6,7 +6,8 @@
 //     reader is looking at usually links its PDF, and a fetch from that page carries the
 //     reader's own session. That PDF is attached to the paper, so its sentences open in it.
 //
-// Talks only to localhost. Nothing leaves the machine except what the page itself loads.
+// Talks only to localhost, the espresso app on this machine; the extension itself sends
+// nothing anywhere else. The app then sends the paper's text to the model the person picked.
 
 const DEFAULT_API = "http://localhost:8000";
 const DEFAULT_WEB = "http://localhost:3000";
