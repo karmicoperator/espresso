@@ -453,7 +453,15 @@ things about PDF.js cost an hour: text items split mid-line and need a space bet
 them before the quote can be found, and display rendering waits for an animation frame
 that a hidden tab never gets, so the page rendered never; print intent draws at once.
 The synthetic PDF used to exercise the viewer was made from the paper's own text with
-PyMuPDF and removed afterwards; no real PDF was fetched.
+PyMuPDF and removed afterwards. Real PDFs come from Unpaywall's locations for the DOI,
+tried in order with a browser user agent and kept when the bytes start with %PDF: five
+of the fourteen PubMed papers got theirs (Nature Medicine, Cureus, a university
+repository, two society journals); NEJM, BMJ, Springer, Elsevier, SAGE and MDPI refused
+a program. Those open in the text until the reader drops the PDF on the page.
+
+A red tick on every sentence the anchoring could not tie down was the first thing a
+reader asked about. It was noise: a mark should say something worth the attention it
+takes, and "not traced" is not that. The tick is gone; the explanation stays on hover.
 
 "100% of charted values verified" is a rule, not a rate. A value that fails the gate is
 never drawn, so the badge now says "All N charted values verified" and counts dropped

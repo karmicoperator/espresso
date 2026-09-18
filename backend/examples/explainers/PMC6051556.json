@@ -608,7 +608,7 @@
       "quote": "This error is generally considered negligible for inclination [], but anteversion is highly susceptible to changes in pelvic tilt since its measurement is based solely on the shape of the ellipsis created by the cup surface on the radiograph [].",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-1",
@@ -626,7 +626,7 @@
       "quote": "Several methods for correcting the effects of pelvic tilt on radiographic anteversion have been proposed, with varying degrees of accuracy.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-2",
@@ -635,7 +635,7 @@
       "quote": "Corrected anteversion was calculated by measuring the vertical distance between the symphysis pubis and the sacrococcygeal joint, per the method outlined by Tannast et al.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-2",
@@ -644,7 +644,7 @@
       "quote": "Pelvic tilt (deviation of the anterior pelvic plane (APP) from the coronal reference plane [-]) was estimated using the method described by Tannast et al. [], where the vertical distance between the upper edge of the pubic symphysis to the centre of the sacro-coccygeal joint is measured.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 2
     },
     {
       "section_id": "PMC6051556-section-2",
@@ -653,7 +653,7 @@
       "quote": "In a recent study, Tannast et al. [] evaluated several proposed measurements and found that the vertical distance from the pubic symphysis to the sacrococcygeal joint (symphococcygeal distance, (SCD)) correlated well with pelvic tilt.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-2",
@@ -698,7 +698,7 @@
       "quote": "Second, differences in population demographics (mean age: 31.7 yrs vs.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 8
     },
     {
       "section_id": "PMC6051556-section-2",
@@ -716,7 +716,7 @@
       "quote": "Radiographs from patients who underwent primary or revision hip arthroplasty between February 2016 and February 2017 were retrospectively reviewed.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-3",
@@ -734,7 +734,7 @@
       "quote": "As the camera remains fixed to the patient during surgery and intraoperative measurements are calculated relative to this initial registration orientation, the resulting anteversion measurements represent the true in situ anteversion, not one distorted by imaging or intraoperative changes in pelvic position or orientation.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 3
     },
     {
       "section_id": "PMC6051556-section-3",
@@ -743,7 +743,7 @@
       "quote": "As the camera remains fixed to the patient during surgery and intraoperative measurements are calculated relative to this initial registration orientation, the resulting anteversion measurements represent the true in situ anteversion, not one distorted by imaging or intraoperative changes in pelvic position or orientation.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 3
     },
     {
       "section_id": "PMC6051556-section-3",
@@ -761,7 +761,7 @@
       "quote": "We scaled radiographs using the known head size of the femoral implant, a reliable method that has been used elsewhere [].",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 8
     },
     {
       "section_id": "PMC6051556-section-3",
@@ -770,7 +770,7 @@
       "quote": "The measurements and application of the nomogram were completed by a single researcher (JV), who was blinded to navigation values.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 3
     },
     {
       "section_id": "PMC6051556-section-3",
@@ -797,7 +797,7 @@
       "quote": "A total of 71 cases were initially eligible for inclusion in the study.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -806,7 +806,7 @@
       "quote": "The correction method could not be applied in 44% (31/71) of the cases, chiefly due to difficulties in visualizing the required landmarks.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -815,7 +815,7 @@
       "quote": "In the remaining 40 radiographs, the anteversion and/or SCD measurements calculated from the image were beyond the scale provided by the nomograms in 23% (9/40).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 3
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -824,7 +824,7 @@
       "quote": "The correction method could not be applied in 44% (31/71) of the cases, chiefly due to difficulties in visualizing the required landmarks.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -833,7 +833,7 @@
       "quote": "In the correction-eligible cohort (n=40), uncorrected, corrected and navigation values differed significantly (F=27.38, p<0.0001).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 5
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -842,7 +842,7 @@
       "quote": "Intra-observer reliability between the three rounds of measurement was excellent for both anteversion measured from radiographs (intraclass correlation = 0.99, SD: 0.51°) and the symphococcygeal distance itself (intraclass correlation = 0.99, SD: 0.25 mm).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 5
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -851,7 +851,7 @@
       "quote": "Mean corrected anteversion (36.9°, SD: 7.4°) differed from uncorrected anteversion (25.2°, SD: 7.6°) by an average of 13.5° (p<0.001).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -860,7 +860,7 @@
       "quote": "Mean navigated anteversion (27.4°, SD: 5.7°) differed from corrected values by an average of 10.8° (p=0.16).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -869,7 +869,7 @@
       "quote": "Mean corrected anteversion (36.9°, SD: 7.4°) differed from uncorrected anteversion (25.2°, SD: 7.6°) by an average of 13.5° (p<0.001).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -878,7 +878,7 @@
       "quote": "Mean corrected anteversion (36.9°, SD: 7.4°) differed from uncorrected anteversion (25.2°, SD: 7.6°) by an average of 13.5° (p<0.001).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -887,7 +887,7 @@
       "quote": "Mean navigated anteversion (27.4°, SD: 5.7°) differed from corrected values by an average of 10.8° (p=0.16).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -896,7 +896,7 @@
       "quote": "In cases where it could be applied, corrected values correlated very poorly with navigation measurements (r = -0.07).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -905,7 +905,7 @@
       "quote": "Corrected anteversion correlated very poorly with navigation values (r = -0.07) (Figure ) although moderately well with uncorrected values (r = 0.73) (Figure ).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 5
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -923,7 +923,7 @@
       "quote": "Corrected anteversion (mean: 36.9°, SD: 7.4°) differed from uncorrected anteversion (mean: 25.2°, SD: 7.6°) by an average of 13.5° (p<0.001) and from navigated anteversion (27.4°, SD: 5.7°) by an average of 10.8° (p=0.16).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 5
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -932,7 +932,7 @@
       "quote": "Uncorrected anteversion correlated poorly with navigation values (r = 0.15) but differed by an average of only -2.2° (SD: 8.7°) and demonstrated a more uniform distribution when compared with the uniform increase in anteversion values resulting from the correction method (Figure ).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 7
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -941,7 +941,7 @@
       "quote": "Uncorrected anteversion correlated poorly with navigation values (r = 0.15) but differed by an average of only -2.2° (SD: 8.7°) and demonstrated a more uniform distribution when compared with the uniform increase in anteversion values resulting from the correction method (Figure ).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 7
     },
     {
       "section_id": "PMC6051556-section-4",
@@ -977,7 +977,7 @@
       "quote": "This trend towards increasing anteversion has important implications, as it could lead to overestimation of intraoperative anteversion, resulting in lower true anteversion orientations, a risk factor for posterior dislocation [].",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 7
     },
     {
       "section_id": "PMC6051556-section-5",
@@ -995,7 +995,7 @@
       "quote": "Firstly, Tannast et al. employed highly standardized radiographic techniques with a controlled source-to-image distance of 1.2m, patients in supine position, and the central beam aimed at the midpoint between the pubic symphysis and centre of the trans-ASIS line.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 7
     },
     {
       "section_id": "PMC6051556-section-5",
@@ -1004,7 +1004,7 @@
       "quote": "This highly regimented approach is in contrast with standard post-operative AP radiographs, which are taken in either supine or standing position, with the central beam aimed at the pubic symphysis, and commonly with small variations in source-to-image distance [].",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 7
     },
     {
       "section_id": "PMC6051556-section-5",
@@ -1022,7 +1022,7 @@
       "quote": "Tannast et al. did not clarify whether their vertical distance was relative to a pelvic reference (such as the trans-ischial line) or relative to the plane of the X-ray, and failed to record if or how they scaled their radiographs.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 8
     },
     {
       "section_id": "PMC6051556-section-5",
@@ -1031,7 +1031,7 @@
       "quote": "While most templating software assumes a magnification factor of 115% or 120% [-], true magnification can range from 97% to 127% [-].",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 8
     },
     {
       "section_id": "PMC6051556-section-5",
@@ -1058,7 +1058,7 @@
       "quote": "However, navigation in general [-] and the system utilized in this study specifically [,-] have demonstrated excellent accuracy when compared with post-operative radiographs, with the Intellijoint system associated with an error of less than 3° when compared with radiographs [].",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 8
     },
     {
       "section_id": "PMC6051556-section-5",
@@ -1067,7 +1067,7 @@
       "quote": "In cases where it could be applied, corrected values correlated very poorly with navigation measurements (r = -0.07).",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     },
     {
       "section_id": "PMC6051556-section-5",
@@ -1076,7 +1076,7 @@
       "quote": "Several methods for correcting the effects of pelvic tilt on radiographic anteversion have been proposed, with varying degrees of accuracy.",
       "supported": true,
       "direction_conflict": false,
-      "page": 0
+      "page": 1
     }
   ],
   "sources": {

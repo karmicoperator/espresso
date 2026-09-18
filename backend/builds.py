@@ -68,7 +68,24 @@ async def build_reference(
 
     progress("fetch", 0.05, "from PubMed Central")
     paper = await ingest_paper(reference, force_refresh=force_refresh, rewrite=False, progress=progress)
+    # The paper's PDF, from a publisher that serves it, fetched while the model works.
+    # Best effort: a paper without one opens its sentences in the verbatim text.
+    import asyncio
+
+    from ingestion.pdf_fetch import fetch_pdf
+
+    pdf_target = store.pdf_path(getattr(paper.meta, "arxiv_id", "") or reference)
+    pdf_job = asyncio.create_task(fetch_pdf(getattr(paper.meta, "doi", None), pdf_target))
     explainer = await build_visuals(paper, progress=progress, rewrite=True)
+    try:
+        pdf_from = await pdf_job
+    except Exception:  # a failed fetch must never fail a build
+        logger.exception("PDF fetch failed")
+        pdf_from = ""
+    if pdf_from:
+        from agents.anchor import page_hints
+
+        page_hints(pdf_target, explainer)
 
     # A build that produced neither prose nor a chart is a failure, not a thin result.
     # Storing it puts an empty page in the reader's library and, worse, caches that

@@ -161,11 +161,12 @@ html {
 }
 
 /* Every anchored sentence opens the paper at its source. It looks like prose until the
-   pointer is over it; an untraced one carries a faint red tick at its left edge and says
-   why on hover; a direction conflict underlines in red. */
+   pointer is over it. An untraced sentence looks like prose too and says why on hover:
+   a mark on every sentence the rule could not tie down was noise, not information. A
+   direction conflict is the one thing worth a mark, a red wavy underline. */
 .anchored { cursor: pointer; border-radius: 3px; transition: background-color .15s ease; }
 .anchored:hover, .anchored:focus-visible { background: rgba(255,255,255,0.07); outline: none; }
-.untraced { box-shadow: inset 3px 0 0 rgba(255,98,89,0.45); padding-left: 8px; margin-left: -8px; border-radius: 3px; }
+.untraced { cursor: help; }
 .conflict { text-decoration: underline wavy rgba(255,98,89,0.7); text-underline-offset: 3px; }
 
 /* Inside a linked sentence, the figures a chart plots and the arm they belong to take the
